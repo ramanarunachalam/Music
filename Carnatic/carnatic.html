@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+
+<head>
+<link media="all" rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+<link media="all" rel="stylesheet" href="css/carnatic.css" type="text/css" />
+<title>Carnatic Collection</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="navbar navbar-inverse"  role="navigation">
+            <div class="col-xs-6">
+                <span class="navbar-brand">Carnatic Music</span>
+    
+                <ul class="nav navbar-nav nav-pills">
+                  <li class="active"><a href="artist.html" target="NAV_LIST"><span class="glyphicon glyphicon-user"></span>&nbsp; Artist</a></li>
+                  <li><a href="composer.html" target="NAV_LIST"><span class="glyphicon glyphicon-user"></span>&nbsp; Composer</a></li>
+                  <li><a href="raga.html" target="NAV_LIST"><span class="glyphicon glyphicon-tags"></span>&nbsp; Raga</a></li>
+                  <li><a href="song.html" target="NAV_LIST"><span class="glyphicon glyphicon-music"></span>&nbsp; Song</a></li>
+                  <li><a href="song_type.html" target="NAV_LIST"><span class="glyphicon glyphicon-tag"></span>&nbsp; Song Type</a></li>
+                </ul>
+            </div>
+    
+            <div class="col-xs-4">
+                <form method="GET" action="/carnaticsearch" target="FRAME_CONTENT" class="navbar-form" role="search">
+                    <div class="input-group">
+                        <span class="input-group-btn"><button class="btn" type="button" onclick='handle_playlist_command("show");'><span class="glyphicon glyphicon-list"></span></button></span>
+                        <input class="form-control" results=5 autosave=5 autofocus name="word" placeholder="Search" type="text">
+                        <span class="input-group-btn"><button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button></span>
+                    </div>
+                </form>
+            </div>
+    
+            <div class="col-xs-2">
+                <span class="navbar-brand navbar-right"><small>Raman Arunachalam</small></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-4" id="LIST">
+          <div id="PLAYER">  
+              <iframe id="FRAME_PLAYER" name="FRAME_PLAYER" frameBorder="0" src="carnatic_player.html" style="visibility:hidden;" onload="this.style.visibility = 'visible';" scrolling="no" ></iframe>
+          </div>  
+          <div id="MENU">  
+            <iframe id="NAV_LIST" name="NAV_LIST" frameBorder="0" src="artist.html" onload="javascript:set_iframe_load_params(this);"></iframe>
+          </div>  
+        </div>
+        <div class="col-xs-8" id="CONTENT">
+            <iframe id="FRAME_CONTENT" name="FRAME_CONTENT" frameBorder="0" src="song/Endaro Mahanubhavulu.html" onload="javascript:set_iframe_load_params(this);"></iframe>
+        </div>
+      </div>
+    </div>
+    
+    <div id="PLAYLIST_MODAL" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="playlistModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 id="playlistModalLabel">Play List</h3>
+          </div>
+
+          <div id="PLAYLIST_BODY" class="modal-body">
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/carnatic.js"></script>
+    <script src="js/carnatic_playlist.js"></script>
+
+</body>
+
+</html>
+

@@ -1,3 +1,54 @@
+
+var yt_player;
+
+function onYouTubeIframeAPIReady()
+{
+    yt_player = new YT.Player('FRAME_PLAYER', {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+    });
+}
+
+function onPlayerReady(event)
+{
+    document.getElementById('FRAME_PLAYER').style.borderColor = '#FF6D00';
+}
+
+function changeBorderColor(playerStatus)
+{
+    var color;
+    if (playerStatus == -1)
+    {
+        color = "#37474F"; // unstarted = gray
+    } else if (playerStatus == 0)
+    {
+        color = "#FFFF00"; // ended = yellow
+        play_next();
+    } else if (playerStatus == 1)
+    {
+        color = "#33691E"; // playing = green
+    } else if (playerStatus == 2)
+    {
+        color = "#DD2C00"; // paused = red
+    } else if (playerStatus == 3)
+    {
+        color = "#AA00FF"; // buffering = purple
+    } else if (playerStatus == 5)
+    {
+      color = "#FF6DOO"; // video cued = orange
+    }
+    if (color)
+    {
+        document.getElementById('FRAME_PLAYER').style.borderColor = color;
+    }
+}
+
+function onPlayerStateChange(event) {
+    changeBorderColor(event.data);
+}
+
 function get_play_list()
 {
     var new_play_list = sessionStorage["playlist"];
@@ -44,13 +95,9 @@ function play_first()
 
     var audio_file = play_list[0];
 
-    var player = document.getElementById('AUDIO_PLAYER');
+    yt_player.loadVideoById({'videoId': audio_file, 'startSeconds': 5});
 
-    player.src = audio_file;
-    player.load();
-    player.play();
-
-    set_marquee_text(audio_file);
+    //set_marquee_text(audio_file);
 }
 
 function play_next()
@@ -79,9 +126,6 @@ function on_storage_event(storageEvent)
 function load_content()
 {
     window.addEventListener('storage', on_storage_event, false);
-
-    var player = document.getElementById('AUDIO_PLAYER');
-    player.addEventListener('ended', play_next);
 }
 
 window.onload = load_content;

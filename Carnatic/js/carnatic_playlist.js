@@ -99,5 +99,7 @@ function handle_playlist_command()
     {
         show_playlist();
     }
+
+    return false;
 }
 

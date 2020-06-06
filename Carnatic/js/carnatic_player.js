@@ -19,6 +19,7 @@ function onPlayerReady(event)
 function changeBorderColor(playerStatus)
 {
     var color;
+    console.log('Player Status:' + playerStatus);
     if (playerStatus == -1)
     {
         color = '#37474F'; // unstarted = gray

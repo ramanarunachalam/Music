@@ -9,39 +9,34 @@
 </head>
 
 <body>
-    <div class="row">
-        <div class="navbar navbar-inverse"  role="navigation">
-            <div class="col-xs-6">
-                <span class="navbar-brand">Carnatic Music</span>
-    
-                <ul class="nav navbar-nav nav-pills">
-                  <li class="active"><a href="artist.html" target="NAV_LIST"><span class="glyphicon glyphicon-user"></span>&nbsp; Artist</a></li>
-                  <li><a href="composer.html" target="NAV_LIST"><span class="glyphicon glyphicon-user"></span>&nbsp; Composer</a></li>
-                  <li><a href="raga.html" target="NAV_LIST"><span class="glyphicon glyphicon-equalizer"></span>&nbsp; Raga</a></li>
-                  <li><a href="song.html" target="NAV_LIST"><span class="glyphicon glyphicon-music"></span>&nbsp; Song</a></li>
-                  <li><a href="song_type.html" target="NAV_LIST"><span class="glyphicon glyphicon-tag"></span>&nbsp; Song Type</a></li>
-                </ul>
-            </div>
-    
-            <div class="col-xs-4">
-                <form method="GET" action="/carnaticsearch" target="FRAME_CONTENT" class="navbar-form" role="search">
-                    <div class="input-group">
-                        <span class="input-group-btn"><button class="btn" type="button" onclick='handle_playlist_command("show");'><span class="glyphicon glyphicon-list"></span></button></span>
-                        <input class="form-control" results=5 autosave=5 autofocus name="word" placeholder="Search" type="text">
-                        <span class="input-group-btn"><button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button></span>
-                    </div>
-                </form>
-            </div>
-    
-            <div class="col-xs-2">
-                <span class="navbar-brand navbar-right"><small>Raman Arunachalam</small></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-xs-4" id="LIST">
+        <nav class="navbar navbar-expand navbar-fixed-top navbar-light bg-light nav-fill w-100">
+            <a class="navbar-brand col-3" href="#">Carnatic Music - Raman Arunachalam</a>
+
+            <button class="input-group-text" onclick='handle_playlist_command("show");'>
+                <img src="icons/card-list.svg" width="24" height="24">
+            </button>
+            <form method="GET" action="/carnaticsearch" target="FRAME_CONTENT" class="form-inline col-3 justify-content-right">
+                 <input class="form-control" results=5 autosave=5 autofocus name="word" type="search" placeholder="Search" aria-label="Search">
+                 <button class="input-group-text" type="submit">
+                     <img src="icons/search.svg" width="24" height="24">
+                 </button>
+            </form>
+
+            <ul class="navbar-nav col-6">
+              <li class="nav-item active"><a class="nav-link" href="artist.html" target="NAV_LIST"><img src="icons/person-fill.svg" width="24" height="24">&nbsp; Artist</a></li>
+              <li class="nav-item"><a class="nav-link" href="composer.html" target="NAV_LIST"><img src="icons/person-lines-fill.svg" width="24" height="24">&nbsp; Composer</a></li>
+              <li class="nav-item"><a class="nav-link" href="raga.html" target="NAV_LIST"><img src="icons/music-note-list.svg" width="24" height="24">&nbsp; Raga</a></li>
+              <li class="nav-item"><a class="nav-link" href="song.html" target="NAV_LIST"><img src="icons/music-note-beamed.svg" width="24" height="24">&nbsp; Song</a></li>
+              <li class="nav-item"><a class="nav-link" href="song_type.html" target="NAV_LIST"><img src="icons/tag.svg" width="24" height="24">&nbsp; Song Type</a></li>
+            </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-4" id="LIST">
           <div id="PLAYER">  
               <iframe id="FRAME_PLAYER" name="FRAME_PLAYER" frameBorder="0" src="https://www.youtube.com/embed/KcFKReOW9yM?enablejsapi=1" style="visibility:hidden;" onload="this.style.visibility = 'visible';" scrolling="no" ></iframe>
           </div>  
@@ -49,7 +44,7 @@
             <iframe id="NAV_LIST" name="NAV_LIST" frameBorder="0" src="artist.html" onload="javascript:set_iframe_load_params(this);"></iframe>
           </div>  
         </div>
-        <div class="col-xs-8" id="CONTENT">
+        <div class="col-8" id="CONTENT">
             <iframe id="FRAME_CONTENT" name="FRAME_CONTENT" frameBorder="0" src="song/Endaro%20Mahanubhavulu.html" onload="javascript:set_iframe_load_params(this);"></iframe>
         </div>
       </div>
@@ -59,15 +54,13 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3 id="playlistModalLabel">Play List</h3>
+            <h3  class="modal-title" id="playlistModalLabel">Play List</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
-
           <div id="PLAYLIST_BODY" class="modal-body">
           </div>
-
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -79,6 +72,10 @@
     <script src="js/carnatic_playlist.js"></script>
     <script src="js/carnatic_player.js"></script>
     <script type="text/javascript">
+      $(".navbar a").on("click", function(){
+        $(".navbar").find(".active").removeClass("active");
+        $(this).parent().addClass("active");
+      });
       var tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
       var firstScriptTag = document.getElementsByTagName('script')[0];

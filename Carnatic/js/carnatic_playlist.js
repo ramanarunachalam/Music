@@ -67,7 +67,7 @@ function show_playlist()
             parts.splice(1, 0, 'Krithi')
         }
         var id_parts = parts[4].split('.')
-        html_str += '<tr><td>' + (i + 1) + '</td><td>' + parts[0] + '</td><td>' + parts[2] + '</td><td>' + id_parts[1] + '</td><td><a href="#" onclick="delete_row(this);"><span class="glyphicon glyphicon-remove-circle"></span></a></td></tr>';
+        html_str += '<tr><td>' + (i + 1) + '</td><td>' + parts[0] + '</td><td>' + parts[2] + '</td><td>' + id_parts[1] + '</td><td><a href="#" onclick="delete_row(this);"><img src="icons/x.svg" width="24" height="24"></a></td></tr>';
     }
     html_str += '</table>';
     document.getElementById('PLAYLIST_BODY').innerHTML = html_str;

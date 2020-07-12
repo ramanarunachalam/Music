@@ -1,5 +1,7 @@
 
 var yt_player;
+var last_player_status = 0;
+var play_status = 0;
 
 function onYouTubeIframeAPIReady()
 {
@@ -16,34 +18,24 @@ function onPlayerReady(event)
     document.getElementById('FRAME_PLAYER').style.borderColor = '#FF6D00';
 }
 
-function changeBorderColor(playerStatus)
+function changeBorderColor(player_status)
 {
-    var color;
-    console.log('Player Status:' + playerStatus);
-    if (playerStatus == -1)
+    // playerStatus: -1 : unstarted, 0 - ended, 1 - playing, 2 - paused, 3 - buffering, 5 - video cued
+    // console.log('Last Player Status: ' + last_player_status + ' Player Status: ' + player_status + ' Play Status: ' + play_status);
+    if (player_status == 0 || (last_player_status == 3 && player_status == -1))
     {
-        color = '#37474F'; // unstarted = gray
-    } else if (playerStatus == 0)
-    {
-        color = '#FFFF00'; // ended = yellow
+        play_status = 0;
         play_next();
-    } else if (playerStatus == 1)
-    {
-        color = '#33691E'; // playing = green
-    } else if (playerStatus == 2)
-    {
-        color = '#DD2C00'; // paused = red
-    } else if (playerStatus == 3)
-    {
-        color = '#AA00FF'; // buffering = purple
-    } else if (playerStatus == 5)
-    {
-      color = '#FF6DOO'; // video cued = orange
     }
-    if (color)
+    else if (player_status == 1)
     {
-        document.getElementById('FRAME_PLAYER').style.borderColor = color;
+        play_status = 1;
     }
+    else
+    {
+        play_status = 0;
+    }
+    last_player_status = player_status;
 }
 
 function onPlayerStateChange(event) {
@@ -64,23 +56,6 @@ function get_play_list()
     return new_play_list;
 }
 
-function set_marquee_text()
-{
-    var audio_file = arguments[0];
-    var file_name = ''
-    if (audio_file === undefined || audio_file === '')
-    {
-        file_name = 'Click on a Play Button';
-    }
-    else
-    {
-        var path_list = audio_file.split('/');
-        file_name = path_list.slice(-1);
-    }
-    str = '<marquee behavior="alternate" direction="left" scrollamount="1">' + file_name + '</marquee>'
-    document.getElementById('AUDIO_TAG').innerHTML=str;
-}
-
 function play_first()
 {
     var play_list = get_play_list();
@@ -91,7 +66,7 @@ function play_first()
     var audio_file = play_list[0];
     var parts = audio_file.split('.');
     var video_id = parts[parts.length - 1];
-    yt_player.loadVideoById({'videoId': video_id, 'startSeconds': 5});
+    yt_player.loadVideoById({'videoId': video_id});
 }
 
 function play_next()

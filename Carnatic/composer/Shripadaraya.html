@@ -25,23 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; kangalidhyathako</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0018-Kangalidhyathako-Thodi-SPR.1wniPPLZ06s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0018   - <a href="song/Kangalidhyathako.html" >Kangalidhyathako</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Rajkumar Bharathi.html" >Rajkumar Bharathi   RAJKUMARB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0083-Kangalidhyathako-Thodi-SPR.rYKkVDXRiMM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0083   - <a href="song/Kangalidhyathako.html" >Kangalidhyathako</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/R. K. Srikantan.html" >R  K  Srikantan   RKS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0059-Kangalidhyathako-Thodi-SPR.CZ7hkjrysl8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0059   - <a href="song/Kangalidhyathako.html" >Kangalidhyathako</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Vidyabhushana.html" >Vidyabhushana   VIDYABHOOSHANA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; nanda nandana pahi guna brnda sundara</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0261-Nandanandana Paahi-Vasantha-SPR.Wy_70td4W0M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0261   - <a href="song/Nandanandana Paahi.html" >nanda nandana pAhi guNa brnda sundara :  Adi</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Nedunuri Krishnamurthy.html" >Nedunuri Krishnamurthy   NEDUNURI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["kangalidhyathako"], "songs": [{"N": "0018", "T": "", "H": "Kangalidhyathako", "S": "Kangalidhyathako", "R": "Thodi", "C": "Shripadaraya", "A": "Rajkumar Bharathi", "V": "1wniPPLZ06s"}, {"N": "0083", "T": "", "H": "Kangalidhyathako", "S": "Kangalidhyathako", "R": "Thodi", "C": "Shripadaraya", "A": "R. K. Srikantan", "V": "rYKkVDXRiMM"}, {"N": "0059", "T": "", "H": "Kangalidhyathako", "S": "Kangalidhyathako", "R": "Thodi", "C": "Shripadaraya", "A": "Vidyabhushana", "V": "CZ7hkjrysl8"}]}, {"name": ["nanda nandana pahi guna brnda sundara"], "songs": [{"N": "0261", "T": "", "H": "Nandanandana Paahi", "S": "nanda nandana pAhi guNa brnda sundara :  Adi", "R": "Vasantha", "C": "Shripadaraya", "A": "Nedunuri Krishnamurthy", "V": "Wy_70td4W0M"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

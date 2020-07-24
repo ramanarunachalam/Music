@@ -42,32 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ambikapuram Sivaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0020-Karuna Judavamma Kamala-Thodi-T.RkNjBivwspM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0020   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Ambikapuram Sivaraman.html" >Ambikapuram Sivaraman   ASIVARAMAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Cherthala K. N. Renganatha Sharma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0073-Karuna Judavamma Kamala-Thodi-T.MA8bfB3fMnU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0073   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Cherthala K. N. Renganatha Sharma.html" >Cherthala K  N  Renganatha Sharma</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Hyderabad Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0090-Karuna Judavamma Kamala-Thodi-T.zzPXh7BTzuo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0090   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Hyderabad Brothers.html" >Hyderabad Brothers   HBROS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Priya Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0109-Karuna Judavamma Kamala-Thodi-T.vQ4HIqKEWg0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0109   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Priya Sisters.html" >Priya Sisters   PRIYAS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0266-Karuna Judavamma Kamala-Thodi-T.7W-tXZ4RU4E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0266   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. M. Thiagarajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Karuna Judavamma Kamala-Thodi-T.4Uh8E1iRNqE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/T. M. Thiagarajan.html" >T  M  Thiagarajan   TMT01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -171,9 +146,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Ambikapuram Sivaraman"], "songs": [{"N": "0020", "T": "", "H": "Karuna Judavamma Kamala", "S": "karuNa jUD av amma kamala vairi :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Ambikapuram Sivaraman", "V": "RkNjBivwspM"}]}, {"name": ["Vocal", "Cherthala K. N. Renganatha Sharma"], "songs": [{"N": "0073", "T": "", "H": "Karuna Judavamma Kamala", "S": "karuNa jUD av amma kamala vairi :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Cherthala K. N. Renganatha Sharma", "V": "MA8bfB3fMnU"}]}, {"name": ["Vocal", "Hyderabad Brothers"], "songs": [{"N": "0090", "T": "", "H": "Karuna Judavamma Kamala", "S": "karuNa jUD av amma kamala vairi :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Hyderabad Brothers", "V": "zzPXh7BTzuo"}]}, {"name": ["Vocal", "Priya Sisters"], "songs": [{"N": "0109", "T": "", "H": "Karuna Judavamma Kamala", "S": "karuNa jUD av amma kamala vairi :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Priya Sisters", "V": "vQ4HIqKEWg0"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0266", "T": "", "H": "Karuna Judavamma Kamala", "S": "karuNa jUD av amma kamala vairi :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "7W-tXZ4RU4E"}]}, {"name": ["Vocal", "T. M. Thiagarajan"], "songs": [{"N": "0017", "T": "", "H": "Karuna Judavamma Kamala", "S": "karuNa jUD av amma kamala vairi :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "T. M. Thiagarajan", "V": "4Uh8E1iRNqE"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

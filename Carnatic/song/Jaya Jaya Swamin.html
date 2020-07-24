@@ -41,36 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Keyboard Keyboard Sathya</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0044-Jaya Jaya Swamin-UnknownRaga-NT.N2rJSWsF8L8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0044   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Keyboard Sathya.html" >Keyboard Sathya   SATHYA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin B. U. Ganesh Prasad</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0052-Jaya Jaya Swamin-Nata-NT.gHom981OcME');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0052   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Nata.html" >Nata</a> - <a href="artist/B. U. Ganesh Prasad.html" >B  U  Ganesh Prasad   BUG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0106-Jaya Jaya Swamin-Nata-NT.iByspKRY0So');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0106   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Nata.html" >Nata</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Hyderabad Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0021-Jaya Jaya Swamin-UnknownRaga-NT.6MuAFqmrsgA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0021   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Hyderabad Sisters.html" >Hyderabad Sisters   HSISTERS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. J. Yesudas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0107-Jaya Jaya Swamin-UnknownRaga-NT.QrE0zdJx7WQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0107   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Raji Gopalakrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0028-Jaya Jaya Swamin-Nata-NT.yL7IBeGicDw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0028   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Nata.html" >Nata</a> - <a href="artist/Raji Gopalakrishnan.html" >Raji Gopalakrishnan   RAJIG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. V. Sankaranarayanan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0100-Jaya Jaya Swamin-Nata-NT.zsQdHbaJHAk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0100   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Nata.html" >Nata</a> - <a href="artist/T. V. Sankaranarayanan.html" >T  V  Sankaranarayanan   TVS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -164,9 +135,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Keyboard", "Keyboard Sathya"], "songs": [{"N": "0044", "T": "", "H": "Jaya Jaya Swamin", "S": "jaya jaya svAmin jaya jaya  :  Adi", "R": "Unknownraga", "C": "Narayana Theertha", "A": "Keyboard Sathya", "V": "N2rJSWsF8L8"}]}, {"name": ["Violin", "B. U. Ganesh Prasad"], "songs": [{"N": "0052", "T": "", "H": "Jaya Jaya Swamin", "S": "jaya jaya svAmin jaya jaya  :  Adi", "R": "Nata", "C": "Narayana Theertha", "A": "B. U. Ganesh Prasad", "V": "gHom981OcME"}]}, {"name": ["Vocal", "Bombay Sisters"], "songs": [{"N": "0106", "T": "", "H": "Jaya Jaya Swamin", "S": "jaya jaya svAmin jaya jaya  :  Adi", "R": "Nata", "C": "Narayana Theertha", "A": "Bombay Sisters", "V": "iByspKRY0So"}]}, {"name": ["Vocal", "Hyderabad Sisters"], "songs": [{"N": "0021", "T": "", "H": "Jaya Jaya Swamin", "S": "jaya jaya svAmin jaya jaya  :  Adi", "R": "Unknownraga", "C": "Narayana Theertha", "A": "Hyderabad Sisters", "V": "6MuAFqmrsgA"}]}, {"name": ["Vocal", "K. J. Yesudas"], "songs": [{"N": "0107", "T": "", "H": "Jaya Jaya Swamin", "S": "jaya jaya svAmin jaya jaya  :  Adi", "R": "Unknownraga", "C": "Narayana Theertha", "A": "K. J. Yesudas", "V": "QrE0zdJx7WQ"}]}, {"name": ["Vocal", "Raji Gopalakrishnan"], "songs": [{"N": "0028", "T": "", "H": "Jaya Jaya Swamin", "S": "jaya jaya svAmin jaya jaya  :  Adi", "R": "Nata", "C": "Narayana Theertha", "A": "Raji Gopalakrishnan", "V": "yL7IBeGicDw"}]}, {"name": ["Vocal", "T. V. Sankaranarayanan"], "songs": [{"N": "0100", "T": "", "H": "Jaya Jaya Swamin", "S": "jaya jaya svAmin jaya jaya  :  Adi", "R": "Nata", "C": "Narayana Theertha", "A": "T. V. Sankaranarayanan", "V": "zsQdHbaJHAk"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -42,36 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0218-Shripati Mukha-Saveri-SS.gCBSdjdRmik');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0218   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Baby Sreeram</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0043-Shripati Mukha-Saveri-SS.oH7GfeVhfLw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0043   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Baby Sreeram.html" >Baby Sreeram   BABYS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Padma Sugavanam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0058-Shripati Mukha-Saveri-SS.iqB4Bxri0Do');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0058   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Padma Sugavanam.html" >Padma Sugavanam   SUGAVANAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Pantula Rama</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0120-Shripati Mukha-Saveri-SS.YMXWgq_kdlI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0120   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Pantula Rama.html" >Pantula Rama   PANTHULA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ramakrishnan Murthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0191-Shripati Mukha-Saveri-SS.oPFyfykztEI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0191   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Ramakrishnan Murthy.html" >Ramakrishnan Murthy   RKM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Seetha Rajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0057-Shripati Mukha-Saveri-SS.CfV0eqN-FaM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0057   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Seetha Rajan.html" >Seetha Rajan   SEETHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vani Sateesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Shripati Mukha-Saveri-SS.rBKjB0eAjAE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Vani Sateesh.html" >Vani Sateesh   VANISATEESH01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -174,9 +145,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0218", "T": "", "H": "Shripati Mukha", "S": "SrI pati mukha viracita pUjyE  :  Adi", "R": "Saveri", "C": "Shyama Shastri", "A": "Amrutha Venkatesh", "V": "gCBSdjdRmik"}]}, {"name": ["Vocal", "Baby Sreeram"], "songs": [{"N": "0043", "T": "", "H": "Shripati Mukha", "S": "SrI pati mukha viracita pUjyE  :  Adi", "R": "Saveri", "C": "Shyama Shastri", "A": "Baby Sreeram", "V": "oH7GfeVhfLw"}]}, {"name": ["Vocal", "Padma Sugavanam"], "songs": [{"N": "0058", "T": "", "H": "Shripati Mukha", "S": "SrI pati mukha viracita pUjyE  :  Adi", "R": "Saveri", "C": "Shyama Shastri", "A": "Padma Sugavanam", "V": "iqB4Bxri0Do"}]}, {"name": ["Vocal", "Pantula Rama"], "songs": [{"N": "0120", "T": "", "H": "Shripati Mukha", "S": "SrI pati mukha viracita pUjyE  :  Adi", "R": "Saveri", "C": "Shyama Shastri", "A": "Pantula Rama", "V": "YMXWgq_kdlI"}]}, {"name": ["Vocal", "Ramakrishnan Murthy"], "songs": [{"N": "0191", "T": "", "H": "Shripati Mukha", "S": "SrI pati mukha viracita pUjyE  :  Adi", "R": "Saveri", "C": "Shyama Shastri", "A": "Ramakrishnan Murthy", "V": "oPFyfykztEI"}]}, {"name": ["Vocal", "Seetha Rajan"], "songs": [{"N": "0057", "T": "", "H": "Shripati Mukha", "S": "SrI pati mukha viracita pUjyE  :  Adi", "R": "Saveri", "C": "Shyama Shastri", "A": "Seetha Rajan", "V": "CfV0eqN-FaM"}]}, {"name": ["Vocal", "Vani Sateesh"], "songs": [{"N": "0017", "T": "", "H": "Shripati Mukha", "S": "SrI pati mukha viracita pUjyE  :  Adi", "R": "Saveri", "C": "Shyama Shastri", "A": "Vani Sateesh", "V": "rBKjB0eAjAE"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

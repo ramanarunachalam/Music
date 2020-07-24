@@ -42,31 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Flute Prapancham Sitaram</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0002-Kaliyugadalli-Chenchurutti-PD.Q766BsvQ_lY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0002   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/Prapancham Sitaram.html" >Prapancham Sitaram   PRAPANCHAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. V. Narayanaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0227-Kaliyugadalli-Chenchurutti-PD.dwLfN2oi7-A');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0227   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/K. V. Narayanaswamy.html" >K  V  Narayanaswamy   KVN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0541-Kaliyugadalli-Chenchurutti-PD.1En64gU8DBc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0541   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0542-Kaliyugadalli-Chenchurutti-PD.6xrri7jEMcI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0542   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0543-Kaliyugadalli-Chenchurutti-PD.OZTpjkOdtsk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0543   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0544-Kaliyugadalli-Chenchurutti-PD.rgM1im1AUDs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0544   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Aishwarya</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0049-Kaliyugadalli-Chenchurutti-PD.QWxLHkOAqAQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0049   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/S. Aishwarya.html" >S  Aishwarya   AISHWARYA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sriram Gangadharan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0024-Kaliyugadalli-Chenchurutti-PD.7BNJKmXBNQI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0024   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/Sriram Gangadharan.html" >Sriram Gangadharan   SRIRAMG01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -143,9 +119,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Flute", "Prapancham Sitaram"], "songs": [{"N": "0002", "T": "", "H": "Kaliyugadalli", "S": "kaliyugadali harinamava nenedare kulakotigalu :  Adi", "R": "Chenchurutti", "C": "Purandara Dasa", "A": "Prapancham Sitaram", "V": "Q766BsvQ_lY"}]}, {"name": ["Vocal", "K. V. Narayanaswamy"], "songs": [{"N": "0227", "T": "", "H": "Kaliyugadalli", "S": "kaliyugadali harinamava nenedare kulakotigalu :  Adi", "R": "Chenchurutti", "C": "Purandara Dasa", "A": "K. V. Narayanaswamy", "V": "dwLfN2oi7-A"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "0541", "T": "", "H": "Kaliyugadalli", "S": "kaliyugadali harinamava nenedare kulakotigalu :  Adi", "R": "Chenchurutti", "C": "Purandara Dasa", "A": "M. S. Subbulakshmi", "V": "1En64gU8DBc"}, {"N": "0542", "T": "", "H": "Kaliyugadalli", "S": "kaliyugadali harinamava nenedare kulakotigalu :  Adi", "R": "Chenchurutti", "C": "Purandara Dasa", "A": "M. S. Subbulakshmi", "V": "6xrri7jEMcI"}, {"N": "0543", "T": "", "H": "Kaliyugadalli", "S": "kaliyugadali harinamava nenedare kulakotigalu :  Adi", "R": "Chenchurutti", "C": "Purandara Dasa", "A": "M. S. Subbulakshmi", "V": "OZTpjkOdtsk"}, {"N": "0544", "T": "", "H": "Kaliyugadalli", "S": "kaliyugadali harinamava nenedare kulakotigalu :  Adi", "R": "Chenchurutti", "C": "Purandara Dasa", "A": "M. S. Subbulakshmi", "V": "rgM1im1AUDs"}]}, {"name": ["Vocal", "S. Aishwarya"], "songs": [{"N": "0049", "T": "", "H": "Kaliyugadalli", "S": "kaliyugadali harinamava nenedare kulakotigalu :  Adi", "R": "Chenchurutti", "C": "Purandara Dasa", "A": "S. Aishwarya", "V": "QWxLHkOAqAQ"}]}, {"name": ["Vocal", "Sriram Gangadharan"], "songs": [{"N": "0024", "T": "", "H": "Kaliyugadalli", "S": "kaliyugadali harinamava nenedare kulakotigalu :  Adi", "R": "Chenchurutti", "C": "Purandara Dasa", "A": "Sriram Gangadharan", "V": "7BNJKmXBNQI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -42,33 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bangalore S. Shankar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0035-Palisemma Muddu-Mukhari-PD.bp1OUM3w_xw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0035   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Mukhari.html" >Mukhari</a> - <a href="artist/Bangalore S. Shankar.html" >Bangalore S  Shankar   BSHANKAR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1061-Palisemma Muddu-UnknownRaga-PD._2UCsWm9Yts');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1061   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0851-Palisemma Muddu-Mukhari-PD.OPCQb3vdi8U');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0851   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Mukhari.html" >Mukhari</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0852-Palisemma Muddu-Mukhari-PD.pk6A58yST7E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0852   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Mukhari.html" >Mukhari</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. K. Srikantan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0142-Palisemma Muddu-Mukhari-PD.M2NuFN3tmq4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0142   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Mukhari.html" >Mukhari</a> - <a href="artist/R. K. Srikantan.html" >R  K  Srikantan   RKS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sankaran Namboothiri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0124-Palisemma Muddu-Sriranjani-PD.gJkXlkuwGQI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0124   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/Sankaran Namboothiri.html" >Sankaran Namboothiri   SNAMBOOTHIRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sriranjani Santhanagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0067-Palisemma Muddu-UnknownRaga-PD.tGc1qQevZNg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0067   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Sriranjani Santhanagopalan.html" >Sriranjani Santhanagopalan   SJS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -162,9 +136,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bangalore S. Shankar"], "songs": [{"N": "0035", "T": "", "H": "Palisemma Muddu", "S": "pAlisemma muddu shAradE enna nAligEyali nilla :  Adi", "R": "Mukhari", "C": "Purandara Dasa", "A": "Bangalore S. Shankar", "V": "bp1OUM3w_xw"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "1062", "T": "", "H": "Palisemma Muddu", "S": "pAlisemma muddu shAradE enna nAligEyali nilla :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "M. Balamuralikrishna", "V": "_2UCsWm9Yts"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "0851", "T": "", "H": "Palisemma Muddu", "S": "pAlisemma muddu shAradE enna nAligEyali nilla :  Adi", "R": "Mukhari", "C": "Purandara Dasa", "A": "M. S. Subbulakshmi", "V": "OPCQb3vdi8U"}, {"N": "0852", "T": "", "H": "Palisemma Muddu", "S": "pAlisemma muddu shAradE enna nAligEyali nilla :  Adi", "R": "Mukhari", "C": "Purandara Dasa", "A": "M. S. Subbulakshmi", "V": "pk6A58yST7E"}]}, {"name": ["Vocal", "R. K. Srikantan"], "songs": [{"N": "0142", "T": "", "H": "Palisemma Muddu", "S": "pAlisemma muddu shAradE enna nAligEyali nilla :  Adi", "R": "Mukhari", "C": "Purandara Dasa", "A": "R. K. Srikantan", "V": "M2NuFN3tmq4"}]}, {"name": ["Vocal", "Sankaran Namboothiri"], "songs": [{"N": "0124", "T": "", "H": "Palisemma Muddu", "S": "pAlisemma muddu shAradE enna nAligEyali nilla :  Adi", "R": "Sriranjani", "C": "Purandara Dasa", "A": "Sankaran Namboothiri", "V": "gJkXlkuwGQI"}]}, {"name": ["Vocal", "Sriranjani Santhanagopalan"], "songs": [{"N": "0067", "T": "", "H": "Palisemma Muddu", "S": "pAlisemma muddu shAradE enna nAligEyali nilla :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Sriranjani Santhanagopalan", "V": "tGc1qQevZNg"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

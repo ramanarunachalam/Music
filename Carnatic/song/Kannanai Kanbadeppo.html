@@ -41,26 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mandolin U. Srinivas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0226-Kannanai Kanbadeppo-Ragamalika-SUB.f1LmMB2sHaY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0226   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/U. Srinivas.html" >U  Srinivas   USRINIVAS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0227-Kannanai Kanbadeppo-Ragamalika-SUB.mpNc8SBnlSE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0227   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/U. Srinivas.html" >U  Srinivas   USRINIVAS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Aruna Sairam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0150-Kannanai Kanbadeppo-Ragamalika-SUB.IGKWA4z8qO8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0150   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal G. N. Balasubramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0162-Kannanai Kanbadeppo-Ragamalika-SUB.PzZIV7CI4bM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0162   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0163-Kannanai Kanbadeppo-Ragamalika-SUB.soLhyudEyJU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0163   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0323-Kannanai Kanbadeppo-Ragamalika-SUB.2JByJ8KrPiM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0323   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -161,9 +142,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Mandolin", "U. Srinivas"], "songs": [{"N": "0226", "T": "", "H": "Kannanai Kanbadeppo", "S": "kaNNanai kANbadeppO  kArmEgha vaNNanukkenmEl enna :  Adi", "R": "Ragamalika", "C": "Shuddhananda Bharathi", "A": "U. Srinivas", "V": "f1LmMB2sHaY"}, {"N": "0227", "T": "", "H": "Kannanai Kanbadeppo", "S": "kaNNanai kANbadeppO  kArmEgha vaNNanukkenmEl enna :  Adi", "R": "Ragamalika", "C": "Shuddhananda Bharathi", "A": "U. Srinivas", "V": "mpNc8SBnlSE"}]}, {"name": ["Vocal", "Aruna Sairam"], "songs": [{"N": "0150", "T": "", "H": "Kannanai Kanbadeppo", "S": "kaNNanai kANbadeppO  kArmEgha vaNNanukkenmEl enna :  Adi", "R": "Ragamalika", "C": "Shuddhananda Bharathi", "A": "Aruna Sairam", "V": "IGKWA4z8qO8"}]}, {"name": ["Vocal", "G. N. Balasubramaniam"], "songs": [{"N": "0164", "T": "", "H": "Kannanai Kanbadeppo", "S": "kaNNanai kANbadeppO  kArmEgha vaNNanukkenmEl enna :  Adi", "R": "Ragamalika", "C": "Shuddhananda Bharathi", "A": "G. N. Balasubramaniam", "V": "PzZIV7CI4bM"}, {"N": "0165", "T": "", "H": "Kannanai Kanbadeppo", "S": "kaNNanai kANbadeppO  kArmEgha vaNNanukkenmEl enna :  Adi", "R": "Ragamalika", "C": "Shuddhananda Bharathi", "A": "G. N. Balasubramaniam", "V": "soLhyudEyJU"}]}, {"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0323", "T": "", "H": "Kannanai Kanbadeppo", "S": "kaNNanai kANbadeppO  kArmEgha vaNNanukkenmEl enna :  Adi", "R": "Ragamalika", "C": "Shuddhananda Bharathi", "A": "M. L. Vasanthakumari", "V": "2JByJ8KrPiM"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

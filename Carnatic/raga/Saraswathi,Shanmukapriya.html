@@ -31,22 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; alapana</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0003-Alapana-Alapana-Saraswathi,Shanmukapriya-UnknownComposer.Yf5vkqIg0Fg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0003   - <a href="song/Alapana.html" >Alapana</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Jayanthi Kumaresh.html" >Jayanthi Kumaresh   KJAYANTHI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; unknownsong</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0023-UnknownSong-Saraswathi,Shanmukapriya-UnknownComposer.XHYobMjIuX0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0023   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/E. M. Subramaniam.html" >E  M  Subramaniam   EMS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0181-UnknownSong-Saraswathi,Shanmukapriya-UnknownComposer.jM9b2Qo5qwM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0181   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Jayanthi Kumaresh.html" >Jayanthi Kumaresh   KJAYANTHI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["alapana"], "songs": [{"N": "0003", "T": "", "H": "Alapana", "S": "Alapana", "R": "Saraswathi,Shanmukapriya", "C": "UnknownComposer", "A": "Jayanthi Kumaresh", "V": "Yf5vkqIg0Fg"}]}, {"name": ["unknownsong"], "songs": [{"N": "0023", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Saraswathi,Shanmukapriya", "C": "UnknownComposer", "A": "E. M. Subramaniam", "V": "XHYobMjIuX0"}, {"N": "0181", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Saraswathi,Shanmukapriya", "C": "UnknownComposer", "A": "Jayanthi Kumaresh", "V": "jM9b2Qo5qwM"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

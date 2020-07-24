@@ -42,20 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0888-Thayagi Thandayumai-Hamsadhwani-RLS.9-Y5_weY_WM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0888   - <a href="composer/Ramalinga Swamigal.html" >Ramalinga Swamigal</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0889-Thayagi Thandayumai-Hamsadhwani-RLS.kD4v69TV_Qw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0889   - <a href="composer/Ramalinga Swamigal.html" >Ramalinga Swamigal</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1144-Thayagi Thandayumai-Simhendramadhyamam-RLS.7UY38mutG1E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1144   - <a href="composer/Ramalinga Swamigal.html" >Ramalinga Swamigal</a> - <a href="raga/Simhendramadhyamam.html" >Simhendramadhyamam</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1145-Thayagi Thandayumai-Simhendramadhyamam-RLS.U-tIYRSfZ0I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1145   - <a href="composer/Ramalinga Swamigal.html" >Ramalinga Swamigal</a> - <a href="raga/Simhendramadhyamam.html" >Simhendramadhyamam</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1146-Thayagi Thandayumai-Simhendramadhyamam-RLS.mSGVAH7xdHw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1146   - <a href="composer/Ramalinga Swamigal.html" >Ramalinga Swamigal</a> - <a href="raga/Simhendramadhyamam.html" >Simhendramadhyamam</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1147-Thayagi Thandayumai-Simhendramadhyamam-RLS.zcAaFf5OZvo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1147   - <a href="composer/Ramalinga Swamigal.html" >Ramalinga Swamigal</a> - <a href="raga/Simhendramadhyamam.html" >Simhendramadhyamam</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -133,9 +120,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0888", "T": "", "H": "Thayagi Thandayumai", "S": "thaayaakith thanthaiyumaayth thaangkukinRa :  Adi", "R": "Hamsadhwani", "C": "Ramalinga Swamigal", "A": "M. L. Vasanthakumari", "V": "9-Y5_weY_WM"}, {"N": "0889", "T": "", "H": "Thayagi Thandayumai", "S": "thaayaakith thanthaiyumaayth thaangkukinRa :  Adi", "R": "Hamsadhwani", "C": "Ramalinga Swamigal", "A": "M. L. Vasanthakumari", "V": "kD4v69TV_Qw"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "1144", "T": "", "H": "Thayagi Thandayumai", "S": "thaayaakith thanthaiyumaayth thaangkukinRa :  Adi", "R": "Simhendramadhyamam", "C": "Ramalinga Swamigal", "A": "M. S. Subbulakshmi", "V": "7UY38mutG1E"}, {"N": "1145", "T": "", "H": "Thayagi Thandayumai", "S": "thaayaakith thanthaiyumaayth thaangkukinRa :  Adi", "R": "Simhendramadhyamam", "C": "Ramalinga Swamigal", "A": "M. S. Subbulakshmi", "V": "U-tIYRSfZ0I"}, {"N": "1146", "T": "", "H": "Thayagi Thandayumai", "S": "thaayaakith thanthaiyumaayth thaangkukinRa :  Adi", "R": "Simhendramadhyamam", "C": "Ramalinga Swamigal", "A": "M. S. Subbulakshmi", "V": "mSGVAH7xdHw"}, {"N": "1147", "T": "", "H": "Thayagi Thandayumai", "S": "thaayaakith thanthaiyumaayth thaangkukinRa :  Adi", "R": "Simhendramadhyamam", "C": "Ramalinga Swamigal", "A": "M. S. Subbulakshmi", "V": "zcAaFf5OZvo"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

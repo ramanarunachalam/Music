@@ -41,28 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Pattammal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0168-Govinda Ghataya-Kambhoji-NT.yUk0TPtRTkk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0168   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. J. Yesudas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0092-Govinda Ghataya-Kambhoji-NT.OB9uV_IGBVY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0092   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0555-Govinda Ghataya-Kambhoji-NT.MornQqung2w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0555   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Malladi Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0079-Govinda Ghataya-Kambhoji-NT.QSLJg9Es8w0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0079   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/Malladi Brothers.html" >Malladi Brothers   MALLADI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. N. Seshagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0221-Govinda Ghataya-Kambhoji-NT.7r4P3M3mwiQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0221   - <a href="composer/Narayana Theertha.html" >Narayana Theertha</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -163,9 +142,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "D. K. Pattammal"], "songs": [{"N": "0168", "T": "", "H": "Govinda Ghataya", "S": "gOvinda ghaTaya paramAnadam amrtamiha harE shrI :  Jhampa", "R": "Kambhoji", "C": "Narayana Theertha", "A": "D. K. Pattammal", "V": "yUk0TPtRTkk"}]}, {"name": ["Vocal", "K. J. Yesudas"], "songs": [{"N": "0092", "T": "", "H": "Govinda Ghataya", "S": "gOvinda ghaTaya paramAnadam amrtamiha harE shrI :  Jhampa", "R": "Kambhoji", "C": "Narayana Theertha", "A": "K. J. Yesudas", "V": "OB9uV_IGBVY"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0555", "T": "", "H": "Govinda Ghataya", "S": "gOvinda ghaTaya paramAnadam amrtamiha harE shrI :  Jhampa", "R": "Kambhoji", "C": "Narayana Theertha", "A": "M. Balamuralikrishna", "V": "MornQqung2w"}]}, {"name": ["Vocal", "Malladi Brothers"], "songs": [{"N": "0079", "T": "", "H": "Govinda Ghataya", "S": "gOvinda ghaTaya paramAnadam amrtamiha harE shrI :  Jhampa", "R": "Kambhoji", "C": "Narayana Theertha", "A": "Malladi Brothers", "V": "QSLJg9Es8w0"}]}, {"name": ["Vocal", "T. N. Seshagopalan"], "songs": [{"N": "0221", "T": "", "H": "Govinda Ghataya", "S": "gOvinda ghaTaya paramAnadam amrtamiha harE shrI :  Jhampa", "R": "Kambhoji", "C": "Narayana Theertha", "A": "T. N. Seshagopalan", "V": "7r4P3M3mwiQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

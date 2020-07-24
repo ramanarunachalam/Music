@@ -42,30 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0736-Lali Laliyani-Harikambhoji-T.19LsBKhrW9E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0736   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Harikambhoji.html" >Harikambhoji</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0737-Lali Laliyani-UnknownRaga-T.0xTyTOvB3xU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0737   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0622-Lali Laliyani-Harikambhoji,Khamas-T.PcvAR6PmBzI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0622   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Harikambhoji,Khamas.html" >Harikambhoji Khamas</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Malladi Narayana Sarma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-Lali Laliyani-Khamas-T.HKEFeZVSDwA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Khamas.html" >Khamas</a> - <a href="artist/Malladi Narayana Sarma.html" >Malladi Narayana Sarma   MNS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Semmangudi Srinivasa Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0363-Lali Laliyani-Harikambhoji-T.nY-MKsT2DxE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0363   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Harikambhoji.html" >Harikambhoji</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0364-Lali Laliyani-Harikambhoji-T.xpmYY8HdCN4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0364   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Harikambhoji.html" >Harikambhoji</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0288-Lali Laliyani-UnknownRaga-T.HvMDU05YIC0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0288   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -168,9 +145,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0736", "T": "", "H": "Lali Laliyani", "S": "lAli lAli y ani y UcErA vana  :  Adi", "R": "Harikambhoji", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "19LsBKhrW9E"}, {"N": "0737", "T": "", "H": "Lali Laliyani", "S": "lAli lAli y ani y UcErA vana  :  Adi", "R": "Unknownraga", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "0xTyTOvB3xU"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "0622", "T": "", "H": "Lali Laliyani", "S": "lAli lAli y ani y UcErA vana  :  Adi", "R": "Harikambhoji,Khamas", "C": "Thyagaraja", "A": "M. S. Subbulakshmi", "V": "PcvAR6PmBzI"}]}, {"name": ["Vocal", "Malladi Narayana Sarma"], "songs": [{"N": "0005", "T": "", "H": "Lali Laliyani", "S": "lAli lAli y ani y UcErA vana  :  Adi", "R": "Khamas", "C": "Thyagaraja", "A": "Malladi Narayana Sarma", "V": "HKEFeZVSDwA"}]}, {"name": ["Vocal", "Semmangudi Srinivasa Iyer"], "songs": [{"N": "0363", "T": "", "H": "Lali Laliyani", "S": "lAli lAli y ani y UcErA vana  :  Adi", "R": "Harikambhoji", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "nY-MKsT2DxE"}, {"N": "0364", "T": "", "H": "Lali Laliyani", "S": "lAli lAli y ani y UcErA vana  :  Adi", "R": "Harikambhoji", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "xpmYY8HdCN4"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0288", "T": "", "H": "Lali Laliyani", "S": "lAli lAli y ani y UcErA vana  :  Adi", "R": "Unknownraga", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "HvMDU05YIC0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

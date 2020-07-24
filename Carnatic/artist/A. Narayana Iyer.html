@@ -26,23 +26,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; ANI01</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0001-Javali-Parulanna Mata-Kapi-DS.-TkXYz4aFvM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0001 - <a href="song_type/Javali.html" >Javali</a>  - <a href="song/Parulanna Mata.html" >parulenna mATa namma vaddu prANa nAyaka :  Rupaka</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="composer/Dharmapuri Subbarayar.html" >Dharmapuri Subbarayar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0002-Raghuvamsa Sudha-Kadanakuthuhalam-PS.eFgRv3pa_K4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0002   - <a href="song/Raghuvamsa Sudha.html" >raghuvamsha sudhAmbudhi candra shrI rAma rAja :  Adi</a> - <a href="raga/Kadanakuthuhalam.html" >Kadanakuthuhalam</a> - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0003-Ramanai Tharuvoy-Sindhubhairavi-AK.a3WoMeBepjY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0003   - <a href="song/Ramanai Tharuvoy.html" >rAmanait taruvAi jagat rakSaka rAmanait taruvAi :  Adi</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="composer/Arunachala Kavi.html" >Arunachala Kavi</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-Ramanatham Bhajeham-Panthuvarali-MD.fGIDZ_Kjf3Q');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="song/Ramanatham Bhajeham.html" >rAmanAtham bhajEham rAmacandra pUjitam :  Tisra Eka</a> - <a href="raga/Panthuvarali.html" >Panthuvarali</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-Sarasiruha Sanapriye-Nata-PDI.nxxh0hAbxmU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="song/Sarasiruha Sanapriye.html" >Sarasi Ruhasana Priye Amba  :  Adi</a> - <a href="raga/Nata.html" >Nata</a> - <a href="composer/Puliyur Doraiswamy Iyer.html" >Puliyur Doraiswamy Iyer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-Shodasa ganapati-Sri Mahaganapatiravatumam-Gowla-MD.m-3wcHonGEk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006 - <a href="song_type/Shodasa ganapati.html" >Shodasa ganapati</a>  - <a href="song/Sri Mahaganapatiravatumam.html" >SrI mahA gaNa patiravatu mAM  :  Adi</a> - <a href="raga/Gowla.html" >Gowla</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0007-UnknownSong-Devagandhari-UnknownComposer._NtTqZcP1ZU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0007   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["ANI01"], "songs": [{"N": "0001", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "A. Narayana Iyer", "V": "-TkXYz4aFvM"}, {"N": "0002", "T": "", "H": "Raghuvamsa Sudha", "S": "raghuvamsha sudhAmbudhi candra shrI rAma rAja :  Adi", "R": "Kadanakuthuhalam", "C": "Patnam Subramanya Iyer", "A": "A. Narayana Iyer", "V": "eFgRv3pa_K4"}, {"N": "0003", "T": "", "H": "Ramanai Tharuvoy", "S": "rAmanait taruvAi jagat rakSaka rAmanait taruvAi :  Adi", "R": "Sindhubhairavi", "C": "Arunachala Kavi", "A": "A. Narayana Iyer", "V": "a3WoMeBepjY"}, {"N": "0004", "T": "", "H": "Ramanatham Bhajeham", "S": "rAmanAtham bhajEham rAmacandra pUjitam :  Tisra Eka", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "A. Narayana Iyer", "V": "fGIDZ_Kjf3Q"}, {"N": "0005", "T": "", "H": "Sarasiruha Sanapriye", "S": "Sarasi Ruhasana Priye Amba  :  Adi", "R": "Nata", "C": "Puliyur Doraiswamy Iyer", "A": "A. Narayana Iyer", "V": "nxxh0hAbxmU"}, {"N": "0006", "T": "Shodasa ganapati", "H": "Sri Mahaganapatiravatumam", "S": "SrI mahA gaNa patiravatu mAM  :  Adi", "R": "Gowla", "C": "Muthuswami Dikshitar", "A": "A. Narayana Iyer", "V": "m-3wcHonGEk"}, {"N": "0007", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Devagandhari", "C": "UnknownComposer", "A": "A. Narayana Iyer", "V": "_NtTqZcP1ZU"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#artist-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

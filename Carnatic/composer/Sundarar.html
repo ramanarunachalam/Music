@@ -25,25 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; pitha piraisudi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0885-Pitha Piraisudi-Nadanamakriya-SU.P5OvBI9T71k');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0885   - <a href="song/Pitha Piraisudi.html" >Pitha Piraisudi</a> - <a href="raga/Nadanamakriya.html" >Nadanamakriya</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0886-Pitha Piraisudi-Nadanamakriya-SU.aNLZb_Tnfbc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0886   - <a href="song/Pitha Piraisudi.html" >Pitha Piraisudi</a> - <a href="raga/Nadanamakriya.html" >Nadanamakriya</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0887-Pitha Piraisudi-UnknownRaga-SU.xmHLNBlnI-I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0887   - <a href="song/Pitha Piraisudi.html" >Pitha Piraisudi</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0024-Pitha Piraisudi-UnknownRaga-SU.c0Xd9G65HEY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0024   - <a href="song/Pitha Piraisudi.html" >Pitha Piraisudi</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/T. M. Soundarajan.html" >T  M  Soundarajan   TMS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; ponnar meniyane</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0092-Ponnar Meniyane-UnknownRaga-SU.mzKxj1ZWBqU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0092   - <a href="song/Ponnar Meniyane.html" >Ponnar Meniyane</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/S. Ramanathan.html" >S  Ramanathan   DSR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0025-Ponnar Meniyane-UnknownRaga-SU.-9M88juogEU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0025   - <a href="song/Ponnar Meniyane.html" >Ponnar Meniyane</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/T. M. Soundarajan.html" >T  M  Soundarajan   TMS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["pitha piraisudi"], "songs": [{"N": "0885", "T": "", "H": "Pitha Piraisudi", "S": "Pitha Piraisudi", "R": "Nadanamakriya", "C": "Sundarar", "A": "M. S. Subbulakshmi", "V": "P5OvBI9T71k"}, {"N": "0886", "T": "", "H": "Pitha Piraisudi", "S": "Pitha Piraisudi", "R": "Nadanamakriya", "C": "Sundarar", "A": "M. S. Subbulakshmi", "V": "aNLZb_Tnfbc"}, {"N": "0887", "T": "", "H": "Pitha Piraisudi", "S": "Pitha Piraisudi", "R": "Unknownraga", "C": "Sundarar", "A": "M. S. Subbulakshmi", "V": "xmHLNBlnI-I"}, {"N": "0024", "T": "", "H": "Pitha Piraisudi", "S": "Pitha Piraisudi", "R": "Unknownraga", "C": "Sundarar", "A": "T. M. Soundarajan", "V": "c0Xd9G65HEY"}]}, {"name": ["ponnar meniyane"], "songs": [{"N": "0092", "T": "", "H": "Ponnar Meniyane", "S": "Ponnar Meniyane", "R": "Unknownraga", "C": "Sundarar", "A": "S. Ramanathan", "V": "mzKxj1ZWBqU"}, {"N": "0025", "T": "", "H": "Ponnar Meniyane", "S": "Ponnar Meniyane", "R": "Unknownraga", "C": "Sundarar", "A": "T. M. Soundarajan", "V": "-9M88juogEU"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

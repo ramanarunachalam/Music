@@ -40,21 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal G. N. Balasubramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0246-Nannu Brova Mani-Kalyani-BR.sgHczi3S_f4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0246   - <a href="composer/Bhadrachala Ramadasu.html" >Bhadrachala Ramadasu</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0918-Nannu Brova Mani-Kalyani-BR.3VioY8mz93Q');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0918   - <a href="composer/Bhadrachala Ramadasu.html" >Bhadrachala Ramadasu</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0919-Nannu Brova Mani-Kalyani-BR.R5cn7TVgYGI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0919   - <a href="composer/Bhadrachala Ramadasu.html" >Bhadrachala Ramadasu</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Priya Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0153-Nannu Brova Mani-Kalyani-BR.fYkvJpth7vI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0153   - <a href="composer/Bhadrachala Ramadasu.html" >Bhadrachala Ramadasu</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Priya Sisters.html" >Priya Sisters   PRIYAS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -155,9 +141,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "G. N. Balasubramaniam"], "songs": [{"N": "0250", "T": "", "H": "Nannu Brova Mani", "S": "nannu brOvumani ceppavE sItamma nanu brOvumani :  Caapu", "R": "Kalyani", "C": "Bhadrachala Ramadasu", "A": "G. N. Balasubramaniam", "V": "sgHczi3S_f4"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0919", "T": "", "H": "Nannu Brova Mani", "S": "nannu brOvumani ceppavE sItamma nanu brOvumani :  Caapu", "R": "Kalyani", "C": "Bhadrachala Ramadasu", "A": "M. Balamuralikrishna", "V": "3VioY8mz93Q"}, {"N": "0920", "T": "", "H": "Nannu Brova Mani", "S": "nannu brOvumani ceppavE sItamma nanu brOvumani :  Caapu", "R": "Kalyani", "C": "Bhadrachala Ramadasu", "A": "M. Balamuralikrishna", "V": "R5cn7TVgYGI"}]}, {"name": ["Vocal", "Priya Sisters"], "songs": [{"N": "0153", "T": "", "H": "Nannu Brova Mani", "S": "nannu brOvumani ceppavE sItamma nanu brOvumani :  Caapu", "R": "Kalyani", "C": "Bhadrachala Ramadasu", "A": "Priya Sisters", "V": "fYkvJpth7vI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

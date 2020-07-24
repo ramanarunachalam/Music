@@ -42,24 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin M. A. Krishnaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0086-Thaye Idu Tarunam-Kamavardhini-KB.ljGo6IScaPg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0086   - <a href="composer/Kavikunchara Bharathi.html" >Kavikunchara Bharathi</a> - <a href="raga/Kamavardhini.html" >Kamavardhini</a> - <a href="artist/M. A. Krishnaswamy.html" >M  A  Krishnaswamy   MAKRISHNASWAMY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1149-Thaye Idu Tarunam-Kamavardhini-KB.P1V4E4C694U');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1149   - <a href="composer/Kavikunchara Bharathi.html" >Kavikunchara Bharathi</a> - <a href="raga/Kamavardhini.html" >Kamavardhini</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1150-Thaye Idu Tarunam-Kamavardhini-KB.TGPbuwHHZAw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1150   - <a href="composer/Kavikunchara Bharathi.html" >Kavikunchara Bharathi</a> - <a href="raga/Kamavardhini.html" >Kamavardhini</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1151-Thaye Idu Tarunam-Kamavardhini-KB.aauFqAxVtlk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1151   - <a href="composer/Kavikunchara Bharathi.html" >Kavikunchara Bharathi</a> - <a href="raga/Kamavardhini.html" >Kamavardhini</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1152-Thaye Idu Tarunam-Kamavardhini-KB.rTj_vV5vhyM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1152   - <a href="composer/Kavikunchara Bharathi.html" >Kavikunchara Bharathi</a> - <a href="raga/Kamavardhini.html" >Kamavardhini</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ramakrishnan Murthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0222-Thaye Idu Tarunam-Kamavardhini-KB.JOGmiowx9mg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0222   - <a href="composer/Kavikunchara Bharathi.html" >Kavikunchara Bharathi</a> - <a href="raga/Kamavardhini.html" >Kamavardhini</a> - <a href="artist/Ramakrishnan Murthy.html" >Ramakrishnan Murthy   RKM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0223-Thaye Idu Tarunam-Kamavardhini-KB.eLrXOPXKTFA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0223   - <a href="composer/Kavikunchara Bharathi.html" >Kavikunchara Bharathi</a> - <a href="raga/Kamavardhini.html" >Kamavardhini</a> - <a href="artist/Ramakrishnan Murthy.html" >Ramakrishnan Murthy   RKM01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -148,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "M. A. Krishnaswamy"], "songs": [{"N": "0086", "T": "", "H": "Thaye Idu Tarunam", "S": "taayE idu daruNam en edir varu  :  Adi", "R": "Kamavardhini", "C": "Kavikunchara Bharathi", "A": "M. A. Krishnaswamy", "V": "ljGo6IScaPg"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "1149", "T": "", "H": "Thaye Idu Tarunam", "S": "taayE idu daruNam en edir varu  :  Adi", "R": "Kamavardhini", "C": "Kavikunchara Bharathi", "A": "M. S. Subbulakshmi", "V": "P1V4E4C694U"}, {"N": "1150", "T": "", "H": "Thaye Idu Tarunam", "S": "taayE idu daruNam en edir varu  :  Adi", "R": "Kamavardhini", "C": "Kavikunchara Bharathi", "A": "M. S. Subbulakshmi", "V": "TGPbuwHHZAw"}, {"N": "1151", "T": "", "H": "Thaye Idu Tarunam", "S": "taayE idu daruNam en edir varu  :  Adi", "R": "Kamavardhini", "C": "Kavikunchara Bharathi", "A": "M. S. Subbulakshmi", "V": "aauFqAxVtlk"}, {"N": "1152", "T": "", "H": "Thaye Idu Tarunam", "S": "taayE idu daruNam en edir varu  :  Adi", "R": "Kamavardhini", "C": "Kavikunchara Bharathi", "A": "M. S. Subbulakshmi", "V": "rTj_vV5vhyM"}]}, {"name": ["Vocal", "Ramakrishnan Murthy"], "songs": [{"N": "0222", "T": "", "H": "Thaye Idu Tarunam", "S": "taayE idu daruNam en edir varu  :  Adi", "R": "Kamavardhini", "C": "Kavikunchara Bharathi", "A": "Ramakrishnan Murthy", "V": "JOGmiowx9mg"}, {"N": "0223", "T": "", "H": "Thaye Idu Tarunam", "S": "taayE idu daruNam en edir varu  :  Adi", "R": "Kamavardhini", "C": "Kavikunchara Bharathi", "A": "Ramakrishnan Murthy", "V": "eLrXOPXKTFA"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

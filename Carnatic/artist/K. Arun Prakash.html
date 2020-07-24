@@ -26,26 +26,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; KAP01</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Concert-Concert-UnknownRaga-UnknownComposer.Rn7jUd49B7I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017   - <a href="song/Concert.html" >Concert</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0084-Rama Rama Rama Ramayani-Mohanam-T.dDmHzjC1B_Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0084   - <a href="song/Rama Rama Rama Ramayani.html" >rAma rAma rAma rAmA y anin a nta :  Caapu</a> - <a href="raga/Mohanam.html" >Mohanam</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0104-Lecdem-Lecdem-UnknownRaga-UnknownComposer.42B7hjzcXtU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0104   - <a href="song/Lecdem.html" >Lecdem</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0105-Lecdem-Lecdem-UnknownRaga-UnknownComposer.Cc98P6wPxAY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0105   - <a href="song/Lecdem.html" >Lecdem</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0108-Lecdem-Lecdem-UnknownRaga-UnknownComposer.whTsCoTR6nQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0108   - <a href="song/Lecdem.html" >Lecdem</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0118-Thillana-Thillana-UnknownRaga-UnknownComposer.NHe_gLBWmg0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0118 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="song/thillana_unknowncomposer_unknownraga.html" >thillana unknowncomposer unknownraga</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0123-Varnam-Vandana-Vachaspathi-TIGER.dURK678G4Wg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0123 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="song/Vandana.html" >vaNdanamonariNciti vElakoladi  :  Ata</a> - <a href="raga/Vachaspathi.html" >Vachaspathi</a> - <a href="composer/Tiger Varadachariar.html" >Tiger Varadachariar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0125-UnknownSong-Kalyani-UnknownComposer.gQa86pfkIHI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0125   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0126-UnknownSong-Kapi-UnknownComposer.5JlXlmQ4Wck');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0126   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0145-UnknownSong-UnknownRaga-UnknownComposer.w7SITd9DQ4U');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0145   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["KAP01"], "songs": [{"N": "0017", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "K. Arun Prakash", "V": "Rn7jUd49B7I"}, {"N": "0084", "T": "", "H": "Rama Rama Rama Ramayani", "S": "rAma rAma rAma rAmA y anin a nta :  Caapu", "R": "Mohanam", "C": "Thyagaraja", "A": "K. Arun Prakash", "V": "dDmHzjC1B_Y"}, {"N": "0104", "T": "", "H": "Lecdem", "S": "Lecdem", "R": "Unknownraga", "C": "UnknownComposer", "A": "K. Arun Prakash", "V": "42B7hjzcXtU"}, {"N": "0105", "T": "", "H": "Lecdem", "S": "Lecdem", "R": "Unknownraga", "C": "UnknownComposer", "A": "K. Arun Prakash", "V": "Cc98P6wPxAY"}, {"N": "0108", "T": "", "H": "Lecdem", "S": "Lecdem", "R": "Unknownraga", "C": "UnknownComposer", "A": "K. Arun Prakash", "V": "whTsCoTR6nQ"}, {"N": "0118", "T": "Thillana", "H": "thillana_unknowncomposer_unknownraga", "S": "thillana unknowncomposer unknownraga", "R": "Unknownraga", "C": "UnknownComposer", "A": "K. Arun Prakash", "V": "NHe_gLBWmg0"}, {"N": "0123", "T": "Varnam", "H": "Vandana", "S": "vaNdanamonariNciti vElakoladi  :  Ata", "R": "Vachaspathi", "C": "Tiger Varadachariar", "A": "K. Arun Prakash", "V": "dURK678G4Wg"}, {"N": "0125", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kalyani", "C": "UnknownComposer", "A": "K. Arun Prakash", "V": "gQa86pfkIHI"}, {"N": "0126", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kapi", "C": "UnknownComposer", "A": "K. Arun Prakash", "V": "5JlXlmQ4Wck"}, {"N": "0145", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "K. Arun Prakash", "V": "w7SITd9DQ4U"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#artist-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

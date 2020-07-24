@@ -38,18 +38,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bangalore Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0059-Poonthennermozhi-Anandabhairavi-ST.QhqqnbqpwV8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0059   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Bangalore Brothers.html" >Bangalore Brothers   BANGBROS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0060-Poonthennermozhi-Anandabhairavi-ST.S5PE0ygkXtQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0060   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Bangalore Brothers.html" >Bangalore Brothers   BANGBROS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Omanakutty</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0015-Poonthennermozhi-Anandabhairavi-ST.iUCldodIl48');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0015   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Omanakutty.html" >Omanakutty   OMANAKUTTY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0016-Poonthennermozhi-Anandabhairavi-ST.oSokjIJfOFo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0016   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Omanakutty.html" >Omanakutty   OMANAKUTTY01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -144,9 +133,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bangalore Brothers"], "songs": [{"N": "0059", "T": "", "H": "Poonthennermozhi", "S": "pUntEn nErmozhi sakhi jnyAn viraham pUNDu :  jhOmpaTa", "R": "Anandabhairavi", "C": "Swathi Thirunal", "A": "Bangalore Brothers", "V": "QhqqnbqpwV8"}, {"N": "0060", "T": "", "H": "Poonthennermozhi", "S": "pUntEn nErmozhi sakhi jnyAn viraham pUNDu :  jhOmpaTa", "R": "Anandabhairavi", "C": "Swathi Thirunal", "A": "Bangalore Brothers", "V": "S5PE0ygkXtQ"}]}, {"name": ["Vocal", "Omanakutty"], "songs": [{"N": "0015", "T": "", "H": "Poonthennermozhi", "S": "pUntEn nErmozhi sakhi jnyAn viraham pUNDu :  jhOmpaTa", "R": "Anandabhairavi", "C": "Swathi Thirunal", "A": "Omanakutty", "V": "iUCldodIl48"}, {"N": "0016", "T": "", "H": "Poonthennermozhi", "S": "pUntEn nErmozhi sakhi jnyAn viraham pUNDu :  jhOmpaTa", "R": "Anandabhairavi", "C": "Swathi Thirunal", "A": "Omanakutty", "V": "oSokjIJfOFo"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

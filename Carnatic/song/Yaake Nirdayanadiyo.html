@@ -42,28 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0958-Yaake Nirdayanadiyo-UnknownRaga-PD.xAYpW2xrl60');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0958   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0955-Yaake Nirdayanadiyo-Subhapanthuvarali-PD.1P13T9HmgBY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0955   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Subhapanthuvarali.html" >Subhapanthuvarali</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0956-Yaake Nirdayanadiyo-Subhapanthuvarali-PD.WpUhSMXQ8P8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0956   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Subhapanthuvarali.html" >Subhapanthuvarali</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0957-Yaake Nirdayanadiyo-Subhapanthuvarali-PD.gQ1ySYHdmLg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0957   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Subhapanthuvarali.html" >Subhapanthuvarali</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Maharajapuram Santhanam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0588-Yaake Nirdayanadiyo-Vijayanagari-PD.NaK6NApNUlU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0588   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Vijayanagari.html" >Vijayanagari</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0590-Yaake Nirdayanadiyo-Vijayanagari-PD.jDULnaXcUoc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0590   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Vijayanagari.html" >Vijayanagari</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. Ganesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0081-Yaake Nirdayanadiyo-Vijayanagari-PD.Ro-dd9VKj58');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0081   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Vijayanagari.html" >Vijayanagari</a> - <a href="artist/R. Ganesh.html" >R  Ganesh   RGANESH01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0682-Yaake Nirdayanadiyo-UnknownRaga-PD.1zTBAVAPNoQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0682   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -157,9 +136,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0958", "T": "", "H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "R": "Unknownraga", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "xAYpW2xrl60"}, {"N": "0955", "T": "", "H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "R": "Subhapanthuvarali", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "1P13T9HmgBY"}, {"N": "0956", "T": "", "H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "R": "Subhapanthuvarali", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "WpUhSMXQ8P8"}, {"N": "0957", "T": "", "H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "R": "Subhapanthuvarali", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "gQ1ySYHdmLg"}]}, {"name": ["Vocal", "Maharajapuram Santhanam"], "songs": [{"N": "0588", "T": "", "H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "R": "Vijayanagari", "C": "Purandara Dasa", "A": "Maharajapuram Santhanam", "V": "NaK6NApNUlU"}, {"N": "0590", "T": "", "H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "R": "Vijayanagari", "C": "Purandara Dasa", "A": "Maharajapuram Santhanam", "V": "jDULnaXcUoc"}]}, {"name": ["Vocal", "R. Ganesh"], "songs": [{"N": "0081", "T": "", "H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "R": "Vijayanagari", "C": "Purandara Dasa", "A": "R. Ganesh", "V": "Ro-dd9VKj58"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0682", "T": "", "H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Sudha Ragunathan", "V": "1zTBAVAPNoQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

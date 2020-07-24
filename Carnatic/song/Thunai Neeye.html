@@ -41,24 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mridangam Umayalpuram K. Sivaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0262-Thunai Neeye-Charukesi-BMK.nu_5mJfdlUE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0262   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Charukesi.html" >Charukesi</a> - <a href="artist/Umayalpuram K. Sivaraman.html" >Umayalpuram K  Sivaraman   UKS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1463-Thunai Neeye-Charukesi-BMK.5tXlCkkgtrA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1463   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Charukesi.html" >Charukesi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1464-Thunai Neeye-Charukesi-BMK.6FcC6cVY_fU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1464   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Charukesi.html" >Charukesi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1465-Thunai Neeye-Charukesi-BMK.XOtNQ-O6jWQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1465   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Charukesi.html" >Charukesi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1466-Thunai Neeye-Charukesi-BMK.Z8iuNv1pxKI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1466   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Charukesi.html" >Charukesi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Prince Rama Varma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0386-Thunai Neeye-Charukesi-BMK.CTZMi_X3ycI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0386   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Charukesi.html" >Charukesi</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0387-Thunai Neeye-Charukesi-BMK.gmdOdejEx6k');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0387   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Charukesi.html" >Charukesi</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -140,9 +123,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Mridangam", "Umayalpuram K. Sivaraman"], "songs": [{"N": "0262", "T": "", "H": "Thunai Neeye", "S": "tuNai nIyE enrum kumarA en vinai :  Adi", "R": "Charukesi", "C": "M. Balamuralikrishna", "A": "Umayalpuram K. Sivaraman", "V": "nu_5mJfdlUE"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "1463", "T": "", "H": "Thunai Neeye", "S": "tuNai nIyE enrum kumarA en vinai :  Adi", "R": "Charukesi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "5tXlCkkgtrA"}, {"N": "1464", "T": "", "H": "Thunai Neeye", "S": "tuNai nIyE enrum kumarA en vinai :  Adi", "R": "Charukesi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "6FcC6cVY_fU"}, {"N": "1465", "T": "", "H": "Thunai Neeye", "S": "tuNai nIyE enrum kumarA en vinai :  Adi", "R": "Charukesi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "XOtNQ-O6jWQ"}, {"N": "1466", "T": "", "H": "Thunai Neeye", "S": "tuNai nIyE enrum kumarA en vinai :  Adi", "R": "Charukesi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "Z8iuNv1pxKI"}]}, {"name": ["Vocal", "Prince Rama Varma"], "songs": [{"N": "0386", "T": "", "H": "Thunai Neeye", "S": "tuNai nIyE enrum kumarA en vinai :  Adi", "R": "Charukesi", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "CTZMi_X3ycI"}, {"N": "0387", "T": "", "H": "Thunai Neeye", "S": "tuNai nIyE enrum kumarA en vinai :  Adi", "R": "Charukesi", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "gmdOdejEx6k"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

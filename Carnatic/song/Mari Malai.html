@@ -42,24 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1146-Thiruppavai-Mari Malai-UnknownRaga-AL.wFn4BMftlYE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1146 - <a href="song_type/Thiruppavai.html" >Thiruppavai</a>  - <a href="composer/Andal.html" >Andal</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Padma Sugavanam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0089-Thiruppavai-Mari Malai-Bilahari-AL.9kWkNhHjTkM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0089 - <a href="song_type/Thiruppavai.html" >Thiruppavai</a>  - <a href="composer/Andal.html" >Andal</a> - <a href="raga/Bilahari.html" >Bilahari</a> - <a href="artist/Padma Sugavanam.html" >Padma Sugavanam   SUGAVANAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sikkil Gurucharan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0243-Thiruppavai-Mari Malai-UnknownRaga-AL.9UndYW-fojg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0243 - <a href="song_type/Thiruppavai.html" >Thiruppavai</a>  - <a href="composer/Andal.html" >Andal</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Sikkil Gurucharan.html" >Sikkil Gurucharan   GURUCHARAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. N. Seshagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0726-Thiruppavai-Mari Malai-Manirangu-AL.WNYLw39Mg5k');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0726 - <a href="song_type/Thiruppavai.html" >Thiruppavai</a>  - <a href="composer/Andal.html" >Andal</a> - <a href="raga/Manirangu.html" >Manirangu</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -129,9 +112,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "1146", "T": "Thiruppavai", "H": "Mari Malai", "S": "Maarimalai muzhainjil manni k kidandhurangum :  Adi", "R": "Unknownraga", "C": "Andal", "A": "M. L. Vasanthakumari", "V": "wFn4BMftlYE"}]}, {"name": ["Vocal", "Padma Sugavanam"], "songs": [{"N": "0089", "T": "Thiruppavai", "H": "Mari Malai", "S": "Maarimalai muzhainjil manni k kidandhurangum :  Adi", "R": "Bilahari", "C": "Andal", "A": "Padma Sugavanam", "V": "9kWkNhHjTkM"}]}, {"name": ["Vocal", "Sikkil Gurucharan"], "songs": [{"N": "0243", "T": "Thiruppavai", "H": "Mari Malai", "S": "Maarimalai muzhainjil manni k kidandhurangum :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Sikkil Gurucharan", "V": "9UndYW-fojg"}]}, {"name": ["Vocal", "T. N. Seshagopalan"], "songs": [{"N": "0726", "T": "Thiruppavai", "H": "Mari Malai", "S": "Maarimalai muzhainjil manni k kidandhurangum :  Adi", "R": "Manirangu", "C": "Andal", "A": "T. N. Seshagopalan", "V": "WNYLw39Mg5k"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

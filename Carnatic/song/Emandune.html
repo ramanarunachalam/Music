@@ -40,24 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amritha Murali</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0055-Emandune-Shreemani-T.HmdSiZfHBpk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0055   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Shreemani.html" >Shreemani</a> - <a href="artist/Amritha Murali.html" >Amritha Murali   AMRITHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal BV Raman BV Lakshmanan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0009-Emandune-Shreemani-T.BHTOhSfdoLI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0009   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Shreemani.html" >Shreemani</a> - <a href="artist/BV Raman BV Lakshmanan.html" >BV Raman BV Lakshmanan   BVRL01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0088-Emandune-Shreemani-T.1hGzyo6c9WE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0088   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Shreemani.html" >Shreemani</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0442-Emandune-Shreemani-T.0p6ymWGHNoI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0442   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Shreemani.html" >Shreemani</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -149,9 +132,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amritha Murali"], "songs": [{"N": "0055", "T": "", "H": "Emandune", "S": "Em a ndunE vicitramunu  :  Deshadi", "R": "Shreemani", "C": "Thyagaraja", "A": "Amritha Murali", "V": "HmdSiZfHBpk"}]}, {"name": ["Vocal", "BV Raman BV Lakshmanan"], "songs": [{"N": "0009", "T": "", "H": "Emandune", "S": "Em a ndunE vicitramunu  :  Deshadi", "R": "Shreemani", "C": "Thyagaraja", "A": "BV Raman BV Lakshmanan", "V": "BHTOhSfdoLI"}]}, {"name": ["Vocal", "Bombay Sisters"], "songs": [{"N": "0088", "T": "", "H": "Emandune", "S": "Em a ndunE vicitramunu  :  Deshadi", "R": "Shreemani", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "1hGzyo6c9WE"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0442", "T": "", "H": "Emandune", "S": "Em a ndunE vicitramunu  :  Deshadi", "R": "Shreemani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "0p6ymWGHNoI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

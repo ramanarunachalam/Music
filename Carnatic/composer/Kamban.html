@@ -25,33 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; aindhile ondru petran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0013-Anjil Onrai Petran-Kannada-K.tvCJd9Z9ceI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0013   - <a href="song/Anjil Onrai Petran.html" >Aindhile ondru petran : Adi</a> - <a href="raga/Kannada.html" >Kannada</a> - <a href="artist/G. S. Mani.html" >G  S  Mani   GSM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; annalum nokkinan, avalum nokkinal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0033-Annalum Nokkinaan-Hamirkalyani-K.tXawlcpdwfM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0033   - <a href="song/Annalum Nokkinaan.html" >aNNalum nOkkinAn  avaLum nOKkinAL :  Adi</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/Bharat Sundar.html" >Bharat Sundar   BSUNDAR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; kaivannam angu kanden, kal vannam ingu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0245-Kaivannam-Panthuvarali-K.S9sFgip22Yo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0245   - <a href="song/Kaivannam.html" >kaivannam angu kanden  kal vannam ingu :  Adi</a> - <a href="raga/Panthuvarali.html" >Panthuvarali</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; kamban kavi amudham</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0547-Kamban Kavi Amudham-Ragamalika-K.hUetJQYtfzk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0547   - <a href="song/Kamban Kavi Amudham.html" >Kamban Kavi Amudham</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; namam; annadu kel, namo narayanaya</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0333-Namam Annadu-Karnaranjani-K.fxKVWCoh740');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0333   - <a href="song/Namam Annadu.html" >nAmam  annadu kEL  namO nArAyaNAya :  Adi</a> - <a href="raga/Karnaranjani.html" >Karnaranjani</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["aindhile ondru petran"], "songs": [{"N": "0013", "T": "", "H": "Anjil Onrai Petran", "S": "Aindhile ondru petran : Adi", "R": "Kannada", "C": "Kamban", "A": "G. S. Mani", "V": "tvCJd9Z9ceI"}]}, {"name": ["annalum nokkinan, avalum nokkinal"], "songs": [{"N": "0033", "T": "", "H": "Annalum Nokkinaan", "S": "aNNalum nOkkinAn  avaLum nOKkinAL :  Adi", "R": "Hamirkalyani", "C": "Kamban", "A": "Bharat Sundar", "V": "tXawlcpdwfM"}]}, {"name": ["kaivannam angu kanden, kal vannam ingu"], "songs": [{"N": "0245", "T": "", "H": "Kaivannam", "S": "kaivannam angu kanden  kal vannam ingu :  Adi", "R": "Panthuvarali", "C": "Kamban", "A": "T. N. Seshagopalan", "V": "S9sFgip22Yo"}]}, {"name": ["kamban kavi amudham"], "songs": [{"N": "0547", "T": "", "H": "Kamban Kavi Amudham", "S": "Kamban Kavi Amudham", "R": "Ragamalika", "C": "Kamban", "A": "M. S. Subbulakshmi", "V": "hUetJQYtfzk"}]}, {"name": ["namam; annadu kel, namo narayanaya"], "songs": [{"N": "0333", "T": "", "H": "Namam Annadu", "S": "nAmam  annadu kEL  namO nArAyaNAya :  Adi", "R": "Karnaranjani", "C": "Kamban", "A": "T. N. Seshagopalan", "V": "fxKVWCoh740"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

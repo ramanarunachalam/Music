@@ -41,32 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Flute B. V. Balasai</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0010-Mariyada Teliyakane-Suruti-PS.YyTjLtok4dI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0010   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Suruti.html" >Suruti</a> - <a href="artist/B. V. Balasai.html" >B  V  Balasai   BVB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin T. N. Krishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0210-Mariyada Teliyakane-Suruti-PS.wM2LT2WWlBs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0210   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Suruti.html" >Suruti</a> - <a href="artist/T. N. Krishnan.html" >T  N  Krishnan   TNK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal G. N. Balasubramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0233-Mariyada Teliyakane-Suruti-PS.BkosGCYiK1A');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0233   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Suruti.html" >Suruti</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. D. Ramanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0328-Mariyada Teliyakane-Suruti-PS.HdFFavev9Tk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0328   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Suruti.html" >Suruti</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Pantula Rama</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0077-Mariyada Teliyakane-Suruti-PS.8Yxukp-6S4M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0077   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Suruti.html" >Suruti</a> - <a href="artist/Pantula Rama.html" >Pantula Rama   PANTHULA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Sowmya</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0134-Mariyada Teliyakane-Suruti-PS.hG10J2UaY00');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0134   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Suruti.html" >Suruti</a> - <a href="artist/S. Sowmya.html" >S  Sowmya   SOWMYA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -154,9 +129,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Flute", "B. V. Balasai"], "songs": [{"N": "0010", "T": "", "H": "Mariyada Teliyakane", "S": "mariyAda teliyakanE mATalADa tagunaTE :  Rupaka", "R": "Suruti", "C": "Patnam Subramanya Iyer", "A": "B. V. Balasai", "V": "YyTjLtok4dI"}]}, {"name": ["Violin", "T. N. Krishnan"], "songs": [{"N": "0210", "T": "", "H": "Mariyada Teliyakane", "S": "mariyAda teliyakanE mATalADa tagunaTE :  Rupaka", "R": "Suruti", "C": "Patnam Subramanya Iyer", "A": "T. N. Krishnan", "V": "wM2LT2WWlBs"}]}, {"name": ["Vocal", "G. N. Balasubramaniam"], "songs": [{"N": "0237", "T": "", "H": "Mariyada Teliyakane", "S": "mariyAda teliyakanE mATalADa tagunaTE :  Rupaka", "R": "Suruti", "C": "Patnam Subramanya Iyer", "A": "G. N. Balasubramaniam", "V": "BkosGCYiK1A"}]}, {"name": ["Vocal", "M. D. Ramanathan"], "songs": [{"N": "0330", "T": "", "H": "Mariyada Teliyakane", "S": "mariyAda teliyakanE mATalADa tagunaTE :  Rupaka", "R": "Suruti", "C": "Patnam Subramanya Iyer", "A": "M. D. Ramanathan", "V": "HdFFavev9Tk"}]}, {"name": ["Vocal", "Pantula Rama"], "songs": [{"N": "0077", "T": "", "H": "Mariyada Teliyakane", "S": "mariyAda teliyakanE mATalADa tagunaTE :  Rupaka", "R": "Suruti", "C": "Patnam Subramanya Iyer", "A": "Pantula Rama", "V": "8Yxukp-6S4M"}]}, {"name": ["Vocal", "S. Sowmya"], "songs": [{"N": "0134", "T": "", "H": "Mariyada Teliyakane", "S": "mariyAda teliyakanE mATalADa tagunaTE :  Rupaka", "R": "Suruti", "C": "Patnam Subramanya Iyer", "A": "S. Sowmya", "V": "hG10J2UaY00"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

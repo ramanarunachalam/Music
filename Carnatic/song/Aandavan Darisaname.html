@@ -42,31 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mridangam Archana Aarathi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0008-Aandavan Darisaname-Jonpuri-HMB.rYLhPcYORFI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0008   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Archana Aarathi.html" >Archana Aarathi   ARCHANAARATHI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0045-Aandavan Darisaname-Jonpuri-HMB.9jdIePvgqsg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0045   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ranjani Gayatri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0026-Aandavan Darisaname-Jonpuri-HMB.-ALmNpuMj0g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0026   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Aandavan Darisaname-Jonpuri-HMB.FQeJc_luMIQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0028-Aandavan Darisaname-Jonpuri-HMB.zGMUndPrYyU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0028   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. G. Kittappa</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0001-Aandavan Darisaname-Jonpuri-HMB.1Mj7fSBGyzU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0001   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/S. G. Kittappa.html" >S  G  Kittappa   SGK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0002-Aandavan Darisaname-Jonpuri-HMB.QpkbU0hoXug');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0002   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/S. G. Kittappa.html" >S  G  Kittappa   SGK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vijay Siva</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0015-Aandavan Darisaname-Jonpuri-HMB.dszFPc56E0Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0015   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Vijay Siva.html" >Vijay Siva   VIJAYSIVA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -167,9 +143,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Mridangam", "Archana Aarathi"], "songs": [{"N": "0008", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "Archana Aarathi", "V": "rYLhPcYORFI"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0045", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "D. K. Jayaraman", "V": "9jdIePvgqsg"}]}, {"name": ["Vocal", "Ranjani Gayatri"], "songs": [{"N": "0026", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "Ranjani Gayatri", "V": "-ALmNpuMj0g"}, {"N": "0027", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "Ranjani Gayatri", "V": "FQeJc_luMIQ"}, {"N": "0028", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "Ranjani Gayatri", "V": "zGMUndPrYyU"}]}, {"name": ["Vocal", "S. G. Kittappa"], "songs": [{"N": "0001", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "S. G. Kittappa", "V": "1Mj7fSBGyzU"}, {"N": "0002", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "S. G. Kittappa", "V": "QpkbU0hoXug"}]}, {"name": ["Vocal", "Vijay Siva"], "songs": [{"N": "0015", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "Vijay Siva", "V": "dszFPc56E0Y"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -42,26 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0066-Kovur pancharathnam-Sundareshwaruni-Sankarabharanam-T.s9YOBmZEArw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0066 - <a href="song_type/Kovur pancharathnam.html" >Kovur pancharathnam</a>  - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ramakrishnan Murthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0026-Kovur pancharathnam-Sundareshwaruni-Sankarabharanam-T.1ypiFP7LBOg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0026 - <a href="song_type/Kovur pancharathnam.html" >Kovur pancharathnam</a>  - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Ramakrishnan Murthy.html" >Ramakrishnan Murthy   RKM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ranjani Gayatri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0021-Kovur pancharathnam-Sundareshwaruni-Sankarabharanam-T.NeeuHkg1xa4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0021 - <a href="song_type/Kovur pancharathnam.html" >Kovur pancharathnam</a>  - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0022-Kovur pancharathnam-Sundareshwaruni-Sankarabharanam-T.Q1XP91-nYS4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0022 - <a href="song_type/Kovur pancharathnam.html" >Kovur pancharathnam</a>  - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0023-Kovur pancharathnam-Sundareshwaruni-Sankarabharanam-T.wu7uVhCOw9M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0023 - <a href="song_type/Kovur pancharathnam.html" >Kovur pancharathnam</a>  - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Voleti Venkateswarlu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0031-Kovur pancharathnam-Sundareshwaruni-Sankarabharanam-T.5_-5MkcqEMs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0031 - <a href="song_type/Kovur pancharathnam.html" >Kovur pancharathnam</a>  - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Voleti Venkateswarlu.html" >Voleti Venkateswarlu   VOLETI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -164,9 +145,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bombay Sisters"], "songs": [{"N": "0066", "T": "Kovur pancharathnam", "H": "Sundareshwaruni", "S": "sundarESvaruni jUci : Adi", "R": "Sankarabharanam", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "s9YOBmZEArw"}]}, {"name": ["Vocal", "Ramakrishnan Murthy"], "songs": [{"N": "0026", "T": "Kovur pancharathnam", "H": "Sundareshwaruni", "S": "sundarESvaruni jUci : Adi", "R": "Sankarabharanam", "C": "Thyagaraja", "A": "Ramakrishnan Murthy", "V": "1ypiFP7LBOg"}]}, {"name": ["Vocal", "Ranjani Gayatri"], "songs": [{"N": "0021", "T": "Kovur pancharathnam", "H": "Sundareshwaruni", "S": "sundarESvaruni jUci : Adi", "R": "Sankarabharanam", "C": "Thyagaraja", "A": "Ranjani Gayatri", "V": "NeeuHkg1xa4"}, {"N": "0022", "T": "Kovur pancharathnam", "H": "Sundareshwaruni", "S": "sundarESvaruni jUci : Adi", "R": "Sankarabharanam", "C": "Thyagaraja", "A": "Ranjani Gayatri", "V": "Q1XP91-nYS4"}, {"N": "0023", "T": "Kovur pancharathnam", "H": "Sundareshwaruni", "S": "sundarESvaruni jUci : Adi", "R": "Sankarabharanam", "C": "Thyagaraja", "A": "Ranjani Gayatri", "V": "wu7uVhCOw9M"}]}, {"name": ["Vocal", "Voleti Venkateswarlu"], "songs": [{"N": "0031", "T": "Kovur pancharathnam", "H": "Sundareshwaruni", "S": "sundarESvaruni jUci : Adi", "R": "Sankarabharanam", "C": "Thyagaraja", "A": "Voleti Venkateswarlu", "V": "5_-5MkcqEMs"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -42,18 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal G. Srikanth</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0023-Sonnathai Kel-Panthuvarali-OVK.Uc_OIG11fTA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0023   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Panthuvarali.html" >Panthuvarali</a> - <a href="artist/G. Srikanth.html" >G  Srikanth   GSRIKANTH01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Uma Radhika</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0083-Sonnathai Kel-Panthuvarali-OVK.4fmv1_j_UAs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0083   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Panthuvarali.html" >Panthuvarali</a> - <a href="artist/Uma Radhika.html" >Uma Radhika   CHINMAYA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0084-Sonnathai Kel-Panthuvarali-OVK.LON67oSMQY8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0084   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Panthuvarali.html" >Panthuvarali</a> - <a href="artist/Uma Radhika.html" >Uma Radhika   CHINMAYA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0085-Sonnathai Kel-Panthuvarali-OVK.novVhqq0N3g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0085   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Panthuvarali.html" >Panthuvarali</a> - <a href="artist/Uma Radhika.html" >Uma Radhika   CHINMAYA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -142,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "G. Srikanth"], "songs": [{"N": "0023", "T": "", "H": "Sonnathai Kel", "S": "sonnadaik kEL kaNNA tOm takiTa tiri tAka :  Adi", "R": "Panthuvarali", "C": "Oothukkadu Venkata Kavi", "A": "G. Srikanth", "V": "Uc_OIG11fTA"}]}, {"name": ["Vocal", "Uma Radhika"], "songs": [{"N": "0083", "T": "", "H": "Sonnathai Kel", "S": "sonnadaik kEL kaNNA tOm takiTa tiri tAka :  Adi", "R": "Panthuvarali", "C": "Oothukkadu Venkata Kavi", "A": "Uma Radhika", "V": "4fmv1_j_UAs"}, {"N": "0084", "T": "", "H": "Sonnathai Kel", "S": "sonnadaik kEL kaNNA tOm takiTa tiri tAka :  Adi", "R": "Panthuvarali", "C": "Oothukkadu Venkata Kavi", "A": "Uma Radhika", "V": "LON67oSMQY8"}, {"N": "0085", "T": "", "H": "Sonnathai Kel", "S": "sonnadaik kEL kaNNA tOm takiTa tiri tAka :  Adi", "R": "Panthuvarali", "C": "Oothukkadu Venkata Kavi", "A": "Uma Radhika", "V": "novVhqq0N3g"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

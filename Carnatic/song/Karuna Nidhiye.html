@@ -40,36 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal B. Rajam Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0016-Karuna Nidhiye-Bowli-P.RRS4NHPMAus');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0016   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/B. Rajam Iyer.html" >B  Rajam Iyer   BRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Jayashri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0173-Karuna Nidhiye-Bowli-P.Z3gnYQS-DX0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0173   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. V. Narayanaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0249-Karuna Nidhiye-Bowli-P.StefAwMv9M8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0249   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/K. V. Narayanaswamy.html" >K  V  Narayanaswamy   KVN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Padma Sugavanam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0032-Karuna Nidhiye-Bowli-P.Xs_q39hX5Y4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0032   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/Padma Sugavanam.html" >Padma Sugavanam   SUGAVANAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Priya Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0110-Karuna Nidhiye-Bowli-P.N4usfgyS3l4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0110   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/Priya Sisters.html" >Priya Sisters   PRIYAS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ranjani Gayatri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0130-Karuna Nidhiye-Bowli-P.-nGCqc7tVJU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0130   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sriram Gangadharan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0025-Karuna Nidhiye-Bowli-P.trGmZprJq3Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0025   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/Sriram Gangadharan.html" >Sriram Gangadharan   SRIRAMG01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -151,9 +122,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "B. Rajam Iyer"], "songs": [{"N": "0016", "T": "", "H": "Karuna Nidhiye", "S": "karuNAnidhiyE thAyE kadaikkan partarulaye amba :  Misra Caapu", "R": "Bowli", "C": "Papanasam Sivan", "A": "B. Rajam Iyer", "V": "RRS4NHPMAus"}]}, {"name": ["Vocal", "Bombay Jayashri"], "songs": [{"N": "0173", "T": "", "H": "Karuna Nidhiye", "S": "karuNAnidhiyE thAyE kadaikkan partarulaye amba :  Misra Caapu", "R": "Bowli", "C": "Papanasam Sivan", "A": "Bombay Jayashri", "V": "Z3gnYQS-DX0"}]}, {"name": ["Vocal", "K. V. Narayanaswamy"], "songs": [{"N": "0249", "T": "", "H": "Karuna Nidhiye", "S": "karuNAnidhiyE thAyE kadaikkan partarulaye amba :  Misra Caapu", "R": "Bowli", "C": "Papanasam Sivan", "A": "K. V. Narayanaswamy", "V": "StefAwMv9M8"}]}, {"name": ["Vocal", "Padma Sugavanam"], "songs": [{"N": "0032", "T": "", "H": "Karuna Nidhiye", "S": "karuNAnidhiyE thAyE kadaikkan partarulaye amba :  Misra Caapu", "R": "Bowli", "C": "Papanasam Sivan", "A": "Padma Sugavanam", "V": "Xs_q39hX5Y4"}]}, {"name": ["Vocal", "Priya Sisters"], "songs": [{"N": "0110", "T": "", "H": "Karuna Nidhiye", "S": "karuNAnidhiyE thAyE kadaikkan partarulaye amba :  Misra Caapu", "R": "Bowli", "C": "Papanasam Sivan", "A": "Priya Sisters", "V": "N4usfgyS3l4"}]}, {"name": ["Vocal", "Ranjani Gayatri"], "songs": [{"N": "0130", "T": "", "H": "Karuna Nidhiye", "S": "karuNAnidhiyE thAyE kadaikkan partarulaye amba :  Misra Caapu", "R": "Bowli", "C": "Papanasam Sivan", "A": "Ranjani Gayatri", "V": "-nGCqc7tVJU"}]}, {"name": ["Vocal", "Sriram Gangadharan"], "songs": [{"N": "0025", "T": "", "H": "Karuna Nidhiye", "S": "karuNAnidhiyE thAyE kadaikkan partarulaye amba :  Misra Caapu", "R": "Bowli", "C": "Papanasam Sivan", "A": "Sriram Gangadharan", "V": "trGmZprJq3Y"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

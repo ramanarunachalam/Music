@@ -42,31 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Pattammal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0508-Varalakshmim Bhajare-Sowrashtram-MD.g1sJo4TJsQE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0508   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sowrashtram.html" >Sowrashtram</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Dr. Reetha Rajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0007-Varalakshmim Bhajare-Sowrashtram-MD.Nv7rwvwVuCI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0007   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sowrashtram.html" >Sowrashtram</a> - <a href="artist/Dr. Reetha Rajan.html" >Dr  Reetha Rajan   REETHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal G. Ravikiran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0053-Varalakshmim Bhajare-Sowrashtram-MD.iMkIBthM53c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0053   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sowrashtram.html" >Sowrashtram</a> - <a href="artist/G. Ravikiran.html" >G  Ravikiran   GRK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0908-Varalakshmim Bhajare-Sowrashtram-MD.4n_xqeePVsQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0908   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sowrashtram.html" >Sowrashtram</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0909-Varalakshmim Bhajare-Sowrashtram-MD.L5pr38B0iHA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0909   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sowrashtram.html" >Sowrashtram</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0910-Varalakshmim Bhajare-Sowrashtram-MD.aseh3Q6DcRc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0910   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sowrashtram.html" >Sowrashtram</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0911-Varalakshmim Bhajare-Sowrashtram-MD.oANJJg6xVwQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0911   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sowrashtram.html" >Sowrashtram</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. M. Krishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0640-Varalakshmim Bhajare-Sowrashtram-MD.5NnmlpPv9cs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0640   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sowrashtram.html" >Sowrashtram</a> - <a href="artist/T. M. Krishna.html" >T  M  Krishna   TMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -152,9 +128,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "D. K. Pattammal"], "songs": [{"N": "0508", "T": "", "H": "Varalakshmim Bhajare", "S": "varalakSmIm bhaja rE rE mAnasa vAHnchitArttha :  Adi", "R": "Sowrashtram", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "g1sJo4TJsQE"}]}, {"name": ["Vocal", "Dr. Reetha Rajan"], "songs": [{"N": "0007", "T": "", "H": "Varalakshmim Bhajare", "S": "varalakSmIm bhaja rE rE mAnasa vAHnchitArttha :  Adi", "R": "Sowrashtram", "C": "Muthuswami Dikshitar", "A": "Dr. Reetha Rajan", "V": "Nv7rwvwVuCI"}]}, {"name": ["Vocal", "G. Ravikiran"], "songs": [{"N": "0053", "T": "", "H": "Varalakshmim Bhajare", "S": "varalakSmIm bhaja rE rE mAnasa vAHnchitArttha :  Adi", "R": "Sowrashtram", "C": "Muthuswami Dikshitar", "A": "G. Ravikiran", "V": "iMkIBthM53c"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0908", "T": "", "H": "Varalakshmim Bhajare", "S": "varalakSmIm bhaja rE rE mAnasa vAHnchitArttha :  Adi", "R": "Sowrashtram", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "4n_xqeePVsQ"}, {"N": "0909", "T": "", "H": "Varalakshmim Bhajare", "S": "varalakSmIm bhaja rE rE mAnasa vAHnchitArttha :  Adi", "R": "Sowrashtram", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "L5pr38B0iHA"}, {"N": "0910", "T": "", "H": "Varalakshmim Bhajare", "S": "varalakSmIm bhaja rE rE mAnasa vAHnchitArttha :  Adi", "R": "Sowrashtram", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "aseh3Q6DcRc"}, {"N": "0911", "T": "", "H": "Varalakshmim Bhajare", "S": "varalakSmIm bhaja rE rE mAnasa vAHnchitArttha :  Adi", "R": "Sowrashtram", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "oANJJg6xVwQ"}]}, {"name": ["Vocal", "T. M. Krishna"], "songs": [{"N": "0640", "T": "", "H": "Varalakshmim Bhajare", "S": "varalakSmIm bhaja rE rE mAnasa vAHnchitArttha :  Adi", "R": "Sowrashtram", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "5NnmlpPv9cs"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

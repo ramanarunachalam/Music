@@ -40,26 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Flute T. R. Mahalingam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0107-Nee Dayache-Yadukulakambhoji-T.EzMesXB46gA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0107   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Yadukulakambhoji.html" >Yadukulakambhoji</a> - <a href="artist/T. R. Mahalingam.html" >T  R  Mahalingam   MALI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0108-Nee Dayache-Yadukulakambhoji-T.Tc-vRtFyAcg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0108   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Yadukulakambhoji.html" >Yadukulakambhoji</a> - <a href="artist/T. R. Mahalingam.html" >T  R  Mahalingam   MALI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Alathur Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0085-Nee Dayache-Yadukulakambhoji-T.HhafFDnGhJM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0085   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Yadukulakambhoji.html" >Yadukulakambhoji</a> - <a href="artist/Alathur Brothers.html" >Alathur Brothers   ALATHUR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Geetha Raja</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0023-Nee Dayache-Yadukulakambhoji-T.pZ2e7WGvJMg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0023   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Yadukulakambhoji.html" >Yadukulakambhoji</a> - <a href="artist/Geetha Raja.html" >Geetha Raja   GEETHARAJA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ramnad Krishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0102-Nee Dayache-Yadukulakambhoji-T.E6tdTAXdo90');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0102   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Yadukulakambhoji.html" >Yadukulakambhoji</a> - <a href="artist/Ramnad Krishnan.html" >Ramnad Krishnan   RAMNAD01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0103-Nee Dayache-Yadukulakambhoji-T.iAAK-RXzo5g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0103   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Yadukulakambhoji.html" >Yadukulakambhoji</a> - <a href="artist/Ramnad Krishnan.html" >Ramnad Krishnan   RAMNAD01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -150,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Flute", "T. R. Mahalingam"], "songs": [{"N": "0107", "T": "", "H": "Nee Dayache", "S": "nI dayacE rAma nity A nanduD ai ti :  Deshadi", "R": "Yadukulakambhoji", "C": "Thyagaraja", "A": "T. R. Mahalingam", "V": "EzMesXB46gA"}, {"N": "0108", "T": "", "H": "Nee Dayache", "S": "nI dayacE rAma nity A nanduD ai ti :  Deshadi", "R": "Yadukulakambhoji", "C": "Thyagaraja", "A": "T. R. Mahalingam", "V": "Tc-vRtFyAcg"}]}, {"name": ["Vocal", "Alathur Brothers"], "songs": [{"N": "0085", "T": "", "H": "Nee Dayache", "S": "nI dayacE rAma nity A nanduD ai ti :  Deshadi", "R": "Yadukulakambhoji", "C": "Thyagaraja", "A": "Alathur Brothers", "V": "HhafFDnGhJM"}]}, {"name": ["Vocal", "Geetha Raja"], "songs": [{"N": "0023", "T": "", "H": "Nee Dayache", "S": "nI dayacE rAma nity A nanduD ai ti :  Deshadi", "R": "Yadukulakambhoji", "C": "Thyagaraja", "A": "Geetha Raja", "V": "pZ2e7WGvJMg"}]}, {"name": ["Vocal", "Ramnad Krishnan"], "songs": [{"N": "0102", "T": "", "H": "Nee Dayache", "S": "nI dayacE rAma nity A nanduD ai ti :  Deshadi", "R": "Yadukulakambhoji", "C": "Thyagaraja", "A": "Ramnad Krishnan", "V": "E6tdTAXdo90"}, {"N": "0103", "T": "", "H": "Nee Dayache", "S": "nI dayacE rAma nity A nanduD ai ti :  Deshadi", "R": "Yadukulakambhoji", "C": "Thyagaraja", "A": "Ramnad Krishnan", "V": "iAAK-RXzo5g"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

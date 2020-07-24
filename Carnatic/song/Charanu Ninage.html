@@ -42,16 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0164-Charanu Ninage-Madhyamavathi-PD.IZDAKJ4iDD4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0164   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Madhyamavathi.html" >Madhyamavathi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0165-Charanu Ninage-Madhyamavathi-PD.XMqBnpXjL2I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0165   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Madhyamavathi.html" >Madhyamavathi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0166-Charanu Ninage-Pahadi-PD.cA67Jrou5SE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0166   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Pahadi.html" >Pahadi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0167-Charanu Ninage-Pahadi-PD.v8QKSbn0p-8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0167   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Pahadi.html" >Pahadi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0168-Charanu Ninage-UnknownRaga-PD.Mg_BGi5_luA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0168   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -139,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0164", "T": "", "H": "Charanu Ninage", "S": "sharanu ninage sharanembenu vithala :  Adi", "R": "Madhyamavathi", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "IZDAKJ4iDD4"}, {"N": "0165", "T": "", "H": "Charanu Ninage", "S": "sharanu ninage sharanembenu vithala :  Adi", "R": "Madhyamavathi", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "XMqBnpXjL2I"}, {"N": "0166", "T": "", "H": "Charanu Ninage", "S": "sharanu ninage sharanembenu vithala :  Adi", "R": "Pahadi", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "cA67Jrou5SE"}, {"N": "0167", "T": "", "H": "Charanu Ninage", "S": "sharanu ninage sharanembenu vithala :  Adi", "R": "Pahadi", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "v8QKSbn0p-8"}, {"N": "0168", "T": "", "H": "Charanu Ninage", "S": "sharanu ninage sharanembenu vithala :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "Mg_BGi5_luA"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

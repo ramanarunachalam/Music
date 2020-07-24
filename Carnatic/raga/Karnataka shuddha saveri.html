@@ -31,27 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; unknownsong</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0104-UnknownSong-Karnataka shuddha saveri-UnknownComposer.4RKrpB5Mx8s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0104   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/U. Rajesh.html" >U  Rajesh   URAJESH01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0156-UnknownSong-Karnataka shuddha saveri-UnknownComposer.Khl6hOyS-Rs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0156   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Jayanthi Kumaresh.html" >Jayanthi Kumaresh   KJAYANTHI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0113-UnknownSong-Karnataka shuddha saveri-UnknownComposer.vkCFI39k6XI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0113   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Kunnakudi Vaidyanathan.html" >Kunnakudi Vaidyanathan   KUNNAKUDI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0077-UnknownSong-Karnataka shuddha saveri-UnknownComposer.t6ffgvrTvm0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0077   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/T. H. Subramaniam.html" >T  H  Subramaniam   THS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0689-UnknownSong-Karnataka shuddha saveri-UnknownComposer.JSQi6RlcU_c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0689   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0305-UnknownSong-Karnataka shuddha saveri-UnknownComposer.pm60KDP6LsY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0305   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Sikkil Gurucharan.html" >Sikkil Gurucharan   GURUCHARAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; thillana_unknowncomposer_karnatakashuddhasaveri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0194-Thillana-Thillana-Karnataka shuddha saveri-UnknownComposer.AVnjDFXiDFc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0194 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="song/thillana_unknowncomposer_karnatakashuddhasaveri.html" >thillana unknowncomposer karnatakashuddhasaveri</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Chitravina Ravi Kiran.html" >Chitravina Ravi Kiran   RAVIKIRAN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0195-Thillana-Thillana-Karnataka shuddha saveri-UnknownComposer.gN9m1z3QWPc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0195 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="song/thillana_unknowncomposer_karnatakashuddhasaveri.html" >thillana unknowncomposer karnatakashuddhasaveri</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Chitravina Ravi Kiran.html" >Chitravina Ravi Kiran   RAVIKIRAN01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["unknownsong"], "songs": [{"N": "0104", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Karnataka shuddha saveri", "C": "UnknownComposer", "A": "U. Rajesh", "V": "4RKrpB5Mx8s"}, {"N": "0156", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Karnataka shuddha saveri", "C": "UnknownComposer", "A": "Jayanthi Kumaresh", "V": "Khl6hOyS-Rs"}, {"N": "0113", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Karnataka shuddha saveri", "C": "UnknownComposer", "A": "Kunnakudi Vaidyanathan", "V": "vkCFI39k6XI"}, {"N": "0077", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Karnataka shuddha saveri", "C": "UnknownComposer", "A": "T. H. Subramaniam", "V": "t6ffgvrTvm0"}, {"N": "0689", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Karnataka shuddha saveri", "C": "UnknownComposer", "A": "D. K. Jayaraman", "V": "JSQi6RlcU_c"}, {"N": "0305", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Karnataka shuddha saveri", "C": "UnknownComposer", "A": "Sikkil Gurucharan", "V": "pm60KDP6LsY"}]}, {"name": ["thillana_unknowncomposer_karnatakashuddhasaveri"], "songs": [{"N": "0194", "T": "Thillana", "H": "thillana_unknowncomposer_karnatakashuddhasaveri", "S": "thillana unknowncomposer karnatakashuddhasaveri", "R": "Karnataka shuddha saveri", "C": "UnknownComposer", "A": "Chitravina Ravi Kiran", "V": "AVnjDFXiDFc"}, {"N": "0195", "T": "Thillana", "H": "thillana_unknowncomposer_karnatakashuddhasaveri", "S": "thillana unknowncomposer karnatakashuddhasaveri", "R": "Karnataka shuddha saveri", "C": "UnknownComposer", "A": "Chitravina Ravi Kiran", "V": "gN9m1z3QWPc"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -39,26 +39,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. D. Ramanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0654-Srikanta Yenagistu-Kaanada-PD.1ScTiZhIK2I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0654   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Kaanada.html" >Kaanada</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0655-Srikanta Yenagistu-Kaanada-PD.3WDB-7x-lYI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0655   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Kaanada.html" >Kaanada</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1112-Srikanta Yenagistu-Kaanada-PD.fRv_T4tdocw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1112   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Kaanada.html" >Kaanada</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Mysore Nagamani Srinath</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0038-Srikanta Yenagistu-Kaanada-PD.YeiV-aV4Tl4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0038   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Kaanada.html" >Kaanada</a> - <a href="artist/Mysore Nagamani Srinath.html" >Mysore Nagamani Srinath   NAGAMANI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0039-Srikanta Yenagistu-Kaanada-PD.xEW6BRLQbUc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0039   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Kaanada.html" >Kaanada</a> - <a href="artist/Mysore Nagamani Srinath.html" >Mysore Nagamani Srinath   NAGAMANI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. Vedavalli</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0249-Srikanta Yenagistu-Kaanada-PD.3__yHgVWoQQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0249   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Kaanada.html" >Kaanada</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -153,9 +134,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. D. Ramanathan"], "songs": [{"N": "0654", "T": "", "H": "Srikanta Yenagistu", "S": "shrIkAnta enagiSTu dayamADo tande EkAntadali :  Caapu", "R": "Kaanada", "C": "Purandara Dasa", "A": "M. D. Ramanathan", "V": "1ScTiZhIK2I"}, {"N": "0655", "T": "", "H": "Srikanta Yenagistu", "S": "shrIkAnta enagiSTu dayamADo tande EkAntadali :  Caapu", "R": "Kaanada", "C": "Purandara Dasa", "A": "M. D. Ramanathan", "V": "3WDB-7x-lYI"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "1112", "T": "", "H": "Srikanta Yenagistu", "S": "shrIkAnta enagiSTu dayamADo tande EkAntadali :  Caapu", "R": "Kaanada", "C": "Purandara Dasa", "A": "M. S. Subbulakshmi", "V": "fRv_T4tdocw"}]}, {"name": ["Vocal", "Mysore Nagamani Srinath"], "songs": [{"N": "0038", "T": "", "H": "Srikanta Yenagistu", "S": "shrIkAnta enagiSTu dayamADo tande EkAntadali :  Caapu", "R": "Kaanada", "C": "Purandara Dasa", "A": "Mysore Nagamani Srinath", "V": "YeiV-aV4Tl4"}, {"N": "0039", "T": "", "H": "Srikanta Yenagistu", "S": "shrIkAnta enagiSTu dayamADo tande EkAntadali :  Caapu", "R": "Kaanada", "C": "Purandara Dasa", "A": "Mysore Nagamani Srinath", "V": "xEW6BRLQbUc"}]}, {"name": ["Vocal", "R. Vedavalli"], "songs": [{"N": "0249", "T": "", "H": "Srikanta Yenagistu", "S": "shrIkAnta enagiSTu dayamADo tande EkAntadali :  Caapu", "R": "Kaanada", "C": "Purandara Dasa", "A": "R. Vedavalli", "V": "3__yHgVWoQQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

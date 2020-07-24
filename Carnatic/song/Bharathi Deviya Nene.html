@@ -42,28 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Gayathri Girish</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0055-Bharathi Deviya Nene-Karaharapriya-PD.BGjIHKporzA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0055   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Karaharapriya.html" >Karaharapriya</a> - <a href="artist/Gayathri Girish.html" >Gayathri Girish   GGAYATHRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0135-Bharathi Deviya Nene-Karaharapriya-PD.RvVwmh6Xw-4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0135   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Karaharapriya.html" >Karaharapriya</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0136-Bharathi Deviya Nene-Karaharapriya-PD.ZbJ-wZimKxY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0136   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Karaharapriya.html" >Karaharapriya</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0125-Bharathi Deviya Nene-Karaharapriya-PD.PLlL_SpIBHE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0125   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Karaharapriya.html" >Karaharapriya</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0126-Bharathi Deviya Nene-Karaharapriya-PD.Y9DcVdinxCw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0126   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Karaharapriya.html" >Karaharapriya</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0127-Bharathi Deviya Nene-Karaharapriya-PD.vszmx5aOWyo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0127   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Karaharapriya.html" >Karaharapriya</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sumithra Vasudev</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0030-Bharathi Deviya Nene-Karaharapriya-PD.4W13leE3dBc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0030   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Karaharapriya.html" >Karaharapriya</a> - <a href="artist/Sumithra Vasudev.html" >Sumithra Vasudev   VSUMITHRA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0031-Bharathi Deviya Nene-Karaharapriya-PD.ekvtP-nkgXY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0031   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Karaharapriya.html" >Karaharapriya</a> - <a href="artist/Sumithra Vasudev.html" >Sumithra Vasudev   VSUMITHRA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -151,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Gayathri Girish"], "songs": [{"N": "0055", "T": "", "H": "Bharathi Deviya Nene", "S": "Bharati deviya nene nene  :  Adi", "R": "Karaharapriya", "C": "Purandara Dasa", "A": "Gayathri Girish", "V": "BGjIHKporzA"}]}, {"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0135", "T": "", "H": "Bharathi Deviya Nene", "S": "Bharati deviya nene nene  :  Adi", "R": "Karaharapriya", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "RvVwmh6Xw-4"}, {"N": "0136", "T": "", "H": "Bharathi Deviya Nene", "S": "Bharati deviya nene nene  :  Adi", "R": "Karaharapriya", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "ZbJ-wZimKxY"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0125", "T": "", "H": "Bharathi Deviya Nene", "S": "Bharati deviya nene nene  :  Adi", "R": "Karaharapriya", "C": "Purandara Dasa", "A": "Sudha Ragunathan", "V": "PLlL_SpIBHE"}, {"N": "0126", "T": "", "H": "Bharathi Deviya Nene", "S": "Bharati deviya nene nene  :  Adi", "R": "Karaharapriya", "C": "Purandara Dasa", "A": "Sudha Ragunathan", "V": "Y9DcVdinxCw"}, {"N": "0127", "T": "", "H": "Bharathi Deviya Nene", "S": "Bharati deviya nene nene  :  Adi", "R": "Karaharapriya", "C": "Purandara Dasa", "A": "Sudha Ragunathan", "V": "vszmx5aOWyo"}]}, {"name": ["Vocal", "Sumithra Vasudev"], "songs": [{"N": "0030", "T": "", "H": "Bharathi Deviya Nene", "S": "Bharati deviya nene nene  :  Adi", "R": "Karaharapriya", "C": "Purandara Dasa", "A": "Sumithra Vasudev", "V": "4W13leE3dBc"}, {"N": "0031", "T": "", "H": "Bharathi Deviya Nene", "S": "Bharati deviya nene nene  :  Adi", "R": "Karaharapriya", "C": "Purandara Dasa", "A": "Sumithra Vasudev", "V": "ekvtP-nkgXY"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

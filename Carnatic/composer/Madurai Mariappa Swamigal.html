@@ -25,24 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; vallik-kanavan perai vazhippokkan shonnalum ullam kuzhaiyudadi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0096-Valli Kanavan-Chenchurutti-MMS.6YnZOowAGC4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0096   - <a href="song/Valli Kanavan.html" >vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/Kunnakudi Vaidyanathan.html" >Kunnakudi Vaidyanathan   KUNNAKUDI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0311-Valli Kanavan-Chenchurutti-MMS._N_2W4mJVPQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0311   - <a href="song/Valli Kanavan.html" >vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0312-Valli Kanavan-Chenchurutti-MMS.zYcij3b4lSI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0312   - <a href="song/Valli Kanavan.html" >vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0543-Valli Kanavan-Chenchurutti-MMS.wCkzwXTdqVk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0543   - <a href="song/Valli Kanavan.html" >vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0502-Valli Kanavan-Chenchurutti-MMS.a25Uk6GdIW4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0502   - <a href="song/Valli Kanavan.html" >vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0652-Valli Kanavan-Chenchurutti-MMS.BXsoIztGQrk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0652   - <a href="song/Valli Kanavan.html" >vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0653-Valli Kanavan-Chenchurutti-MMS.fiTT5hRlHcw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0653   - <a href="song/Valli Kanavan.html" >vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0654-Valli Kanavan-Chenchurutti-MMS.lpEhf4M7bVU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0654   - <a href="song/Valli Kanavan.html" >vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["vallik-kanavan perai vazhippokkan shonnalum ullam kuzhaiyudadi"], "songs": [{"N": "0096", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Kunnakudi Vaidyanathan", "V": "6YnZOowAGC4"}, {"N": "0311", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Aruna Sairam", "V": "_N_2W4mJVPQ"}, {"N": "0312", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Aruna Sairam", "V": "zYcij3b4lSI"}, {"N": "0543", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "D. K. Jayaraman", "V": "wCkzwXTdqVk"}, {"N": "0502", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "D. K. Pattammal", "V": "a25Uk6GdIW4"}, {"N": "0652", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Sudha Ragunathan", "V": "BXsoIztGQrk"}, {"N": "0653", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Sudha Ragunathan", "V": "fiTT5hRlHcw"}, {"N": "0654", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Sudha Ragunathan", "V": "lpEhf4M7bVU"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

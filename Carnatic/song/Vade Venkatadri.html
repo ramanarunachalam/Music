@@ -42,36 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0223-Vade Venkatadri-Vasantha-TA.wn4-u0CAr_w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0223   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Chembai Vaidyanatha Bhagavathar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0229-Vade Venkatadri-Vasantha-TA.ijM0LjrXFoQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0229   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Chembai Vaidyanatha Bhagavathar.html" >Chembai Vaidyanatha Bhagavathar</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Dr. Sripada Pinakapani</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0043-Vade Venkatadri-Vasantha-TA.qCMGytpn_ZI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0043   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Dr. Sripada Pinakapani.html" >Dr  Sripada Pinakapani   SPP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Malladi Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0254-Vade Venkatadri-Vasantha-TA.oQIBkER0HI0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0254   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Malladi Brothers.html" >Malladi Brothers   MALLADI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Malladi Suribabu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0051-Vade Venkatadri-Vasantha-TA.L44ccIQ8hAY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0051   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Malladi Suribabu.html" >Malladi Suribabu   SURIBABU01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vijayalakshmy Subramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0100-Vade Venkatadri-Vasantha-TA.MSTn2i3u1hI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0100   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Vijayalakshmy Subramaniam.html" >Vijayalakshmy Subramaniam   VSL01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Voleti Venkateswarlu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0230-Vade Venkatadri-Vasantha-TA._EXl2uAwNIA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0230   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Voleti Venkateswarlu.html" >Voleti Venkateswarlu   VOLETI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -166,9 +137,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bombay Sisters"], "songs": [{"N": "0223", "T": "", "H": "Vade Venkatadri", "S": "vADe venkaTAdri meeda vara daivamu :  Adi", "R": "Vasantha", "C": "Annamacharya", "A": "Bombay Sisters", "V": "wn4-u0CAr_w"}]}, {"name": ["Vocal", "Chembai Vaidyanatha Bhagavathar"], "songs": [{"N": "0229", "T": "", "H": "Vade Venkatadri", "S": "vADe venkaTAdri meeda vara daivamu :  Adi", "R": "Vasantha", "C": "Annamacharya", "A": "Chembai Vaidyanatha Bhagavathar", "V": "ijM0LjrXFoQ"}]}, {"name": ["Vocal", "Dr. Sripada Pinakapani"], "songs": [{"N": "0043", "T": "", "H": "Vade Venkatadri", "S": "vADe venkaTAdri meeda vara daivamu :  Adi", "R": "Vasantha", "C": "Annamacharya", "A": "Dr. Sripada Pinakapani", "V": "qCMGytpn_ZI"}]}, {"name": ["Vocal", "Malladi Brothers"], "songs": [{"N": "0254", "T": "", "H": "Vade Venkatadri", "S": "vADe venkaTAdri meeda vara daivamu :  Adi", "R": "Vasantha", "C": "Annamacharya", "A": "Malladi Brothers", "V": "oQIBkER0HI0"}]}, {"name": ["Vocal", "Malladi Suribabu"], "songs": [{"N": "0051", "T": "", "H": "Vade Venkatadri", "S": "vADe venkaTAdri meeda vara daivamu :  Adi", "R": "Vasantha", "C": "Annamacharya", "A": "Malladi Suribabu", "V": "L44ccIQ8hAY"}]}, {"name": ["Vocal", "Vijayalakshmy Subramaniam"], "songs": [{"N": "0100", "T": "", "H": "Vade Venkatadri", "S": "vADe venkaTAdri meeda vara daivamu :  Adi", "R": "Vasantha", "C": "Annamacharya", "A": "Vijayalakshmy Subramaniam", "V": "MSTn2i3u1hI"}]}, {"name": ["Vocal", "Voleti Venkateswarlu"], "songs": [{"N": "0230", "T": "", "H": "Vade Venkatadri", "S": "vADe venkaTAdri meeda vara daivamu :  Adi", "R": "Vasantha", "C": "Annamacharya", "A": "Voleti Venkateswarlu", "V": "_EXl2uAwNIA"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

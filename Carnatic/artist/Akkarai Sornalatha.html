@@ -26,23 +26,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; AKKARAISWARNA01</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-Concert-Concert-UnknownRaga-UnknownComposer.H40Cq_IdNm4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="song/Concert.html" >Concert</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0011-Ninnu Vina Naa Madi-Navarasa kannada-T.xowa7QNSM8M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0011   - <a href="song/Ninnu Vina Naa Madi.html" >ninu vinA nA madi y endu niluvadE SrI :  Rupaka</a> - <a href="raga/Navarasa kannada.html" >Navarasa kannada</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0014-Vanchathonu-Karnaranjani-HMB.NsEdC4Gj4Ac');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0014   - <a href="song/Vanchathonu.html" >vAncatOnu nAvagalu delpavE ambA :  Adi</a> - <a href="raga/Karnaranjani.html" >Karnaranjani</a> - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0016-Shodasa ganapati-Maha Ganapathe-Nata narayani-MD.n29SaZ3auDo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0016 - <a href="song_type/Shodasa ganapati.html" >Shodasa ganapati</a>  - <a href="song/Maha Ganapathe.html" >mahA gaNa patE pAlayASu mAM  :  Adi</a> - <a href="raga/Nata narayani.html" >Nata narayani</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0018-Thiruvottiyur pancharathnam-Dharini Telsukonti-Shuddha saveri-T.0InrVxmTopY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0018 - <a href="song_type/Thiruvottiyur pancharathnam.html" >Thiruvottiyur pancharathnam</a>  - <a href="song/Dharini Telsukonti.html" >dArini telusukoNTi tripura  :  Adi</a> - <a href="raga/Shuddha saveri.html" >Shuddha saveri</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0019-Varnam-Varnam-Hamsadhwani-UnknownComposer.hhW0atYDKe0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0019   - <a href="song/Varnam.html" >Varnam</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0024-UnknownSong-Navarasa kannada-UnknownComposer.HIlSsEdUH5U');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0024   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Navarasa kannada.html" >Navarasa kannada</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["AKKARAISWARNA01"], "songs": [{"N": "0004", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "Akkarai Sornalatha", "V": "H40Cq_IdNm4"}, {"N": "0011", "T": "", "H": "Ninnu Vina Naa Madi", "S": "ninu vinA nA madi y endu niluvadE SrI :  Rupaka", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "Akkarai Sornalatha", "V": "xowa7QNSM8M"}, {"N": "0014", "T": "", "H": "Vanchathonu", "S": "vAncatOnu nAvagalu delpavE ambA :  Adi", "R": "Karnaranjani", "C": "Muthiah Bhagavathar", "A": "Akkarai Sornalatha", "V": "NsEdC4Gj4Ac"}, {"N": "0016", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "Akkarai Sornalatha", "V": "n29SaZ3auDo"}, {"N": "0018", "T": "Thiruvottiyur pancharathnam", "H": "Dharini Telsukonti", "S": "dArini telusukoNTi tripura  :  Adi", "R": "Shuddha saveri", "C": "Thyagaraja", "A": "Akkarai Sornalatha", "V": "0InrVxmTopY"}, {"N": "0019", "T": "", "H": "Varnam", "S": "Varnam", "R": "Hamsadhwani", "C": "UnknownComposer", "A": "Akkarai Sornalatha", "V": "hhW0atYDKe0"}, {"N": "0024", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Navarasa kannada", "C": "UnknownComposer", "A": "Akkarai Sornalatha", "V": "HIlSsEdUH5U"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#artist-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

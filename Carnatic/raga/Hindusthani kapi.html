@@ -31,29 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; duru maduvarene caru maddiyolage muru lokake</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0031-Dooru Maduva Rene-Hindusthani Kapi-PD.hJAbVAF7Or8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0031   - <a href="song/Dooru Maduva Rene.html" >Duru Maduvarene Caru Maddiyolage Muru Lokake :  Adi</a> - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="artist/Dr. Nagavalli Nagaraj.html" >Dr  Nagavalli Nagaraj   NN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; kamdarpajanaka garudagamana | namda gopatmaja namo</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-Kandarpa Janaka-Hindusthani Kapi-TA.02O6kd2e_8I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="song/Kandarpa Janaka.html" >kaMdarpajanaka garuDagamana   naMda gOpAtmaja :  Adi</a> - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="artist/B. Lalitha.html" >B  Lalitha   BLALITHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; radha mukha kamala madhu rasikam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0325-Radha Mukha Kamala-Hindusthani Kapi-P.fjd1RUFNOHI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0325   - <a href="song/Radha Mukha Kamala.html" >rAdhA mukha kamala madhu rasikam :  Adi</a> - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; sanmukhane shiva shakti svarupane muttukkumarane</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0764-Shanmukhane Sivasakthi-Hindusthani Kapi-NS.xZHJR40wGE8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0764   - <a href="song/Shanmukhane Sivasakthi.html" >SanmukhanE shiva shakti svarUpanE muttukkumAranE :  Rupaka</a> - <a href="composer/Neelakanta Sivan.html" >Neelakanta Sivan</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["duru maduvarene caru maddiyolage muru lokake"], "songs": [{"N": "0031", "T": "", "H": "Dooru Maduva Rene", "S": "Duru Maduvarene Caru Maddiyolage Muru Lokake :  Adi", "R": "Hindusthani kapi", "C": "Purandara Dasa", "A": "Dr. Nagavalli Nagaraj", "V": "hJAbVAF7Or8"}]}, {"name": ["kamdarpajanaka garudagamana | namda gopatmaja namo"], "songs": [{"N": "0004", "T": "", "H": "Kandarpa Janaka", "S": "kaMdarpajanaka garuDagamana   naMda gOpAtmaja :  Adi", "R": "Hindusthani kapi", "C": "Annamacharya", "A": "B. Lalitha", "V": "02O6kd2e_8I"}]}, {"name": ["radha mukha kamala madhu rasikam"], "songs": [{"N": "0329", "T": "", "H": "Radha Mukha Kamala", "S": "rAdhA mukha kamala madhu rasikam :  Adi", "R": "Hindusthani kapi", "C": "Papanasam Sivan", "A": "G. N. Balasubramaniam", "V": "fjd1RUFNOHI"}]}, {"name": ["sanmukhane shiva shakti svarupane muttukkumarane"], "songs": [{"N": "0764", "T": "", "H": "Shanmukhane Sivasakthi", "S": "SanmukhanE shiva shakti svarUpanE muttukkumAranE :  Rupaka", "R": "Hindusthani kapi", "C": "Neelakanta Sivan", "A": "Sanjay Subrahmanyan", "V": "xZHJR40wGE8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

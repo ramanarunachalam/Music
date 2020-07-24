@@ -42,28 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Lakshmi Rangarajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0015-Prasanna Venkateswaram-Vasanthabhairavi-MD.b7I1rtOQ0rI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0015   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/Lakshmi Rangarajan.html" >Lakshmi Rangarajan   LAKSHMIR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal O. S. Thyagarajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0124-Prasanna Venkateswaram-Vasanthabhairavi-MD.Sy45VfeI0hI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0124   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/O. S. Thyagarajan.html" >O  S  Thyagarajan   OST01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0125-Prasanna Venkateswaram-Vasanthabhairavi-MD.fbzyxmcTX7A');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0125   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/O. S. Thyagarajan.html" >O  S  Thyagarajan   OST01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0126-Prasanna Venkateswaram-Vasanthabhairavi-MD.iABUBMLwqTg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0126   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/O. S. Thyagarajan.html" >O  S  Thyagarajan   OST01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0660-Prasanna Venkateswaram-Vasanthabhairavi-MD.6NiYuoszHf8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0660   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vivek Sadasivam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Prasanna Venkateswaram-Vasanthabhairavi-MD.PXsGMcz5yjc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/Vivek Sadasivam.html" >Vivek Sadasivam   VIVEK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0028-Prasanna Venkateswaram-Vasanthabhairavi-MD.rNiGLuSGTNg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0028   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/Vivek Sadasivam.html" >Vivek Sadasivam   VIVEK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0029-Prasanna Venkateswaram-Vasanthabhairavi-MD.ylM0SXl5_-0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0029   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/Vivek Sadasivam.html" >Vivek Sadasivam   VIVEK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -149,9 +128,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Lakshmi Rangarajan"], "songs": [{"N": "0015", "T": "", "H": "Prasanna Venkateswaram", "S": "prasanna veHNkaTEshvaram bhajarE vATI :  Adi", "R": "Vasanthabhairavi", "C": "Muthuswami Dikshitar", "A": "Lakshmi Rangarajan", "V": "b7I1rtOQ0rI"}]}, {"name": ["Vocal", "O. S. Thyagarajan"], "songs": [{"N": "0124", "T": "", "H": "Prasanna Venkateswaram", "S": "prasanna veHNkaTEshvaram bhajarE vATI :  Adi", "R": "Vasanthabhairavi", "C": "Muthuswami Dikshitar", "A": "O. S. Thyagarajan", "V": "Sy45VfeI0hI"}, {"N": "0125", "T": "", "H": "Prasanna Venkateswaram", "S": "prasanna veHNkaTEshvaram bhajarE vATI :  Adi", "R": "Vasanthabhairavi", "C": "Muthuswami Dikshitar", "A": "O. S. Thyagarajan", "V": "fbzyxmcTX7A"}, {"N": "0126", "T": "", "H": "Prasanna Venkateswaram", "S": "prasanna veHNkaTEshvaram bhajarE vATI :  Adi", "R": "Vasanthabhairavi", "C": "Muthuswami Dikshitar", "A": "O. S. Thyagarajan", "V": "iABUBMLwqTg"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0660", "T": "", "H": "Prasanna Venkateswaram", "S": "prasanna veHNkaTEshvaram bhajarE vATI :  Adi", "R": "Vasanthabhairavi", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "6NiYuoszHf8"}]}, {"name": ["Vocal", "Vivek Sadasivam"], "songs": [{"N": "0027", "T": "", "H": "Prasanna Venkateswaram", "S": "prasanna veHNkaTEshvaram bhajarE vATI :  Adi", "R": "Vasanthabhairavi", "C": "Muthuswami Dikshitar", "A": "Vivek Sadasivam", "V": "PXsGMcz5yjc"}, {"N": "0028", "T": "", "H": "Prasanna Venkateswaram", "S": "prasanna veHNkaTEshvaram bhajarE vATI :  Adi", "R": "Vasanthabhairavi", "C": "Muthuswami Dikshitar", "A": "Vivek Sadasivam", "V": "rNiGLuSGTNg"}, {"N": "0029", "T": "", "H": "Prasanna Venkateswaram", "S": "prasanna veHNkaTEshvaram bhajarE vATI :  Adi", "R": "Vasanthabhairavi", "C": "Muthuswami Dikshitar", "A": "Vivek Sadasivam", "V": "ylM0SXl5_-0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

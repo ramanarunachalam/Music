@@ -31,31 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; ettanai ettanai vidam tan cittattil vaittanai</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0049-Ettanai Ettanai Vidam-Gavambodhi-DLP.5yoHAq1skCo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0049   - <a href="song/Ettanai Ettanai Vidam.html" >ettanai ettanai vidam tAn cittattil vaittanai :  Caapu</a> - <a href="composer/D. Pattammal.html" >D  Pattammal</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; namo namaste girvani nadabindu kalashreni</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0542-Namo Namaste-Gavambodhi-MD.r2q5-jUxzbo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0542   - <a href="song/Namo Namaste.html" >namO namastE gIrvANI nAdabindu kaLAshrENi :  Misra Caapu</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; unknownsong</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0051-UnknownSong-Gavambodhi-UnknownComposer.o2x-Tjy1llI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0051   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Nookala Chinna Satyanarayana.html" >Nookala Chinna Satyanarayana</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0352-UnknownSong-Gavambodhi-UnknownComposer.PE4IKAmuBfg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0352   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0147-UnknownSong-Gavambodhi-UnknownComposer.-8RjjUZDbwk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0147   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/S. Rajam.html" >S  Rajam   SRAJAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; viraivagave vinai tira vel iraiva arulvai</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0056-Viravagave Vinatheerave-Gavambodhi-KI.hrEFjsuQ0G8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0056   - <a href="song/Viravagave Vinatheerave.html" >viraivAgavE vinai tIra vEl iraivA aruLvAi :  Adi</a> - <a href="composer/Koteeswara Iyer.html" >Koteeswara Iyer</a> - <a href="artist/S. Mahathi.html" >S  Mahathi   MAHATHI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["ettanai ettanai vidam tan cittattil vaittanai"], "songs": [{"N": "0049", "T": "", "H": "Ettanai Ettanai Vidam", "S": "ettanai ettanai vidam tAn cittattil vaittanai :  Caapu", "R": "Gavambodhi", "C": "D. Pattammal", "A": "S. Kalyanaraman", "V": "5yoHAq1skCo"}]}, {"name": ["namo namaste girvani nadabindu kalashreni"], "songs": [{"N": "0542", "T": "", "H": "Namo Namaste", "S": "namO namastE gIrvANI nAdabindu kaLAshrENi :  Misra Caapu", "R": "Gavambodhi", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "r2q5-jUxzbo"}]}, {"name": ["unknownsong"], "songs": [{"N": "0051", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gavambodhi", "C": "UnknownComposer", "A": "Nookala Chinna Satyanarayana", "V": "o2x-Tjy1llI"}, {"N": "0352", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gavambodhi", "C": "UnknownComposer", "A": "S. Kalyanaraman", "V": "PE4IKAmuBfg"}, {"N": "0147", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gavambodhi", "C": "UnknownComposer", "A": "S. Rajam", "V": "-8RjjUZDbwk"}]}, {"name": ["viraivagave vinai tira vel iraiva arulvai"], "songs": [{"N": "0056", "T": "", "H": "Viravagave Vinatheerave", "S": "viraivAgavE vinai tIra vEl iraivA aruLvAi :  Adi", "R": "Gavambodhi", "C": "Koteeswara Iyer", "A": "S. Mahathi", "V": "hrEFjsuQ0G8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

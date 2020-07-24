@@ -31,23 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; lalitambikam cintayamyaham shri guruguhapujita parambikam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0088-Lalitambikam-Devakriya,Shuddha saveri-MD.Zp1Xrh0cR2c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0088   - <a href="song/Lalitambikam.html" >lalitAmbikAm cintayAmyaham shrI guruguhapUjita :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/R. K. Srikantan.html" >R  K  Srikantan   RKS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; shri vatuka natha shiva sahnjata dayakara</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0821-Sri Vatukanatha-Devakriya,Shuddha saveri-MD.abRJLh7AzzU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0821   - <a href="song/Sri Vatukanatha.html" >shrI vaTuka nAtha shiva saHnjAta dayAkara :  Misra Caapu</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0854-Sri Vatukanatha-Devakriya,Shuddha saveri-MD.F9mT8KKfLXQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0854   - <a href="song/Sri Vatukanatha.html" >shrI vaTuka nAtha shiva saHnjAta dayAkara :  Misra Caapu</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0855-Sri Vatukanatha-Devakriya,Shuddha saveri-MD.YkOURm0wt7s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0855   - <a href="song/Sri Vatukanatha.html" >shrI vaTuka nAtha shiva saHnjAta dayAkara :  Misra Caapu</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["lalitambikam cintayamyaham shri guruguhapujita parambikam"], "songs": [{"N": "0088", "T": "", "H": "Lalitambikam", "S": "lalitAmbikAm cintayAmyaham shrI guruguhapUjita :  Adi", "R": "Devakriya,Shuddha saveri", "C": "Muthuswami Dikshitar", "A": "R. K. Srikantan", "V": "Zp1Xrh0cR2c"}]}, {"name": ["shri vatuka natha shiva sahnjata dayakara"], "songs": [{"N": "0821", "T": "", "H": "Sri Vatukanatha", "S": "shrI vaTuka nAtha shiva saHnjAta dayAkara :  Misra Caapu", "R": "Devakriya,Shuddha saveri", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "abRJLh7AzzU"}, {"N": "0854", "T": "", "H": "Sri Vatukanatha", "S": "shrI vaTuka nAtha shiva saHnjAta dayAkara :  Misra Caapu", "R": "Devakriya,Shuddha saveri", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "F9mT8KKfLXQ"}, {"N": "0855", "T": "", "H": "Sri Vatukanatha", "S": "shrI vaTuka nAtha shiva saHnjAta dayAkara :  Misra Caapu", "R": "Devakriya,Shuddha saveri", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "YkOURm0wt7s"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

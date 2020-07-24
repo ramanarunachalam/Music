@@ -42,23 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bangalore Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0015-Bhajare Sri Ramam-Kedaram-BR.zwzAvjPgrUg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0015   - <a href="composer/Bhadrachala Ramadasu.html" >Bhadrachala Ramadasu</a> - <a href="raga/Kedaram.html" >Kedaram</a> - <a href="artist/Bangalore Brothers.html" >Bangalore Brothers   BANGBROS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0347-Bhajare Sri Ramam-Sindhubhairavi-BR.ZhmK9HaJLLg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0347   - <a href="composer/Bhadrachala Ramadasu.html" >Bhadrachala Ramadasu</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0348-Bhajare Sri Ramam-UnknownRaga-BR.Cy26kFjJGHo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0348   - <a href="composer/Bhadrachala Ramadasu.html" >Bhadrachala Ramadasu</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0349-Bhajare Sri Ramam-UnknownRaga-BR.KDb0rOB8CEA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0349   - <a href="composer/Bhadrachala Ramadasu.html" >Bhadrachala Ramadasu</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0350-Bhajare Sri Ramam-UnknownRaga-BR.XSbDcZ4Hbno');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0350   - <a href="composer/Bhadrachala Ramadasu.html" >Bhadrachala Ramadasu</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Nedunuri Krishnamurthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0062-Bhajare Sri Ramam-Sindhubhairavi-BR.qi-Os5HE8Bw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0062   - <a href="composer/Bhadrachala Ramadasu.html" >Bhadrachala Ramadasu</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/Nedunuri Krishnamurthy.html" >Nedunuri Krishnamurthy   NEDUNURI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -165,9 +149,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bangalore Brothers"], "songs": [{"N": "0015", "T": "", "H": "Bhajare Sri Ramam", "S": "bhajarE shrIrAmam hE mAnasa bhajarE raghurAmam :  Adi", "R": "Kedaram", "C": "Bhadrachala Ramadasu", "A": "Bangalore Brothers", "V": "zwzAvjPgrUg"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0347", "T": "", "H": "Bhajare Sri Ramam", "S": "bhajarE shrIrAmam hE mAnasa bhajarE raghurAmam :  Adi", "R": "Sindhubhairavi", "C": "Bhadrachala Ramadasu", "A": "M. Balamuralikrishna", "V": "ZhmK9HaJLLg"}, {"N": "0348", "T": "", "H": "Bhajare Sri Ramam", "S": "bhajarE shrIrAmam hE mAnasa bhajarE raghurAmam :  Adi", "R": "Unknownraga", "C": "Bhadrachala Ramadasu", "A": "M. Balamuralikrishna", "V": "Cy26kFjJGHo"}, {"N": "0349", "T": "", "H": "Bhajare Sri Ramam", "S": "bhajarE shrIrAmam hE mAnasa bhajarE raghurAmam :  Adi", "R": "Unknownraga", "C": "Bhadrachala Ramadasu", "A": "M. Balamuralikrishna", "V": "KDb0rOB8CEA"}, {"N": "0350", "T": "", "H": "Bhajare Sri Ramam", "S": "bhajarE shrIrAmam hE mAnasa bhajarE raghurAmam :  Adi", "R": "Unknownraga", "C": "Bhadrachala Ramadasu", "A": "M. Balamuralikrishna", "V": "XSbDcZ4Hbno"}]}, {"name": ["Vocal", "Nedunuri Krishnamurthy"], "songs": [{"N": "0062", "T": "", "H": "Bhajare Sri Ramam", "S": "bhajarE shrIrAmam hE mAnasa bhajarE raghurAmam :  Adi", "R": "Sindhubhairavi", "C": "Bhadrachala Ramadasu", "A": "Nedunuri Krishnamurthy", "V": "qi-Os5HE8Bw"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

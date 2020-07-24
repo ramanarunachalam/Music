@@ -40,31 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin A. Kanyakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0030-Agastheeswaram-Lalitha-MD.YOPaUasOV2g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0030   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Lalitha.html" >Lalitha</a> - <a href="artist/A. Kanyakumari.html" >A  Kanyakumari   AKK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin V. V. Ravi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0018-Agastheeswaram-Lalitha-MD.TmU1ilOBKhQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0018   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Lalitha.html" >Lalitha</a> - <a href="artist/V. V. Ravi.html" >V  V  Ravi   VVRAVI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Raji Gopalakrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0008-Agastheeswaram-Lalitha-MD.GEfas30zdRU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0008   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Lalitha.html" >Lalitha</a> - <a href="artist/Raji Gopalakrishnan.html" >Raji Gopalakrishnan   RAJIG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Rudrapatnam Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-Agastheeswaram-Lalitha-MD.WDKYZfgdZUk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Lalitha.html" >Lalitha</a> - <a href="artist/Rudrapatnam Brothers.html" >Rudrapatnam Brothers   RUDRABROS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-Agastheeswaram-Lalitha-MD.ZSCpsO6SfPw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Lalitha.html" >Lalitha</a> - <a href="artist/Rudrapatnam Brothers.html" >Rudrapatnam Brothers   RUDRABROS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Semmangudi Srinivasa Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0066-Agastheeswaram-Lalitha-MD.O9OitgKeot0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0066   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Lalitha.html" >Lalitha</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0067-Agastheeswaram-Lalitha-MD.b0Awe2o7K-M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0067   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Lalitha.html" >Lalitha</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0068-Agastheeswaram-Lalitha-MD.c1wPbkLPn28');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0068   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Lalitha.html" >Lalitha</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -156,9 +132,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "A. Kanyakumari"], "songs": [{"N": "0030", "T": "", "H": "Agastheeswaram", "S": "agastIshvaram ArAdhayEham haram saccidAnanda :  Misra Caapu", "R": "Lalitha", "C": "Muthuswami Dikshitar", "A": "A. Kanyakumari", "V": "YOPaUasOV2g"}]}, {"name": ["Violin", "V. V. Ravi"], "songs": [{"N": "0018", "T": "", "H": "Agastheeswaram", "S": "agastIshvaram ArAdhayEham haram saccidAnanda :  Misra Caapu", "R": "Lalitha", "C": "Muthuswami Dikshitar", "A": "V. V. Ravi", "V": "TmU1ilOBKhQ"}]}, {"name": ["Vocal", "Raji Gopalakrishnan"], "songs": [{"N": "0008", "T": "", "H": "Agastheeswaram", "S": "agastIshvaram ArAdhayEham haram saccidAnanda :  Misra Caapu", "R": "Lalitha", "C": "Muthuswami Dikshitar", "A": "Raji Gopalakrishnan", "V": "GEfas30zdRU"}]}, {"name": ["Vocal", "Rudrapatnam Brothers"], "songs": [{"N": "0004", "T": "", "H": "Agastheeswaram", "S": "agastIshvaram ArAdhayEham haram saccidAnanda :  Misra Caapu", "R": "Lalitha", "C": "Muthuswami Dikshitar", "A": "Rudrapatnam Brothers", "V": "WDKYZfgdZUk"}, {"N": "0005", "T": "", "H": "Agastheeswaram", "S": "agastIshvaram ArAdhayEham haram saccidAnanda :  Misra Caapu", "R": "Lalitha", "C": "Muthuswami Dikshitar", "A": "Rudrapatnam Brothers", "V": "ZSCpsO6SfPw"}]}, {"name": ["Vocal", "Semmangudi Srinivasa Iyer"], "songs": [{"N": "0066", "T": "", "H": "Agastheeswaram", "S": "agastIshvaram ArAdhayEham haram saccidAnanda :  Misra Caapu", "R": "Lalitha", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "O9OitgKeot0"}, {"N": "0067", "T": "", "H": "Agastheeswaram", "S": "agastIshvaram ArAdhayEham haram saccidAnanda :  Misra Caapu", "R": "Lalitha", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "b0Awe2o7K-M"}, {"N": "0068", "T": "", "H": "Agastheeswaram", "S": "agastIshvaram ArAdhayEham haram saccidAnanda :  Misra Caapu", "R": "Lalitha", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "c1wPbkLPn28"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

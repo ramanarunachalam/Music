@@ -42,33 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Chitra Veena Chitravina Ravi Kiran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0079-Ennadu Nee Kripa-Vachaspathi-PS.pQqNW-MaYH8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0079   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Vachaspathi.html" >Vachaspathi</a> - <a href="artist/Chitravina Ravi Kiran.html" >Chitravina Ravi Kiran   RAVIKIRAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. Vedavalli</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0114-Ennadu Nee Kripa-Vachaspathi-PS.aF6kE_MCEvs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0114   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Vachaspathi.html" >Vachaspathi</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Mahathi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Ennadu Nee Kripa-Vachaspathi-PS.8N9hOBfYDi8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Vachaspathi.html" >Vachaspathi</a> - <a href="artist/S. Mahathi.html" >S  Mahathi   MAHATHI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. N. Seshagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0190-Ennadu Nee Kripa-Vachaspathi-PS.i8KE4jZ2dZI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0190   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Vachaspathi.html" >Vachaspathi</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Uma Radhika</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0041-Ennadu Nee Kripa-Vachaspathi-PS.a2_y3HUwQoI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0041   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Vachaspathi.html" >Vachaspathi</a> - <a href="artist/Uma Radhika.html" >Uma Radhika   CHINMAYA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0042-Ennadu Nee Kripa-Vachaspathi-PS.jOA66Yz05pU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0042   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Vachaspathi.html" >Vachaspathi</a> - <a href="artist/Uma Radhika.html" >Uma Radhika   CHINMAYA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vidyabhushana</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0037-Ennadu Nee Kripa-Vachaspathi-PS.xl1594xJ-cE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0037   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Vachaspathi.html" >Vachaspathi</a> - <a href="artist/Vidyabhushana.html" >Vidyabhushana   VIDYABHOOSHANA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -157,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Chitra Veena", "Chitravina Ravi Kiran"], "songs": [{"N": "0079", "T": "", "H": "Ennadu Nee Kripa", "S": "ennaDu nee krupa kalgunO inakula tilaka :  Adi", "R": "Vachaspathi", "C": "Patnam Subramanya Iyer", "A": "Chitravina Ravi Kiran", "V": "pQqNW-MaYH8"}]}, {"name": ["Vocal", "R. Vedavalli"], "songs": [{"N": "0114", "T": "", "H": "Ennadu Nee Kripa", "S": "ennaDu nee krupa kalgunO inakula tilaka :  Adi", "R": "Vachaspathi", "C": "Patnam Subramanya Iyer", "A": "R. Vedavalli", "V": "aF6kE_MCEvs"}]}, {"name": ["Vocal", "S. Mahathi"], "songs": [{"N": "0017", "T": "", "H": "Ennadu Nee Kripa", "S": "ennaDu nee krupa kalgunO inakula tilaka :  Adi", "R": "Vachaspathi", "C": "Patnam Subramanya Iyer", "A": "S. Mahathi", "V": "8N9hOBfYDi8"}]}, {"name": ["Vocal", "T. N. Seshagopalan"], "songs": [{"N": "0190", "T": "", "H": "Ennadu Nee Kripa", "S": "ennaDu nee krupa kalgunO inakula tilaka :  Adi", "R": "Vachaspathi", "C": "Patnam Subramanya Iyer", "A": "T. N. Seshagopalan", "V": "i8KE4jZ2dZI"}]}, {"name": ["Vocal", "Uma Radhika"], "songs": [{"N": "0041", "T": "", "H": "Ennadu Nee Kripa", "S": "ennaDu nee krupa kalgunO inakula tilaka :  Adi", "R": "Vachaspathi", "C": "Patnam Subramanya Iyer", "A": "Uma Radhika", "V": "a2_y3HUwQoI"}, {"N": "0042", "T": "", "H": "Ennadu Nee Kripa", "S": "ennaDu nee krupa kalgunO inakula tilaka :  Adi", "R": "Vachaspathi", "C": "Patnam Subramanya Iyer", "A": "Uma Radhika", "V": "jOA66Yz05pU"}]}, {"name": ["Vocal", "Vidyabhushana"], "songs": [{"N": "0037", "T": "", "H": "Ennadu Nee Kripa", "S": "ennaDu nee krupa kalgunO inakula tilaka :  Adi", "R": "Vachaspathi", "C": "Patnam Subramanya Iyer", "A": "Vidyabhushana", "V": "xl1594xJ-cE"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

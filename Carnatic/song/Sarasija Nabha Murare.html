@@ -42,24 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0374-Varnam-Sarasija Nabha Murare-Mayamalavagowla-ST.bm_uOJHZ5-w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0374 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Mayamalavagowla.html" >Mayamalavagowla</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. V. Narayanaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0697-Varnam-Sarasija Nabha Murare-Mayamalavagowla-ST.GqR-QRFUQGo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0697 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Mayamalavagowla.html" >Mayamalavagowla</a> - <a href="artist/K. V. Narayanaswamy.html" >K  V  Narayanaswamy   KVN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Malladi Narayana Sarma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0011-Varnam-Sarasija Nabha Murare-Mayamalavagowla-ST.SJF7_MUUFw0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0011 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Mayamalavagowla.html" >Mayamalavagowla</a> - <a href="artist/Malladi Narayana Sarma.html" >Malladi Narayana Sarma   MNS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Pattabhirama Pandit</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0048-Varnam-Sarasija Nabha Murare-Mayamalavagowla-ST.uqpr9fp4BRg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0048 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Mayamalavagowla.html" >Mayamalavagowla</a> - <a href="artist/Pattabhirama Pandit.html" >Pattabhirama Pandit   PTP01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -141,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0374", "T": "Varnam", "H": "Sarasija Nabha Murare", "S": "sarasija nAbha murArE pAhimAm  :  Adi", "R": "Mayamalavagowla", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "bm_uOJHZ5-w"}]}, {"name": ["Vocal", "K. V. Narayanaswamy"], "songs": [{"N": "0697", "T": "Varnam", "H": "Sarasija Nabha Murare", "S": "sarasija nAbha murArE pAhimAm  :  Adi", "R": "Mayamalavagowla", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "GqR-QRFUQGo"}]}, {"name": ["Vocal", "Malladi Narayana Sarma"], "songs": [{"N": "0011", "T": "Varnam", "H": "Sarasija Nabha Murare", "S": "sarasija nAbha murArE pAhimAm  :  Adi", "R": "Mayamalavagowla", "C": "Swathi Thirunal", "A": "Malladi Narayana Sarma", "V": "SJF7_MUUFw0"}]}, {"name": ["Vocal", "Pattabhirama Pandit"], "songs": [{"N": "0048", "T": "Varnam", "H": "Sarasija Nabha Murare", "S": "sarasija nAbha murArE pAhimAm  :  Adi", "R": "Mayamalavagowla", "C": "Swathi Thirunal", "A": "Pattabhirama Pandit", "V": "uqpr9fp4BRg"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

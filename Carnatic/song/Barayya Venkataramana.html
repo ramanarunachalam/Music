@@ -41,26 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0050-Barayya Venkataramana-Saveri-PD.JuIm3YgEVQM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0050   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0051-Barayya Venkataramana-Saveri-PD.k1c4yDMULcw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0051   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0072-Barayya Venkataramana-Saveri-PD.YKkG9d2SXEg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0072   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Prince Rama Varma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0074-Barayya Venkataramana-Saveri-PD.KuRpPnsdoxI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0074   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. V. Sankaranarayanan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0039-Barayya Venkataramana-Saveri-PD.dRCKP6dM6tM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0039   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/T. V. Sankaranarayanan.html" >T  V  Sankaranarayanan   TVS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0040-Barayya Venkataramana-Saveri-PD.iahFtk0boyM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0040   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/T. V. Sankaranarayanan.html" >T  V  Sankaranarayanan   TVS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -161,9 +142,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0050", "T": "", "H": "Barayya Venkataramana", "S": "bArayya venkaTaramaNa bhaktara nidhiye :  Adi", "R": "Saveri", "C": "Purandara Dasa", "A": "Amrutha Venkatesh", "V": "JuIm3YgEVQM"}, {"N": "0051", "T": "", "H": "Barayya Venkataramana", "S": "bArayya venkaTaramaNa bhaktara nidhiye :  Adi", "R": "Saveri", "C": "Purandara Dasa", "A": "Amrutha Venkatesh", "V": "k1c4yDMULcw"}]}, {"name": ["Vocal", "Bombay Sisters"], "songs": [{"N": "0072", "T": "", "H": "Barayya Venkataramana", "S": "bArayya venkaTaramaNa bhaktara nidhiye :  Adi", "R": "Saveri", "C": "Purandara Dasa", "A": "Bombay Sisters", "V": "YKkG9d2SXEg"}]}, {"name": ["Vocal", "Prince Rama Varma"], "songs": [{"N": "0074", "T": "", "H": "Barayya Venkataramana", "S": "bArayya venkaTaramaNa bhaktara nidhiye :  Adi", "R": "Saveri", "C": "Purandara Dasa", "A": "Prince Rama Varma", "V": "KuRpPnsdoxI"}]}, {"name": ["Vocal", "T. V. Sankaranarayanan"], "songs": [{"N": "0039", "T": "", "H": "Barayya Venkataramana", "S": "bArayya venkaTaramaNa bhaktara nidhiye :  Adi", "R": "Saveri", "C": "Purandara Dasa", "A": "T. V. Sankaranarayanan", "V": "dRCKP6dM6tM"}, {"N": "0040", "T": "", "H": "Barayya Venkataramana", "S": "bArayya venkaTaramaNa bhaktara nidhiye :  Adi", "R": "Saveri", "C": "Purandara Dasa", "A": "T. V. Sankaranarayanan", "V": "iahFtk0boyM"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

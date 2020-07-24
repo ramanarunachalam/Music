@@ -31,23 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; ramanatham bhajeham ramacandra pujitam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0690-Ramanatham Bhajeham-Kashiramakriya,Panthuvarali-MD.JHVSIWn9D4M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0690   - <a href="song/Ramanatham Bhajeham.html" >rAmanAtham bhajEham rAmacandra pUjitam :  Tisra Eka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; vishalaksim vishveshim bhajare re manasa sada</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0574-Vishalakshim-Kashiramakriya,Panthuvarali-MD.CWeol0trY8w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0574   - <a href="song/Vishalakshim.html" >vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Misra Caapu</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0575-Vishalakshim-Kashiramakriya,Panthuvarali-MD.N3Fn6_RHn-E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0575   - <a href="song/Vishalakshim.html" >vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Misra Caapu</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0124-Vishalakshim-Kashiramakriya,Panthuvarali-MD.0SkO5889FNc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0124   - <a href="song/Vishalakshim.html" >vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Misra Caapu</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/S. Rajam.html" >S  Rajam   SRAJAM01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["ramanatham bhajeham ramacandra pujitam"], "songs": [{"N": "0690", "T": "", "H": "Ramanatham Bhajeham", "S": "rAmanAtham bhajEham rAmacandra pUjitam :  Tisra Eka", "R": "Kashiramakriya,Panthuvarali", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "JHVSIWn9D4M"}]}, {"name": ["vishalaksim vishveshim bhajare re manasa sada"], "songs": [{"N": "0574", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Misra Caapu", "R": "Kashiramakriya,Panthuvarali", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "CWeol0trY8w"}, {"N": "0575", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Misra Caapu", "R": "Kashiramakriya,Panthuvarali", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "N3Fn6_RHn-E"}, {"N": "0124", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Misra Caapu", "R": "Kashiramakriya,Panthuvarali", "C": "Muthuswami Dikshitar", "A": "S. Rajam", "V": "0SkO5889FNc"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

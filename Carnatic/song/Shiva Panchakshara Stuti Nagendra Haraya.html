@@ -36,32 +36,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Jayashri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0327-Shiva Panchakshara Stuti Nagendra Haraya-Ragamalika-A.Z49mTAFSuvg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0327   - <a href="composer/Adishankara.html" >Adishankara</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0328-Shiva Panchakshara Stuti Nagendra Haraya-Ragamalika-A.v2zn431iAPE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0328   - <a href="composer/Adishankara.html" >Adishankara</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0198-Shiva Panchakshara Stuti Nagendra Haraya-Ragamalika-A.SeSwS7xDdbE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0198   - <a href="composer/Adishankara.html" >Adishankara</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1033-Shiva Panchakshara Stuti Nagendra Haraya-Ragamalika-A.GGRyd5sUCD8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1033   - <a href="composer/Adishankara.html" >Adishankara</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1034-Shiva Panchakshara Stuti Nagendra Haraya-Ragamalika-A.YCh3GPb0Cp0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1034   - <a href="composer/Adishankara.html" >Adishankara</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1035-Shiva Panchakshara Stuti Nagendra Haraya-Ragamalika-A.f-diIOEPRrs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1035   - <a href="composer/Adishankara.html" >Adishankara</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Priya Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0224-Shiva Panchakshara Stuti Nagendra Haraya-Ragamalika-A.6k3H4AVlMjM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0224   - <a href="composer/Adishankara.html" >Adishankara</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Priya Sisters.html" >Priya Sisters   PRIYAS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bombay Jayashri"], "songs": [{"N": "0327", "T": "", "H": "Shiva Panchakshara Stuti Nagendra Haraya", "S": "Shiva Panchakshara Stuti Nagendra", "R": "Ragamalika", "C": "Adishankara", "A": "Bombay Jayashri", "V": "Z49mTAFSuvg"}, {"N": "0328", "T": "", "H": "Shiva Panchakshara Stuti Nagendra Haraya", "S": "Shiva Panchakshara Stuti Nagendra", "R": "Ragamalika", "C": "Adishankara", "A": "Bombay Jayashri", "V": "v2zn431iAPE"}]}, {"name": ["Vocal", "Bombay Sisters"], "songs": [{"N": "0198", "T": "", "H": "Shiva Panchakshara Stuti Nagendra Haraya", "S": "Shiva Panchakshara Stuti Nagendra", "R": "Ragamalika", "C": "Adishankara", "A": "Bombay Sisters", "V": "SeSwS7xDdbE"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "1033", "T": "", "H": "Shiva Panchakshara Stuti Nagendra Haraya", "S": "Shiva Panchakshara Stuti Nagendra", "R": "Ragamalika", "C": "Adishankara", "A": "M. S. Subbulakshmi", "V": "GGRyd5sUCD8"}, {"N": "1034", "T": "", "H": "Shiva Panchakshara Stuti Nagendra Haraya", "S": "Shiva Panchakshara Stuti Nagendra", "R": "Ragamalika", "C": "Adishankara", "A": "M. S. Subbulakshmi", "V": "YCh3GPb0Cp0"}, {"N": "1035", "T": "", "H": "Shiva Panchakshara Stuti Nagendra Haraya", "S": "Shiva Panchakshara Stuti Nagendra", "R": "Ragamalika", "C": "Adishankara", "A": "M. S. Subbulakshmi", "V": "f-diIOEPRrs"}]}, {"name": ["Vocal", "Priya Sisters"], "songs": [{"N": "0224", "T": "", "H": "Shiva Panchakshara Stuti Nagendra Haraya", "S": "Shiva Panchakshara Stuti Nagendra", "R": "Ragamalika", "C": "Adishankara", "A": "Priya Sisters", "V": "6k3H4AVlMjM"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

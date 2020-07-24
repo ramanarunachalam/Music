@@ -40,24 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. J. Yesudas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0262-Rama Pahi-Kapi-T.G_pdHoGmC4s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0262   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0263-Rama Pahi-Kapi-T.hp7DYb-mi-0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0263   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0264-Rama Pahi-Kapi-T.tVJv3jNAfJk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0264   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1188-Rama Pahi-Kapi-T.bCoK_cULWd4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1188   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. D. Ramanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0534-Rama Pahi-Kapi-T.2YiXk2Mii4M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0534   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0535-Rama Pahi-Kapi-T.Fz5auPKtj_0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0535   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0536-Rama Pahi-Kapi-T.p5YnhtfraK8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0536   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -208,9 +191,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "K. J. Yesudas"], "songs": [{"N": "0262", "T": "", "H": "Rama Pahi", "S": "rAma pAhi mEgha SyAma pAhi guNa :  Caapu", "R": "Kapi", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "G_pdHoGmC4s"}, {"N": "0263", "T": "", "H": "Rama Pahi", "S": "rAma pAhi mEgha SyAma pAhi guNa :  Caapu", "R": "Kapi", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "hp7DYb-mi-0"}, {"N": "0264", "T": "", "H": "Rama Pahi", "S": "rAma pAhi mEgha SyAma pAhi guNa :  Caapu", "R": "Kapi", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "tVJv3jNAfJk"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "1189", "T": "", "H": "Rama Pahi", "S": "rAma pAhi mEgha SyAma pAhi guNa :  Caapu", "R": "Kapi", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "bCoK_cULWd4"}]}, {"name": ["Vocal", "M. D. Ramanathan"], "songs": [{"N": "0536", "T": "", "H": "Rama Pahi", "S": "rAma pAhi mEgha SyAma pAhi guNa :  Caapu", "R": "Kapi", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "2YiXk2Mii4M"}, {"N": "0537", "T": "", "H": "Rama Pahi", "S": "rAma pAhi mEgha SyAma pAhi guNa :  Caapu", "R": "Kapi", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "Fz5auPKtj_0"}, {"N": "0538", "T": "", "H": "Rama Pahi", "S": "rAma pAhi mEgha SyAma pAhi guNa :  Caapu", "R": "Kapi", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "p5YnhtfraK8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

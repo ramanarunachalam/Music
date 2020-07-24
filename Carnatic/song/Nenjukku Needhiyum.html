@@ -41,30 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Aruna Sairam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0225-Nenjukku Needhiyum-Sindhubhairavi-B.SOIQ-mrf538');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0225   - <a href="composer/Subramanya Bharathiyar.html" >Subramanya Bharathiyar</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0787-Nenjukku Needhiyum-Sindhubhairavi-B.LOSDZnO_8Rg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0787   - <a href="composer/Subramanya Bharathiyar.html" >Subramanya Bharathiyar</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Mambalam Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0077-Nenjukku Needhiyum-Sindhubhairavi-B.Mex0ma5cdks');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0077   - <a href="composer/Subramanya Bharathiyar.html" >Subramanya Bharathiyar</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/Mambalam Sisters.html" >Mambalam Sisters   MAMBALAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Priya Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0162-Nenjukku Needhiyum-Sindhubhairavi-B.k8aQa6Wmo6A');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0162   - <a href="composer/Subramanya Bharathiyar.html" >Subramanya Bharathiyar</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/Priya Sisters.html" >Priya Sisters   PRIYAS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. M. Krishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0409-Nenjukku Needhiyum-Sindhubhairavi-B.B3tVAR46GWg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0409   - <a href="composer/Subramanya Bharathiyar.html" >Subramanya Bharathiyar</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/T. M. Krishna.html" >T  M  Krishna   TMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0410-Nenjukku Needhiyum-Sindhubhairavi-B.oTNn-YCtMbM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0410   - <a href="composer/Subramanya Bharathiyar.html" >Subramanya Bharathiyar</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/T. M. Krishna.html" >T  M  Krishna   TMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0411-Nenjukku Needhiyum-Sindhubhairavi-B.reRivR39X6g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0411   - <a href="composer/Subramanya Bharathiyar.html" >Subramanya Bharathiyar</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/T. M. Krishna.html" >T  M  Krishna   TMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -158,9 +135,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Aruna Sairam"], "songs": [{"N": "0225", "T": "", "H": "Nenjukku Needhiyum", "S": "nenjukku nItiyum tOLukku vALum niRainda :  Adi", "R": "Sindhubhairavi", "C": "Subramanya Bharathiyar", "A": "Aruna Sairam", "V": "SOIQ-mrf538"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "0787", "T": "", "H": "Nenjukku Needhiyum", "S": "nenjukku nItiyum tOLukku vALum niRainda :  Adi", "R": "Sindhubhairavi", "C": "Subramanya Bharathiyar", "A": "M. S. Subbulakshmi", "V": "LOSDZnO_8Rg"}]}, {"name": ["Vocal", "Mambalam Sisters"], "songs": [{"N": "0077", "T": "", "H": "Nenjukku Needhiyum", "S": "nenjukku nItiyum tOLukku vALum niRainda :  Adi", "R": "Sindhubhairavi", "C": "Subramanya Bharathiyar", "A": "Mambalam Sisters", "V": "Mex0ma5cdks"}]}, {"name": ["Vocal", "Priya Sisters"], "songs": [{"N": "0162", "T": "", "H": "Nenjukku Needhiyum", "S": "nenjukku nItiyum tOLukku vALum niRainda :  Adi", "R": "Sindhubhairavi", "C": "Subramanya Bharathiyar", "A": "Priya Sisters", "V": "k8aQa6Wmo6A"}]}, {"name": ["Vocal", "T. M. Krishna"], "songs": [{"N": "0409", "T": "", "H": "Nenjukku Needhiyum", "S": "nenjukku nItiyum tOLukku vALum niRainda :  Adi", "R": "Sindhubhairavi", "C": "Subramanya Bharathiyar", "A": "T. M. Krishna", "V": "B3tVAR46GWg"}, {"N": "0410", "T": "", "H": "Nenjukku Needhiyum", "S": "nenjukku nItiyum tOLukku vALum niRainda :  Adi", "R": "Sindhubhairavi", "C": "Subramanya Bharathiyar", "A": "T. M. Krishna", "V": "oTNn-YCtMbM"}, {"N": "0411", "T": "", "H": "Nenjukku Needhiyum", "S": "nenjukku nItiyum tOLukku vALum niRainda :  Adi", "R": "Sindhubhairavi", "C": "Subramanya Bharathiyar", "A": "T. M. Krishna", "V": "reRivR39X6g"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

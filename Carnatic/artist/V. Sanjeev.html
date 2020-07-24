@@ -26,22 +26,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; VSANJEEV01</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0002-Concert-Concert-Kedaram-UnknownComposer.5kALsBIhSnI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0002   - <a href="song/Concert.html" >Concert</a> - <a href="raga/Kedaram.html" >Kedaram</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0013-Karimuka Varadha-Nata-GNB.HkM3RKzT2BM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0013   - <a href="song/Karimuka Varadha.html" >karimukha varadA mAm pAlaya  :  Adi</a> - <a href="raga/Nata.html" >Nata</a> - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0014-Karimuka Varadha-Nata-GNB.durxOsZl7LU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0014   - <a href="song/Karimuka Varadha.html" >karimukha varadA mAm pAlaya  :  Adi</a> - <a href="raga/Nata.html" >Nata</a> - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0016-Nada Sudha Rasa-Arabhi-T.zO9Zw6-slzg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0016   - <a href="song/Nada Sudha Rasa.html" >nAda sudhA rasamb i lanu  :  Rupaka</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Ninne Nammithinaya-Simhendramadhyamam-MV.9IYgn3tMj4Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017   - <a href="song/Ninne Nammithinaya.html" >ninnE nammitinaiya sri rAmA  :  Rupaka</a> - <a href="raga/Simhendramadhyamam.html" >Simhendramadhyamam</a> - <a href="composer/Mysore Vasudevachar.html" >Mysore Vasudevachar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0028-UnknownSong-Balahamsa-UnknownComposer.0RFZzCgtIr8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0028   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Balahamsa.html" >Balahamsa</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["VSANJEEV01"], "songs": [{"N": "0002", "T": "", "H": "Concert", "S": "Concert", "R": "Kedaram", "C": "UnknownComposer", "A": "V. Sanjeev", "V": "5kALsBIhSnI"}, {"N": "0013", "T": "", "H": "Karimuka Varadha", "S": "karimukha varadA mAm pAlaya  :  Adi", "R": "Nata", "C": "G. N. Balasubramaniam", "A": "V. Sanjeev", "V": "HkM3RKzT2BM"}, {"N": "0014", "T": "", "H": "Karimuka Varadha", "S": "karimukha varadA mAm pAlaya  :  Adi", "R": "Nata", "C": "G. N. Balasubramaniam", "A": "V. Sanjeev", "V": "durxOsZl7LU"}, {"N": "0016", "T": "", "H": "Nada Sudha Rasa", "S": "nAda sudhA rasamb i lanu  :  Rupaka", "R": "Arabhi", "C": "Thyagaraja", "A": "V. Sanjeev", "V": "zO9Zw6-slzg"}, {"N": "0017", "T": "", "H": "Ninne Nammithinaya", "S": "ninnE nammitinaiya sri rAmA  :  Rupaka", "R": "Simhendramadhyamam", "C": "Mysore Vasudevachar", "A": "V. Sanjeev", "V": "9IYgn3tMj4Y"}, {"N": "0028", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Balahamsa", "C": "UnknownComposer", "A": "V. Sanjeev", "V": "0RFZzCgtIr8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#artist-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

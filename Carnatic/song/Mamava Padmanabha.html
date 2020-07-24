@@ -40,24 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amritha Murali</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0076-Mamava Padmanabha-Varali-ST.yYCFIjvMhsk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0076   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Varali.html" >Varali</a> - <a href="artist/Amritha Murali.html" >Amritha Murali   AMRITHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0123-Mamava Padmanabha-Varali-ST.7fsGFJx_Lzg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0123   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Varali.html" >Varali</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Kunnakudi M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0061-Mamava Padmanabha-Varali-ST.dMf-gZE5j-4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0061   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Varali.html" >Varali</a> - <a href="artist/Kunnakudi M. Balamuralikrishna.html" >Kunnakudi M  Balamuralikrishna</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Semmangudi Srinivasa Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0395-Mamava Padmanabha-Varali-ST.4pkq59Aj5XI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0395   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Varali.html" >Varali</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -151,9 +134,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amritha Murali"], "songs": [{"N": "0076", "T": "", "H": "Mamava Padmanabha", "S": "mAmava padmanAbha sadA sura sAdhya gaNa :  Caapu", "R": "Varali", "C": "Swathi Thirunal", "A": "Amritha Murali", "V": "yYCFIjvMhsk"}]}, {"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0123", "T": "", "H": "Mamava Padmanabha", "S": "mAmava padmanAbha sadA sura sAdhya gaNa :  Caapu", "R": "Varali", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "7fsGFJx_Lzg"}]}, {"name": ["Vocal", "Kunnakudi M. Balamuralikrishna"], "songs": [{"N": "0061", "T": "", "H": "Mamava Padmanabha", "S": "mAmava padmanAbha sadA sura sAdhya gaNa :  Caapu", "R": "Varali", "C": "Swathi Thirunal", "A": "Kunnakudi M. Balamuralikrishna", "V": "dMf-gZE5j-4"}]}, {"name": ["Vocal", "Semmangudi Srinivasa Iyer"], "songs": [{"N": "0395", "T": "", "H": "Mamava Padmanabha", "S": "mAmava padmanAbha sadA sura sAdhya gaNa :  Caapu", "R": "Varali", "C": "Swathi Thirunal", "A": "Semmangudi Srinivasa Iyer", "V": "4pkq59Aj5XI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

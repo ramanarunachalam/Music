@@ -42,34 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Flute N. Ramani</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0047-Brova Samayamide-Gowrimanohari-GP.LAer2rVMsqs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0047   - <a href="composer/Garbapurivaasar.html" >Garbapurivaasar</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/N. Ramani.html" >N  Ramani   RAMANI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Anahita Apoorva</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0042-Brova Samayamide-Gowrimanohari-GP.sjLwZjzAR8g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0042   - <a href="composer/Garbapurivaasar.html" >Garbapurivaasar</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/Anahita Apoorva.html" >Anahita Apoorva   ANAHITAAPOORVA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. Vedavalli</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0091-Brova Samayamide-Gowrimanohari-GP.CNHdVNXXvHw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0091   - <a href="composer/Garbapurivaasar.html" >Garbapurivaasar</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0092-Brova Samayamide-Gowrimanohari-GP.xVSDk0o6t5c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0092   - <a href="composer/Garbapurivaasar.html" >Garbapurivaasar</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0177-Brova Samayamide-Gowrimanohari-GP.TLlRJVDxVTI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0177   - <a href="composer/Garbapurivaasar.html" >Garbapurivaasar</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. Brinda</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0012-Brova Samayamide-Gowrimanohari-GP.88ho2s5rmF4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0012   - <a href="composer/Garbapurivaasar.html" >Garbapurivaasar</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/T. Brinda.html" >T  Brinda   BRINDA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Uma Radhika</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0037-Brova Samayamide-Gowrimanohari-GP.DvUnoAOCGuk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0037   - <a href="composer/Garbapurivaasar.html" >Garbapurivaasar</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/Uma Radhika.html" >Uma Radhika   CHINMAYA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0038-Brova Samayamide-Gowrimanohari-GP.amvQTtORBHs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0038   - <a href="composer/Garbapurivaasar.html" >Garbapurivaasar</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/Uma Radhika.html" >Uma Radhika   CHINMAYA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -151,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Flute", "N. Ramani"], "songs": [{"N": "0047", "T": "", "H": "Brova Samayamide", "S": "brOva samayamidE rAmayya  :  Adi", "R": "Gowrimanohari", "C": "Garbapurivaasar", "A": "N. Ramani", "V": "LAer2rVMsqs"}]}, {"name": ["Vocal", "Anahita Apoorva"], "songs": [{"N": "0042", "T": "", "H": "Brova Samayamide", "S": "brOva samayamidE rAmayya  :  Adi", "R": "Gowrimanohari", "C": "Garbapurivaasar", "A": "Anahita Apoorva", "V": "sjLwZjzAR8g"}]}, {"name": ["Vocal", "R. Vedavalli"], "songs": [{"N": "0091", "T": "", "H": "Brova Samayamide", "S": "brOva samayamidE rAmayya  :  Adi", "R": "Gowrimanohari", "C": "Garbapurivaasar", "A": "R. Vedavalli", "V": "CNHdVNXXvHw"}, {"N": "0092", "T": "", "H": "Brova Samayamide", "S": "brOva samayamidE rAmayya  :  Adi", "R": "Gowrimanohari", "C": "Garbapurivaasar", "A": "R. Vedavalli", "V": "xVSDk0o6t5c"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0177", "T": "", "H": "Brova Samayamide", "S": "brOva samayamidE rAmayya  :  Adi", "R": "Gowrimanohari", "C": "Garbapurivaasar", "A": "Sanjay Subrahmanyan", "V": "TLlRJVDxVTI"}]}, {"name": ["Vocal", "T. Brinda"], "songs": [{"N": "0012", "T": "", "H": "Brova Samayamide", "S": "brOva samayamidE rAmayya  :  Adi", "R": "Gowrimanohari", "C": "Garbapurivaasar", "A": "T. Brinda", "V": "88ho2s5rmF4"}]}, {"name": ["Vocal", "Uma Radhika"], "songs": [{"N": "0037", "T": "", "H": "Brova Samayamide", "S": "brOva samayamidE rAmayya  :  Adi", "R": "Gowrimanohari", "C": "Garbapurivaasar", "A": "Uma Radhika", "V": "DvUnoAOCGuk"}, {"N": "0038", "T": "", "H": "Brova Samayamide", "S": "brOva samayamidE rAmayya  :  Adi", "R": "Gowrimanohari", "C": "Garbapurivaasar", "A": "Uma Radhika", "V": "amvQTtORBHs"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

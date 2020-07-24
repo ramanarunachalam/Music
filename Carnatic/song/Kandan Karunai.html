@@ -42,21 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Nadaswaram Karukurichi Arunachalam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0018-Kandan Karunai-Bhimplas-G.gQ_bVMV1UAY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0018   - <a href="composer/Guhan.html" >Guhan</a> - <a href="raga/Bhimplas.html" >Bhimplas</a> - <a href="artist/Karukurichi Arunachalam.html" >Karukurichi Arunachalam   KARAIKURICHI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Nadaswaram MPN Sethuraman MPN Ponnuswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0007-Kandan Karunai-Bhimplas-G.XNzIjNJLHlM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0007   - <a href="composer/Guhan.html" >Guhan</a> - <a href="raga/Bhimplas.html" >Bhimplas</a> - <a href="artist/MPN Sethuraman MPN Ponnuswamy.html" >MPN Sethuraman MPN Ponnuswamy</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Madurai Mani Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0210-Kandan Karunai-Bhimplas-G.7I_jNb3a2EY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0210   - <a href="composer/Guhan.html" >Guhan</a> - <a href="raga/Bhimplas.html" >Bhimplas</a> - <a href="artist/Madurai Mani Iyer.html" >Madurai Mani Iyer   MMI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0211-Kandan Karunai-Bhimplas-G.jvsI7B-8tjQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0211   - <a href="composer/Guhan.html" >Guhan</a> - <a href="raga/Bhimplas.html" >Bhimplas</a> - <a href="artist/Madurai Mani Iyer.html" >Madurai Mani Iyer   MMI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -144,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Nadaswaram", "Karukurichi Arunachalam"], "songs": [{"N": "0018", "T": "", "H": "Kandan Karunai", "S": "kandan karuNai puriyum vaDivEl kandan  :  Adi", "R": "Bhimplas", "C": "Guhan", "A": "Karukurichi Arunachalam", "V": "gQ_bVMV1UAY"}]}, {"name": ["Nadaswaram", "MPN Sethuraman MPN Ponnuswamy"], "songs": [{"N": "0007", "T": "", "H": "Kandan Karunai", "S": "kandan karuNai puriyum vaDivEl kandan  :  Adi", "R": "Bhimplas", "C": "Guhan", "A": "MPN Sethuraman MPN Ponnuswamy", "V": "XNzIjNJLHlM"}]}, {"name": ["Vocal", "Madurai Mani Iyer"], "songs": [{"N": "0210", "T": "", "H": "Kandan Karunai", "S": "kandan karuNai puriyum vaDivEl kandan  :  Adi", "R": "Bhimplas", "C": "Guhan", "A": "Madurai Mani Iyer", "V": "7I_jNb3a2EY"}, {"N": "0211", "T": "", "H": "Kandan Karunai", "S": "kandan karuNai puriyum vaDivEl kandan  :  Adi", "R": "Bhimplas", "C": "Guhan", "A": "Madurai Mani Iyer", "V": "jvsI7B-8tjQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

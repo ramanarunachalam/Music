@@ -25,20 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; ottubettudu summi valadu i sarasalu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-Pattakura-Anandabhairavi-SGP.jpn1dvCXEUQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006   - <a href="song/Pattakura.html" >oTTubeTTudu summI valadu I sarasAlu :  Rupaka</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Veenai Dhanammal.html" >Veenai Dhanammal   DHANAMMAL01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0061-Pattakura-Anandabhairavi-SGP.6uveWwg5Z6s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0061   - <a href="song/Pattakura.html" >oTTubeTTudu summI valadu I sarasAlu :  Rupaka</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/T. Brinda.html" >T  Brinda   BRINDA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0015-Pattakura-Anandabhairavi-SGP.1ruBkaQAvdQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0015   - <a href="song/Pattakura.html" >oTTubeTTudu summI valadu I sarasAlu :  Rupaka</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/T. Muktha.html" >T  Muktha   MUKTHA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0166-Pattakura-Anandabhairavi-SGP.FWjHY6kTpk8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0166   - <a href="song/Pattakura.html" >oTTubeTTudu summI valadu I sarasAlu :  Rupaka</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Ramakrishnan Murthy.html" >Ramakrishnan Murthy   RKM01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["ottubettudu summi valadu i sarasalu"], "songs": [{"N": "0006", "T": "", "H": "Pattakura", "S": "oTTubeTTudu summI valadu I sarasAlu :  Rupaka", "R": "Anandabhairavi", "C": "Karvetnagar Sarangapani", "A": "Veenai Dhanammal", "V": "jpn1dvCXEUQ"}, {"N": "0061", "T": "", "H": "Pattakura", "S": "oTTubeTTudu summI valadu I sarasAlu :  Rupaka", "R": "Anandabhairavi", "C": "Karvetnagar Sarangapani", "A": "T. Brinda", "V": "6uveWwg5Z6s"}, {"N": "0015", "T": "", "H": "Pattakura", "S": "oTTubeTTudu summI valadu I sarasAlu :  Rupaka", "R": "Anandabhairavi", "C": "Karvetnagar Sarangapani", "A": "T. Muktha", "V": "1ruBkaQAvdQ"}, {"N": "0166", "T": "", "H": "Pattakura", "S": "oTTubeTTudu summI valadu I sarasAlu :  Rupaka", "R": "Anandabhairavi", "C": "Karvetnagar Sarangapani", "A": "Ramakrishnan Murthy", "V": "FWjHY6kTpk8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

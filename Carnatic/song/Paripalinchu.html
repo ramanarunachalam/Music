@@ -40,22 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0876-Paripalinchu-Shuddha saveri-TVI.9dq7A7TeGPQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0876   - <a href="composer/Thiruvisanallur Venkatarmana Iyer.html" >Thiruvisanallur Venkatarmana Iyer</a> - <a href="raga/Shuddha saveri.html" >Shuddha saveri</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0877-Paripalinchu-Shuddha saveri-TVI.h3tAt3apzjk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0877   - <a href="composer/Thiruvisanallur Venkatarmana Iyer.html" >Thiruvisanallur Venkatarmana Iyer</a> - <a href="raga/Shuddha saveri.html" >Shuddha saveri</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0878-Paripalinchu-Shuddha saveri-TVI.xi_O5kUAytc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0878   - <a href="composer/Thiruvisanallur Venkatarmana Iyer.html" >Thiruvisanallur Venkatarmana Iyer</a> - <a href="raga/Shuddha saveri.html" >Shuddha saveri</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Semmangudi Srinivasa Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0590-Paripalinchu-Shuddha saveri-TVI.BdpRIVnLaCo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0590   - <a href="composer/Thiruvisanallur Venkatarmana Iyer.html" >Thiruvisanallur Venkatarmana Iyer</a> - <a href="raga/Shuddha saveri.html" >Shuddha saveri</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0591-Paripalinchu-Shuddha saveri-TVI.Fvl39XXTk60');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0591   - <a href="composer/Thiruvisanallur Venkatarmana Iyer.html" >Thiruvisanallur Venkatarmana Iyer</a> - <a href="raga/Shuddha saveri.html" >Shuddha saveri</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0592-Paripalinchu-Shuddha saveri-TVI.k8tX7tXsqxk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0592   - <a href="composer/Thiruvisanallur Venkatarmana Iyer.html" >Thiruvisanallur Venkatarmana Iyer</a> - <a href="raga/Shuddha saveri.html" >Shuddha saveri</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0593-Paripalinchu-Shuddha saveri-TVI.rjrY9gIEG7w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0593   - <a href="composer/Thiruvisanallur Venkatarmana Iyer.html" >Thiruvisanallur Venkatarmana Iyer</a> - <a href="raga/Shuddha saveri.html" >Shuddha saveri</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0594-Paripalinchu-Shuddha saveri-TVI.usxL7m2R3ow');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0594   - <a href="composer/Thiruvisanallur Venkatarmana Iyer.html" >Thiruvisanallur Venkatarmana Iyer</a> - <a href="raga/Shuddha saveri.html" >Shuddha saveri</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -143,9 +128,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "0876", "T": "", "H": "Paripalinchu", "S": "paripAlincumani palumAru vEDiti parAku jEsitE :  Khanda Caapu", "R": "Shuddha saveri", "C": "Thiruvisanallur Venkatarmana Iyer", "A": "M. S. Subbulakshmi", "V": "9dq7A7TeGPQ"}, {"N": "0877", "T": "", "H": "Paripalinchu", "S": "paripAlincumani palumAru vEDiti parAku jEsitE :  Khanda Caapu", "R": "Shuddha saveri", "C": "Thiruvisanallur Venkatarmana Iyer", "A": "M. S. Subbulakshmi", "V": "h3tAt3apzjk"}, {"N": "0878", "T": "", "H": "Paripalinchu", "S": "paripAlincumani palumAru vEDiti parAku jEsitE :  Khanda Caapu", "R": "Shuddha saveri", "C": "Thiruvisanallur Venkatarmana Iyer", "A": "M. S. Subbulakshmi", "V": "xi_O5kUAytc"}]}, {"name": ["Vocal", "Semmangudi Srinivasa Iyer"], "songs": [{"N": "0590", "T": "", "H": "Paripalinchu", "S": "paripAlincumani palumAru vEDiti parAku jEsitE :  Khanda Caapu", "R": "Shuddha saveri", "C": "Thiruvisanallur Venkatarmana Iyer", "A": "Semmangudi Srinivasa Iyer", "V": "BdpRIVnLaCo"}, {"N": "0591", "T": "", "H": "Paripalinchu", "S": "paripAlincumani palumAru vEDiti parAku jEsitE :  Khanda Caapu", "R": "Shuddha saveri", "C": "Thiruvisanallur Venkatarmana Iyer", "A": "Semmangudi Srinivasa Iyer", "V": "Fvl39XXTk60"}, {"N": "0592", "T": "", "H": "Paripalinchu", "S": "paripAlincumani palumAru vEDiti parAku jEsitE :  Khanda Caapu", "R": "Shuddha saveri", "C": "Thiruvisanallur Venkatarmana Iyer", "A": "Semmangudi Srinivasa Iyer", "V": "k8tX7tXsqxk"}, {"N": "0593", "T": "", "H": "Paripalinchu", "S": "paripAlincumani palumAru vEDiti parAku jEsitE :  Khanda Caapu", "R": "Shuddha saveri", "C": "Thiruvisanallur Venkatarmana Iyer", "A": "Semmangudi Srinivasa Iyer", "V": "rjrY9gIEG7w"}, {"N": "0594", "T": "", "H": "Paripalinchu", "S": "paripAlincumani palumAru vEDiti parAku jEsitE :  Khanda Caapu", "R": "Shuddha saveri", "C": "Thiruvisanallur Venkatarmana Iyer", "A": "Semmangudi Srinivasa Iyer", "V": "usxL7m2R3ow"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

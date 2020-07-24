@@ -41,26 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal G. N. Balasubramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0258-Nee Charanambhuja-Keeravani-GNB.c06ZVDWsQmg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0258   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Kalyanaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0160-Nee Charanambhuja-Keeravani-GNB.mxCXJ0fGZLo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0160   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0161-Nee Charanambhuja-Keeravani-GNB.z46VigB9X9c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0161   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0379-Nee Charanambhuja-Keeravani-GNB.NRer06NJd2I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0379   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0380-Nee Charanambhuja-UnknownRaga-GNB.FJEd1bW6ci8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0380   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Trichur V. Ramachandran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0049-Nee Charanambhuja-Keeravani-GNB.JpXw5PavUkQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0049   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/Trichur V. Ramachandran.html" >Trichur V  Ramachandran   TVR01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -149,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "G. N. Balasubramaniam"], "songs": [{"N": "0262", "T": "", "H": "Nee Charanambhuja", "S": "nI caraNAmbujamunu neranammiti nIrajAkSi :  Adi", "R": "Keeravani", "C": "G. N. Balasubramaniam", "A": "G. N. Balasubramaniam", "V": "c06ZVDWsQmg"}]}, {"name": ["Vocal", "S. Kalyanaraman"], "songs": [{"N": "0160", "T": "", "H": "Nee Charanambhuja", "S": "nI caraNAmbujamunu neranammiti nIrajAkSi :  Adi", "R": "Keeravani", "C": "G. N. Balasubramaniam", "A": "S. Kalyanaraman", "V": "mxCXJ0fGZLo"}, {"N": "0161", "T": "", "H": "Nee Charanambhuja", "S": "nI caraNAmbujamunu neranammiti nIrajAkSi :  Adi", "R": "Keeravani", "C": "G. N. Balasubramaniam", "A": "S. Kalyanaraman", "V": "z46VigB9X9c"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0379", "T": "", "H": "Nee Charanambhuja", "S": "nI caraNAmbujamunu neranammiti nIrajAkSi :  Adi", "R": "Keeravani", "C": "G. N. Balasubramaniam", "A": "Sudha Ragunathan", "V": "NRer06NJd2I"}, {"N": "0380", "T": "", "H": "Nee Charanambhuja", "S": "nI caraNAmbujamunu neranammiti nIrajAkSi :  Adi", "R": "Unknownraga", "C": "G. N. Balasubramaniam", "A": "Sudha Ragunathan", "V": "FJEd1bW6ci8"}]}, {"name": ["Vocal", "Trichur V. Ramachandran"], "songs": [{"N": "0049", "T": "", "H": "Nee Charanambhuja", "S": "nI caraNAmbujamunu neranammiti nIrajAkSi :  Adi", "R": "Keeravani", "C": "G. N. Balasubramaniam", "A": "Trichur V. Ramachandran", "V": "JpXw5PavUkQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

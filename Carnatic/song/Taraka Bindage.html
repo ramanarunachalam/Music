@@ -42,25 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Dr. Nagavalli Nagaraj</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0106-Taraka Bindage-Thilang-PD.g3rmOUhAkSI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0106   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Thilang.html" >Thilang</a> - <a href="artist/Dr. Nagavalli Nagaraj.html" >Dr  Nagavalli Nagaraj   NN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Balasubramanya Sharma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0020-Taraka Bindage-UnknownRaga-PD.TN82Kf792dI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0020   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. S. Balasubramanya Sharma.html" >M  S  Balasubramanya Sharma   MBS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ranjani Hebbar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0036-Taraka Bindage-Asaveri-PD.M8fpdhgTwZQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0036   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Asaveri.html" >Asaveri</a> - <a href="artist/Ranjani Hebbar.html" >Ranjani Hebbar   RANJANI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vidyabhushana</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0089-Taraka Bindage-UnknownRaga-PD.Dt3fWS0rhmM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0089   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Vidyabhushana.html" >Vidyabhushana   VIDYABHOOSHANA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0090-Taraka Bindage-UnknownRaga-PD.fl1vjqXfLqY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0090   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Vidyabhushana.html" >Vidyabhushana   VIDYABHOOSHANA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -148,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Dr. Nagavalli Nagaraj"], "songs": [{"N": "0106", "T": "", "H": "Taraka Bindage", "S": "tArakka bindige nA nIrighOguve tArE bindigeye :  Adi", "R": "Thilang", "C": "Purandara Dasa", "A": "Dr. Nagavalli Nagaraj", "V": "g3rmOUhAkSI"}]}, {"name": ["Vocal", "M. S. Balasubramanya Sharma"], "songs": [{"N": "0020", "T": "", "H": "Taraka Bindage", "S": "tArakka bindige nA nIrighOguve tArE bindigeye :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "M. S. Balasubramanya Sharma", "V": "TN82Kf792dI"}]}, {"name": ["Vocal", "Ranjani Hebbar"], "songs": [{"N": "0036", "T": "", "H": "Taraka Bindage", "S": "tArakka bindige nA nIrighOguve tArE bindigeye :  Adi", "R": "Asaveri", "C": "Purandara Dasa", "A": "Ranjani Hebbar", "V": "M8fpdhgTwZQ"}]}, {"name": ["Vocal", "Vidyabhushana"], "songs": [{"N": "0089", "T": "", "H": "Taraka Bindage", "S": "tArakka bindige nA nIrighOguve tArE bindigeye :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vidyabhushana", "V": "Dt3fWS0rhmM"}, {"N": "0090", "T": "", "H": "Taraka Bindage", "S": "tArakka bindige nA nIrighOguve tArE bindigeye :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vidyabhushana", "V": "fl1vjqXfLqY"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

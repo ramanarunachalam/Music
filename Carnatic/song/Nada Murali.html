@@ -42,26 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Aruna Sairam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0209-Nada Murali-Hamirkalyani-OVK.a5XfufK3ZMk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0209   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0210-Nada Murali-Hamirkalyani-OVK.kixZ-nbG0j0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0210   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Gayathri Girish</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0124-Nada Murali-Hamirkalyani-OVK.QQioxqsg2bY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0124   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/Gayathri Girish.html" >Gayathri Girish   GGAYATHRI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0125-Nada Murali-Hamirkalyani-OVK.i_FzTOkwNYY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0125   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/Gayathri Girish.html" >Gayathri Girish   GGAYATHRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sankaran Namboothiri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0104-Nada Murali-Hamirkalyani-OVK.yQrlNJOgiQc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0104   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/Sankaran Namboothiri.html" >Sankaran Namboothiri   SNAMBOOTHIRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. N. Seshagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0330-Nada Murali-Hamirkalyani-OVK.2aObh_lVoBo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0330   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -149,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Aruna Sairam"], "songs": [{"N": "0209", "T": "", "H": "Nada Murali", "S": "nAda murali gAna vilOlA kalyANa krSNA :  Adi", "R": "Hamirkalyani", "C": "Oothukkadu Venkata Kavi", "A": "Aruna Sairam", "V": "a5XfufK3ZMk"}, {"N": "0210", "T": "", "H": "Nada Murali", "S": "nAda murali gAna vilOlA kalyANa krSNA :  Adi", "R": "Hamirkalyani", "C": "Oothukkadu Venkata Kavi", "A": "Aruna Sairam", "V": "kixZ-nbG0j0"}]}, {"name": ["Vocal", "Gayathri Girish"], "songs": [{"N": "0124", "T": "", "H": "Nada Murali", "S": "nAda murali gAna vilOlA kalyANa krSNA :  Adi", "R": "Hamirkalyani", "C": "Oothukkadu Venkata Kavi", "A": "Gayathri Girish", "V": "QQioxqsg2bY"}, {"N": "0125", "T": "", "H": "Nada Murali", "S": "nAda murali gAna vilOlA kalyANa krSNA :  Adi", "R": "Hamirkalyani", "C": "Oothukkadu Venkata Kavi", "A": "Gayathri Girish", "V": "i_FzTOkwNYY"}]}, {"name": ["Vocal", "Sankaran Namboothiri"], "songs": [{"N": "0104", "T": "", "H": "Nada Murali", "S": "nAda murali gAna vilOlA kalyANa krSNA :  Adi", "R": "Hamirkalyani", "C": "Oothukkadu Venkata Kavi", "A": "Sankaran Namboothiri", "V": "yQrlNJOgiQc"}]}, {"name": ["Vocal", "T. N. Seshagopalan"], "songs": [{"N": "0330", "T": "", "H": "Nada Murali", "S": "nAda murali gAna vilOlA kalyANa krSNA :  Adi", "R": "Hamirkalyani", "C": "Oothukkadu Venkata Kavi", "A": "T. N. Seshagopalan", "V": "2aObh_lVoBo"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

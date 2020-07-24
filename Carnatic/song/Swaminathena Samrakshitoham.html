@@ -42,23 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Maharajapuram Santhanam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0535-Swaminathena Samrakshitoham-Brindavana saranga-MD.5uzY6Ci3Mzg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0535   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Brindavana saranga.html" >Brindavana saranga</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0536-Swaminathena Samrakshitoham-Brindavana saranga-MD.FaiUvYxukJI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0536   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Brindavana saranga.html" >Brindavana saranga</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0537-Swaminathena Samrakshitoham-Brindavana saranga-MD.HuU3lI1vBFE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0537   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Brindavana saranga.html" >Brindavana saranga</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0538-Swaminathena Samrakshitoham-Brindavana saranga-MD.tNt2FC_5dZ8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0538   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Brindavana saranga.html" >Brindavana saranga</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. Ganesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0074-Swaminathena Samrakshitoham-Brindavana saranga-MD.ohMhAWcTZmo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0074   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Brindavana saranga.html" >Brindavana saranga</a> - <a href="artist/R. Ganesh.html" >R  Ganesh   RGANESH01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Kalyanaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0268-Swaminathena Samrakshitoham-Brindavana saranga-MD.jLKZMiC68Uk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0268   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Brindavana saranga.html" >Brindavana saranga</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -156,9 +140,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Maharajapuram Santhanam"], "songs": [{"N": "0535", "T": "", "H": "Swaminathena Samrakshitoham", "S": "svAminAthEna samrakSitOham  :  Adi", "R": "Brindavana saranga", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Santhanam", "V": "5uzY6Ci3Mzg"}, {"N": "0536", "T": "", "H": "Swaminathena Samrakshitoham", "S": "svAminAthEna samrakSitOham  :  Adi", "R": "Brindavana saranga", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Santhanam", "V": "FaiUvYxukJI"}, {"N": "0537", "T": "", "H": "Swaminathena Samrakshitoham", "S": "svAminAthEna samrakSitOham  :  Adi", "R": "Brindavana saranga", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Santhanam", "V": "HuU3lI1vBFE"}, {"N": "0538", "T": "", "H": "Swaminathena Samrakshitoham", "S": "svAminAthEna samrakSitOham  :  Adi", "R": "Brindavana saranga", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Santhanam", "V": "tNt2FC_5dZ8"}]}, {"name": ["Vocal", "R. Ganesh"], "songs": [{"N": "0074", "T": "", "H": "Swaminathena Samrakshitoham", "S": "svAminAthEna samrakSitOham  :  Adi", "R": "Brindavana saranga", "C": "Muthuswami Dikshitar", "A": "R. Ganesh", "V": "ohMhAWcTZmo"}]}, {"name": ["Vocal", "S. Kalyanaraman"], "songs": [{"N": "0268", "T": "", "H": "Swaminathena Samrakshitoham", "S": "svAminAthEna samrakSitOham  :  Adi", "R": "Brindavana saranga", "C": "Muthuswami Dikshitar", "A": "S. Kalyanaraman", "V": "jLKZMiC68Uk"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

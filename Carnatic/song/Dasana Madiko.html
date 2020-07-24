@@ -42,27 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Flute T. R. Mahalingam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0043-Dasana Madiko-Nadanamakriya-PD.pQmrCVenE-E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0043   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Nadanamakriya.html" >Nadanamakriya</a> - <a href="artist/T. R. Mahalingam.html" >T  R  Mahalingam   MALI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0291-Dasana Madiko-Nadanamakriya-PD.5HUxjWff_YQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0291   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Nadanamakriya.html" >Nadanamakriya</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0292-Dasana Madiko-Nadanamakriya-PD.RTq-aqfYbIA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0292   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Nadanamakriya.html" >Nadanamakriya</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0293-Dasana Madiko-Nadanamakriya-PD.d1kT6EL1vmU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0293   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Nadanamakriya.html" >Nadanamakriya</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Aishwarya</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0030-Dasana Madiko-Nadanamakriya-PD.pfLP30V0FhQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0030   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Nadanamakriya.html" >Nadanamakriya</a> - <a href="artist/S. Aishwarya.html" >S  Aishwarya   AISHWARYA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0031-Dasana Madiko-Nadanamakriya-PD.pt0QW2BP6ac');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0031   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Nadanamakriya.html" >Nadanamakriya</a> - <a href="artist/S. Aishwarya.html" >S  Aishwarya   AISHWARYA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vasudha Keshav</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-Dasana Madiko-Nadanamakriya-PD.xHFDC65-oFM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Nadanamakriya.html" >Nadanamakriya</a> - <a href="artist/Vasudha Keshav.html" >Vasudha Keshav   AVK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -150,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Flute", "T. R. Mahalingam"], "songs": [{"N": "0043", "T": "", "H": "Dasana Madiko", "S": "dAsana mADiko enna swAmi  :  Adi", "R": "Nadanamakriya", "C": "Purandara Dasa", "A": "T. R. Mahalingam", "V": "pQmrCVenE-E"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "0291", "T": "", "H": "Dasana Madiko", "S": "dAsana mADiko enna swAmi  :  Adi", "R": "Nadanamakriya", "C": "Purandara Dasa", "A": "M. S. Subbulakshmi", "V": "5HUxjWff_YQ"}, {"N": "0292", "T": "", "H": "Dasana Madiko", "S": "dAsana mADiko enna swAmi  :  Adi", "R": "Nadanamakriya", "C": "Purandara Dasa", "A": "M. S. Subbulakshmi", "V": "RTq-aqfYbIA"}, {"N": "0293", "T": "", "H": "Dasana Madiko", "S": "dAsana mADiko enna swAmi  :  Adi", "R": "Nadanamakriya", "C": "Purandara Dasa", "A": "M. S. Subbulakshmi", "V": "d1kT6EL1vmU"}]}, {"name": ["Vocal", "S. Aishwarya"], "songs": [{"N": "0030", "T": "", "H": "Dasana Madiko", "S": "dAsana mADiko enna swAmi  :  Adi", "R": "Nadanamakriya", "C": "Purandara Dasa", "A": "S. Aishwarya", "V": "pfLP30V0FhQ"}, {"N": "0031", "T": "", "H": "Dasana Madiko", "S": "dAsana mADiko enna swAmi  :  Adi", "R": "Nadanamakriya", "C": "Purandara Dasa", "A": "S. Aishwarya", "V": "pt0QW2BP6ac"}]}, {"name": ["Vocal", "Vasudha Keshav"], "songs": [{"N": "0005", "T": "", "H": "Dasana Madiko", "S": "dAsana mADiko enna swAmi  :  Adi", "R": "Nadanamakriya", "C": "Purandara Dasa", "A": "Vasudha Keshav", "V": "xHFDC65-oFM"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

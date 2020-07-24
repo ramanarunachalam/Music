@@ -40,24 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Chitra Veena Chitravina Ravi Kiran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0131-Prema Swaroopa-Anandabhairavi-OVK.guZsFHty7C4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0131   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Chitravina Ravi Kiran.html" >Chitravina Ravi Kiran   RAVIKIRAN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0130-Prema Swaroopa-Anandabhairavi-OVK.O8lwPaM1lVk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0130   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Chitravina Ravi Kiran.html" >Chitravina Ravi Kiran   RAVIKIRAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0364-Prema Swaroopa-Anandabhairavi-OVK.SndjBJrirXw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0364   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0365-Prema Swaroopa-Anandabhairavi-OVK.p0TmMQfwk0Q');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0365   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ramakrishnan Murthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0169-Prema Swaroopa-Anandabhairavi-OVK.LkYV6Lk59k0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0169   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Ramakrishnan Murthy.html" >Ramakrishnan Murthy   RKM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0170-Prema Swaroopa-Anandabhairavi-OVK.MUcNi1h-Qkw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0170   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Ramakrishnan Murthy.html" >Ramakrishnan Murthy   RKM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0171-Prema Swaroopa-Anandabhairavi-OVK.t27XoPKghD0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0171   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Ramakrishnan Murthy.html" >Ramakrishnan Murthy   RKM01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -139,9 +122,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Chitra Veena", "Chitravina Ravi Kiran"], "songs": [{"N": "0131", "T": "", "H": "Prema Swaroopa", "S": "prEma svarUpa sarasa lOcana priyakara mrdu :  Caapu", "R": "Anandabhairavi", "C": "Oothukkadu Venkata Kavi", "A": "Chitravina Ravi Kiran", "V": "guZsFHty7C4"}, {"N": "0130", "T": "", "H": "Prema Swaroopa", "S": "prEma svarUpa sarasa lOcana priyakara mrdu :  Caapu", "R": "Anandabhairavi", "C": "Oothukkadu Venkata Kavi", "A": "Chitravina Ravi Kiran", "V": "O8lwPaM1lVk"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0364", "T": "", "H": "Prema Swaroopa", "S": "prEma svarUpa sarasa lOcana priyakara mrdu :  Caapu", "R": "Anandabhairavi", "C": "Oothukkadu Venkata Kavi", "A": "D. K. Jayaraman", "V": "SndjBJrirXw"}, {"N": "0365", "T": "", "H": "Prema Swaroopa", "S": "prEma svarUpa sarasa lOcana priyakara mrdu :  Caapu", "R": "Anandabhairavi", "C": "Oothukkadu Venkata Kavi", "A": "D. K. Jayaraman", "V": "p0TmMQfwk0Q"}]}, {"name": ["Vocal", "Ramakrishnan Murthy"], "songs": [{"N": "0169", "T": "", "H": "Prema Swaroopa", "S": "prEma svarUpa sarasa lOcana priyakara mrdu :  Caapu", "R": "Anandabhairavi", "C": "Oothukkadu Venkata Kavi", "A": "Ramakrishnan Murthy", "V": "LkYV6Lk59k0"}, {"N": "0170", "T": "", "H": "Prema Swaroopa", "S": "prEma svarUpa sarasa lOcana priyakara mrdu :  Caapu", "R": "Anandabhairavi", "C": "Oothukkadu Venkata Kavi", "A": "Ramakrishnan Murthy", "V": "MUcNi1h-Qkw"}, {"N": "0171", "T": "", "H": "Prema Swaroopa", "S": "prEma svarUpa sarasa lOcana priyakara mrdu :  Caapu", "R": "Anandabhairavi", "C": "Oothukkadu Venkata Kavi", "A": "Ramakrishnan Murthy", "V": "t27XoPKghD0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

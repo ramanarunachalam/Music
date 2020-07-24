@@ -41,25 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0289-Padam-Kintucheyvunjaan-Kalyani-ST._TB8QEela00');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0289 - <a href="song_type/Padam.html" >Padam</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal N. J. Nandini</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0047-Padam-Kintucheyvunjaan-Kalyani-ST.MrSXWlNagXc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0047 - <a href="song_type/Padam.html" >Padam</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/N. J. Nandini.html" >N  J  Nandini   NJNANDINI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Semmangudi Srinivasa Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0866-Padam-Kintucheyvunjaan-Kalyani-ST.LEV0tr1AWAE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0866 - <a href="song_type/Padam.html" >Padam</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0867-Padam-Kintucheyvunjaan-Kalyani-ST.U7OpPKL2-Sc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0867 - <a href="song_type/Padam.html" >Padam</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Thamarakkad Govindan Namboothiri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0023-Padam-Kintucheyvunjaan-Kalyani-ST.4XqyaGETAEg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0023 - <a href="song_type/Padam.html" >Padam</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Thamarakkad Govindan Namboothiri.html" >Thamarakkad Govindan Namboothiri</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -141,9 +123,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0289", "T": "Padam", "H": "Kintucheyvunjaan", "S": "kintu ceyvu jnyAninnahO kIravANi sakhi :  Rupaka", "R": "Kalyani", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "_TB8QEela00"}]}, {"name": ["Vocal", "N. J. Nandini"], "songs": [{"N": "0047", "T": "Padam", "H": "Kintucheyvunjaan", "S": "kintu ceyvu jnyAninnahO kIravANi sakhi :  Rupaka", "R": "Kalyani", "C": "Swathi Thirunal", "A": "N. J. Nandini", "V": "MrSXWlNagXc"}]}, {"name": ["Vocal", "Semmangudi Srinivasa Iyer"], "songs": [{"N": "0866", "T": "Padam", "H": "Kintucheyvunjaan", "S": "kintu ceyvu jnyAninnahO kIravANi sakhi :  Rupaka", "R": "Kalyani", "C": "Swathi Thirunal", "A": "Semmangudi Srinivasa Iyer", "V": "LEV0tr1AWAE"}, {"N": "0867", "T": "Padam", "H": "Kintucheyvunjaan", "S": "kintu ceyvu jnyAninnahO kIravANi sakhi :  Rupaka", "R": "Kalyani", "C": "Swathi Thirunal", "A": "Semmangudi Srinivasa Iyer", "V": "U7OpPKL2-Sc"}]}, {"name": ["Vocal", "Thamarakkad Govindan Namboothiri"], "songs": [{"N": "0023", "T": "Padam", "H": "Kintucheyvunjaan", "S": "kintu ceyvu jnyAninnahO kIravANi sakhi :  Rupaka", "R": "Kalyani", "C": "Swathi Thirunal", "A": "Thamarakkad Govindan Namboothiri", "V": "4XqyaGETAEg"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

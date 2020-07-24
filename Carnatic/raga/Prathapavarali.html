@@ -31,24 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; vinan(a)sakoni(y)unnanura visva rupuda ne</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0096-Vina Nasakoni-Prathapavarali-T.8EVNfpZhhs4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0096   - <a href="song/Vina Nasakoni.html" >vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/Karaikudi Mani.html" >Karaikudi Mani   KMANI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0233-Vina Nasakoni-Prathapavarali-T.13ZiqP4RnIw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0233   - <a href="song/Vina Nasakoni.html" >vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0234-Vina Nasakoni-Prathapavarali-T.20sw3rPCLLc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0234   - <a href="song/Vina Nasakoni.html" >vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0036-Vina Nasakoni-Prathapavarali-T.cUtHVd7sOyk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0036   - <a href="song/Vina Nasakoni.html" >vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/BV Raman BV Lakshmanan.html" >BV Raman BV Lakshmanan   BVRL01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0728-Vina Nasakoni-Prathapavarali-T.COjXaGHPJoE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0728   - <a href="song/Vina Nasakoni.html" >vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0466-Vina Nasakoni-Prathapavarali-T.E6_fGFq-ru4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0466   - <a href="song/Vina Nasakoni.html" >vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/Madurai Mani Iyer.html" >Madurai Mani Iyer   MMI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0586-Vina Nasakoni-Prathapavarali-T.A21WTUSS4n0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0586   - <a href="song/Vina Nasakoni.html" >vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0587-Vina Nasakoni-Prathapavarali-T.cDNuDKCW6C0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0587   - <a href="song/Vina Nasakoni.html" >vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["vinan(a)sakoni(y)unnanura visva rupuda ne"], "songs": [{"N": "0096", "T": "", "H": "Vina Nasakoni", "S": "vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi", "R": "Prathapavarali", "C": "Thyagaraja", "A": "Karaikudi Mani", "V": "8EVNfpZhhs4"}, {"N": "0233", "T": "", "H": "Vina Nasakoni", "S": "vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi", "R": "Prathapavarali", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "13ZiqP4RnIw"}, {"N": "0234", "T": "", "H": "Vina Nasakoni", "S": "vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi", "R": "Prathapavarali", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "20sw3rPCLLc"}, {"N": "0036", "T": "", "H": "Vina Nasakoni", "S": "vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi", "R": "Prathapavarali", "C": "Thyagaraja", "A": "BV Raman BV Lakshmanan", "V": "cUtHVd7sOyk"}, {"N": "0728", "T": "", "H": "Vina Nasakoni", "S": "vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi", "R": "Prathapavarali", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "COjXaGHPJoE"}, {"N": "0466", "T": "", "H": "Vina Nasakoni", "S": "vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi", "R": "Prathapavarali", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "E6_fGFq-ru4"}, {"N": "0586", "T": "", "H": "Vina Nasakoni", "S": "vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi", "R": "Prathapavarali", "C": "Thyagaraja", "A": "Maharajapuram Santhanam", "V": "A21WTUSS4n0"}, {"N": "0587", "T": "", "H": "Vina Nasakoni", "S": "vinan A sakoni y unnAnurA viSva rUpuDa nE :  Deshadi", "R": "Prathapavarali", "C": "Thyagaraja", "A": "Maharajapuram Santhanam", "V": "cDNuDKCW6C0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

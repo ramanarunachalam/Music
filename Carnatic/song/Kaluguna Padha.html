@@ -42,27 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bangalore Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0031-Kaluguna Padha-Poornalalitha-T.-bq1mpDFPsk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0031   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Poornalalitha.html" >Poornalalitha</a> - <a href="artist/Bangalore Brothers.html" >Bangalore Brothers   BANGBROS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0032-Kaluguna Padha-Poornalalitha-T.JT9ey0Hfals');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0032   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Poornalalitha.html" >Poornalalitha</a> - <a href="artist/Bangalore Brothers.html" >Bangalore Brothers   BANGBROS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Rajkumar Bharathi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Kaluguna Padha-Poornalalitha-T.bcoh9qSS0gw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Poornalalitha.html" >Poornalalitha</a> - <a href="artist/Rajkumar Bharathi.html" >Rajkumar Bharathi   RAJKUMARB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Sowmya</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0112-Kaluguna Padha-Poornalalitha-T.hZ0XY73qJEg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0112   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Poornalalitha.html" >Poornalalitha</a> - <a href="artist/S. Sowmya.html" >S  Sowmya   SOWMYA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. P. Vaidhyanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0003-Kaluguna Padha-Poornalalitha-T.P8W77F90uiw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0003   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Poornalalitha.html" >Poornalalitha</a> - <a href="artist/T. P. Vaidhyanathan.html" >T  P  Vaidhyanathan   TPV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-Kaluguna Padha-Poornalalitha-T.UvSScRAHhNo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Poornalalitha.html" >Poornalalitha</a> - <a href="artist/T. P. Vaidhyanathan.html" >T  P  Vaidhyanathan   TPV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-Kaluguna Padha-Poornalalitha-T.XUEG9TCw5Jw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Poornalalitha.html" >Poornalalitha</a> - <a href="artist/T. P. Vaidhyanathan.html" >T  P  Vaidhyanathan   TPV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -151,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bangalore Brothers"], "songs": [{"N": "0031", "T": "", "H": "Kaluguna Padha", "S": "kalugunA pada nIraja sEva  :  Adi", "R": "Poornalalitha", "C": "Thyagaraja", "A": "Bangalore Brothers", "V": "-bq1mpDFPsk"}, {"N": "0032", "T": "", "H": "Kaluguna Padha", "S": "kalugunA pada nIraja sEva  :  Adi", "R": "Poornalalitha", "C": "Thyagaraja", "A": "Bangalore Brothers", "V": "JT9ey0Hfals"}]}, {"name": ["Vocal", "Rajkumar Bharathi"], "songs": [{"N": "0017", "T": "", "H": "Kaluguna Padha", "S": "kalugunA pada nIraja sEva  :  Adi", "R": "Poornalalitha", "C": "Thyagaraja", "A": "Rajkumar Bharathi", "V": "bcoh9qSS0gw"}]}, {"name": ["Vocal", "S. Sowmya"], "songs": [{"N": "0112", "T": "", "H": "Kaluguna Padha", "S": "kalugunA pada nIraja sEva  :  Adi", "R": "Poornalalitha", "C": "Thyagaraja", "A": "S. Sowmya", "V": "hZ0XY73qJEg"}]}, {"name": ["Vocal", "T. P. Vaidhyanathan"], "songs": [{"N": "0003", "T": "", "H": "Kaluguna Padha", "S": "kalugunA pada nIraja sEva  :  Adi", "R": "Poornalalitha", "C": "Thyagaraja", "A": "T. P. Vaidhyanathan", "V": "P8W77F90uiw"}, {"N": "0004", "T": "", "H": "Kaluguna Padha", "S": "kalugunA pada nIraja sEva  :  Adi", "R": "Poornalalitha", "C": "Thyagaraja", "A": "T. P. Vaidhyanathan", "V": "UvSScRAHhNo"}, {"N": "0005", "T": "", "H": "Kaluguna Padha", "S": "kalugunA pada nIraja sEva  :  Adi", "R": "Poornalalitha", "C": "Thyagaraja", "A": "T. P. Vaidhyanathan", "V": "XUEG9TCw5Jw"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -31,23 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; ikane talajalanura nannintadi sodana seyakara guha</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0229-Ikani Tala Jalanura-Guharanjani-HMB.-v2w5xEmzDE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0229   - <a href="song/Ikani Tala Jalanura.html" >ikanE tALajAlanurA nannintaDi sOdana sEyakarA :  Adi</a> - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0230-Ikani Tala Jalanura-Guharanjani-HMB.rp2yQifurT4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0230   - <a href="song/Ikani Tala Jalanura.html" >ikanE tALajAlanurA nannintaDi sOdana sEyakarA :  Adi</a> - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; navavarana sampujye amba</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0034-Navavarana Sampoojye-Guharanjani-HMB.cGzCRJavckk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0034   - <a href="song/Navavarana Sampoojye.html" >navAvaraNa sampUjyE ambA  :  Adi</a> - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="artist/A. S. Murali.html" >A  S  Murali   ASMURALI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0121-Navavarana Sampoojye-Guharanjani-HMB.us_p_oabDjI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0121   - <a href="song/Navavarana Sampoojye.html" >navAvaraNa sampUjyE ambA  :  Adi</a> - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="artist/R. K. Srikantan.html" >R  K  Srikantan   RKS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["ikane talajalanura nannintadi sodana seyakara guha"], "songs": [{"N": "0229", "T": "", "H": "Ikani Tala Jalanura", "S": "ikanE tALajAlanurA nannintaDi sOdana sEyakarA :  Adi", "R": "Guharanjani", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "-v2w5xEmzDE"}, {"N": "0230", "T": "", "H": "Ikani Tala Jalanura", "S": "ikanE tALajAlanurA nannintaDi sOdana sEyakarA :  Adi", "R": "Guharanjani", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "rp2yQifurT4"}]}, {"name": ["navavarana sampujye amba"], "songs": [{"N": "0034", "T": "", "H": "Navavarana Sampoojye", "S": "navAvaraNa sampUjyE ambA  :  Adi", "R": "Guharanjani", "C": "Muthiah Bhagavathar", "A": "A. S. Murali", "V": "cGzCRJavckk"}, {"N": "0121", "T": "", "H": "Navavarana Sampoojye", "S": "navAvaraNa sampUjyE ambA  :  Adi", "R": "Guharanjani", "C": "Muthiah Bhagavathar", "A": "R. K. Srikantan", "V": "us_p_oabDjI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -42,21 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0496-Sri Ranganatham Upasmahe-Poornachandrika-AMD.pE1ik5qsO2I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0496   - <a href="composer/Ambi Dikshitar.html" >Ambi Dikshitar</a> - <a href="raga/Poornachandrika.html" >Poornachandrika</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Pattammal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0451-Sri Ranganatham Upasmahe-Poornachandrika-AMD.GXKXVUu45aI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0451   - <a href="composer/Ambi Dikshitar.html" >Ambi Dikshitar</a> - <a href="raga/Poornachandrika.html" >Poornachandrika</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0452-Sri Ranganatham Upasmahe-Poornachandrika-AMD.UKP_GSSD80I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0452   - <a href="composer/Ambi Dikshitar.html" >Ambi Dikshitar</a> - <a href="raga/Poornachandrika.html" >Poornachandrika</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Nithyasree Mahadevan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0320-Sri Ranganatham Upasmahe-Poornachandrika-AMD.PTv1gBw8iaw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0320   - <a href="composer/Ambi Dikshitar.html" >Ambi Dikshitar</a> - <a href="raga/Poornachandrika.html" >Poornachandrika</a> - <a href="artist/Nithyasree Mahadevan.html" >Nithyasree Mahadevan   NITHYASREE01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -132,9 +118,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0496", "T": "", "H": "Sri Ranganatham Upasmahe", "S": "shrI ranganatham upAsmahE nityam sItA vallabham :  Adi", "R": "Poornachandrika", "C": "Ambi Dikshitar", "A": "D. K. Jayaraman", "V": "pE1ik5qsO2I"}]}, {"name": ["Vocal", "D. K. Pattammal"], "songs": [{"N": "0451", "T": "", "H": "Sri Ranganatham Upasmahe", "S": "shrI ranganatham upAsmahE nityam sItA vallabham :  Adi", "R": "Poornachandrika", "C": "Ambi Dikshitar", "A": "D. K. Pattammal", "V": "GXKXVUu45aI"}, {"N": "0452", "T": "", "H": "Sri Ranganatham Upasmahe", "S": "shrI ranganatham upAsmahE nityam sItA vallabham :  Adi", "R": "Poornachandrika", "C": "Ambi Dikshitar", "A": "D. K. Pattammal", "V": "UKP_GSSD80I"}]}, {"name": ["Vocal", "Nithyasree Mahadevan"], "songs": [{"N": "0320", "T": "", "H": "Sri Ranganatham Upasmahe", "S": "shrI ranganatham upAsmahE nityam sItA vallabham :  Adi", "R": "Poornachandrika", "C": "Ambi Dikshitar", "A": "Nithyasree Mahadevan", "V": "PTv1gBw8iaw"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

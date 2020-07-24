@@ -31,22 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; parama pavana guna-sali nannu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0368-Parama Pavana Guna-Kamavardhini,Panthuvarali-T.3aeejOdHx_w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0368   - <a href="song/Parama Pavana Guna.html" >parama pAvana guNa SAli nannu  :  Adi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/K. V. Narayanaswamy.html" >K  V  Narayanaswamy   KVN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; sri salivateesa nayike</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0032-Sri Salivateesa Nayike-Kamavardhini,Panthuvarali-VVS.jbrbIDAywl4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0032   - <a href="song/Sri Salivateesa Nayike.html" >Sri Salivateesa Nayike</a> - <a href="composer/V. V. Shrivatsa.html" >V  V  Shrivatsa</a> - <a href="artist/Suguna Purushothaman.html" >Suguna Purushothaman   SUGUNA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0238-Sri Salivateesa Nayike-Kamavardhini,Panthuvarali-VVS.S760oQWU8vQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0238   - <a href="song/Sri Salivateesa Nayike.html" >Sri Salivateesa Nayike</a> - <a href="composer/V. V. Shrivatsa.html" >V  V  Shrivatsa</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["parama pavana guna-sali nannu"], "songs": [{"N": "0368", "T": "", "H": "Parama Pavana Guna", "S": "parama pAvana guNa SAli nannu  :  Adi", "R": "Kamavardhini,Panthuvarali", "C": "Thyagaraja", "A": "K. V. Narayanaswamy", "V": "3aeejOdHx_w"}]}, {"name": ["sri salivateesa nayike"], "songs": [{"N": "0032", "T": "", "H": "Sri Salivateesa Nayike", "S": "Sri Salivateesa Nayike", "R": "Kamavardhini,Panthuvarali", "C": "V. V. Shrivatsa", "A": "Suguna Purushothaman", "V": "jbrbIDAywl4"}, {"N": "0238", "T": "", "H": "Sri Salivateesa Nayike", "S": "Sri Salivateesa Nayike", "R": "Kamavardhini,Panthuvarali", "C": "V. V. Shrivatsa", "A": "R. Vedavalli", "V": "S760oQWU8vQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

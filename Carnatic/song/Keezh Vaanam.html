@@ -42,24 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ariyakudi Ramanuja Iyengar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0199-Thiruppavai-Keezh Vaanam-Dhanyasi-AL.8QK--XWuCeA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0199 - <a href="song_type/Thiruppavai.html" >Thiruppavai</a>  - <a href="composer/Andal.html" >Andal</a> - <a href="raga/Dhanyasi.html" >Dhanyasi</a> - <a href="artist/Ariyakudi Ramanuja Iyengar.html" >Ariyakudi Ramanuja Iyengar   ARI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0200-Thiruppavai-Keezh Vaanam-UnknownRaga-AL.MTLftrhlnCc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0200 - <a href="song_type/Thiruppavai.html" >Thiruppavai</a>  - <a href="composer/Andal.html" >Andal</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Ariyakudi Ramanuja Iyengar.html" >Ariyakudi Ramanuja Iyengar   ARI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0201-Thiruppavai-Keezh Vaanam-UnknownRaga-AL.sKvnmEZQCLw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0201 - <a href="song_type/Thiruppavai.html" >Thiruppavai</a>  - <a href="composer/Andal.html" >Andal</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Ariyakudi Ramanuja Iyengar.html" >Ariyakudi Ramanuja Iyengar   ARI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1135-Thiruppavai-Keezh Vaanam-Dhanyasi-AL.ErSQZT76FI0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1135 - <a href="song_type/Thiruppavai.html" >Thiruppavai</a>  - <a href="composer/Andal.html" >Andal</a> - <a href="raga/Dhanyasi.html" >Dhanyasi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1136-Thiruppavai-Keezh Vaanam-UnknownRaga-AL.2L4oW43nu90');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1136 - <a href="song_type/Thiruppavai.html" >Thiruppavai</a>  - <a href="composer/Andal.html" >Andal</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1137-Thiruppavai-Keezh Vaanam-UnknownRaga-AL.T7DWKTNoWzc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1137 - <a href="song_type/Thiruppavai.html" >Thiruppavai</a>  - <a href="composer/Andal.html" >Andal</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Savita Narasimhan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0055-Thiruppavai-Keezh Vaanam-Dhanyasi-AL.iN_wNgdOStI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0055 - <a href="song_type/Thiruppavai.html" >Thiruppavai</a>  - <a href="composer/Andal.html" >Andal</a> - <a href="raga/Dhanyasi.html" >Dhanyasi</a> - <a href="artist/Savita Narasimhan.html" >Savita Narasimhan   SAVITHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -129,9 +112,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Ariyakudi Ramanuja Iyengar"], "songs": [{"N": "0199", "T": "Thiruppavai", "H": "Keezh Vaanam", "S": "Keezh vaanam vellendru  erumai siru veedu :  Adi", "R": "Dhanyasi", "C": "Andal", "A": "Ariyakudi Ramanuja Iyengar", "V": "8QK--XWuCeA"}, {"N": "0200", "T": "Thiruppavai", "H": "Keezh Vaanam", "S": "Keezh vaanam vellendru  erumai siru veedu :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Ariyakudi Ramanuja Iyengar", "V": "MTLftrhlnCc"}, {"N": "0201", "T": "Thiruppavai", "H": "Keezh Vaanam", "S": "Keezh vaanam vellendru  erumai siru veedu :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Ariyakudi Ramanuja Iyengar", "V": "sKvnmEZQCLw"}]}, {"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "1135", "T": "Thiruppavai", "H": "Keezh Vaanam", "S": "Keezh vaanam vellendru  erumai siru veedu :  Adi", "R": "Dhanyasi", "C": "Andal", "A": "M. L. Vasanthakumari", "V": "ErSQZT76FI0"}, {"N": "1136", "T": "Thiruppavai", "H": "Keezh Vaanam", "S": "Keezh vaanam vellendru  erumai siru veedu :  Adi", "R": "Unknownraga", "C": "Andal", "A": "M. L. Vasanthakumari", "V": "2L4oW43nu90"}, {"N": "1137", "T": "Thiruppavai", "H": "Keezh Vaanam", "S": "Keezh vaanam vellendru  erumai siru veedu :  Adi", "R": "Unknownraga", "C": "Andal", "A": "M. L. Vasanthakumari", "V": "T7DWKTNoWzc"}]}, {"name": ["Vocal", "Savita Narasimhan"], "songs": [{"N": "0055", "T": "Thiruppavai", "H": "Keezh Vaanam", "S": "Keezh vaanam vellendru  erumai siru veedu :  Adi", "R": "Dhanyasi", "C": "Andal", "A": "Savita Narasimhan", "V": "iN_wNgdOStI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

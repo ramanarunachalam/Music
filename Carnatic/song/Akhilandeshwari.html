@@ -42,16 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0228-Akhilandeshwari-Karnataka kapi-SS._ce9K__NzfI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0228   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Karnataka kapi.html" >Karnataka kapi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0229-Akhilandeshwari-Karnataka kapi-SS.aVeruHGZsKM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0229   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Karnataka kapi.html" >Karnataka kapi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0230-Akhilandeshwari-Karnataka kapi-SS.tB570RGvtBQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0230   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Karnataka kapi.html" >Karnataka kapi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0231-Akhilandeshwari-Karnataka kapi-SS.tVLlcaUKks4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0231   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Karnataka kapi.html" >Karnataka kapi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0232-Akhilandeshwari-Karnataka kapi-SS.vfron8Vqj54');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0232   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Karnataka kapi.html" >Karnataka kapi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -154,9 +145,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0228", "T": "", "H": "Akhilandeshwari", "S": "akhil A ND E SvarI durusuga brOvumu :  Adi", "R": "Karnataka kapi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "_ce9K__NzfI"}, {"N": "0229", "T": "", "H": "Akhilandeshwari", "S": "akhil A ND E SvarI durusuga brOvumu :  Adi", "R": "Karnataka kapi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "aVeruHGZsKM"}, {"N": "0230", "T": "", "H": "Akhilandeshwari", "S": "akhil A ND E SvarI durusuga brOvumu :  Adi", "R": "Karnataka kapi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "tB570RGvtBQ"}, {"N": "0231", "T": "", "H": "Akhilandeshwari", "S": "akhil A ND E SvarI durusuga brOvumu :  Adi", "R": "Karnataka kapi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "tVLlcaUKks4"}, {"N": "0232", "T": "", "H": "Akhilandeshwari", "S": "akhil A ND E SvarI durusuga brOvumu :  Adi", "R": "Karnataka kapi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "vfron8Vqj54"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

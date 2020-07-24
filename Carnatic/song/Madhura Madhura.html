@@ -42,29 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ashwath Narayanan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0033-Madhura Madhura-Atana-OVK.03zFzgzxMOA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0033   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Atana.html" >Atana</a> - <a href="artist/Ashwath Narayanan.html" >Ashwath Narayanan   ASWATH01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. J. Yesudas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0150-Madhura Madhura-Atana-OVK.78ZsNP0FPSI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0150   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Atana.html" >Atana</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0151-Madhura Madhura-Atana-OVK.S4EU0IqfIJ4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0151   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Atana.html" >Atana</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal O. S. Arun</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0083-Madhura Madhura-Atana-OVK.3nrfdWFhilY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0083   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Atana.html" >Atana</a> - <a href="artist/O. S. Arun.html" >O  S  Arun   OSARUN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. N. Seshagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0273-Madhura Madhura-Atana-OVK.VTwHfBxlzKY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0273   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Atana.html" >Atana</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vechoor Harihara Subramania Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0015-Madhura Madhura-Atana-OVK.pcpJjOq0Vj8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0015   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Atana.html" >Atana</a> - <a href="artist/Vechoor Harihara Subramania Iyer.html" >Vechoor Harihara Subramania Iyer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -152,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Ashwath Narayanan"], "songs": [{"N": "0033", "T": "", "H": "Madhura Madhura", "S": "madhura madhura vENugIta mOhA madana kusuma :  Adi", "R": "Atana", "C": "Oothukkadu Venkata Kavi", "A": "Ashwath Narayanan", "V": "03zFzgzxMOA"}]}, {"name": ["Vocal", "K. J. Yesudas"], "songs": [{"N": "0150", "T": "", "H": "Madhura Madhura", "S": "madhura madhura vENugIta mOhA madana kusuma :  Adi", "R": "Atana", "C": "Oothukkadu Venkata Kavi", "A": "K. J. Yesudas", "V": "78ZsNP0FPSI"}, {"N": "0151", "T": "", "H": "Madhura Madhura", "S": "madhura madhura vENugIta mOhA madana kusuma :  Adi", "R": "Atana", "C": "Oothukkadu Venkata Kavi", "A": "K. J. Yesudas", "V": "S4EU0IqfIJ4"}]}, {"name": ["Vocal", "O. S. Arun"], "songs": [{"N": "0083", "T": "", "H": "Madhura Madhura", "S": "madhura madhura vENugIta mOhA madana kusuma :  Adi", "R": "Atana", "C": "Oothukkadu Venkata Kavi", "A": "O. S. Arun", "V": "3nrfdWFhilY"}]}, {"name": ["Vocal", "T. N. Seshagopalan"], "songs": [{"N": "0273", "T": "", "H": "Madhura Madhura", "S": "madhura madhura vENugIta mOhA madana kusuma :  Adi", "R": "Atana", "C": "Oothukkadu Venkata Kavi", "A": "T. N. Seshagopalan", "V": "VTwHfBxlzKY"}]}, {"name": ["Vocal", "Vechoor Harihara Subramania Iyer"], "songs": [{"N": "0015", "T": "", "H": "Madhura Madhura", "S": "madhura madhura vENugIta mOhA madana kusuma :  Adi", "R": "Atana", "C": "Oothukkadu Venkata Kavi", "A": "Vechoor Harihara Subramania Iyer", "V": "pcpJjOq0Vj8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

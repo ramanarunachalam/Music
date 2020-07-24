@@ -36,30 +36,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Flute N. Ramani</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0042-Bhajare Manasa Raghuveeram-UnknownRaga-UnknownComposer.DnPhGi72tUc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0042   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/N. Ramani.html" >N  Ramani   RAMANI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Jayashri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0066-Bhajare Manasa Raghuveeram-UnknownRaga-UnknownComposer.qvdG7hLqc2c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0066   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Pattammal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0079-Bhajare Manasa Raghuveeram-UnknownRaga-UnknownComposer.oCCGH5ad8JU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0079   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0080-Bhajare Manasa Raghuveeram-UnknownRaga-UnknownComposer.ojORwYWtGJQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0080   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0123-Bhajare Manasa Raghuveeram-UnknownRaga-UnknownComposer.ffqqhd4vJPs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0123   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Flute", "N. Ramani"], "songs": [{"N": "0042", "T": "", "H": "Bhajare Manasa Raghuveeram", "S": "Bhajare Manasa Raghuveeram", "R": "Unknownraga", "C": "UnknownComposer", "A": "N. Ramani", "V": "DnPhGi72tUc"}]}, {"name": ["Vocal", "Bombay Jayashri"], "songs": [{"N": "0066", "T": "", "H": "Bhajare Manasa Raghuveeram", "S": "Bhajare Manasa Raghuveeram", "R": "Unknownraga", "C": "UnknownComposer", "A": "Bombay Jayashri", "V": "qvdG7hLqc2c"}]}, {"name": ["Vocal", "D. K. Pattammal"], "songs": [{"N": "0079", "T": "", "H": "Bhajare Manasa Raghuveeram", "S": "Bhajare Manasa Raghuveeram", "R": "Unknownraga", "C": "UnknownComposer", "A": "D. K. Pattammal", "V": "oCCGH5ad8JU"}, {"N": "0080", "T": "", "H": "Bhajare Manasa Raghuveeram", "S": "Bhajare Manasa Raghuveeram", "R": "Unknownraga", "C": "UnknownComposer", "A": "D. K. Pattammal", "V": "ojORwYWtGJQ"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0123", "T": "", "H": "Bhajare Manasa Raghuveeram", "S": "Bhajare Manasa Raghuveeram", "R": "Unknownraga", "C": "UnknownComposer", "A": "Sudha Ragunathan", "V": "ffqqhd4vJPs"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

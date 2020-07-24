@@ -42,29 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Brindha Manickavasakan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0030-Naa Morala-Devagandhari-T.x5-Bh78RL20');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0030   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/Brindha Manickavasakan.html" >Brindha Manickavasakan   BRINDHAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. D. Ramanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0364-Naa Morala-Devagandhari-T.ZPTRM7Tn39U');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0364   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Musiri Subramania Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0032-Naa Morala-Devagandhari-T.jPD48D_ChvY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0032   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/Musiri Subramania Iyer.html" >Musiri Subramania Iyer   MUSIRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. K. Srikantan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0108-Naa Morala-Devagandhari-T.9kAUBT0N6us');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0108   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/R. K. Srikantan.html" >R  K  Srikantan   RKS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Voleti Venkateswarlu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0119-Naa Morala-Devagandhari-T.gZcd4qTR_k0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0119   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/Voleti Venkateswarlu.html" >Voleti Venkateswarlu   VOLETI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0120-Naa Morala-Devagandhari-T.lxElDATGslE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0120   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/Voleti Venkateswarlu.html" >Voleti Venkateswarlu   VOLETI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -168,9 +146,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Brindha Manickavasakan"], "songs": [{"N": "0030", "T": "", "H": "Naa Morala", "S": "nA mor A lakimpav E mi SrI rAma :  Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Brindha Manickavasakan", "V": "x5-Bh78RL20"}]}, {"name": ["Vocal", "M. D. Ramanathan"], "songs": [{"N": "0366", "T": "", "H": "Naa Morala", "S": "nA mor A lakimpav E mi SrI rAma :  Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "ZPTRM7Tn39U"}]}, {"name": ["Vocal", "Musiri Subramania Iyer"], "songs": [{"N": "0032", "T": "", "H": "Naa Morala", "S": "nA mor A lakimpav E mi SrI rAma :  Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Musiri Subramania Iyer", "V": "jPD48D_ChvY"}]}, {"name": ["Vocal", "R. K. Srikantan"], "songs": [{"N": "0108", "T": "", "H": "Naa Morala", "S": "nA mor A lakimpav E mi SrI rAma :  Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "R. K. Srikantan", "V": "9kAUBT0N6us"}]}, {"name": ["Vocal", "Voleti Venkateswarlu"], "songs": [{"N": "0119", "T": "", "H": "Naa Morala", "S": "nA mor A lakimpav E mi SrI rAma :  Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Voleti Venkateswarlu", "V": "gZcd4qTR_k0"}, {"N": "0120", "T": "", "H": "Naa Morala", "S": "nA mor A lakimpav E mi SrI rAma :  Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Voleti Venkateswarlu", "V": "lxElDATGslE"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

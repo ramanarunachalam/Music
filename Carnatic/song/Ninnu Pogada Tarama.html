@@ -42,26 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. Ganesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0050-Ninnu Pogada Tarama-Kunthalavarali-GNB.AJKScBu8KDU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0050   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Kunthalavarali.html" >Kunthalavarali</a> - <a href="artist/R. Ganesh.html" >R  Ganesh   RGANESH01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Radha Jayalakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0083-Ninnu Pogada Tarama-Kunthalavarali-GNB.LjP6fCBsrbk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0083   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Kunthalavarali.html" >Kunthalavarali</a> - <a href="artist/Radha Jayalakshmi.html" >Radha Jayalakshmi   RJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Kalyanaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0183-Ninnu Pogada Tarama-Kunthalavarali-GNB.b6DeYw9lI4I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0183   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Kunthalavarali.html" >Kunthalavarali</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0184-Ninnu Pogada Tarama-Kunthalavarali-GNB.sF_bHdx1Q_A');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0184   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Kunthalavarali.html" >Kunthalavarali</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0185-Ninnu Pogada Tarama-Kunthalavarali-GNB.vALT1_2f6DI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0185   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Kunthalavarali.html" >Kunthalavarali</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Trichur V. Ramachandran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0050-Ninnu Pogada Tarama-Kunthalavarali-GNB.yygLSVSksGU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0050   - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="raga/Kunthalavarali.html" >Kunthalavarali</a> - <a href="artist/Trichur V. Ramachandran.html" >Trichur V  Ramachandran   TVR01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -150,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "R. Ganesh"], "songs": [{"N": "0050", "T": "", "H": "Ninnu Pogada Tarama", "S": "ninnu pogaDa taramA talli  :  Adi", "R": "Kunthalavarali", "C": "G. N. Balasubramaniam", "A": "R. Ganesh", "V": "AJKScBu8KDU"}]}, {"name": ["Vocal", "Radha Jayalakshmi"], "songs": [{"N": "0083", "T": "", "H": "Ninnu Pogada Tarama", "S": "ninnu pogaDa taramA talli  :  Adi", "R": "Kunthalavarali", "C": "G. N. Balasubramaniam", "A": "Radha Jayalakshmi", "V": "LjP6fCBsrbk"}]}, {"name": ["Vocal", "S. Kalyanaraman"], "songs": [{"N": "0183", "T": "", "H": "Ninnu Pogada Tarama", "S": "ninnu pogaDa taramA talli  :  Adi", "R": "Kunthalavarali", "C": "G. N. Balasubramaniam", "A": "S. Kalyanaraman", "V": "b6DeYw9lI4I"}, {"N": "0184", "T": "", "H": "Ninnu Pogada Tarama", "S": "ninnu pogaDa taramA talli  :  Adi", "R": "Kunthalavarali", "C": "G. N. Balasubramaniam", "A": "S. Kalyanaraman", "V": "sF_bHdx1Q_A"}, {"N": "0185", "T": "", "H": "Ninnu Pogada Tarama", "S": "ninnu pogaDa taramA talli  :  Adi", "R": "Kunthalavarali", "C": "G. N. Balasubramaniam", "A": "S. Kalyanaraman", "V": "vALT1_2f6DI"}]}, {"name": ["Vocal", "Trichur V. Ramachandran"], "songs": [{"N": "0050", "T": "", "H": "Ninnu Pogada Tarama", "S": "ninnu pogaDa taramA talli  :  Adi", "R": "Kunthalavarali", "C": "G. N. Balasubramaniam", "A": "Trichur V. Ramachandran", "V": "yygLSVSksGU"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

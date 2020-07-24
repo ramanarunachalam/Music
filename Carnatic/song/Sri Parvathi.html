@@ -41,34 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Abhishek Raghuram</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0199-Sri Parvathi-Sri-KKI.YJdmmOhaxA4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0199   - <a href="composer/Kunnakudi Krishna Iyer.html" >Kunnakudi Krishna Iyer</a> - <a href="raga/Sri.html" >Sri</a> - <a href="artist/Abhishek Raghuram.html" >Abhishek Raghuram   ABHISHEK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0483-Sri Parvathi-Sri-KKI.QtNk_v9pcnI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0483   - <a href="composer/Kunnakudi Krishna Iyer.html" >Kunnakudi Krishna Iyer</a> - <a href="raga/Sri.html" >Sri</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1094-Sri Parvathi-Sri-KKI.-7odrq-u-68');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1094   - <a href="composer/Kunnakudi Krishna Iyer.html" >Kunnakudi Krishna Iyer</a> - <a href="raga/Sri.html" >Sri</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1095-Sri Parvathi-Sri-KKI.UHvbxbCQiJ0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1095   - <a href="composer/Kunnakudi Krishna Iyer.html" >Kunnakudi Krishna Iyer</a> - <a href="raga/Sri.html" >Sri</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Nithyasree Mahadevan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0314-Sri Parvathi-Sri-KKI.4eQC64vILeo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0314   - <a href="composer/Kunnakudi Krishna Iyer.html" >Kunnakudi Krishna Iyer</a> - <a href="raga/Sri.html" >Sri</a> - <a href="artist/Nithyasree Mahadevan.html" >Nithyasree Mahadevan   NITHYASREE01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0807-Sri Parvathi-Sri-KKI.1i_ZbeRjOyw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0807   - <a href="composer/Kunnakudi Krishna Iyer.html" >Kunnakudi Krishna Iyer</a> - <a href="raga/Sri.html" >Sri</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0808-Sri Parvathi-Sri-KKI.9MJOUybfeLE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0808   - <a href="composer/Kunnakudi Krishna Iyer.html" >Kunnakudi Krishna Iyer</a> - <a href="raga/Sri.html" >Sri</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vasundara Rajagopal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0012-Sri Parvathi-Sri-KKI.6pgXgooZO0c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0012   - <a href="composer/Kunnakudi Krishna Iyer.html" >Kunnakudi Krishna Iyer</a> - <a href="raga/Sri.html" >Sri</a> - <a href="artist/Vasundara Rajagopal.html" >Vasundara Rajagopal   VASUNDARA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -157,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Abhishek Raghuram"], "songs": [{"N": "0199", "T": "", "H": "Sri Parvathi", "S": "shrI pArvati paramAdvaita shivE parE :  Ata", "R": "Sri", "C": "Kunnakudi Krishna Iyer", "A": "Abhishek Raghuram", "V": "YJdmmOhaxA4"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0483", "T": "", "H": "Sri Parvathi", "S": "shrI pArvati paramAdvaita shivE parE :  Ata", "R": "Sri", "C": "Kunnakudi Krishna Iyer", "A": "D. K. Jayaraman", "V": "QtNk_v9pcnI"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "1094", "T": "", "H": "Sri Parvathi", "S": "shrI pArvati paramAdvaita shivE parE :  Ata", "R": "Sri", "C": "Kunnakudi Krishna Iyer", "A": "M. S. Subbulakshmi", "V": "-7odrq-u-68"}, {"N": "1095", "T": "", "H": "Sri Parvathi", "S": "shrI pArvati paramAdvaita shivE parE :  Ata", "R": "Sri", "C": "Kunnakudi Krishna Iyer", "A": "M. S. Subbulakshmi", "V": "UHvbxbCQiJ0"}]}, {"name": ["Vocal", "Nithyasree Mahadevan"], "songs": [{"N": "0314", "T": "", "H": "Sri Parvathi", "S": "shrI pArvati paramAdvaita shivE parE :  Ata", "R": "Sri", "C": "Kunnakudi Krishna Iyer", "A": "Nithyasree Mahadevan", "V": "4eQC64vILeo"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0807", "T": "", "H": "Sri Parvathi", "S": "shrI pArvati paramAdvaita shivE parE :  Ata", "R": "Sri", "C": "Kunnakudi Krishna Iyer", "A": "Sanjay Subrahmanyan", "V": "1i_ZbeRjOyw"}, {"N": "0808", "T": "", "H": "Sri Parvathi", "S": "shrI pArvati paramAdvaita shivE parE :  Ata", "R": "Sri", "C": "Kunnakudi Krishna Iyer", "A": "Sanjay Subrahmanyan", "V": "9MJOUybfeLE"}]}, {"name": ["Vocal", "Vasundara Rajagopal"], "songs": [{"N": "0012", "T": "", "H": "Sri Parvathi", "S": "shrI pArvati paramAdvaita shivE parE :  Ata", "R": "Sri", "C": "Kunnakudi Krishna Iyer", "A": "Vasundara Rajagopal", "V": "6pgXgooZO0c"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -41,23 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Annavarapu Ramaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Hanuma Anuma-Sarasangi-BMK.rsdZpYrwOgw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/Annavarapu Ramaswamy.html" >Annavarapu Ramaswamy   ANNAVARAPU01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin V. V. Subramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0040-Hanuma Anuma-Sarasangi-BMK.RKUfcXpstQQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0040   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/V. V. Subramaniam.html" >V  V  Subramaniam   VSUB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0561-Hanuma Anuma-Sarasangi-BMK.6lIXYzxhw5A');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0561   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0562-Hanuma Anuma-Sarasangi-BMK.DhhSfHm6j1s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0562   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0563-Hanuma Anuma-Sarasangi-BMK.l5CR1xUOELU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0563   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0564-Hanuma Anuma-Sarasangi-BMK.tgyJWsIOXK0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0564   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -152,9 +136,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "Annavarapu Ramaswamy"], "songs": [{"N": "0027", "T": "", "H": "Hanuma Anuma", "S": "hanumA anumA O manamA hanuma nAmamE :  Adi", "R": "Sarasangi", "C": "M. Balamuralikrishna", "A": "Annavarapu Ramaswamy", "V": "rsdZpYrwOgw"}]}, {"name": ["Violin", "V. V. Subramaniam"], "songs": [{"N": "0040", "T": "", "H": "Hanuma Anuma", "S": "hanumA anumA O manamA hanuma nAmamE :  Adi", "R": "Sarasangi", "C": "M. Balamuralikrishna", "A": "V. V. Subramaniam", "V": "RKUfcXpstQQ"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0561", "T": "", "H": "Hanuma Anuma", "S": "hanumA anumA O manamA hanuma nAmamE :  Adi", "R": "Sarasangi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "6lIXYzxhw5A"}, {"N": "0562", "T": "", "H": "Hanuma Anuma", "S": "hanumA anumA O manamA hanuma nAmamE :  Adi", "R": "Sarasangi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "DhhSfHm6j1s"}, {"N": "0563", "T": "", "H": "Hanuma Anuma", "S": "hanumA anumA O manamA hanuma nAmamE :  Adi", "R": "Sarasangi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "l5CR1xUOELU"}, {"N": "0564", "T": "", "H": "Hanuma Anuma", "S": "hanumA anumA O manamA hanuma nAmamE :  Adi", "R": "Sarasangi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "tgyJWsIOXK0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

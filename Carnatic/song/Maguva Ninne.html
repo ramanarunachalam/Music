@@ -41,25 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin T. N. Krishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0467-Varnam-Maguva Ninne-Narayanagowla-VK.GaMfGWkW_uc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0467 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Veena Kuppaiyer.html" >Veena Kuppaiyer</a> - <a href="raga/Narayanagowla.html" >Narayanagowla</a> - <a href="artist/T. N. Krishnan.html" >T  N  Krishnan   TNK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0468-Varnam-Maguva Ninne-Narayanagowla-VK.sotl4GVweq4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0468 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Veena Kuppaiyer.html" >Veena Kuppaiyer</a> - <a href="raga/Narayanagowla.html" >Narayanagowla</a> - <a href="artist/T. N. Krishnan.html" >T  N  Krishnan   TNK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Neyveli Santhanagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0174-Varnam-Maguva Ninne-Narayanagowla-VK.Y-uUQL3UGGw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0174 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Veena Kuppaiyer.html" >Veena Kuppaiyer</a> - <a href="raga/Narayanagowla.html" >Narayanagowla</a> - <a href="artist/Neyveli Santhanagopalan.html" >Neyveli Santhanagopalan   NEYVELI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sriranjani Santhanagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0103-Varnam-Maguva Ninne-Narayanagowla-VK.rAa7EghOMKo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0103 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Veena Kuppaiyer.html" >Veena Kuppaiyer</a> - <a href="raga/Narayanagowla.html" >Narayanagowla</a> - <a href="artist/Sriranjani Santhanagopalan.html" >Sriranjani Santhanagopalan   SJS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Visalakshi Nityanand</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0036-Varnam-Maguva Ninne-Narayanagowla-VK.hpSAsUD2SAM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0036 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Veena Kuppaiyer.html" >Veena Kuppaiyer</a> - <a href="raga/Narayanagowla.html" >Narayanagowla</a> - <a href="artist/Visalakshi Nityanand.html" >Visalakshi Nityanand   NVISALAKSHI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -141,9 +123,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "T. N. Krishnan"], "songs": [{"N": "0467", "T": "Varnam", "H": "Maguva Ninne", "S": "maguva ninnE kOri cAra marulu konnadirA :  Ata", "R": "Narayanagowla", "C": "Veena Kuppaiyer", "A": "T. N. Krishnan", "V": "GaMfGWkW_uc"}, {"N": "0468", "T": "Varnam", "H": "Maguva Ninne", "S": "maguva ninnE kOri cAra marulu konnadirA :  Ata", "R": "Narayanagowla", "C": "Veena Kuppaiyer", "A": "T. N. Krishnan", "V": "sotl4GVweq4"}]}, {"name": ["Vocal", "Neyveli Santhanagopalan"], "songs": [{"N": "0174", "T": "Varnam", "H": "Maguva Ninne", "S": "maguva ninnE kOri cAra marulu konnadirA :  Ata", "R": "Narayanagowla", "C": "Veena Kuppaiyer", "A": "Neyveli Santhanagopalan", "V": "Y-uUQL3UGGw"}]}, {"name": ["Vocal", "Sriranjani Santhanagopalan"], "songs": [{"N": "0103", "T": "Varnam", "H": "Maguva Ninne", "S": "maguva ninnE kOri cAra marulu konnadirA :  Ata", "R": "Narayanagowla", "C": "Veena Kuppaiyer", "A": "Sriranjani Santhanagopalan", "V": "rAa7EghOMKo"}]}, {"name": ["Vocal", "Visalakshi Nityanand"], "songs": [{"N": "0036", "T": "Varnam", "H": "Maguva Ninne", "S": "maguva ninnE kOri cAra marulu konnadirA :  Ata", "R": "Narayanagowla", "C": "Veena Kuppaiyer", "A": "Visalakshi Nityanand", "V": "hpSAsUD2SAM"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

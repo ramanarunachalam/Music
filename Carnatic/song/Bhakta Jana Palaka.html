@@ -36,29 +36,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mridangam Palghat Mani Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0040-Bhakta Jana Palaka-Anandabhairavi-UnknownComposer.KOG3nDWR-_g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0040   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Palghat Mani Iyer.html" >Palghat Mani Iyer   PALGHATMANI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Maharajapuram Viswanatha Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-Bhakta Jana Palaka-Anandabhairavi-UnknownComposer.0m23mU2TjJc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Maharajapuram Viswanatha Iyer.html" >Maharajapuram Viswanatha Iyer</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Aishwarya</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0025-Bhakta Jana Palaka-Anandabhairavi-UnknownComposer.apHQRYHXqt4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0025   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/S. Aishwarya.html" >S  Aishwarya   AISHWARYA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vidyabhushana</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Bhakta Jana Palaka-Anandabhairavi-UnknownComposer.8sM0WhQwvTM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Vidyabhushana.html" >Vidyabhushana   VIDYABHOOSHANA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Mridangam", "Palghat Mani Iyer"], "songs": [{"N": "0040", "T": "", "H": "Bhakta Jana Palaka", "S": "Bhakta Jana Palaka", "R": "Anandabhairavi", "C": "UnknownComposer", "A": "Palghat Mani Iyer", "V": "KOG3nDWR-_g"}]}, {"name": ["Vocal", "Maharajapuram Viswanatha Iyer"], "songs": [{"N": "0006", "T": "", "H": "Bhakta Jana Palaka", "S": "Bhakta Jana Palaka", "R": "Anandabhairavi", "C": "UnknownComposer", "A": "Maharajapuram Viswanatha Iyer", "V": "0m23mU2TjJc"}]}, {"name": ["Vocal", "S. Aishwarya"], "songs": [{"N": "0025", "T": "", "H": "Bhakta Jana Palaka", "S": "Bhakta Jana Palaka", "R": "Anandabhairavi", "C": "UnknownComposer", "A": "S. Aishwarya", "V": "apHQRYHXqt4"}]}, {"name": ["Vocal", "Vidyabhushana"], "songs": [{"N": "0027", "T": "", "H": "Bhakta Jana Palaka", "S": "Bhakta Jana Palaka", "R": "Anandabhairavi", "C": "UnknownComposer", "A": "Vidyabhushana", "V": "8sM0WhQwvTM"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

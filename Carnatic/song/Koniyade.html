@@ -42,26 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mandolin U. Srinivas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0238-Koniyade-Kokiladhwani-T.xkGYjwK9uoU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0238   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kokiladhwani.html" >Kokiladhwani</a> - <a href="artist/U. Srinivas.html" >U  Srinivas   USRINIVAS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0713-Koniyade-Kokiladhwani-T.6LknX2GQYOg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0713   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kokiladhwani.html" >Kokiladhwani</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0714-Koniyade-Kokiladhwani-T.cvJl5gGPUFo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0714   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kokiladhwani.html" >Kokiladhwani</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. D. Ramanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0266-Koniyade-Kokiladhwani-T.ZPjT1gWLGOY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0266   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kokiladhwani.html" >Kokiladhwani</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0267-Koniyade-Kokiladhwani-T.biuAuhOVZPo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0267   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kokiladhwani.html" >Kokiladhwani</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Tiger Varadachariar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0008-Koniyade-Kokiladhwani-T.DUig8jZi41I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0008   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kokiladhwani.html" >Kokiladhwani</a> - <a href="artist/Tiger Varadachariar.html" >Tiger Varadachariar   TIGER01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -153,9 +134,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Mandolin", "U. Srinivas"], "songs": [{"N": "0238", "T": "", "H": "Koniyade", "S": "koniyADE nAyeDa daya velaku   :  Adi", "R": "Kokiladhwani", "C": "Thyagaraja", "A": "U. Srinivas", "V": "xkGYjwK9uoU"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0713", "T": "", "H": "Koniyade", "S": "koniyADE nAyeDa daya velaku   :  Adi", "R": "Kokiladhwani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "6LknX2GQYOg"}, {"N": "0714", "T": "", "H": "Koniyade", "S": "koniyADE nAyeDa daya velaku   :  Adi", "R": "Kokiladhwani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "cvJl5gGPUFo"}]}, {"name": ["Vocal", "M. D. Ramanathan"], "songs": [{"N": "0268", "T": "", "H": "Koniyade", "S": "koniyADE nAyeDa daya velaku   :  Adi", "R": "Kokiladhwani", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "ZPjT1gWLGOY"}, {"N": "0269", "T": "", "H": "Koniyade", "S": "koniyADE nAyeDa daya velaku   :  Adi", "R": "Kokiladhwani", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "biuAuhOVZPo"}]}, {"name": ["Vocal", "Tiger Varadachariar"], "songs": [{"N": "0008", "T": "", "H": "Koniyade", "S": "koniyADE nAyeDa daya velaku   :  Adi", "R": "Kokiladhwani", "C": "Thyagaraja", "A": "Tiger Varadachariar", "V": "DUig8jZi41I"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -39,29 +39,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0037-Alamelu Manga-UnknownRaga-TA.1K8J8pRgjS4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0037   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Nedunuri Krishnamurthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0026-Alamelu Manga-Bhairavi-TA.4pJtU1VIvuk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0026   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Bhairavi.html" >Bhairavi</a> - <a href="artist/Nedunuri Krishnamurthy.html" >Nedunuri Krishnamurthy   NEDUNURI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Alamelu Manga-Bhairavi-TA.GokRHdnkO2E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Bhairavi.html" >Bhairavi</a> - <a href="artist/Nedunuri Krishnamurthy.html" >Nedunuri Krishnamurthy   NEDUNURI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. Suryaprakash</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Alamelu Manga-UnknownRaga-TA.eRk0mhbiy3k');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/R. Suryaprakash.html" >R  Suryaprakash   RSP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Srirangam Gopalaratnam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0003-Alamelu Manga-UnknownRaga-TA.K2E_-ZwkqLA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0003   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Srirangam Gopalaratnam.html" >Srirangam Gopalaratnam   SRIRANGAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. M. Krishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0137-Alamelu Manga-Bhairavi-TA.gH733revdRQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0137   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Bhairavi.html" >Bhairavi</a> - <a href="artist/T. M. Krishna.html" >T  M  Krishna   TMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -156,9 +134,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0037", "T": "", "H": "Alamelu Manga", "S": "Alamelu Manga ni abhinava roopamu   :  Khanda Caapu", "R": "Unknownraga", "C": "Annamacharya", "A": "Amrutha Venkatesh", "V": "1K8J8pRgjS4"}]}, {"name": ["Vocal", "Nedunuri Krishnamurthy"], "songs": [{"N": "0026", "T": "", "H": "Alamelu Manga", "S": "Alamelu Manga ni abhinava roopamu   :  Khanda Caapu", "R": "Bhairavi", "C": "Annamacharya", "A": "Nedunuri Krishnamurthy", "V": "4pJtU1VIvuk"}, {"N": "0027", "T": "", "H": "Alamelu Manga", "S": "Alamelu Manga ni abhinava roopamu   :  Khanda Caapu", "R": "Bhairavi", "C": "Annamacharya", "A": "Nedunuri Krishnamurthy", "V": "GokRHdnkO2E"}]}, {"name": ["Vocal", "R. Suryaprakash"], "songs": [{"N": "0017", "T": "", "H": "Alamelu Manga", "S": "Alamelu Manga ni abhinava roopamu   :  Khanda Caapu", "R": "Unknownraga", "C": "Annamacharya", "A": "R. Suryaprakash", "V": "eRk0mhbiy3k"}]}, {"name": ["Vocal", "Srirangam Gopalaratnam"], "songs": [{"N": "0003", "T": "", "H": "Alamelu Manga", "S": "Alamelu Manga ni abhinava roopamu   :  Khanda Caapu", "R": "Unknownraga", "C": "Annamacharya", "A": "Srirangam Gopalaratnam", "V": "K2E_-ZwkqLA"}]}, {"name": ["Vocal", "T. M. Krishna"], "songs": [{"N": "0137", "T": "", "H": "Alamelu Manga", "S": "Alamelu Manga ni abhinava roopamu   :  Khanda Caapu", "R": "Bhairavi", "C": "Annamacharya", "A": "T. M. Krishna", "V": "gH733revdRQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

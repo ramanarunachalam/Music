@@ -41,22 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Chitra Veena Chitravina Ravi Kiran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0143-Sri Kamakshi Mam-Saranga-AS.KQ6tYmCSCBs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0143   - <a href="composer/Annaswamy Sastry.html" >Annaswamy Sastry</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/Chitravina Ravi Kiran.html" >Chitravina Ravi Kiran   RAVIKIRAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0472-Sri Kamakshi Mam-Saranga-AS.TsAj3bqcPA0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0472   - <a href="composer/Annaswamy Sastry.html" >Annaswamy Sastry</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0473-Sri Kamakshi Mam-Saranga-AS.hvupkzJG3ME');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0473   - <a href="composer/Annaswamy Sastry.html" >Annaswamy Sastry</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ramnad Krishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0139-Sri Kamakshi Mam-Saranga-AS.JN5aJWeyw68');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0139   - <a href="composer/Annaswamy Sastry.html" >Annaswamy Sastry</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/Ramnad Krishnan.html" >Ramnad Krishnan   RAMNAD01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0140-Sri Kamakshi Mam-Saranga-AS.vhAp-hyYQbc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0140   - <a href="composer/Annaswamy Sastry.html" >Annaswamy Sastry</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/Ramnad Krishnan.html" >Ramnad Krishnan   RAMNAD01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -145,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Chitra Veena", "Chitravina Ravi Kiran"], "songs": [{"N": "0143", "T": "", "H": "Sri Kamakshi Mam", "S": "shrI kAmAkSi mAm pAhi : Adi", "R": "Saranga", "C": "Annaswamy Sastry", "A": "Chitravina Ravi Kiran", "V": "KQ6tYmCSCBs"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0472", "T": "", "H": "Sri Kamakshi Mam", "S": "shrI kAmAkSi mAm pAhi : Adi", "R": "Saranga", "C": "Annaswamy Sastry", "A": "D. K. Jayaraman", "V": "TsAj3bqcPA0"}, {"N": "0473", "T": "", "H": "Sri Kamakshi Mam", "S": "shrI kAmAkSi mAm pAhi : Adi", "R": "Saranga", "C": "Annaswamy Sastry", "A": "D. K. Jayaraman", "V": "hvupkzJG3ME"}]}, {"name": ["Vocal", "Ramnad Krishnan"], "songs": [{"N": "0139", "T": "", "H": "Sri Kamakshi Mam", "S": "shrI kAmAkSi mAm pAhi : Adi", "R": "Saranga", "C": "Annaswamy Sastry", "A": "Ramnad Krishnan", "V": "JN5aJWeyw68"}, {"N": "0140", "T": "", "H": "Sri Kamakshi Mam", "S": "shrI kAmAkSi mAm pAhi : Adi", "R": "Saranga", "C": "Annaswamy Sastry", "A": "Ramnad Krishnan", "V": "vhAp-hyYQbc"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -31,25 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; dhyaname parama pavaname taghumenra jnanam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0084-Dhyaname Parama-Rasamanjari-OVK.cm5eENpzBNo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0084   - <a href="song/Dhyaname Parama.html" >dhyAnamE parama pAvanamE taghumenra jnAnam :  Adi</a> - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; shrhngara rasamahnjarim shri kamaksim gaurim shritajana</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0115-Shringara Rasamanjari-Rasamanjari-MD.ryKtjma3oVY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0115   - <a href="song/Shringara Rasamanjari.html" >shRHNgAra rasamaHnjarIm shrI kAmAkSIm gaurIm :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Amritha Murali.html" >Amritha Murali   AMRITHA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1295-Shringara Rasamanjari-Rasamanjari-MD.8hbUVmURqp0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1295   - <a href="song/Shringara Rasamanjari.html" >shRHNgAra rasamaHnjarIm shrI kAmAkSIm gaurIm :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1296-Shringara Rasamanjari-Rasamanjari-MD.XKzSzOvhKtI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1296   - <a href="song/Shringara Rasamanjari.html" >shRHNgAra rasamaHnjarIm shrI kAmAkSIm gaurIm :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1297-Shringara Rasamanjari-Rasamanjari-MD.bb7jqOhfK7o');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1297   - <a href="song/Shringara Rasamanjari.html" >shRHNgAra rasamaHnjarIm shrI kAmAkSIm gaurIm :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0057-Shringara Rasamanjari-Rasamanjari-MD.Mn7jBqiBdS8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0057   - <a href="song/Shringara Rasamanjari.html" >shRHNgAra rasamaHnjarIm shrI kAmAkSIm gaurIm :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Padma Sugavanam.html" >Padma Sugavanam   SUGAVANAM01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["dhyaname parama pavaname taghumenra jnanam"], "songs": [{"N": "0084", "T": "", "H": "Dhyaname Parama", "S": "dhyAnamE parama pAvanamE taghumenra jnAnam :  Adi", "R": "Rasamanjari", "C": "Oothukkadu Venkata Kavi", "A": "Aruna Sairam", "V": "cm5eENpzBNo"}]}, {"name": ["shrhngara rasamahnjarim shri kamaksim gaurim shritajana"], "songs": [{"N": "0115", "T": "", "H": "Shringara Rasamanjari", "S": "shRHNgAra rasamaHnjarIm shrI kAmAkSIm gaurIm :  Rupaka", "R": "Rasamanjari", "C": "Muthuswami Dikshitar", "A": "Amritha Murali", "V": "ryKtjma3oVY"}, {"N": "1296", "T": "", "H": "Shringara Rasamanjari", "S": "shRHNgAra rasamaHnjarIm shrI kAmAkSIm gaurIm :  Rupaka", "R": "Rasamanjari", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "8hbUVmURqp0"}, {"N": "1297", "T": "", "H": "Shringara Rasamanjari", "S": "shRHNgAra rasamaHnjarIm shrI kAmAkSIm gaurIm :  Rupaka", "R": "Rasamanjari", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "XKzSzOvhKtI"}, {"N": "1298", "T": "", "H": "Shringara Rasamanjari", "S": "shRHNgAra rasamaHnjarIm shrI kAmAkSIm gaurIm :  Rupaka", "R": "Rasamanjari", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "bb7jqOhfK7o"}, {"N": "0057", "T": "", "H": "Shringara Rasamanjari", "S": "shRHNgAra rasamaHnjarIm shrI kAmAkSIm gaurIm :  Rupaka", "R": "Rasamanjari", "C": "Muthuswami Dikshitar", "A": "Padma Sugavanam", "V": "Mn7jBqiBdS8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

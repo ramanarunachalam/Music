@@ -26,26 +26,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; RK01</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0001-Mahalakshmi-Sankarabharanam-P.-SCQ-do4vvM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0001   - <a href="song/Mahalakshmi.html" >mahAlakshmi jaganmAta : Adi</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0002-Varamulo Sakhi-Keeravani-PS.SQL1188M2VE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0002   - <a href="song/Varamulo Sakhi.html" >varamulosagi brOcuTa nI karudA jagadAdhara :  Rupaka</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0003-UnknownSong-Hemavathi,Revathi-UnknownComposer.5fUh6qLhJYo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0003   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Hemavathi,Revathi.html" >Hemavathi Revathi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-UnknownSong-Revathi-UnknownComposer.29jjbnhfjK4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Revathi.html" >Revathi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-UnknownSong-Revathi-UnknownComposer.4RovT2tlWa8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Revathi.html" >Revathi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-UnknownSong-Revathi-UnknownComposer.8LKvC2m8ERk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Revathi.html" >Revathi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0007-UnknownSong-Revathi-UnknownComposer.SnK9eAOIC_Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0007   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Revathi.html" >Revathi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0008-UnknownSong-Revathi-UnknownComposer.U8pLbDsRp04');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0008   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Revathi.html" >Revathi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0009-UnknownSong-Revathi-UnknownComposer.rlsYTh8xtFY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0009   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Revathi.html" >Revathi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0010-UnknownSong-Revathi-UnknownComposer.wQmLG0mk9ug');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0010   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Revathi.html" >Revathi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["RK01"], "songs": [{"N": "0001", "T": "", "H": "Mahalakshmi", "S": "mahAlakshmi jaganmAta : Adi", "R": "Sankarabharanam", "C": "Papanasam Sivan", "A": "Revathi Krishna", "V": "-SCQ-do4vvM"}, {"N": "0002", "T": "", "H": "Varamulo Sakhi", "S": "varamulosagi brOcuTa nI karudA jagadAdhara :  Rupaka", "R": "Keeravani", "C": "Patnam Subramanya Iyer", "A": "Revathi Krishna", "V": "SQL1188M2VE"}, {"N": "0003", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Hemavathi,Revathi", "C": "UnknownComposer", "A": "Revathi Krishna", "V": "5fUh6qLhJYo"}, {"N": "0004", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Revathi", "C": "UnknownComposer", "A": "Revathi Krishna", "V": "29jjbnhfjK4"}, {"N": "0005", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Revathi", "C": "UnknownComposer", "A": "Revathi Krishna", "V": "4RovT2tlWa8"}, {"N": "0006", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Revathi", "C": "UnknownComposer", "A": "Revathi Krishna", "V": "8LKvC2m8ERk"}, {"N": "0007", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Revathi", "C": "UnknownComposer", "A": "Revathi Krishna", "V": "SnK9eAOIC_Y"}, {"N": "0008", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Revathi", "C": "UnknownComposer", "A": "Revathi Krishna", "V": "U8pLbDsRp04"}, {"N": "0009", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Revathi", "C": "UnknownComposer", "A": "Revathi Krishna", "V": "rlsYTh8xtFY"}, {"N": "0010", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Revathi", "C": "UnknownComposer", "A": "Revathi Krishna", "V": "wQmLG0mk9ug"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#artist-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

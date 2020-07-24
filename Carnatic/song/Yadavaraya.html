@@ -42,28 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin A. Kanyakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0161-Yadavaraya-Ragamalika-KD.Zo-rQ48b7xQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0161   - <a href="composer/Kanaka Dasa.html" >Kanaka Dasa</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/A. Kanyakumari.html" >A  Kanyakumari   AKK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0959-Yadavaraya-Ragamalika-KD.6ASO2dh7Dt8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0959   - <a href="composer/Kanaka Dasa.html" >Kanaka Dasa</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0960-Yadavaraya-Ragamalika-KD.M_AxM0M7AOE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0960   - <a href="composer/Kanaka Dasa.html" >Kanaka Dasa</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0961-Yadavaraya-Ragamalika-KD.fG_paJV4fSc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0961   - <a href="composer/Kanaka Dasa.html" >Kanaka Dasa</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0962-Yadavaraya-Ragamalika-KD.xfzZDpzGkSY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0962   - <a href="composer/Kanaka Dasa.html" >Kanaka Dasa</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0683-Yadavaraya-Ragamalika-KD.GfZVvCMY74k');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0683   - <a href="composer/Kanaka Dasa.html" >Kanaka Dasa</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0684-Yadavaraya-Ragamalika-KD.trwoXBHeU8M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0684   - <a href="composer/Kanaka Dasa.html" >Kanaka Dasa</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Y. G. Srilatha</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0024-Yadavaraya-Ragamalika-KD.NrWRfGp5bl8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0024   - <a href="composer/Kanaka Dasa.html" >Kanaka Dasa</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Y. G. Srilatha.html" >Y  G  Srilatha   YGSRILATHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -151,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "A. Kanyakumari"], "songs": [{"N": "0161", "T": "", "H": "Yadavaraya", "S": "yAdavarAya brndAvanadoLu vEnu nAdava mADutire :  Adi", "R": "Ragamalika", "C": "Kanaka Dasa", "A": "A. Kanyakumari", "V": "Zo-rQ48b7xQ"}]}, {"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0959", "T": "", "H": "Yadavaraya", "S": "yAdavarAya brndAvanadoLu vEnu nAdava mADutire :  Adi", "R": "Ragamalika", "C": "Kanaka Dasa", "A": "M. L. Vasanthakumari", "V": "6ASO2dh7Dt8"}, {"N": "0960", "T": "", "H": "Yadavaraya", "S": "yAdavarAya brndAvanadoLu vEnu nAdava mADutire :  Adi", "R": "Ragamalika", "C": "Kanaka Dasa", "A": "M. L. Vasanthakumari", "V": "M_AxM0M7AOE"}, {"N": "0961", "T": "", "H": "Yadavaraya", "S": "yAdavarAya brndAvanadoLu vEnu nAdava mADutire :  Adi", "R": "Ragamalika", "C": "Kanaka Dasa", "A": "M. L. Vasanthakumari", "V": "fG_paJV4fSc"}, {"N": "0962", "T": "", "H": "Yadavaraya", "S": "yAdavarAya brndAvanadoLu vEnu nAdava mADutire :  Adi", "R": "Ragamalika", "C": "Kanaka Dasa", "A": "M. L. Vasanthakumari", "V": "xfzZDpzGkSY"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0683", "T": "", "H": "Yadavaraya", "S": "yAdavarAya brndAvanadoLu vEnu nAdava mADutire :  Adi", "R": "Ragamalika", "C": "Kanaka Dasa", "A": "Sudha Ragunathan", "V": "GfZVvCMY74k"}, {"N": "0684", "T": "", "H": "Yadavaraya", "S": "yAdavarAya brndAvanadoLu vEnu nAdava mADutire :  Adi", "R": "Ragamalika", "C": "Kanaka Dasa", "A": "Sudha Ragunathan", "V": "trwoXBHeU8M"}]}, {"name": ["Vocal", "Y. G. Srilatha"], "songs": [{"N": "0024", "T": "", "H": "Yadavaraya", "S": "yAdavarAya brndAvanadoLu vEnu nAdava mADutire :  Adi", "R": "Ragamalika", "C": "Kanaka Dasa", "A": "Y. G. Srilatha", "V": "NrWRfGp5bl8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

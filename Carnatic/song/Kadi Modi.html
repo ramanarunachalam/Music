@@ -42,25 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0272-Thiruppugazh-Kadi Modi-UnknownRaga-AN.mJoGSuBxAVE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0272 - <a href="song_type/Thiruppugazh.html" >Thiruppugazh</a>  - <a href="composer/Arunagirinathar.html" >Arunagirinathar</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Dandapani Desikar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0073-Thiruppugazh-Kadi Modi-Subhapanthuvarali-AN.-EANRwzlroo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0073 - <a href="song_type/Thiruppugazh.html" >Thiruppugazh</a>  - <a href="composer/Arunagirinathar.html" >Arunagirinathar</a> - <a href="raga/Subhapanthuvarali.html" >Subhapanthuvarali</a> - <a href="artist/M. Dandapani Desikar.html" >M  Dandapani Desikar   MDD01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0074-Thiruppugazh-Kadi Modi-Subhapanthuvarali-AN.wbECctgStAI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0074 - <a href="song_type/Thiruppugazh.html" >Thiruppugazh</a>  - <a href="composer/Arunagirinathar.html" >Arunagirinathar</a> - <a href="raga/Subhapanthuvarali.html" >Subhapanthuvarali</a> - <a href="artist/M. Dandapani Desikar.html" >M  Dandapani Desikar   MDD01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sikkil Gurucharan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0252-Thiruppugazh-Kadi Modi-UnknownRaga-AN.qKBWrGvkC_g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0252 - <a href="song_type/Thiruppugazh.html" >Thiruppugazh</a>  - <a href="composer/Arunagirinathar.html" >Arunagirinathar</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Sikkil Gurucharan.html" >Sikkil Gurucharan   GURUCHARAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal V. Pradeep Kumar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0022-Thiruppugazh-Kadi Modi-UnknownRaga-AN.NlgSihI-K6w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0022 - <a href="song_type/Thiruppugazh.html" >Thiruppugazh</a>  - <a href="composer/Arunagirinathar.html" >Arunagirinathar</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/V. Pradeep Kumar.html" >V  Pradeep Kumar   VPRADEEP01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -137,9 +119,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bombay Sisters"], "songs": [{"N": "0272", "T": "Thiruppugazh", "H": "Kadi Modi", "S": "kAdhi mOdhi vAdhAdu nUl katriduvOrung :  Adi", "R": "Unknownraga", "C": "Arunagirinathar", "A": "Bombay Sisters", "V": "mJoGSuBxAVE"}]}, {"name": ["Vocal", "M. Dandapani Desikar"], "songs": [{"N": "0072", "T": "Thiruppugazh", "H": "Kadi Modi", "S": "kAdhi mOdhi vAdhAdu nUl katriduvOrung :  Adi", "R": "Subhapanthuvarali", "C": "Arunagirinathar", "A": "M. Dandapani Desikar", "V": "-EANRwzlroo"}, {"N": "0073", "T": "Thiruppugazh", "H": "Kadi Modi", "S": "kAdhi mOdhi vAdhAdu nUl katriduvOrung :  Adi", "R": "Subhapanthuvarali", "C": "Arunagirinathar", "A": "M. Dandapani Desikar", "V": "wbECctgStAI"}]}, {"name": ["Vocal", "Sikkil Gurucharan"], "songs": [{"N": "0252", "T": "Thiruppugazh", "H": "Kadi Modi", "S": "kAdhi mOdhi vAdhAdu nUl katriduvOrung :  Adi", "R": "Unknownraga", "C": "Arunagirinathar", "A": "Sikkil Gurucharan", "V": "qKBWrGvkC_g"}]}, {"name": ["Vocal", "V. Pradeep Kumar"], "songs": [{"N": "0022", "T": "Thiruppugazh", "H": "Kadi Modi", "S": "kAdhi mOdhi vAdhAdu nUl katriduvOrung :  Adi", "R": "Unknownraga", "C": "Arunagirinathar", "A": "V. Pradeep Kumar", "V": "NlgSihI-K6w"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

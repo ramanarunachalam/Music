@@ -42,25 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin T. N. Krishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0051-Javali-Vaddani Ne-Kapi-RSI.0SLZGOBD3fY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0051 - <a href="song_type/Javali.html" >Javali</a>  - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/T. N. Krishnan.html" >T  N  Krishnan   TNK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Chembai Vaidyanatha Bhagavathar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0010-Javali-Vaddani Ne-Kapi-RSI.c49lCcm4VkU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0010 - <a href="song_type/Javali.html" >Javali</a>  - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/Chembai Vaidyanatha Bhagavathar.html" >Chembai Vaidyanatha Bhagavathar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0011-Javali-Vaddani Ne-Kapi-RSI.giB4iEOdfFA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0011 - <a href="song_type/Javali.html" >Javali</a>  - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/Chembai Vaidyanatha Bhagavathar.html" >Chembai Vaidyanatha Bhagavathar</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. D. Ramanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0031-Javali-Vaddani Ne-Kapi-RSI.JXK5hQ174lU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0031 - <a href="song_type/Javali.html" >Javali</a>  - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Semmangudi Srinivasa Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0057-Javali-Vaddani Ne-Kapi-RSI.s71uny8K-mk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0057 - <a href="song_type/Javali.html" >Javali</a>  - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -148,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "T. N. Krishnan"], "songs": [{"N": "0051", "T": "Javali", "H": "Vaddani Ne", "S": "vaddani nEnaNtigA vAni jOli nIku celi :  Rupaka", "R": "Kapi", "C": "Ramanathapuram Srinivasa Iyengar", "A": "T. N. Krishnan", "V": "0SLZGOBD3fY"}]}, {"name": ["Vocal", "Chembai Vaidyanatha Bhagavathar"], "songs": [{"N": "0010", "T": "Javali", "H": "Vaddani Ne", "S": "vaddani nEnaNtigA vAni jOli nIku celi :  Rupaka", "R": "Kapi", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Chembai Vaidyanatha Bhagavathar", "V": "c49lCcm4VkU"}, {"N": "0011", "T": "Javali", "H": "Vaddani Ne", "S": "vaddani nEnaNtigA vAni jOli nIku celi :  Rupaka", "R": "Kapi", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Chembai Vaidyanatha Bhagavathar", "V": "giB4iEOdfFA"}]}, {"name": ["Vocal", "M. D. Ramanathan"], "songs": [{"N": "0031", "T": "Javali", "H": "Vaddani Ne", "S": "vaddani nEnaNtigA vAni jOli nIku celi :  Rupaka", "R": "Kapi", "C": "Ramanathapuram Srinivasa Iyengar", "A": "M. D. Ramanathan", "V": "JXK5hQ174lU"}]}, {"name": ["Vocal", "Semmangudi Srinivasa Iyer"], "songs": [{"N": "0057", "T": "Javali", "H": "Vaddani Ne", "S": "vaddani nEnaNtigA vAni jOli nIku celi :  Rupaka", "R": "Kapi", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Semmangudi Srinivasa Iyer", "V": "s71uny8K-mk"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

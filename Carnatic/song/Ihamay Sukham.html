@@ -42,30 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Veena S. Balachander</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0016-Ihamay Sukham-Gamanashrama-KI.koFc53Wn1Do');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0016   - <a href="composer/Koteeswara Iyer.html" >Koteeswara Iyer</a> - <a href="raga/Gamanashrama.html" >Gamanashrama</a> - <a href="artist/S. Balachander.html" >S  Balachander   SB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Priya Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0081-Ihamay Sukham-Gamanashrama-KI.47lQDbqgKfs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0081   - <a href="composer/Koteeswara Iyer.html" >Koteeswara Iyer</a> - <a href="raga/Gamanashrama.html" >Gamanashrama</a> - <a href="artist/Priya Sisters.html" >Priya Sisters   PRIYAS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0082-Ihamay Sukham-Gamanashrama-KI.m4ue40qMQyM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0082   - <a href="composer/Koteeswara Iyer.html" >Koteeswara Iyer</a> - <a href="raga/Gamanashrama.html" >Gamanashrama</a> - <a href="artist/Priya Sisters.html" >Priya Sisters   PRIYAS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Rajam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0043-Ihamay Sukham-Gamanashrama-KI.59-Be7nlvOw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0043   - <a href="composer/Koteeswara Iyer.html" >Koteeswara Iyer</a> - <a href="raga/Gamanashrama.html" >Gamanashrama</a> - <a href="artist/S. Rajam.html" >S  Rajam   SRAJAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. R. Subramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0037-Ihamay Sukham-Gamanashrama-KI.wY70WTF9WS4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0037   - <a href="composer/Koteeswara Iyer.html" >Koteeswara Iyer</a> - <a href="raga/Gamanashrama.html" >Gamanashrama</a> - <a href="artist/T. R. Subramaniam.html" >T  R  Subramaniam   TRS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0036-Ihamay Sukham-Gamanashrama-KI.NmVu7xsE-LE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0036   - <a href="composer/Koteeswara Iyer.html" >Koteeswara Iyer</a> - <a href="raga/Gamanashrama.html" >Gamanashrama</a> - <a href="artist/T. R. Subramaniam.html" >T  R  Subramaniam   TRS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vijayalakshmy Subramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0039-Ihamay Sukham-Gamanashrama-KI.IBFmW1Q3F2I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0039   - <a href="composer/Koteeswara Iyer.html" >Koteeswara Iyer</a> - <a href="raga/Gamanashrama.html" >Gamanashrama</a> - <a href="artist/Vijayalakshmy Subramaniam.html" >Vijayalakshmy Subramaniam   VSL01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -154,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Veena", "S. Balachander"], "songs": [{"N": "0016", "T": "", "H": "Ihamay Sukham", "S": "ihamE sukham tarum SaNmukham enavE varumE :  Adi", "R": "Gamanashrama", "C": "Koteeswara Iyer", "A": "S. Balachander", "V": "koFc53Wn1Do"}]}, {"name": ["Vocal", "Priya Sisters"], "songs": [{"N": "0081", "T": "", "H": "Ihamay Sukham", "S": "ihamE sukham tarum SaNmukham enavE varumE :  Adi", "R": "Gamanashrama", "C": "Koteeswara Iyer", "A": "Priya Sisters", "V": "47lQDbqgKfs"}, {"N": "0082", "T": "", "H": "Ihamay Sukham", "S": "ihamE sukham tarum SaNmukham enavE varumE :  Adi", "R": "Gamanashrama", "C": "Koteeswara Iyer", "A": "Priya Sisters", "V": "m4ue40qMQyM"}]}, {"name": ["Vocal", "S. Rajam"], "songs": [{"N": "0043", "T": "", "H": "Ihamay Sukham", "S": "ihamE sukham tarum SaNmukham enavE varumE :  Adi", "R": "Gamanashrama", "C": "Koteeswara Iyer", "A": "S. Rajam", "V": "59-Be7nlvOw"}]}, {"name": ["Vocal", "T. R. Subramaniam"], "songs": [{"N": "0037", "T": "", "H": "Ihamay Sukham", "S": "ihamE sukham tarum SaNmukham enavE varumE :  Adi", "R": "Gamanashrama", "C": "Koteeswara Iyer", "A": "T. R. Subramaniam", "V": "wY70WTF9WS4"}, {"N": "0036", "T": "", "H": "Ihamay Sukham", "S": "ihamE sukham tarum SaNmukham enavE varumE :  Adi", "R": "Gamanashrama", "C": "Koteeswara Iyer", "A": "T. R. Subramaniam", "V": "NmVu7xsE-LE"}]}, {"name": ["Vocal", "Vijayalakshmy Subramaniam"], "songs": [{"N": "0039", "T": "", "H": "Ihamay Sukham", "S": "ihamE sukham tarum SaNmukham enavE varumE :  Adi", "R": "Gamanashrama", "C": "Koteeswara Iyer", "A": "Vijayalakshmy Subramaniam", "V": "IBFmW1Q3F2I"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

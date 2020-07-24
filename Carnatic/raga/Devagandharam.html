@@ -31,29 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; kayarohanesham bhajare re manasa kali kalmasapaham</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0014-Kayarohanesam-Devagandharam-MD.nppMTTtITB8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0014   - <a href="song/Kayarohanesam.html" >kAyArOhaNEsham bhajarE rE mAnasa kali :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Deekshita Venkataraman.html" >Deekshita Venkataraman   DEEKSHITA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; pahncashat pitha rupini mam pahi shri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0151-Panchashat Pitha-Devagandharam-MD.dqCUJZZAMek');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0151   - <a href="song/Panchashat Pitha.html" >paHncAshat pITha rUpiNi mAm pAhi shrI :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Abhishek Raghuram.html" >Abhishek Raghuram   ABHISHEK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0184-Panchashat Pitha-Devagandharam-MD.Wqdf0qinoCc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0184   - <a href="song/Panchashat Pitha.html" >paHncAshat pITha rUpiNi mAm pAhi shrI :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Malladi Brothers.html" >Malladi Brothers   MALLADI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0582-Panchashat Pitha-Devagandharam-MD.CnkGPdX2pYc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0582   - <a href="song/Panchashat Pitha.html" >paHncAshat pITha rUpiNi mAm pAhi shrI :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0583-Panchashat Pitha-Devagandharam-MD.yk3GHso0AFk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0583   - <a href="song/Panchashat Pitha.html" >paHncAshat pITha rUpiNi mAm pAhi shrI :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0018-Panchashat Pitha-Devagandharam-MD.ex6hw-qsURg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0018   - <a href="song/Panchashat Pitha.html" >paHncAshat pITha rUpiNi mAm pAhi shrI :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Y. G. Srilatha.html" >Y  G  Srilatha   YGSRILATHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; unknownsong</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0040-UnknownSong-Devagandharam-UnknownComposer.m9eG3bqUWYo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0040   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Balaji Shankar.html" >Balaji Shankar   SBALAJI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["kayarohanesham bhajare re manasa kali kalmasapaham"], "songs": [{"N": "0014", "T": "", "H": "Kayarohanesam", "S": "kAyArOhaNEsham bhajarE rE mAnasa kali :  Rupaka", "R": "Devagandharam", "C": "Muthuswami Dikshitar", "A": "Deekshita Venkataraman", "V": "nppMTTtITB8"}]}, {"name": ["pahncashat pitha rupini mam pahi shri"], "songs": [{"N": "0151", "T": "", "H": "Panchashat Pitha", "S": "paHncAshat pITha rUpiNi mAm pAhi shrI :  Adi", "R": "Devagandharam", "C": "Muthuswami Dikshitar", "A": "Abhishek Raghuram", "V": "dqCUJZZAMek"}, {"N": "0184", "T": "", "H": "Panchashat Pitha", "S": "paHncAshat pITha rUpiNi mAm pAhi shrI :  Adi", "R": "Devagandharam", "C": "Muthuswami Dikshitar", "A": "Malladi Brothers", "V": "Wqdf0qinoCc"}, {"N": "0582", "T": "", "H": "Panchashat Pitha", "S": "paHncAshat pITha rUpiNi mAm pAhi shrI :  Adi", "R": "Devagandharam", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "CnkGPdX2pYc"}, {"N": "0583", "T": "", "H": "Panchashat Pitha", "S": "paHncAshat pITha rUpiNi mAm pAhi shrI :  Adi", "R": "Devagandharam", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "yk3GHso0AFk"}, {"N": "0018", "T": "", "H": "Panchashat Pitha", "S": "paHncAshat pITha rUpiNi mAm pAhi shrI :  Adi", "R": "Devagandharam", "C": "Muthuswami Dikshitar", "A": "Y. G. Srilatha", "V": "ex6hw-qsURg"}]}, {"name": ["unknownsong"], "songs": [{"N": "0040", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Devagandharam", "C": "UnknownComposer", "A": "Balaji Shankar", "V": "m9eG3bqUWYo"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

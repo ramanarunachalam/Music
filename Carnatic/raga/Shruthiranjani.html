@@ -31,28 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; e dari sancarintura(y)ika palkara</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0021-Edari Sancharintura-Shruthiranjani-T.3OVx1kc6NOo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0021   - <a href="song/Edari Sancharintura.html" >E dAri sancarinturA y ika palkarA :  Deshadi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/Charumathi Raghuraman.html" >Charumathi Raghuraman   CHARUMATHIR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0434-Edari Sancharintura-Shruthiranjani-T.EWy8qA-9MsU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0434   - <a href="song/Edari Sancharintura.html" >E dAri sancarinturA y ika palkarA :  Deshadi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0015-Edari Sancharintura-Shruthiranjani-T.8NEG_m5ujOY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0015   - <a href="song/Edari Sancharintura.html" >E dAri sancarinturA y ika palkarA :  Deshadi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/Sriram Gangadharan.html" >Sriram Gangadharan   SRIRAMG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; unknownsong</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0284-UnknownSong-Shruthiranjani-UnknownComposer.eeBvs6g_0Rc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0284   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/N. Ramani.html" >N  Ramani   RAMANI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0011-UnknownSong-Shruthiranjani-UnknownComposer.yYXCldqJwaE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0011   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/B. Sivakumar.html" >B  Sivakumar   SIVAKUMAR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0065-UnknownSong-Shruthiranjani-UnknownComposer.1zioPavgcpU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0065   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Ambi Subramaniam.html" >Ambi Subramaniam   AMBI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0148-UnknownSong-Shruthiranjani-UnknownComposer.8FRlOVEjg0o');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0148   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Mambalam Sisters.html" >Mambalam Sisters   MAMBALAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1616-UnknownSong-Shruthiranjani-UnknownComposer.3V1UlwzOhj0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1616   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0050-UnknownSong-Shruthiranjani-UnknownComposer.RhgCECIlgU4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0050   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Vivek Sadasivam.html" >Vivek Sadasivam   VIVEK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["e dari sancarintura(y)ika palkara"], "songs": [{"N": "0021", "T": "", "H": "Edari Sancharintura", "S": "E dAri sancarinturA y ika palkarA :  Deshadi", "R": "Shruthiranjani", "C": "Thyagaraja", "A": "Charumathi Raghuraman", "V": "3OVx1kc6NOo"}, {"N": "0434", "T": "", "H": "Edari Sancharintura", "S": "E dAri sancarinturA y ika palkarA :  Deshadi", "R": "Shruthiranjani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "EWy8qA-9MsU"}, {"N": "0015", "T": "", "H": "Edari Sancharintura", "S": "E dAri sancarinturA y ika palkarA :  Deshadi", "R": "Shruthiranjani", "C": "Thyagaraja", "A": "Sriram Gangadharan", "V": "8NEG_m5ujOY"}]}, {"name": ["unknownsong"], "songs": [{"N": "0284", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "N. Ramani", "V": "eeBvs6g_0Rc"}, {"N": "0011", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "B. Sivakumar", "V": "yYXCldqJwaE"}, {"N": "0065", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "Ambi Subramaniam", "V": "1zioPavgcpU"}, {"N": "0148", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "Mambalam Sisters", "V": "8FRlOVEjg0o"}, {"N": "1616", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "M. S. Subbulakshmi", "V": "3V1UlwzOhj0"}, {"N": "0050", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "Vivek Sadasivam", "V": "RhgCECIlgU4"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

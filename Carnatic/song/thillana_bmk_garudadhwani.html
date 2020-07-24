@@ -41,24 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0327-Thillana-Thillana-Garudadhwani-BMK.TBb-Y6lRg-Q');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0327 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Garudadhwani.html" >Garudadhwani</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1741-Thillana-Thillana-Garudadhwani-BMK.Hvz6NRn0fb0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1741 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Garudadhwani.html" >Garudadhwani</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1742-Thillana-Thillana-Garudadhwani-BMK.isGyOJcq_L8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1742 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Garudadhwani.html" >Garudadhwani</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1743-Thillana-Thillana-Garudadhwani-BMK.ucK0w8zMYgU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1743 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Garudadhwani.html" >Garudadhwani</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Prince Rama Varma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0513-Thillana-Thillana-Garudadhwani-BMK.2oTYteXti1w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0513 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Garudadhwani.html" >Garudadhwani</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0514-Thillana-Thillana-Garudadhwani-BMK.MqHOvwh_hmU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0514 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Garudadhwani.html" >Garudadhwani</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0515-Thillana-Thillana-Garudadhwani-BMK.yPk7P3lsCN0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0515 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Garudadhwani.html" >Garudadhwani</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -152,9 +135,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0327", "T": "Thillana", "H": "thillana_bmk_garudadhwani", "S": "nAdru dru tOm dru nA dru  :  Adi", "R": "Garudadhwani", "C": "M. Balamuralikrishna", "A": "Amrutha Venkatesh", "V": "TBb-Y6lRg-Q"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "1742", "T": "Thillana", "H": "thillana_bmk_garudadhwani", "S": "nAdru dru tOm dru nA dru  :  Adi", "R": "Garudadhwani", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "Hvz6NRn0fb0"}, {"N": "1743", "T": "Thillana", "H": "thillana_bmk_garudadhwani", "S": "nAdru dru tOm dru nA dru  :  Adi", "R": "Garudadhwani", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "isGyOJcq_L8"}, {"N": "1744", "T": "Thillana", "H": "thillana_bmk_garudadhwani", "S": "nAdru dru tOm dru nA dru  :  Adi", "R": "Garudadhwani", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "ucK0w8zMYgU"}]}, {"name": ["Vocal", "Prince Rama Varma"], "songs": [{"N": "0513", "T": "Thillana", "H": "thillana_bmk_garudadhwani", "S": "nAdru dru tOm dru nA dru  :  Adi", "R": "Garudadhwani", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "2oTYteXti1w"}, {"N": "0514", "T": "Thillana", "H": "thillana_bmk_garudadhwani", "S": "nAdru dru tOm dru nA dru  :  Adi", "R": "Garudadhwani", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "MqHOvwh_hmU"}, {"N": "0515", "T": "Thillana", "H": "thillana_bmk_garudadhwani", "S": "nAdru dru tOm dru nA dru  :  Adi", "R": "Garudadhwani", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "yPk7P3lsCN0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

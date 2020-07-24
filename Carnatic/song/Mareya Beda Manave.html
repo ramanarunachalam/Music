@@ -42,29 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Krithika Natarajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0021-Mareya Beda Manave-Rageshree-PD.-q_XQgAqq5w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0021   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Rageshree.html" >Rageshree</a> - <a href="artist/Krithika Natarajan.html" >Krithika Natarajan   KRITHIKA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Pattabhirama Pandit</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0020-Mareya Beda Manave-Rageshree-PD.CqF0CLMnQv0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0020   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Rageshree.html" >Rageshree</a> - <a href="artist/Pattabhirama Pandit.html" >Pattabhirama Pandit   PTP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vani Sateesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0009-Mareya Beda Manave-UnknownRaga-PD.71KH93ee6XU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0009   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Vani Sateesh.html" >Vani Sateesh   VANISATEESH01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0010-Mareya Beda Manave-UnknownRaga-PD.7IB2NYLqhAQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0010   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Vani Sateesh.html" >Vani Sateesh   VANISATEESH01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vasudha Ravi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0023-Mareya Beda Manave-UnknownRaga-PD.vbdsB4KHC_Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0023   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Vasudha Ravi.html" >Vasudha Ravi   VASUDHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vidyabhushana</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0063-Mareya Beda Manave-UnknownRaga-PD.0EmHI2VtOUQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0063   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Vidyabhushana.html" >Vidyabhushana   VIDYABHOOSHANA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -152,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Krithika Natarajan"], "songs": [{"N": "0021", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Rageshree", "C": "Purandara Dasa", "A": "Krithika Natarajan", "V": "-q_XQgAqq5w"}]}, {"name": ["Vocal", "Pattabhirama Pandit"], "songs": [{"N": "0020", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Rageshree", "C": "Purandara Dasa", "A": "Pattabhirama Pandit", "V": "CqF0CLMnQv0"}]}, {"name": ["Vocal", "Vani Sateesh"], "songs": [{"N": "0009", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vani Sateesh", "V": "71KH93ee6XU"}, {"N": "0010", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vani Sateesh", "V": "7IB2NYLqhAQ"}]}, {"name": ["Vocal", "Vasudha Ravi"], "songs": [{"N": "0023", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vasudha Ravi", "V": "vbdsB4KHC_Y"}]}, {"name": ["Vocal", "Vidyabhushana"], "songs": [{"N": "0063", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vidyabhushana", "V": "0EmHI2VtOUQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

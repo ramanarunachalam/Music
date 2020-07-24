@@ -42,25 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin A. Kanyakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0085-Manaviche-Sarasangi-PS.uyP6VJBvJ4k');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0085   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/A. Kanyakumari.html" >A  Kanyakumari   AKK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Pattammal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0243-Manaviche-Sarasangi-PS.rv4POxwA4vE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0243   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Mahathi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0026-Manaviche-Sarasangi-PS.ySOYPybkMmI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0026   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/S. Mahathi.html" >S  Mahathi   MAHATHI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. N. Seshagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0281-Manaviche-Sarasangi-PS.UWe_F2k3xHg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0281   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0282-Manaviche-Sarasangi-PS.qukPZnt34gs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0282   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -149,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "A. Kanyakumari"], "songs": [{"N": "0085", "T": "", "H": "Manaviche", "S": "manavi cEkonavayya inakula tilakA nI :  Rupaka", "R": "Sarasangi", "C": "Patnam Subramanya Iyer", "A": "A. Kanyakumari", "V": "uyP6VJBvJ4k"}]}, {"name": ["Vocal", "D. K. Pattammal"], "songs": [{"N": "0243", "T": "", "H": "Manaviche", "S": "manavi cEkonavayya inakula tilakA nI :  Rupaka", "R": "Sarasangi", "C": "Patnam Subramanya Iyer", "A": "D. K. Pattammal", "V": "rv4POxwA4vE"}]}, {"name": ["Vocal", "S. Mahathi"], "songs": [{"N": "0026", "T": "", "H": "Manaviche", "S": "manavi cEkonavayya inakula tilakA nI :  Rupaka", "R": "Sarasangi", "C": "Patnam Subramanya Iyer", "A": "S. Mahathi", "V": "ySOYPybkMmI"}]}, {"name": ["Vocal", "T. N. Seshagopalan"], "songs": [{"N": "0281", "T": "", "H": "Manaviche", "S": "manavi cEkonavayya inakula tilakA nI :  Rupaka", "R": "Sarasangi", "C": "Patnam Subramanya Iyer", "A": "T. N. Seshagopalan", "V": "UWe_F2k3xHg"}, {"N": "0282", "T": "", "H": "Manaviche", "S": "manavi cEkonavayya inakula tilakA nI :  Rupaka", "R": "Sarasangi", "C": "Patnam Subramanya Iyer", "A": "T. N. Seshagopalan", "V": "qukPZnt34gs"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

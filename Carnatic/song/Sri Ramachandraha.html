@@ -41,29 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Sheela</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0087-Sri Ramachandraha-Huseni-ST.5no7xOlO5-8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0087   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/M. S. Sheela.html" >M  S  Sheela   MSHEELA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Maharajapuram Santhanam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0511-Sri Ramachandraha-Huseni-ST.XBD3wP4GRWs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0511   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Suguna Varadachari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0098-Sri Ramachandraha-Huseni-ST.B1BqspXV7Zo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0098   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/Suguna Varadachari.html" >Suguna Varadachari   SUGUNAV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0099-Sri Ramachandraha-Huseni-ST.umewAEPn0AE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0099   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/Suguna Varadachari.html" >Suguna Varadachari   SUGUNAV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Thamarakkad Govindan Namboothiri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0019-Sri Ramachandraha-Huseni-ST.07nqy3SdyWY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0019   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/Thamarakkad Govindan Namboothiri.html" >Thamarakkad Govindan Namboothiri</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vijayalakshmy Subramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0089-Sri Ramachandraha-Huseni-ST.rtYENbBJCao');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0089   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/Vijayalakshmy Subramaniam.html" >Vijayalakshmy Subramaniam   VSL01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -152,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. S. Sheela"], "songs": [{"N": "0087", "T": "", "H": "Sri Ramachandraha", "S": "Sree Ramachandra Parilasa Mama hrdi :  Adi", "R": "Huseni", "C": "Swathi Thirunal", "A": "M. S. Sheela", "V": "5no7xOlO5-8"}]}, {"name": ["Vocal", "Maharajapuram Santhanam"], "songs": [{"N": "0511", "T": "", "H": "Sri Ramachandraha", "S": "Sree Ramachandra Parilasa Mama hrdi :  Adi", "R": "Huseni", "C": "Swathi Thirunal", "A": "Maharajapuram Santhanam", "V": "XBD3wP4GRWs"}]}, {"name": ["Vocal", "Suguna Varadachari"], "songs": [{"N": "0098", "T": "", "H": "Sri Ramachandraha", "S": "Sree Ramachandra Parilasa Mama hrdi :  Adi", "R": "Huseni", "C": "Swathi Thirunal", "A": "Suguna Varadachari", "V": "B1BqspXV7Zo"}, {"N": "0099", "T": "", "H": "Sri Ramachandraha", "S": "Sree Ramachandra Parilasa Mama hrdi :  Adi", "R": "Huseni", "C": "Swathi Thirunal", "A": "Suguna Varadachari", "V": "umewAEPn0AE"}]}, {"name": ["Vocal", "Thamarakkad Govindan Namboothiri"], "songs": [{"N": "0019", "T": "", "H": "Sri Ramachandraha", "S": "Sree Ramachandra Parilasa Mama hrdi :  Adi", "R": "Huseni", "C": "Swathi Thirunal", "A": "Thamarakkad Govindan Namboothiri", "V": "07nqy3SdyWY"}]}, {"name": ["Vocal", "Vijayalakshmy Subramaniam"], "songs": [{"N": "0089", "T": "", "H": "Sri Ramachandraha", "S": "Sree Ramachandra Parilasa Mama hrdi :  Adi", "R": "Huseni", "C": "Swathi Thirunal", "A": "Vijayalakshmy Subramaniam", "V": "rtYENbBJCao"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

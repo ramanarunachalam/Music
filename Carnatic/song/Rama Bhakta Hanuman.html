@@ -36,30 +36,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0177-Rama Bhakta Hanuman-Jonpuri-SUGUNA.OV91pncZa_c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0177   - <a href="composer/Suguna Purushothaman.html" >Suguna Purushothaman</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0178-Rama Bhakta Hanuman-Jonpuri-SUGUNA.WL2CXFz2TjM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0178   - <a href="composer/Suguna Purushothaman.html" >Suguna Purushothaman</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. Gayathri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0053-Rama Bhakta Hanuman-Jonpuri-SUGUNA.OIegCEXo9UU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0053   - <a href="composer/Suguna Purushothaman.html" >Suguna Purushothaman</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/K. Gayathri.html" >K  Gayathri   KGAYATHRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Maruthi Prasad</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0025-Rama Bhakta Hanuman-Jonpuri-SUGUNA.r9O-QpURsik');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0025   - <a href="composer/Suguna Purushothaman.html" >Suguna Purushothaman</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Maruthi Prasad.html" >Maruthi Prasad   MARUTHIPRASAD01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Suguna Purushothaman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Rama Bhakta Hanuman-Jonpuri-SUGUNA.56q-rjefJU0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="composer/Suguna Purushothaman.html" >Suguna Purushothaman</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Suguna Purushothaman.html" >Suguna Purushothaman   SUGUNA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0177", "T": "", "H": "Rama Bhakta Hanuman", "S": "Rama Bhakta Hanuman", "R": "Jonpuri", "C": "Suguna Purushothaman", "A": "Amrutha Venkatesh", "V": "OV91pncZa_c"}, {"N": "0178", "T": "", "H": "Rama Bhakta Hanuman", "S": "Rama Bhakta Hanuman", "R": "Jonpuri", "C": "Suguna Purushothaman", "A": "Amrutha Venkatesh", "V": "WL2CXFz2TjM"}]}, {"name": ["Vocal", "K. Gayathri"], "songs": [{"N": "0053", "T": "", "H": "Rama Bhakta Hanuman", "S": "Rama Bhakta Hanuman", "R": "Jonpuri", "C": "Suguna Purushothaman", "A": "K. Gayathri", "V": "OIegCEXo9UU"}]}, {"name": ["Vocal", "Maruthi Prasad"], "songs": [{"N": "0025", "T": "", "H": "Rama Bhakta Hanuman", "S": "Rama Bhakta Hanuman", "R": "Jonpuri", "C": "Suguna Purushothaman", "A": "Maruthi Prasad", "V": "r9O-QpURsik"}]}, {"name": ["Vocal", "Suguna Purushothaman"], "songs": [{"N": "0027", "T": "", "H": "Rama Bhakta Hanuman", "S": "Rama Bhakta Hanuman", "R": "Jonpuri", "C": "Suguna Purushothaman", "A": "Suguna Purushothaman", "V": "56q-rjefJU0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

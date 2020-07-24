@@ -42,28 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Kannikeswaran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-Pahi Mam Janaki-Sankarabharanam-MD.AdJzl62y6lA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Kannikeswaran.html" >Kannikeswaran   KANNIKS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Semmangudi Srinivasa Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0546-Pahi Mam Janaki-Sankarabharanam-MD.Ogws7wOid3g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0546   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0430-Pahi Mam Janaki-Sankarabharanam-MD.w1nnT8Y7nMg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0430   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal V. Sankaranarayanan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0019-Pahi Mam Janaki-Sankarabharanam-MD.pFrBHHJ-bDI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0019   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/V. Sankaranarayanan.html" >V  Sankaranarayanan   VSN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vijayalakshmy Subramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0070-Pahi Mam Janaki-Sankarabharanam-MD.V0UO5KPbLvs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0070   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Vijayalakshmy Subramaniam.html" >Vijayalakshmy Subramaniam   VSL01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -143,9 +122,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Kannikeswaran"], "songs": [{"N": "0006", "T": "", "H": "Pahi Mam Janaki", "S": "pAhimAm jAnakIvallabha shrIharE bhAratIsha :  Tisra Eka", "R": "Sankarabharanam", "C": "Muthuswami Dikshitar", "A": "Kannikeswaran", "V": "AdJzl62y6lA"}]}, {"name": ["Vocal", "Semmangudi Srinivasa Iyer"], "songs": [{"N": "0546", "T": "", "H": "Pahi Mam Janaki", "S": "pAhimAm jAnakIvallabha shrIharE bhAratIsha :  Tisra Eka", "R": "Sankarabharanam", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "Ogws7wOid3g"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0430", "T": "", "H": "Pahi Mam Janaki", "S": "pAhimAm jAnakIvallabha shrIharE bhAratIsha :  Tisra Eka", "R": "Sankarabharanam", "C": "Muthuswami Dikshitar", "A": "Sudha Ragunathan", "V": "w1nnT8Y7nMg"}]}, {"name": ["Vocal", "V. Sankaranarayanan"], "songs": [{"N": "0019", "T": "", "H": "Pahi Mam Janaki", "S": "pAhimAm jAnakIvallabha shrIharE bhAratIsha :  Tisra Eka", "R": "Sankarabharanam", "C": "Muthuswami Dikshitar", "A": "V. Sankaranarayanan", "V": "pFrBHHJ-bDI"}]}, {"name": ["Vocal", "Vijayalakshmy Subramaniam"], "songs": [{"N": "0070", "T": "", "H": "Pahi Mam Janaki", "S": "pAhimAm jAnakIvallabha shrIharE bhAratIsha :  Tisra Eka", "R": "Sankarabharanam", "C": "Muthuswami Dikshitar", "A": "Vijayalakshmy Subramaniam", "V": "V0UO5KPbLvs"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -42,27 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mridangam C. Cheluvaraju</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0013-Saketa Niketana-Kannada-T.EepJwwqAP08');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0013   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kannada.html" >Kannada</a> - <a href="artist/C. Cheluvaraju.html" >C  Cheluvaraju   CHELUVARAJU01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin M. S. Gopalakrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0328-Saketa Niketana-Kannada-T.JDoMoDtTIbk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0328   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kannada.html" >Kannada</a> - <a href="artist/M. S. Gopalakrishnan.html" >M  S  Gopalakrishnan   MSG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. Vedavalli</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0218-Saketa Niketana-Kannada-T.e2Sp1s9Q1o8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0218   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kannada.html" >Kannada</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Semmangudi Srinivasa Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0643-Saketa Niketana-Kannada-T.-RTbvJgUBrw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0643   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kannada.html" >Kannada</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0644-Saketa Niketana-Kannada-T.CLr2MEnicFg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0644   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kannada.html" >Kannada</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0645-Saketa Niketana-Kannada-T.hG4fS0-JUcY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0645   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kannada.html" >Kannada</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0646-Saketa Niketana-Kannada-T.jLxyfCTqQT8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0646   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kannada.html" >Kannada</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -153,9 +133,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Mridangam", "C. Cheluvaraju"], "songs": [{"N": "0013", "T": "", "H": "Saketa Niketana", "S": "sAkEta nikEtana sAkEn a naga lEdA :  Rupaka", "R": "Kannada", "C": "Thyagaraja", "A": "C. Cheluvaraju", "V": "EepJwwqAP08"}]}, {"name": ["Violin", "M. S. Gopalakrishnan"], "songs": [{"N": "0328", "T": "", "H": "Saketa Niketana", "S": "sAkEta nikEtana sAkEn a naga lEdA :  Rupaka", "R": "Kannada", "C": "Thyagaraja", "A": "M. S. Gopalakrishnan", "V": "JDoMoDtTIbk"}]}, {"name": ["Vocal", "R. Vedavalli"], "songs": [{"N": "0218", "T": "", "H": "Saketa Niketana", "S": "sAkEta nikEtana sAkEn a naga lEdA :  Rupaka", "R": "Kannada", "C": "Thyagaraja", "A": "R. Vedavalli", "V": "e2Sp1s9Q1o8"}]}, {"name": ["Vocal", "Semmangudi Srinivasa Iyer"], "songs": [{"N": "0643", "T": "", "H": "Saketa Niketana", "S": "sAkEta nikEtana sAkEn a naga lEdA :  Rupaka", "R": "Kannada", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "-RTbvJgUBrw"}, {"N": "0644", "T": "", "H": "Saketa Niketana", "S": "sAkEta nikEtana sAkEn a naga lEdA :  Rupaka", "R": "Kannada", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "CLr2MEnicFg"}, {"N": "0645", "T": "", "H": "Saketa Niketana", "S": "sAkEta nikEtana sAkEn a naga lEdA :  Rupaka", "R": "Kannada", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "hG4fS0-JUcY"}, {"N": "0646", "T": "", "H": "Saketa Niketana", "S": "sAkEta nikEtana sAkEn a naga lEdA :  Rupaka", "R": "Kannada", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "jLxyfCTqQT8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

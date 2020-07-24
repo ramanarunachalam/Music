@@ -42,30 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Aishwarya Shankar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0035-Sri Ramaa Ramani-Mohanam-PG.ewudUtajl4E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0035   - <a href="composer/Pallavi Gopalaiyer.html" >Pallavi Gopalaiyer</a> - <a href="raga/Mohanam.html" >Mohanam</a> - <a href="artist/Aishwarya Shankar.html" >Aishwarya Shankar   AYS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal G. N. Balasubramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0479-Sri Ramaa Ramani-Mohanam-PG.OuSJq3XbWAg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0479   - <a href="composer/Pallavi Gopalaiyer.html" >Pallavi Gopalaiyer</a> - <a href="raga/Mohanam.html" >Mohanam</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0480-Sri Ramaa Ramani-Mohanam-PG.i0ur_bxD574');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0480   - <a href="composer/Pallavi Gopalaiyer.html" >Pallavi Gopalaiyer</a> - <a href="raga/Mohanam.html" >Mohanam</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1374-Sri Ramaa Ramani-Mohanam-PG.oy_fXyTpDk4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1374   - <a href="composer/Pallavi Gopalaiyer.html" >Pallavi Gopalaiyer</a> - <a href="raga/Mohanam.html" >Mohanam</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Raji Gopalakrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0066-Sri Ramaa Ramani-Mohanam-PG.Mwz7rsJYkMk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0066   - <a href="composer/Pallavi Gopalaiyer.html" >Pallavi Gopalaiyer</a> - <a href="raga/Mohanam.html" >Mohanam</a> - <a href="artist/Raji Gopalakrishnan.html" >Raji Gopalakrishnan   RAJIG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0812-Sri Ramaa Ramani-Mohanam-PG.6M-k6I6AlQM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0812   - <a href="composer/Pallavi Gopalaiyer.html" >Pallavi Gopalaiyer</a> - <a href="raga/Mohanam.html" >Mohanam</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0813-Sri Ramaa Ramani-Mohanam-PG.HZ5NHimjVAw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0813   - <a href="composer/Pallavi Gopalaiyer.html" >Pallavi Gopalaiyer</a> - <a href="raga/Mohanam.html" >Mohanam</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -159,9 +136,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Aishwarya Shankar"], "songs": [{"N": "0035", "T": "", "H": "Sri Ramaa Ramani", "S": "shrI ramA ramaNI manOhara shrtajana mandAra :  Adi", "R": "Mohanam", "C": "Pallavi Gopalaiyer", "A": "Aishwarya Shankar", "V": "ewudUtajl4E"}]}, {"name": ["Vocal", "G. N. Balasubramaniam"], "songs": [{"N": "0489", "T": "", "H": "Sri Ramaa Ramani", "S": "shrI ramA ramaNI manOhara shrtajana mandAra :  Adi", "R": "Mohanam", "C": "Pallavi Gopalaiyer", "A": "G. N. Balasubramaniam", "V": "OuSJq3XbWAg"}, {"N": "0490", "T": "", "H": "Sri Ramaa Ramani", "S": "shrI ramA ramaNI manOhara shrtajana mandAra :  Adi", "R": "Mohanam", "C": "Pallavi Gopalaiyer", "A": "G. N. Balasubramaniam", "V": "i0ur_bxD574"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "1374", "T": "", "H": "Sri Ramaa Ramani", "S": "shrI ramA ramaNI manOhara shrtajana mandAra :  Adi", "R": "Mohanam", "C": "Pallavi Gopalaiyer", "A": "M. Balamuralikrishna", "V": "oy_fXyTpDk4"}]}, {"name": ["Vocal", "Raji Gopalakrishnan"], "songs": [{"N": "0066", "T": "", "H": "Sri Ramaa Ramani", "S": "shrI ramA ramaNI manOhara shrtajana mandAra :  Adi", "R": "Mohanam", "C": "Pallavi Gopalaiyer", "A": "Raji Gopalakrishnan", "V": "Mwz7rsJYkMk"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0812", "T": "", "H": "Sri Ramaa Ramani", "S": "shrI ramA ramaNI manOhara shrtajana mandAra :  Adi", "R": "Mohanam", "C": "Pallavi Gopalaiyer", "A": "Sanjay Subrahmanyan", "V": "6M-k6I6AlQM"}, {"N": "0813", "T": "", "H": "Sri Ramaa Ramani", "S": "shrI ramA ramaNI manOhara shrtajana mandAra :  Adi", "R": "Mohanam", "C": "Pallavi Gopalaiyer", "A": "Sanjay Subrahmanyan", "V": "HZ5NHimjVAw"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -41,21 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Kunnakudi Vaidyanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0094-Tirupati Malai-Sarasangi-MDD.yC1hSdCeQSc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0094   - <a href="composer/M. Dandapani Desikar.html" >M  Dandapani Desikar</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/Kunnakudi Vaidyanathan.html" >Kunnakudi Vaidyanathan   KUNNAKUDI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal A. S. Murali</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0050-Tirupati Malai-Sarasangi-MDD.Hm_En7LDHlM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0050   - <a href="composer/M. Dandapani Desikar.html" >M  Dandapani Desikar</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/A. S. Murali.html" >A  S  Murali   ASMURALI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Suguna Varadachari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0114-Tirupati Malai-Sarasangi-MDD.Jt6YrDv2GZk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0114   - <a href="composer/M. Dandapani Desikar.html" >M  Dandapani Desikar</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/Suguna Varadachari.html" >Suguna Varadachari   SUGUNAV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0115-Tirupati Malai-Sarasangi-MDD.of3U0fg6uTg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0115   - <a href="composer/M. Dandapani Desikar.html" >M  Dandapani Desikar</a> - <a href="raga/Sarasangi.html" >Sarasangi</a> - <a href="artist/Suguna Varadachari.html" >Suguna Varadachari   SUGUNAV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -144,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "Kunnakudi Vaidyanathan"], "songs": [{"N": "0094", "T": "", "H": "Tirupati Malai", "S": "tirupati malaiyurai vEnkaTavA tiruvaDiyaip paNindE :  Adi", "R": "Sarasangi", "C": "M. Dandapani Desikar", "A": "Kunnakudi Vaidyanathan", "V": "yC1hSdCeQSc"}]}, {"name": ["Vocal", "A. S. Murali"], "songs": [{"N": "0050", "T": "", "H": "Tirupati Malai", "S": "tirupati malaiyurai vEnkaTavA tiruvaDiyaip paNindE :  Adi", "R": "Sarasangi", "C": "M. Dandapani Desikar", "A": "A. S. Murali", "V": "Hm_En7LDHlM"}]}, {"name": ["Vocal", "Suguna Varadachari"], "songs": [{"N": "0114", "T": "", "H": "Tirupati Malai", "S": "tirupati malaiyurai vEnkaTavA tiruvaDiyaip paNindE :  Adi", "R": "Sarasangi", "C": "M. Dandapani Desikar", "A": "Suguna Varadachari", "V": "Jt6YrDv2GZk"}, {"N": "0115", "T": "", "H": "Tirupati Malai", "S": "tirupati malaiyurai vEnkaTavA tiruvaDiyaip paNindE :  Adi", "R": "Sarasangi", "C": "M. Dandapani Desikar", "A": "Suguna Varadachari", "V": "of3U0fg6uTg"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

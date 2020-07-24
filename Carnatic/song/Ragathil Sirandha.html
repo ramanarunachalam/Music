@@ -41,24 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Maharajapuram S. Srinivasan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0019-Ragathil Sirandha-Ragamalika-KDS.Dnqgg8J4JvI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0019   - <a href="composer/Kadalur Subramaniam.html" >Kadalur Subramaniam</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Maharajapuram S. Srinivasan.html" >Maharajapuram S  Srinivasan   MSSRINIVASAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Nithyasree Mahadevan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0260-Ragathil Sirandha-Ragamalika-KDS.-TKdbTPaDG8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0260   - <a href="composer/Kadalur Subramaniam.html" >Kadalur Subramaniam</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Nithyasree Mahadevan.html" >Nithyasree Mahadevan   NITHYASREE01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0261-Ragathil Sirandha-Ragamalika-KDS.PIH4SvyULa4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0261   - <a href="composer/Kadalur Subramaniam.html" >Kadalur Subramaniam</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Nithyasree Mahadevan.html" >Nithyasree Mahadevan   NITHYASREE01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0262-Ragathil Sirandha-Ragamalika-KDS.TP5lNjILQhY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0262   - <a href="composer/Kadalur Subramaniam.html" >Kadalur Subramaniam</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Nithyasree Mahadevan.html" >Nithyasree Mahadevan   NITHYASREE01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0263-Ragathil Sirandha-Ragamalika-KDS.T_UQVawQXX0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0263   - <a href="composer/Kadalur Subramaniam.html" >Kadalur Subramaniam</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Nithyasree Mahadevan.html" >Nithyasree Mahadevan   NITHYASREE01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0264-Ragathil Sirandha-Ragamalika-KDS.Zx86Lc9--QE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0264   - <a href="composer/Kadalur Subramaniam.html" >Kadalur Subramaniam</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Nithyasree Mahadevan.html" >Nithyasree Mahadevan   NITHYASREE01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Sowmya</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0185-Ragathil Sirandha-Ragamalika-KDS.-vsPKB8dxNI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0185   - <a href="composer/Kadalur Subramaniam.html" >Kadalur Subramaniam</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/S. Sowmya.html" >S  Sowmya   SOWMYA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -176,9 +159,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Maharajapuram S. Srinivasan"], "songs": [{"N": "0019", "T": "", "H": "Ragathil Sirandha", "S": "rAgattil shiranda rAgamEdu  kalyaaNiyA :  Adi", "R": "Ragamalika", "C": "Kadalur Subramaniam", "A": "Maharajapuram S. Srinivasan", "V": "Dnqgg8J4JvI"}]}, {"name": ["Vocal", "Nithyasree Mahadevan"], "songs": [{"N": "0260", "T": "", "H": "Ragathil Sirandha", "S": "rAgattil shiranda rAgamEdu  kalyaaNiyA :  Adi", "R": "Ragamalika", "C": "Kadalur Subramaniam", "A": "Nithyasree Mahadevan", "V": "-TKdbTPaDG8"}, {"N": "0261", "T": "", "H": "Ragathil Sirandha", "S": "rAgattil shiranda rAgamEdu  kalyaaNiyA :  Adi", "R": "Ragamalika", "C": "Kadalur Subramaniam", "A": "Nithyasree Mahadevan", "V": "PIH4SvyULa4"}, {"N": "0262", "T": "", "H": "Ragathil Sirandha", "S": "rAgattil shiranda rAgamEdu  kalyaaNiyA :  Adi", "R": "Ragamalika", "C": "Kadalur Subramaniam", "A": "Nithyasree Mahadevan", "V": "TP5lNjILQhY"}, {"N": "0263", "T": "", "H": "Ragathil Sirandha", "S": "rAgattil shiranda rAgamEdu  kalyaaNiyA :  Adi", "R": "Ragamalika", "C": "Kadalur Subramaniam", "A": "Nithyasree Mahadevan", "V": "T_UQVawQXX0"}, {"N": "0264", "T": "", "H": "Ragathil Sirandha", "S": "rAgattil shiranda rAgamEdu  kalyaaNiyA :  Adi", "R": "Ragamalika", "C": "Kadalur Subramaniam", "A": "Nithyasree Mahadevan", "V": "Zx86Lc9--QE"}]}, {"name": ["Vocal", "S. Sowmya"], "songs": [{"N": "0185", "T": "", "H": "Ragathil Sirandha", "S": "rAgattil shiranda rAgamEdu  kalyaaNiyA :  Adi", "R": "Ragamalika", "C": "Kadalur Subramaniam", "A": "S. Sowmya", "V": "-vsPKB8dxNI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

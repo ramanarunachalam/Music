@@ -42,31 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Jayashri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0121-Hanumane-Malayamarutham-AK.wM3z-bHaYDY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0121   - <a href="composer/Arunachala Kavi.html" >Arunachala Kavi</a> - <a href="raga/Malayamarutham.html" >Malayamarutham</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0122-Hanumane-Malayamarutham-AK.wke3VJpleWI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0122   - <a href="composer/Arunachala Kavi.html" >Arunachala Kavi</a> - <a href="raga/Malayamarutham.html" >Malayamarutham</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0308-Hanumane-Malayamarutham-AK.IqoF5TmD6z8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0308   - <a href="composer/Arunachala Kavi.html" >Arunachala Kavi</a> - <a href="raga/Malayamarutham.html" >Malayamarutham</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0309-Hanumane-Malayamarutham-AK.f_MIhrQJCCk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0309   - <a href="composer/Arunachala Kavi.html" >Arunachala Kavi</a> - <a href="raga/Malayamarutham.html" >Malayamarutham</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sikkil Gurucharan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0080-Hanumane-Malayamarutham-AK.vppVh4inXFs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0080   - <a href="composer/Arunachala Kavi.html" >Arunachala Kavi</a> - <a href="raga/Malayamarutham.html" >Malayamarutham</a> - <a href="artist/Sikkil Gurucharan.html" >Sikkil Gurucharan   GURUCHARAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. N. Seshagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0225-Hanumane-Malayamarutham-AK.H4YQSmYs5qo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0225   - <a href="composer/Arunachala Kavi.html" >Arunachala Kavi</a> - <a href="raga/Malayamarutham.html" >Malayamarutham</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0226-Hanumane-Malayamarutham-AK.Hmy_2WQCe1E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0226   - <a href="composer/Arunachala Kavi.html" >Arunachala Kavi</a> - <a href="raga/Malayamarutham.html" >Malayamarutham</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal V. Pradeep Kumar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0014-Hanumane-Malayamarutham-AK.0VGOkk6xUoc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0014   - <a href="composer/Arunachala Kavi.html" >Arunachala Kavi</a> - <a href="raga/Malayamarutham.html" >Malayamarutham</a> - <a href="artist/V. Pradeep Kumar.html" >V  Pradeep Kumar   VPRADEEP01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -172,9 +148,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bombay Jayashri"], "songs": [{"N": "0121", "T": "", "H": "Hanumane", "S": "hanumAnE sAmikkinda aDaiyALam shol ayyA :  Jhampa", "R": "Malayamarutham", "C": "Arunachala Kavi", "A": "Bombay Jayashri", "V": "wM3z-bHaYDY"}, {"N": "0122", "T": "", "H": "Hanumane", "S": "hanumAnE sAmikkinda aDaiyALam shol ayyA :  Jhampa", "R": "Malayamarutham", "C": "Arunachala Kavi", "A": "Bombay Jayashri", "V": "wke3VJpleWI"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0308", "T": "", "H": "Hanumane", "S": "hanumAnE sAmikkinda aDaiyALam shol ayyA :  Jhampa", "R": "Malayamarutham", "C": "Arunachala Kavi", "A": "Sanjay Subrahmanyan", "V": "IqoF5TmD6z8"}, {"N": "0309", "T": "", "H": "Hanumane", "S": "hanumAnE sAmikkinda aDaiyALam shol ayyA :  Jhampa", "R": "Malayamarutham", "C": "Arunachala Kavi", "A": "Sanjay Subrahmanyan", "V": "f_MIhrQJCCk"}]}, {"name": ["Vocal", "Sikkil Gurucharan"], "songs": [{"N": "0080", "T": "", "H": "Hanumane", "S": "hanumAnE sAmikkinda aDaiyALam shol ayyA :  Jhampa", "R": "Malayamarutham", "C": "Arunachala Kavi", "A": "Sikkil Gurucharan", "V": "vppVh4inXFs"}]}, {"name": ["Vocal", "T. N. Seshagopalan"], "songs": [{"N": "0225", "T": "", "H": "Hanumane", "S": "hanumAnE sAmikkinda aDaiyALam shol ayyA :  Jhampa", "R": "Malayamarutham", "C": "Arunachala Kavi", "A": "T. N. Seshagopalan", "V": "H4YQSmYs5qo"}, {"N": "0226", "T": "", "H": "Hanumane", "S": "hanumAnE sAmikkinda aDaiyALam shol ayyA :  Jhampa", "R": "Malayamarutham", "C": "Arunachala Kavi", "A": "T. N. Seshagopalan", "V": "Hmy_2WQCe1E"}]}, {"name": ["Vocal", "V. Pradeep Kumar"], "songs": [{"N": "0014", "T": "", "H": "Hanumane", "S": "hanumAnE sAmikkinda aDaiyALam shol ayyA :  Jhampa", "R": "Malayamarutham", "C": "Arunachala Kavi", "A": "V. Pradeep Kumar", "V": "0VGOkk6xUoc"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

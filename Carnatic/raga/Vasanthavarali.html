@@ -31,24 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; pahi rama duta jagat-prana kumara mam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1044-Pahi Rama Duta-Vasanthavarali-T.njXgGhnB11s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1044   - <a href="song/Pahi Rama Duta.html" >pAhi rAma dUta jagat prANa kumAra maM :  Rupaka</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0471-Pahi Rama Duta-Vasanthavarali-T.-8CErPxegJs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0471   - <a href="song/Pahi Rama Duta.html" >pAhi rAma dUta jagat prANa kumAra maM :  Rupaka</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0472-Pahi Rama Duta-Vasanthavarali-T.4uH5yAwuK3c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0472   - <a href="song/Pahi Rama Duta.html" >pAhi rAma dUta jagat prANa kumAra maM :  Rupaka</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0473-Pahi Rama Duta-Vasanthavarali-T.CZQfzwbXHp4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0473   - <a href="song/Pahi Rama Duta.html" >pAhi rAma dUta jagat prANa kumAra maM :  Rupaka</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0474-Pahi Rama Duta-Vasanthavarali-T.SZoIx0PhVhc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0474   - <a href="song/Pahi Rama Duta.html" >pAhi rAma dUta jagat prANa kumAra maM :  Rupaka</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0475-Pahi Rama Duta-Vasanthavarali-T.U4SbW-1DdAk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0475   - <a href="song/Pahi Rama Duta.html" >pAhi rAma dUta jagat prANa kumAra maM :  Rupaka</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0095-Pahi Rama Duta-Vasanthavarali-T.0hAcmbHigQY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0095   - <a href="song/Pahi Rama Duta.html" >pAhi rAma dUta jagat prANa kumAra maM :  Rupaka</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/Pantula Rama.html" >Pantula Rama   PANTHULA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0041-Pahi Rama Duta-Vasanthavarali-T.34t_KfAwIgU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0041   - <a href="song/Pahi Rama Duta.html" >pAhi rAma dUta jagat prANa kumAra maM :  Rupaka</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/Malladi Suribabu.html" >Malladi Suribabu   SURIBABU01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["pahi rama duta jagat-prana kumara mam"], "songs": [{"N": "1045", "T": "", "H": "Pahi Rama Duta", "S": "pAhi rAma dUta jagat prANa kumAra maM :  Rupaka", "R": "Vasanthavarali", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "njXgGhnB11s"}, {"N": "0473", "T": "", "H": "Pahi Rama Duta", "S": "pAhi rAma dUta jagat prANa kumAra maM :  Rupaka", "R": "Vasanthavarali", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "-8CErPxegJs"}, {"N": "0474", "T": "", "H": "Pahi Rama Duta", "S": "pAhi rAma dUta jagat prANa kumAra maM :  Rupaka", "R": "Vasanthavarali", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "4uH5yAwuK3c"}, {"N": "0475", "T": "", "H": "Pahi Rama Duta", "S": "pAhi rAma dUta jagat prANa kumAra maM :  Rupaka", "R": "Vasanthavarali", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "CZQfzwbXHp4"}, {"N": "0476", "T": "", "H": "Pahi Rama Duta", "S": "pAhi rAma dUta jagat prANa kumAra maM :  Rupaka", "R": "Vasanthavarali", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "SZoIx0PhVhc"}, {"N": "0477", "T": "", "H": "Pahi Rama Duta", "S": "pAhi rAma dUta jagat prANa kumAra maM :  Rupaka", "R": "Vasanthavarali", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "U4SbW-1DdAk"}, {"N": "0095", "T": "", "H": "Pahi Rama Duta", "S": "pAhi rAma dUta jagat prANa kumAra maM :  Rupaka", "R": "Vasanthavarali", "C": "Thyagaraja", "A": "Pantula Rama", "V": "0hAcmbHigQY"}, {"N": "0041", "T": "", "H": "Pahi Rama Duta", "S": "pAhi rAma dUta jagat prANa kumAra maM :  Rupaka", "R": "Vasanthavarali", "C": "Thyagaraja", "A": "Malladi Suribabu", "V": "34t_KfAwIgU"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

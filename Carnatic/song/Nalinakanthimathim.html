@@ -42,17 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Maharajapuram Santhanam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0303-Nalinakanthimathim-Ragamalika-MK.Dx6-whFJ_aM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0303   - <a href="composer/Madurai V. Krishnaswami.html" >Madurai V  Krishnaswami</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0304-Nalinakanthimathim-Ragamalika-MK.IPinPXjHalc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0304   - <a href="composer/Madurai V. Krishnaswami.html" >Madurai V  Krishnaswami</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0305-Nalinakanthimathim-Ragamalika-MK.JJFRq_JSpY4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0305   - <a href="composer/Madurai V. Krishnaswami.html" >Madurai V  Krishnaswami</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0306-Nalinakanthimathim-Ragamalika-MK.P2tGSCC40vU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0306   - <a href="composer/Madurai V. Krishnaswami.html" >Madurai V  Krishnaswami</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0307-Nalinakanthimathim-Ragamalika-MK.oldaSfTpqVk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0307   - <a href="composer/Madurai V. Krishnaswami.html" >Madurai V  Krishnaswami</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0308-Nalinakanthimathim-Ragamalika-MK.sTa-Lzm4jug');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0308   - <a href="composer/Madurai V. Krishnaswami.html" >Madurai V  Krishnaswami</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -153,9 +143,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Maharajapuram Santhanam"], "songs": [{"N": "0303", "T": "", "H": "Nalinakanthimathim", "S": "nalinakAntImatim namAmyaham sadA :  Adi", "R": "Ragamalika", "C": "Madurai V. Krishnaswami", "A": "Maharajapuram Santhanam", "V": "Dx6-whFJ_aM"}, {"N": "0304", "T": "", "H": "Nalinakanthimathim", "S": "nalinakAntImatim namAmyaham sadA :  Adi", "R": "Ragamalika", "C": "Madurai V. Krishnaswami", "A": "Maharajapuram Santhanam", "V": "IPinPXjHalc"}, {"N": "0305", "T": "", "H": "Nalinakanthimathim", "S": "nalinakAntImatim namAmyaham sadA :  Adi", "R": "Ragamalika", "C": "Madurai V. Krishnaswami", "A": "Maharajapuram Santhanam", "V": "JJFRq_JSpY4"}, {"N": "0306", "T": "", "H": "Nalinakanthimathim", "S": "nalinakAntImatim namAmyaham sadA :  Adi", "R": "Ragamalika", "C": "Madurai V. Krishnaswami", "A": "Maharajapuram Santhanam", "V": "P2tGSCC40vU"}, {"N": "0307", "T": "", "H": "Nalinakanthimathim", "S": "nalinakAntImatim namAmyaham sadA :  Adi", "R": "Ragamalika", "C": "Madurai V. Krishnaswami", "A": "Maharajapuram Santhanam", "V": "oldaSfTpqVk"}, {"N": "0308", "T": "", "H": "Nalinakanthimathim", "S": "nalinakAntImatim namAmyaham sadA :  Adi", "R": "Ragamalika", "C": "Madurai V. Krishnaswami", "A": "Maharajapuram Santhanam", "V": "sTa-Lzm4jug"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

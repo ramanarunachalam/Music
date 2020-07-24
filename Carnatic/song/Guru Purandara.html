@@ -41,28 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin V. V. Ravi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Guru Purandara-Hamirkalyani-VD.hXB_HiArvMY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="composer/Vijaya Vittala Dasa.html" >Vijaya Vittala Dasa</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/V. V. Ravi.html" >V  V  Ravi   VVRAVI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0095-Guru Purandara-Hamirkalyani-VD.R3bwehu11vc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0095   - <a href="composer/Vijaya Vittala Dasa.html" >Vijaya Vittala Dasa</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Priya Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0077-Guru Purandara-Hamirkalyani-VD.rVCQ5CE6Ae4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0077   - <a href="composer/Vijaya Vittala Dasa.html" >Vijaya Vittala Dasa</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/Priya Sisters.html" >Priya Sisters   PRIYAS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. R. Subramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0032-Guru Purandara-Hamirkalyani-VD.544lExqCkpM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0032   - <a href="composer/Vijaya Vittala Dasa.html" >Vijaya Vittala Dasa</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/T. R. Subramaniam.html" >T  R  Subramaniam   TRS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vidyabhushana</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0044-Guru Purandara-Hamirkalyani-VD.fhPXYuuzxL8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0044   - <a href="composer/Vijaya Vittala Dasa.html" >Vijaya Vittala Dasa</a> - <a href="raga/Hamirkalyani.html" >Hamirkalyani</a> - <a href="artist/Vidyabhushana.html" >Vidyabhushana   VIDYABHOOSHANA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -175,9 +154,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "V. V. Ravi"], "songs": [{"N": "0027", "T": "", "H": "Guru Purandara", "S": "guru purandara dAsarE nimma caraNa kamalava :  Rupaka", "R": "Hamirkalyani", "C": "Vijaya Vittala Dasa", "A": "V. V. Ravi", "V": "hXB_HiArvMY"}]}, {"name": ["Vocal", "Bombay Sisters"], "songs": [{"N": "0095", "T": "", "H": "Guru Purandara", "S": "guru purandara dAsarE nimma caraNa kamalava :  Rupaka", "R": "Hamirkalyani", "C": "Vijaya Vittala Dasa", "A": "Bombay Sisters", "V": "R3bwehu11vc"}]}, {"name": ["Vocal", "Priya Sisters"], "songs": [{"N": "0077", "T": "", "H": "Guru Purandara", "S": "guru purandara dAsarE nimma caraNa kamalava :  Rupaka", "R": "Hamirkalyani", "C": "Vijaya Vittala Dasa", "A": "Priya Sisters", "V": "rVCQ5CE6Ae4"}]}, {"name": ["Vocal", "T. R. Subramaniam"], "songs": [{"N": "0032", "T": "", "H": "Guru Purandara", "S": "guru purandara dAsarE nimma caraNa kamalava :  Rupaka", "R": "Hamirkalyani", "C": "Vijaya Vittala Dasa", "A": "T. R. Subramaniam", "V": "544lExqCkpM"}]}, {"name": ["Vocal", "Vidyabhushana"], "songs": [{"N": "0044", "T": "", "H": "Guru Purandara", "S": "guru purandara dAsarE nimma caraNa kamalava :  Rupaka", "R": "Hamirkalyani", "C": "Vijaya Vittala Dasa", "A": "Vidyabhushana", "V": "fhPXYuuzxL8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

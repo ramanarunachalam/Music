@@ -42,31 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Nadaswaram MPN Sethuraman MPN Ponnuswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0011-Padame Thunai-Valaji-P.tdLyzQRq0gg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0011   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Valaji.html" >Valaji</a> - <a href="artist/MPN Sethuraman MPN Ponnuswamy.html" >MPN Sethuraman MPN Ponnuswamy</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0330-Padame Thunai-Valaji-P.S7AAhCytuK8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0330   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Valaji.html" >Valaji</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0331-Padame Thunai-Valaji-P.UaWrlYvGvwM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0331   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Valaji.html" >Valaji</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0332-Padame Thunai-Valaji-P.uSqKsBmZexU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0332   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Valaji.html" >Valaji</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Gayathri Girish</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0138-Padame Thunai-Valaji-P.I6wVagDrJbw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0138   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Valaji.html" >Valaji</a> - <a href="artist/Gayathri Girish.html" >Gayathri Girish   GGAYATHRI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0139-Padame Thunai-Valaji-P.p4b_h59xxYs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0139   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Valaji.html" >Valaji</a> - <a href="artist/Gayathri Girish.html" >Gayathri Girish   GGAYATHRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0563-Padame Thunai-Valaji-P.p4bDjADTjXg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0563   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Valaji.html" >Valaji</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0428-Padame Thunai-Valaji-P.VqbekCfnDwU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0428   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Valaji.html" >Valaji</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -148,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Nadaswaram", "MPN Sethuraman MPN Ponnuswamy"], "songs": [{"N": "0011", "T": "", "H": "Padame Thunai", "S": "pAdamE tuNai paramashivA bhayankara bhavakkaDal :  Adi", "R": "Valaji", "C": "Papanasam Sivan", "A": "MPN Sethuraman MPN Ponnuswamy", "V": "tdLyzQRq0gg"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0330", "T": "", "H": "Padame Thunai", "S": "pAdamE tuNai paramashivA bhayankara bhavakkaDal :  Adi", "R": "Valaji", "C": "Papanasam Sivan", "A": "D. K. Jayaraman", "V": "S7AAhCytuK8"}, {"N": "0331", "T": "", "H": "Padame Thunai", "S": "pAdamE tuNai paramashivA bhayankara bhavakkaDal :  Adi", "R": "Valaji", "C": "Papanasam Sivan", "A": "D. K. Jayaraman", "V": "UaWrlYvGvwM"}, {"N": "0332", "T": "", "H": "Padame Thunai", "S": "pAdamE tuNai paramashivA bhayankara bhavakkaDal :  Adi", "R": "Valaji", "C": "Papanasam Sivan", "A": "D. K. Jayaraman", "V": "uSqKsBmZexU"}]}, {"name": ["Vocal", "Gayathri Girish"], "songs": [{"N": "0138", "T": "", "H": "Padame Thunai", "S": "pAdamE tuNai paramashivA bhayankara bhavakkaDal :  Adi", "R": "Valaji", "C": "Papanasam Sivan", "A": "Gayathri Girish", "V": "I6wVagDrJbw"}, {"N": "0139", "T": "", "H": "Padame Thunai", "S": "pAdamE tuNai paramashivA bhayankara bhavakkaDal :  Adi", "R": "Valaji", "C": "Papanasam Sivan", "A": "Gayathri Girish", "V": "p4b_h59xxYs"}]}, {"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0563", "T": "", "H": "Padame Thunai", "S": "pAdamE tuNai paramashivA bhayankara bhavakkaDal :  Adi", "R": "Valaji", "C": "Papanasam Sivan", "A": "M. L. Vasanthakumari", "V": "p4bDjADTjXg"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0428", "T": "", "H": "Padame Thunai", "S": "pAdamE tuNai paramashivA bhayankara bhavakkaDal :  Adi", "R": "Valaji", "C": "Papanasam Sivan", "A": "Sudha Ragunathan", "V": "VqbekCfnDwU"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

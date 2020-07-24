@@ -26,24 +26,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; KSK01</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0001-Ethanai Koti Inbam-Desh-B.0dOnUl_pfiI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0001   - <a href="song/Ethanai Koti Inbam.html" >ettanai kOTi inbam vaittAy engaL :  Adi</a> - <a href="raga/Desh.html" >Desh</a> - <a href="composer/Subramanya Bharathiyar.html" >Subramanya Bharathiyar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0002-Manasu Rada Mayamma-Samakadambari-GNB.N4thIFNl4N0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0002   - <a href="song/Manasu Rada Mayamma.html" >sujana mAnasa hamsAnandinI sudhA sAgara madhya :  Adi</a> - <a href="raga/Samakadambari.html" >Samakadambari</a> - <a href="composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0003-Neekeppudu-Abhogi-MSR.9oyi0um_UhM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0003   - <a href="song/Neekeppudu.html" >nIkeppuDu daya vaccunO : Adi</a> - <a href="raga/Abhogi.html" >Abhogi</a> - <a href="composer/Mysore Sadasiva Rao.html" >Mysore Sadasiva Rao</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-Varnam-Varnam-Kadanakuthuhalam-UnknownComposer.LgoqLYy1ytQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="song/Varnam.html" >Varnam</a> - <a href="raga/Kadanakuthuhalam.html" >Kadanakuthuhalam</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-Varnam-Varnam-Malavi-KSK.-HkNxyj5pmc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="song/Varnam.html" >Varnam</a> - <a href="raga/Malavi.html" >Malavi</a> - <a href="composer/Calcutta K. S. Krishnamurti.html" >Calcutta K  S  Krishnamurti</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-Varnam-Varnam-UnknownRaga-UnknownComposer.8N85ZnTVMkg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006   - <a href="song/Varnam.html" >Varnam</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0007-UnknownSong-Kapi-UnknownComposer.EMh-qdinnfo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0007   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Kapi.html" >Kapi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0008-UnknownSong-Subhapanthuvarali-UnknownComposer.bVs0f8Lu4G8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0008   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Subhapanthuvarali.html" >Subhapanthuvarali</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["KSK01"], "songs": [{"N": "0001", "T": "", "H": "Ethanai Koti Inbam", "S": "ettanai kOTi inbam vaittAy engaL :  Adi", "R": "Desh", "C": "Subramanya Bharathiyar", "A": "Calcutta K. S. Krishnamurti", "V": "0dOnUl_pfiI"}, {"N": "0002", "T": "", "H": "Manasu Rada Mayamma", "S": "sujana mAnasa hamsAnandinI sudhA sAgara madhya :  Adi", "R": "Samakadambari", "C": "G. N. Balasubramaniam", "A": "Calcutta K. S. Krishnamurti", "V": "N4thIFNl4N0"}, {"N": "0003", "T": "", "H": "Neekeppudu", "S": "nIkeppuDu daya vaccunO : Adi", "R": "Abhogi", "C": "Mysore Sadasiva Rao", "A": "Calcutta K. S. Krishnamurti", "V": "9oyi0um_UhM"}, {"N": "0004", "T": "", "H": "Varnam", "S": "Varnam", "R": "Kadanakuthuhalam", "C": "UnknownComposer", "A": "Calcutta K. S. Krishnamurti", "V": "LgoqLYy1ytQ"}, {"N": "0005", "T": "", "H": "Varnam", "S": "Varnam", "R": "Malavi", "C": "Calcutta K. S. Krishnamurti", "A": "Calcutta K. S. Krishnamurti", "V": "-HkNxyj5pmc"}, {"N": "0006", "T": "", "H": "Varnam", "S": "Varnam", "R": "Unknownraga", "C": "UnknownComposer", "A": "Calcutta K. S. Krishnamurti", "V": "8N85ZnTVMkg"}, {"N": "0007", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kapi", "C": "UnknownComposer", "A": "Calcutta K. S. Krishnamurti", "V": "EMh-qdinnfo"}, {"N": "0008", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Subhapanthuvarali", "C": "UnknownComposer", "A": "Calcutta K. S. Krishnamurti", "V": "bVs0f8Lu4G8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#artist-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

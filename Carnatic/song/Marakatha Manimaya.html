@@ -42,27 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Aruna Sairam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0195-Marakatha Manimaya-Arabhi-OVK.1r_PF92zq-w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0195   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0129-Marakatha Manimaya-Arabhi-OVK.0kbdpF1CD6E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0129   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0130-Marakatha Manimaya-Arabhi-OVK.kHTFRQ9MKuE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0130   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. J. Yesudas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0167-Marakatha Manimaya-Arabhi-OVK.OZWwM1VogJ0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0167   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0168-Marakatha Manimaya-Arabhi-OVK.Wt-6rd-_fKc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0168   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0169-Marakatha Manimaya-Arabhi-OVK.gu7pfqjWRYA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0169   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0320-Marakatha Manimaya-Arabhi-OVK.HoRXYKrJDCA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0320   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -156,9 +136,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Aruna Sairam"], "songs": [{"N": "0195", "T": "", "H": "Marakatha Manimaya", "S": "marakata maNimaya cElA gOpAla madana kOTi :  Adi", "R": "Arabhi", "C": "Oothukkadu Venkata Kavi", "A": "Aruna Sairam", "V": "1r_PF92zq-w"}]}, {"name": ["Vocal", "Bombay Sisters"], "songs": [{"N": "0129", "T": "", "H": "Marakatha Manimaya", "S": "marakata maNimaya cElA gOpAla madana kOTi :  Adi", "R": "Arabhi", "C": "Oothukkadu Venkata Kavi", "A": "Bombay Sisters", "V": "0kbdpF1CD6E"}, {"N": "0130", "T": "", "H": "Marakatha Manimaya", "S": "marakata maNimaya cElA gOpAla madana kOTi :  Adi", "R": "Arabhi", "C": "Oothukkadu Venkata Kavi", "A": "Bombay Sisters", "V": "kHTFRQ9MKuE"}]}, {"name": ["Vocal", "K. J. Yesudas"], "songs": [{"N": "0167", "T": "", "H": "Marakatha Manimaya", "S": "marakata maNimaya cElA gOpAla madana kOTi :  Adi", "R": "Arabhi", "C": "Oothukkadu Venkata Kavi", "A": "K. J. Yesudas", "V": "OZWwM1VogJ0"}, {"N": "0168", "T": "", "H": "Marakatha Manimaya", "S": "marakata maNimaya cElA gOpAla madana kOTi :  Adi", "R": "Arabhi", "C": "Oothukkadu Venkata Kavi", "A": "K. J. Yesudas", "V": "Wt-6rd-_fKc"}, {"N": "0169", "T": "", "H": "Marakatha Manimaya", "S": "marakata maNimaya cElA gOpAla madana kOTi :  Adi", "R": "Arabhi", "C": "Oothukkadu Venkata Kavi", "A": "K. J. Yesudas", "V": "gu7pfqjWRYA"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0320", "T": "", "H": "Marakatha Manimaya", "S": "marakata maNimaya cElA gOpAla madana kOTi :  Adi", "R": "Arabhi", "C": "Oothukkadu Venkata Kavi", "A": "Sudha Ragunathan", "V": "HoRXYKrJDCA"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -42,19 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0660-Manujudai Putti-Abhogi-TA.IwVC8OHsLjg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0660   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Abhogi.html" >Abhogi</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0661-Manujudai Putti-Abhogi-TA.P-867NW0uyE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0661   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Abhogi.html" >Abhogi</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0662-Manujudai Putti-Abhogi-TA.SLLW6SJyKg0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0662   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Abhogi.html" >Abhogi</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0663-Manujudai Putti-Abhogi-TA.U_nYJX1gZ88');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0663   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Abhogi.html" >Abhogi</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0664-Manujudai Putti-Abhogi-TA._1UVkOOhhbU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0664   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Abhogi.html" >Abhogi</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0665-Manujudai Putti-Abhogi-TA.cMLyvUp-0Aw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0665   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Abhogi.html" >Abhogi</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0666-Manujudai Putti-Abhogi-TA.dtsn2s-Gma0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0666   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Abhogi.html" >Abhogi</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0667-Manujudai Putti-Abhogi-TA.jzx265oimrg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0667   - <a href="composer/Annamacharya.html" >Annamacharya</a> - <a href="raga/Abhogi.html" >Abhogi</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -143,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "0660", "T": "", "H": "Manujudai Putti", "S": "manujuDai puTTi manujuni saeviMchi :  Adi", "R": "Abhogi", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "IwVC8OHsLjg"}, {"N": "0661", "T": "", "H": "Manujudai Putti", "S": "manujuDai puTTi manujuni saeviMchi :  Adi", "R": "Abhogi", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "P-867NW0uyE"}, {"N": "0662", "T": "", "H": "Manujudai Putti", "S": "manujuDai puTTi manujuni saeviMchi :  Adi", "R": "Abhogi", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "SLLW6SJyKg0"}, {"N": "0663", "T": "", "H": "Manujudai Putti", "S": "manujuDai puTTi manujuni saeviMchi :  Adi", "R": "Abhogi", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "U_nYJX1gZ88"}, {"N": "0664", "T": "", "H": "Manujudai Putti", "S": "manujuDai puTTi manujuni saeviMchi :  Adi", "R": "Abhogi", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "_1UVkOOhhbU"}, {"N": "0665", "T": "", "H": "Manujudai Putti", "S": "manujuDai puTTi manujuni saeviMchi :  Adi", "R": "Abhogi", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "cMLyvUp-0Aw"}, {"N": "0666", "T": "", "H": "Manujudai Putti", "S": "manujuDai puTTi manujuni saeviMchi :  Adi", "R": "Abhogi", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "dtsn2s-Gma0"}, {"N": "0667", "T": "", "H": "Manujudai Putti", "S": "manujuDai puTTi manujuni saeviMchi :  Adi", "R": "Abhogi", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "jzx265oimrg"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

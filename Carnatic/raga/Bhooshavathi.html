@@ -31,33 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; abhiramim akhilabhuvana raksakimashraye</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-Abhiramim Akhila-Bhooshavathi-MD.6NjtOQndrX0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006   - <a href="song/Abhiramim Akhila.html" >abhirAmIm akhilabhuvana rakSakImAshrayE :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Raji Gopalakrishnan.html" >Raji Gopalakrishnan   RAJIG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; bhusapatim mahnjubhasapatim bhajeham</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0067-Bhushapatim-Bhooshavathi-MD.o_5Fm1YjwnQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0067   - <a href="song/Bhushapatim.html" >bhUSApatim maHnjubhASApatim bhajEham :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0068-Bhushapatim-Bhooshavathi-MD.uDSft3pmvYk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0068   - <a href="song/Bhushapatim.html" >bhUSApatim maHnjubhASApatim bhajEham :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; bhusavatim mahnjubhasavatim bhajeham</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0021-Bhushavatim-Bhooshavathi-MD.2AWCXFnRrvA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0021   - <a href="song/Bhushavatim.html" >bhUSAvatim maHnjubhASAvatim bhajEham :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Prema Rangarajan.html" >Prema Rangarajan   RPREMA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0022-Bhushavatim-Bhooshavathi-MD.nuG7SrBUKF4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0022   - <a href="song/Bhushavatim.html" >bhUSAvatim maHnjubhASAvatim bhajEham :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Prema Rangarajan.html" >Prema Rangarajan   RPREMA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0090-Bhushavatim-Bhooshavathi-MD.qI85-Ke11Ao');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0090   - <a href="song/Bhushavatim.html" >bhUSAvatim maHnjubhASAvatim bhajEham :  Rupaka</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; unknownsong</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0086-UnknownSong-Bhooshavathi-UnknownComposer.z1MKVNfD1vc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0086   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Vikku Vinayakram.html" >Vikku Vinayakram   VIKKU01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1918-UnknownSong-Bhooshavathi-UnknownComposer.l9dbjNIgPXY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1918   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["abhiramim akhilabhuvana raksakimashraye"], "songs": [{"N": "0006", "T": "", "H": "Abhiramim Akhila", "S": "abhirAmIm akhilabhuvana rakSakImAshrayE :  Rupaka", "R": "Bhooshavathi", "C": "Muthuswami Dikshitar", "A": "Raji Gopalakrishnan", "V": "6NjtOQndrX0"}]}, {"name": ["bhusapatim mahnjubhasapatim bhajeham"], "songs": [{"N": "0067", "T": "", "H": "Bhushapatim", "S": "bhUSApatim maHnjubhASApatim bhajEham :  Rupaka", "R": "Bhooshavathi", "C": "Muthuswami Dikshitar", "A": "Aruna Sairam", "V": "o_5Fm1YjwnQ"}, {"N": "0068", "T": "", "H": "Bhushapatim", "S": "bhUSApatim maHnjubhASApatim bhajEham :  Rupaka", "R": "Bhooshavathi", "C": "Muthuswami Dikshitar", "A": "Aruna Sairam", "V": "uDSft3pmvYk"}]}, {"name": ["bhusavatim mahnjubhasavatim bhajeham"], "songs": [{"N": "0021", "T": "", "H": "Bhushavatim", "S": "bhUSAvatim maHnjubhASAvatim bhajEham :  Rupaka", "R": "Bhooshavathi", "C": "Muthuswami Dikshitar", "A": "Prema Rangarajan", "V": "2AWCXFnRrvA"}, {"N": "0022", "T": "", "H": "Bhushavatim", "S": "bhUSAvatim maHnjubhASAvatim bhajEham :  Rupaka", "R": "Bhooshavathi", "C": "Muthuswami Dikshitar", "A": "Prema Rangarajan", "V": "nuG7SrBUKF4"}, {"N": "0090", "T": "", "H": "Bhushavatim", "S": "bhUSAvatim maHnjubhASAvatim bhajEham :  Rupaka", "R": "Bhooshavathi", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "qI85-Ke11Ao"}]}, {"name": ["unknownsong"], "songs": [{"N": "0086", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Bhooshavathi", "C": "UnknownComposer", "A": "Vikku Vinayakram", "V": "z1MKVNfD1vc"}, {"N": "1918", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Bhooshavathi", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "l9dbjNIgPXY"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

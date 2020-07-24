@@ -42,31 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal A. S. Murali</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0030-Maragatha Lingam-Vasantha-MD.VQ7KF9-3lNY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0030   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/A. S. Murali.html" >A  S  Murali   ASMURALI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Pattammal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0245-Maragatha Lingam-Vasantha-MD.DSldA79YC2U');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0245   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Neela Ramgopal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0050-Maragatha Lingam-Vasantha-MD.Aiwmo15sFns');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0050   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Neela Ramgopal.html" >Neela Ramgopal   NEELA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Raji Gopalakrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0042-Maragatha Lingam-Vasantha-MD.QaREC4ieR_A');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0042   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Raji Gopalakrishnan.html" >Raji Gopalakrishnan   RAJIG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ranjani Gayatri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0170-Maragatha Lingam-Vasantha-MD.DFD_M4A4Vrw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0170   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0171-Maragatha Lingam-Vasantha-MD.fHXi7kb-bII');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0171   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0172-Maragatha Lingam-Vasantha-MD.m2ToifthIO4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0172   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0173-Maragatha Lingam-Vasantha-MD.uxegRMlEpZ4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0173   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Vasantha.html" >Vasantha</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -158,9 +134,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "A. S. Murali"], "songs": [{"N": "0030", "T": "", "H": "Maragatha Lingam", "S": "marakata liHNgam cintayEham mANikyavalyambAsamEtam :  Adi", "R": "Vasantha", "C": "Muthuswami Dikshitar", "A": "A. S. Murali", "V": "VQ7KF9-3lNY"}]}, {"name": ["Vocal", "D. K. Pattammal"], "songs": [{"N": "0245", "T": "", "H": "Maragatha Lingam", "S": "marakata liHNgam cintayEham mANikyavalyambAsamEtam :  Adi", "R": "Vasantha", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "DSldA79YC2U"}]}, {"name": ["Vocal", "Neela Ramgopal"], "songs": [{"N": "0050", "T": "", "H": "Maragatha Lingam", "S": "marakata liHNgam cintayEham mANikyavalyambAsamEtam :  Adi", "R": "Vasantha", "C": "Muthuswami Dikshitar", "A": "Neela Ramgopal", "V": "Aiwmo15sFns"}]}, {"name": ["Vocal", "Raji Gopalakrishnan"], "songs": [{"N": "0042", "T": "", "H": "Maragatha Lingam", "S": "marakata liHNgam cintayEham mANikyavalyambAsamEtam :  Adi", "R": "Vasantha", "C": "Muthuswami Dikshitar", "A": "Raji Gopalakrishnan", "V": "QaREC4ieR_A"}]}, {"name": ["Vocal", "Ranjani Gayatri"], "songs": [{"N": "0170", "T": "", "H": "Maragatha Lingam", "S": "marakata liHNgam cintayEham mANikyavalyambAsamEtam :  Adi", "R": "Vasantha", "C": "Muthuswami Dikshitar", "A": "Ranjani Gayatri", "V": "DFD_M4A4Vrw"}, {"N": "0171", "T": "", "H": "Maragatha Lingam", "S": "marakata liHNgam cintayEham mANikyavalyambAsamEtam :  Adi", "R": "Vasantha", "C": "Muthuswami Dikshitar", "A": "Ranjani Gayatri", "V": "fHXi7kb-bII"}, {"N": "0172", "T": "", "H": "Maragatha Lingam", "S": "marakata liHNgam cintayEham mANikyavalyambAsamEtam :  Adi", "R": "Vasantha", "C": "Muthuswami Dikshitar", "A": "Ranjani Gayatri", "V": "m2ToifthIO4"}, {"N": "0173", "T": "", "H": "Maragatha Lingam", "S": "marakata liHNgam cintayEham mANikyavalyambAsamEtam :  Adi", "R": "Vasantha", "C": "Muthuswami Dikshitar", "A": "Ranjani Gayatri", "V": "uxegRMlEpZ4"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

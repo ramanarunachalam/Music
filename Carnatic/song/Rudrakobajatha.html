@@ -42,18 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Rudrapatnam Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0037-Rudrakobajatha-Rudrapriya-MD.0yl36_FxXp4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0037   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Rudrapriya.html" >Rudrapriya</a> - <a href="artist/Rudrapatnam Brothers.html" >Rudrapatnam Brothers   RUDRABROS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0038-Rudrakobajatha-Rudrapriya-MD.3FP4Xw1bibE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0038   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Rudrapriya.html" >Rudrapriya</a> - <a href="artist/Rudrapatnam Brothers.html" >Rudrapatnam Brothers   RUDRABROS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. R. Subramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0088-Rudrakobajatha-Rudrapriya-MD.nU0GuGxYXIg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0088   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Rudrapriya.html" >Rudrapriya</a> - <a href="artist/T. R. Subramaniam.html" >T  R  Subramaniam   TRS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0087-Rudrakobajatha-Rudrapriya-MD.laCycZxyVrE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0087   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Rudrapriya.html" >Rudrapriya</a> - <a href="artist/T. R. Subramaniam.html" >T  R  Subramaniam   TRS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -145,9 +134,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Rudrapatnam Brothers"], "songs": [{"N": "0037", "T": "", "H": "Rudrakobajatha", "S": "rudrakOpajAta vIrabhadramAshrayE sadA hRdayE :  Rupaka", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "Rudrapatnam Brothers", "V": "0yl36_FxXp4"}, {"N": "0038", "T": "", "H": "Rudrakobajatha", "S": "rudrakOpajAta vIrabhadramAshrayE sadA hRdayE :  Rupaka", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "Rudrapatnam Brothers", "V": "3FP4Xw1bibE"}]}, {"name": ["Vocal", "T. R. Subramaniam"], "songs": [{"N": "0088", "T": "", "H": "Rudrakobajatha", "S": "rudrakOpajAta vIrabhadramAshrayE sadA hRdayE :  Rupaka", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "T. R. Subramaniam", "V": "nU0GuGxYXIg"}, {"N": "0087", "T": "", "H": "Rudrakobajatha", "S": "rudrakOpajAta vIrabhadramAshrayE sadA hRdayE :  Rupaka", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "T. R. Subramaniam", "V": "laCycZxyVrE"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -25,23 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; ala mamarattin ilai mel</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0634-Virutham-Ala Mamarattin Ilai Mel-Ragamalika-TPPZ.RGKNVH6yMNg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0634 - <a href="song_type/Virutham.html" >Virutham</a>  - <a href="song/Ala Mamarattin Ilai Mel.html" >Ala Mamarattin Ilai Mel</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; kondal vannanai kovalanai</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0346-Kondal Vannanai Kovalanai-Yadukulakambhoji-TPPZ.Bw28V9XM99o');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0346   - <a href="song/Kondal Vannanai Kovalanai.html" >Kondal Vannanai Kovalanai</a> - <a href="raga/Yadukulakambhoji.html" >Yadukulakambhoji</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0457-Kondal Vannanai Kovalanai-Yadukulakambhoji-TPPZ.v2noKT1uhHc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0457   - <a href="song/Kondal Vannanai Kovalanai.html" >Kondal Vannanai Kovalanai</a> - <a href="raga/Yadukulakambhoji.html" >Yadukulakambhoji</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0281-Kondal Vannanai Kovalanai-Yadukulakambhoji-TPPZ.-WsRTDeVhog');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0281   - <a href="song/Kondal Vannanai Kovalanai.html" >Kondal Vannanai Kovalanai</a> - <a href="raga/Yadukulakambhoji.html" >Yadukulakambhoji</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["ala mamarattin ilai mel"], "songs": [{"N": "0634", "T": "Virutham", "H": "Ala Mamarattin Ilai Mel", "S": "Ala Mamarattin Ilai Mel", "R": "Ragamalika", "C": "Thiruppaan Azhwar", "A": "D. K. Pattammal", "V": "RGKNVH6yMNg"}]}, {"name": ["kondal vannanai kovalanai"], "songs": [{"N": "0346", "T": "", "H": "Kondal Vannanai Kovalanai", "S": "Kondal Vannanai Kovalanai", "R": "Yadukulakambhoji", "C": "Thiruppaan Azhwar", "A": "M. L. Vasanthakumari", "V": "Bw28V9XM99o"}, {"N": "0457", "T": "", "H": "Kondal Vannanai Kovalanai", "S": "Kondal Vannanai Kovalanai", "R": "Yadukulakambhoji", "C": "Thiruppaan Azhwar", "A": "Sanjay Subrahmanyan", "V": "v2noKT1uhHc"}, {"N": "0281", "T": "", "H": "Kondal Vannanai Kovalanai", "S": "Kondal Vannanai Kovalanai", "R": "Yadukulakambhoji", "C": "Thiruppaan Azhwar", "A": "Sudha Ragunathan", "V": "-WsRTDeVhog"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

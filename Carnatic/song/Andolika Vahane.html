@@ -39,26 +39,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. V. Narayanaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0055-Andolika Vahane-Anandabhairavi-ST.CQNe-0SmXQ8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0055   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/K. V. Narayanaswamy.html" >K  V  Narayanaswamy   KVN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Puducode Krishnamoorthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-Andolika Vahane-Anandabhairavi-ST.XmWjnu1BcwU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Puducode Krishnamoorthy.html" >Puducode Krishnamoorthy   PK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0123-Andolika Vahane-Anandabhairavi-ST.rQEECH3pdt8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0123   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0121-Andolika Vahane-Anandabhairavi-ST.CNWZf15EZso');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0121   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0122-Andolika Vahane-Anandabhairavi-ST.q8NQ--I7f78');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0122   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sankaran Namboothiri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0023-Andolika Vahane-Anandabhairavi-ST.MjAa_7tt7kM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0023   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Sankaran Namboothiri.html" >Sankaran Namboothiri   SNAMBOOTHIRI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -165,9 +146,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "K. V. Narayanaswamy"], "songs": [{"N": "0055", "T": "", "H": "Andolika Vahane", "S": "AndOLika vAhanE jagatpatiyAm ambhOja nAbhan :  Caapu", "R": "Anandabhairavi", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "CQNe-0SmXQ8"}]}, {"name": ["Vocal", "Puducode Krishnamoorthy"], "songs": [{"N": "0005", "T": "", "H": "Andolika Vahane", "S": "AndOLika vAhanE jagatpatiyAm ambhOja nAbhan :  Caapu", "R": "Anandabhairavi", "C": "Swathi Thirunal", "A": "Puducode Krishnamoorthy", "V": "XmWjnu1BcwU"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0123", "T": "", "H": "Andolika Vahane", "S": "AndOLika vAhanE jagatpatiyAm ambhOja nAbhan :  Caapu", "R": "Anandabhairavi", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "rQEECH3pdt8"}, {"N": "0121", "T": "", "H": "Andolika Vahane", "S": "AndOLika vAhanE jagatpatiyAm ambhOja nAbhan :  Caapu", "R": "Anandabhairavi", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "CNWZf15EZso"}, {"N": "0122", "T": "", "H": "Andolika Vahane", "S": "AndOLika vAhanE jagatpatiyAm ambhOja nAbhan :  Caapu", "R": "Anandabhairavi", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "q8NQ--I7f78"}]}, {"name": ["Vocal", "Sankaran Namboothiri"], "songs": [{"N": "0023", "T": "", "H": "Andolika Vahane", "S": "AndOLika vAhanE jagatpatiyAm ambhOja nAbhan :  Caapu", "R": "Anandabhairavi", "C": "Swathi Thirunal", "A": "Sankaran Namboothiri", "V": "MjAa_7tt7kM"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

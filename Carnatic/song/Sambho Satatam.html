@@ -42,24 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0199-Sambho Satatam-Shuddha hindolam-ST.KiJwk1aquyA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0199   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Shuddha hindolam.html" >Shuddha hindolam</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0200-Sambho Satatam-Shuddha hindolam-ST.wCbqJ_x6JXE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0200   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Shuddha hindolam.html" >Shuddha hindolam</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0201-Sambho Satatam-UnknownRaga-ST.ybM3B95Xtdo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0201   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal C. K. Ramachandran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0014-Sambho Satatam-UnknownRaga-ST.8WBXmx6xS2w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0014   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/C. K. Ramachandran.html" >C  K  Ramachandran   CKR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0015-Sambho Satatam-UnknownRaga-ST.B6oDTLMVUGU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0015   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/C. K. Ramachandran.html" >C  K  Ramachandran   CKR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Semmangudi Srinivasa Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0647-Sambho Satatam-Karnataka kapi-ST.oZy2zznkp6k');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0647   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Karnataka kapi.html" >Karnataka kapi</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0648-Sambho Satatam-Karnataka kapi-ST.vbztHUrSq50');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0648   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Karnataka kapi.html" >Karnataka kapi</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -148,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0199", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Shuddha hindolam", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "KiJwk1aquyA"}, {"N": "0200", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Shuddha hindolam", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "wCbqJ_x6JXE"}, {"N": "0201", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Unknownraga", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "ybM3B95Xtdo"}]}, {"name": ["Vocal", "C. K. Ramachandran"], "songs": [{"N": "0014", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Unknownraga", "C": "Swathi Thirunal", "A": "C. K. Ramachandran", "V": "8WBXmx6xS2w"}, {"N": "0015", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Unknownraga", "C": "Swathi Thirunal", "A": "C. K. Ramachandran", "V": "B6oDTLMVUGU"}]}, {"name": ["Vocal", "Semmangudi Srinivasa Iyer"], "songs": [{"N": "0647", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Karnataka kapi", "C": "Swathi Thirunal", "A": "Semmangudi Srinivasa Iyer", "V": "oZy2zznkp6k"}, {"N": "0648", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Karnataka kapi", "C": "Swathi Thirunal", "A": "Semmangudi Srinivasa Iyer", "V": "vbztHUrSq50"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

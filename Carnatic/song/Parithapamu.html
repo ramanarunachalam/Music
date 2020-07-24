@@ -42,30 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mandolin U. Srinivas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0368-Parithapamu-Manohari-T.NGkLOBaF8q0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0368   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manohari.html" >Manohari</a> - <a href="artist/U. Srinivas.html" >U  Srinivas   USRINIVAS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0347-Parithapamu-Manohari-T.AMRefMaKpx0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0347   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manohari.html" >Manohari</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0348-Parithapamu-Manohari-T.x6CWyfP3y9c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0348   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manohari.html" >Manohari</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Hyderabad Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0142-Parithapamu-Manohari-T.J-bQVDa4nKk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0142   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manohari.html" >Manohari</a> - <a href="artist/Hyderabad Brothers.html" >Hyderabad Brothers   HBROS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1107-Parithapamu-Manohari-T.u-9VepMVgEs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1107   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manohari.html" >Manohari</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal O. S. Thyagarajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0119-Parithapamu-Manohari-T.7oDB0G8x0pk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0119   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manohari.html" >Manohari</a> - <a href="artist/O. S. Thyagarajan.html" >O  S  Thyagarajan   OST01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0120-Parithapamu-Manohari-T.trJ5DF1xhrY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0120   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manohari.html" >Manohari</a> - <a href="artist/O. S. Thyagarajan.html" >O  S  Thyagarajan   OST01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -157,9 +134,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Mandolin", "U. Srinivas"], "songs": [{"N": "0368", "T": "", "H": "Parithapamu", "S": "paritApamu kani y ADina  :  Rupaka", "R": "Manohari", "C": "Thyagaraja", "A": "U. Srinivas", "V": "NGkLOBaF8q0"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0347", "T": "", "H": "Parithapamu", "S": "paritApamu kani y ADina  :  Rupaka", "R": "Manohari", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "AMRefMaKpx0"}, {"N": "0348", "T": "", "H": "Parithapamu", "S": "paritApamu kani y ADina  :  Rupaka", "R": "Manohari", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "x6CWyfP3y9c"}]}, {"name": ["Vocal", "Hyderabad Brothers"], "songs": [{"N": "0142", "T": "", "H": "Parithapamu", "S": "paritApamu kani y ADina  :  Rupaka", "R": "Manohari", "C": "Thyagaraja", "A": "Hyderabad Brothers", "V": "J-bQVDa4nKk"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "1108", "T": "", "H": "Parithapamu", "S": "paritApamu kani y ADina  :  Rupaka", "R": "Manohari", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "u-9VepMVgEs"}]}, {"name": ["Vocal", "O. S. Thyagarajan"], "songs": [{"N": "0119", "T": "", "H": "Parithapamu", "S": "paritApamu kani y ADina  :  Rupaka", "R": "Manohari", "C": "Thyagaraja", "A": "O. S. Thyagarajan", "V": "7oDB0G8x0pk"}, {"N": "0120", "T": "", "H": "Parithapamu", "S": "paritApamu kani y ADina  :  Rupaka", "R": "Manohari", "C": "Thyagaraja", "A": "O. S. Thyagarajan", "V": "trJ5DF1xhrY"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

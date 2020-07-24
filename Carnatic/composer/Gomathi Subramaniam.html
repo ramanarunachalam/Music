@@ -25,27 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; muruga muruga ena</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0028-Muruga Muruga Ena-Hamsanandi-GMS.xf02pXaimwg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0028   - <a href="song/Muruga Muruga Ena.html" >Muruga Muruga Ena</a> - <a href="raga/Hamsanandi.html" >Hamsanandi</a> - <a href="artist/Bangalore S. Shankar.html" >Bangalore S  Shankar   BSHANKAR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0097-Muruga Muruga Ena-Hamsanandi-GMS.Ib2SFYF5yyc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0097   - <a href="song/Muruga Muruga Ena.html" >Muruga Muruga Ena</a> - <a href="raga/Hamsanandi.html" >Hamsanandi</a> - <a href="artist/Bharat Sundar.html" >Bharat Sundar   BSUNDAR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0265-Muruga Muruga Ena-Hamsanandi-GMS.WoKfa-VEkPo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0265   - <a href="song/Muruga Muruga Ena.html" >Muruga Muruga Ena</a> - <a href="raga/Hamsanandi.html" >Hamsanandi</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0266-Muruga Muruga Ena-Hamsanandi-GMS.nSLggB8EwAY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0266   - <a href="song/Muruga Muruga Ena.html" >Muruga Muruga Ena</a> - <a href="raga/Hamsanandi.html" >Hamsanandi</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0066-Muruga Muruga Ena-Hamsanandi-GMS.HVTBV8Zj-oc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0066   - <a href="song/Muruga Muruga Ena.html" >Muruga Muruga Ena</a> - <a href="raga/Hamsanandi.html" >Hamsanandi</a> - <a href="artist/Kunnakudi M. Balamuralikrishna.html" >Kunnakudi M  Balamuralikrishna</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0039-Muruga Muruga Ena-Hamsanandi-GMS.llMh0qqcDJo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0039   - <a href="song/Muruga Muruga Ena.html" >Muruga Muruga Ena</a> - <a href="raga/Hamsanandi.html" >Hamsanandi</a> - <a href="artist/Palghat R Ramprasad.html" >Palghat R Ramprasad   RRAMPRASAD01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; va va va murugayya (ni) vand-enakkarul</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0539-Va Va Murugayya-Sindhubhairavi-GMS.VTeGlRrcIuM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0539   - <a href="song/Va Va Murugayya.html" >vA vA vA murugayyA  nI  vand enakkaruL :  Adi</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0540-Va Va Murugayya-Sindhubhairavi-GMS.bGkwJQhSQ30');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0540   - <a href="song/Va Va Murugayya.html" >vA vA vA murugayyA  nI  vand enakkaruL :  Adi</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["muruga muruga ena"], "songs": [{"N": "0028", "T": "", "H": "Muruga Muruga Ena", "S": "Muruga Muruga Ena", "R": "Hamsanandi", "C": "Gomathi Subramaniam", "A": "Bangalore S. Shankar", "V": "xf02pXaimwg"}, {"N": "0097", "T": "", "H": "Muruga Muruga Ena", "S": "Muruga Muruga Ena", "R": "Hamsanandi", "C": "Gomathi Subramaniam", "A": "Bharat Sundar", "V": "Ib2SFYF5yyc"}, {"N": "0265", "T": "", "H": "Muruga Muruga Ena", "S": "Muruga Muruga Ena", "R": "Hamsanandi", "C": "Gomathi Subramaniam", "A": "D. K. Jayaraman", "V": "WoKfa-VEkPo"}, {"N": "0266", "T": "", "H": "Muruga Muruga Ena", "S": "Muruga Muruga Ena", "R": "Hamsanandi", "C": "Gomathi Subramaniam", "A": "D. K. Jayaraman", "V": "nSLggB8EwAY"}, {"N": "0066", "T": "", "H": "Muruga Muruga Ena", "S": "Muruga Muruga Ena", "R": "Hamsanandi", "C": "Gomathi Subramaniam", "A": "Kunnakudi M. Balamuralikrishna", "V": "HVTBV8Zj-oc"}, {"N": "0039", "T": "", "H": "Muruga Muruga Ena", "S": "Muruga Muruga Ena", "R": "Hamsanandi", "C": "Gomathi Subramaniam", "A": "Palghat R Ramprasad", "V": "llMh0qqcDJo"}]}, {"name": ["va va va murugayya (ni) vand-enakkarul"], "songs": [{"N": "0539", "T": "", "H": "Va Va Murugayya", "S": "vA vA vA murugayyA  nI  vand enakkaruL :  Adi", "R": "Sindhubhairavi", "C": "Gomathi Subramaniam", "A": "D. K. Jayaraman", "V": "VTeGlRrcIuM"}, {"N": "0540", "T": "", "H": "Va Va Murugayya", "S": "vA vA vA murugayyA  nI  vand enakkaruL :  Adi", "R": "Sindhubhairavi", "C": "Gomathi Subramaniam", "A": "D. K. Jayaraman", "V": "bGkwJQhSQ30"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

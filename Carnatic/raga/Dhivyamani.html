@@ -31,27 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; lilaganu jucu guna silula na</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0022-Lilaganu Juche-Dhivyamani-T.3YRUIqbNFXw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0022   - <a href="song/Lilaganu Juche.html" >lIlagAnu jUcu guNa SIlula nA  :  Adi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="artist/S. R. Janakiraman.html" >S  R  Janakiraman   SRJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; unknownsong</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0073-UnknownSong-Dhivyamani-UnknownComposer.b2WHCd9aNgE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0073   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/S. Balachander.html" >S  Balachander   SB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0003-UnknownSong-Dhivyamani-UnknownComposer.uFA5q-YkYgA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0003   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Bellary Brothers.html" >Bellary Brothers   BELLARY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0121-UnknownSong-Dhivyamani-UnknownComposer.K6XTmyBj_Qs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0121   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Charulatha Mani.html" >Charulatha Mani   CHARULATHAMANI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0122-UnknownSong-Dhivyamani-UnknownComposer.Koog3-vX_wQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0122   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Charulatha Mani.html" >Charulatha Mani   CHARULATHAMANI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0041-UnknownSong-Dhivyamani-UnknownComposer.w7cz946ITnU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0041   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/G. Srikanth.html" >G  Srikanth   GSRIKANTH01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0351-UnknownSong-Dhivyamani-UnknownComposer.F-4LnEq75cw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0351   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0145-UnknownSong-Dhivyamani-UnknownComposer.EEXVheqr93A');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0145   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/S. Rajam.html" >S  Rajam   SRAJAM01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["lilaganu jucu guna silula na"], "songs": [{"N": "0022", "T": "", "H": "Lilaganu Juche", "S": "lIlagAnu jUcu guNa SIlula nA  :  Adi", "R": "Dhivyamani", "C": "Thyagaraja", "A": "S. R. Janakiraman", "V": "3YRUIqbNFXw"}]}, {"name": ["unknownsong"], "songs": [{"N": "0073", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Dhivyamani", "C": "UnknownComposer", "A": "S. Balachander", "V": "b2WHCd9aNgE"}, {"N": "0003", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Dhivyamani", "C": "UnknownComposer", "A": "Bellary Brothers", "V": "uFA5q-YkYgA"}, {"N": "0121", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Dhivyamani", "C": "UnknownComposer", "A": "Charulatha Mani", "V": "K6XTmyBj_Qs"}, {"N": "0122", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Dhivyamani", "C": "UnknownComposer", "A": "Charulatha Mani", "V": "Koog3-vX_wQ"}, {"N": "0041", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Dhivyamani", "C": "UnknownComposer", "A": "G. Srikanth", "V": "w7cz946ITnU"}, {"N": "0351", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Dhivyamani", "C": "UnknownComposer", "A": "S. Kalyanaraman", "V": "F-4LnEq75cw"}, {"N": "0145", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Dhivyamani", "C": "UnknownComposer", "A": "S. Rajam", "V": "EEXVheqr93A"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

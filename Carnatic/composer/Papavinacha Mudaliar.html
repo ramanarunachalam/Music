@@ -25,27 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; mukhattai katttiye deham muzhumaiyum kattamal mudu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0168-Muhathai Kaati-Bhairavi-PM.55Vme47ALGY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0168   - <a href="song/Muhathai Kaati.html" >mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu</a> - <a href="raga/Bhairavi.html" >Bhairavi</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0169-Muhathai Kaati-Bhairavi-PM.CSNYRlxz_t4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0169   - <a href="song/Muhathai Kaati.html" >mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu</a> - <a href="raga/Bhairavi.html" >Bhairavi</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0170-Muhathai Kaati-Bhairavi-PM.oBljVPOvNhg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0170   - <a href="song/Muhathai Kaati.html" >mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu</a> - <a href="raga/Bhairavi.html" >Bhairavi</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0171-Muhathai Kaati-Bhairavi-PM.vc5GIHHFCEQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0171   - <a href="song/Muhathai Kaati.html" >mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu</a> - <a href="raga/Bhairavi.html" >Bhairavi</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; natamadit tirinda umadidadu kal udavamal mudhamanadenenru</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0052-Nadamaadi Thirinda-Kambhoji-PM.qMC3ZqmEpQw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0052   - <a href="song/Nadamaadi Thirinda.html" >naTamADit tirinda umadiDadu kAl udavAmal :  Adi</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/R Raghul.html" >R Raghul   RAGHUL01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0315-Nadamaadi Thirinda-Kambhoji-PM.TQj1P_i4zWQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0315   - <a href="song/Nadamaadi Thirinda.html" >naTamADit tirinda umadiDadu kAl udavAmal :  Adi</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/K. V. Narayanaswamy.html" >K  V  Narayanaswamy   KVN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Nadamaadi Thirinda-Kambhoji-PM.8FjkSILUtO4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="song/Nadamaadi Thirinda.html" >naTamADit tirinda umadiDadu kAl udavAmal :  Adi</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/Savita Narasimhan.html" >Savita Narasimhan   SAVITHA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0002-Nadamaadi Thirinda-Kambhoji-PM.85n6tBFGwDk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0002   - <a href="song/Nadamaadi Thirinda.html" >naTamADit tirinda umadiDadu kAl udavAmal :  Adi</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/V. V. Sadagopan.html" >V  V  Sadagopan   VVS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["mukhattai katttiye deham muzhumaiyum kattamal mudu"], "songs": [{"N": "0168", "T": "", "H": "Muhathai Kaati", "S": "mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu", "R": "Bhairavi", "C": "Papavinacha Mudaliar", "A": "R. Vedavalli", "V": "55Vme47ALGY"}, {"N": "0169", "T": "", "H": "Muhathai Kaati", "S": "mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu", "R": "Bhairavi", "C": "Papavinacha Mudaliar", "A": "R. Vedavalli", "V": "CSNYRlxz_t4"}, {"N": "0170", "T": "", "H": "Muhathai Kaati", "S": "mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu", "R": "Bhairavi", "C": "Papavinacha Mudaliar", "A": "R. Vedavalli", "V": "oBljVPOvNhg"}, {"N": "0171", "T": "", "H": "Muhathai Kaati", "S": "mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu", "R": "Bhairavi", "C": "Papavinacha Mudaliar", "A": "R. Vedavalli", "V": "vc5GIHHFCEQ"}]}, {"name": ["natamadit tirinda umadidadu kal udavamal mudhamanadenenru"], "songs": [{"N": "0052", "T": "", "H": "Nadamaadi Thirinda", "S": "naTamADit tirinda umadiDadu kAl udavAmal :  Adi", "R": "Kambhoji", "C": "Papavinacha Mudaliar", "A": "R Raghul", "V": "qMC3ZqmEpQw"}, {"N": "0315", "T": "", "H": "Nadamaadi Thirinda", "S": "naTamADit tirinda umadiDadu kAl udavAmal :  Adi", "R": "Kambhoji", "C": "Papavinacha Mudaliar", "A": "K. V. Narayanaswamy", "V": "TQj1P_i4zWQ"}, {"N": "0027", "T": "", "H": "Nadamaadi Thirinda", "S": "naTamADit tirinda umadiDadu kAl udavAmal :  Adi", "R": "Kambhoji", "C": "Papavinacha Mudaliar", "A": "Savita Narasimhan", "V": "8FjkSILUtO4"}, {"N": "0002", "T": "", "H": "Nadamaadi Thirinda", "S": "naTamADit tirinda umadiDadu kAl udavAmal :  Adi", "R": "Kambhoji", "C": "Papavinacha Mudaliar", "A": "V. V. Sadagopan", "V": "85n6tBFGwDk"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

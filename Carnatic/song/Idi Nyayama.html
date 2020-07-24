@@ -42,33 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mandolin U. P. Raju</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0014-Idi Nyayama-Malavi-PS.IOoNwccBN64');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0014   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Malavi.html" >Malavi</a> - <a href="artist/U. P. Raju.html" >U  P  Raju   UPRAJU01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mandolin U. Rajesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0038-Idi Nyayama-Malavi-PS.L1K-nbX7deM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0038   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Malavi.html" >Malavi</a> - <a href="artist/U. Rajesh.html" >U  Rajesh   URAJESH01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Veena Veena E. Gayathri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0037-Idi Nyayama-Malavi-PS.CpvAylPModE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0037   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Malavi.html" >Malavi</a> - <a href="artist/Veena E. Gayathri.html" >Veena E  Gayathri   GAYATHRI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0038-Idi Nyayama-Malavi-PS.qzPFbt1jRQI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0038   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Malavi.html" >Malavi</a> - <a href="artist/Veena E. Gayathri.html" >Veena E  Gayathri   GAYATHRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Mysore Srikanth</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0034-Idi Nyayama-Malavi-PS.TY-J9ExSFCE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0034   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Malavi.html" >Malavi</a> - <a href="artist/Mysore Srikanth.html" >Mysore Srikanth   MYSORESRIKANTH01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Aruna Sairam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0130-Idi Nyayama-Malavi-PS.TQRYz4whNxk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0130   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Malavi.html" >Malavi</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vechoor Harihara Subramania Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0011-Idi Nyayama-Malavi-PS.9a3lbbL6hCU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0011   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Malavi.html" >Malavi</a> - <a href="artist/Vechoor Harihara Subramania Iyer.html" >Vechoor Harihara Subramania Iyer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -157,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Mandolin", "U. P. Raju"], "songs": [{"N": "0014", "T": "", "H": "Idi Nyayama", "S": "idi nyAyamA Sri rAmachandra inchukaina daya :  Adi", "R": "Malavi", "C": "Patnam Subramanya Iyer", "A": "U. P. Raju", "V": "IOoNwccBN64"}]}, {"name": ["Mandolin", "U. Rajesh"], "songs": [{"N": "0038", "T": "", "H": "Idi Nyayama", "S": "idi nyAyamA Sri rAmachandra inchukaina daya :  Adi", "R": "Malavi", "C": "Patnam Subramanya Iyer", "A": "U. Rajesh", "V": "L1K-nbX7deM"}]}, {"name": ["Veena", "Veena E. Gayathri"], "songs": [{"N": "0037", "T": "", "H": "Idi Nyayama", "S": "idi nyAyamA Sri rAmachandra inchukaina daya :  Adi", "R": "Malavi", "C": "Patnam Subramanya Iyer", "A": "Veena E. Gayathri", "V": "CpvAylPModE"}, {"N": "0038", "T": "", "H": "Idi Nyayama", "S": "idi nyAyamA Sri rAmachandra inchukaina daya :  Adi", "R": "Malavi", "C": "Patnam Subramanya Iyer", "A": "Veena E. Gayathri", "V": "qzPFbt1jRQI"}]}, {"name": ["Violin", "Mysore Srikanth"], "songs": [{"N": "0034", "T": "", "H": "Idi Nyayama", "S": "idi nyAyamA Sri rAmachandra inchukaina daya :  Adi", "R": "Malavi", "C": "Patnam Subramanya Iyer", "A": "Mysore Srikanth", "V": "TY-J9ExSFCE"}]}, {"name": ["Vocal", "Aruna Sairam"], "songs": [{"N": "0130", "T": "", "H": "Idi Nyayama", "S": "idi nyAyamA Sri rAmachandra inchukaina daya :  Adi", "R": "Malavi", "C": "Patnam Subramanya Iyer", "A": "Aruna Sairam", "V": "TQRYz4whNxk"}]}, {"name": ["Vocal", "Vechoor Harihara Subramania Iyer"], "songs": [{"N": "0011", "T": "", "H": "Idi Nyayama", "S": "idi nyAyamA Sri rAmachandra inchukaina daya :  Adi", "R": "Malavi", "C": "Patnam Subramanya Iyer", "A": "Vechoor Harihara Subramania Iyer", "V": "9a3lbbL6hCU"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

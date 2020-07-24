@@ -42,25 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Baby Sreeram</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0018-Emani Migula-Thodi-SS.AUqNH6Z7-mk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0018   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Baby Sreeram.html" >Baby Sreeram   BABYS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Gayathri Venkataraghavan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0059-Emani Migula-Thodi-SS.PoAJeMI7zyE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0059   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Gayathri Venkataraghavan.html" >Gayathri Venkataraghavan   GAYATHRIV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0060-Emani Migula-Thodi-SS.VsqnrPcxuMQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0060   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Gayathri Venkataraghavan.html" >Gayathri Venkataraghavan   GAYATHRIV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0450-Emani Migula-Thodi-SS.3MZb2w4qfgY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0450   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0451-Emani Migula-Thodi-SS.4soqVuwN1oU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0451   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0452-Emani Migula-Thodi-SS.A7pvetwFLC8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0452   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0453-Emani Migula-Thodi-SS.Eyn2btJH_Xg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0453   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0454-Emani Migula-Thodi-SS.aPC4SPeu-Eo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0454   - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -163,9 +145,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Baby Sreeram"], "songs": [{"N": "0018", "T": "", "H": "Emani Migula", "S": "Emani migula varNintu I mahini nE :  Adi", "R": "Thodi", "C": "Shyama Shastri", "A": "Baby Sreeram", "V": "AUqNH6Z7-mk"}]}, {"name": ["Vocal", "Gayathri Venkataraghavan"], "songs": [{"N": "0059", "T": "", "H": "Emani Migula", "S": "Emani migula varNintu I mahini nE :  Adi", "R": "Thodi", "C": "Shyama Shastri", "A": "Gayathri Venkataraghavan", "V": "PoAJeMI7zyE"}, {"N": "0060", "T": "", "H": "Emani Migula", "S": "Emani migula varNintu I mahini nE :  Adi", "R": "Thodi", "C": "Shyama Shastri", "A": "Gayathri Venkataraghavan", "V": "VsqnrPcxuMQ"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0450", "T": "", "H": "Emani Migula", "S": "Emani migula varNintu I mahini nE :  Adi", "R": "Thodi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "3MZb2w4qfgY"}, {"N": "0451", "T": "", "H": "Emani Migula", "S": "Emani migula varNintu I mahini nE :  Adi", "R": "Thodi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "4soqVuwN1oU"}, {"N": "0452", "T": "", "H": "Emani Migula", "S": "Emani migula varNintu I mahini nE :  Adi", "R": "Thodi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "A7pvetwFLC8"}, {"N": "0453", "T": "", "H": "Emani Migula", "S": "Emani migula varNintu I mahini nE :  Adi", "R": "Thodi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "Eyn2btJH_Xg"}, {"N": "0454", "T": "", "H": "Emani Migula", "S": "Emani migula varNintu I mahini nE :  Adi", "R": "Thodi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "aPC4SPeu-Eo"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

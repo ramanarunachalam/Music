@@ -41,25 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal B. Rajam Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0014-Hari Hari Hariyani-Saraswathi-WVB.GdAKQS96RXc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0014   - <a href="composer/Walajapet Venkataramana Bhagavatar.html" >Walajapet Venkataramana Bhagavatar</a> - <a href="raga/Saraswathi.html" >Saraswathi</a> - <a href="artist/B. Rajam Iyer.html" >B  Rajam Iyer   BRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Hyderabad Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0018-Hari Hari Hariyani-Saraswathi-WVB.iuoLxiABLUg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0018   - <a href="composer/Walajapet Venkataramana Bhagavatar.html" >Walajapet Venkataramana Bhagavatar</a> - <a href="raga/Saraswathi.html" >Saraswathi</a> - <a href="artist/Hyderabad Sisters.html" >Hyderabad Sisters   HSISTERS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0019-Hari Hari Hariyani-Saraswathi-WVB.rS-Ej2xCLh0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0019   - <a href="composer/Walajapet Venkataramana Bhagavatar.html" >Walajapet Venkataramana Bhagavatar</a> - <a href="raga/Saraswathi.html" >Saraswathi</a> - <a href="artist/Hyderabad Sisters.html" >Hyderabad Sisters   HSISTERS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Maruthi Prasad</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Hari Hari Hariyani-Saraswathi-WVB.XTplkjlwHn4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017   - <a href="composer/Walajapet Venkataramana Bhagavatar.html" >Walajapet Venkataramana Bhagavatar</a> - <a href="raga/Saraswathi.html" >Saraswathi</a> - <a href="artist/Maruthi Prasad.html" >Maruthi Prasad   MARUTHIPRASAD01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Prema Rangarajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0036-Hari Hari Hariyani-Saraswathi-WVB.ID6cnMNXdjY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0036   - <a href="composer/Walajapet Venkataramana Bhagavatar.html" >Walajapet Venkataramana Bhagavatar</a> - <a href="raga/Saraswathi.html" >Saraswathi</a> - <a href="artist/Prema Rangarajan.html" >Prema Rangarajan   RPREMA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -148,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "B. Rajam Iyer"], "songs": [{"N": "0014", "T": "", "H": "Hari Hari Hariyani", "S": "hari hari hariyani smaraNa jEsitE duritamu :  Adi", "R": "Saraswathi", "C": "Walajapet Venkataramana Bhagavatar", "A": "B. Rajam Iyer", "V": "GdAKQS96RXc"}]}, {"name": ["Vocal", "Hyderabad Sisters"], "songs": [{"N": "0018", "T": "", "H": "Hari Hari Hariyani", "S": "hari hari hariyani smaraNa jEsitE duritamu :  Adi", "R": "Saraswathi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Hyderabad Sisters", "V": "iuoLxiABLUg"}, {"N": "0019", "T": "", "H": "Hari Hari Hariyani", "S": "hari hari hariyani smaraNa jEsitE duritamu :  Adi", "R": "Saraswathi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Hyderabad Sisters", "V": "rS-Ej2xCLh0"}]}, {"name": ["Vocal", "Maruthi Prasad"], "songs": [{"N": "0017", "T": "", "H": "Hari Hari Hariyani", "S": "hari hari hariyani smaraNa jEsitE duritamu :  Adi", "R": "Saraswathi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Maruthi Prasad", "V": "XTplkjlwHn4"}]}, {"name": ["Vocal", "Prema Rangarajan"], "songs": [{"N": "0036", "T": "", "H": "Hari Hari Hariyani", "S": "hari hari hariyani smaraNa jEsitE duritamu :  Adi", "R": "Saraswathi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Prema Rangarajan", "V": "ID6cnMNXdjY"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

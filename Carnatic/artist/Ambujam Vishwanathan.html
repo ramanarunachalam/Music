@@ -26,25 +26,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; VAMBUJAM01</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0001-Akhilandeswaryai-Arabhi-MD.ZKfwknHXiyA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0001   - <a href="song/Akhilandeswaryai.html" >akhilANDEshvaryai namastE aNimAdi siddhIshvaryai :  Adi</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0002-Balambikaya-Sriranjani-MD._R3_YE1UmuM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0002   - <a href="song/Balambikaya.html" >bAlAmbikayA kaTAkSitOham budhajanAdinuta trikUTa :  Chatusra Eka</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0003-Brhannayaki Nannu-Madhyamavathi-SS.zpwoXW7I0T0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0003   - <a href="song/Brhannayaki Nannu.html" >bRhan nAyakI nannu brOvu vEgamE :  Tisra Matya</a> - <a href="raga/Madhyamavathi.html" >Madhyamavathi</a> - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-Pahimam Sri-Nata-SS.Gh3A3OxwNZc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="song/Pahimam Sri.html" >pAhi mAM SrI rAja rAj E Svari amba :  Rupaka</a> - <a href="raga/Nata.html" >Nata</a> - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-Palimpavamma-Mukhari-SS.Gd86wxNjw5E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="song/Palimpavamma.html" >pAlimp ava mmA parama pAvanI bhavAnI :  Adi</a> - <a href="raga/Mukhari.html" >Mukhari</a> - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-Paramugamenamma-Kalyani-SS.MDKxOjwMnkk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006   - <a href="song/Paramugamenamma.html" >parAmukham En ammA pArvati y ammA :  Adi</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0007-Sharavathy-Sharaavathi-MD.Ch7t_1U323o');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0007   - <a href="song/Sharavathy.html" >sharAvatI taTavAsinI hamsinI sarasvatI :  Rupaka</a> - <a href="raga/Sharaavathi.html" >Sharaavathi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0008-Navaratnamalika-Devi Nidu Pada-Kambhoji-SS.-KIVoT8tIks');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0008 - <a href="song_type/Navaratnamalika.html" >Navaratnamalika</a>  - <a href="song/Devi Nidu Pada.html" >dEvI nI pada sArasamulE : Adi</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0009-UnknownSong-Kashiramakriya-UnknownComposer.-0LoTOZz7C0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0009   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Kashiramakriya.html" >Kashiramakriya</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["VAMBUJAM01"], "songs": [{"N": "0001", "T": "", "H": "Akhilandeswaryai", "S": "akhilANDEshvaryai namastE aNimAdi siddhIshvaryai :  Adi", "R": "Arabhi", "C": "Muthuswami Dikshitar", "A": "Ambujam Vishwanathan", "V": "ZKfwknHXiyA"}, {"N": "0002", "T": "", "H": "Balambikaya", "S": "bAlAmbikayA kaTAkSitOham budhajanAdinuta trikUTa :  Chatusra Eka", "R": "Sriranjani", "C": "Muthuswami Dikshitar", "A": "Ambujam Vishwanathan", "V": "_R3_YE1UmuM"}, {"N": "0003", "T": "", "H": "Brhannayaki Nannu", "S": "bRhan nAyakI nannu brOvu vEgamE :  Tisra Matya", "R": "Madhyamavathi", "C": "Shyama Shastri", "A": "Ambujam Vishwanathan", "V": "zpwoXW7I0T0"}, {"N": "0004", "T": "", "H": "Pahimam Sri", "S": "pAhi mAM SrI rAja rAj E Svari amba :  Rupaka", "R": "Nata", "C": "Shyama Shastri", "A": "Ambujam Vishwanathan", "V": "Gh3A3OxwNZc"}, {"N": "0005", "T": "", "H": "Palimpavamma", "S": "pAlimp ava mmA parama pAvanI bhavAnI :  Adi", "R": "Mukhari", "C": "Shyama Shastri", "A": "Ambujam Vishwanathan", "V": "Gd86wxNjw5E"}, {"N": "0006", "T": "", "H": "Paramugamenamma", "S": "parAmukham En ammA pArvati y ammA :  Adi", "R": "Kalyani", "C": "Shyama Shastri", "A": "Ambujam Vishwanathan", "V": "MDKxOjwMnkk"}, {"N": "0007", "T": "", "H": "Sharavathy", "S": "sharAvatI taTavAsinI hamsinI sarasvatI :  Rupaka", "R": "Sharaavathi", "C": "Muthuswami Dikshitar", "A": "Ambujam Vishwanathan", "V": "Ch7t_1U323o"}, {"N": "0008", "T": "Navaratnamalika", "H": "Devi Nidu Pada", "S": "dEvI nI pada sArasamulE : Adi", "R": "Kambhoji", "C": "Shyama Shastri", "A": "Ambujam Vishwanathan", "V": "-KIVoT8tIks"}, {"N": "0009", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kashiramakriya", "C": "UnknownComposer", "A": "Ambujam Vishwanathan", "V": "-0LoTOZz7C0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#artist-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

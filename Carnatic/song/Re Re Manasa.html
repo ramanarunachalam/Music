@@ -42,25 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal P. Unnikrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0163-Re Re Manasa-Nata-CCS.R7rvwmnvPE0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0163   - <a href="composer/Cheyyur Chengalvaraya Sastri.html" >Cheyyur Chengalvaraya Sastri</a> - <a href="raga/Nata.html" >Nata</a> - <a href="artist/P. Unnikrishnan.html" >P  Unnikrishnan   UNNIK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0164-Re Re Manasa-Nata-CCS.VmLeKYYFB7s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0164   - <a href="composer/Cheyyur Chengalvaraya Sastri.html" >Cheyyur Chengalvaraya Sastri</a> - <a href="raga/Nata.html" >Nata</a> - <a href="artist/P. Unnikrishnan.html" >P  Unnikrishnan   UNNIK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Saketharaman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0120-Re Re Manasa-Nata-CCS._2RyfbGrRvs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0120   - <a href="composer/Cheyyur Chengalvaraya Sastri.html" >Cheyyur Chengalvaraya Sastri</a> - <a href="raga/Nata.html" >Nata</a> - <a href="artist/S. Saketharaman.html" >S  Saketharaman   SAKETHARAMAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0691-Re Re Manasa-Nata-CCS.SZaTx6UJuww');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0691   - <a href="composer/Cheyyur Chengalvaraya Sastri.html" >Cheyyur Chengalvaraya Sastri</a> - <a href="raga/Nata.html" >Nata</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0502-Re Re Manasa-Nata-CCS.2Xe2nnlGQK4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0502   - <a href="composer/Cheyyur Chengalvaraya Sastri.html" >Cheyyur Chengalvaraya Sastri</a> - <a href="raga/Nata.html" >Nata</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -142,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "P. Unnikrishnan"], "songs": [{"N": "0163", "T": "", "H": "Re Re Manasa", "S": "rE rE mAnasa bhajarE gajAnanam  rE  :  Rupaka", "R": "Nata", "C": "Cheyyur Chengalvaraya Sastri", "A": "P. Unnikrishnan", "V": "R7rvwmnvPE0"}, {"N": "0164", "T": "", "H": "Re Re Manasa", "S": "rE rE mAnasa bhajarE gajAnanam  rE  :  Rupaka", "R": "Nata", "C": "Cheyyur Chengalvaraya Sastri", "A": "P. Unnikrishnan", "V": "VmLeKYYFB7s"}]}, {"name": ["Vocal", "S. Saketharaman"], "songs": [{"N": "0120", "T": "", "H": "Re Re Manasa", "S": "rE rE mAnasa bhajarE gajAnanam  rE  :  Rupaka", "R": "Nata", "C": "Cheyyur Chengalvaraya Sastri", "A": "S. Saketharaman", "V": "_2RyfbGrRvs"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0691", "T": "", "H": "Re Re Manasa", "S": "rE rE mAnasa bhajarE gajAnanam  rE  :  Rupaka", "R": "Nata", "C": "Cheyyur Chengalvaraya Sastri", "A": "Sanjay Subrahmanyan", "V": "SZaTx6UJuww"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0502", "T": "", "H": "Re Re Manasa", "S": "rE rE mAnasa bhajarE gajAnanam  rE  :  Rupaka", "R": "Nata", "C": "Cheyyur Chengalvaraya Sastri", "A": "Sudha Ragunathan", "V": "2Xe2nnlGQK4"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

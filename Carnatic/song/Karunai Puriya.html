@@ -42,18 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0576-Karunai Puriya-Sriranjani-AM.ClK1c3QxCrA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0576   - <a href="composer/Ambujam Krishna.html" >Ambujam Krishna</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0577-Karunai Puriya-Sriranjani-AM.jAT-tJi5pr0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0577   - <a href="composer/Ambujam Krishna.html" >Ambujam Krishna</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ranjani Gayatri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0131-Karunai Puriya-Sriranjani-AM.tD6k1gwismU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0131   - <a href="composer/Ambujam Krishna.html" >Ambujam Krishna</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0132-Karunai Puriya-Sriranjani-AM.u5CsKFFDzxw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0132   - <a href="composer/Ambujam Krishna.html" >Ambujam Krishna</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -142,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "0576", "T": "", "H": "Karunai Puriya", "S": "karuNai puriya nalla taruNam iduvE marakata :  Adi", "R": "Sriranjani", "C": "Ambujam Krishna", "A": "M. S. Subbulakshmi", "V": "ClK1c3QxCrA"}, {"N": "0577", "T": "", "H": "Karunai Puriya", "S": "karuNai puriya nalla taruNam iduvE marakata :  Adi", "R": "Sriranjani", "C": "Ambujam Krishna", "A": "M. S. Subbulakshmi", "V": "jAT-tJi5pr0"}]}, {"name": ["Vocal", "Ranjani Gayatri"], "songs": [{"N": "0131", "T": "", "H": "Karunai Puriya", "S": "karuNai puriya nalla taruNam iduvE marakata :  Adi", "R": "Sriranjani", "C": "Ambujam Krishna", "A": "Ranjani Gayatri", "V": "tD6k1gwismU"}, {"N": "0132", "T": "", "H": "Karunai Puriya", "S": "karuNai puriya nalla taruNam iduvE marakata :  Adi", "R": "Sriranjani", "C": "Ambujam Krishna", "A": "Ranjani Gayatri", "V": "u5CsKFFDzxw"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

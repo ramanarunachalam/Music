@@ -25,27 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; amba ni caranamu jocciti adarimpavamma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0048-Amba Nee Charanamu-Anandabhairavi-RD.OtzbE9YzT_E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0048   - <a href="song/Amba Nee Charanamu.html" >ambA nI caraNamu jocciti AdarimpavammA :  Adi</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0049-Amba Nee Charanamu-Anandabhairavi-RD.Zvdl-YoNT44');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0049   - <a href="song/Amba Nee Charanamu.html" >ambA nI caraNamu jocciti AdarimpavammA :  Adi</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; jagadeesha pahimam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0612-Jagadeesha Pahimam-Lalithapanchamam-RD.HGyDQOLu3AE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0612   - <a href="song/Jagadeesha Pahimam.html" >Jagadeesha Pahimam</a> - <a href="raga/Lalithapanchamam.html" >Lalithapanchamam</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0613-Jagadeesha Pahimam-Lalithapanchamam-RD.ZCjXNbVsm7Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0613   - <a href="song/Jagadeesha Pahimam.html" >Jagadeesha Pahimam</a> - <a href="raga/Lalithapanchamam.html" >Lalithapanchamam</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; rupamu juci valaci vaccitini kopamu setura</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0896-Varnam-Rupamu Juchi-Thodi-RD.IZNfArpFIiI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0896 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="song/Rupamu Juchi.html" >rUpamu jUci valaci vaccitini kOpamu sEturA :  Adi</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["amba ni caranamu jocciti adarimpavamma"], "songs": [{"N": "0048", "T": "", "H": "Amba Nee Charanamu", "S": "ambA nI caraNamu jocciti AdarimpavammA :  Adi", "R": "Anandabhairavi", "C": "Ramaswamy Dikshitar", "A": "M. D. Ramanathan", "V": "OtzbE9YzT_E"}, {"N": "0049", "T": "", "H": "Amba Nee Charanamu", "S": "ambA nI caraNamu jocciti AdarimpavammA :  Adi", "R": "Anandabhairavi", "C": "Ramaswamy Dikshitar", "A": "M. D. Ramanathan", "V": "Zvdl-YoNT44"}]}, {"name": ["jagadeesha pahimam"], "songs": [{"N": "0612", "T": "", "H": "Jagadeesha Pahimam", "S": "Jagadeesha Pahimam", "R": "Lalithapanchamam", "C": "Ramaswamy Dikshitar", "A": "M. Balamuralikrishna", "V": "HGyDQOLu3AE"}, {"N": "0613", "T": "", "H": "Jagadeesha Pahimam", "S": "Jagadeesha Pahimam", "R": "Lalithapanchamam", "C": "Ramaswamy Dikshitar", "A": "M. Balamuralikrishna", "V": "ZCjXNbVsm7Y"}]}, {"name": ["rupamu juci valaci vaccitini kopamu setura"], "songs": [{"N": "0896", "T": "Varnam", "H": "Rupamu Juchi", "S": "rUpamu jUci valaci vaccitini kOpamu sEturA :  Adi", "R": "Thodi", "C": "Ramaswamy Dikshitar", "A": "M. D. Ramanathan", "V": "IZNfArpFIiI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

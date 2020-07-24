@@ -42,30 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Abhishek Raghuram</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0146-Ninu Vina Sukhamu-Thodi-T.ZYZCtwAqzTA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0146   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Abhishek Raghuram.html" >Abhishek Raghuram   ABHISHEK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0147-Ninu Vina Sukhamu-Thodi-T.tB0k0zGuw8o');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0147   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Abhishek Raghuram.html" >Abhishek Raghuram   ABHISHEK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Chittoor Subramaniam Pillai</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0026-Ninu Vina Sukhamu-Thodi-T.QSrU-VwGFLU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0026   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Chittoor Subramaniam Pillai.html" >Chittoor Subramaniam Pillai   CSP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. V. Narayanaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0352-Ninu Vina Sukhamu-Thodi-T.2vIhBFHr27A');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0352   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/K. V. Narayanaswamy.html" >K  V  Narayanaswamy   KVN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0353-Ninu Vina Sukhamu-Thodi-T.Z__Ga1Xx3Yw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0353   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/K. V. Narayanaswamy.html" >K  V  Narayanaswamy   KVN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Neyveli Santhanagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0101-Ninu Vina Sukhamu-Thodi-T.dijKuzh6pC0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0101   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Neyveli Santhanagopalan.html" >Neyveli Santhanagopalan   NEYVELI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Voleti Venkateswarlu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0163-Ninu Vina Sukhamu-Thodi-T.xnFWIISe9Po');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0163   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Voleti Venkateswarlu.html" >Voleti Venkateswarlu   VOLETI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -170,9 +147,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Abhishek Raghuram"], "songs": [{"N": "0146", "T": "", "H": "Ninu Vina Sukhamu", "S": "ninu vinA sukhamu kAna nIraja nayana :  Rupaka", "R": "Thodi", "C": "Thyagaraja", "A": "Abhishek Raghuram", "V": "ZYZCtwAqzTA"}, {"N": "0147", "T": "", "H": "Ninu Vina Sukhamu", "S": "ninu vinA sukhamu kAna nIraja nayana :  Rupaka", "R": "Thodi", "C": "Thyagaraja", "A": "Abhishek Raghuram", "V": "tB0k0zGuw8o"}]}, {"name": ["Vocal", "Chittoor Subramaniam Pillai"], "songs": [{"N": "0026", "T": "", "H": "Ninu Vina Sukhamu", "S": "ninu vinA sukhamu kAna nIraja nayana :  Rupaka", "R": "Thodi", "C": "Thyagaraja", "A": "Chittoor Subramaniam Pillai", "V": "QSrU-VwGFLU"}]}, {"name": ["Vocal", "K. V. Narayanaswamy"], "songs": [{"N": "0352", "T": "", "H": "Ninu Vina Sukhamu", "S": "ninu vinA sukhamu kAna nIraja nayana :  Rupaka", "R": "Thodi", "C": "Thyagaraja", "A": "K. V. Narayanaswamy", "V": "2vIhBFHr27A"}, {"N": "0353", "T": "", "H": "Ninu Vina Sukhamu", "S": "ninu vinA sukhamu kAna nIraja nayana :  Rupaka", "R": "Thodi", "C": "Thyagaraja", "A": "K. V. Narayanaswamy", "V": "Z__Ga1Xx3Yw"}]}, {"name": ["Vocal", "Neyveli Santhanagopalan"], "songs": [{"N": "0101", "T": "", "H": "Ninu Vina Sukhamu", "S": "ninu vinA sukhamu kAna nIraja nayana :  Rupaka", "R": "Thodi", "C": "Thyagaraja", "A": "Neyveli Santhanagopalan", "V": "dijKuzh6pC0"}]}, {"name": ["Vocal", "Voleti Venkateswarlu"], "songs": [{"N": "0163", "T": "", "H": "Ninu Vina Sukhamu", "S": "ninu vinA sukhamu kAna nIraja nayana :  Rupaka", "R": "Thodi", "C": "Thyagaraja", "A": "Voleti Venkateswarlu", "V": "xnFWIISe9Po"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

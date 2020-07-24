@@ -31,28 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; ragam thanam pallavi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1668-Ragam thanam pallavi-Ragam thanam pallavi-Sarvashree-UnknownComposer._8jeu7RDGcU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1668   - <a href="song/Ragam Thanam Pallavi.html" >Ragam Thanam Pallavi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; uma sutam namami ma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0069-Uma Sutham Namami-Sarvashree-BMK.fFR4u8yHCsk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0069   - <a href="song/Uma Sutham Namami.html" >umA sutam namAmi ma : Adi</a> - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="artist/Mysore Nagaraj.html" >Mysore Nagaraj   MNAGARAJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1487-Uma Sutham Namami-Sarvashree-BMK.2CA3YQ6Ch4c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1487   - <a href="song/Uma Sutham Namami.html" >umA sutam namAmi ma : Adi</a> - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1488-Uma Sutham Namami-Sarvashree-BMK.oU10_PR9hYY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1488   - <a href="song/Uma Sutham Namami.html" >umA sutam namAmi ma : Adi</a> - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; unknownsong</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '2215-UnknownSong-Sarvashree-UnknownComposer.PfB70AQiAas');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>2215   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0031-UnknownSong-Sarvashree-UnknownComposer.NKNv5OE8_iw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0031   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Dr. Vellore A. R. Srinivasan.html" >Dr  Vellore A  R  Srinivasan</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["ragam thanam pallavi"], "songs": [{"N": "1669", "T": "", "H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "R": "Sarvashree", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "_8jeu7RDGcU"}]}, {"name": ["uma sutam namami ma"], "songs": [{"N": "0069", "T": "", "H": "Uma Sutham Namami", "S": "umA sutam namAmi ma : Adi", "R": "Sarvashree", "C": "M. Balamuralikrishna", "A": "Mysore Nagaraj", "V": "fFR4u8yHCsk"}, {"N": "1487", "T": "", "H": "Uma Sutham Namami", "S": "umA sutam namAmi ma : Adi", "R": "Sarvashree", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "2CA3YQ6Ch4c"}, {"N": "1488", "T": "", "H": "Uma Sutham Namami", "S": "umA sutam namAmi ma : Adi", "R": "Sarvashree", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "oU10_PR9hYY"}]}, {"name": ["unknownsong"], "songs": [{"N": "2215", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sarvashree", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "PfB70AQiAas"}, {"N": "0031", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sarvashree", "C": "UnknownComposer", "A": "Dr. Vellore A. R. Srinivasan", "V": "NKNv5OE8_iw"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

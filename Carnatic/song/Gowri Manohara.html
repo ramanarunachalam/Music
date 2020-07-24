@@ -41,29 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mandolin U. Srinivas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0178-Gowri Manohara-Gowrimanohari-P.L6Jb02FmePU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0178   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/U. Srinivas.html" >U  Srinivas   USRINIVAS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal A. S. Murali</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0023-Gowri Manohara-Gowrimanohari-P.ucSt0U-bZGU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0023   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/A. S. Murali.html" >A  S  Murali   ASMURALI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Jayashri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0115-Gowri Manohara-Gowrimanohari-P.jEjhy2u8IRo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0115   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Saketharaman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0053-Gowri Manohara-Gowrimanohari-P.J-22QWJuF5o');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0053   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/S. Saketharaman.html" >S  Saketharaman   SAKETHARAMAN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0052-Gowri Manohara-Gowrimanohari-P.CPDGvTaS1Fo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0052   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/S. Saketharaman.html" >S  Saketharaman   SAKETHARAMAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Shankari Krishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0038-Gowri Manohara-Gowrimanohari-P.8JrAFJMvczM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0038   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/Shankari Krishnan.html" >Shankari Krishnan   KSHANKARI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -152,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Mandolin", "U. Srinivas"], "songs": [{"N": "0178", "T": "", "H": "Gowri Manohara", "S": "gaurImanOhara karuNAkarA shiva shankarA shrI :  Adi", "R": "Gowrimanohari", "C": "Papanasam Sivan", "A": "U. Srinivas", "V": "L6Jb02FmePU"}]}, {"name": ["Vocal", "A. S. Murali"], "songs": [{"N": "0023", "T": "", "H": "Gowri Manohara", "S": "gaurImanOhara karuNAkarA shiva shankarA shrI :  Adi", "R": "Gowrimanohari", "C": "Papanasam Sivan", "A": "A. S. Murali", "V": "ucSt0U-bZGU"}]}, {"name": ["Vocal", "Bombay Jayashri"], "songs": [{"N": "0115", "T": "", "H": "Gowri Manohara", "S": "gaurImanOhara karuNAkarA shiva shankarA shrI :  Adi", "R": "Gowrimanohari", "C": "Papanasam Sivan", "A": "Bombay Jayashri", "V": "jEjhy2u8IRo"}]}, {"name": ["Vocal", "S. Saketharaman"], "songs": [{"N": "0053", "T": "", "H": "Gowri Manohara", "S": "gaurImanOhara karuNAkarA shiva shankarA shrI :  Adi", "R": "Gowrimanohari", "C": "Papanasam Sivan", "A": "S. Saketharaman", "V": "J-22QWJuF5o"}, {"N": "0052", "T": "", "H": "Gowri Manohara", "S": "gaurImanOhara karuNAkarA shiva shankarA shrI :  Adi", "R": "Gowrimanohari", "C": "Papanasam Sivan", "A": "S. Saketharaman", "V": "CPDGvTaS1Fo"}]}, {"name": ["Vocal", "Shankari Krishnan"], "songs": [{"N": "0038", "T": "", "H": "Gowri Manohara", "S": "gaurImanOhara karuNAkarA shiva shankarA shrI :  Adi", "R": "Gowrimanohari", "C": "Papanasam Sivan", "A": "Shankari Krishnan", "V": "8JrAFJMvczM"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -40,26 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Gayathri Girish</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0129-Neene Dayalo-Anandabhairavi-PD._7nJ4YlWvkA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0129   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Gayathri Girish.html" >Gayathri Girish   GGAYATHRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. K. Srikantan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0127-Neene Dayalo-Anandabhairavi-PD.23ZWDNj0hN4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0127   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/R. K. Srikantan.html" >R  K  Srikantan   RKS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Semmangudi Srinivasa Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0505-Neene Dayalo-Anandabhairavi-PD.XHJGfutPqLw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0505   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0506-Neene Dayalo-Anandabhairavi-PD.i7zQCMwwfs8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0506   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0507-Neene Dayalo-Anandabhairavi-PD.ujk66yrbfhM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0507   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Semmangudi Srinivasa Iyer.html" >Semmangudi Srinivasa Iyer   SSI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vidyabhushana</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0078-Neene Dayalo-Anandabhairavi-PD.Qm_FHos0QFA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0078   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Vidyabhushana.html" >Vidyabhushana   VIDYABHOOSHANA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -153,9 +134,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Gayathri Girish"], "songs": [{"N": "0129", "T": "", "H": "Neene Dayalo", "S": "neene dayoLo nirmala chitta gOviMda :  Misra Caapu", "R": "Anandabhairavi", "C": "Purandara Dasa", "A": "Gayathri Girish", "V": "_7nJ4YlWvkA"}]}, {"name": ["Vocal", "R. K. Srikantan"], "songs": [{"N": "0127", "T": "", "H": "Neene Dayalo", "S": "neene dayoLo nirmala chitta gOviMda :  Misra Caapu", "R": "Anandabhairavi", "C": "Purandara Dasa", "A": "R. K. Srikantan", "V": "23ZWDNj0hN4"}]}, {"name": ["Vocal", "Semmangudi Srinivasa Iyer"], "songs": [{"N": "0505", "T": "", "H": "Neene Dayalo", "S": "neene dayoLo nirmala chitta gOviMda :  Misra Caapu", "R": "Anandabhairavi", "C": "Purandara Dasa", "A": "Semmangudi Srinivasa Iyer", "V": "XHJGfutPqLw"}, {"N": "0506", "T": "", "H": "Neene Dayalo", "S": "neene dayoLo nirmala chitta gOviMda :  Misra Caapu", "R": "Anandabhairavi", "C": "Purandara Dasa", "A": "Semmangudi Srinivasa Iyer", "V": "i7zQCMwwfs8"}, {"N": "0507", "T": "", "H": "Neene Dayalo", "S": "neene dayoLo nirmala chitta gOviMda :  Misra Caapu", "R": "Anandabhairavi", "C": "Purandara Dasa", "A": "Semmangudi Srinivasa Iyer", "V": "ujk66yrbfhM"}]}, {"name": ["Vocal", "Vidyabhushana"], "songs": [{"N": "0078", "T": "", "H": "Neene Dayalo", "S": "neene dayoLo nirmala chitta gOviMda :  Misra Caapu", "R": "Anandabhairavi", "C": "Purandara Dasa", "A": "Vidyabhushana", "V": "Qm_FHos0QFA"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

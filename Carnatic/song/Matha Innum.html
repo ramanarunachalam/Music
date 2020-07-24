@@ -42,28 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0133-Matha Innum-Sriranjani-P.AmQFjHLa3_8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0133   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0134-Matha Innum-Sriranjani-P.rgEK7GFu1n8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0134   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/Bombay Sisters.html" >Bombay Sisters   BOMBAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0258-Matha Innum-Sriranjani-P.f96BZlu9WB8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0258   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0428-Matha Innum-Sriranjani-P.AtSkMyJbEaY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0428   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0429-Matha Innum-Sriranjani-P.IzJMK6jgYK8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0429   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0430-Matha Innum-Sriranjani-P.OjUkd3qxy3E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0430   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Nithyasree Mahadevan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0188-Matha Innum-Sriranjani-P.z_PynIXkxVw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0188   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/Nithyasree Mahadevan.html" >Nithyasree Mahadevan   NITHYASREE01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0189-Matha Innum-Sriranjani-P.zimSdC-9IUw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0189   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Sriranjani.html" >Sriranjani</a> - <a href="artist/Nithyasree Mahadevan.html" >Nithyasree Mahadevan   NITHYASREE01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -145,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bombay Sisters"], "songs": [{"N": "0133", "T": "", "H": "Matha Innum", "S": "mAtA innum vAtA uyar tiru  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Bombay Sisters", "V": "AmQFjHLa3_8"}, {"N": "0134", "T": "", "H": "Matha Innum", "S": "mAtA innum vAtA uyar tiru  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Bombay Sisters", "V": "rgEK7GFu1n8"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0258", "T": "", "H": "Matha Innum", "S": "mAtA innum vAtA uyar tiru  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "D. K. Jayaraman", "V": "f96BZlu9WB8"}]}, {"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0428", "T": "", "H": "Matha Innum", "S": "mAtA innum vAtA uyar tiru  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "M. L. Vasanthakumari", "V": "AtSkMyJbEaY"}, {"N": "0429", "T": "", "H": "Matha Innum", "S": "mAtA innum vAtA uyar tiru  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "M. L. Vasanthakumari", "V": "IzJMK6jgYK8"}, {"N": "0430", "T": "", "H": "Matha Innum", "S": "mAtA innum vAtA uyar tiru  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "M. L. Vasanthakumari", "V": "OjUkd3qxy3E"}]}, {"name": ["Vocal", "Nithyasree Mahadevan"], "songs": [{"N": "0188", "T": "", "H": "Matha Innum", "S": "mAtA innum vAtA uyar tiru  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Nithyasree Mahadevan", "V": "z_PynIXkxVw"}, {"N": "0189", "T": "", "H": "Matha Innum", "S": "mAtA innum vAtA uyar tiru  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Nithyasree Mahadevan", "V": "zimSdC-9IUw"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -36,23 +36,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Lalgudi Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0625-Thillana-Thillana-Karnaranjani-LALGUDI.M7YT3vR5KXE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0625 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/Lalgudi Jayaraman.html" >Lalgudi Jayaraman</a> - <a href="raga/Karnaranjani.html" >Karnaranjani</a> - <a href="artist/Lalgudi Jayaraman.html" >Lalgudi Jayaraman   LALGUDI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0626-Thillana-Thillana-Karnaranjani-LALGUDI.hCj-AjQPuls');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0626 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/Lalgudi Jayaraman.html" >Lalgudi Jayaraman</a> - <a href="raga/Karnaranjani.html" >Karnaranjani</a> - <a href="artist/Lalgudi Jayaraman.html" >Lalgudi Jayaraman   LALGUDI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0627-Thillana-Thillana-Karnaranjani-LALGUDI.nYijIrRbWu8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0627 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/Lalgudi Jayaraman.html" >Lalgudi Jayaraman</a> - <a href="raga/Karnaranjani.html" >Karnaranjani</a> - <a href="artist/Lalgudi Jayaraman.html" >Lalgudi Jayaraman   LALGUDI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0343-Thillana-Thillana-Karnaranjani-LALGUDI.4G03w9MvLKE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0343 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/Lalgudi Jayaraman.html" >Lalgudi Jayaraman</a> - <a href="raga/Karnaranjani.html" >Karnaranjani</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "Lalgudi Jayaraman"], "songs": [{"N": "0625", "T": "Thillana", "H": "thillana_lalgudi_karnaranjani", "S": "thillana lalgudi karnaranjani", "R": "Karnaranjani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "M7YT3vR5KXE"}, {"N": "0626", "T": "Thillana", "H": "thillana_lalgudi_karnaranjani", "S": "thillana lalgudi karnaranjani", "R": "Karnaranjani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "hCj-AjQPuls"}, {"N": "0627", "T": "Thillana", "H": "thillana_lalgudi_karnaranjani", "S": "thillana lalgudi karnaranjani", "R": "Karnaranjani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "nYijIrRbWu8"}]}, {"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0343", "T": "Thillana", "H": "thillana_lalgudi_karnaranjani", "S": "thillana lalgudi karnaranjani", "R": "Karnaranjani", "C": "Lalgudi Jayaraman", "A": "Amrutha Venkatesh", "V": "4G03w9MvLKE"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

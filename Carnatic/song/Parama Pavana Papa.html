@@ -42,30 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal P. Unnikrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0149-Parama Pavana Papa-Ranjani-MIK.cJdnviRT0N0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0149   - <a href="composer/Misu Krishna Iyer.html" >Misu Krishna Iyer</a> - <a href="raga/Ranjani.html" >Ranjani</a> - <a href="artist/P. Unnikrishnan.html" >P  Unnikrishnan   UNNIK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ram Kaushik</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0049-Parama Pavana Papa-Ranjani-MIK.SXhmcBTTW5c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0049   - <a href="composer/Misu Krishna Iyer.html" >Misu Krishna Iyer</a> - <a href="raga/Ranjani.html" >Ranjani</a> - <a href="artist/Ram Kaushik.html" >Ram Kaushik   KRAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Rajam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0084-Parama Pavana Papa-Ranjani-MIK.ne86UhX0yvw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0084   - <a href="composer/Misu Krishna Iyer.html" >Misu Krishna Iyer</a> - <a href="raga/Ranjani.html" >Ranjani</a> - <a href="artist/S. Rajam.html" >S  Rajam   SRAJAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sunil Gargyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0026-Parama Pavana Papa-Ranjani-MIK.CL2rt1ANML4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0026   - <a href="composer/Misu Krishna Iyer.html" >Misu Krishna Iyer</a> - <a href="raga/Ranjani.html" >Ranjani</a> - <a href="artist/Sunil Gargyan.html" >Sunil Gargyan   SUNILGARGYAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Voleti Venkateswarlu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0167-Parama Pavana Papa-Ranjani-MIK.0QrfapgyBnM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0167   - <a href="composer/Misu Krishna Iyer.html" >Misu Krishna Iyer</a> - <a href="raga/Ranjani.html" >Ranjani</a> - <a href="artist/Voleti Venkateswarlu.html" >Voleti Venkateswarlu   VOLETI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0168-Parama Pavana Papa-Ranjani-MIK.6sKzIKbo6Rc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0168   - <a href="composer/Misu Krishna Iyer.html" >Misu Krishna Iyer</a> - <a href="raga/Ranjani.html" >Ranjani</a> - <a href="artist/Voleti Venkateswarlu.html" >Voleti Venkateswarlu   VOLETI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0169-Parama Pavana Papa-Ranjani-MIK.fAEQsxNTbIY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0169   - <a href="composer/Misu Krishna Iyer.html" >Misu Krishna Iyer</a> - <a href="raga/Ranjani.html" >Ranjani</a> - <a href="artist/Voleti Venkateswarlu.html" >Voleti Venkateswarlu   VOLETI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -147,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "P. Unnikrishnan"], "songs": [{"N": "0149", "T": "", "H": "Parama Pavana Papa", "S": "parama pAvanA pApa mOcanA bhAgyamiyAdrA :  Adi", "R": "Ranjani", "C": "Misu Krishna Iyer", "A": "P. Unnikrishnan", "V": "cJdnviRT0N0"}]}, {"name": ["Vocal", "Ram Kaushik"], "songs": [{"N": "0049", "T": "", "H": "Parama Pavana Papa", "S": "parama pAvanA pApa mOcanA bhAgyamiyAdrA :  Adi", "R": "Ranjani", "C": "Misu Krishna Iyer", "A": "Ram Kaushik", "V": "SXhmcBTTW5c"}]}, {"name": ["Vocal", "S. Rajam"], "songs": [{"N": "0084", "T": "", "H": "Parama Pavana Papa", "S": "parama pAvanA pApa mOcanA bhAgyamiyAdrA :  Adi", "R": "Ranjani", "C": "Misu Krishna Iyer", "A": "S. Rajam", "V": "ne86UhX0yvw"}]}, {"name": ["Vocal", "Sunil Gargyan"], "songs": [{"N": "0026", "T": "", "H": "Parama Pavana Papa", "S": "parama pAvanA pApa mOcanA bhAgyamiyAdrA :  Adi", "R": "Ranjani", "C": "Misu Krishna Iyer", "A": "Sunil Gargyan", "V": "CL2rt1ANML4"}]}, {"name": ["Vocal", "Voleti Venkateswarlu"], "songs": [{"N": "0167", "T": "", "H": "Parama Pavana Papa", "S": "parama pAvanA pApa mOcanA bhAgyamiyAdrA :  Adi", "R": "Ranjani", "C": "Misu Krishna Iyer", "A": "Voleti Venkateswarlu", "V": "0QrfapgyBnM"}, {"N": "0168", "T": "", "H": "Parama Pavana Papa", "S": "parama pAvanA pApa mOcanA bhAgyamiyAdrA :  Adi", "R": "Ranjani", "C": "Misu Krishna Iyer", "A": "Voleti Venkateswarlu", "V": "6sKzIKbo6Rc"}, {"N": "0169", "T": "", "H": "Parama Pavana Papa", "S": "parama pAvanA pApa mOcanA bhAgyamiyAdrA :  Adi", "R": "Ranjani", "C": "Misu Krishna Iyer", "A": "Voleti Venkateswarlu", "V": "fAEQsxNTbIY"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

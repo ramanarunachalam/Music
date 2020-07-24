@@ -42,28 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mandolin U. Srinivas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0211-Kalasha Vardhijam-Rathnangi-T.77_lzqZ_OQ4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0211   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Rathnangi.html" >Rathnangi</a> - <a href="artist/U. Srinivas.html" >U  Srinivas   USRINIVAS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0212-Kalasha Vardhijam-Rathnangi-T.TNDh6Bzi1Rg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0212   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Rathnangi.html" >Rathnangi</a> - <a href="artist/U. Srinivas.html" >U  Srinivas   USRINIVAS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0213-Kalasha Vardhijam-Rathnangi-T.pr6shTD0APY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0213   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Rathnangi.html" >Rathnangi</a> - <a href="artist/U. Srinivas.html" >U  Srinivas   USRINIVAS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0214-Kalasha Vardhijam-Rathnangi-T.v3x5fBi1-4g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0214   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Rathnangi.html" >Rathnangi</a> - <a href="artist/U. Srinivas.html" >U  Srinivas   USRINIVAS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Nisha Rajagopal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0067-Kalasha Vardhijam-Rathnangi-T.uSIJD6Onh_8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0067   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Rathnangi.html" >Rathnangi</a> - <a href="artist/Nisha Rajagopal.html" >Nisha Rajagopal   NISHAR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal O. S. Thyagarajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0064-Kalasha Vardhijam-Rathnangi-T.NhQ4AlV_3tw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0064   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Rathnangi.html" >Rathnangi</a> - <a href="artist/O. S. Thyagarajan.html" >O  S  Thyagarajan   OST01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0065-Kalasha Vardhijam-Rathnangi-T.mvTzmdfLpRQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0065   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Rathnangi.html" >Rathnangi</a> - <a href="artist/O. S. Thyagarajan.html" >O  S  Thyagarajan   OST01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal P. S. Narayanaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0011-Kalasha Vardhijam-Rathnangi-T.zvB8rn_-W8A');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0011   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Rathnangi.html" >Rathnangi</a> - <a href="artist/P. S. Narayanaswamy.html" >P  S  Narayanaswamy   PSN01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -155,9 +134,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Mandolin", "U. Srinivas"], "songs": [{"N": "0211", "T": "", "H": "Kalasha Vardhijam", "S": "kalaSa vArdhijAm satatam bhajE :  Adi", "R": "Rathnangi", "C": "Thyagaraja", "A": "U. Srinivas", "V": "77_lzqZ_OQ4"}, {"N": "0212", "T": "", "H": "Kalasha Vardhijam", "S": "kalaSa vArdhijAm satatam bhajE :  Adi", "R": "Rathnangi", "C": "Thyagaraja", "A": "U. Srinivas", "V": "TNDh6Bzi1Rg"}, {"N": "0213", "T": "", "H": "Kalasha Vardhijam", "S": "kalaSa vArdhijAm satatam bhajE :  Adi", "R": "Rathnangi", "C": "Thyagaraja", "A": "U. Srinivas", "V": "pr6shTD0APY"}, {"N": "0214", "T": "", "H": "Kalasha Vardhijam", "S": "kalaSa vArdhijAm satatam bhajE :  Adi", "R": "Rathnangi", "C": "Thyagaraja", "A": "U. Srinivas", "V": "v3x5fBi1-4g"}]}, {"name": ["Vocal", "Nisha Rajagopal"], "songs": [{"N": "0067", "T": "", "H": "Kalasha Vardhijam", "S": "kalaSa vArdhijAm satatam bhajE :  Adi", "R": "Rathnangi", "C": "Thyagaraja", "A": "Nisha Rajagopal", "V": "uSIJD6Onh_8"}]}, {"name": ["Vocal", "O. S. Thyagarajan"], "songs": [{"N": "0064", "T": "", "H": "Kalasha Vardhijam", "S": "kalaSa vArdhijAm satatam bhajE :  Adi", "R": "Rathnangi", "C": "Thyagaraja", "A": "O. S. Thyagarajan", "V": "NhQ4AlV_3tw"}, {"N": "0065", "T": "", "H": "Kalasha Vardhijam", "S": "kalaSa vArdhijAm satatam bhajE :  Adi", "R": "Rathnangi", "C": "Thyagaraja", "A": "O. S. Thyagarajan", "V": "mvTzmdfLpRQ"}]}, {"name": ["Vocal", "P. S. Narayanaswamy"], "songs": [{"N": "0011", "T": "", "H": "Kalasha Vardhijam", "S": "kalaSa vArdhijAm satatam bhajE :  Adi", "R": "Rathnangi", "C": "Thyagaraja", "A": "P. S. Narayanaswamy", "V": "zvB8rn_-W8A"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

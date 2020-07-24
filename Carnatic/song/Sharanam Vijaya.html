@@ -42,25 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Cherthala K. N. Renganatha Sharma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0122-Sharanam Vijaya-Vijayasaraswathi-HMB.CippzG8Bb_s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0122   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Vijayasaraswathi.html" >Vijayasaraswathi</a> - <a href="artist/Cherthala K. N. Renganatha Sharma.html" >Cherthala K  N  Renganatha Sharma</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0123-Sharanam Vijaya-Vijayasaraswathi-HMB.Xkjfw6_efu8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0123   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Vijayasaraswathi.html" >Vijayasaraswathi</a> - <a href="artist/Cherthala K. N. Renganatha Sharma.html" >Cherthala K  N  Renganatha Sharma</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0124-Sharanam Vijaya-Vijayasaraswathi-HMB.wzrqva2xAUE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0124   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Vijayasaraswathi.html" >Vijayasaraswathi</a> - <a href="artist/Cherthala K. N. Renganatha Sharma.html" >Cherthala K  N  Renganatha Sharma</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. N. Seshagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0474-Sharanam Vijaya-Vijayasaraswathi-HMB.EUQFBj1lULQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0474   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Vijayasaraswathi.html" >Vijayasaraswathi</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0475-Sharanam Vijaya-Vijayasaraswathi-HMB.MXCNSA4zJio');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0475   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Vijayasaraswathi.html" >Vijayasaraswathi</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0476-Sharanam Vijaya-Vijayasaraswathi-HMB.aEv2QmVxIYc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0476   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Vijayasaraswathi.html" >Vijayasaraswathi</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0477-Sharanam Vijaya-Vijayasaraswathi-HMB.vjvnNBUNuqM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0477   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Vijayasaraswathi.html" >Vijayasaraswathi</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. V. Ramprasad</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0034-Sharanam Vijaya-Vijayasaraswathi-HMB.d5wNf_GtHu4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0034   - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a> - <a href="raga/Vijayasaraswathi.html" >Vijayasaraswathi</a> - <a href="artist/T. V. Ramprasad.html" >T  V  Ramprasad   RAMPRASAD01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -149,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Cherthala K. N. Renganatha Sharma"], "songs": [{"N": "0122", "T": "", "H": "Sharanam Vijaya", "S": "sharaNam vijaya sarasvati mAyE sarva jIva :  Adi", "R": "Vijayasaraswathi", "C": "Muthiah Bhagavathar", "A": "Cherthala K. N. Renganatha Sharma", "V": "CippzG8Bb_s"}, {"N": "0123", "T": "", "H": "Sharanam Vijaya", "S": "sharaNam vijaya sarasvati mAyE sarva jIva :  Adi", "R": "Vijayasaraswathi", "C": "Muthiah Bhagavathar", "A": "Cherthala K. N. Renganatha Sharma", "V": "Xkjfw6_efu8"}, {"N": "0124", "T": "", "H": "Sharanam Vijaya", "S": "sharaNam vijaya sarasvati mAyE sarva jIva :  Adi", "R": "Vijayasaraswathi", "C": "Muthiah Bhagavathar", "A": "Cherthala K. N. Renganatha Sharma", "V": "wzrqva2xAUE"}]}, {"name": ["Vocal", "T. N. Seshagopalan"], "songs": [{"N": "0474", "T": "", "H": "Sharanam Vijaya", "S": "sharaNam vijaya sarasvati mAyE sarva jIva :  Adi", "R": "Vijayasaraswathi", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "EUQFBj1lULQ"}, {"N": "0475", "T": "", "H": "Sharanam Vijaya", "S": "sharaNam vijaya sarasvati mAyE sarva jIva :  Adi", "R": "Vijayasaraswathi", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "MXCNSA4zJio"}, {"N": "0476", "T": "", "H": "Sharanam Vijaya", "S": "sharaNam vijaya sarasvati mAyE sarva jIva :  Adi", "R": "Vijayasaraswathi", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "aEv2QmVxIYc"}, {"N": "0477", "T": "", "H": "Sharanam Vijaya", "S": "sharaNam vijaya sarasvati mAyE sarva jIva :  Adi", "R": "Vijayasaraswathi", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "vjvnNBUNuqM"}]}, {"name": ["Vocal", "T. V. Ramprasad"], "songs": [{"N": "0034", "T": "", "H": "Sharanam Vijaya", "S": "sharaNam vijaya sarasvati mAyE sarva jIva :  Adi", "R": "Vijayasaraswathi", "C": "Muthiah Bhagavathar", "A": "T. V. Ramprasad", "V": "d5wNf_GtHu4"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

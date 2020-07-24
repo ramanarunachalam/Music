@@ -42,21 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Brindha Manickavasakan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0044-Varnam-Entha Ninne-Khamas-SD.I8RD-N9a76g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0044 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Subbarama Dikshitar.html" >Subbarama Dikshitar</a> - <a href="raga/Khamas.html" >Khamas</a> - <a href="artist/Brindha Manickavasakan.html" >Brindha Manickavasakan   BRINDHAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Mani Krishnaswami</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0097-Varnam-Entha Ninne-Khamas-SD.-HhQPqGxK1k');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0097 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Subbarama Dikshitar.html" >Subbarama Dikshitar</a> - <a href="raga/Khamas.html" >Khamas</a> - <a href="artist/Mani Krishnaswami.html" >Mani Krishnaswami   MANIK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0098-Varnam-Entha Ninne-Khamas-SD.LBRfIxxDTBU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0098 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Subbarama Dikshitar.html" >Subbarama Dikshitar</a> - <a href="raga/Khamas.html" >Khamas</a> - <a href="artist/Mani Krishnaswami.html" >Mani Krishnaswami   MANIK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Musiri Subramania Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0058-Varnam-Entha Ninne-Khamas-SD.Wrp1GLtl-nQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0058 - <a href="song_type/Varnam.html" >Varnam</a>  - <a href="composer/Subbarama Dikshitar.html" >Subbarama Dikshitar</a> - <a href="raga/Khamas.html" >Khamas</a> - <a href="artist/Musiri Subramania Iyer.html" >Musiri Subramania Iyer   MUSIRI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -168,9 +154,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Brindha Manickavasakan"], "songs": [{"N": "0044", "T": "Varnam", "H": "Entha Ninne", "S": "entani nE delupudurA ElAgu tALudurA :  Tisra Eka", "R": "Khamas", "C": "Subbarama Dikshitar", "A": "Brindha Manickavasakan", "V": "I8RD-N9a76g"}]}, {"name": ["Vocal", "Mani Krishnaswami"], "songs": [{"N": "0097", "T": "Varnam", "H": "Entha Ninne", "S": "entani nE delupudurA ElAgu tALudurA :  Tisra Eka", "R": "Khamas", "C": "Subbarama Dikshitar", "A": "Mani Krishnaswami", "V": "-HhQPqGxK1k"}, {"N": "0098", "T": "Varnam", "H": "Entha Ninne", "S": "entani nE delupudurA ElAgu tALudurA :  Tisra Eka", "R": "Khamas", "C": "Subbarama Dikshitar", "A": "Mani Krishnaswami", "V": "LBRfIxxDTBU"}]}, {"name": ["Vocal", "Musiri Subramania Iyer"], "songs": [{"N": "0058", "T": "Varnam", "H": "Entha Ninne", "S": "entani nE delupudurA ElAgu tALudurA :  Tisra Eka", "R": "Khamas", "C": "Subbarama Dikshitar", "A": "Musiri Subramania Iyer", "V": "Wrp1GLtl-nQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

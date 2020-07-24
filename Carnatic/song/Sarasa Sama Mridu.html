@@ -41,25 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Baby Sreeram</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0042-Sarasa Sama Mridu-Gowrimanohari-ST.nwI8cKY1WzE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0042   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/Baby Sreeram.html" >Baby Sreeram   BABYS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bushani Kalyanaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0019-Sarasa Sama Mridu-Gowrimanohari-ST.lgIZcafKz58');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0019   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/Bushani Kalyanaraman.html" >Bushani Kalyanaraman   BUSHANI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0733-Sarasa Sama Mridu-Gowrimanohari-ST.cCdU_ecQHQk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0733   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0734-Sarasa Sama Mridu-Gowrimanohari-ST.k2Txg4qU8_A');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0734   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sikkil Gurucharan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0165-Sarasa Sama Mridu-Gowrimanohari-ST.--GcCsS7Jl8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0165   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Gowrimanohari.html" >Gowrimanohari</a> - <a href="artist/Sikkil Gurucharan.html" >Sikkil Gurucharan   GURUCHARAN01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -160,9 +142,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Baby Sreeram"], "songs": [{"N": "0042", "T": "", "H": "Sarasa Sama Mridu", "S": "sArasa sama mrdupada nIti nilaya jaya :  Adi", "R": "Gowrimanohari", "C": "Swathi Thirunal", "A": "Baby Sreeram", "V": "nwI8cKY1WzE"}]}, {"name": ["Vocal", "Bushani Kalyanaraman"], "songs": [{"N": "0019", "T": "", "H": "Sarasa Sama Mridu", "S": "sArasa sama mrdupada nIti nilaya jaya :  Adi", "R": "Gowrimanohari", "C": "Swathi Thirunal", "A": "Bushani Kalyanaraman", "V": "lgIZcafKz58"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0733", "T": "", "H": "Sarasa Sama Mridu", "S": "sArasa sama mrdupada nIti nilaya jaya :  Adi", "R": "Gowrimanohari", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "cCdU_ecQHQk"}, {"N": "0734", "T": "", "H": "Sarasa Sama Mridu", "S": "sArasa sama mrdupada nIti nilaya jaya :  Adi", "R": "Gowrimanohari", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "k2Txg4qU8_A"}]}, {"name": ["Vocal", "Sikkil Gurucharan"], "songs": [{"N": "0165", "T": "", "H": "Sarasa Sama Mridu", "S": "sArasa sama mrdupada nIti nilaya jaya :  Adi", "R": "Gowrimanohari", "C": "Swathi Thirunal", "A": "Sikkil Gurucharan", "V": "--GcCsS7Jl8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -42,33 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mridangam T. V. Gopalakrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0103-Sarasiruha Nayane-Amrithavarshini-T.yXcVy1eGFHg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0103   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Amrithavarshini.html" >Amrithavarshini</a> - <a href="artist/T. V. Gopalakrishnan.html" >T  V  Gopalakrishnan   TVG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin S. R. Mahadeva Sarma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Sarasiruha Nayane-Amrithavarshini-T.mR84tcg5cAY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Amrithavarshini.html" >Amrithavarshini</a> - <a href="artist/S. R. Mahadeva Sarma.html" >S  R  Mahadeva Sarma   SRMAHADEVA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ambikapuram Sivaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0035-Sarasiruha Nayane-Amrithavarshini-T.pYz1Jmim8iI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0035   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Amrithavarshini.html" >Amrithavarshini</a> - <a href="artist/Ambikapuram Sivaraman.html" >Ambikapuram Sivaraman   ASIVARAMAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Dr. Nagavalli Nagaraj</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0090-Sarasiruha Nayane-Amrithavarshini-T.4X4ho8hKeko');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0090   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Amrithavarshini.html" >Amrithavarshini</a> - <a href="artist/Dr. Nagavalli Nagaraj.html" >Dr  Nagavalli Nagaraj   NN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Dr. Sripada Pinakapani</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0038-Sarasiruha Nayane-Amrithavarshini-T.HfPBPNG_hDU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0038   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Amrithavarshini.html" >Amrithavarshini</a> - <a href="artist/Dr. Sripada Pinakapani.html" >Dr  Sripada Pinakapani   SPP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. J. Yesudas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0292-Sarasiruha Nayane-Amrithavarshini-T.WI5jrHjbrg0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0292   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Amrithavarshini.html" >Amrithavarshini</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0293-Sarasiruha Nayane-Amrithavarshini-T.cjdRVumQJXI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0293   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Amrithavarshini.html" >Amrithavarshini</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -158,9 +132,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Mridangam", "T. V. Gopalakrishnan"], "songs": [{"N": "0103", "T": "", "H": "Sarasiruha Nayane", "S": "sarasI ruha nayanE sarasij A sanE :  Adi", "R": "Amrithavarshini", "C": "Thyagaraja", "A": "T. V. Gopalakrishnan", "V": "yXcVy1eGFHg"}]}, {"name": ["Violin", "S. R. Mahadeva Sarma"], "songs": [{"N": "0017", "T": "", "H": "Sarasiruha Nayane", "S": "sarasI ruha nayanE sarasij A sanE :  Adi", "R": "Amrithavarshini", "C": "Thyagaraja", "A": "S. R. Mahadeva Sarma", "V": "mR84tcg5cAY"}]}, {"name": ["Vocal", "Ambikapuram Sivaraman"], "songs": [{"N": "0035", "T": "", "H": "Sarasiruha Nayane", "S": "sarasI ruha nayanE sarasij A sanE :  Adi", "R": "Amrithavarshini", "C": "Thyagaraja", "A": "Ambikapuram Sivaraman", "V": "pYz1Jmim8iI"}]}, {"name": ["Vocal", "Dr. Nagavalli Nagaraj"], "songs": [{"N": "0090", "T": "", "H": "Sarasiruha Nayane", "S": "sarasI ruha nayanE sarasij A sanE :  Adi", "R": "Amrithavarshini", "C": "Thyagaraja", "A": "Dr. Nagavalli Nagaraj", "V": "4X4ho8hKeko"}]}, {"name": ["Vocal", "Dr. Sripada Pinakapani"], "songs": [{"N": "0038", "T": "", "H": "Sarasiruha Nayane", "S": "sarasI ruha nayanE sarasij A sanE :  Adi", "R": "Amrithavarshini", "C": "Thyagaraja", "A": "Dr. Sripada Pinakapani", "V": "HfPBPNG_hDU"}]}, {"name": ["Vocal", "K. J. Yesudas"], "songs": [{"N": "0292", "T": "", "H": "Sarasiruha Nayane", "S": "sarasI ruha nayanE sarasij A sanE :  Adi", "R": "Amrithavarshini", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "WI5jrHjbrg0"}, {"N": "0293", "T": "", "H": "Sarasiruha Nayane", "S": "sarasI ruha nayanE sarasij A sanE :  Adi", "R": "Amrithavarshini", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "cjdRVumQJXI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

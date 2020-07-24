@@ -42,25 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Nalina Mohan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0008-Sadguru Swamiki-Reethigowla-RSI.16pQ-Tsq2kA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0008   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Reethigowla.html" >Reethigowla</a> - <a href="artist/Nalina Mohan.html" >Nalina Mohan   NALINA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1237-Sadguru Swamiki-Reethigowla-RSI.0C_UPvBLIRA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1237   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Reethigowla.html" >Reethigowla</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1238-Sadguru Swamiki-Reethigowla-RSI.sbUVw1w8ELI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1238   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Reethigowla.html" >Reethigowla</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Neyveli Santhanagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0119-Sadguru Swamiki-Reethigowla-RSI.J2d-v5PKvvo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0119   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Reethigowla.html" >Reethigowla</a> - <a href="artist/Neyveli Santhanagopalan.html" >Neyveli Santhanagopalan   NEYVELI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sriranjani Santhanagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0078-Sadguru Swamiki-Reethigowla-RSI.8lvBXPoo1y0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0078   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Reethigowla.html" >Reethigowla</a> - <a href="artist/Sriranjani Santhanagopalan.html" >Sriranjani Santhanagopalan   SJS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -142,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "Nalina Mohan"], "songs": [{"N": "0008", "T": "", "H": "Sadguru Swamiki", "S": "sadguru svAmiki sATiyu lEdani santatamu pogaDi :  Adi", "R": "Reethigowla", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Nalina Mohan", "V": "16pQ-Tsq2kA"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "1238", "T": "", "H": "Sadguru Swamiki", "S": "sadguru svAmiki sATiyu lEdani santatamu pogaDi :  Adi", "R": "Reethigowla", "C": "Ramanathapuram Srinivasa Iyengar", "A": "M. Balamuralikrishna", "V": "0C_UPvBLIRA"}, {"N": "1239", "T": "", "H": "Sadguru Swamiki", "S": "sadguru svAmiki sATiyu lEdani santatamu pogaDi :  Adi", "R": "Reethigowla", "C": "Ramanathapuram Srinivasa Iyengar", "A": "M. Balamuralikrishna", "V": "sbUVw1w8ELI"}]}, {"name": ["Vocal", "Neyveli Santhanagopalan"], "songs": [{"N": "0119", "T": "", "H": "Sadguru Swamiki", "S": "sadguru svAmiki sATiyu lEdani santatamu pogaDi :  Adi", "R": "Reethigowla", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Neyveli Santhanagopalan", "V": "J2d-v5PKvvo"}]}, {"name": ["Vocal", "Sriranjani Santhanagopalan"], "songs": [{"N": "0078", "T": "", "H": "Sadguru Swamiki", "S": "sadguru svAmiki sATiyu lEdani santatamu pogaDi :  Adi", "R": "Reethigowla", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Sriranjani Santhanagopalan", "V": "8lvBXPoo1y0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

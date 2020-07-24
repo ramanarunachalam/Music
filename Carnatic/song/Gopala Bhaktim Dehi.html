@@ -42,34 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0084-Gopala Bhaktim Dehi-Bageshree-ST.v_cDfutvwUQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0084   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bageshree.html" >Bageshree</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Krithika Natarajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0020-Gopala Bhaktim Dehi-Bageshree-ST.HPu9RZyorWQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0020   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bageshree.html" >Bageshree</a> - <a href="artist/Krithika Natarajan.html" >Krithika Natarajan   KRITHIKA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Padma Krishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0022-Gopala Bhaktim Dehi-Bageshree-ST.TsBlNj3NGBA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0022   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bageshree.html" >Bageshree</a> - <a href="artist/Padma Krishnan.html" >Padma Krishnan   KPADMA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0301-Gopala Bhaktim Dehi-Bageshree-ST.HqEA-G1c6ug');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0301   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bageshree.html" >Bageshree</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0302-Gopala Bhaktim Dehi-Bageshree-ST.NXjzjGkAZ5Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0302   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bageshree.html" >Bageshree</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0303-Gopala Bhaktim Dehi-Bageshree-ST.ParWb-Ukn0Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0303   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bageshree.html" >Bageshree</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Thamarakkad Govindan Namboothiri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0012-Gopala Bhaktim Dehi-Bageshree-ST.o3nQbpNj50Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0012   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bageshree.html" >Bageshree</a> - <a href="artist/Thamarakkad Govindan Namboothiri.html" >Thamarakkad Govindan Namboothiri</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Trichur V. Ramachandran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0026-Gopala Bhaktim Dehi-Bageshree-ST.uwJceaWyMeA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0026   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bageshree.html" >Bageshree</a> - <a href="artist/Trichur V. Ramachandran.html" >Trichur V  Ramachandran   TVR01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -170,9 +143,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0084", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "v_cDfutvwUQ"}]}, {"name": ["Vocal", "Krithika Natarajan"], "songs": [{"N": "0020", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Krithika Natarajan", "V": "HPu9RZyorWQ"}]}, {"name": ["Vocal", "Padma Krishnan"], "songs": [{"N": "0022", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Padma Krishnan", "V": "TsBlNj3NGBA"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0301", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "HqEA-G1c6ug"}, {"N": "0302", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "NXjzjGkAZ5Y"}, {"N": "0303", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "ParWb-Ukn0Y"}]}, {"name": ["Vocal", "Thamarakkad Govindan Namboothiri"], "songs": [{"N": "0012", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Thamarakkad Govindan Namboothiri", "V": "o3nQbpNj50Y"}]}, {"name": ["Vocal", "Trichur V. Ramachandran"], "songs": [{"N": "0026", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Trichur V. Ramachandran", "V": "uwJceaWyMeA"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

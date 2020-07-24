@@ -25,29 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; kal mari adiya kanakasabhesha unmel kadal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0230-Kaal Maari Adiya-Kunthalavarali-ADP.C8R8d6HfkRE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0230   - <a href="song/Kaal Maari Adiya.html" >kAl mAri ADiya kanakasabhEshA unmEl kAdal :  Adi</a> - <a href="raga/Kunthalavarali.html" >Kunthalavarali</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0231-Kaal Maari Adiya-Kunthalavarali-ADP.gUYFH3QrlPQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0231   - <a href="song/Kaal Maari Adiya.html" >kAl mAri ADiya kanakasabhEshA unmEl kAdal :  Adi</a> - <a href="raga/Kunthalavarali.html" >Kunthalavarali</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; pahi pahi sharade krpanidhe bhakta paripalite</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0333-Pahi Pahi Sharade-Kalyani-ADP.T0kDWfeiXC8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0333   - <a href="song/Pahi Pahi Sharade.html" >pAhi pAhi shAradE krpAnidhE bhakta paripalitE :  Adi</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0334-Pahi Pahi Sharade-Kalyani-ADP.h0dG-akgMXI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0334   - <a href="song/Pahi Pahi Sharade.html" >pAhi pAhi shAradE krpAnidhE bhakta paripalitE :  Adi</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0368-Pahi Pahi Sharade-Kalyani-ADP.t_lkSlwsrSc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0368   - <a href="song/Pahi Pahi Sharade.html" >pAhi pAhi shAradE krpAnidhE bhakta paripalitE :  Adi</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; he kamaksi he ekamreshvari heramba guha</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0584-Ye Kamakshi-Yadukulakambhoji-ADP.hNZb_Uj--C4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0584   - <a href="song/Ye Kamakshi.html" >hE kAmAkSi hE EkAmrEshvari hEramba guha :  Adi</a> - <a href="raga/Yadukulakambhoji.html" >Yadukulakambhoji</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0542-Ye Kamakshi-Yadukulakambhoji-ADP.HOIQRRo2yug');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0542   - <a href="song/Ye Kamakshi.html" >hE kAmAkSi hE EkAmrEshvari hEramba guha :  Adi</a> - <a href="raga/Yadukulakambhoji.html" >Yadukulakambhoji</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["kal mari adiya kanakasabhesha unmel kadal"], "songs": [{"N": "0230", "T": "", "H": "Kaal Maari Adiya", "S": "kAl mAri ADiya kanakasabhEshA unmEl kAdal :  Adi", "R": "Kunthalavarali", "C": "Andavan Pitchai", "A": "Sudha Ragunathan", "V": "C8R8d6HfkRE"}, {"N": "0231", "T": "", "H": "Kaal Maari Adiya", "S": "kAl mAri ADiya kanakasabhEshA unmEl kAdal :  Adi", "R": "Kunthalavarali", "C": "Andavan Pitchai", "A": "Sudha Ragunathan", "V": "gUYFH3QrlPQ"}]}, {"name": ["pahi pahi sharade krpanidhe bhakta paripalite"], "songs": [{"N": "0333", "T": "", "H": "Pahi Pahi Sharade", "S": "pAhi pAhi shAradE krpAnidhE bhakta paripalitE :  Adi", "R": "Kalyani", "C": "Andavan Pitchai", "A": "D. K. Jayaraman", "V": "T0kDWfeiXC8"}, {"N": "0334", "T": "", "H": "Pahi Pahi Sharade", "S": "pAhi pAhi shAradE krpAnidhE bhakta paripalitE :  Adi", "R": "Kalyani", "C": "Andavan Pitchai", "A": "D. K. Jayaraman", "V": "h0dG-akgMXI"}, {"N": "0368", "T": "", "H": "Pahi Pahi Sharade", "S": "pAhi pAhi shAradE krpAnidhE bhakta paripalitE :  Adi", "R": "Kalyani", "C": "Andavan Pitchai", "A": "Maharajapuram Santhanam", "V": "t_lkSlwsrSc"}]}, {"name": ["he kamaksi he ekamreshvari heramba guha"], "songs": [{"N": "0584", "T": "", "H": "Ye Kamakshi", "S": "hE kAmAkSi hE EkAmrEshvari hEramba guha :  Adi", "R": "Yadukulakambhoji", "C": "Andavan Pitchai", "A": "D. K. Jayaraman", "V": "hNZb_Uj--C4"}, {"N": "0542", "T": "", "H": "Ye Kamakshi", "S": "hE kAmAkSi hE EkAmrEshvari hEramba guha :  Adi", "R": "Yadukulakambhoji", "C": "Andavan Pitchai", "A": "D. K. Pattammal", "V": "HOIQRRo2yug"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

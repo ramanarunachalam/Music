@@ -41,22 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Maharajapuram S. Srinivasan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0016-Parengum Parttalum-Kalyani-GK.Cp9zGgTwqgs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0016   - <a href="composer/Ghanam Krishnaiyer.html" >Ghanam Krishnaiyer</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Maharajapuram S. Srinivasan.html" >Maharajapuram S  Srinivasan   MSSRINIVASAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Maharajapuram Viswanatha Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0030-Parengum Parttalum-Kalyani-GK.O5qnhARi4AE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0030   - <a href="composer/Ghanam Krishnaiyer.html" >Ghanam Krishnaiyer</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Maharajapuram Viswanatha Iyer.html" >Maharajapuram Viswanatha Iyer</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0637-Parengum Parttalum-Kalyani-GK.0b7s6h3PGe4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0637   - <a href="composer/Ghanam Krishnaiyer.html" >Ghanam Krishnaiyer</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0638-Parengum Parttalum-Kalyani-GK.9zttOiI2A-g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0638   - <a href="composer/Ghanam Krishnaiyer.html" >Ghanam Krishnaiyer</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0639-Parengum Parttalum-Kalyani-GK.l9lZyfP9Lwg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0639   - <a href="composer/Ghanam Krishnaiyer.html" >Ghanam Krishnaiyer</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -157,9 +142,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Maharajapuram S. Srinivasan"], "songs": [{"N": "0016", "T": "", "H": "Parengum Parttalum", "S": "pArengum pArttAlum ummai pOla parimaLamuLLa :  Adi", "R": "Kalyani", "C": "Ghanam Krishnaiyer", "A": "Maharajapuram S. Srinivasan", "V": "Cp9zGgTwqgs"}]}, {"name": ["Vocal", "Maharajapuram Viswanatha Iyer"], "songs": [{"N": "0030", "T": "", "H": "Parengum Parttalum", "S": "pArengum pArttAlum ummai pOla parimaLamuLLa :  Adi", "R": "Kalyani", "C": "Ghanam Krishnaiyer", "A": "Maharajapuram Viswanatha Iyer", "V": "O5qnhARi4AE"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0637", "T": "", "H": "Parengum Parttalum", "S": "pArengum pArttAlum ummai pOla parimaLamuLLa :  Adi", "R": "Kalyani", "C": "Ghanam Krishnaiyer", "A": "Sanjay Subrahmanyan", "V": "0b7s6h3PGe4"}, {"N": "0638", "T": "", "H": "Parengum Parttalum", "S": "pArengum pArttAlum ummai pOla parimaLamuLLa :  Adi", "R": "Kalyani", "C": "Ghanam Krishnaiyer", "A": "Sanjay Subrahmanyan", "V": "9zttOiI2A-g"}, {"N": "0639", "T": "", "H": "Parengum Parttalum", "S": "pArengum pArttAlum ummai pOla parimaLamuLLa :  Adi", "R": "Kalyani", "C": "Ghanam Krishnaiyer", "A": "Sanjay Subrahmanyan", "V": "l9lZyfP9Lwg"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

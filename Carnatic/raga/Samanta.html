@@ -31,30 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; pranatarttiharaya namaste vara dharmasamvarddhani sahitaya</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0205-Pranatharthiharaya Namasthe-Samanta-MD.b9PzLUvM-Xw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0205   - <a href="song/Pranatharthiharaya Namasthe.html" >praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0018-Pranatharthiharaya Namasthe-Samanta-MD.SGZRAh--5zs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0018   - <a href="song/Pranatharthiharaya Namasthe.html" >praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Balaji Shankar.html" >Balaji Shankar   SBALAJI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0019-Pranatharthiharaya Namasthe-Samanta-MD.Z0nGHWHF368');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0019   - <a href="song/Pranatharthiharaya Namasthe.html" >praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Balaji Shankar.html" >Balaji Shankar   SBALAJI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0206-Pranatharthiharaya Namasthe-Samanta-MD.o9p39Vr13XA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0206   - <a href="song/Pranatharthiharaya Namasthe.html" >praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; unknownsong</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0030-UnknownSong-Samanta-UnknownComposer.auycGt6wKdM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0030   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/S. Srinivasan.html" >S  Srinivasan   SRINIVASANS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0038-UnknownSong-Samanta-UnknownComposer.DiSu7ENNBVQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0038   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Carnatica Brothers.html" >Carnatica Brothers   CBROS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; vishvanathena raksitoham</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0044-Viswanathena-Samanta-MD.mNhkLn-01pY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0044   - <a href="song/Viswanathena.html" >vishvanAthEna rakSitOham  :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/Kalpakam Swaminathan.html" >Kalpakam Swaminathan   KALPAGAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0674-Viswanathena-Samanta-MD.I1rpRPSjK0M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0674   - <a href="song/Viswanathena.html" >vishvanAthEna rakSitOham  :  Adi</a> - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="artist/T. M. Krishna.html" >T  M  Krishna   TMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["pranatarttiharaya namaste vara dharmasamvarddhani sahitaya"], "songs": [{"N": "0205", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "b9PzLUvM-Xw"}, {"N": "0018", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "Balaji Shankar", "V": "SGZRAh--5zs"}, {"N": "0019", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "Balaji Shankar", "V": "Z0nGHWHF368"}, {"N": "0206", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "o9p39Vr13XA"}]}, {"name": ["unknownsong"], "songs": [{"N": "0030", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Samanta", "C": "UnknownComposer", "A": "S. Srinivasan", "V": "auycGt6wKdM"}, {"N": "0038", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Samanta", "C": "UnknownComposer", "A": "Carnatica Brothers", "V": "DiSu7ENNBVQ"}]}, {"name": ["vishvanathena raksitoham"], "songs": [{"N": "0044", "T": "", "H": "Viswanathena", "S": "vishvanAthEna rakSitOham  :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "Kalpakam Swaminathan", "V": "mNhkLn-01pY"}, {"N": "0674", "T": "", "H": "Viswanathena", "S": "vishvanAthEna rakSitOham  :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "I1rpRPSjK0M"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

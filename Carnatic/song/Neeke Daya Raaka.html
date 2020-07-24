@@ -42,25 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin T. N. Krishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0239-Neeke Daya Raaka-Neelambari-T.M2U-gKBPAh0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0239   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Neelambari.html" >Neelambari</a> - <a href="artist/T. N. Krishnan.html" >T  N  Krishnan   TNK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0774-Neeke Daya Raaka-Neelambari-T.966xne2gCxw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0774   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Neelambari.html" >Neelambari</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0775-Neeke Daya Raaka-Neelambari-T.CFHALiz_NLE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0775   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Neelambari.html" >Neelambari</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ranjani Gayatri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0206-Neeke Daya Raaka-Neelambari-T.PEDf-8nXb8c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0206   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Neelambari.html" >Neelambari</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. M. Thiagarajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Neeke Daya Raaka-Neelambari-T.3yopUkeKIKQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Neelambari.html" >Neelambari</a> - <a href="artist/T. M. Thiagarajan.html" >T  M  Thiagarajan   TMT01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -164,9 +146,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "T. N. Krishnan"], "songs": [{"N": "0239", "T": "", "H": "Neeke Daya Raaka", "S": "nIkE daya rAka nE jEyu panul e lla :  Adi", "R": "Neelambari", "C": "Thyagaraja", "A": "T. N. Krishnan", "V": "M2U-gKBPAh0"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "0774", "T": "", "H": "Neeke Daya Raaka", "S": "nIkE daya rAka nE jEyu panul e lla :  Adi", "R": "Neelambari", "C": "Thyagaraja", "A": "M. S. Subbulakshmi", "V": "966xne2gCxw"}, {"N": "0775", "T": "", "H": "Neeke Daya Raaka", "S": "nIkE daya rAka nE jEyu panul e lla :  Adi", "R": "Neelambari", "C": "Thyagaraja", "A": "M. S. Subbulakshmi", "V": "CFHALiz_NLE"}]}, {"name": ["Vocal", "Ranjani Gayatri"], "songs": [{"N": "0206", "T": "", "H": "Neeke Daya Raaka", "S": "nIkE daya rAka nE jEyu panul e lla :  Adi", "R": "Neelambari", "C": "Thyagaraja", "A": "Ranjani Gayatri", "V": "PEDf-8nXb8c"}]}, {"name": ["Vocal", "T. M. Thiagarajan"], "songs": [{"N": "0027", "T": "", "H": "Neeke Daya Raaka", "S": "nIkE daya rAka nE jEyu panul e lla :  Adi", "R": "Neelambari", "C": "Thyagaraja", "A": "T. M. Thiagarajan", "V": "3yopUkeKIKQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

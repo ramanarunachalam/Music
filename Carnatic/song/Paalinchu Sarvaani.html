@@ -42,18 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Madurai Somu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0176-Paalinchu Sarvaani-Kambhoji-PDI.3MLEEf4HcqU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0176   - <a href="composer/Puliyur Doraiswamy Iyer.html" >Puliyur Doraiswamy Iyer</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/Madurai Somu.html" >Madurai Somu   SOMU01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0177-Paalinchu Sarvaani-Kambhoji-PDI.P1iC48Urg98');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0177   - <a href="composer/Puliyur Doraiswamy Iyer.html" >Puliyur Doraiswamy Iyer</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/Madurai Somu.html" >Madurai Somu   SOMU01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0178-Paalinchu Sarvaani-Kambhoji-PDI.x4b7qPqHoSw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0178   - <a href="composer/Puliyur Doraiswamy Iyer.html" >Puliyur Doraiswamy Iyer</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/Madurai Somu.html" >Madurai Somu   SOMU01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Priya Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0171-Paalinchu Sarvaani-Kambhoji-PDI.QVXuW-OD3nQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0171   - <a href="composer/Puliyur Doraiswamy Iyer.html" >Puliyur Doraiswamy Iyer</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/Priya Sisters.html" >Priya Sisters   PRIYAS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -135,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Madurai Somu"], "songs": [{"N": "0176", "T": "", "H": "Paalinchu Sarvaani", "S": "pAlincu sarvani bhava rOga samani nannu :  Adi", "R": "Kambhoji", "C": "Puliyur Doraiswamy Iyer", "A": "Madurai Somu", "V": "3MLEEf4HcqU"}, {"N": "0177", "T": "", "H": "Paalinchu Sarvaani", "S": "pAlincu sarvani bhava rOga samani nannu :  Adi", "R": "Kambhoji", "C": "Puliyur Doraiswamy Iyer", "A": "Madurai Somu", "V": "P1iC48Urg98"}, {"N": "0178", "T": "", "H": "Paalinchu Sarvaani", "S": "pAlincu sarvani bhava rOga samani nannu :  Adi", "R": "Kambhoji", "C": "Puliyur Doraiswamy Iyer", "A": "Madurai Somu", "V": "x4b7qPqHoSw"}]}, {"name": ["Vocal", "Priya Sisters"], "songs": [{"N": "0171", "T": "", "H": "Paalinchu Sarvaani", "S": "pAlincu sarvani bhava rOga samani nannu :  Adi", "R": "Kambhoji", "C": "Puliyur Doraiswamy Iyer", "A": "Priya Sisters", "V": "QVXuW-OD3nQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

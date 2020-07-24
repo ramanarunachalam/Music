@@ -31,26 +31,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; unknownsong</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0080-UnknownSong-Salagam-UnknownComposer.uOXZm2_LEJU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0080   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/S. Balachander.html" >S  Balachander   SB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0330-UnknownSong-Salagam-UnknownComposer.X8uJxGyfH5k');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0330   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/Sikkil Gurucharan.html" >Sikkil Gurucharan   GURUCHARAN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0390-UnknownSong-Salagam-UnknownComposer.2JRXB_t4zjs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0390   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; varana vadanam varivashyami vamadeva priya sutamaham</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0196-Vaarana-Salagam-BMK.41AHZQh4q6g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0196   - <a href="song/Vaarana.html" >vAraNa vadanam varivashyAmi vAmadEva priya :  Adi</a> - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="artist/T. R. Mahalingam.html" >T  R  Mahalingam   MALI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0021-Vaarana-Salagam-BMK.oO7CEcr6EiU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0021   - <a href="song/Vaarana.html" >vAraNa vadanam varivashyAmi vAmadEva priya :  Adi</a> - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="artist/Yella Venkateswara Rao.html" >Yella Venkateswara Rao   YELLAVRAO01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1493-Vaarana-Salagam-BMK.9IQLvYROh6s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1493   - <a href="song/Vaarana.html" >vAraNa vadanam varivashyAmi vAmadEva priya :  Adi</a> - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0390-Vaarana-Salagam-BMK.kRcICaIxfic');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0390   - <a href="song/Vaarana.html" >vAraNa vadanam varivashyAmi vAmadEva priya :  Adi</a> - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["unknownsong"], "songs": [{"N": "0080", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Salagam", "C": "UnknownComposer", "A": "S. Balachander", "V": "uOXZm2_LEJU"}, {"N": "0330", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Salagam", "C": "UnknownComposer", "A": "Sikkil Gurucharan", "V": "X8uJxGyfH5k"}, {"N": "0390", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Salagam", "C": "UnknownComposer", "A": "S. Kalyanaraman", "V": "2JRXB_t4zjs"}]}, {"name": ["varana vadanam varivashyami vamadeva priya sutamaham"], "songs": [{"N": "0196", "T": "", "H": "Vaarana", "S": "vAraNa vadanam varivashyAmi vAmadEva priya :  Adi", "R": "Salagam", "C": "M. Balamuralikrishna", "A": "T. R. Mahalingam", "V": "41AHZQh4q6g"}, {"N": "0021", "T": "", "H": "Vaarana", "S": "vAraNa vadanam varivashyAmi vAmadEva priya :  Adi", "R": "Salagam", "C": "M. Balamuralikrishna", "A": "Yella Venkateswara Rao", "V": "oO7CEcr6EiU"}, {"N": "1493", "T": "", "H": "Vaarana", "S": "vAraNa vadanam varivashyAmi vAmadEva priya :  Adi", "R": "Salagam", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "9IQLvYROh6s"}, {"N": "0390", "T": "", "H": "Vaarana", "S": "vAraNa vadanam varivashyAmi vAmadEva priya :  Adi", "R": "Salagam", "C": "M. Balamuralikrishna", "A": "K. J. Yesudas", "V": "kRcICaIxfic"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#raga-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -40,22 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal G. Ravikiran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0037-Narmada Kaveri-Namadesi-MD.WivS3jcWlG4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0037   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Namadesi.html" >Namadesi</a> - <a href="artist/G. Ravikiran.html" >G  Ravikiran   GRK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0038-Narmada Kaveri-Namadesi-MD.jnMRPk7veyQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0038   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Namadesi.html" >Namadesi</a> - <a href="artist/G. Ravikiran.html" >G  Ravikiran   GRK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Sheela</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0053-Narmada Kaveri-Namadesi-MD.PusHdWCZaLw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0053   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Namadesi.html" >Namadesi</a> - <a href="artist/M. S. Sheela.html" >M  S  Sheela   MSHEELA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0054-Narmada Kaveri-Namadesi-MD.soQT2GYHP6I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0054   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Namadesi.html" >Namadesi</a> - <a href="artist/M. S. Sheela.html" >M  S  Sheela   MSHEELA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vani Sateesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0013-Narmada Kaveri-Namadesi-MD.lnizlJLQEeY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0013   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Namadesi.html" >Namadesi</a> - <a href="artist/Vani Sateesh.html" >Vani Sateesh   VANISATEESH01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -141,9 +126,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "G. Ravikiran"], "songs": [{"N": "0037", "T": "", "H": "Narmada Kaveri", "S": "narmadA kAvErI tIranilayE maNivalayE kalayE :  Misra Caapu", "R": "Namadesi", "C": "Muthuswami Dikshitar", "A": "G. Ravikiran", "V": "WivS3jcWlG4"}, {"N": "0038", "T": "", "H": "Narmada Kaveri", "S": "narmadA kAvErI tIranilayE maNivalayE kalayE :  Misra Caapu", "R": "Namadesi", "C": "Muthuswami Dikshitar", "A": "G. Ravikiran", "V": "jnMRPk7veyQ"}]}, {"name": ["Vocal", "M. S. Sheela"], "songs": [{"N": "0053", "T": "", "H": "Narmada Kaveri", "S": "narmadA kAvErI tIranilayE maNivalayE kalayE :  Misra Caapu", "R": "Namadesi", "C": "Muthuswami Dikshitar", "A": "M. S. Sheela", "V": "PusHdWCZaLw"}, {"N": "0054", "T": "", "H": "Narmada Kaveri", "S": "narmadA kAvErI tIranilayE maNivalayE kalayE :  Misra Caapu", "R": "Namadesi", "C": "Muthuswami Dikshitar", "A": "M. S. Sheela", "V": "soQT2GYHP6I"}]}, {"name": ["Vocal", "Vani Sateesh"], "songs": [{"N": "0013", "T": "", "H": "Narmada Kaveri", "S": "narmadA kAvErI tIranilayE maNivalayE kalayE :  Misra Caapu", "R": "Namadesi", "C": "Muthuswami Dikshitar", "A": "Vani Sateesh", "V": "lnizlJLQEeY"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

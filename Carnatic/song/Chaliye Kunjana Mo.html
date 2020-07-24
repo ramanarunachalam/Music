@@ -40,24 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Flute Kudamaloor Janardanan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0009-Chaliye Kunjana Mo-Brindavana saranga-ST.Z1vnalaRd0Q');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0009   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Brindavana saranga.html" >Brindavana saranga</a> - <a href="artist/Kudamaloor Janardanan.html" >Kudamaloor Janardanan   KJANARDHAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Avaneeswaram S. R. Vinu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0031-Chaliye Kunjana Mo-Brindavani-ST.m6-xQp2TQKE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0031   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Brindavani.html" >Brindavani</a> - <a href="artist/Avaneeswaram S. R. Vinu.html" >Avaneeswaram S  R  Vinu   VINU01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal O. S. Arun</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0049-Chaliye Kunjana Mo-Brindavani-ST.E1lUIApSjB0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0049   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Brindavani.html" >Brindavani</a> - <a href="artist/O. S. Arun.html" >O  S  Arun   OSARUN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sankaran Namboothiri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0044-Chaliye Kunjana Mo-UnknownRaga-ST.gZl3eJgR2aQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0044   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Sankaran Namboothiri.html" >Sankaran Namboothiri   SNAMBOOTHIRI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -153,9 +136,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Flute", "Kudamaloor Janardanan"], "songs": [{"N": "0009", "T": "", "H": "Chaliye Kunjana Mo", "S": "caliyE kunjan mO tum ham mil  :  Deshadi", "R": "Brindavana saranga", "C": "Swathi Thirunal", "A": "Kudamaloor Janardanan", "V": "Z1vnalaRd0Q"}]}, {"name": ["Violin", "Avaneeswaram S. R. Vinu"], "songs": [{"N": "0031", "T": "", "H": "Chaliye Kunjana Mo", "S": "caliyE kunjan mO tum ham mil  :  Deshadi", "R": "Brindavani", "C": "Swathi Thirunal", "A": "Avaneeswaram S. R. Vinu", "V": "m6-xQp2TQKE"}]}, {"name": ["Vocal", "O. S. Arun"], "songs": [{"N": "0049", "T": "", "H": "Chaliye Kunjana Mo", "S": "caliyE kunjan mO tum ham mil  :  Deshadi", "R": "Brindavani", "C": "Swathi Thirunal", "A": "O. S. Arun", "V": "E1lUIApSjB0"}]}, {"name": ["Vocal", "Sankaran Namboothiri"], "songs": [{"N": "0044", "T": "", "H": "Chaliye Kunjana Mo", "S": "caliyE kunjan mO tum ham mil  :  Deshadi", "R": "Unknownraga", "C": "Swathi Thirunal", "A": "Sankaran Namboothiri", "V": "gZl3eJgR2aQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

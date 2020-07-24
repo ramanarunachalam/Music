@@ -41,18 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Veena Veena E. Gayathri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0084-Sree Rajarajeswari-Ramapriya-PP.MnFM6TNwb_U');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0084   - <a href="composer/Ponniah Pillai.html" >Ponniah Pillai</a> - <a href="raga/Ramapriya.html" >Ramapriya</a> - <a href="artist/Veena E. Gayathri.html" >Veena E  Gayathri   GAYATHRI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0085-Sree Rajarajeswari-Ramapriya-PP.iz9jUcXUrr0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0085   - <a href="composer/Ponniah Pillai.html" >Ponniah Pillai</a> - <a href="raga/Ramapriya.html" >Ramapriya</a> - <a href="artist/Veena E. Gayathri.html" >Veena E  Gayathri   GAYATHRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1327-Sree Rajarajeswari-Ramapriya-PP.0UdbGary5mI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1327   - <a href="composer/Ponniah Pillai.html" >Ponniah Pillai</a> - <a href="raga/Ramapriya.html" >Ramapriya</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1328-Sree Rajarajeswari-Ramapriya-PP.LvzSX72l944');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1328   - <a href="composer/Ponniah Pillai.html" >Ponniah Pillai</a> - <a href="raga/Ramapriya.html" >Ramapriya</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -141,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Veena", "Veena E. Gayathri"], "songs": [{"N": "0084", "T": "", "H": "Sree Rajarajeswari", "S": "shrI rAjarAjEshvari shrI rAmamanOhari :  Adi", "R": "Ramapriya", "C": "Ponniah Pillai", "A": "Veena E. Gayathri", "V": "MnFM6TNwb_U"}, {"N": "0085", "T": "", "H": "Sree Rajarajeswari", "S": "shrI rAjarAjEshvari shrI rAmamanOhari :  Adi", "R": "Ramapriya", "C": "Ponniah Pillai", "A": "Veena E. Gayathri", "V": "iz9jUcXUrr0"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "1328", "T": "", "H": "Sree Rajarajeswari", "S": "shrI rAjarAjEshvari shrI rAmamanOhari :  Adi", "R": "Ramapriya", "C": "Ponniah Pillai", "A": "M. Balamuralikrishna", "V": "0UdbGary5mI"}, {"N": "1329", "T": "", "H": "Sree Rajarajeswari", "S": "shrI rAjarAjEshvari shrI rAmamanOhari :  Adi", "R": "Ramapriya", "C": "Ponniah Pillai", "A": "M. Balamuralikrishna", "V": "LvzSX72l944"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

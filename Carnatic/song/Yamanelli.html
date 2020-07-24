@@ -42,26 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0970-Yamanelli-Shivaranjani-PD.8zTTLovOUFU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0970   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0968-Yamanelli-Shivaranjani-PD.0sTw4GzDA_Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0968   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0971-Yamanelli-Shivaranjani-PD.H2Raur9JSw4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0971   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0972-Yamanelli-Shivaranjani-PD.WlpEhpa6SC0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0972   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0973-Yamanelli-Shivaranjani-PD.Z4mH7Smn7bc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0973   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0974-Yamanelli-Shivaranjani-PD.bAaP6y1cwag');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0974   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0975-Yamanelli-Shivaranjani-PD.tk9bmcnc6mE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0975   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sikkil Gurucharan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0216-Yamanelli-Shivaranjani-PD.nDCsIfiHcZI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0216   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/Sikkil Gurucharan.html" >Sikkil Gurucharan   GURUCHARAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0688-Yamanelli-Shivaranjani-PD.dxioMuUB0b4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0688   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -167,9 +148,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0970", "T": "", "H": "Yamanelli", "S": "yamanelli kANenendu hELabEDa  :  Jhampa", "R": "Shivaranjani", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "8zTTLovOUFU"}, {"N": "0968", "T": "", "H": "Yamanelli", "S": "yamanelli kANenendu hELabEDa  :  Jhampa", "R": "Shivaranjani", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "0sTw4GzDA_Y"}, {"N": "0971", "T": "", "H": "Yamanelli", "S": "yamanelli kANenendu hELabEDa  :  Jhampa", "R": "Shivaranjani", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "H2Raur9JSw4"}, {"N": "0972", "T": "", "H": "Yamanelli", "S": "yamanelli kANenendu hELabEDa  :  Jhampa", "R": "Shivaranjani", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "WlpEhpa6SC0"}, {"N": "0973", "T": "", "H": "Yamanelli", "S": "yamanelli kANenendu hELabEDa  :  Jhampa", "R": "Shivaranjani", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "Z4mH7Smn7bc"}, {"N": "0974", "T": "", "H": "Yamanelli", "S": "yamanelli kANenendu hELabEDa  :  Jhampa", "R": "Shivaranjani", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "bAaP6y1cwag"}, {"N": "0975", "T": "", "H": "Yamanelli", "S": "yamanelli kANenendu hELabEDa  :  Jhampa", "R": "Shivaranjani", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "tk9bmcnc6mE"}]}, {"name": ["Vocal", "Sikkil Gurucharan"], "songs": [{"N": "0216", "T": "", "H": "Yamanelli", "S": "yamanelli kANenendu hELabEDa  :  Jhampa", "R": "Shivaranjani", "C": "Purandara Dasa", "A": "Sikkil Gurucharan", "V": "nDCsIfiHcZI"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0688", "T": "", "H": "Yamanelli", "S": "yamanelli kANenendu hELabEDa  :  Jhampa", "R": "Shivaranjani", "C": "Purandara Dasa", "A": "Sudha Ragunathan", "V": "dxioMuUB0b4"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

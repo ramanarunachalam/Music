@@ -41,27 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Allepy Venkatesan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0009-Pancha Nadhisa-Poornachandrika-PS.r1U7xTq31T0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0009   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Poornachandrika.html" >Poornachandrika</a> - <a href="artist/Allepy Venkatesan.html" >Allepy Venkatesan   ALLEPY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Rajam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0080-Pancha Nadhisa-Poornachandrika-PS.HaKojilZMCo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0080   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Poornachandrika.html" >Poornachandrika</a> - <a href="artist/S. Rajam.html" >S  Rajam   SRAJAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0081-Pancha Nadhisa-Poornachandrika-PS.VfIxOnrkUxY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0081   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Poornachandrika.html" >Poornachandrika</a> - <a href="artist/S. Rajam.html" >S  Rajam   SRAJAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0082-Pancha Nadhisa-Poornachandrika-PS.q5SgotrNOg8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0082   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Poornachandrika.html" >Poornachandrika</a> - <a href="artist/S. Rajam.html" >S  Rajam   SRAJAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0083-Pancha Nadhisa-Poornachandrika-PS.wk7CUI7WwR8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0083   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Poornachandrika.html" >Poornachandrika</a> - <a href="artist/S. Rajam.html" >S  Rajam   SRAJAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sikkil Gurucharan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0137-Pancha Nadhisa-Poornachandrika-PS.jMgiwnK1lHs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0137   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Poornachandrika.html" >Poornachandrika</a> - <a href="artist/Sikkil Gurucharan.html" >Sikkil Gurucharan   GURUCHARAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vidya Kalyanaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0045-Pancha Nadhisa-Poornachandrika-PS.byGrXclCYT0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0045   - <a href="composer/Patnam Subramanya Iyer.html" >Patnam Subramanya Iyer</a> - <a href="raga/Poornachandrika.html" >Poornachandrika</a> - <a href="artist/Vidya Kalyanaraman.html" >Vidya Kalyanaraman   VIDYAK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -150,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Allepy Venkatesan"], "songs": [{"N": "0009", "T": "", "H": "Pancha Nadhisa", "S": "panca nadIsha pAhimAm bhayAnIca sarvEsha :  Rupaka", "R": "Poornachandrika", "C": "Patnam Subramanya Iyer", "A": "Allepy Venkatesan", "V": "r1U7xTq31T0"}]}, {"name": ["Vocal", "S. Rajam"], "songs": [{"N": "0080", "T": "", "H": "Pancha Nadhisa", "S": "panca nadIsha pAhimAm bhayAnIca sarvEsha :  Rupaka", "R": "Poornachandrika", "C": "Patnam Subramanya Iyer", "A": "S. Rajam", "V": "HaKojilZMCo"}, {"N": "0081", "T": "", "H": "Pancha Nadhisa", "S": "panca nadIsha pAhimAm bhayAnIca sarvEsha :  Rupaka", "R": "Poornachandrika", "C": "Patnam Subramanya Iyer", "A": "S. Rajam", "V": "VfIxOnrkUxY"}, {"N": "0082", "T": "", "H": "Pancha Nadhisa", "S": "panca nadIsha pAhimAm bhayAnIca sarvEsha :  Rupaka", "R": "Poornachandrika", "C": "Patnam Subramanya Iyer", "A": "S. Rajam", "V": "q5SgotrNOg8"}, {"N": "0083", "T": "", "H": "Pancha Nadhisa", "S": "panca nadIsha pAhimAm bhayAnIca sarvEsha :  Rupaka", "R": "Poornachandrika", "C": "Patnam Subramanya Iyer", "A": "S. Rajam", "V": "wk7CUI7WwR8"}]}, {"name": ["Vocal", "Sikkil Gurucharan"], "songs": [{"N": "0137", "T": "", "H": "Pancha Nadhisa", "S": "panca nadIsha pAhimAm bhayAnIca sarvEsha :  Rupaka", "R": "Poornachandrika", "C": "Patnam Subramanya Iyer", "A": "Sikkil Gurucharan", "V": "jMgiwnK1lHs"}]}, {"name": ["Vocal", "Vidya Kalyanaraman"], "songs": [{"N": "0045", "T": "", "H": "Pancha Nadhisa", "S": "panca nadIsha pAhimAm bhayAnIca sarvEsha :  Rupaka", "R": "Poornachandrika", "C": "Patnam Subramanya Iyer", "A": "Vidya Kalyanaraman", "V": "byGrXclCYT0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -42,24 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Annavarapu Ramaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0035-Mahadevasutham-Arabhi-BMK.Rn5Eg1waQbA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0035   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/Annavarapu Ramaswamy.html" >Annavarapu Ramaswamy   ANNAVARAPU01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin M. S. Gopalakrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0196-Mahadevasutham-Arabhi-BMK.RATiKFfsW2Q');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0196   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/M. S. Gopalakrishnan.html" >M  S  Gopalakrishnan   MSG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0751-Mahadevasutham-Arabhi-BMK.38w17fUUzzk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0751   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0753-Mahadevasutham-Arabhi-BMK.IEAkt2zAEc0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0753   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0754-Mahadevasutham-Arabhi-BMK.OIONHHcpS7E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0754   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0757-Mahadevasutham-Arabhi-BMK.mhLDt6a9Bgk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0757   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0758-Mahadevasutham-Arabhi-BMK.r8rb3VJR4WE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0758   - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a> - <a href="raga/Arabhi.html" >Arabhi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -141,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "Annavarapu Ramaswamy"], "songs": [{"N": "0035", "T": "", "H": "Mahadevasutham", "S": "mahAdEva sutam aham praNamAmi  :  Adi", "R": "Arabhi", "C": "M. Balamuralikrishna", "A": "Annavarapu Ramaswamy", "V": "Rn5Eg1waQbA"}]}, {"name": ["Violin", "M. S. Gopalakrishnan"], "songs": [{"N": "0196", "T": "", "H": "Mahadevasutham", "S": "mahAdEva sutam aham praNamAmi  :  Adi", "R": "Arabhi", "C": "M. Balamuralikrishna", "A": "M. S. Gopalakrishnan", "V": "RATiKFfsW2Q"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0751", "T": "", "H": "Mahadevasutham", "S": "mahAdEva sutam aham praNamAmi  :  Adi", "R": "Arabhi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "38w17fUUzzk"}, {"N": "0753", "T": "", "H": "Mahadevasutham", "S": "mahAdEva sutam aham praNamAmi  :  Adi", "R": "Arabhi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "IEAkt2zAEc0"}, {"N": "0754", "T": "", "H": "Mahadevasutham", "S": "mahAdEva sutam aham praNamAmi  :  Adi", "R": "Arabhi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "OIONHHcpS7E"}, {"N": "0757", "T": "", "H": "Mahadevasutham", "S": "mahAdEva sutam aham praNamAmi  :  Adi", "R": "Arabhi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "mhLDt6a9Bgk"}, {"N": "0758", "T": "", "H": "Mahadevasutham", "S": "mahAdEva sutam aham praNamAmi  :  Adi", "R": "Arabhi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "r8rb3VJR4WE"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

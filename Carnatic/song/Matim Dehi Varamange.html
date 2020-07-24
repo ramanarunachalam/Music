@@ -41,26 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Dr. Sripada Pinakapani</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0022-Matim Dehi Varamange-Kalyani-VJ.9VfCEMtkXoc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0022   - <a href="composer/Vanamalai Jeeyar Swamigal.html" >Vanamalai Jeeyar Swamigal</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Dr. Sripada Pinakapani.html" >Dr  Sripada Pinakapani   SPP01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0023-Matim Dehi Varamange-Kalyani-VJ.9aGLE7kiljI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0023   - <a href="composer/Vanamalai Jeeyar Swamigal.html" >Vanamalai Jeeyar Swamigal</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Dr. Sripada Pinakapani.html" >Dr  Sripada Pinakapani   SPP01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0024-Matim Dehi Varamange-Kalyani-VJ.MzZ254T-URY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0024   - <a href="composer/Vanamalai Jeeyar Swamigal.html" >Vanamalai Jeeyar Swamigal</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Dr. Sripada Pinakapani.html" >Dr  Sripada Pinakapani   SPP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Malladi Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0141-Matim Dehi Varamange-Kalyani-VJ.LftCIEix8sc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0141   - <a href="composer/Vanamalai Jeeyar Swamigal.html" >Vanamalai Jeeyar Swamigal</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Malladi Brothers.html" >Malladi Brothers   MALLADI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Srirangam Gopalaratnam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Matim Dehi Varamange-Kalyani-VJ.wJJySKJrapk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="composer/Vanamalai Jeeyar Swamigal.html" >Vanamalai Jeeyar Swamigal</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Srirangam Gopalaratnam.html" >Srirangam Gopalaratnam   SRIRANGAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Voleti Venkateswarlu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0114-Matim Dehi Varamange-Kalyani-VJ.NXOgu4xCs6M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0114   - <a href="composer/Vanamalai Jeeyar Swamigal.html" >Vanamalai Jeeyar Swamigal</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Voleti Venkateswarlu.html" >Voleti Venkateswarlu   VOLETI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -149,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Dr. Sripada Pinakapani"], "songs": [{"N": "0022", "T": "", "H": "Matim Dehi Varamange", "S": "matim dEhi varamangE shubha tungE mama :  Adi", "R": "Kalyani", "C": "Vanamalai Jeeyar Swamigal", "A": "Dr. Sripada Pinakapani", "V": "9VfCEMtkXoc"}, {"N": "0023", "T": "", "H": "Matim Dehi Varamange", "S": "matim dEhi varamangE shubha tungE mama :  Adi", "R": "Kalyani", "C": "Vanamalai Jeeyar Swamigal", "A": "Dr. Sripada Pinakapani", "V": "9aGLE7kiljI"}, {"N": "0024", "T": "", "H": "Matim Dehi Varamange", "S": "matim dEhi varamangE shubha tungE mama :  Adi", "R": "Kalyani", "C": "Vanamalai Jeeyar Swamigal", "A": "Dr. Sripada Pinakapani", "V": "MzZ254T-URY"}]}, {"name": ["Vocal", "Malladi Brothers"], "songs": [{"N": "0141", "T": "", "H": "Matim Dehi Varamange", "S": "matim dEhi varamangE shubha tungE mama :  Adi", "R": "Kalyani", "C": "Vanamalai Jeeyar Swamigal", "A": "Malladi Brothers", "V": "LftCIEix8sc"}]}, {"name": ["Vocal", "Srirangam Gopalaratnam"], "songs": [{"N": "0027", "T": "", "H": "Matim Dehi Varamange", "S": "matim dEhi varamangE shubha tungE mama :  Adi", "R": "Kalyani", "C": "Vanamalai Jeeyar Swamigal", "A": "Srirangam Gopalaratnam", "V": "wJJySKJrapk"}]}, {"name": ["Vocal", "Voleti Venkateswarlu"], "songs": [{"N": "0114", "T": "", "H": "Matim Dehi Varamange", "S": "matim dEhi varamangE shubha tungE mama :  Adi", "R": "Kalyani", "C": "Vanamalai Jeeyar Swamigal", "A": "Voleti Venkateswarlu", "V": "NXOgu4xCs6M"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

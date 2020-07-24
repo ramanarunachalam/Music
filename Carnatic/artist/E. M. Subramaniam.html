@@ -26,21 +26,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; EMS01</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0010-Manavinalakincha-Nalinakanthi-T.mghqQSkbuZw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0010   - <a href="song/Manavinalakincha.html" >manavin A lakinca rAdaTE  :  Deshadi</a> - <a href="raga/Nalinakanthi.html" >Nalinakanthi</a> - <a href="composer/Thyagaraja.html" >Thyagaraja</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Navaratnamalika-Nannu Brovu Lalitha-Lalitha-SS.clK4LgmyIFY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017 - <a href="song_type/Navaratnamalika.html" >Navaratnamalika</a>  - <a href="song/Nannu Brovu Lalitha.html" >nannu brOvu lalitA vEgamE cAla :  Viloma Caapu</a> - <a href="raga/Lalitha.html" >Lalitha</a> - <a href="composer/Shyama Shastri.html" >Shyama Shastri</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0021-UnknownSong-Ragamalika,Saraswathi-UnknownComposer.76VMHQdxYzM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0021   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Ragamalika,Saraswathi.html" >Ragamalika Saraswathi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0022-UnknownSong-Saraswathi-UnknownComposer.UCL3FUXWqek');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0022   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Saraswathi.html" >Saraswathi</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0023-UnknownSong-Saraswathi,Shanmukapriya-UnknownComposer.XHYobMjIuX0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0023   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Saraswathi,Shanmukapriya.html" >Saraswathi Shanmukapriya</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["EMS01"], "songs": [{"N": "0010", "T": "", "H": "Manavinalakincha", "S": "manavin A lakinca rAdaTE  :  Deshadi", "R": "Nalinakanthi", "C": "Thyagaraja", "A": "E. M. Subramaniam", "V": "mghqQSkbuZw"}, {"N": "0017", "T": "Navaratnamalika", "H": "Nannu Brovu Lalitha", "S": "nannu brOvu lalitA vEgamE cAla :  Viloma Caapu", "R": "Lalitha", "C": "Shyama Shastri", "A": "E. M. Subramaniam", "V": "clK4LgmyIFY"}, {"N": "0021", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Ragamalika,Saraswathi", "C": "UnknownComposer", "A": "E. M. Subramaniam", "V": "76VMHQdxYzM"}, {"N": "0022", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Saraswathi", "C": "UnknownComposer", "A": "E. M. Subramaniam", "V": "UCL3FUXWqek"}, {"N": "0023", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Saraswathi,Shanmukapriya", "C": "UnknownComposer", "A": "E. M. Subramaniam", "V": "XHYobMjIuX0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#artist-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

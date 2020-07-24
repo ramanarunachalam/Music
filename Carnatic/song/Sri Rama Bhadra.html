@@ -41,33 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Jayashri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0351-Sri Rama Bhadra-Saramathi-P.hekSAFPju-0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0351   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Saramathi.html" >Saramathi</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0352-Sri Rama Bhadra-Saramathi-P.oIA1SOSF4VI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0352   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Saramathi.html" >Saramathi</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Girijashankar Sundaresan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0015-Sri Rama Bhadra-Saramathi-P.IvaEsReOfOM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0015   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Saramathi.html" >Saramathi</a> - <a href="artist/Girijashankar Sundaresan.html" >Girijashankar Sundaresan   GIRIJA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. V. Narayanaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0487-Sri Rama Bhadra-Saramathi-P.51kvE5ieBfo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0487   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Saramathi.html" >Saramathi</a> - <a href="artist/K. V. Narayanaswamy.html" >K  V  Narayanaswamy   KVN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Madurai Mani Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0405-Sri Rama Bhadra-Saramathi-P.jz_Cx8qgzL8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0405   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Saramathi.html" >Saramathi</a> - <a href="artist/Madurai Mani Iyer.html" >Madurai Mani Iyer   MMI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Papanasam Ashok Ramani</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0014-Sri Rama Bhadra-Saramathi-P.FnGymAJORqY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0014   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Saramathi.html" >Saramathi</a> - <a href="artist/Papanasam Ashok Ramani.html" >Papanasam Ashok Ramani   PAR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Suguna Varadachari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0097-Sri Rama Bhadra-Saramathi-P.s5FsrWb3E3w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0097   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Saramathi.html" >Saramathi</a> - <a href="artist/Suguna Varadachari.html" >Suguna Varadachari   SUGUNAV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -156,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bombay Jayashri"], "songs": [{"N": "0351", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Bombay Jayashri", "V": "hekSAFPju-0"}, {"N": "0352", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Bombay Jayashri", "V": "oIA1SOSF4VI"}]}, {"name": ["Vocal", "Girijashankar Sundaresan"], "songs": [{"N": "0015", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Girijashankar Sundaresan", "V": "IvaEsReOfOM"}]}, {"name": ["Vocal", "K. V. Narayanaswamy"], "songs": [{"N": "0487", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "K. V. Narayanaswamy", "V": "51kvE5ieBfo"}]}, {"name": ["Vocal", "Madurai Mani Iyer"], "songs": [{"N": "0405", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Madurai Mani Iyer", "V": "jz_Cx8qgzL8"}]}, {"name": ["Vocal", "Papanasam Ashok Ramani"], "songs": [{"N": "0014", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Papanasam Ashok Ramani", "V": "FnGymAJORqY"}]}, {"name": ["Vocal", "Suguna Varadachari"], "songs": [{"N": "0097", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Suguna Varadachari", "V": "s5FsrWb3E3w"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

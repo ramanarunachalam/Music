@@ -41,22 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin B. Ananthakrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0083-Thillana-Thillana-Bhoopalam-ST.gL_t2dCdTY4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0083 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bhoopalam.html" >Bhoopalam</a> - <a href="artist/B. Ananthakrishnan.html" >B  Ananthakrishnan   BANATHAK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0315-Thillana-Thillana-Bhoopalam-ST.DiwSqS8AbaI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0315 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bhoopalam.html" >Bhoopalam</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0316-Thillana-Thillana-Bhoopalam-ST.rKix9I3_WP4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0316 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bhoopalam.html" >Bhoopalam</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Prince Rama Varma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0501-Thillana-Thillana-Bhoopalam-ST.Mawt8wtPqMU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0501 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bhoopalam.html" >Bhoopalam</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0502-Thillana-Thillana-Bhoopalam-ST.t4jduDWpPzQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0502 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Bhoopalam.html" >Bhoopalam</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -132,9 +117,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "B. Ananthakrishnan"], "songs": [{"N": "0083", "T": "Thillana", "H": "thillana_st_bhoopalam", "S": "tAm tanAm tadani udanita dhrintaka tanOm :  Jhampa", "R": "Bhoopalam", "C": "Swathi Thirunal", "A": "B. Ananthakrishnan", "V": "gL_t2dCdTY4"}]}, {"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0315", "T": "Thillana", "H": "thillana_st_bhoopalam", "S": "tAm tanAm tadani udanita dhrintaka tanOm :  Jhampa", "R": "Bhoopalam", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "DiwSqS8AbaI"}, {"N": "0316", "T": "Thillana", "H": "thillana_st_bhoopalam", "S": "tAm tanAm tadani udanita dhrintaka tanOm :  Jhampa", "R": "Bhoopalam", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "rKix9I3_WP4"}]}, {"name": ["Vocal", "Prince Rama Varma"], "songs": [{"N": "0501", "T": "Thillana", "H": "thillana_st_bhoopalam", "S": "tAm tanAm tadani udanita dhrintaka tanOm :  Jhampa", "R": "Bhoopalam", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "Mawt8wtPqMU"}, {"N": "0502", "T": "Thillana", "H": "thillana_st_bhoopalam", "S": "tAm tanAm tadani udanita dhrintaka tanOm :  Jhampa", "R": "Bhoopalam", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "t4jduDWpPzQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

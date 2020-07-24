@@ -42,30 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Lalgudi G. J. R. Krishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0037-Koluvaiyunnade-Devagandhari-T.Op10B-LoEMY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0037   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/Lalgudi G. J. R. Krishnan.html" >Lalgudi G  J  R  Krishnan   GJRK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Hyderabad Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0093-Koluvaiyunnade-Devagandhari-T.nU7p5-ye4PY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0093   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/Hyderabad Brothers.html" >Hyderabad Brothers   HBROS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Malladi Suribabu</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0032-Koluvaiyunnade-Devagandhari-T.WIaOql3nkUY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0032   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/Malladi Suribabu.html" >Malladi Suribabu   SURIBABU01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Nedunuri Krishnamurthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0197-Koluvaiyunnade-Devagandhari-T.07Jt6hK8vdk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0197   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/Nedunuri Krishnamurthy.html" >Nedunuri Krishnamurthy   NEDUNURI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0198-Koluvaiyunnade-Devagandhari-T.3UTm1PMOnxI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0198   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/Nedunuri Krishnamurthy.html" >Nedunuri Krishnamurthy   NEDUNURI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0199-Koluvaiyunnade-Devagandhari-T.fQ-6g73zUTw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0199   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/Nedunuri Krishnamurthy.html" >Nedunuri Krishnamurthy   NEDUNURI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ramakrishnan Murthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0126-Koluvaiyunnade-Devagandhari-T.c0TbfpomjXA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0126   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Devagandhari.html" >Devagandhari</a> - <a href="artist/Ramakrishnan Murthy.html" >Ramakrishnan Murthy   RKM01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -170,9 +147,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "Lalgudi G. J. R. Krishnan"], "songs": [{"N": "0037", "T": "", "H": "Koluvaiyunnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Devagandhari", "C": "Thyagaraja", "A": "Lalgudi G. J. R. Krishnan", "V": "Op10B-LoEMY"}]}, {"name": ["Vocal", "Hyderabad Brothers"], "songs": [{"N": "0093", "T": "", "H": "Koluvaiyunnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Devagandhari", "C": "Thyagaraja", "A": "Hyderabad Brothers", "V": "nU7p5-ye4PY"}]}, {"name": ["Vocal", "Malladi Suribabu"], "songs": [{"N": "0032", "T": "", "H": "Koluvaiyunnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Devagandhari", "C": "Thyagaraja", "A": "Malladi Suribabu", "V": "WIaOql3nkUY"}]}, {"name": ["Vocal", "Nedunuri Krishnamurthy"], "songs": [{"N": "0197", "T": "", "H": "Koluvaiyunnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Devagandhari", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "07Jt6hK8vdk"}, {"N": "0198", "T": "", "H": "Koluvaiyunnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Devagandhari", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "3UTm1PMOnxI"}, {"N": "0199", "T": "", "H": "Koluvaiyunnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Devagandhari", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "fQ-6g73zUTw"}]}, {"name": ["Vocal", "Ramakrishnan Murthy"], "songs": [{"N": "0126", "T": "", "H": "Koluvaiyunnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Devagandhari", "C": "Thyagaraja", "A": "Ramakrishnan Murthy", "V": "c0TbfpomjXA"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

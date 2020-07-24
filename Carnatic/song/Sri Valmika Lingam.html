@@ -43,25 +43,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amritha Murali</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0147-Pancha linga-Sri Valmika Lingam-Kambhoji-MD.0tEhl-q1K3k');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0147 - <a href="song_type/Pancha linga.html" >Pancha linga</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/Amritha Murali.html" >Amritha Murali   AMRITHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. Vedavalli</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0315-Pancha linga-Sri Valmika Lingam-Kambhoji-MD.nksGqCnmcZk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0315 - <a href="song_type/Pancha linga.html" >Pancha linga</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Seetha Narayanan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0041-Pancha linga-Sri Valmika Lingam-Kambhoji-MD.4lmsDGLkmpc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0041 - <a href="song_type/Pancha linga.html" >Pancha linga</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/Seetha Narayanan.html" >Seetha Narayanan   NSEETHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vijay Siva</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0130-Pancha linga-Sri Valmika Lingam-Kambhoji-MD.BmoPCJ_5css');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0130 - <a href="song_type/Pancha linga.html" >Pancha linga</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/Vijay Siva.html" >Vijay Siva   VIJAYSIVA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0131-Pancha linga-Sri Valmika Lingam-Kambhoji-MD.qxuHsyqL8P8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0131 - <a href="song_type/Pancha linga.html" >Pancha linga</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Kambhoji.html" >Kambhoji</a> - <a href="artist/Vijay Siva.html" >Vijay Siva   VIJAYSIVA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -158,9 +140,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amritha Murali"], "songs": [{"N": "0147", "T": "Pancha linga", "H": "Sri Valmika Lingam", "S": "SrI valmIka lingaM cintayE SivArdhAngam cintayE :  Khanda Ata", "R": "Kambhoji", "C": "Muthuswami Dikshitar", "A": "Amritha Murali", "V": "0tEhl-q1K3k"}]}, {"name": ["Vocal", "R. Vedavalli"], "songs": [{"N": "0315", "T": "Pancha linga", "H": "Sri Valmika Lingam", "S": "SrI valmIka lingaM cintayE SivArdhAngam cintayE :  Khanda Ata", "R": "Kambhoji", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "nksGqCnmcZk"}]}, {"name": ["Vocal", "Seetha Narayanan"], "songs": [{"N": "0041", "T": "Pancha linga", "H": "Sri Valmika Lingam", "S": "SrI valmIka lingaM cintayE SivArdhAngam cintayE :  Khanda Ata", "R": "Kambhoji", "C": "Muthuswami Dikshitar", "A": "Seetha Narayanan", "V": "4lmsDGLkmpc"}]}, {"name": ["Vocal", "Vijay Siva"], "songs": [{"N": "0130", "T": "Pancha linga", "H": "Sri Valmika Lingam", "S": "SrI valmIka lingaM cintayE SivArdhAngam cintayE :  Khanda Ata", "R": "Kambhoji", "C": "Muthuswami Dikshitar", "A": "Vijay Siva", "V": "BmoPCJ_5css"}, {"N": "0131", "T": "Pancha linga", "H": "Sri Valmika Lingam", "S": "SrI valmIka lingaM cintayE SivArdhAngam cintayE :  Khanda Ata", "R": "Kambhoji", "C": "Muthuswami Dikshitar", "A": "Vijay Siva", "V": "qxuHsyqL8P8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

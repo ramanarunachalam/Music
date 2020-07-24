@@ -25,22 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; amba ninnu nera nammiti anandabhairavi adarimpa</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0033-Amba Ninnu Nera-Ragamalika-CK.ZF5SmaZHXWs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0033   - <a href="song/Amba Ninnu Nera.html" >ambA ninnu nera nammiti Anandabhairavi Adarimpa :  Caapu</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Suguna Varadachari.html" >Suguna Varadachari   SUGUNAV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; samba shivayanave rajitagiri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0244-Swarajathi-Sambasivayanave-Khamas-CK.YAB--j8nnRo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0244 - <a href="song_type/Swarajathi.html" >Swarajathi</a>  - <a href="song/Sambasivayanave.html" >sAmba shivAyanavE rAjitagiri</a> - <a href="raga/Khamas.html" >Khamas</a> - <a href="artist/T. R. Mahalingam.html" >T  R  Mahalingam   MALI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0010-Swarajathi-Sambasivayanave-Khamas-CK.9x7jk7vK_sI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0010 - <a href="song_type/Swarajathi.html" >Swarajathi</a>  - <a href="song/Sambasivayanave.html" >sAmba shivAyanavE rAjitagiri</a> - <a href="raga/Khamas.html" >Khamas</a> - <a href="artist/Malladi Narayana Sarma.html" >Malladi Narayana Sarma   MNS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["amba ninnu nera nammiti anandabhairavi adarimpa"], "songs": [{"N": "0033", "T": "", "H": "Amba Ninnu Nera", "S": "ambA ninnu nera nammiti Anandabhairavi Adarimpa :  Caapu", "R": "Ragamalika", "C": "Chinni Krishnadasa", "A": "Suguna Varadachari", "V": "ZF5SmaZHXWs"}]}, {"name": ["samba shivayanave rajitagiri"], "songs": [{"N": "0244", "T": "Swarajathi", "H": "Sambasivayanave", "S": "sAmba shivAyanavE rAjitagiri", "R": "Khamas", "C": "Chinni Krishnadasa", "A": "T. R. Mahalingam", "V": "YAB--j8nnRo"}, {"N": "0010", "T": "Swarajathi", "H": "Sambasivayanave", "S": "sAmba shivAyanavE rAjitagiri", "R": "Khamas", "C": "Chinni Krishnadasa", "A": "Malladi Narayana Sarma", "V": "9x7jk7vK_sI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

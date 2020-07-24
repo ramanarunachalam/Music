@@ -44,32 +44,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Veena Veenai Dhanammal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0007-Raaga Rasika-Keeravani-KR.XveUkjAtwQA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0007   - <a href="composer/K. Ramaraj.html" >K  Ramaraj</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/Veenai Dhanammal.html" >Veenai Dhanammal   DHANAMMAL01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Lalgudi Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0334-Raaga Rasika-Keeravani-KR.lq07Yy1eYQU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0334   - <a href="composer/K. Ramaraj.html" >K  Ramaraj</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/Lalgudi Jayaraman.html" >Lalgudi Jayaraman   LALGUDI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal G. N. Balasubramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0321-Raaga Rasika-Keeravani-KR.5KH6qB_GF38');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0321   - <a href="composer/K. Ramaraj.html" >K  Ramaraj</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0322-Raaga Rasika-Keeravani-KR.PxuRSB9unGQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0322   - <a href="composer/K. Ramaraj.html" >K  Ramaraj</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0323-Raaga Rasika-Keeravani-KR.ecxQz7AGUqM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0323   - <a href="composer/K. Ramaraj.html" >K  Ramaraj</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0324-Raaga Rasika-Keeravani-KR.q-89X8089FA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0324   - <a href="composer/K. Ramaraj.html" >K  Ramaraj</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Raji Gopalakrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0051-Raaga Rasika-Keeravani-KR.fFft4X8ulCg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0051   - <a href="composer/K. Ramaraj.html" >K  Ramaraj</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/Raji Gopalakrishnan.html" >Raji Gopalakrishnan   RAJIG01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Veena", "Veenai Dhanammal"], "songs": [{"N": "0007", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "Veenai Dhanammal", "V": "XveUkjAtwQA"}]}, {"name": ["Violin", "Lalgudi Jayaraman"], "songs": [{"N": "0334", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "Lalgudi Jayaraman", "V": "lq07Yy1eYQU"}]}, {"name": ["Vocal", "G. N. Balasubramaniam"], "songs": [{"N": "0325", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "G. N. Balasubramaniam", "V": "5KH6qB_GF38"}, {"N": "0326", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "G. N. Balasubramaniam", "V": "PxuRSB9unGQ"}, {"N": "0327", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "G. N. Balasubramaniam", "V": "ecxQz7AGUqM"}, {"N": "0328", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "G. N. Balasubramaniam", "V": "q-89X8089FA"}]}, {"name": ["Vocal", "Raji Gopalakrishnan"], "songs": [{"N": "0051", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "Raji Gopalakrishnan", "V": "fFft4X8ulCg"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

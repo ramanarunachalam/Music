@@ -42,29 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Ghatam S. Krishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0033-Arulpurivai Karunai-Hamsadhwani-SUB.Th7w-ejC4cE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0033   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/S. Krishna.html" >S  Krishna   SKRISHNA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Kunnakudi Vaidyanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0012-Arulpurivai Karunai-Hamsadhwani-SUB.iWszM2M_uio');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0012   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/Kunnakudi Vaidyanathan.html" >Kunnakudi Vaidyanathan   KUNNAKUDI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0098-Arulpurivai Karunai-Hamsadhwani-SUB.RRESF8FixLQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0098   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0164-Arulpurivai Karunai-Hamsadhwani-SUB.j6MPustNn0E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0164   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0165-Arulpurivai Karunai-Hamsadhwani-SUB.o6u0zPawIs0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0165   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Radha Jayalakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0009-Arulpurivai Karunai-Hamsadhwani-SUB.sRuXgqulLoI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0009   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/Radha Jayalakshmi.html" >Radha Jayalakshmi   RJ01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -153,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Ghatam", "S. Krishna"], "songs": [{"N": "0033", "T": "", "H": "Arulpurivai Karunai", "S": "aruL purivAi karuNai kaDalE Aruyir anaittum :  Adi", "R": "Hamsadhwani", "C": "Shuddhananda Bharathi", "A": "S. Krishna", "V": "Th7w-ejC4cE"}]}, {"name": ["Violin", "Kunnakudi Vaidyanathan"], "songs": [{"N": "0012", "T": "", "H": "Arulpurivai Karunai", "S": "aruL purivAi karuNai kaDalE Aruyir anaittum :  Adi", "R": "Hamsadhwani", "C": "Shuddhananda Bharathi", "A": "Kunnakudi Vaidyanathan", "V": "iWszM2M_uio"}]}, {"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0098", "T": "", "H": "Arulpurivai Karunai", "S": "aruL purivAi karuNai kaDalE Aruyir anaittum :  Adi", "R": "Hamsadhwani", "C": "Shuddhananda Bharathi", "A": "M. L. Vasanthakumari", "V": "RRESF8FixLQ"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "0164", "T": "", "H": "Arulpurivai Karunai", "S": "aruL purivAi karuNai kaDalE Aruyir anaittum :  Adi", "R": "Hamsadhwani", "C": "Shuddhananda Bharathi", "A": "M. S. Subbulakshmi", "V": "j6MPustNn0E"}, {"N": "0165", "T": "", "H": "Arulpurivai Karunai", "S": "aruL purivAi karuNai kaDalE Aruyir anaittum :  Adi", "R": "Hamsadhwani", "C": "Shuddhananda Bharathi", "A": "M. S. Subbulakshmi", "V": "o6u0zPawIs0"}]}, {"name": ["Vocal", "Radha Jayalakshmi"], "songs": [{"N": "0009", "T": "", "H": "Arulpurivai Karunai", "S": "aruL purivAi karuNai kaDalE Aruyir anaittum :  Adi", "R": "Hamsadhwani", "C": "Shuddhananda Bharathi", "A": "Radha Jayalakshmi", "V": "sRuXgqulLoI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

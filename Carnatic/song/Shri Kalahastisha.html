@@ -42,29 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin M. A. Krishnaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0094-Pancha bhootha-Shri Kalahastisha-Huseni-MD.KZNBah03P7M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0094 - <a href="song_type/Pancha bhootha.html" >Pancha bhootha</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/M. A. Krishnaswamy.html" >M  A  Krishnaswamy   MAKRISHNASWAMY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Jayashri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0444-Pancha bhootha-Shri Kalahastisha-Huseni-MD.d-Kdpkf6PfY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0444 - <a href="song_type/Pancha bhootha.html" >Pancha bhootha</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0445-Pancha bhootha-Shri Kalahastisha-Huseni-MD.n-iu_5vlIz4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0445 - <a href="song_type/Pancha bhootha.html" >Pancha bhootha</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0605-Pancha bhootha-Shri Kalahastisha-Huseni-MD.hVkzbk71AtY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0605 - <a href="song_type/Pancha bhootha.html" >Pancha bhootha</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Pantula Rama</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0139-Pancha bhootha-Shri Kalahastisha-Huseni-MD.wPp18Kz04Lk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0139 - <a href="song_type/Pancha bhootha.html" >Pancha bhootha</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/Pantula Rama.html" >Pantula Rama   PANTHULA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. K. Srikantan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0220-Pancha bhootha-Shri Kalahastisha-Huseni-MD.l2TQSh_gzPk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0220 - <a href="song_type/Pancha bhootha.html" >Pancha bhootha</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Huseni.html" >Huseni</a> - <a href="artist/R. K. Srikantan.html" >R  K  Srikantan   RKS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -156,9 +134,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "M. A. Krishnaswamy"], "songs": [{"N": "0094", "T": "Pancha bhootha", "H": "Shri Kalahastisha", "S": "shrI kALahastIsha shritajanAvana samIrAkAra mAm :  Jhampa", "R": "Huseni", "C": "Muthuswami Dikshitar", "A": "M. A. Krishnaswamy", "V": "KZNBah03P7M"}]}, {"name": ["Vocal", "Bombay Jayashri"], "songs": [{"N": "0444", "T": "Pancha bhootha", "H": "Shri Kalahastisha", "S": "shrI kALahastIsha shritajanAvana samIrAkAra mAm :  Jhampa", "R": "Huseni", "C": "Muthuswami Dikshitar", "A": "Bombay Jayashri", "V": "d-Kdpkf6PfY"}, {"N": "0445", "T": "Pancha bhootha", "H": "Shri Kalahastisha", "S": "shrI kALahastIsha shritajanAvana samIrAkAra mAm :  Jhampa", "R": "Huseni", "C": "Muthuswami Dikshitar", "A": "Bombay Jayashri", "V": "n-iu_5vlIz4"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0605", "T": "Pancha bhootha", "H": "Shri Kalahastisha", "S": "shrI kALahastIsha shritajanAvana samIrAkAra mAm :  Jhampa", "R": "Huseni", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "hVkzbk71AtY"}]}, {"name": ["Vocal", "Pantula Rama"], "songs": [{"N": "0139", "T": "Pancha bhootha", "H": "Shri Kalahastisha", "S": "shrI kALahastIsha shritajanAvana samIrAkAra mAm :  Jhampa", "R": "Huseni", "C": "Muthuswami Dikshitar", "A": "Pantula Rama", "V": "wPp18Kz04Lk"}]}, {"name": ["Vocal", "R. K. Srikantan"], "songs": [{"N": "0220", "T": "Pancha bhootha", "H": "Shri Kalahastisha", "S": "shrI kALahastIsha shritajanAvana samIrAkAra mAm :  Jhampa", "R": "Huseni", "C": "Muthuswami Dikshitar", "A": "R. K. Srikantan", "V": "l2TQSh_gzPk"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

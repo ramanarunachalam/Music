@@ -25,27 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; abhaya varade sharade ashrita bhakta hrdkamala</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0019-Abhaya Varade-Hindolam-IN.L_MySNx078Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0019   - <a href="song/Abhaya Varade.html" >abhaya varadE shAradE Ashrita bhakta hrdkamala :  Adi</a> - <a href="raga/Hindolam.html" >Hindolam</a> - <a href="artist/T. V. Sankaranarayanan.html" >T  V  Sankaranarayanan   TVS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0016-Abhaya Varade-Hindolam-IN.GQ-PXvpWUZ0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0016   - <a href="song/Abhaya Varade.html" >abhaya varadE shAradE Ashrita bhakta hrdkamala :  Adi</a> - <a href="raga/Hindolam.html" >Hindolam</a> - <a href="artist/R. Suryaprakash.html" >R  Suryaprakash   RSP01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0018-Abhaya Varade-Hindolam-IN.C_cjaAQwFzs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0018   - <a href="song/Abhaya Varade.html" >abhaya varadE shAradE Ashrita bhakta hrdkamala :  Adi</a> - <a href="raga/Hindolam.html" >Hindolam</a> - <a href="artist/T. V. Sankaranarayanan.html" >T  V  Sankaranarayanan   TVS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; mahaganapathe namo namo</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0197-Mahaganapathe Namo Namo-Hamsadhwani-IN.Equ4hG0UFko');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0197   - <a href="song/Mahaganapathe Namo Namo.html" >Mahaganapathe Namo Namo</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/M. S. Gopalakrishnan.html" >M  S  Gopalakrishnan   MSG01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0043-Mahaganapathe Namo Namo-Hamsadhwani-IN.r0TX5s68BA8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0043   - <a href="song/Mahaganapathe Namo Namo.html" >Mahaganapathe Namo Namo</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/R. Ganesh.html" >R  Ganesh   RGANESH01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0089-Mahaganapathe Namo Namo-Hamsadhwani-IN.6avyufXlpXE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0089   - <a href="song/Mahaganapathe Namo Namo.html" >Mahaganapathe Namo Namo</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/Sankaran Namboothiri.html" >Sankaran Namboothiri   SNAMBOOTHIRI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0090-Mahaganapathe Namo Namo-Hamsadhwani-IN.FKQe5hGteSM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0090   - <a href="song/Mahaganapathe Namo Namo.html" >Mahaganapathe Namo Namo</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/Sankaran Namboothiri.html" >Sankaran Namboothiri   SNAMBOOTHIRI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0117-Mahaganapathe Namo Namo-Hamsadhwani-IN.e40DJpNtBW0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0117   - <a href="song/Mahaganapathe Namo Namo.html" >Mahaganapathe Namo Namo</a> - <a href="raga/Hamsadhwani.html" >Hamsadhwani</a> - <a href="artist/T. V. Sankaranarayanan.html" >T  V  Sankaranarayanan   TVS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["abhaya varade sharade ashrita bhakta hrdkamala"], "songs": [{"N": "0019", "T": "", "H": "Abhaya Varade", "S": "abhaya varadE shAradE Ashrita bhakta hrdkamala :  Adi", "R": "Hindolam", "C": "Indira Natesan", "A": "T. V. Sankaranarayanan", "V": "L_MySNx078Y"}, {"N": "0016", "T": "", "H": "Abhaya Varade", "S": "abhaya varadE shAradE Ashrita bhakta hrdkamala :  Adi", "R": "Hindolam", "C": "Indira Natesan", "A": "R. Suryaprakash", "V": "GQ-PXvpWUZ0"}, {"N": "0018", "T": "", "H": "Abhaya Varade", "S": "abhaya varadE shAradE Ashrita bhakta hrdkamala :  Adi", "R": "Hindolam", "C": "Indira Natesan", "A": "T. V. Sankaranarayanan", "V": "C_cjaAQwFzs"}]}, {"name": ["mahaganapathe namo namo"], "songs": [{"N": "0197", "T": "", "H": "Mahaganapathe Namo Namo", "S": "Mahaganapathe Namo Namo", "R": "Hamsadhwani", "C": "Indira Natesan", "A": "M. S. Gopalakrishnan", "V": "Equ4hG0UFko"}, {"N": "0043", "T": "", "H": "Mahaganapathe Namo Namo", "S": "Mahaganapathe Namo Namo", "R": "Hamsadhwani", "C": "Indira Natesan", "A": "R. Ganesh", "V": "r0TX5s68BA8"}, {"N": "0089", "T": "", "H": "Mahaganapathe Namo Namo", "S": "Mahaganapathe Namo Namo", "R": "Hamsadhwani", "C": "Indira Natesan", "A": "Sankaran Namboothiri", "V": "6avyufXlpXE"}, {"N": "0090", "T": "", "H": "Mahaganapathe Namo Namo", "S": "Mahaganapathe Namo Namo", "R": "Hamsadhwani", "C": "Indira Natesan", "A": "Sankaran Namboothiri", "V": "FKQe5hGteSM"}, {"N": "0117", "T": "", "H": "Mahaganapathe Namo Namo", "S": "Mahaganapathe Namo Namo", "R": "Hamsadhwani", "C": "Indira Natesan", "A": "T. V. Sankaranarayanan", "V": "e40DJpNtBW0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

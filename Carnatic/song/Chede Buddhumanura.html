@@ -42,28 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Kamalakiran Vinjamuri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0034-Chede Buddhumanura-Atana-T.MFjdE_XMMkc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0034   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Atana.html" >Atana</a> - <a href="artist/Kamalakiran Vinjamuri.html" >Kamalakiran Vinjamuri   KAMALAKIRAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Abhishek Raghuram</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0053-Chede Buddhumanura-Atana-T.YVF3yJPqxuk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0053   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Atana.html" >Atana</a> - <a href="artist/Abhishek Raghuram.html" >Abhishek Raghuram   ABHISHEK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0093-Chede Buddhumanura-Atana-T.lv0I-CrM1kM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0093   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Atana.html" >Atana</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Kunnakudi M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0030-Chede Buddhumanura-Atana-T.o2N9dxZNaMA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0030   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Atana.html" >Atana</a> - <a href="artist/Kunnakudi M. Balamuralikrishna.html" >Kunnakudi M  Balamuralikrishna</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Seetha Rajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0041-Chede Buddhumanura-Atana-T.Gj6OFlfY7wk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0041   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Atana.html" >Atana</a> - <a href="artist/Seetha Rajan.html" >Seetha Rajan   SEETHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -154,9 +133,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "Kamalakiran Vinjamuri"], "songs": [{"N": "0034", "T": "", "H": "Chede Buddhumanura", "S": "ceDE buddhi mAnurA : Adi", "R": "Atana", "C": "Thyagaraja", "A": "Kamalakiran Vinjamuri", "V": "MFjdE_XMMkc"}]}, {"name": ["Vocal", "Abhishek Raghuram"], "songs": [{"N": "0053", "T": "", "H": "Chede Buddhumanura", "S": "ceDE buddhi mAnurA : Adi", "R": "Atana", "C": "Thyagaraja", "A": "Abhishek Raghuram", "V": "YVF3yJPqxuk"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0093", "T": "", "H": "Chede Buddhumanura", "S": "ceDE buddhi mAnurA : Adi", "R": "Atana", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "lv0I-CrM1kM"}]}, {"name": ["Vocal", "Kunnakudi M. Balamuralikrishna"], "songs": [{"N": "0030", "T": "", "H": "Chede Buddhumanura", "S": "ceDE buddhi mAnurA : Adi", "R": "Atana", "C": "Thyagaraja", "A": "Kunnakudi M. Balamuralikrishna", "V": "o2N9dxZNaMA"}]}, {"name": ["Vocal", "Seetha Rajan"], "songs": [{"N": "0041", "T": "", "H": "Chede Buddhumanura", "S": "ceDE buddhi mAnurA : Adi", "R": "Atana", "C": "Thyagaraja", "A": "Seetha Rajan", "V": "Gj6OFlfY7wk"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -42,22 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0731-Ksheerasagara Vihara-Anandabhairavi-T.no6l3EWqIpI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0731   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Nedunuri Krishnamurthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0202-Ksheerasagara Vihara-Anandabhairavi-T.ruiz30YxGOQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0202   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Nedunuri Krishnamurthy.html" >Nedunuri Krishnamurthy   NEDUNURI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0200-Ksheerasagara Vihara-Anandabhairavi-T.jeZbBKusAN8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0200   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Nedunuri Krishnamurthy.html" >Nedunuri Krishnamurthy   NEDUNURI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0201-Ksheerasagara Vihara-Anandabhairavi-T.q71KZtOX7v8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0201   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Nedunuri Krishnamurthy.html" >Nedunuri Krishnamurthy   NEDUNURI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Prince Rama Varma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0189-Ksheerasagara Vihara-Anandabhairavi-T.hJ5GWOViYTs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0189   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Anandabhairavi.html" >Anandabhairavi</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -148,9 +133,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0731", "T": "", "H": "Ksheerasagara Vihara", "S": "kshIra sAgara vihAra aparimita :  Jhampa", "R": "Anandabhairavi", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "no6l3EWqIpI"}]}, {"name": ["Vocal", "Nedunuri Krishnamurthy"], "songs": [{"N": "0202", "T": "", "H": "Ksheerasagara Vihara", "S": "kshIra sAgara vihAra aparimita :  Jhampa", "R": "Anandabhairavi", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "ruiz30YxGOQ"}, {"N": "0200", "T": "", "H": "Ksheerasagara Vihara", "S": "kshIra sAgara vihAra aparimita :  Jhampa", "R": "Anandabhairavi", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "jeZbBKusAN8"}, {"N": "0201", "T": "", "H": "Ksheerasagara Vihara", "S": "kshIra sAgara vihAra aparimita :  Jhampa", "R": "Anandabhairavi", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "q71KZtOX7v8"}]}, {"name": ["Vocal", "Prince Rama Varma"], "songs": [{"N": "0189", "T": "", "H": "Ksheerasagara Vihara", "S": "kshIra sAgara vihAra aparimita :  Jhampa", "R": "Anandabhairavi", "C": "Thyagaraja", "A": "Prince Rama Varma", "V": "hJ5GWOViYTs"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

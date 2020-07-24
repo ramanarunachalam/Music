@@ -42,29 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal K. J. Yesudas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0306-Shri Ganeshatparam-Ardhradesi-MD.p7wCUc2RrXo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0306   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Ardhradesi.html" >Ardhradesi</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0307-Shri Ganeshatparam-Ardhradesi-MD.r_e4AjYWmdY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0307   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Ardhradesi.html" >Ardhradesi</a> - <a href="artist/K. J. Yesudas.html" >K  J  Yesudas   KJY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Rudrapatnam Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0043-Shri Ganeshatparam-Ardhradesi-MD.9pSBY4_j-5Y');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0043   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Ardhradesi.html" >Ardhradesi</a> - <a href="artist/Rudrapatnam Brothers.html" >Rudrapatnam Brothers   RUDRABROS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sikkil Gurucharan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0173-Shri Ganeshatparam-Ardhradesi-MD.H6AkcDTOLBc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0173   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Ardhradesi.html" >Ardhradesi</a> - <a href="artist/Sikkil Gurucharan.html" >Sikkil Gurucharan   GURUCHARAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. M. Krishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0536-Shri Ganeshatparam-Ardhradesi-MD.4sCjxi7Tp24');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0536   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Ardhradesi.html" >Ardhradesi</a> - <a href="artist/T. M. Krishna.html" >T  M  Krishna   TMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vivek Sadasivam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0033-Shri Ganeshatparam-Ardhradesi-MD.fetrQQUn75Q');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0033   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Ardhradesi.html" >Ardhradesi</a> - <a href="artist/Vivek Sadasivam.html" >Vivek Sadasivam   VIVEK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -162,9 +140,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "K. J. Yesudas"], "songs": [{"N": "0306", "T": "", "H": "Shri Ganeshatparam", "S": "shrI gaNESAtparam citta nahi rE rE :  Jhampa", "R": "Ardhradesi", "C": "Muthuswami Dikshitar", "A": "K. J. Yesudas", "V": "p7wCUc2RrXo"}, {"N": "0307", "T": "", "H": "Shri Ganeshatparam", "S": "shrI gaNESAtparam citta nahi rE rE :  Jhampa", "R": "Ardhradesi", "C": "Muthuswami Dikshitar", "A": "K. J. Yesudas", "V": "r_e4AjYWmdY"}]}, {"name": ["Vocal", "Rudrapatnam Brothers"], "songs": [{"N": "0043", "T": "", "H": "Shri Ganeshatparam", "S": "shrI gaNESAtparam citta nahi rE rE :  Jhampa", "R": "Ardhradesi", "C": "Muthuswami Dikshitar", "A": "Rudrapatnam Brothers", "V": "9pSBY4_j-5Y"}]}, {"name": ["Vocal", "Sikkil Gurucharan"], "songs": [{"N": "0173", "T": "", "H": "Shri Ganeshatparam", "S": "shrI gaNESAtparam citta nahi rE rE :  Jhampa", "R": "Ardhradesi", "C": "Muthuswami Dikshitar", "A": "Sikkil Gurucharan", "V": "H6AkcDTOLBc"}]}, {"name": ["Vocal", "T. M. Krishna"], "songs": [{"N": "0536", "T": "", "H": "Shri Ganeshatparam", "S": "shrI gaNESAtparam citta nahi rE rE :  Jhampa", "R": "Ardhradesi", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "4sCjxi7Tp24"}]}, {"name": ["Vocal", "Vivek Sadasivam"], "songs": [{"N": "0033", "T": "", "H": "Shri Ganeshatparam", "S": "shrI gaNESAtparam citta nahi rE rE :  Jhampa", "R": "Ardhradesi", "C": "Muthuswami Dikshitar", "A": "Vivek Sadasivam", "V": "fetrQQUn75Q"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

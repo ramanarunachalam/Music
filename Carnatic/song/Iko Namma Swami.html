@@ -40,26 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Aruna Sairam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0131-Iko Namma Swami-Manirangu-PD.INXHcQ4tYKY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0131   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Manirangu.html" >Manirangu</a> - <a href="artist/Aruna Sairam.html" >Aruna Sairam   ARUNASAIRAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0171-Iko Namma Swami-Manirangu-PD.rbnuv5tsQAg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0171   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Manirangu.html" >Manirangu</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Pattammal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0177-Iko Namma Swami-Manirangu-PD.5gjJ-gAXlt4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0177   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Manirangu.html" >Manirangu</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0178-Iko Namma Swami-Manirangu-PD.EEa9NimII1U');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0178   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Manirangu.html" >Manirangu</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0179-Iko Namma Swami-Manirangu-PD.LkemIdcOvbI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0179   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Manirangu.html" >Manirangu</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vijay Siva</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0041-Iko Namma Swami-Manirangu-PD.i11HrDnJozI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0041   - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a> - <a href="raga/Manirangu.html" >Manirangu</a> - <a href="artist/Vijay Siva.html" >Vijay Siva   VIJAYSIVA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -147,9 +128,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Aruna Sairam"], "songs": [{"N": "0131", "T": "", "H": "Iko Namma Swami", "S": "ikO namma svAmi jagadantaryAmi :  Caapu", "R": "Manirangu", "C": "Purandara Dasa", "A": "Aruna Sairam", "V": "INXHcQ4tYKY"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0171", "T": "", "H": "Iko Namma Swami", "S": "ikO namma svAmi jagadantaryAmi :  Caapu", "R": "Manirangu", "C": "Purandara Dasa", "A": "D. K. Jayaraman", "V": "rbnuv5tsQAg"}]}, {"name": ["Vocal", "D. K. Pattammal"], "songs": [{"N": "0177", "T": "", "H": "Iko Namma Swami", "S": "ikO namma svAmi jagadantaryAmi :  Caapu", "R": "Manirangu", "C": "Purandara Dasa", "A": "D. K. Pattammal", "V": "5gjJ-gAXlt4"}, {"N": "0178", "T": "", "H": "Iko Namma Swami", "S": "ikO namma svAmi jagadantaryAmi :  Caapu", "R": "Manirangu", "C": "Purandara Dasa", "A": "D. K. Pattammal", "V": "EEa9NimII1U"}, {"N": "0179", "T": "", "H": "Iko Namma Swami", "S": "ikO namma svAmi jagadantaryAmi :  Caapu", "R": "Manirangu", "C": "Purandara Dasa", "A": "D. K. Pattammal", "V": "LkemIdcOvbI"}]}, {"name": ["Vocal", "Vijay Siva"], "songs": [{"N": "0041", "T": "", "H": "Iko Namma Swami", "S": "ikO namma svAmi jagadantaryAmi :  Caapu", "R": "Manirangu", "C": "Purandara Dasa", "A": "Vijay Siva", "V": "i11HrDnJozI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

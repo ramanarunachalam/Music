@@ -43,26 +43,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal G. N. Balasubramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0643-Shodasa ganapati-Maha Ganapatim Vande-Thodi-MD.5Y2PMCivjLQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0643 - <a href="song_type/Shodasa ganapati.html" >Shodasa ganapati</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0644-Shodasa ganapati-Maha Ganapatim Vande-Thodi-MD.rtLByc5cyR0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0644 - <a href="song_type/Shodasa ganapati.html" >Shodasa ganapati</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0645-Shodasa ganapati-Maha Ganapatim Vande-Thodi-MD.si6DLV0PhKc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0645 - <a href="song_type/Shodasa ganapati.html" >Shodasa ganapati</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1370-Shodasa ganapati-Maha Ganapatim Vande-Thodi-MD.Rg-CR27F3oI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1370 - <a href="song_type/Shodasa ganapati.html" >Shodasa ganapati</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. K. Srikantan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0222-Shodasa ganapati-Maha Ganapatim Vande-Thodi-MD.VPnHGs2sVUQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0222 - <a href="song_type/Shodasa ganapati.html" >Shodasa ganapati</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/R. K. Srikantan.html" >R  K  Srikantan   RKS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sriram Gangadharan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0034-Shodasa ganapati-Maha Ganapatim Vande-Thodi-MD.818W4iDhl6M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0034 - <a href="song_type/Shodasa ganapati.html" >Shodasa ganapati</a>  - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Thodi.html" >Thodi</a> - <a href="artist/Sriram Gangadharan.html" >Sriram Gangadharan   SRIRAMG01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -159,9 +140,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "G. N. Balasubramaniam"], "songs": [{"N": "0653", "T": "Shodasa ganapati", "H": "Maha Ganapatim Vande", "S": "mahA gaNa patiM vandE  :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "G. N. Balasubramaniam", "V": "5Y2PMCivjLQ"}, {"N": "0654", "T": "Shodasa ganapati", "H": "Maha Ganapatim Vande", "S": "mahA gaNa patiM vandE  :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "G. N. Balasubramaniam", "V": "rtLByc5cyR0"}, {"N": "0655", "T": "Shodasa ganapati", "H": "Maha Ganapatim Vande", "S": "mahA gaNa patiM vandE  :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "G. N. Balasubramaniam", "V": "si6DLV0PhKc"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "1370", "T": "Shodasa ganapati", "H": "Maha Ganapatim Vande", "S": "mahA gaNa patiM vandE  :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "Rg-CR27F3oI"}]}, {"name": ["Vocal", "R. K. Srikantan"], "songs": [{"N": "0222", "T": "Shodasa ganapati", "H": "Maha Ganapatim Vande", "S": "mahA gaNa patiM vandE  :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "R. K. Srikantan", "V": "VPnHGs2sVUQ"}]}, {"name": ["Vocal", "Sriram Gangadharan"], "songs": [{"N": "0034", "T": "Shodasa ganapati", "H": "Maha Ganapatim Vande", "S": "mahA gaNa patiM vandE  :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "Sriram Gangadharan", "V": "818W4iDhl6M"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

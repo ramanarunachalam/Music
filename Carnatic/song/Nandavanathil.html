@@ -36,24 +36,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Kunnakudi Vaidyanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0071-Nandavanathil-UnknownRaga-UnknownComposer.wNZ8c5ZFqPQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0071   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Kunnakudi Vaidyanathan.html" >Kunnakudi Vaidyanathan   KUNNAKUDI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Prince Rama Varma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0234-Nandavanathil-UnknownRaga-UnknownComposer.sf741cbmrUo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0234   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0231-Nandavanathil-UnknownRaga-UnknownComposer.NQPLifO6cwM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0231   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0232-Nandavanathil-UnknownRaga-UnknownComposer.aWW9f3qACs8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0232   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0233-Nandavanathil-UnknownRaga-UnknownComposer.d88I84K9RpU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0233   - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "Kunnakudi Vaidyanathan"], "songs": [{"N": "0071", "T": "", "H": "Nandavanathil", "S": "Nandavanathil", "R": "Unknownraga", "C": "UnknownComposer", "A": "Kunnakudi Vaidyanathan", "V": "wNZ8c5ZFqPQ"}]}, {"name": ["Vocal", "Prince Rama Varma"], "songs": [{"N": "0234", "T": "", "H": "Nandavanathil", "S": "Nandavanathil", "R": "Unknownraga", "C": "UnknownComposer", "A": "Prince Rama Varma", "V": "sf741cbmrUo"}, {"N": "0231", "T": "", "H": "Nandavanathil", "S": "Nandavanathil", "R": "Unknownraga", "C": "UnknownComposer", "A": "Prince Rama Varma", "V": "NQPLifO6cwM"}, {"N": "0232", "T": "", "H": "Nandavanathil", "S": "Nandavanathil", "R": "Unknownraga", "C": "UnknownComposer", "A": "Prince Rama Varma", "V": "aWW9f3qACs8"}, {"N": "0233", "T": "", "H": "Nandavanathil", "S": "Nandavanathil", "R": "Unknownraga", "C": "UnknownComposer", "A": "Prince Rama Varma", "V": "d88I84K9RpU"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

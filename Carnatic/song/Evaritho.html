@@ -40,24 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Veena Nirmala Rajasekar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0011-Evaritho-Manavathi-T._hpmZTXdqmY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0011   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manavathi.html" >Manavathi</a> - <a href="artist/Nirmala Rajasekar.html" >Nirmala Rajasekar   RNIRMALA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0228-Evaritho-Manavathi-T.2qsK74YolJk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0228   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manavathi.html" >Manavathi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0229-Evaritho-Manavathi-T.BDZpeA1acno');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0229   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manavathi.html" >Manavathi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0230-Evaritho-Manavathi-T.Q2yVrFHSJmI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0230   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manavathi.html" >Manavathi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0231-Evaritho-Manavathi-T.f-FAr4h1yPc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0231   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manavathi.html" >Manavathi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0232-Evaritho-Manavathi-T.rGbSwuAaOKg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0232   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manavathi.html" >Manavathi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0276-Evaritho-Manavathi-T.s85p7zikewc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0276   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Manavathi.html" >Manavathi</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -149,9 +132,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Veena", "Nirmala Rajasekar"], "songs": [{"N": "0011", "T": "", "H": "Evaritho", "S": "evaritO nE telpudu rAma  :  Deshadi", "R": "Manavathi", "C": "Thyagaraja", "A": "Nirmala Rajasekar", "V": "_hpmZTXdqmY"}]}, {"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0228", "T": "", "H": "Evaritho", "S": "evaritO nE telpudu rAma  :  Deshadi", "R": "Manavathi", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "2qsK74YolJk"}, {"N": "0229", "T": "", "H": "Evaritho", "S": "evaritO nE telpudu rAma  :  Deshadi", "R": "Manavathi", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "BDZpeA1acno"}, {"N": "0230", "T": "", "H": "Evaritho", "S": "evaritO nE telpudu rAma  :  Deshadi", "R": "Manavathi", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "Q2yVrFHSJmI"}, {"N": "0231", "T": "", "H": "Evaritho", "S": "evaritO nE telpudu rAma  :  Deshadi", "R": "Manavathi", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "f-FAr4h1yPc"}, {"N": "0232", "T": "", "H": "Evaritho", "S": "evaritO nE telpudu rAma  :  Deshadi", "R": "Manavathi", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "rGbSwuAaOKg"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0276", "T": "", "H": "Evaritho", "S": "evaritO nE telpudu rAma  :  Deshadi", "R": "Manavathi", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "s85p7zikewc"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

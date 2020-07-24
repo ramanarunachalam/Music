@@ -42,22 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Chitra Veena Chitravina Ravi Kiran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0140-Senapathe-Gowla-OVK.zuC6ajbpzVA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0140   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Gowla.html" >Gowla</a> - <a href="artist/Chitravina Ravi Kiran.html" >Chitravina Ravi Kiran   RAVIKIRAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Akkarai Sisters</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0060-Senapathe-Gowla-OVK.FKN0BNjNDF8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0060   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Gowla.html" >Gowla</a> - <a href="artist/Akkarai Sisters.html" >Akkarai Sisters   AKKARAISIS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0061-Senapathe-Gowla-OVK.oeDN28hc49E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0061   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Gowla.html" >Gowla</a> - <a href="artist/Akkarai Sisters.html" >Akkarai Sisters   AKKARAISIS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal O. S. Thyagarajan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0148-Senapathe-Gowla-OVK.OkHn4CrAtXU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0148   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Gowla.html" >Gowla</a> - <a href="artist/O. S. Thyagarajan.html" >O  S  Thyagarajan   OST01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0149-Senapathe-Gowla-OVK.WBtIUEQDDj4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0149   - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a> - <a href="raga/Gowla.html" >Gowla</a> - <a href="artist/O. S. Thyagarajan.html" >O  S  Thyagarajan   OST01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -139,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Chitra Veena", "Chitravina Ravi Kiran"], "songs": [{"N": "0140", "T": "", "H": "Senapathe", "S": "sEnApatE namOstutE dInAti bhanjana sharavaNa :  Adi", "R": "Gowla", "C": "Oothukkadu Venkata Kavi", "A": "Chitravina Ravi Kiran", "V": "zuC6ajbpzVA"}]}, {"name": ["Violin", "Akkarai Sisters"], "songs": [{"N": "0060", "T": "", "H": "Senapathe", "S": "sEnApatE namOstutE dInAti bhanjana sharavaNa :  Adi", "R": "Gowla", "C": "Oothukkadu Venkata Kavi", "A": "Akkarai Sisters", "V": "FKN0BNjNDF8"}, {"N": "0061", "T": "", "H": "Senapathe", "S": "sEnApatE namOstutE dInAti bhanjana sharavaNa :  Adi", "R": "Gowla", "C": "Oothukkadu Venkata Kavi", "A": "Akkarai Sisters", "V": "oeDN28hc49E"}]}, {"name": ["Vocal", "O. S. Thyagarajan"], "songs": [{"N": "0148", "T": "", "H": "Senapathe", "S": "sEnApatE namOstutE dInAti bhanjana sharavaNa :  Adi", "R": "Gowla", "C": "Oothukkadu Venkata Kavi", "A": "O. S. Thyagarajan", "V": "OkHn4CrAtXU"}, {"N": "0149", "T": "", "H": "Senapathe", "S": "sEnApatE namOstutE dInAti bhanjana sharavaNa :  Adi", "R": "Gowla", "C": "Oothukkadu Venkata Kavi", "A": "O. S. Thyagarajan", "V": "WBtIUEQDDj4"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

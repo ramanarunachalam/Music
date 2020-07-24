@@ -42,30 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Nadaswaram T. N. Rajarathnam Pillai</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0024-Rama Ramana-Vasanthabhairavi-T.Uexu0UFMnkM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0024   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/T. N. Rajarathnam Pillai.html" >T  N  Rajarathnam Pillai   TNR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. L. Vasanthakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0678-Rama Ramana-Vasanthabhairavi-T.4GM92QRG_UQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0678   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0679-Rama Ramana-Vasanthabhairavi-T.4i3BoYtYe98');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0679   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/M. L. Vasanthakumari.html" >M  L  Vasanthakumari   MLV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Kalyanaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0211-Rama Ramana-Vasanthabhairavi-T.QxV6AT1A708');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0211   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0212-Rama Ramana-Vasanthabhairavi-T.YwQIUqvAqpk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0212   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/S. Kalyanaraman.html" >S  Kalyanaraman   SK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Salem Gayathri Venkatesan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0013-Rama Ramana-Vasanthabhairavi-T.aJMaMrsmzso');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0013   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/Salem Gayathri Venkatesan.html" >Salem Gayathri Venkatesan   SGV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sudha Ragunathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0496-Rama Ramana-Vasanthabhairavi-T.BhVYmRz3BgE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0496   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Vasanthabhairavi.html" >Vasanthabhairavi</a> - <a href="artist/Sudha Ragunathan.html" >Sudha Ragunathan   SUDHA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -169,9 +146,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Nadaswaram", "T. N. Rajarathnam Pillai"], "songs": [{"N": "0024", "T": "", "H": "Rama Ramana", "S": "ramA ramaNa bhAramA nannu brOva SrI kara :  Adi", "R": "Vasanthabhairavi", "C": "Thyagaraja", "A": "T. N. Rajarathnam Pillai", "V": "Uexu0UFMnkM"}]}, {"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "0678", "T": "", "H": "Rama Ramana", "S": "ramA ramaNa bhAramA nannu brOva SrI kara :  Adi", "R": "Vasanthabhairavi", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "4GM92QRG_UQ"}, {"N": "0679", "T": "", "H": "Rama Ramana", "S": "ramA ramaNa bhAramA nannu brOva SrI kara :  Adi", "R": "Vasanthabhairavi", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "4i3BoYtYe98"}]}, {"name": ["Vocal", "S. Kalyanaraman"], "songs": [{"N": "0211", "T": "", "H": "Rama Ramana", "S": "ramA ramaNa bhAramA nannu brOva SrI kara :  Adi", "R": "Vasanthabhairavi", "C": "Thyagaraja", "A": "S. Kalyanaraman", "V": "QxV6AT1A708"}, {"N": "0212", "T": "", "H": "Rama Ramana", "S": "ramA ramaNa bhAramA nannu brOva SrI kara :  Adi", "R": "Vasanthabhairavi", "C": "Thyagaraja", "A": "S. Kalyanaraman", "V": "YwQIUqvAqpk"}]}, {"name": ["Vocal", "Salem Gayathri Venkatesan"], "songs": [{"N": "0013", "T": "", "H": "Rama Ramana", "S": "ramA ramaNa bhAramA nannu brOva SrI kara :  Adi", "R": "Vasanthabhairavi", "C": "Thyagaraja", "A": "Salem Gayathri Venkatesan", "V": "aJMaMrsmzso"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0496", "T": "", "H": "Rama Ramana", "S": "ramA ramaNa bhAramA nannu brOva SrI kara :  Adi", "R": "Vasanthabhairavi", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "BhVYmRz3BgE"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

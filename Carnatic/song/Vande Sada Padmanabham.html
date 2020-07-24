@@ -42,29 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0256-Vande Sada Padmanabham-Navarasa kannada-ST.hDgST6MhCqE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0256   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Navarasa kannada.html" >Navarasa kannada</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Balaji Shankar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0029-Vande Sada Padmanabham-Navarasa kannada-ST.nzZ3QTtkgyw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0029   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Navarasa kannada.html" >Navarasa kannada</a> - <a href="artist/Balaji Shankar.html" >Balaji Shankar   SBALAJI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1215-Vande Sada Padmanabham-Navarasa kannada-ST.emK4yIcVcUs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1215   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Navarasa kannada.html" >Navarasa kannada</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Ramanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0116-Vande Sada Padmanabham-Navarasa kannada-ST.mP4eKMgnGt4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0116   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Navarasa kannada.html" >Navarasa kannada</a> - <a href="artist/S. Ramanathan.html" >S  Ramanathan   DSR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0906-Vande Sada Padmanabham-Navarasa kannada-ST.CBk6oMB_0Ok');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0906   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Navarasa kannada.html" >Navarasa kannada</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0907-Vande Sada Padmanabham-Navarasa kannada-ST.zgdyO2JtswE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0907   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Navarasa kannada.html" >Navarasa kannada</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -165,9 +143,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0256", "T": "", "H": "Vande Sada Padmanabham", "S": "vandE sadA padmanAbham pada vandAru samudaya :  Adi", "R": "Navarasa kannada", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "hDgST6MhCqE"}]}, {"name": ["Vocal", "Balaji Shankar"], "songs": [{"N": "0029", "T": "", "H": "Vande Sada Padmanabham", "S": "vandE sadA padmanAbham pada vandAru samudaya :  Adi", "R": "Navarasa kannada", "C": "Swathi Thirunal", "A": "Balaji Shankar", "V": "nzZ3QTtkgyw"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "1215", "T": "", "H": "Vande Sada Padmanabham", "S": "vandE sadA padmanAbham pada vandAru samudaya :  Adi", "R": "Navarasa kannada", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "emK4yIcVcUs"}]}, {"name": ["Vocal", "S. Ramanathan"], "songs": [{"N": "0116", "T": "", "H": "Vande Sada Padmanabham", "S": "vandE sadA padmanAbham pada vandAru samudaya :  Adi", "R": "Navarasa kannada", "C": "Swathi Thirunal", "A": "S. Ramanathan", "V": "mP4eKMgnGt4"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0906", "T": "", "H": "Vande Sada Padmanabham", "S": "vandE sadA padmanAbham pada vandAru samudaya :  Adi", "R": "Navarasa kannada", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "CBk6oMB_0Ok"}, {"N": "0907", "T": "", "H": "Vande Sada Padmanabham", "S": "vandE sadA padmanAbham pada vandAru samudaya :  Adi", "R": "Navarasa kannada", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "zgdyO2JtswE"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

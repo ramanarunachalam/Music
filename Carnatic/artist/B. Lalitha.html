@@ -26,24 +26,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; BLALITHA01</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0001-Concert-Concert-UnknownRaga-UnknownComposer.NUXqQCCk4fs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0001   - <a href="song/Concert.html" >Concert</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0002-Bhuvaneswariya-Mohanakalyani-HMB.qJkkeeRUVTs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0002   - <a href="song/Bhuvaneswariya.html" >bhuvanEshvariya nene mAnasavE bhava bandhagaLa :  Rupaka</a> - <a href="raga/Mohanakalyani.html" >Mohanakalyani</a> - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0003-Jagajanani-Ratipatipriya-GK.6P84uLXs7X8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0003   - <a href="song/Jagajanani.html" >jagajjananI sukhapANI kalyANI  jagajjananI  :  Adi</a> - <a href="raga/Ratipatipriya.html" >Ratipatipriya</a> - <a href="composer/Ghanam Krishnaiyer.html" >Ghanam Krishnaiyer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-Kandarpa Janaka-Hindusthani Kapi-TA.02O6kd2e_8I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="song/Kandarpa Janaka.html" >kaMdarpajanaka garuDagamana   naMda gOpAtmaja :  Adi</a> - <a href="raga/Hindusthani kapi.html" >Hindusthani kapi</a> - <a href="composer/Annamacharya.html" >Annamacharya</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-Mangala Roopiniye-Jonpuri-HMB.zBC9Yd9HAFg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="song/Mangala Roopiniye.html" >mangaLa rUpiNiyE mAvUr vaLar mAtangi mAmaNiyE :  Rupaka</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-Natavara Taruni-Kannadagowla-OVK.MuokdP_fIV4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006   - <a href="song/Natavara Taruni.html" >naTavara taruNi saha rAsavilAsa nava navamaNI :  Adi</a> - <a href="raga/Kannadagowla.html" >Kannadagowla</a> - <a href="composer/Oothukkadu Venkata Kavi.html" >Oothukkadu Venkata Kavi</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0007-Valli Nayakane-Shanmukapriya-HMB.-auZ0DurDNY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0007   - <a href="song/Valli Nayakane.html" >vallI nAyakA nIvE gatiyani manasAraka namminAnu :  Adi</a> - <a href="raga/Shanmukapriya.html" >Shanmukapriya</a> - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0008-Valli Nayakane-Shanmukapriya-HMB.4NcDspfv-ss');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0008   - <a href="song/Valli Nayakane.html" >vallI nAyakA nIvE gatiyani manasAraka namminAnu :  Adi</a> - <a href="raga/Shanmukapriya.html" >Shanmukapriya</a> - <a href="composer/Muthiah Bhagavathar.html" >Muthiah Bhagavathar</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["BLALITHA01"], "songs": [{"N": "0001", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "B. Lalitha", "V": "NUXqQCCk4fs"}, {"N": "0002", "T": "", "H": "Bhuvaneswariya", "S": "bhuvanEshvariya nene mAnasavE bhava bandhagaLa :  Rupaka", "R": "Mohanakalyani", "C": "Muthiah Bhagavathar", "A": "B. Lalitha", "V": "qJkkeeRUVTs"}, {"N": "0003", "T": "", "H": "Jagajanani", "S": "jagajjananI sukhapANI kalyANI  jagajjananI  :  Adi", "R": "Ratipatipriya", "C": "Ghanam Krishnaiyer", "A": "B. Lalitha", "V": "6P84uLXs7X8"}, {"N": "0004", "T": "", "H": "Kandarpa Janaka", "S": "kaMdarpajanaka garuDagamana   naMda gOpAtmaja :  Adi", "R": "Hindusthani kapi", "C": "Annamacharya", "A": "B. Lalitha", "V": "02O6kd2e_8I"}, {"N": "0005", "T": "", "H": "Mangala Roopiniye", "S": "mangaLa rUpiNiyE mAvUr vaLar mAtangi mAmaNiyE :  Rupaka", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "B. Lalitha", "V": "zBC9Yd9HAFg"}, {"N": "0006", "T": "", "H": "Natavara Taruni", "S": "naTavara taruNi saha rAsavilAsa nava navamaNI :  Adi", "R": "Kannadagowla", "C": "Oothukkadu Venkata Kavi", "A": "B. Lalitha", "V": "MuokdP_fIV4"}, {"N": "0007", "T": "", "H": "Valli Nayakane", "S": "vallI nAyakA nIvE gatiyani manasAraka namminAnu :  Adi", "R": "Shanmukapriya", "C": "Muthiah Bhagavathar", "A": "B. Lalitha", "V": "-auZ0DurDNY"}, {"N": "0008", "T": "", "H": "Valli Nayakane", "S": "vallI nAyakA nIvE gatiyani manasAraka namminAnu :  Adi", "R": "Shanmukapriya", "C": "Muthiah Bhagavathar", "A": "B. Lalitha", "V": "4NcDspfv-ss"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#artist-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

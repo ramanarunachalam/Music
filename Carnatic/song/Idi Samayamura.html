@@ -42,32 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Chitra Veena Chitravina Ravi Kiran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0084-Idi Samayamura-Chayanata-T.SMUhwK0zWFw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0084   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Chayanata.html" >Chayanata</a> - <a href="artist/Chitravina Ravi Kiran.html" >Chitravina Ravi Kiran   RAVIKIRAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mridangam Thanjavur Murugaboopathi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0010-Idi Samayamura-Chayanata-T.s3vC5Xi6-AI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0010   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Chayanata.html" >Chayanata</a> - <a href="artist/Thanjavur Murugaboopathi.html" >Thanjavur Murugaboopathi   TMURUGABHU01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Pattammal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0175-Idi Samayamura-Chayanata-T.1dgkKPwsVvM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0175   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Chayanata.html" >Chayanata</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. D. Ramanathan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0228-Idi Samayamura-Chayanata-T.WPk4P4sT01M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0228   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Chayanata.html" >Chayanata</a> - <a href="artist/M. D. Ramanathan.html" >M  D  Ramanathan   MDR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Nookala Chinna Satyanarayana</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0030-Idi Samayamura-Chayanata-T.gSY1P3CCRnI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0030   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Chayanata.html" >Chayanata</a> - <a href="artist/Nookala Chinna Satyanarayana.html" >Nookala Chinna Satyanarayana</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ranjani Gayatri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0096-Idi Samayamura-Chayanata-T.PTB2Icar6Z4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0096   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Chayanata.html" >Chayanata</a> - <a href="artist/Ranjani Gayatri.html" >Ranjani Gayatri   RG01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -159,9 +134,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Chitra Veena", "Chitravina Ravi Kiran"], "songs": [{"N": "0084", "T": "", "H": "Idi Samayamura", "S": "idi samayamurA ina kula tilaka :  Adi", "R": "Chayanata", "C": "Thyagaraja", "A": "Chitravina Ravi Kiran", "V": "SMUhwK0zWFw"}]}, {"name": ["Mridangam", "Thanjavur Murugaboopathi"], "songs": [{"N": "0010", "T": "", "H": "Idi Samayamura", "S": "idi samayamurA ina kula tilaka :  Adi", "R": "Chayanata", "C": "Thyagaraja", "A": "Thanjavur Murugaboopathi", "V": "s3vC5Xi6-AI"}]}, {"name": ["Vocal", "D. K. Pattammal"], "songs": [{"N": "0175", "T": "", "H": "Idi Samayamura", "S": "idi samayamurA ina kula tilaka :  Adi", "R": "Chayanata", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "1dgkKPwsVvM"}]}, {"name": ["Vocal", "M. D. Ramanathan"], "songs": [{"N": "0230", "T": "", "H": "Idi Samayamura", "S": "idi samayamurA ina kula tilaka :  Adi", "R": "Chayanata", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "WPk4P4sT01M"}]}, {"name": ["Vocal", "Nookala Chinna Satyanarayana"], "songs": [{"N": "0030", "T": "", "H": "Idi Samayamura", "S": "idi samayamurA ina kula tilaka :  Adi", "R": "Chayanata", "C": "Thyagaraja", "A": "Nookala Chinna Satyanarayana", "V": "gSY1P3CCRnI"}]}, {"name": ["Vocal", "Ranjani Gayatri"], "songs": [{"N": "0096", "T": "", "H": "Idi Samayamura", "S": "idi samayamurA ina kula tilaka :  Adi", "R": "Chayanata", "C": "Thyagaraja", "A": "Ranjani Gayatri", "V": "PTB2Icar6Z4"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

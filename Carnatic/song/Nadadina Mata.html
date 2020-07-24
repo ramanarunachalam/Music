@@ -40,21 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Dr. Sripada Pinakapani</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Nadadina Mata-Janaranjani-T.mE5e94Uii8w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Janaranjani.html" >Janaranjani</a> - <a href="artist/Dr. Sripada Pinakapani.html" >Dr  Sripada Pinakapani   SPP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Mani Krishnaswami</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0046-Nadadina Mata-Janaranjani-T.rIIqjpfrcUs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0046   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Janaranjani.html" >Janaranjani</a> - <a href="artist/Mani Krishnaswami.html" >Mani Krishnaswami   MANIK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Musiri Subramania Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0033-Nadadina Mata-Janaranjani-T.J6vW6LIP1_M');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0033   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Janaranjani.html" >Janaranjani</a> - <a href="artist/Musiri Subramania Iyer.html" >Musiri Subramania Iyer   MUSIRI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0034-Nadadina Mata-Janaranjani-T.mokHpI_7nxA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0034   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Janaranjani.html" >Janaranjani</a> - <a href="artist/Musiri Subramania Iyer.html" >Musiri Subramania Iyer   MUSIRI01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -146,9 +132,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Dr. Sripada Pinakapani"], "songs": [{"N": "0027", "T": "", "H": "Nadadina Mata", "S": "nAD A Dina mATa nEDu tappa valadu :  Caapu", "R": "Janaranjani", "C": "Thyagaraja", "A": "Dr. Sripada Pinakapani", "V": "mE5e94Uii8w"}]}, {"name": ["Vocal", "Mani Krishnaswami"], "songs": [{"N": "0046", "T": "", "H": "Nadadina Mata", "S": "nAD A Dina mATa nEDu tappa valadu :  Caapu", "R": "Janaranjani", "C": "Thyagaraja", "A": "Mani Krishnaswami", "V": "rIIqjpfrcUs"}]}, {"name": ["Vocal", "Musiri Subramania Iyer"], "songs": [{"N": "0033", "T": "", "H": "Nadadina Mata", "S": "nAD A Dina mATa nEDu tappa valadu :  Caapu", "R": "Janaranjani", "C": "Thyagaraja", "A": "Musiri Subramania Iyer", "V": "J6vW6LIP1_M"}, {"N": "0034", "T": "", "H": "Nadadina Mata", "S": "nAD A Dina mATa nEDu tappa valadu :  Caapu", "R": "Janaranjani", "C": "Thyagaraja", "A": "Musiri Subramania Iyer", "V": "mokHpI_7nxA"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

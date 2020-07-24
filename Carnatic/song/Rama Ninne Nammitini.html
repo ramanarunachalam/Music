@@ -42,30 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin M. A. Krishnaswamy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0070-Rama Ninne Nammitini-Saranga-RSI.cnrMX_WE-pU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0070   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/M. A. Krishnaswamy.html" >M  A  Krishnaswamy   MAKRISHNASWAMY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin M. S. Gopalakrishnan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0319-Rama Ninne Nammitini-Saranga-RSI.HjDgYlFKtwM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0319   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/M. S. Gopalakrishnan.html" >M  S  Gopalakrishnan   MSG01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal G. N. Balasubramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0367-Rama Ninne Nammitini-Saranga-RSI.6QwoGDIyLGs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0367   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0368-Rama Ninne Nammitini-Saranga-RSI.7LWg2L9L8Hs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0368   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0369-Rama Ninne Nammitini-Saranga-RSI.WRv4U6Gl4eQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0369   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/G. N. Balasubramaniam.html" >G  N  Balasubramaniam   GNB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Kuzhikkarai S. P. Viswalingam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0012-Rama Ninne Nammitini-Saranga-RSI.YWWY7imvmwc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0012   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/Kuzhikkarai S. P. Viswalingam.html" >Kuzhikkarai S  P  Viswalingam</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0922-Rama Ninne Nammitini-Saranga-RSI.SWMT2hXx_lo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0922   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Saranga.html" >Saranga</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -147,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "M. A. Krishnaswamy"], "songs": [{"N": "0070", "T": "", "H": "Rama Ninne Nammitini", "S": "rAma ninnE nammitini rayamuga ninnu rakSimparAdA :  Adi", "R": "Saranga", "C": "Ramanathapuram Srinivasa Iyengar", "A": "M. A. Krishnaswamy", "V": "cnrMX_WE-pU"}]}, {"name": ["Violin", "M. S. Gopalakrishnan"], "songs": [{"N": "0319", "T": "", "H": "Rama Ninne Nammitini", "S": "rAma ninnE nammitini rayamuga ninnu rakSimparAdA :  Adi", "R": "Saranga", "C": "Ramanathapuram Srinivasa Iyengar", "A": "M. S. Gopalakrishnan", "V": "HjDgYlFKtwM"}]}, {"name": ["Vocal", "G. N. Balasubramaniam"], "songs": [{"N": "0371", "T": "", "H": "Rama Ninne Nammitini", "S": "rAma ninnE nammitini rayamuga ninnu rakSimparAdA :  Adi", "R": "Saranga", "C": "Ramanathapuram Srinivasa Iyengar", "A": "G. N. Balasubramaniam", "V": "6QwoGDIyLGs"}, {"N": "0372", "T": "", "H": "Rama Ninne Nammitini", "S": "rAma ninnE nammitini rayamuga ninnu rakSimparAdA :  Adi", "R": "Saranga", "C": "Ramanathapuram Srinivasa Iyengar", "A": "G. N. Balasubramaniam", "V": "7LWg2L9L8Hs"}, {"N": "0373", "T": "", "H": "Rama Ninne Nammitini", "S": "rAma ninnE nammitini rayamuga ninnu rakSimparAdA :  Adi", "R": "Saranga", "C": "Ramanathapuram Srinivasa Iyengar", "A": "G. N. Balasubramaniam", "V": "WRv4U6Gl4eQ"}]}, {"name": ["Vocal", "Kuzhikkarai S. P. Viswalingam"], "songs": [{"N": "0012", "T": "", "H": "Rama Ninne Nammitini", "S": "rAma ninnE nammitini rayamuga ninnu rakSimparAdA :  Adi", "R": "Saranga", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Kuzhikkarai S. P. Viswalingam", "V": "YWWY7imvmwc"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "0922", "T": "", "H": "Rama Ninne Nammitini", "S": "rAma ninnE nammitini rayamuga ninnu rakSimparAdA :  Adi", "R": "Saranga", "C": "Ramanathapuram Srinivasa Iyengar", "A": "M. S. Subbulakshmi", "V": "SWMT2hXx_lo"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

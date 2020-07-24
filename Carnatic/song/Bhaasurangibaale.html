@@ -41,19 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Allepy Venkatesan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-Bhaasurangibaale-Saveri-ST.J-zDM6StbvI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Allepy Venkatesan.html" >Allepy Venkatesan   ALLEPY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sreevalsan J. Menon</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0024-Bhaasurangibaale-Saveri-ST.DmfY4gIvnqY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0024   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Sreevalsan J. Menon.html" >Sreevalsan J  Menon   SJM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0025-Bhaasurangibaale-Saveri-ST.ZjfA87pCnz4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0025   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Sreevalsan J. Menon.html" >Sreevalsan J  Menon   SJM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0026-Bhaasurangibaale-Saveri-ST.aRDhAR4Abro');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0026   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Sreevalsan J. Menon.html" >Sreevalsan J  Menon   SJM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Bhaasurangibaale-Saveri-ST.n3IywfYT5YI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Saveri.html" >Saveri</a> - <a href="artist/Sreevalsan J. Menon.html" >Sreevalsan J  Menon   SJM01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -148,9 +136,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Allepy Venkatesan"], "songs": [{"N": "0004", "T": "", "H": "Bhaasurangibaale", "S": "bhAsurAngi bAlE madana turayAyi jnyAn :  Adi", "R": "Saveri", "C": "Swathi Thirunal", "A": "Allepy Venkatesan", "V": "J-zDM6StbvI"}]}, {"name": ["Vocal", "Sreevalsan J. Menon"], "songs": [{"N": "0024", "T": "", "H": "Bhaasurangibaale", "S": "bhAsurAngi bAlE madana turayAyi jnyAn :  Adi", "R": "Saveri", "C": "Swathi Thirunal", "A": "Sreevalsan J. Menon", "V": "DmfY4gIvnqY"}, {"N": "0025", "T": "", "H": "Bhaasurangibaale", "S": "bhAsurAngi bAlE madana turayAyi jnyAn :  Adi", "R": "Saveri", "C": "Swathi Thirunal", "A": "Sreevalsan J. Menon", "V": "ZjfA87pCnz4"}, {"N": "0026", "T": "", "H": "Bhaasurangibaale", "S": "bhAsurAngi bAlE madana turayAyi jnyAn :  Adi", "R": "Saveri", "C": "Swathi Thirunal", "A": "Sreevalsan J. Menon", "V": "aRDhAR4Abro"}, {"N": "0027", "T": "", "H": "Bhaasurangibaale", "S": "bhAsurAngi bAlE madana turayAyi jnyAn :  Adi", "R": "Saveri", "C": "Swathi Thirunal", "A": "Sreevalsan J. Menon", "V": "n3IywfYT5YI"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

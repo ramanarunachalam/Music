@@ -42,29 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1154-Raghunandana-Kedaragowla-T.qeKj7gUKeE0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1154   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1150-Raghunandana-Kedaragowla-T.LTJtvKl3ubA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1150   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1151-Raghunandana-Kedaragowla-T.Xi61Mt3xxVM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1151   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1152-Raghunandana-Kedaragowla-T.a8WpsQ_rgmY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1152   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1153-Raghunandana-Kedaragowla-T.mGLqLcarf9w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1153   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1155-Raghunandana-Kedaragowla-T.vm09-XM15TM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1155   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. Vedavalli</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0207-Raghunandana-Kedaragowla-T.O2WIxz4Df2o');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0207   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. N. Seshagopalan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0396-Raghunandana-Kedaragowla-T.CuCUytVlulA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0396   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/T. N. Seshagopalan.html" >T  N  Seshagopalan   TNS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Uma Radhika</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0067-Raghunandana-Kedaragowla-T.FGMYB0c6wq8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0067   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/Uma Radhika.html" >Uma Radhika   CHINMAYA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -221,9 +199,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "1155", "T": "", "H": "Raghunandana", "S": "raghu nandana raghu nandana raghu nandana :  Rupaka", "R": "Kedaragowla", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "qeKj7gUKeE0"}, {"N": "1151", "T": "", "H": "Raghunandana", "S": "raghu nandana raghu nandana raghu nandana :  Rupaka", "R": "Kedaragowla", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "LTJtvKl3ubA"}, {"N": "1152", "T": "", "H": "Raghunandana", "S": "raghu nandana raghu nandana raghu nandana :  Rupaka", "R": "Kedaragowla", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "Xi61Mt3xxVM"}, {"N": "1153", "T": "", "H": "Raghunandana", "S": "raghu nandana raghu nandana raghu nandana :  Rupaka", "R": "Kedaragowla", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "a8WpsQ_rgmY"}, {"N": "1154", "T": "", "H": "Raghunandana", "S": "raghu nandana raghu nandana raghu nandana :  Rupaka", "R": "Kedaragowla", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "mGLqLcarf9w"}, {"N": "1156", "T": "", "H": "Raghunandana", "S": "raghu nandana raghu nandana raghu nandana :  Rupaka", "R": "Kedaragowla", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "vm09-XM15TM"}]}, {"name": ["Vocal", "R. Vedavalli"], "songs": [{"N": "0207", "T": "", "H": "Raghunandana", "S": "raghu nandana raghu nandana raghu nandana :  Rupaka", "R": "Kedaragowla", "C": "Thyagaraja", "A": "R. Vedavalli", "V": "O2WIxz4Df2o"}]}, {"name": ["Vocal", "T. N. Seshagopalan"], "songs": [{"N": "0396", "T": "", "H": "Raghunandana", "S": "raghu nandana raghu nandana raghu nandana :  Rupaka", "R": "Kedaragowla", "C": "Thyagaraja", "A": "T. N. Seshagopalan", "V": "CuCUytVlulA"}]}, {"name": ["Vocal", "Uma Radhika"], "songs": [{"N": "0067", "T": "", "H": "Raghunandana", "S": "raghu nandana raghu nandana raghu nandana :  Rupaka", "R": "Kedaragowla", "C": "Thyagaraja", "A": "Uma Radhika", "V": "FGMYB0c6wq8"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

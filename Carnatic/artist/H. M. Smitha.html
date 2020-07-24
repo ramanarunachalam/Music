@@ -26,24 +26,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; HMSMITHA01</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0002-Concert-Concert-UnknownRaga-UnknownComposer.tO3uQ7VxGHA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0002   - <a href="song/Concert.html" >Concert</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-Harismarane-Yamunakalyani-PD.tSHnRt0l-ko');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006   - <a href="song/Harismarane.html" >hari smaraNe mADO nirantara paragatige idu :  Caapu</a> - <a href="raga/Yamunakalyani.html" >Yamunakalyani</a> - <a href="composer/Purandara Dasa.html" >Purandara Dasa</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Sri Gurum-Rathnangi-BMK.VwUgJKX9s5s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017   - <a href="song/Sri Gurum.html" >shrI gurum cintayAmyaham satatam shrI tyAgrAjam :  Rupaka</a> - <a href="raga/Rathnangi.html" >Rathnangi</a> - <a href="composer/M. Balamuralikrishna.html" >M  Balamuralikrishna</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0028-Varnam-Varnam-Valaji-LALGUDI.b99c5NpLWks');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0028   - <a href="song/Varnam.html" >Varnam</a> - <a href="raga/Valaji.html" >Valaji</a> - <a href="composer/Lalgudi Jayaraman.html" >Lalgudi Jayaraman</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0035-UnknownSong-UnknownRaga-UnknownComposer.AkY_-PWr3wQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0035   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0037-UnknownSong-UnknownRaga-UnknownComposer.HpFPcsz8G2I');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0037   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0046-UnknownSong-UnknownRaga-UnknownComposer.tPtMlwSNbNs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0046   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0047-UnknownSong-UnknownRaga-UnknownComposer.zAZuNZLp340');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0047   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["HMSMITHA01"], "songs": [{"N": "0002", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "H. M. Smitha", "V": "tO3uQ7VxGHA"}, {"N": "0006", "T": "", "H": "Harismarane", "S": "hari smaraNe mADO nirantara paragatige idu :  Caapu", "R": "Yamunakalyani", "C": "Purandara Dasa", "A": "H. M. Smitha", "V": "tSHnRt0l-ko"}, {"N": "0017", "T": "", "H": "Sri Gurum", "S": "shrI gurum cintayAmyaham satatam shrI tyAgrAjam :  Rupaka", "R": "Rathnangi", "C": "M. Balamuralikrishna", "A": "H. M. Smitha", "V": "VwUgJKX9s5s"}, {"N": "0028", "T": "", "H": "Varnam", "S": "Varnam", "R": "Valaji", "C": "Lalgudi Jayaraman", "A": "H. M. Smitha", "V": "b99c5NpLWks"}, {"N": "0035", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "H. M. Smitha", "V": "AkY_-PWr3wQ"}, {"N": "0037", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "H. M. Smitha", "V": "HpFPcsz8G2I"}, {"N": "0046", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "H. M. Smitha", "V": "tPtMlwSNbNs"}, {"N": "0047", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "H. M. Smitha", "V": "zAZuNZLp340"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#artist-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

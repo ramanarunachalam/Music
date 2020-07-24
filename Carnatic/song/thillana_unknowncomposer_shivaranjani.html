@@ -36,28 +36,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin A. Kanyakumari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0190-Thillana-Thillana-Shivaranjani-UnknownComposer.TleDtd1xBH0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0190 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/A. Kanyakumari.html" >A  Kanyakumari   AKK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Lalgudi Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0670-Thillana-Thillana-Shivaranjani-UnknownComposer.O7cSQ1s3iqA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0670 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/Lalgudi Jayaraman.html" >Lalgudi Jayaraman   LALGUDI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Maharajapuram Santhanam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0660-Thillana-Thillana-Shivaranjani-UnknownComposer.uJXL2kzMR6s');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0660 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0657-Thillana-Thillana-Shivaranjani-UnknownComposer.16GmbTFLDtY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0657 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0658-Thillana-Thillana-Shivaranjani-UnknownComposer.cWI1z8pRycU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0658 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0659-Thillana-Thillana-Shivaranjani-UnknownComposer.kkwTDnoWkXU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0659 - <a href="song_type/Thillana.html" >Thillana</a>  - <a href="composer/UnknownComposer.html" >UnknownComposer</a> - <a href="raga/Shivaranjani.html" >Shivaranjani</a> - <a href="artist/Maharajapuram Santhanam.html" >Maharajapuram Santhanam   SANTHANAM01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Violin", "A. Kanyakumari"], "songs": [{"N": "0190", "T": "Thillana", "H": "thillana_unknowncomposer_shivaranjani", "S": "thillana unknowncomposer shivaranjani", "R": "Shivaranjani", "C": "UnknownComposer", "A": "A. Kanyakumari", "V": "TleDtd1xBH0"}]}, {"name": ["Violin", "Lalgudi Jayaraman"], "songs": [{"N": "0670", "T": "Thillana", "H": "thillana_unknowncomposer_shivaranjani", "S": "thillana unknowncomposer shivaranjani", "R": "Shivaranjani", "C": "UnknownComposer", "A": "Lalgudi Jayaraman", "V": "O7cSQ1s3iqA"}]}, {"name": ["Vocal", "Maharajapuram Santhanam"], "songs": [{"N": "0660", "T": "Thillana", "H": "thillana_unknowncomposer_shivaranjani", "S": "thillana unknowncomposer shivaranjani", "R": "Shivaranjani", "C": "UnknownComposer", "A": "Maharajapuram Santhanam", "V": "uJXL2kzMR6s"}, {"N": "0657", "T": "Thillana", "H": "thillana_unknowncomposer_shivaranjani", "S": "thillana unknowncomposer shivaranjani", "R": "Shivaranjani", "C": "UnknownComposer", "A": "Maharajapuram Santhanam", "V": "16GmbTFLDtY"}, {"N": "0658", "T": "Thillana", "H": "thillana_unknowncomposer_shivaranjani", "S": "thillana unknowncomposer shivaranjani", "R": "Shivaranjani", "C": "UnknownComposer", "A": "Maharajapuram Santhanam", "V": "cWI1z8pRycU"}, {"N": "0659", "T": "Thillana", "H": "thillana_unknowncomposer_shivaranjani", "S": "thillana unknowncomposer shivaranjani", "R": "Shivaranjani", "C": "UnknownComposer", "A": "Maharajapuram Santhanam", "V": "kkwTDnoWkXU"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

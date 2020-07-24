@@ -42,24 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Adithya Narayanan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0017-Kanthimathi Karuna-Kalyani-SD.j-MWv73Dj3U');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0017   - <a href="composer/Subbarama Dikshitar.html" >Subbarama Dikshitar</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/S. Adithya Narayanan.html" >S  Adithya Narayanan   ADHITYAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0425-Kanthimathi Karuna-Kalyani-SD.jQ_LpLgCMJU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0425   - <a href="composer/Subbarama Dikshitar.html" >Subbarama Dikshitar</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0424-Kanthimathi Karuna-Kalyani-SD.cEkbNO17ujk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0424   - <a href="composer/Subbarama Dikshitar.html" >Subbarama Dikshitar</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. Brinda</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0031-Kanthimathi Karuna-Kalyani-SD.1_80H7EQafc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0031   - <a href="composer/Subbarama Dikshitar.html" >Subbarama Dikshitar</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/T. Brinda.html" >T  Brinda   BRINDA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0032-Kanthimathi Karuna-Kalyani-SD.46p9DDL64Lw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0032   - <a href="composer/Subbarama Dikshitar.html" >Subbarama Dikshitar</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/T. Brinda.html" >T  Brinda   BRINDA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0033-Kanthimathi Karuna-Kalyani-SD.FJb6ynzGhes');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0033   - <a href="composer/Subbarama Dikshitar.html" >Subbarama Dikshitar</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/T. Brinda.html" >T  Brinda   BRINDA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0034-Kanthimathi Karuna-Kalyani-SD.zlnDG229NkY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0034   - <a href="composer/Subbarama Dikshitar.html" >Subbarama Dikshitar</a> - <a href="raga/Kalyani.html" >Kalyani</a> - <a href="artist/T. Brinda.html" >T  Brinda   BRINDA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -141,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "S. Adithya Narayanan"], "songs": [{"N": "0017", "T": "", "H": "Kanthimathi Karuna", "S": "kAntimatI karuNa mIra kAntimatI nosagumamma :  Rupaka", "R": "Kalyani", "C": "Subbarama Dikshitar", "A": "S. Adithya Narayanan", "V": "j-MWv73Dj3U"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0425", "T": "", "H": "Kanthimathi Karuna", "S": "kAntimatI karuNa mIra kAntimatI nosagumamma :  Rupaka", "R": "Kalyani", "C": "Subbarama Dikshitar", "A": "Sanjay Subrahmanyan", "V": "jQ_LpLgCMJU"}, {"N": "0424", "T": "", "H": "Kanthimathi Karuna", "S": "kAntimatI karuNa mIra kAntimatI nosagumamma :  Rupaka", "R": "Kalyani", "C": "Subbarama Dikshitar", "A": "Sanjay Subrahmanyan", "V": "cEkbNO17ujk"}]}, {"name": ["Vocal", "T. Brinda"], "songs": [{"N": "0031", "T": "", "H": "Kanthimathi Karuna", "S": "kAntimatI karuNa mIra kAntimatI nosagumamma :  Rupaka", "R": "Kalyani", "C": "Subbarama Dikshitar", "A": "T. Brinda", "V": "1_80H7EQafc"}, {"N": "0032", "T": "", "H": "Kanthimathi Karuna", "S": "kAntimatI karuNa mIra kAntimatI nosagumamma :  Rupaka", "R": "Kalyani", "C": "Subbarama Dikshitar", "A": "T. Brinda", "V": "46p9DDL64Lw"}, {"N": "0033", "T": "", "H": "Kanthimathi Karuna", "S": "kAntimatI karuNa mIra kAntimatI nosagumamma :  Rupaka", "R": "Kalyani", "C": "Subbarama Dikshitar", "A": "T. Brinda", "V": "FJb6ynzGhes"}, {"N": "0034", "T": "", "H": "Kanthimathi Karuna", "S": "kAntimatI karuNa mIra kAntimatI nosagumamma :  Rupaka", "R": "Kalyani", "C": "Subbarama Dikshitar", "A": "T. Brinda", "V": "zlnDG229NkY"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

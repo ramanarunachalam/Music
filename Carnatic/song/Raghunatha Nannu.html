@@ -42,30 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Flute Sikkil Mala Chandrasekhar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0044-Raghunatha Nannu-Swararanjani-RSI.72NKuQLlhvU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0044   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Swararanjani.html" >Swararanjani</a> - <a href="artist/Sikkil Mala Chandrasekhar.html" >Sikkil Mala Chandrasekhar   MALA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mandolin U. Rajesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0057-Raghunatha Nannu-Swararanjani-RSI.cd3CuK2XZRo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0057   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Swararanjani.html" >Swararanjani</a> - <a href="artist/U. Rajesh.html" >U  Rajesh   URAJESH01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Mandolin U. Srinivas</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0386-Raghunatha Nannu-Suraranjani-RSI.9tAguZ2ExkA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0386   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Suraranjani.html" >Suraranjani</a> - <a href="artist/U. Srinivas.html" >U  Srinivas   USRINIVAS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0387-Raghunatha Nannu-Swararanjani-RSI._XIUmB4jpWI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0387   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Swararanjani.html" >Swararanjani</a> - <a href="artist/U. Srinivas.html" >U  Srinivas   USRINIVAS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Veena P. Ganesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0011-Raghunatha Nannu-Suraranjani-RSI.ZMFbNUzoI9U');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0011   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Suraranjani.html" >Suraranjani</a> - <a href="artist/P. Ganesh.html" >P  Ganesh   PGANESH01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Violin Ganesh Kumaresh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0020-Raghunatha Nannu-Suraranjani-RSI.kswsNoIw270');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0020   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Suraranjani.html" >Suraranjani</a> - <a href="artist/Ganesh Kumaresh.html" >Ganesh Kumaresh   GANESHKUMARESH01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0021-Raghunatha Nannu-UnknownRaga-RSI.1XmI3bLrMc0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0021   - <a href="composer/Ramanathapuram Srinivasa Iyengar.html" >Ramanathapuram Srinivasa Iyengar</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Ganesh Kumaresh.html" >Ganesh Kumaresh   GANESHKUMARESH01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -147,9 +124,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Flute", "Sikkil Mala Chandrasekhar"], "songs": [{"N": "0044", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Swararanjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Sikkil Mala Chandrasekhar", "V": "72NKuQLlhvU"}]}, {"name": ["Mandolin", "U. Rajesh"], "songs": [{"N": "0057", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Swararanjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "U. Rajesh", "V": "cd3CuK2XZRo"}]}, {"name": ["Mandolin", "U. Srinivas"], "songs": [{"N": "0386", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Suraranjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "U. Srinivas", "V": "9tAguZ2ExkA"}, {"N": "0387", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Swararanjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "U. Srinivas", "V": "_XIUmB4jpWI"}]}, {"name": ["Veena", "P. Ganesh"], "songs": [{"N": "0011", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Suraranjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "P. Ganesh", "V": "ZMFbNUzoI9U"}]}, {"name": ["Violin", "Ganesh Kumaresh"], "songs": [{"N": "0020", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Suraranjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Ganesh Kumaresh", "V": "kswsNoIw270"}, {"N": "0021", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Unknownraga", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Ganesh Kumaresh", "V": "1XmI3bLrMc0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

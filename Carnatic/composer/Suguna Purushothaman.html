@@ -25,30 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; rama bhakta hanuman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0177-Rama Bhakta Hanuman-Jonpuri-SUGUNA.OV91pncZa_c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0177   - <a href="song/Rama Bhakta Hanuman.html" >Rama Bhakta Hanuman</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0178-Rama Bhakta Hanuman-Jonpuri-SUGUNA.WL2CXFz2TjM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0178   - <a href="song/Rama Bhakta Hanuman.html" >Rama Bhakta Hanuman</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0053-Rama Bhakta Hanuman-Jonpuri-SUGUNA.OIegCEXo9UU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0053   - <a href="song/Rama Bhakta Hanuman.html" >Rama Bhakta Hanuman</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/K. Gayathri.html" >K  Gayathri   KGAYATHRI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0025-Rama Bhakta Hanuman-Jonpuri-SUGUNA.r9O-QpURsik');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0025   - <a href="song/Rama Bhakta Hanuman.html" >Rama Bhakta Hanuman</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Maruthi Prasad.html" >Maruthi Prasad   MARUTHIPRASAD01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0027-Rama Bhakta Hanuman-Jonpuri-SUGUNA.56q-rjefJU0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0027   - <a href="song/Rama Bhakta Hanuman.html" >Rama Bhakta Hanuman</a> - <a href="raga/Jonpuri.html" >Jonpuri</a> - <a href="artist/Suguna Purushothaman.html" >Suguna Purushothaman   SUGUNA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; thirukkalyaanam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0050-Thirukkalyaanam-Mohanam-SUGUNA.nyxHnmOPmo8');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0050   - <a href="song/Thirukkalyaanam.html" >Thirukkalyaanam</a> - <a href="raga/Mohanam.html" >Mohanam</a> - <a href="artist/Musiri Subramania Iyer.html" >Musiri Subramania Iyer   MUSIRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; varnam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-Varnam-Varnam-Ragamalika-SUGUNA.cyaqIkvmUmw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="song/Varnam.html" >Varnam</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Sharanya Krishnan.html" >Sharanya Krishnan   SHARANYAK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0052-Varnam-Varnam-Ragamalika-SUGUNA.0BvnLB8qAwc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0052   - <a href="song/Varnam.html" >Varnam</a> - <a href="raga/Ragamalika.html" >Ragamalika</a> - <a href="artist/Suguna Purushothaman.html" >Suguna Purushothaman   SUGUNA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["rama bhakta hanuman"], "songs": [{"N": "0177", "T": "", "H": "Rama Bhakta Hanuman", "S": "Rama Bhakta Hanuman", "R": "Jonpuri", "C": "Suguna Purushothaman", "A": "Amrutha Venkatesh", "V": "OV91pncZa_c"}, {"N": "0178", "T": "", "H": "Rama Bhakta Hanuman", "S": "Rama Bhakta Hanuman", "R": "Jonpuri", "C": "Suguna Purushothaman", "A": "Amrutha Venkatesh", "V": "WL2CXFz2TjM"}, {"N": "0053", "T": "", "H": "Rama Bhakta Hanuman", "S": "Rama Bhakta Hanuman", "R": "Jonpuri", "C": "Suguna Purushothaman", "A": "K. Gayathri", "V": "OIegCEXo9UU"}, {"N": "0025", "T": "", "H": "Rama Bhakta Hanuman", "S": "Rama Bhakta Hanuman", "R": "Jonpuri", "C": "Suguna Purushothaman", "A": "Maruthi Prasad", "V": "r9O-QpURsik"}, {"N": "0027", "T": "", "H": "Rama Bhakta Hanuman", "S": "Rama Bhakta Hanuman", "R": "Jonpuri", "C": "Suguna Purushothaman", "A": "Suguna Purushothaman", "V": "56q-rjefJU0"}]}, {"name": ["thirukkalyaanam"], "songs": [{"N": "0050", "T": "", "H": "Thirukkalyaanam", "S": "Thirukkalyaanam", "R": "Mohanam", "C": "Suguna Purushothaman", "A": "Musiri Subramania Iyer", "V": "nyxHnmOPmo8"}]}, {"name": ["varnam"], "songs": [{"N": "0004", "T": "", "H": "Varnam", "S": "Varnam", "R": "Ragamalika", "C": "Suguna Purushothaman", "A": "Sharanya Krishnan", "V": "cyaqIkvmUmw"}, {"N": "0052", "T": "", "H": "Varnam", "S": "Varnam", "R": "Ragamalika", "C": "Suguna Purushothaman", "A": "Suguna Purushothaman", "V": "0BvnLB8qAwc"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

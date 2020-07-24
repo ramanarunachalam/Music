@@ -42,26 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Nisha Rajagopal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0112-Vanaja Nayanudani-Kedaragowla-T.6mY32fQ7oiU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0112   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/Nisha Rajagopal.html" >Nisha Rajagopal   NISHAR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Suguna Varadachari</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0121-Vanaja Nayanudani-Kedaragowla-T.Y_77xqyAirY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0121   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/Suguna Varadachari.html" >Suguna Varadachari   SUGUNAV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sumithra Vasudev</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0088-Vanaja Nayanudani-Kedaragowla-T.LM8qL72-yP0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0088   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/Sumithra Vasudev.html" >Sumithra Vasudev   VSUMITHRA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0089-Vanaja Nayanudani-Kedaragowla-T.TXFGFbzQUbc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0089   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/Sumithra Vasudev.html" >Sumithra Vasudev   VSUMITHRA01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0090-Vanaja Nayanudani-Kedaragowla-T.xS-DBwKKxHg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0090   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/Sumithra Vasudev.html" >Sumithra Vasudev   VSUMITHRA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Vijayalakshmy Subramaniam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0101-Vanaja Nayanudani-Kedaragowla-T.scRhjITSndY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0101   - <a href="composer/Thyagaraja.html" >Thyagaraja</a> - <a href="raga/Kedaragowla.html" >Kedaragowla</a> - <a href="artist/Vijayalakshmy Subramaniam.html" >Vijayalakshmy Subramaniam   VSL01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -152,9 +133,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Nisha Rajagopal"], "songs": [{"N": "0112", "T": "", "H": "Vanaja Nayanudani", "S": "vanaja nayanuD a ni valacitivO vAni :  Adi", "R": "Kedaragowla", "C": "Thyagaraja", "A": "Nisha Rajagopal", "V": "6mY32fQ7oiU"}]}, {"name": ["Vocal", "Suguna Varadachari"], "songs": [{"N": "0121", "T": "", "H": "Vanaja Nayanudani", "S": "vanaja nayanuD a ni valacitivO vAni :  Adi", "R": "Kedaragowla", "C": "Thyagaraja", "A": "Suguna Varadachari", "V": "Y_77xqyAirY"}]}, {"name": ["Vocal", "Sumithra Vasudev"], "songs": [{"N": "0088", "T": "", "H": "Vanaja Nayanudani", "S": "vanaja nayanuD a ni valacitivO vAni :  Adi", "R": "Kedaragowla", "C": "Thyagaraja", "A": "Sumithra Vasudev", "V": "LM8qL72-yP0"}, {"N": "0089", "T": "", "H": "Vanaja Nayanudani", "S": "vanaja nayanuD a ni valacitivO vAni :  Adi", "R": "Kedaragowla", "C": "Thyagaraja", "A": "Sumithra Vasudev", "V": "TXFGFbzQUbc"}, {"N": "0090", "T": "", "H": "Vanaja Nayanudani", "S": "vanaja nayanuD a ni valacitivO vAni :  Adi", "R": "Kedaragowla", "C": "Thyagaraja", "A": "Sumithra Vasudev", "V": "xS-DBwKKxHg"}]}, {"name": ["Vocal", "Vijayalakshmy Subramaniam"], "songs": [{"N": "0101", "T": "", "H": "Vanaja Nayanudani", "S": "vanaja nayanuD a ni valacitivO vAni :  Adi", "R": "Kedaragowla", "C": "Thyagaraja", "A": "Vijayalakshmy Subramaniam", "V": "scRhjITSndY"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

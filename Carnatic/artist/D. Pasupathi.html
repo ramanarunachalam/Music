@@ -26,24 +26,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; DPASUPATHI01</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0001-Mama Hridaye-Reethigowla-MV.OgZL0lEbYpw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0001   - <a href="song/Mama Hridaye.html" >mama hrdayE vihara dayALO krSNa mandaradhara :  Adi</a> - <a href="raga/Reethigowla.html" >Reethigowla</a> - <a href="composer/Mysore Vasudevachar.html" >Mysore Vasudevachar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0002-Namo Namo Raghukula Nayaka-Nata-TA.nBzpzvJSnuk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0002   - <a href="song/Namo Namo Raghukula Nayaka.html" >namO namO raghukula nAyaka divijavantya vandya :  Rupaka</a> - <a href="raga/Nata.html" >Nata</a> - <a href="composer/Annamacharya.html" >Annamacharya</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0003-Navaneetha Chora-Chenchurutti-TA.FlJ3_HZT0fk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0003   - <a href="song/Navaneetha Chora.html" >navanItacOra namOnamO navamahimArNava namOnamO :  Adi</a> - <a href="raga/Chenchurutti.html" >Chenchurutti</a> - <a href="composer/Annamacharya.html" >Annamacharya</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0004-Nede Sukravaramu-Hemavathi-TA.yWgeKVBhi3w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0004   - <a href="song/Nede Sukravaramu.html" >nEDE sukkurAramu nelatalAla pODimi sEvasEyarE :  Adi</a> - <a href="raga/Hemavathi.html" >Hemavathi</a> - <a href="composer/Annamacharya.html" >Annamacharya</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-Nevemi Seyduvayya-Bhairavi-TA.k0NUKckyr38');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="song/Nevemi Seyduvayya.html" >nIvEmi sEtuvayya nIvu dayAnidhi vanduvu :  Adi</a> - <a href="raga/Bhairavi.html" >Bhairavi</a> - <a href="composer/Annamacharya.html" >Annamacharya</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-Sri Hari Vallabhe-UnknownRaga-MV.dwytcLTkLHc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006   - <a href="song/Sri Hari Vallabhe.html" >shrI hari vallabhE mAm pAhi shrita :  Adi</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="composer/Mysore Vasudevachar.html" >Mysore Vasudevachar</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0007-Vande Vasudevam-Sri-TA.JnScDSlbTo4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0007   - <a href="song/Vande Vasudevam.html" >vandE vAsudEvam brndArakAdhIsha vandita padAbjam :  Khanda Caapu</a> - <a href="raga/Sri.html" >Sri</a> - <a href="composer/Annamacharya.html" >Annamacharya</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0008-UnknownSong-Bhimplas-UnknownComposer.4VswQ6ox8PM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0008   - <a href="song/Unknownsong.html" >Unknownsong</a> - <a href="raga/Bhimplas.html" >Bhimplas</a> - <a href="composer/UnknownComposer.html" >UnknownComposer</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["DPASUPATHI01"], "songs": [{"N": "0001", "T": "", "H": "Mama Hridaye", "S": "mama hrdayE vihara dayALO krSNa mandaradhara :  Adi", "R": "Reethigowla", "C": "Mysore Vasudevachar", "A": "D. Pasupathi", "V": "OgZL0lEbYpw"}, {"N": "0002", "T": "", "H": "Namo Namo Raghukula Nayaka", "S": "namO namO raghukula nAyaka divijavantya vandya :  Rupaka", "R": "Nata", "C": "Annamacharya", "A": "D. Pasupathi", "V": "nBzpzvJSnuk"}, {"N": "0003", "T": "", "H": "Navaneetha Chora", "S": "navanItacOra namOnamO navamahimArNava namOnamO :  Adi", "R": "Chenchurutti", "C": "Annamacharya", "A": "D. Pasupathi", "V": "FlJ3_HZT0fk"}, {"N": "0004", "T": "", "H": "Nede Sukravaramu", "S": "nEDE sukkurAramu nelatalAla pODimi sEvasEyarE :  Adi", "R": "Hemavathi", "C": "Annamacharya", "A": "D. Pasupathi", "V": "yWgeKVBhi3w"}, {"N": "0005", "T": "", "H": "Nevemi Seyduvayya", "S": "nIvEmi sEtuvayya nIvu dayAnidhi vanduvu :  Adi", "R": "Bhairavi", "C": "Annamacharya", "A": "D. Pasupathi", "V": "k0NUKckyr38"}, {"N": "0006", "T": "", "H": "Sri Hari Vallabhe", "S": "shrI hari vallabhE mAm pAhi shrita :  Adi", "R": "Unknownraga", "C": "Mysore Vasudevachar", "A": "D. Pasupathi", "V": "dwytcLTkLHc"}, {"N": "0007", "T": "", "H": "Vande Vasudevam", "S": "vandE vAsudEvam brndArakAdhIsha vandita padAbjam :  Khanda Caapu", "R": "Sri", "C": "Annamacharya", "A": "D. Pasupathi", "V": "JnScDSlbTo4"}, {"N": "0008", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Bhimplas", "C": "UnknownComposer", "A": "D. Pasupathi", "V": "4VswQ6ox8PM"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#artist-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

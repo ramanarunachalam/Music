@@ -42,30 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Pattammal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0491-Thookiya Thiruvadi-Sankarabharanam-SUB.k5tazvS_BMY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0491   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/D. K. Pattammal.html" >D  K  Pattammal   DKP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Gayathri Girish</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0186-Thookiya Thiruvadi-Sankarabharanam-SUB.KQK5h2PKhio');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0186   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Gayathri Girish.html" >Gayathri Girish   GGAYATHRI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Madurai Mani Iyer</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0443-Thookiya Thiruvadi-Sankarabharanam-SUB.8lJCKGZCKek');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0443   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Madurai Mani Iyer.html" >Madurai Mani Iyer   MMI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0444-Thookiya Thiruvadi-Sankarabharanam-SUB.Kj8oFh_QAgI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0444   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Madurai Mani Iyer.html" >Madurai Mani Iyer   MMI01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0445-Thookiya Thiruvadi-Sankarabharanam-SUB.rffepIbBdv0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0445   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/Madurai Mani Iyer.html" >Madurai Mani Iyer   MMI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Saketharaman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0152-Thookiya Thiruvadi-Sankarabharanam-SUB.nzQonYT5aUA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0152   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/S. Saketharaman.html" >S  Saketharaman   SAKETHARAMAN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. V. Sankaranarayanan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0238-Thookiya Thiruvadi-Sankarabharanam-SUB.lj5sJkAGv0E');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0238   - <a href="composer/Shuddhananda Bharathi.html" >Shuddhananda Bharathi</a> - <a href="raga/Sankarabharanam.html" >Sankarabharanam</a> - <a href="artist/T. V. Sankaranarayanan.html" >T  V  Sankaranarayanan   TVS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -154,9 +131,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "D. K. Pattammal"], "songs": [{"N": "0491", "T": "", "H": "Thookiya Thiruvadi", "S": "tUkkiya tiruvaDi tuNai ena nambinEn turiya :  Adi", "R": "Sankarabharanam", "C": "Shuddhananda Bharathi", "A": "D. K. Pattammal", "V": "k5tazvS_BMY"}]}, {"name": ["Vocal", "Gayathri Girish"], "songs": [{"N": "0186", "T": "", "H": "Thookiya Thiruvadi", "S": "tUkkiya tiruvaDi tuNai ena nambinEn turiya :  Adi", "R": "Sankarabharanam", "C": "Shuddhananda Bharathi", "A": "Gayathri Girish", "V": "KQK5h2PKhio"}]}, {"name": ["Vocal", "Madurai Mani Iyer"], "songs": [{"N": "0443", "T": "", "H": "Thookiya Thiruvadi", "S": "tUkkiya tiruvaDi tuNai ena nambinEn turiya :  Adi", "R": "Sankarabharanam", "C": "Shuddhananda Bharathi", "A": "Madurai Mani Iyer", "V": "8lJCKGZCKek"}, {"N": "0444", "T": "", "H": "Thookiya Thiruvadi", "S": "tUkkiya tiruvaDi tuNai ena nambinEn turiya :  Adi", "R": "Sankarabharanam", "C": "Shuddhananda Bharathi", "A": "Madurai Mani Iyer", "V": "Kj8oFh_QAgI"}, {"N": "0445", "T": "", "H": "Thookiya Thiruvadi", "S": "tUkkiya tiruvaDi tuNai ena nambinEn turiya :  Adi", "R": "Sankarabharanam", "C": "Shuddhananda Bharathi", "A": "Madurai Mani Iyer", "V": "rffepIbBdv0"}]}, {"name": ["Vocal", "S. Saketharaman"], "songs": [{"N": "0152", "T": "", "H": "Thookiya Thiruvadi", "S": "tUkkiya tiruvaDi tuNai ena nambinEn turiya :  Adi", "R": "Sankarabharanam", "C": "Shuddhananda Bharathi", "A": "S. Saketharaman", "V": "nzQonYT5aUA"}]}, {"name": ["Vocal", "T. V. Sankaranarayanan"], "songs": [{"N": "0238", "T": "", "H": "Thookiya Thiruvadi", "S": "tUkkiya tiruvaDi tuNai ena nambinEn turiya :  Adi", "R": "Sankarabharanam", "C": "Shuddhananda Bharathi", "A": "T. V. Sankaranarayanan", "V": "lj5sJkAGv0E"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

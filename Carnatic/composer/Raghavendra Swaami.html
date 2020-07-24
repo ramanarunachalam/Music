@@ -25,23 +25,99 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; indu enage govinda ninna padaara</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0006-Indu Enage Govinda-UnknownRaga-RGS.a7tYeso3nu0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0006   - <a href="song/Indu Enage Govinda.html" >Indu Enage Govinda ninna padaara :  Adi</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/B. V. Balasai.html" >B  V  Balasai   BVB01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0485-Indu Enage Govinda-Bhairavi-RGS.mWNXFSFWWRM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0485   - <a href="song/Indu Enage Govinda.html" >Indu Enage Govinda ninna padaara :  Adi</a> - <a href="raga/Bhairavi.html" >Bhairavi</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0486-Indu Enage Govinda-Mukhari-RGS.0GVtfg70sRM');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0486   - <a href="song/Indu Enage Govinda.html" >Indu Enage Govinda ninna padaara :  Adi</a> - <a href="raga/Mukhari.html" >Mukhari</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0487-Indu Enage Govinda-Mukhari-RGS.Cb4sEHctoi0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0487   - <a href="song/Indu Enage Govinda.html" >Indu Enage Govinda ninna padaara :  Adi</a> - <a href="raga/Mukhari.html" >Mukhari</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0488-Indu Enage Govinda-Mukhari-RGS.nmw0AEi5hRo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0488   - <a href="song/Indu Enage Govinda.html" >Indu Enage Govinda ninna padaara :  Adi</a> - <a href="raga/Mukhari.html" >Mukhari</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0008-Indu Enage Govinda-UnknownRaga-RGS.zZWsUnepvQ0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0008   - <a href="song/Indu Enage Govinda.html" >Indu Enage Govinda ninna padaara :  Adi</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Nandini Rao Gujar.html" >Nandini Rao Gujar   NANDINIRAO01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0051-Indu Enage Govinda-UnknownRaga-RGS.jtYjUdut3GY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0051   - <a href="song/Indu Enage Govinda.html" >Indu Enage Govinda ninna padaara :  Adi</a> - <a href="raga/Unknownraga.html" >Unknownraga</a> - <a href="artist/Vidyabhushana.html" >Vidyabhushana   VIDYABHOOSHANA01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["indu enage govinda ninna padaara"], "songs": [{"N": "0006", "T": "", "H": "Indu Enage Govinda", "S": "Indu Enage Govinda ninna padaara :  Adi", "R": "Unknownraga", "C": "Raghavendra Swaami", "A": "B. V. Balasai", "V": "a7tYeso3nu0"}, {"N": "0485", "T": "", "H": "Indu Enage Govinda", "S": "Indu Enage Govinda ninna padaara :  Adi", "R": "Bhairavi", "C": "Raghavendra Swaami", "A": "M. S. Subbulakshmi", "V": "mWNXFSFWWRM"}, {"N": "0486", "T": "", "H": "Indu Enage Govinda", "S": "Indu Enage Govinda ninna padaara :  Adi", "R": "Mukhari", "C": "Raghavendra Swaami", "A": "M. S. Subbulakshmi", "V": "0GVtfg70sRM"}, {"N": "0487", "T": "", "H": "Indu Enage Govinda", "S": "Indu Enage Govinda ninna padaara :  Adi", "R": "Mukhari", "C": "Raghavendra Swaami", "A": "M. S. Subbulakshmi", "V": "Cb4sEHctoi0"}, {"N": "0488", "T": "", "H": "Indu Enage Govinda", "S": "Indu Enage Govinda ninna padaara :  Adi", "R": "Mukhari", "C": "Raghavendra Swaami", "A": "M. S. Subbulakshmi", "V": "nmw0AEi5hRo"}, {"N": "0008", "T": "", "H": "Indu Enage Govinda", "S": "Indu Enage Govinda ninna padaara :  Adi", "R": "Unknownraga", "C": "Raghavendra Swaami", "A": "Nandini Rao Gujar", "V": "zZWsUnepvQ0"}, {"N": "0051", "T": "", "H": "Indu Enage Govinda", "S": "Indu Enage Govinda ninna padaara :  Adi", "R": "Unknownraga", "C": "Raghavendra Swaami", "A": "Vidyabhushana", "V": "jtYjUdut3GY"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#composer-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

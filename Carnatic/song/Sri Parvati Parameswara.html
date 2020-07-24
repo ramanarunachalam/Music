@@ -42,31 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. S. Subbulakshmi</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1097-Sri Parvati Parameswara-Bowli-MD.05DafktXnd0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1097   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1098-Sri Parvati Parameswara-Bowli-MD.46t4Hu7dgcA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1098   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1099-Sri Parvati Parameswara-Bowli-MD.PZSp2OJCbUg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1099   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '1100-Sri Parvati Parameswara-Bowli-MD.QTgBQJj1Wwk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>1100   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/M. S. Subbulakshmi.html" >M  S  Subbulakshmi   MSS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Padma Sugavanam</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0059-Sri Parvati Parameswara-Bowli-MD.2GxKmr5P1ws');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0059   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/Padma Sugavanam.html" >Padma Sugavanam   SUGAVANAM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. K. Srikantan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0199-Sri Parvati Parameswara-Bowli-MD.GnsQ3LBzSNc');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0199   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/R. K. Srikantan.html" >R  K  Srikantan   RKS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal R. Vedavalli</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0233-Sri Parvati Parameswara-Bowli-MD.r9H3GeX-d6g');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0233   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/R. Vedavalli.html" >R  Vedavalli   VEDAVALLI01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. M. Krishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0564-Sri Parvati Parameswara-Bowli-MD.HrJbl-yCIA0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0564   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Bowli.html" >Bowli</a> - <a href="artist/T. M. Krishna.html" >T  M  Krishna   TMK01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -164,9 +140,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "1097", "T": "", "H": "Sri Parvati Parameswara", "S": "SrI pArvatI paramESvarau vandE :  Adi", "R": "Bowli", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "05DafktXnd0"}, {"N": "1098", "T": "", "H": "Sri Parvati Parameswara", "S": "SrI pArvatI paramESvarau vandE :  Adi", "R": "Bowli", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "46t4Hu7dgcA"}, {"N": "1099", "T": "", "H": "Sri Parvati Parameswara", "S": "SrI pArvatI paramESvarau vandE :  Adi", "R": "Bowli", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "PZSp2OJCbUg"}, {"N": "1100", "T": "", "H": "Sri Parvati Parameswara", "S": "SrI pArvatI paramESvarau vandE :  Adi", "R": "Bowli", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "QTgBQJj1Wwk"}]}, {"name": ["Vocal", "Padma Sugavanam"], "songs": [{"N": "0059", "T": "", "H": "Sri Parvati Parameswara", "S": "SrI pArvatI paramESvarau vandE :  Adi", "R": "Bowli", "C": "Muthuswami Dikshitar", "A": "Padma Sugavanam", "V": "2GxKmr5P1ws"}]}, {"name": ["Vocal", "R. K. Srikantan"], "songs": [{"N": "0199", "T": "", "H": "Sri Parvati Parameswara", "S": "SrI pArvatI paramESvarau vandE :  Adi", "R": "Bowli", "C": "Muthuswami Dikshitar", "A": "R. K. Srikantan", "V": "GnsQ3LBzSNc"}]}, {"name": ["Vocal", "R. Vedavalli"], "songs": [{"N": "0233", "T": "", "H": "Sri Parvati Parameswara", "S": "SrI pArvatI paramESvarau vandE :  Adi", "R": "Bowli", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "r9H3GeX-d6g"}]}, {"name": ["Vocal", "T. M. Krishna"], "songs": [{"N": "0564", "T": "", "H": "Sri Parvati Parameswara", "S": "SrI pArvatI paramESvarau vandE :  Adi", "R": "Bowli", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "HrJbl-yCIA0"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

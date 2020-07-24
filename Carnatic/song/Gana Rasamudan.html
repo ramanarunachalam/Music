@@ -41,33 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bharat Sundar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0056-Gana Rasamudan-Begada-P.A0RPcT0Yty0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0056   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Begada.html" >Begada</a> - <a href="artist/Bharat Sundar.html" >Bharat Sundar   BSUNDAR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Puducode Krishnamoorthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0008-Gana Rasamudan-Begada-P._lan9A1zjgU');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0008   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Begada.html" >Begada</a> - <a href="artist/Puducode Krishnamoorthy.html" >Puducode Krishnamoorthy   PK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Ramakrishnan Murthy</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0087-Gana Rasamudan-Begada-P.Rv_jFTBdt2c');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0087   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Begada.html" >Begada</a> - <a href="artist/Ramakrishnan Murthy.html" >Ramakrishnan Murthy   RKM01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal S. Sowmya</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0093-Gana Rasamudan-Begada-P.g9xG5ihB1oY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0093   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Begada.html" >Begada</a> - <a href="artist/S. Sowmya.html" >S  Sowmya   SOWMYA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0291-Gana Rasamudan-Begada-P.9GUVCelF_Tk');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0291   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Begada.html" >Begada</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0292-Gana Rasamudan-Begada-P.aYv28Lx1QXQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0292   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Begada.html" >Begada</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal T. V. Sankaranarayanan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0066-Gana Rasamudan-Begada-P.Du5giOWbDzw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0066   - <a href="composer/Papanasam Sivan.html" >Papanasam Sivan</a> - <a href="raga/Begada.html" >Begada</a> - <a href="artist/T. V. Sankaranarayanan.html" >T  V  Sankaranarayanan   TVS01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -156,9 +130,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Bharat Sundar"], "songs": [{"N": "0056", "T": "", "H": "Gana Rasamudan", "S": "gAna rasamuDan nin tiruppugazh tanaiyE :  Adi", "R": "Begada", "C": "Papanasam Sivan", "A": "Bharat Sundar", "V": "A0RPcT0Yty0"}]}, {"name": ["Vocal", "Puducode Krishnamoorthy"], "songs": [{"N": "0008", "T": "", "H": "Gana Rasamudan", "S": "gAna rasamuDan nin tiruppugazh tanaiyE :  Adi", "R": "Begada", "C": "Papanasam Sivan", "A": "Puducode Krishnamoorthy", "V": "_lan9A1zjgU"}]}, {"name": ["Vocal", "Ramakrishnan Murthy"], "songs": [{"N": "0087", "T": "", "H": "Gana Rasamudan", "S": "gAna rasamuDan nin tiruppugazh tanaiyE :  Adi", "R": "Begada", "C": "Papanasam Sivan", "A": "Ramakrishnan Murthy", "V": "Rv_jFTBdt2c"}]}, {"name": ["Vocal", "S. Sowmya"], "songs": [{"N": "0093", "T": "", "H": "Gana Rasamudan", "S": "gAna rasamuDan nin tiruppugazh tanaiyE :  Adi", "R": "Begada", "C": "Papanasam Sivan", "A": "S. Sowmya", "V": "g9xG5ihB1oY"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0291", "T": "", "H": "Gana Rasamudan", "S": "gAna rasamuDan nin tiruppugazh tanaiyE :  Adi", "R": "Begada", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "9GUVCelF_Tk"}, {"N": "0292", "T": "", "H": "Gana Rasamudan", "S": "gAna rasamuDan nin tiruppugazh tanaiyE :  Adi", "R": "Begada", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "aYv28Lx1QXQ"}]}, {"name": ["Vocal", "T. V. Sankaranarayanan"], "songs": [{"N": "0066", "T": "", "H": "Gana Rasamudan", "S": "gAna rasamuDan nin tiruppugazh tanaiyE :  Adi", "R": "Begada", "C": "Papanasam Sivan", "A": "T. V. Sankaranarayanan", "V": "Du5giOWbDzw"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

@@ -41,29 +41,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Veena Iyer Brothers</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0013-Bhavaye Sarasa Nabham-Keeravani-ST.4rRriktJabA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0013   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/Iyer Brothers.html" >Iyer Brothers   IYERBROS01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0014-Bhavaye Sarasa Nabham-Keeravani-ST.8hBHBVPLLbI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0014   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/Iyer Brothers.html" >Iyer Brothers   IYERBROS01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amrutha Venkatesh</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0063-Bhavaye Sarasa Nabham-Keeravani-ST.-8eGx6XKL-4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0063   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/Amrutha Venkatesh.html" >Amrutha Venkatesh   AMRUTHAVEN01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal D. K. Jayaraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0079-Bhavaye Sarasa Nabham-Keeravani-ST.hrRCQdxAEQs');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0079   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/D. K. Jayaraman.html" >D  K  Jayaraman   DKJ01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Parassala B. Ponnammal</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0005-Bhavaye Sarasa Nabham-Keeravani-ST.D56ULXDbiBw');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0005   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/Parassala B. Ponnammal.html" >Parassala B  Ponnammal   PBP01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Prince Rama Varma</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0076-Bhavaye Sarasa Nabham-Keeravani-ST._hd-Zl_XnAg');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0076   - <a href="composer/Swathi Thirunal.html" >Swathi Thirunal</a> - <a href="raga/Keeravani.html" >Keeravani</a> - <a href="artist/Prince Rama Varma.html" >Prince Rama Varma   PRV01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -164,9 +142,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Veena", "Iyer Brothers"], "songs": [{"N": "0013", "T": "", "H": "Bhavaye Sarasa Nabham", "S": "bhAvayE sArasanAbham bhAsura mUrtim :  Adi", "R": "Keeravani", "C": "Swathi Thirunal", "A": "Iyer Brothers", "V": "4rRriktJabA"}, {"N": "0014", "T": "", "H": "Bhavaye Sarasa Nabham", "S": "bhAvayE sArasanAbham bhAsura mUrtim :  Adi", "R": "Keeravani", "C": "Swathi Thirunal", "A": "Iyer Brothers", "V": "8hBHBVPLLbI"}]}, {"name": ["Vocal", "Amrutha Venkatesh"], "songs": [{"N": "0063", "T": "", "H": "Bhavaye Sarasa Nabham", "S": "bhAvayE sArasanAbham bhAsura mUrtim :  Adi", "R": "Keeravani", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "-8eGx6XKL-4"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0079", "T": "", "H": "Bhavaye Sarasa Nabham", "S": "bhAvayE sArasanAbham bhAsura mUrtim :  Adi", "R": "Keeravani", "C": "Swathi Thirunal", "A": "D. K. Jayaraman", "V": "hrRCQdxAEQs"}]}, {"name": ["Vocal", "Parassala B. Ponnammal"], "songs": [{"N": "0005", "T": "", "H": "Bhavaye Sarasa Nabham", "S": "bhAvayE sArasanAbham bhAsura mUrtim :  Adi", "R": "Keeravani", "C": "Swathi Thirunal", "A": "Parassala B. Ponnammal", "V": "D56ULXDbiBw"}]}, {"name": ["Vocal", "Prince Rama Varma"], "songs": [{"N": "0076", "T": "", "H": "Bhavaye Sarasa Nabham", "S": "bhAvayE sArasanAbham bhAsura mUrtim :  Adi", "R": "Keeravani", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "_hd-Zl_XnAg"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

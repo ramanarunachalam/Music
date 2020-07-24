@@ -45,22 +45,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Nadaswaram Sheik Mahaboob Subhani</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0001-Ashtapadi-Nijagadasa-Sindhubhairavi-J.yLr_p6eFTAA');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0001 - <a href="song_type/Ashtapadi.html" >Ashtapadi</a>  - <a href="composer/Jayadeva.html" >Jayadeva</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/Sheik Mahaboob Subhani.html" >Sheik Mahaboob Subhani   MAHABOOB01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal M. Balamuralikrishna</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0018-Ashtapadi-Nijagadasa-Sindhubhairavi-J.91va_F8SuzY');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0018 - <a href="song_type/Ashtapadi.html" >Ashtapadi</a>  - <a href="composer/Jayadeva.html" >Jayadeva</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0019-Ashtapadi-Nijagadasa-Sindhubhairavi-J.J7gtpYVN_l0');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0019 - <a href="song_type/Ashtapadi.html" >Ashtapadi</a>  - <a href="composer/Jayadeva.html" >Jayadeva</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0020-Ashtapadi-Nijagadasa-Sindhubhairavi-J.ziG8441yYuo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0020 - <a href="song_type/Ashtapadi.html" >Ashtapadi</a>  - <a href="composer/Jayadeva.html" >Jayadeva</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/M. Balamuralikrishna.html" >M  Balamuralikrishna   BMK01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sanjay Subrahmanyan</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0043-Ashtapadi-Nijagadasa-Sindhubhairavi-J.JfxBtl8cIqQ');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0043 - <a href="song_type/Ashtapadi.html" >Ashtapadi</a>  - <a href="composer/Jayadeva.html" >Jayadeva</a> - <a href="raga/Sindhubhairavi.html" >Sindhubhairavi</a> - <a href="artist/Sanjay Subrahmanyan.html" >Sanjay Subrahmanyan   SANJAY01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -130,9 +115,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Nadaswaram", "Sheik Mahaboob Subhani"], "songs": [{"N": "0001", "T": "Ashtapadi", "H": "Nijagadasa", "S": "kuru yadhunandhana chandana sisira tharENa :  Adi", "R": "Sindhubhairavi", "C": "Jayadeva", "A": "Sheik Mahaboob Subhani", "V": "yLr_p6eFTAA"}]}, {"name": ["Vocal", "M. Balamuralikrishna"], "songs": [{"N": "0018", "T": "Ashtapadi", "H": "Nijagadasa", "S": "kuru yadhunandhana chandana sisira tharENa :  Adi", "R": "Sindhubhairavi", "C": "Jayadeva", "A": "M. Balamuralikrishna", "V": "91va_F8SuzY"}, {"N": "0019", "T": "Ashtapadi", "H": "Nijagadasa", "S": "kuru yadhunandhana chandana sisira tharENa :  Adi", "R": "Sindhubhairavi", "C": "Jayadeva", "A": "M. Balamuralikrishna", "V": "J7gtpYVN_l0"}, {"N": "0020", "T": "Ashtapadi", "H": "Nijagadasa", "S": "kuru yadhunandhana chandana sisira tharENa :  Adi", "R": "Sindhubhairavi", "C": "Jayadeva", "A": "M. Balamuralikrishna", "V": "ziG8441yYuo"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0043", "T": "Ashtapadi", "H": "Nijagadasa", "S": "kuru yadhunandhana chandana sisira tharENa :  Adi", "R": "Sindhubhairavi", "C": "Jayadeva", "A": "Sanjay Subrahmanyan", "V": "JfxBtl8cIqQ"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

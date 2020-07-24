@@ -42,36 +42,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Aishwarya Vidhya Raghunath</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0048-Saraswathi Chaya-Chayatharangini-MD.w_YlLkGi5gE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0048   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Chayatharangini.html" >Chayatharangini</a> - <a href="artist/Aishwarya Vidhya Raghunath.html" >Aishwarya Vidhya Raghunath   AVR01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Amritha Murali</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0110-Saraswathi Chaya-Chayatharangini-MD.2fp3UBOjh0w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0110   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Chayatharangini.html" >Chayatharangini</a> - <a href="artist/Amritha Murali.html" >Amritha Murali   AMRITHA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Bombay Jayashri</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0324-Saraswathi Chaya-Chayatharangini-MD.6KjPjY6qpAI');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0324   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Chayatharangini.html" >Chayatharangini</a> - <a href="artist/Bombay Jayashri.html" >Bombay Jayashri   BJAYSHREE01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Chembai Vaidyanatha Bhagavathar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0192-Saraswathi Chaya-Chayatharangini-MD.snr6YQnQzj4');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0192   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Chayatharangini.html" >Chayatharangini</a> - <a href="artist/Chembai Vaidyanatha Bhagavathar.html" >Chembai Vaidyanatha Bhagavathar</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Prasanna Venkataraman</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0028-Saraswathi Chaya-Chayatharangini-MD.GsMKnv0EFUo');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0028   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Chayatharangini.html" >Chayatharangini</a> - <a href="artist/Prasanna Venkataraman.html" >Prasanna Venkataraman   PRASANNAV01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal Sumithra Vasudev</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0069-Saraswathi Chaya-Chayatharangini-MD.XMBdAoxbgbE');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0069   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Chayatharangini.html" >Chayatharangini</a> - <a href="artist/Sumithra Vasudev.html" >Sumithra Vasudev   VSUMITHRA01</a></li>
-</ul>
-<li><span><img src="icons/folder.svg" width="24" height="24">&nbsp; Vocal V. R. Dileep Kumar</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0031-Saraswathi Chaya-Chayatharangini-MD.JUqQxoe3Y5w');"><span><img src="icons/play.svg" width="24" height="24">&nbsp;  </a>0031   - <a href="composer/Muthuswami Dikshitar.html" >Muthuswami Dikshitar</a> - <a href="raga/Chayatharangini.html" >Chayatharangini</a> - <a href="artist/V. R. Dileep Kumar.html" >V  R  Dileep Kumar   VRD01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -157,9 +128,96 @@
 </div>
 </div>
 <hr />
-
-  <script src="js/jquery.min.js"></script>
-  <script src="js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}{{> song}}{{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
+    </li>
+</script>
+<script type="text/html" id="composer-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="raga-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script type="text/html" id="song-type-li-template">
+    <li>
+        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+            <span>
+                <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+            </span>
+        </a> {{N}}   - 
+        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
+    </li>
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Aishwarya Vidhya Raghunath"], "songs": [{"N": "0048", "T": "", "H": "Saraswathi Chaya", "S": "sarasvatIchAyA taraHNgiNi sakala kalA svarUpiNi :  Adi", "R": "Chayatharangini", "C": "Muthuswami Dikshitar", "A": "Aishwarya Vidhya Raghunath", "V": "w_YlLkGi5gE"}]}, {"name": ["Vocal", "Amritha Murali"], "songs": [{"N": "0110", "T": "", "H": "Saraswathi Chaya", "S": "sarasvatIchAyA taraHNgiNi sakala kalA svarUpiNi :  Adi", "R": "Chayatharangini", "C": "Muthuswami Dikshitar", "A": "Amritha Murali", "V": "2fp3UBOjh0w"}]}, {"name": ["Vocal", "Bombay Jayashri"], "songs": [{"N": "0324", "T": "", "H": "Saraswathi Chaya", "S": "sarasvatIchAyA taraHNgiNi sakala kalA svarUpiNi :  Adi", "R": "Chayatharangini", "C": "Muthuswami Dikshitar", "A": "Bombay Jayashri", "V": "6KjPjY6qpAI"}]}, {"name": ["Vocal", "Chembai Vaidyanatha Bhagavathar"], "songs": [{"N": "0192", "T": "", "H": "Saraswathi Chaya", "S": "sarasvatIchAyA taraHNgiNi sakala kalA svarUpiNi :  Adi", "R": "Chayatharangini", "C": "Muthuswami Dikshitar", "A": "Chembai Vaidyanatha Bhagavathar", "V": "snr6YQnQzj4"}]}, {"name": ["Vocal", "Prasanna Venkataraman"], "songs": [{"N": "0028", "T": "", "H": "Saraswathi Chaya", "S": "sarasvatIchAyA taraHNgiNi sakala kalA svarUpiNi :  Adi", "R": "Chayatharangini", "C": "Muthuswami Dikshitar", "A": "Prasanna Venkataraman", "V": "GsMKnv0EFUo"}]}, {"name": ["Vocal", "Sumithra Vasudev"], "songs": [{"N": "0069", "T": "", "H": "Saraswathi Chaya", "S": "sarasvatIchAyA taraHNgiNi sakala kalA svarUpiNi :  Adi", "R": "Chayatharangini", "C": "Muthuswami Dikshitar", "A": "Sumithra Vasudev", "V": "XMBdAoxbgbE"}]}, {"name": ["Vocal", "V. R. Dileep Kumar"], "songs": [{"N": "0031", "T": "", "H": "Saraswathi Chaya", "S": "sarasvatIchAyA taraHNgiNi sakala kalA svarUpiNi :  Adi", "R": "Chayatharangini", "C": "Muthuswami Dikshitar", "A": "V. R. Dileep Kumar", "V": "JUqQxoe3Y5w"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

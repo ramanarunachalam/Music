@@ -40,12 +40,7 @@
 <div class="card">
 <div class="card-header "><h4 class="SONG_HEADER"><span><img src="../icons/headphones.svg" width="24" height="24">&nbsp; Audios:</h4></div>
 <div class="card-body">
-<ol start="1">
-<li><span><img src="../icons/folder.svg" width="24" height="24">&nbsp; Vocal Trichur V. Ramachandran</li>
-<ul class="UL_LIST">
-<li> <a href="javascript:void(0);" onclick="handle_playlist_command('play', '0032-Kamalasini Sundari-Kalyani-GNB.5PZjfaiiPCY');"><span><img src="../icons/play.svg" width="24" height="24">&nbsp;  </a>0032   - <a href="/Carnatic/HTML/composer/G. N. Balasubramaniam.html" >G  N  Balasubramaniam</a> - <a href="/Carnatic/HTML/raga/Kalyani.html" >Kalyani</a> - <a href="/Carnatic/HTML/artist/Trichur V. Ramachandran.html" >Trichur V  Ramachandran   TVR01</a></li>
-</ul>
-</ol>
+<div id="DATA"></div>
 </div>
 </div>
 <hr />
@@ -134,9 +129,70 @@
 </div>
 </div>
 <hr />
-
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/carnatic_playlist.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/mustache.min.js"></script>
+<script src="../js/carnatic_playlist.js"></script>
+<script type="text/html" id="ul-template">
+    {{#folder}}
+        <ol start="1">
+            <li>
+                <span>
+                    <img src="../icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                </span>
+            </li>
+            <ul class="UL_LIST">
+                {{#songs}}
+                <li>
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                        <span>
+                         <img src="../icons/play.svg" width="24" height="24">&nbsp;  
+                        </span>
+                    </a> {{N}}   - 
+                    {{> song}}
+                </li>
+                {{/songs}}
+            </ul>
+        </ol>
+    {{/folder}}
+</script>
+<script type="text/html" id="artist-li-template">
+        {{#T}}<a href="/Carnatic/HTML/song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="/Carnatic/HTML/song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="/Carnatic/HTML/raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="/Carnatic/HTML/composer/{{C}}.html" >{{C}}</a>{{/C}}
+</script>
+<script type="text/html" id="composer-li-template">
+        {{#T}}<a href="/Carnatic/HTML/song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="/Carnatic/HTML/song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="/Carnatic/HTML/raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="/Carnatic/HTML/artist/{{A}}.html" >{{A}}</a>{{/A}}
+</script>
+<script type="text/html" id="raga-li-template">
+        {{#T}}<a href="/Carnatic/HTML/song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#S}}<a href="/Carnatic/HTML/song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#C}}<a href="/Carnatic/HTML/composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="/Carnatic/HTML/artist/{{A}}.html" >{{A}}</a>{{/A}}
+</script>
+<script type="text/html" id="song-li-template">
+        {{#T}}<a href="/Carnatic/HTML/song_type/{{T}}.html" >{{T}}</a> - {{/T}}
+        {{#C}}<a href="/Carnatic/HTML/composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#R}}<a href="/Carnatic/HTML/raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#A}}<a href="/Carnatic/HTML/artist/{{A}}.html" >{{A}}</a>{{/A}}
+</script>
+<script type="text/html" id="song-type-li-template">
+        {{#S}}<a href="/Carnatic/HTML/song/{{H}}.html" >{{S}}</a> - {{/S}}
+        {{#R}}<a href="/Carnatic/HTML/raga/{{R}}.html" >{{R}}</a> - {{/R}}
+        {{#C}}<a href="/Carnatic/HTML/composer/{{C}}.html" >{{C}}</a> - {{/C}}
+        {{#A}}<a href="/Carnatic/HTML/artist/{{A}}.html" >{{A}}</a>{{/A}}
+</script>
+<script>
+    var data = {"folder": [{"name": ["Vocal", "Trichur V. Ramachandran"], "songs": [{"N": "0032", "T": "", "H": "Kamalasini Sundari", "S": "kamalAsini sundari kAmAri manOhari :  Rupaka", "R": "Kalyani", "C": "G. N. Balasubramaniam", "A": "Trichur V. Ramachandran", "V": "5PZjfaiiPCY"}]}]};
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#song-li-template').html();
+    var partials = {"song": li_template};
+    var template_html = Mustache.to_html(ul_template, data, partials);
+    $('#DATA').html(template_html);
+</script>
 
 </body>
 </html>

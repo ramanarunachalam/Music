@@ -40,75 +40,49 @@
                 </span>
             </li>
             <ul class="UL_LIST">
-                {{#songs}}{{> song}}{{/songs}}
+                {{#songs}}
+                <li>
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                        <span>
+                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                        </span>
+                    </a> {{N}}   - 
+                    {{> song}}
+                </li>
+                {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
 <script type="text/html" id="artist-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-    </li>
 </script>
 <script type="text/html" id="composer-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script type="text/html" id="raga-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script type="text/html" id="song-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script type="text/html" id="song-type-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script>
     var data = {"folder": [{"name": ["ela radayane kamini vega todi teve"], "songs": [{"N": "0024", "T": "", "H": "Ela Radayane", "S": "Ela rADAyanE kAmini vEga tODi tEvE :  Adi", "R": "Bhairavi", "C": "Chinniah Pillai", "A": "Rama Ravi", "V": "GIGeJ0syP5U"}]}, {"name": ["kopam etula ragayundura komalanga ninapa"], "songs": [{"N": "0037", "T": "Javali", "H": "Kopametula", "S": "kOpam eTula rAgayuNDurA kOmaLAnga nInapa :  Rupaka", "R": "Kedaragowla", "C": "Chinniah Pillai", "A": "D. K. Pattammal", "V": "ILBOjEYz0hY"}, {"N": "0025", "T": "Javali", "H": "Kopametula", "S": "kOpam eTula rAgayuNDurA kOmaLAnga nInapa :  Rupaka", "R": "Kedaragowla", "C": "Chinniah Pillai", "A": "Malladi Brothers", "V": "1NAc0_BMLBo"}]}, {"name": ["meragadu lecirara e' ra na sami"], "songs": [{"N": "0056", "T": "Javali", "H": "Meragaadu", "S": "mEragAdu lEcirArA E  rA nA sAmi", "R": "Atana", "C": "Chinniah Pillai", "A": "Chitravina Ravi Kiran", "V": "FreRBfDJU-M"}, {"N": "0012", "T": "Javali", "H": "Meragaadu", "S": "mEragAdu lEcirArA E  rA nA sAmi", "R": "Atana", "C": "Chinniah Pillai", "A": "Rama Ravi", "V": "_pSvRqxL0vs"}]}]};

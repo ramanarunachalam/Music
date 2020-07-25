@@ -146,75 +146,49 @@
                 </span>
             </li>
             <ul class="UL_LIST">
-                {{#songs}}{{> song}}{{/songs}}
+                {{#songs}}
+                <li>
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                        <span>
+                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                        </span>
+                    </a> {{N}}   - 
+                    {{> song}}
+                </li>
+                {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
 <script type="text/html" id="artist-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-    </li>
 </script>
 <script type="text/html" id="composer-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script type="text/html" id="raga-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script type="text/html" id="song-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script type="text/html" id="song-type-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script>
     var data = {"folder": [{"name": ["Guitar", "Guitar R. Prasanna"], "songs": [{"N": "0020", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Guitar R. Prasanna", "V": "io0W2pPn98o"}]}, {"name": ["Keyboard", "Keyboard Sathya"], "songs": [{"N": "0093", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Keyboard Sathya", "V": "6jYh2xXAnQ0"}]}, {"name": ["Mandolin", "U. Srinivas"], "songs": [{"N": "0599", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Poornashadjam", "C": "Muthuswami Dikshitar", "A": "U. Srinivas", "V": "SAQLjzR-424"}, {"N": "0605", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "U. Srinivas", "V": "modJ4X0Q4GY"}, {"N": "0600", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Poornashadjam", "C": "Muthuswami Dikshitar", "A": "U. Srinivas", "V": "XefwIoaykJU"}, {"N": "0601", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Poornashadjam", "C": "Muthuswami Dikshitar", "A": "U. Srinivas", "V": "vlYnr76GDBE"}, {"N": "0602", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Poornashadjam", "C": "Muthuswami Dikshitar", "A": "U. Srinivas", "V": "wasE10DIZDc"}, {"N": "0603", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "U. Srinivas", "V": "5UVVO-8XJnE"}, {"N": "0604", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "U. Srinivas", "V": "fpaqn7G0GFk"}]}, {"name": ["Nadaswaram", "Seshampatti T. Sivalingam"], "songs": [{"N": "0011", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "Seshampatti T. Sivalingam", "V": "6lvWTNg-QA8"}, {"N": "0012", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "Seshampatti T. Sivalingam", "V": "Q7WTJipYvC4"}]}, {"name": ["Saxaphone", "Kadri Gopalnath"], "songs": [{"N": "0121", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Poornashadjam", "C": "Muthuswami Dikshitar", "A": "Kadri Gopalnath", "V": "PzBhCNyBzv4"}]}, {"name": ["Veena", "P. Ganesh"], "songs": [{"N": "0014", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "P. Ganesh", "V": "hZnEuETilas"}]}, {"name": ["Violin", "A. Kanyakumari"], "songs": [{"N": "0173", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "A. Kanyakumari", "V": "Rttg6U2RjY8"}]}, {"name": ["Violin", "M. S. Anantharaman"], "songs": [{"N": "0040", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "M. S. Anantharaman", "V": "UAbMejs2yns"}]}, {"name": ["Violin", "M. S. Gopalakrishnan"], "songs": [{"N": "0491", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Poornashadjam", "C": "Muthuswami Dikshitar", "A": "M. S. Gopalakrishnan", "V": "Oe8FL5HvHNU"}]}, {"name": ["Vocal", "D. K. Jayaraman"], "songs": [{"N": "0622", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "8buWnZ5zB-E"}]}, {"name": ["Vocal", "M. L. Vasanthakumari"], "songs": [{"N": "1068", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Poornashadjam,Rudrapriya", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "aIGGfQ8P6pc"}, {"N": "1069", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "4AmBQ7cF8eM"}, {"N": "1070", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "Bmzyc34zpQ4"}, {"N": "1071", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "FCs357HgphE"}, {"N": "1072", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "4HfWaiuFMFs"}]}, {"name": ["Vocal", "M. S. Balasubramanya Sharma"], "songs": [{"N": "0023", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "M. S. Balasubramanya Sharma", "V": "16uUYjmAafU"}]}, {"name": ["Vocal", "M. S. Subbulakshmi"], "songs": [{"N": "1366", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "1Z7RwzyaXNs"}, {"N": "1367", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "8ekdX1PlyVA"}, {"N": "1368", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "KgBts38ocEo"}, {"N": "1369", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "bo8kYzbaoHQ"}]}, {"name": ["Vocal", "R. S. Mani"], "songs": [{"N": "0005", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "R. S. Mani", "V": "na4Rkjuiugk"}]}, {"name": ["Vocal", "R. Vedavalli"], "songs": [{"N": "0323", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "AcQGSgwL3A4"}]}, {"name": ["Vocal", "S. Rajam"], "songs": [{"N": "0134", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "S. Rajam", "V": "B6DJYLox86I"}, {"N": "0135", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "S. Rajam", "V": "PCRjtmOeVNw"}]}, {"name": ["Vocal", "Sikkil Gurucharan"], "songs": [{"N": "0234", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Rudrapriya", "C": "Muthuswami Dikshitar", "A": "Sikkil Gurucharan", "V": "IIIrd5VLi-Y"}]}, {"name": ["Vocal", "Sirkazhi Govindarajan"], "songs": [{"N": "0048", "T": "Shodasa ganapati", "H": "Gananayakam", "S": "gaNa nAyakaM bhajE a haM bhajE :  Adi", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Sirkazhi Govindarajan", "V": "cNG2kNJ1imY"}]}]};

@@ -158,75 +158,49 @@
                 </span>
             </li>
             <ul class="UL_LIST">
-                {{#songs}}{{> song}}{{/songs}}
+                {{#songs}}
+                <li>
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                        <span>
+                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                        </span>
+                    </a> {{N}}   - 
+                    {{> song}}
+                </li>
+                {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
 <script type="text/html" id="artist-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-    </li>
 </script>
 <script type="text/html" id="composer-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script type="text/html" id="raga-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script type="text/html" id="song-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script type="text/html" id="song-type-li-template">
-    <li>
-        <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
-            <span>
-                <img src="icons/play.svg" width="24" height="24">&nbsp;  
-            </span>
-        </a> {{N}}   - 
         {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
         {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
         {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
         {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-    </li>
 </script>
 <script>
     var data = {"folder": [{"name": ["Nadaswaram", "T. N. Rajarathnam Pillai"], "songs": [{"N": "0012", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "T. N. Rajarathnam Pillai", "V": "qrJd7f33bVM"}]}, {"name": ["Veena", "Doraiswamy Iyengar"], "songs": [{"N": "0012", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Doraiswamy Iyengar", "V": "uGxGIzxu5z4"}]}, {"name": ["Violin", "Kumbakonam Rajamanickam Pillai"], "songs": [{"N": "0002", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Kumbakonam Rajamanickam Pillai", "V": "xqhUy02gMG8"}]}, {"name": ["Vocal", "Chembai Vaidyanatha Bhagavathar"], "songs": [{"N": "0040", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Chembai Vaidyanatha Bhagavathar", "V": "2cJvgXmrI60"}]}, {"name": ["Vocal", "Gayathri Venkataraghavan"], "songs": [{"N": "0041", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Gayathri Venkataraghavan", "V": "-NSRtwk39x0"}]}, {"name": ["Vocal", "M. Dandapani Desikar"], "songs": [{"N": "0021", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "M. Dandapani Desikar", "V": "ua60bHtM_3E"}]}, {"name": ["Vocal", "Nedunuri Krishnamurthy"], "songs": [{"N": "0086", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "JI6brn8nd4I"}, {"N": "0087", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "LgBNklsq-0M"}, {"N": "0088", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "jsCiOiKMgBA"}, {"N": "0089", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "sWmqErzs5TA"}, {"N": "0090", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "vbTZ0MwYA5o"}]}, {"name": ["Vocal", "Priya Sisters"], "songs": [{"N": "0053", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Priya Sisters", "V": "pZjpzIoncr4"}, {"N": "0054", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Priya Sisters", "V": "uzgR0GeeHE0"}]}, {"name": ["Vocal", "S. Kalyanaraman"], "songs": [{"N": "0036", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "S. Kalyanaraman", "V": "acusR7ziVKw"}]}, {"name": ["Vocal", "S. Sowmya"], "songs": [{"N": "0067", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "S. Sowmya", "V": "03QzZXgm9c8"}, {"N": "0068", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "S. Sowmya", "V": "ap6S3d4oc1Y"}]}, {"name": ["Vocal", "Sanjay Subrahmanyan"], "songs": [{"N": "0189", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "MgeYqiPCNbc"}]}, {"name": ["Vocal", "Sudha Ragunathan"], "songs": [{"N": "0153", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "GNwxm6K1C7w"}, {"N": "0154", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "pprB401wq1s"}, {"N": "0155", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "tKQSabnvUr4"}]}, {"name": ["Vocal", "T. K. Govindarao"], "songs": [{"N": "0012", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "T. K. Govindarao", "V": "QeTHuLpzPR4"}]}, {"name": ["Vocal", "T. V. Sankaranarayanan"], "songs": [{"N": "0053", "T": "", "H": "Chesinadella", "S": "cEsinad e lla maracitivO O rAma rAma :  Adi", "R": "Thodi", "C": "Thyagaraja", "A": "T. V. Sankaranarayanan", "V": "E-NFrCLIOEc"}]}]};

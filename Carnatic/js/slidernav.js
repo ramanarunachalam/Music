@@ -38,11 +38,22 @@ $.fn.sliderNav = function(options) {
 	}
 };
 
-function setIframeHeight(iframe) {
+function setIframeHeight(iframe)
+{
     if (iframe) {
         var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
         if (iframeWin.document.body) {
             iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
         }
     }
+};
+
+function slider_init(nav_data, li_name, li_type)
+{
+    render_template(nav_data, li_name, li_type);
+
+    $(window).on('load', function() {
+        $('#slider').sliderNav();
+        setIframeHeight(document.getElementById('NAV_LIST'));
+    });
 };

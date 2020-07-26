@@ -5,6 +5,7 @@ function set_iframe_load_params(obj)
     height -= obj.offsetTop;
     height -= 20;
     obj.style.height = height + 'px';
+    $('#LOADING').show()
 }
 
 function onYouTubeIframeAPIReady()
@@ -214,5 +215,15 @@ function carnatic_init()
     tag.src = 'https://www.youtube.com/iframe_api';
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+function render_template(data, li_name, li_type)
+{
+    var ul_template = $('#ul-template').html();
+    var li_template = $('#' + li_type + '-li-template').html();
+    var partial_template = {};
+    partial_template[li_name] = li_template;
+    var template_html = Mustache.to_html(ul_template, data, partial_template);
+    $('#DATA').html(template_html);
 }
 

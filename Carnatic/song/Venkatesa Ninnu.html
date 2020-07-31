@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>27</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>19</td></tr>
-<tr><td><em>Concert</em></td><td>19</td></tr>
+<tr><td><em>Concert</em></td><td>21</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -151,57 +151,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Alathur Brothers", "songs": [{"N": "0126", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "Alathur Brothers", "V": "GrEkZNIiFYU"}, {"N": "0127", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "Alathur Brothers", "V": "j4s5J9XqAr0"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0229", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "f_TRGEeELCo"}, {"N": "0230", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "husb8wIMwy4"}]}, {"name": "Vocal - G. N. Balasubramaniam", "songs": [{"N": "0580", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "G. N. Balasubramaniam", "V": "8avH0lBeP8c"}, {"N": "0581", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "G. N. Balasubramaniam", "V": "WtqYBF4Wwg8"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0580", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "K. V. Narayanaswamy", "V": "1nMjXq5y4TI"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1524", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "OfsZ6ctD7mg"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0939", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "X281XX6AAds"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0363", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "Nithyasree Mahadevan", "V": "igMTXlzi7Lw"}, {"N": "0364", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "Nithyasree Mahadevan", "V": "yUaqHehNgf8"}]}, {"name": "Vocal - Pantula Rama", "songs": [{"N": "0130", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "Pantula Rama", "V": "vMMKCup-81E"}]}, {"name": "Vocal - S. Saketharaman", "songs": [{"N": "0160", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "S. Saketharaman", "V": "FlFaxmIEA-I"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0189", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "Sankaran Namboothiri", "V": "dM1C0OVdDMU"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0660", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "T. M. Krishna", "V": "uylQkFTQXB4"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0580", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "T. N. Seshagopalan", "V": "JXKn9kpb_qY"}, {"N": "0579", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "T. N. Seshagopalan", "V": "HrCOODx2Rpo"}, {"N": "0581", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "T. N. Seshagopalan", "V": "MXTJGZIvMlg"}, {"N": "0582", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "T. N. Seshagopalan", "V": "RabAirSRya4"}, {"N": "0583", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "T. N. Seshagopalan", "V": "hY3UidSCB5Y"}]}, {"name": "Violin - K. J. Dileep", "songs": [{"N": "0038", "T": "", "H": "Venkatesa Ninnu", "S": "vEnkaTESa ninu sEvimpanu padi  :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "K. J. Dileep", "V": "cHUaLEv2V20"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Alathur Brothers", "songs": [{"C": "Thyagaraja", "D": "7:55", "R": "Madhyamavathi", "T": "", "U": "1,000 views", "V": "j4s5J9XqAr0"}, {"C": "Thyagaraja", "D": "6:06", "R": "Madhyamavathi", "T": "", "U": "1,589 views", "V": "GrEkZNIiFYU"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Thyagaraja", "D": "38:38", "R": "Madhyamavathi", "T": "", "U": "2,489 views", "V": "husb8wIMwy4"}, {"C": "Thyagaraja", "D": "5:26", "R": "Madhyamavathi", "T": "", "U": "0 views", "V": "f_TRGEeELCo"}]}, {"A": "G. N. Balasubramaniam", "songs": [{"C": "Thyagaraja", "D": "28:03", "R": "Madhyamavathi", "T": "", "U": "3,100 views", "V": "WtqYBF4Wwg8"}, {"C": "Thyagaraja", "D": "28:03", "R": "Madhyamavathi", "T": "", "U": "523 views", "V": "8avH0lBeP8c"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Thyagaraja", "D": "13:35", "R": "Madhyamavathi", "T": "", "U": "89 views", "V": "1nMjXq5y4TI"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Thyagaraja", "D": "6:00", "R": "Madhyamavathi", "T": "", "U": "0 views", "V": "OfsZ6ctD7mg"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Thyagaraja", "D": "19:39", "R": "Madhyamavathi", "T": "", "U": "1,556 views", "V": "X281XX6AAds"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Thyagaraja", "D": "1:13:52", "R": "Madhyamavathi", "T": "", "U": "563 views", "V": "yUaqHehNgf8"}, {"C": "Thyagaraja", "D": "3:01", "R": "Madhyamavathi", "T": "", "U": "1,440 views", "V": "igMTXlzi7Lw"}]}, {"A": "Pantula Rama", "songs": [{"C": "Thyagaraja", "D": "39:56", "R": "Madhyamavathi", "T": "", "U": "9,700 views", "V": "vMMKCup-81E"}]}, {"A": "S. Saketharaman", "songs": [{"C": "Thyagaraja", "D": "58:12", "R": "Madhyamavathi", "T": "", "U": "426 views", "V": "FlFaxmIEA-I"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Thyagaraja", "D": "23:54", "R": "Madhyamavathi", "T": "", "U": "1,131 views", "V": "dM1C0OVdDMU"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Thyagaraja", "D": "24:00", "R": "Madhyamavathi", "T": "", "U": "52,260 views", "V": "uylQkFTQXB4"}]}, {"A": "T. N. S. Krishna", "songs": [{"C": "Thyagaraja", "D": "43:16", "R": "Madhyamavathi", "T": "", "U": "825 views", "V": "JXKn9kpb_qY"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Thyagaraja", "D": "22:35", "R": "Madhyamavathi", "T": "", "U": "167 views", "V": "MXTJGZIvMlg"}, {"C": "Thyagaraja", "D": "21:58", "R": "Madhyamavathi", "T": "", "U": "3,756 views", "V": "hY3UidSCB5Y"}, {"C": "Thyagaraja", "D": "22:01", "R": "Madhyamavathi", "T": "", "U": "555 views", "V": "RabAirSRya4"}, {"C": "Thyagaraja", "D": "37:51", "R": "Madhyamavathi", "T": "", "U": "271 views", "V": "HrCOODx2Rpo"}]}, {"A": "K. J. Dileep", "songs": [{"C": "Thyagaraja", "D": "36:25", "R": "Madhyamavathi", "T": "", "U": "374 views", "V": "cHUaLEv2V20"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

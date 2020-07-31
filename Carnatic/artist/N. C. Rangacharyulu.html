@@ -17,7 +17,7 @@
 <tr><td><em>Song</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>5</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "NCR01", "songs": [{"N": "0001", "T": "", "H": "Bantureethi", "S": "baNTu rIti koluv i yy av ayya rAma :  Adi", "R": "Hamsanadam", "C": "Thyagaraja", "A": "N. C. Rangacharyulu", "V": "r0C8YF2C7a8"}, {"N": "0002", "T": "", "H": "Brochevarevare", "S": "brOcEvAr e varE raghu patI  :  Adi", "R": "Sriranjani", "C": "Thyagaraja", "A": "N. C. Rangacharyulu", "V": "kP0lg63e-rM"}, {"N": "0003", "T": "", "H": "Sobhillu Sapta Swara", "S": "SObhillu sapta svara : Rupaka", "R": "Jaganmohini", "C": "Thyagaraja", "A": "N. C. Rangacharyulu", "V": "HVSmG5nzoMs"}, {"N": "0004", "T": "", "H": "Sri Narada", "S": "SrI nArada nAda sarasI ruha bhRnga Subh A nga :  Rupaka", "R": "Kaanada", "C": "Thyagaraja", "A": "N. C. Rangacharyulu", "V": "mE78I3me8EA"}, {"N": "0005", "T": "Shodasa ganapati", "H": "Sidhi Vinayakam", "S": "siddhi vinAyakaM aniSaM cintayAmyahaM :  Rupaka", "R": "Shanmukapriya", "C": "Muthuswami Dikshitar", "A": "N. C. Rangacharyulu", "V": "e3K17y2cMR4"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Bantureethi", "S": "baNTu rIti koluv i yy av ayya rAma :  Adi", "songs": [{"C": "Thyagaraja", "D": "13:15", "R": "Hamsanadam", "T": "", "U": "7 views", "V": "r0C8YF2C7a8"}]}, {"H": "Brochevarevare", "S": "brOcEvAr e varE raghu patI  :  Adi", "songs": [{"C": "Thyagaraja", "D": "8:13", "R": "Sriranjani", "T": "", "U": "13 views", "V": "kP0lg63e-rM"}]}, {"H": "Sidhi Vinayakam", "S": "siddhi vinAyakaM aniSaM cintayAmyahaM :  Rupaka", "songs": [{"C": "Muthuswami Dikshitar", "D": "17:03", "R": "Shanmukapriya", "T": "Shodasa ganapati", "U": "15 views", "V": "e3K17y2cMR4"}]}, {"H": "Sobhillu Sapta Swara", "S": "SObhillu sapta svara : Rupaka", "songs": [{"C": "Thyagaraja", "D": "9:08", "R": "Jaganmohini", "T": "", "U": "8 views", "V": "HVSmG5nzoMs"}]}, {"H": "Sri Narada", "S": "SrI nArada nAda sarasI ruha bhRnga Subh A nga :  Rupaka", "songs": [{"C": "Thyagaraja", "D": "6:45", "R": "Kaanada", "T": "", "U": "10 views", "V": "mE78I3me8EA"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

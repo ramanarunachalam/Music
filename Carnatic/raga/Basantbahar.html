@@ -19,10 +19,10 @@
 </tbody>
 </table></div></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>9</td></tr>
-<tr><td><em>Song</em></td><td>3</td></tr>
+<tr><td><em>Audio</em></td><td>8</td></tr>
+<tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>3</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Concert", "songs": [{"N": "0004", "T": "", "H": "Concert", "S": "Concert", "R": "Basantbahar", "C": "UnknownComposer", "A": "Lalgudi Jayaraman", "V": "uDuLDbNMaU4"}]}, {"name": "Unknownsong", "songs": [{"N": "0699", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Basantbahar", "C": "UnknownComposer", "A": "Maharajapuram Santhanam", "V": "LsauRaHMOxo"}, {"N": "0139", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Basantbahar", "C": "UnknownComposer", "A": "Mambalam Sisters", "V": "2K0sl-aTmmM"}]}, {"name": "tom dhru dhru tAni tadara tAni", "songs": [{"N": "0308", "T": "Thillana", "H": "thillana_santhanam_basantbahar", "S": "tom dhru dhru tAni tadara tAni :  Adi", "R": "Basantbahar", "C": "Maharajapuram Santhanam", "A": "Amrutha Venkatesh", "V": "uEx9v1Oo9ME"}, {"N": "0642", "T": "Thillana", "H": "thillana_santhanam_basantbahar", "S": "tom dhru dhru tAni tadara tAni :  Adi", "R": "Basantbahar", "C": "Maharajapuram Santhanam", "A": "Maharajapuram Santhanam", "V": "K6m6lA1_8Uw"}, {"N": "0643", "T": "Thillana", "H": "thillana_santhanam_basantbahar", "S": "tom dhru dhru tAni tadara tAni :  Adi", "R": "Basantbahar", "C": "Maharajapuram Santhanam", "A": "Maharajapuram Santhanam", "V": "jSIMXi15kIM"}, {"N": "0644", "T": "Thillana", "H": "thillana_santhanam_basantbahar", "S": "tom dhru dhru tAni tadara tAni :  Adi", "R": "Basantbahar", "C": "Maharajapuram Santhanam", "A": "Maharajapuram Santhanam", "V": "u15H9RiJApg"}, {"N": "0645", "T": "Thillana", "H": "thillana_santhanam_basantbahar", "S": "tom dhru dhru tAni tadara tAni :  Adi", "R": "Basantbahar", "C": "Maharajapuram Santhanam", "A": "Maharajapuram Santhanam", "V": "xS7KUDp2NpM"}, {"N": "0105", "T": "Thillana", "H": "thillana_santhanam_basantbahar", "S": "tom dhru dhru tAni tadara tAni :  Adi", "R": "Basantbahar", "C": "Maharajapuram Santhanam", "A": "Jayanthi Kumaresh", "V": "Ox4VkT3F2a4"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Maharajapuram Santhanam", "C": "UnknownComposer", "D": "59:47", "T": "", "U": "16,000 views", "V": "LsauRaHMOxo"}, {"A": "Mambalam Sisters", "C": "UnknownComposer", "D": "10:25", "T": "", "U": "529 views", "V": "2K0sl-aTmmM"}]}, {"H": "thillana_santhanam_basantbahar", "S": "tom dhru dhru tAni tadara tAni :  Adi", "songs": [{"A": "Amrutha Venkatesh", "C": "Maharajapuram Santhanam", "D": "6:26", "T": "Thillana", "U": "0 views", "V": "uEx9v1Oo9ME"}, {"A": "Maharajapuram Santhanam", "C": "Maharajapuram Santhanam", "D": "6:30", "T": "Thillana", "U": "406 views", "V": "jSIMXi15kIM"}, {"A": "Maharajapuram Santhanam", "C": "Maharajapuram Santhanam", "D": "5:51", "T": "Thillana", "U": "36,668 views", "V": "u15H9RiJApg"}, {"A": "Maharajapuram Santhanam", "C": "Maharajapuram Santhanam", "D": "6:55", "T": "Thillana", "U": "6,928 views", "V": "xS7KUDp2NpM"}, {"A": "Maharajapuram Santhanam", "C": "Maharajapuram Santhanam", "D": "3:50", "T": "Thillana", "U": "184 views", "V": "K6m6lA1_8Uw"}, {"A": "Jayanthi Kumaresh", "C": "Maharajapuram Santhanam", "D": "7:49", "T": "Thillana", "U": "0 views", "V": "Ox4VkT3F2a4"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -15,9 +15,9 @@
 <tbody>
 <tr><td><em>Audio</em></td><td>67</td></tr>
 <tr><td><em>Song</em></td><td>29</td></tr>
-<tr><td><em>Raga</em></td><td>25</td></tr>
+<tr><td><em>Raga</em></td><td>24</td></tr>
 <tr><td><em>Composer</em></td><td>15</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>66</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "TMURALI01", "songs": [{"N": "0008", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "Trichy K. Murali", "V": "8epXcBJQOUA"}, {"N": "0018", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "Trichy K. Murali", "V": "YPoA3I4t5NY"}, {"N": "0055", "T": "", "H": "Thani", "S": "Thani", "R": "Unknownraga", "C": "UnknownComposer", "A": "Trichy K. Murali", "V": "0YU5qGP5yJ8"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Concert", "S": "Concert", "songs": [{"C": "UnknownComposer", "D": "1:03:59", "R": "Unknownraga", "T": "", "U": "504 views", "V": "YPoA3I4t5NY"}, {"C": "UnknownComposer", "D": "1:57:03", "R": "Unknownraga", "T": "", "U": "1,917 views", "V": "8epXcBJQOUA"}]}, {"H": "Thani", "S": "Thani", "songs": [{"C": "UnknownComposer", "D": "11:37", "R": "Unknownraga", "T": "", "U": "1,712 views", "V": "0YU5qGP5yJ8"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

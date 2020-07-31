@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>35</td></tr>
 <tr><td><em>Song</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>5</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Barase Badariya Sawanki", "songs": [{"N": "0001", "T": "Bhajan", "H": "Barase Badariya Sawanki", "S": "Barase Badariya Sawanki", "R": "Brindavana saranga", "C": "Meera Bhai", "A": "Ranjani Gayatri", "V": "tnUwpjsidIg"}]}, {"name": "Chalo Man Ganga Yamuna Thir", "songs": [{"N": "0003", "T": "Bhajan", "H": "Chalo Man Ganga Yamuna Thir", "S": "Chalo Man Ganga Yamuna Thir", "R": "Mishra maand", "C": "Meera Bhai", "A": "Manasi Prasad", "V": "_GfS8sUQhz4"}, {"N": "0011", "T": "Bhajan", "H": "Chalo Man Ganga Yamuna Thir", "S": "Chalo Man Ganga Yamuna Thir", "R": "Mishra maand", "C": "Meera Bhai", "A": "Sriram Parthasarathy", "V": "Uvab-0-IINk"}]}, {"name": "Hari Guna", "songs": [{"N": "0007", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "Abhishek Raghuram", "V": "N6_QwGlqXBk"}, {"N": "0008", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "Abhishek Raghuram", "V": "ZHBr1i1T06o"}, {"N": "0004", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "Cherthala K. N. Renganatha Sharma", "V": "CWiFijblsQc"}, {"N": "0004", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "Kunnakudi M. Balamuralikrishna", "V": "wyj4aC6-3N8"}, {"N": "0007", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "S. Kalyanaraman", "V": "KcP_Xn4vMNQ"}, {"N": "0008", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "S. Kalyanaraman", "V": "QCFP_hCiT0U"}, {"N": "0009", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "S. Kalyanaraman", "V": "l7LwARNq4Ow"}, {"N": "0004", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "J. A. Jayanth", "V": "ZU2Wr8aUq8E"}, {"N": "0005", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "J. A. Jayanth", "V": "jFKMhH9cNLA"}]}, {"name": "hari tum harO jan ki pIr", "songs": [{"N": "0003", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "Bombay Jayashri", "V": "1BoLb-phVeA"}, {"N": "0004", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "Bombay Jayashri", "V": "DGF2EFJTd3I"}, {"N": "0005", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "Bombay Jayashri", "V": "YxlR2ss-QPU"}, {"N": "0006", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "Bombay Jayashri", "V": "h7kN0eqiLGo"}, {"N": "0007", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "Bombay Jayashri", "V": "o3feKUNsi1g"}, {"N": "0056", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "M. S. Subbulakshmi", "V": "6QjGRNpGeOk"}, {"N": "0057", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "M. S. Subbulakshmi", "V": "H6C4uFWGC1s"}, {"N": "0058", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "M. S. Subbulakshmi", "V": "JGJIjYtN2wk"}, {"N": "0059", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "M. S. Subbulakshmi", "V": "itUXh4UrTZc"}, {"N": "0060", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "M. S. Subbulakshmi", "V": "kCzxL5RMjUA"}, {"N": "0061", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "M. S. Subbulakshmi", "V": "soNUxpxfKu8"}, {"N": "0062", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "M. S. Subbulakshmi", "V": "uTqYWFWjGRw"}, {"N": "0006", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "Sikkil Gurucharan", "V": "ajBJ937lR8k"}, {"N": "0007", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "Sikkil Gurucharan", "V": "l5PZtfzbhfQ"}, {"N": "0008", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "Sikkil Gurucharan", "V": "ltOJ3X__vrI"}, {"N": "0011", "T": "Bhajan", "H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "R": "Darbari kaanada", "C": "Meera Bhai", "A": "Voleti Venkateswarlu", "V": "mrg9IsyCzao"}]}, {"name": "Nanda Nandana", "songs": [{"N": "0010", "T": "Bhajan", "H": "Nanda Nandana", "S": "Nanda Nandana", "R": "Shuddha sarang", "C": "Meera Bhai", "A": "Sudha Ragunathan", "V": "rMqk1r6wCHY"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Barase Badariya Sawanki", "S": "Barase Badariya Sawanki", "songs": [{"A": "Ranjani Gayatri", "D": "7:36", "R": "Brindavana saranga", "T": "Bhajan", "U": "4,300 views", "V": "tnUwpjsidIg"}]}, {"H": "Chalo Man Ganga Yamuna Thir", "S": "Chalo Man Ganga Yamuna Thir", "songs": [{"A": "Manasi Prasad", "D": "13:17", "R": "Mishra maand", "T": "Bhajan", "U": "142 views", "V": "_GfS8sUQhz4"}, {"A": "Sriram Parthasarathy", "D": "11:26", "R": "Mishra maand", "T": "Bhajan", "U": "81 views", "V": "Uvab-0-IINk"}]}, {"H": "Hari Guna", "S": "Hari Guna", "songs": [{"A": "Abhishek Raghuram", "D": "6:41", "R": "Deepali", "T": "Bhajan", "U": "36,839 views", "V": "N6_QwGlqXBk"}, {"A": "Abhishek Raghuram", "D": "6:41", "R": "Deepali", "T": "Bhajan", "U": "1,344 views", "V": "ZHBr1i1T06o"}, {"A": "Cherthala K. N. Renganatha Sharma", "D": "9:07", "R": "Deepali", "T": "Bhajan", "U": "0 views", "V": "CWiFijblsQc"}, {"A": "Kunnakudi M. Balamuralikrishna", "D": "11:44", "R": "Deepali", "T": "Bhajan", "U": "7,728 views", "V": "wyj4aC6-3N8"}, {"A": "S. Kalyanaraman", "D": "11:05", "R": "Deepali", "T": "Bhajan", "U": "54 views", "V": "QCFP_hCiT0U"}, {"A": "S. Kalyanaraman", "D": "10:15", "R": "Deepali", "T": "Bhajan", "U": "0 views", "V": "l7LwARNq4Ow"}, {"A": "S. Kalyanaraman", "D": "10:09", "R": "Deepali", "T": "Bhajan", "U": "14,576 views", "V": "KcP_Xn4vMNQ"}, {"A": "J. A. Jayanth", "D": "4:03", "R": "Deepali", "T": "Bhajan", "U": "614 views", "V": "jFKMhH9cNLA"}, {"A": "J. A. Jayanth", "D": "2:51", "R": "Deepali", "T": "Bhajan", "U": "249 views", "V": "ZU2Wr8aUq8E"}]}, {"H": "Hari Tum Haro", "S": "hari tum harO jan ki pIr  :  Adi", "songs": [{"A": "Bombay Jayashri", "D": "4:21", "R": "Darbari kaanada", "T": "Bhajan", "U": "24,769 views", "V": "DGF2EFJTd3I"}, {"A": "Bombay Jayashri", "D": "3:01", "R": "Darbari kaanada", "T": "Bhajan", "U": "1,849 views", "V": "YxlR2ss-QPU"}, {"A": "Bombay Jayashri", "D": "4:19", "R": "Darbari kaanada", "T": "Bhajan", "U": "487 views", "V": "h7kN0eqiLGo"}, {"A": "Bombay Jayashri", "D": "4:19", "R": "Darbari kaanada", "T": "Bhajan", "U": "0 views", "V": "1BoLb-phVeA"}, {"A": "Bombay Jayashri", "D": "3:01", "R": "Darbari kaanada", "T": "Bhajan", "U": "519 views", "V": "o3feKUNsi1g"}, {"A": "M. S. Subbulakshmi", "D": "3:36", "R": "Darbari kaanada", "T": "Bhajan", "U": "3,700 views", "V": "JGJIjYtN2wk"}, {"A": "M. S. Subbulakshmi", "D": "3:25", "R": "Darbari kaanada", "T": "Bhajan", "U": "209,752 views", "V": "kCzxL5RMjUA"}, {"A": "M. S. Subbulakshmi", "D": "3:37", "R": "Darbari kaanada", "T": "Bhajan", "U": "1,407 views", "V": "soNUxpxfKu8"}, {"A": "M. S. Subbulakshmi", "D": "3:18", "R": "Darbari kaanada", "T": "Bhajan", "U": "64 views", "V": "6QjGRNpGeOk"}, {"A": "M. S. Subbulakshmi", "D": "3:12", "R": "Darbari kaanada", "T": "Bhajan", "U": "0 views", "V": "uTqYWFWjGRw"}, {"A": "M. S. Subbulakshmi", "D": "3:27", "R": "Darbari kaanada", "T": "Bhajan", "U": "194,127 views", "V": "itUXh4UrTZc"}, {"A": "M. S. Subbulakshmi", "D": "3:18", "R": "Darbari kaanada", "T": "Bhajan", "U": "0 views", "V": "H6C4uFWGC1s"}, {"A": "Sikkil Gurucharan", "D": "4:11", "R": "Darbari kaanada", "T": "Bhajan", "U": "0 views", "V": "ltOJ3X__vrI"}, {"A": "Sikkil Gurucharan", "D": "4:21", "R": "Darbari kaanada", "T": "Bhajan", "U": "3,165 views", "V": "l5PZtfzbhfQ"}, {"A": "Sikkil Gurucharan", "D": "10:52", "R": "Darbari kaanada", "T": "Bhajan", "U": "37 views", "V": "ajBJ937lR8k"}, {"A": "Voleti Venkateswarlu", "D": "3:00", "R": "Darbari kaanada", "T": "Bhajan", "U": "249 views", "V": "mrg9IsyCzao"}]}, {"H": "Nanda Nandana", "S": "Nanda Nandana", "songs": [{"A": "Sudha Ragunathan", "D": "3:13", "R": "Shuddha sarang", "T": "Bhajan", "U": "1,070 views", "V": "rMqk1r6wCHY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

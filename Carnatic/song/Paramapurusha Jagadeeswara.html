@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>24</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>22</td></tr>
-<tr><td><em>Concert</em></td><td>22</td></tr>
+<tr><td><em>Concert</em></td><td>18</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Balaji Shankar", "songs": [{"N": "0016", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "Balaji Shankar", "V": "z0wyOamxmvk"}]}, {"name": "Vocal - Bangalore Brothers", "songs": [{"N": "0055", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "Bangalore Brothers", "V": "Dnpbt8V6DLI"}, {"N": "0056", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "Bangalore Brothers", "V": "aEWmg0zybmQ"}]}, {"name": "Vocal - K. J. Yesudas", "songs": [{"N": "0242", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "K. J. Yesudas", "V": "w1kWELJCLIw"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0382", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "JMvQPREnTjw"}, {"N": "0383", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "usmPf0xk4-A"}]}, {"name": "Vocal - Mambalam Sisters", "songs": [{"N": "0082", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "Mambalam Sisters", "V": "whcpIz2s1-Q"}]}, {"name": "Vocal - O. S. Arun", "songs": [{"N": "0095", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "O. S. Arun", "V": "eQSmuBFbqes"}]}, {"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0151", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "P. Unnikrishnan", "V": "0Oa0B5_vEKk"}]}, {"name": "Vocal - Prince Rama Varma", "songs": [{"N": "0290", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "Nk5gg62BJME"}]}, {"name": "Vocal - R. Suryaprakash", "songs": [{"N": "0051", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "R. Suryaprakash", "V": "CCf9I9qWTcQ"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0127", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "Sankaran Namboothiri", "V": "YDA4rHjzDe8"}]}, {"name": "Vocal - Sreevalsan J. Menon", "songs": [{"N": "0094", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "Sreevalsan J. Menon", "V": "PGnvBTVU-4I"}]}, {"name": "Vocal - T. V. Sankaranarayanan", "songs": [{"N": "0169", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "T. V. Sankaranarayanan", "V": "pDctB2wlCWc"}]}, {"name": "Vocal - Vasudha Ravi", "songs": [{"N": "0028", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "Vasudha Ravi", "V": "TUjJTdYxuYA"}]}, {"name": "Veena - R. S. Jayalakshmi", "songs": [{"N": "0021", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "R. S. Jayalakshmi", "V": "lLxWlYTTU2k"}]}, {"name": "Nadaswaram - Thiruvizha Jayashankar", "songs": [{"N": "0012", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "Thiruvizha Jayashankar", "V": "P5chXoGOTc0"}]}, {"name": "Violin - Akkarai Sisters", "songs": [{"N": "0055", "T": "", "H": "Paramapurusha Jagadeeswara", "S": "parama puruSa jagadIshvara jaya jaya pankajanAbha :  Adi", "R": "Vasantha", "C": "Swathi Thirunal", "A": "Akkarai Sisters", "V": "-p9zCdlhM2g"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Balaji Shankar", "songs": [{"C": "Swathi Thirunal", "D": "3:37", "R": "Vasantha", "T": "", "U": "227 views", "V": "z0wyOamxmvk"}]}, {"A": "Bangalore Brothers", "songs": [{"C": "Swathi Thirunal", "D": "10:19", "R": "Vasantha", "T": "", "U": "596 views", "V": "Dnpbt8V6DLI"}, {"C": "Swathi Thirunal", "D": "11:50", "R": "Vasantha", "T": "", "U": "305 views", "V": "aEWmg0zybmQ"}]}, {"A": "K. J. Yesudas", "songs": [{"C": "Swathi Thirunal", "D": "4:36", "R": "Vasantha", "T": "", "U": "119,554 views", "V": "w1kWELJCLIw"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Swathi Thirunal", "D": "5:40", "R": "Vasantha", "T": "", "U": "29 views", "V": "JMvQPREnTjw"}, {"C": "Swathi Thirunal", "D": "2:10", "R": "Vasantha", "T": "", "U": "18 views", "V": "usmPf0xk4-A"}]}, {"A": "Mambalam Sisters", "songs": [{"C": "Swathi Thirunal", "D": "8:57", "R": "Vasantha", "T": "", "U": "145 views", "V": "whcpIz2s1-Q"}]}, {"A": "O. S. Arun", "songs": [{"C": "Swathi Thirunal", "D": "10:28", "R": "Vasantha", "T": "", "U": "0 views", "V": "eQSmuBFbqes"}]}, {"A": "P. Unnikrishnan", "songs": [{"C": "Swathi Thirunal", "D": "4:34", "R": "Vasantha", "T": "", "U": "8,853 views", "V": "0Oa0B5_vEKk"}]}, {"A": "Prince Rama Varma", "songs": [{"C": "Swathi Thirunal", "D": "6:16", "R": "Vasantha", "T": "", "U": "26,808 views", "V": "Nk5gg62BJME"}]}, {"A": "R. Suryaprakash", "songs": [{"C": "Swathi Thirunal", "D": "9:04", "R": "Vasantha", "T": "", "U": "9,718 views", "V": "CCf9I9qWTcQ"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Swathi Thirunal", "D": "5:28", "R": "Vasantha", "T": "", "U": "1,060 views", "V": "YDA4rHjzDe8"}]}, {"A": "Sreevalsan J. Menon", "songs": [{"C": "Swathi Thirunal", "D": "11:06", "R": "Vasantha", "T": "", "U": "1,734 views", "V": "PGnvBTVU-4I"}]}, {"A": "T. V. Sankaranarayanan", "songs": [{"C": "Swathi Thirunal", "D": "16:46", "R": "Vasantha", "T": "", "U": "176 views", "V": "pDctB2wlCWc"}]}, {"A": "Vasudha Ravi", "songs": [{"C": "Swathi Thirunal", "D": "12:46", "R": "Vasantha", "T": "", "U": "880 views", "V": "TUjJTdYxuYA"}]}, {"A": "R. S. Jayalakshmi", "songs": [{"C": "Swathi Thirunal", "D": "7:12", "R": "Vasantha", "T": "", "U": "286 views", "V": "lLxWlYTTU2k"}]}, {"A": "Thiruvizha Jayashankar", "songs": [{"C": "Swathi Thirunal", "D": "16:01", "R": "Vasantha", "T": "", "U": "68 views", "V": "P5chXoGOTc0"}]}, {"A": "Akkarai Sisters", "songs": [{"C": "Swathi Thirunal", "D": "10:28", "R": "Vasantha", "T": "", "U": "24 views", "V": "-p9zCdlhM2g"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

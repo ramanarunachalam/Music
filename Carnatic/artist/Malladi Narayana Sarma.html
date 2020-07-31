@@ -17,7 +17,7 @@
 <tr><td><em>Song</em></td><td>9</td></tr>
 <tr><td><em>Raga</em></td><td>19</td></tr>
 <tr><td><em>Composer</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>35</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "MNS01", "songs": [{"N": "0001", "T": "", "H": "Geetham", "S": "Geetham", "R": "Bhoopalam", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "wtidbWIsYfY"}, {"N": "0002", "T": "", "H": "Geetham", "S": "Geetham", "R": "Madhyamavathi", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "Dd8peJjeOow"}, {"N": "0003", "T": "", "H": "Geetham", "S": "Geetham", "R": "Panthuvarali", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "-HcYWY_d9w0"}, {"N": "0004", "T": "", "H": "Geetham", "S": "Geetham", "R": "Sankarabharanam", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "ZugTdOnUNHA"}, {"N": "0005", "T": "", "H": "Lali Laliyani", "S": "lAli lAli y ani y UcErA vana  :  Adi", "R": "Khamas", "C": "Thyagaraja", "A": "Malladi Narayana Sarma", "V": "HKEFeZVSDwA"}, {"N": "0006", "T": "", "H": "Nagumomu Galavani", "S": "nagu mOmu gala vAni nA manO haruni :  Adi", "R": "Madhyamavathi", "C": "Thyagaraja", "A": "Malladi Narayana Sarma", "V": "rRip7FjGBtg"}, {"N": "0007", "T": "", "H": "Nidhichala Sukhama", "S": "nidhi cAla sukhamA rAmuni  :  Caapu", "R": "Kalyani", "C": "Thyagaraja", "A": "Malladi Narayana Sarma", "V": "Ts9tuPXVPDk"}, {"N": "0008", "T": "", "H": "Ramachandru Vitudu", "S": "rAmacaMdruDitaDu raGuvIruDu   kAmitaPalamulIya :  Adi", "R": "Dwijavanthi", "C": "Annamacharya", "A": "Malladi Narayana Sarma", "V": "T7saH9zC3D4"}, {"N": "0009", "T": "Navagraha", "H": "Chandram Bhaja", "S": "candraM bhaja mAnasa sAdhu hRdaya sadRSam :  Matya", "R": "Asaveri", "C": "Muthuswami Dikshitar", "A": "Malladi Narayana Sarma", "V": "EHaFgSkJtwQ"}, {"N": "0010", "T": "Swarajathi", "H": "Sambasivayanave", "S": "sAmba shivAyanavE rAjitagiri", "R": "Khamas", "C": "Chinni Krishnadasa", "A": "Malladi Narayana Sarma", "V": "9x7jk7vK_sI"}, {"N": "0011", "T": "Varnam", "H": "Sarasija Nabha Murare", "S": "sarasija nAbha murArE pAhimAm  :  Adi", "R": "Mayamalavagowla", "C": "Swathi Thirunal", "A": "Malladi Narayana Sarma", "V": "SJF7_MUUFw0"}, {"N": "0012", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "kka_iLa7Ano"}, {"N": "0013", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Harikambhoji", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "xIfZns1rDsw"}, {"N": "0014", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jankaradhvani", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "RwjCGpEdLvQ"}, {"N": "0015", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kalyani", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "YEUw0qOMw8M"}, {"N": "0016", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kalyani", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "adpXiEuJbVs"}, {"N": "0017", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kalyani", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "xQx1MUeZTVE"}, {"N": "0018", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Lalitha", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "ZhSL8zKwjMs"}, {"N": "0019", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Manohari", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "4IShuaO3JDQ"}, {"N": "0020", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Mayamalavagowla", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "33rr6mPElEg"}, {"N": "0021", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Mayamalavagowla", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "GA1ESElm_p0"}, {"N": "0022", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Mayamalavagowla", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "NXOx-aQD3yI"}, {"N": "0023", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Megharanjani", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "rl5SZe3byUg"}, {"N": "0024", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sankarabharanam", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "f1r-V8-mCbg"}, {"N": "0025", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sankarabharanam", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "y78ekBuifac"}, {"N": "0026", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sankarabharanam", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "yT3BHeaHdDo"}, {"N": "0027", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Saraswathi", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "UCeIAdw7EcKuSCPUgm-NVKPg"}, {"N": "0028", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shanmukapriya", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "2APUYY38xrs"}, {"N": "0029", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shanmukapriya", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "mSjgJ04dvDc"}, {"N": "0030", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sowrashtram", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "oqKxmgzl0Yg"}, {"N": "0031", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "UC2swT9tSNlVnLZLbVYunxfQ"}, {"N": "0032", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "4hn2XMP_qYY"}, {"N": "0033", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "4wi9mIhJU1M"}, {"N": "0034", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "WZUe1siqshI"}, {"N": "0035", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "jilshp9bjek"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Chandram Bhaja", "S": "candraM bhaja mAnasa sAdhu hRdaya sadRSam :  Matya", "songs": [{"C": "Muthuswami Dikshitar", "D": "10:23", "R": "Asaveri", "T": "Navagraha", "U": "54 views", "V": "EHaFgSkJtwQ"}]}, {"H": "Geetham", "S": "Geetham", "songs": [{"C": "UnknownComposer", "D": "8:18", "R": "Bhoopalam", "T": "", "U": "367 views", "V": "wtidbWIsYfY"}, {"C": "UnknownComposer", "D": "2:22", "R": "Madhyamavathi", "T": "", "U": "596 views", "V": "Dd8peJjeOow"}, {"C": "UnknownComposer", "D": "6:27", "R": "Panthuvarali", "T": "", "U": "297 views", "V": "-HcYWY_d9w0"}, {"C": "UnknownComposer", "D": "1:48", "R": "Sankarabharanam", "T": "", "U": "392 views", "V": "ZugTdOnUNHA"}]}, {"H": "Lali Laliyani", "S": "lAli lAli y ani y UcErA vana  :  Adi", "songs": [{"C": "Thyagaraja", "D": "11:17", "R": "Khamas", "T": "", "U": "42 views", "V": "HKEFeZVSDwA"}]}, {"H": "Nagumomu Galavani", "S": "nagu mOmu gala vAni nA manO haruni :  Adi", "songs": [{"C": "Thyagaraja", "D": "5:32", "R": "Madhyamavathi", "T": "", "U": "102 views", "V": "rRip7FjGBtg"}]}, {"H": "Nidhichala Sukhama", "S": "nidhi cAla sukhamA rAmuni  :  Caapu", "songs": [{"C": "Thyagaraja", "D": "11:20", "R": "Kalyani", "T": "", "U": "29 views", "V": "Ts9tuPXVPDk"}]}, {"H": "Ramachandru Vitudu", "S": "rAmacaMdruDitaDu raGuvIruDu   kAmitaPalamulIya :  Adi", "songs": [{"C": "Annamacharya", "D": "5:46", "R": "Dwijavanthi", "T": "", "U": "877 views", "V": "T7saH9zC3D4"}]}, {"H": "Sambasivayanave", "S": "sAmba shivAyanavE rAjitagiri", "songs": [{"C": "Chinni Krishnadasa", "D": "28:04", "R": "Khamas", "T": "Swarajathi", "U": "57 views", "V": "9x7jk7vK_sI"}]}, {"H": "Sarasija Nabha Murare", "S": "sarasija nAbha murArE pAhimAm  :  Adi", "songs": [{"C": "Swathi Thirunal", "D": "23:48", "R": "Mayamalavagowla", "T": "Varnam", "U": "67 views", "V": "SJF7_MUUFw0"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "1:59", "R": "Gowri", "T": "", "U": "106 views", "V": "kka_iLa7Ano"}, {"C": "UnknownComposer", "D": "2:12", "R": "Harikambhoji", "T": "", "U": "88 views", "V": "xIfZns1rDsw"}, {"C": "UnknownComposer", "D": "13:20", "R": "Jankaradhvani", "T": "", "U": "369 views", "V": "RwjCGpEdLvQ"}, {"C": "UnknownComposer", "D": "9:54", "R": "Kalyani", "T": "", "U": "28 views", "V": "xQx1MUeZTVE"}, {"C": "UnknownComposer", "D": "5:53", "R": "Kalyani", "T": "", "U": "39 views", "V": "YEUw0qOMw8M"}, {"C": "UnknownComposer", "D": "0:57", "R": "Kalyani", "T": "", "U": "8 views", "V": "adpXiEuJbVs"}, {"C": "UnknownComposer", "D": "4:56", "R": "Lalitha", "T": "", "U": "74 views", "V": "ZhSL8zKwjMs"}, {"C": "UnknownComposer", "D": "6:12", "R": "Manohari", "T": "", "U": "64 views", "V": "4IShuaO3JDQ"}, {"C": "UnknownComposer", "D": "4:44", "R": "Mayamalavagowla", "T": "", "U": "40 views", "V": "NXOx-aQD3yI"}, {"C": "UnknownComposer", "D": "9:00", "R": "Mayamalavagowla", "T": "", "U": "63 views", "V": "GA1ESElm_p0"}, {"C": "UnknownComposer", "D": "4:31", "R": "Mayamalavagowla", "T": "", "U": "33 views", "V": "33rr6mPElEg"}, {"C": "UnknownComposer", "D": "9:15", "R": "Megharanjani", "T": "", "U": "59 views", "V": "rl5SZe3byUg"}, {"C": "UnknownComposer", "D": "9:31", "R": "Sankarabharanam", "T": "", "U": "15,893 views", "V": "yT3BHeaHdDo"}, {"C": "UnknownComposer", "D": "9:22", "R": "Sankarabharanam", "T": "", "U": "2,960 views", "V": "y78ekBuifac"}, {"C": "UnknownComposer", "D": "9:31", "R": "Sankarabharanam", "T": "", "U": "446 views", "V": "f1r-V8-mCbg"}, {"C": "UnknownComposer", "D": "- Channel", "R": "Saraswathi", "T": "", "U": "0 views", "V": "/channel/UCeIAdw7EcKuSCPUgm-NVKPg"}, {"C": "UnknownComposer", "D": "5:33", "R": "Shanmukapriya", "T": "", "U": "19 views", "V": "2APUYY38xrs"}, {"C": "UnknownComposer", "D": "4:10", "R": "Shanmukapriya", "T": "", "U": "54 views", "V": "mSjgJ04dvDc"}, {"C": "UnknownComposer", "D": "5:37", "R": "Sowrashtram", "T": "", "U": "318 views", "V": "oqKxmgzl0Yg"}, {"C": "UnknownComposer", "D": "- Channel", "R": "Unknownraga", "T": "", "U": "0 views", "V": "/channel/UC2swT9tSNlVnLZLbVYunxfQ"}, {"C": "UnknownComposer", "D": "3:29", "R": "Unknownraga", "T": "", "U": "801 views", "V": "jilshp9bjek"}, {"C": "UnknownComposer", "D": "2:53", "R": "Unknownraga", "T": "", "U": "390 views", "V": "4wi9mIhJU1M"}, {"C": "UnknownComposer", "D": "10:43", "R": "Unknownraga", "T": "", "U": "75 views", "V": "WZUe1siqshI"}, {"C": "UnknownComposer", "D": "", "R": "Unknownraga", "T": "", "U": "0 views", "V": "4hn2XMP_qYY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>15</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>12</td></tr>
-<tr><td><em>Concert</em></td><td>12</td></tr>
+<tr><td><em>Concert</em></td><td>13</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -149,57 +149,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Baby Sreeram", "songs": [{"N": "0044", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "Baby Sreeram", "V": "TwyzN3t8r2c"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0205", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "Bombay Sisters", "V": "CaIyYaPEYpY"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0492", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "D2rlw1eObOI"}, {"N": "0493", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "h2fPRKPKwj0"}, {"N": "0494", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "p7ZGkjqsbIo"}]}, {"name": "Vocal - M. A. Kalyanakrishna Bhagavathar", "songs": [{"N": "0006", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "M. A. Kalyanakrishna Bhagavathar", "V": "nJHvqpZgCRM"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1092", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "Y-3Ucs5u9Ws"}, {"N": "1093", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "sOAar2wGcCc"}]}, {"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0185", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "P. Unnikrishnan", "V": "E1wSu38cI60"}]}, {"name": "Vocal - S. Ramanathan", "songs": [{"N": "0110", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "S. Ramanathan", "V": "YzXTTfYLndU"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0572", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "Sudha Ragunathan", "V": "xobN8x18MGk"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0557", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "T. M. Krishna", "V": "hs9qLr6Q7Y4"}]}, {"name": "Vocal - Uma Radhika", "songs": [{"N": "0087", "T": "", "H": "Sri Kumara Nagaralaye", "S": "Shri Kumaara Nagaraalaye Karunaalaye Kamalaalaye :  Adi", "R": "Atana", "C": "Swathi Thirunal", "A": "Uma Radhika", "V": "k5S1Af6cVE0"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Baby Sreeram", "songs": [{"C": "Swathi Thirunal", "D": "25:36", "R": "Atana", "T": "", "U": "2,148 views", "V": "TwyzN3t8r2c"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Swathi Thirunal", "D": "47:00", "R": "Atana", "T": "", "U": "4,135 views", "V": "CaIyYaPEYpY"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Swathi Thirunal", "D": "7:25", "R": "Atana", "T": "", "U": "123 views", "V": "p7ZGkjqsbIo"}, {"C": "Swathi Thirunal", "D": "8:50", "R": "Atana", "T": "", "U": "24 views", "V": "D2rlw1eObOI"}, {"C": "Swathi Thirunal", "D": "9:01", "R": "Atana", "T": "", "U": "56 views", "V": "h2fPRKPKwj0"}]}, {"A": "M. A. Kalyanakrishna Bhagavathar", "songs": [{"C": "Swathi Thirunal", "D": "15:27", "R": "Atana", "T": "", "U": "181 views", "V": "nJHvqpZgCRM"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Swathi Thirunal", "D": "8:15", "R": "Atana", "T": "", "U": "734 views", "V": "Y-3Ucs5u9Ws"}, {"C": "Swathi Thirunal", "D": "8:21", "R": "Atana", "T": "", "U": "1,621 views", "V": "sOAar2wGcCc"}]}, {"A": "P. Unnikrishnan", "songs": [{"C": "Swathi Thirunal", "D": "9:26", "R": "Atana", "T": "", "U": "0 views", "V": "E1wSu38cI60"}]}, {"A": "S. Ramanathan", "songs": [{"C": "Swathi Thirunal", "D": "15:15", "R": "Atana", "T": "", "U": "1,447 views", "V": "YzXTTfYLndU"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Swathi Thirunal", "D": "8:01", "R": "Atana", "T": "", "U": "669 views", "V": "xobN8x18MGk"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Swathi Thirunal", "D": "7:50", "R": "Atana", "T": "", "U": "509 views", "V": "hs9qLr6Q7Y4"}]}, {"A": "Uma Radhika", "songs": [{"C": "Swathi Thirunal", "D": "58:20", "R": "Atana", "T": "", "U": "0 views", "V": "k5S1Af6cVE0"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

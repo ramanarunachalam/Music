@@ -29,7 +29,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -147,57 +147,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Sisters", "songs": [{"N": "0116", "T": "", "H": "Kannan Thiruvadi", "S": "kaNNan tiruvaDi eNNuga maname tiNNam azhiyA :  Caapu", "R": "Charukesi", "C": "Subramanya Bharathiyar", "A": "Bombay Sisters", "V": "lGIN-LnIbmg"}]}, {"name": "Vocal - Bushani Kalyanaraman", "songs": [{"N": "0006", "T": "", "H": "Kannan Thiruvadi", "S": "kaNNan tiruvaDi eNNuga maname tiNNam azhiyA :  Caapu", "R": "Charukesi", "C": "Subramanya Bharathiyar", "A": "Bushani Kalyanaraman", "V": "ULSDqaIbY1E"}, {"N": "0007", "T": "", "H": "Kannan Thiruvadi", "S": "kaNNan tiruvaDi eNNuga maname tiNNam azhiyA :  Caapu", "R": "Charukesi", "C": "Subramanya Bharathiyar", "A": "Bushani Kalyanaraman", "V": "umHacJNVTec"}]}, {"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0103", "T": "", "H": "Kannan Thiruvadi", "S": "kaNNan tiruvaDi eNNuga maname tiNNam azhiyA :  Caapu", "R": "Charukesi", "C": "Subramanya Bharathiyar", "A": "P. Unnikrishnan", "V": "s5u0HnuH3Zg"}, {"N": "0104", "T": "", "H": "Kannan Thiruvadi", "S": "kaNNan tiruvaDi eNNuga maname tiNNam azhiyA :  Caapu", "R": "Charukesi", "C": "Subramanya Bharathiyar", "A": "P. Unnikrishnan", "V": "zBD3zhtmVhg"}]}, {"name": "Vocal - Vasundara Rajagopal", "songs": [{"N": "0005", "T": "", "H": "Kannan Thiruvadi", "S": "kaNNan tiruvaDi eNNuga maname tiNNam azhiyA :  Caapu", "R": "Charukesi", "C": "Subramanya Bharathiyar", "A": "Vasundara Rajagopal", "V": "nDQ8iA3lm1E"}]}, {"name": "Keyboard - Keyboard Sathya", "songs": [{"N": "0047", "T": "", "H": "Kannan Thiruvadi", "S": "kaNNan tiruvaDi eNNuga maname tiNNam azhiyA :  Caapu", "R": "Charukesi", "C": "Subramanya Bharathiyar", "A": "Keyboard Sathya", "V": "KPSMMMvjCgc"}]}, {"name": "Violin - A. Kanyakumari", "songs": [{"N": "0076", "T": "", "H": "Kannan Thiruvadi", "S": "kaNNan tiruvaDi eNNuga maname tiNNam azhiyA :  Caapu", "R": "Charukesi", "C": "Subramanya Bharathiyar", "A": "A. Kanyakumari", "V": "au5ZLmRFrzQ"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Sisters", "songs": [{"C": "Subramanya Bharathiyar", "D": "5:42", "R": "Charukesi", "T": "", "U": "0 views", "V": "lGIN-LnIbmg"}]}, {"A": "Bushani Kalyanaraman", "songs": [{"C": "Subramanya Bharathiyar", "D": "5:48", "R": "Charukesi", "T": "", "U": "0 views", "V": "umHacJNVTec"}, {"C": "Subramanya Bharathiyar", "D": "5:46", "R": "Charukesi", "T": "", "U": "2,087 views", "V": "ULSDqaIbY1E"}]}, {"A": "P. Unnikrishnan", "songs": [{"C": "Subramanya Bharathiyar", "D": "4:51", "R": "Charukesi", "T": "", "U": "12,927 views", "V": "s5u0HnuH3Zg"}, {"C": "Subramanya Bharathiyar", "D": "2:01", "R": "Charukesi", "T": "", "U": "583 views", "V": "zBD3zhtmVhg"}]}, {"A": "Vasundara Rajagopal", "songs": [{"C": "Subramanya Bharathiyar", "D": "3:01", "R": "Charukesi", "T": "", "U": "45 views", "V": "nDQ8iA3lm1E"}]}, {"A": "Keyboard Sathya", "songs": [{"C": "Subramanya Bharathiyar", "D": "5:04", "R": "Charukesi", "T": "", "U": "476 views", "V": "KPSMMMvjCgc"}]}, {"A": "A. Kanyakumari", "songs": [{"C": "Subramanya Bharathiyar", "D": "4:49", "R": "Charukesi", "T": "", "U": "843 views", "V": "au5ZLmRFrzQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

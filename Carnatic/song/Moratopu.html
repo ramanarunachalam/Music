@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Brinda Muktha", "songs": [{"N": "0024", "T": "Padam", "H": "Moratopu", "S": "mEragAdu rammanavE nA sAmini mUratopu sEyaka :  Adi", "R": "Sahana", "C": "Kshetragna", "A": "Brinda Muktha", "V": "CtSLpcnQLFo"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1318", "T": "Padam", "H": "Moratopu", "S": "mEragAdu rammanavE nA sAmini mUratopu sEyaka :  Adi", "R": "Sahana", "C": "Kshetragna", "A": "M. S. Subbulakshmi", "V": "q7bzPVprZM0"}]}, {"name": "Vocal - S. Adithya Narayanan", "songs": [{"N": "0033", "T": "Padam", "H": "Moratopu", "S": "mEragAdu rammanavE nA sAmini mUratopu sEyaka :  Adi", "R": "Sahana", "C": "Kshetragna", "A": "S. Adithya Narayanan", "V": "QxJhv7PVhs8"}, {"N": "0034", "T": "Padam", "H": "Moratopu", "S": "mEragAdu rammanavE nA sAmini mUratopu sEyaka :  Adi", "R": "Sahana", "C": "Kshetragna", "A": "S. Adithya Narayanan", "V": "qscjCl-Ug_0"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0254", "T": "Padam", "H": "Moratopu", "S": "mEragAdu rammanavE nA sAmini mUratopu sEyaka :  Adi", "R": "Sahana", "C": "Kshetragna", "A": "S. Sowmya", "V": "ImHSthozpOE"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0750", "T": "Padam", "H": "Moratopu", "S": "mEragAdu rammanavE nA sAmini mUratopu sEyaka :  Adi", "R": "Sahana", "C": "Kshetragna", "A": "T. M. Krishna", "V": "8M8Y3NZzwI0"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "M. S. Subbulakshmi", "songs": [{"C": "Kshetragna", "D": "7:31", "R": "Sahana", "T": "Padam", "U": "2,132 views", "V": "q7bzPVprZM0"}]}, {"A": "S. Adithya Narayanan", "songs": [{"C": "Kshetragna", "D": "16:23", "R": "Sahana", "T": "Padam", "U": "778 views", "V": "QxJhv7PVhs8"}, {"C": "Kshetragna", "D": "14:11", "R": "Sahana", "T": "Padam", "U": "400 views", "V": "qscjCl-Ug_0"}]}, {"A": "S. Sowmya", "songs": [{"C": "Kshetragna", "D": "3:01", "R": "Sahana", "T": "Padam", "U": "287 views", "V": "ImHSthozpOE"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Kshetragna", "D": "28:51", "R": "Sahana", "T": "Padam", "U": "1,026 views", "V": "8M8Y3NZzwI0"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

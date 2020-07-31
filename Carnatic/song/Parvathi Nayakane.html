@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>22</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>15</td></tr>
-<tr><td><em>Concert</em></td><td>15</td></tr>
+<tr><td><em>Concert</em></td><td>19</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Abhishek Raghuram", "songs": [{"N": "0160", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Abhishek Raghuram", "V": "bOb1DuwNRYs"}]}, {"name": "Vocal - Bangalore Brothers", "songs": [{"N": "0057", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Bangalore Brothers", "V": "fdxew4cZy5M"}]}, {"name": "Vocal - Gayathri Girish", "songs": [{"N": "0144", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Gayathri Girish", "V": "cRu3cs0r9U0"}, {"N": "0145", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Gayathri Girish", "V": "dak7z-apZrU"}]}, {"name": "Vocal - Jayashree Rajeev", "songs": [{"N": "0048", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Jayashree Rajeev", "V": "NzaYkuM2OB8"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0613", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "M. L. Vasanthakumari", "V": "cS18Lmw1Yb0"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0250", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Nithyasree Mahadevan", "V": "5OuaUBn474k"}, {"N": "0251", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Nithyasree Mahadevan", "V": "BZ_1Qi5D5EA"}]}, {"name": "Vocal - Padma Krishnan", "songs": [{"N": "0059", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Padma Krishnan", "V": "0KccewX7OCw"}]}, {"name": "Vocal - Rajkumar Bharathi", "songs": [{"N": "0027", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Rajkumar Bharathi", "V": "24obEgGue04"}]}, {"name": "Vocal - Sandeep Narayan", "songs": [{"N": "0107", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Sandeep Narayan", "V": "qhdPhK1rt9U"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0669", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "0u3kWv8cmGY"}, {"N": "0670", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "4r4T-2YPx-4"}, {"N": "0671", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "RXVu3h23Scs"}, {"N": "0672", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "igPKLUX_Ejs"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0140", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Sikkil Gurucharan", "V": "NJQZG5OPwQQ"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0463", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Sudha Ragunathan", "V": "uHqNPqcSnLY"}, {"N": "0464", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Sudha Ragunathan", "V": "wORorrk04Xs"}]}, {"name": "Violin - Avaneeswaram S. R. Vinu", "songs": [{"N": "0121", "T": "", "H": "Parvathi Nayakane", "S": "paarvati naayakanE sharaNam  :  Adi", "R": "Shanmukapriya", "C": "Papanasam Sivan", "A": "Avaneeswaram S. R. Vinu", "V": "flTJsnG2QAg"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Abhishek Raghuram", "songs": [{"C": "Papanasam Sivan", "D": "42:55", "R": "Shanmukapriya", "T": "", "U": "14,624 views", "V": "bOb1DuwNRYs"}]}, {"A": "Bangalore Brothers", "songs": [{"C": "Papanasam Sivan", "D": "27:06", "R": "Shanmukapriya", "T": "", "U": "982 views", "V": "fdxew4cZy5M"}]}, {"A": "Gayathri Girish", "songs": [{"C": "Papanasam Sivan", "D": "24:16", "R": "Shanmukapriya", "T": "", "U": "705 views", "V": "cRu3cs0r9U0"}, {"C": "Papanasam Sivan", "D": "23:56", "R": "Shanmukapriya", "T": "", "U": "503 views", "V": "dak7z-apZrU"}]}, {"A": "Jayashree Rajeev", "songs": [{"C": "Papanasam Sivan", "D": "17:26", "R": "Shanmukapriya", "T": "", "U": "2,215 views", "V": "NzaYkuM2OB8"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Papanasam Sivan", "D": "28:51", "R": "Shanmukapriya", "T": "", "U": "958 views", "V": "cS18Lmw1Yb0"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Papanasam Sivan", "D": "32:22", "R": "Shanmukapriya", "T": "", "U": "0 views", "V": "5OuaUBn474k"}, {"C": "Papanasam Sivan", "D": "15:13", "R": "Shanmukapriya", "T": "", "U": "31,082 views", "V": "BZ_1Qi5D5EA"}]}, {"A": "Padma Krishnan", "songs": [{"C": "Papanasam Sivan", "D": "18:17", "R": "Shanmukapriya", "T": "", "U": "234 views", "V": "0KccewX7OCw"}]}, {"A": "Rajkumar Bharathi", "songs": [{"C": "Papanasam Sivan", "D": "1:03:36", "R": "Shanmukapriya", "T": "", "U": "4,396 views", "V": "24obEgGue04"}]}, {"A": "Sandeep Narayan", "songs": [{"C": "Papanasam Sivan", "D": "27:05", "R": "Shanmukapriya", "T": "", "U": "10,870 views", "V": "qhdPhK1rt9U"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Papanasam Sivan", "D": "30:06", "R": "Shanmukapriya", "T": "", "U": "547 views", "V": "igPKLUX_Ejs"}, {"C": "Papanasam Sivan", "D": "30:06", "R": "Shanmukapriya", "T": "", "U": "1,100 views", "V": "4r4T-2YPx-4"}, {"C": "Papanasam Sivan", "D": "50:26", "R": "Shanmukapriya", "T": "", "U": "830 views", "V": "0u3kWv8cmGY"}, {"C": "Papanasam Sivan", "D": "54:12", "R": "Shanmukapriya", "T": "", "U": "3,481 views", "V": "RXVu3h23Scs"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Papanasam Sivan", "D": "11:07", "R": "Shanmukapriya", "T": "", "U": "4,443 views", "V": "NJQZG5OPwQQ"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Papanasam Sivan", "D": "7:49", "R": "Shanmukapriya", "T": "", "U": "55,389 views", "V": "uHqNPqcSnLY"}, {"C": "Papanasam Sivan", "D": "7:34", "R": "Shanmukapriya", "T": "", "U": "0 views", "V": "wORorrk04Xs"}]}, {"A": "Avaneeswaram S. R. Vinu", "songs": [{"C": "Papanasam Sivan", "D": "45:08", "R": "Shanmukapriya", "T": "", "U": "323 views", "V": "flTJsnG2QAg"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>4</td></tr>
-<tr><td><em>Concert</em></td><td>4</td></tr>
+<tr><td><em>Concert</em></td><td>9</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bangalore S. Shankar", "songs": [{"N": "0026", "T": "", "H": "Meena Lochani", "S": "mInalOcani ambA vEga nannu brOvavE ambA :  Rupaka", "R": "Thodi", "C": "Muthiah Bhagavathar", "A": "Bangalore S. Shankar", "V": "PJE7ZZQn7OY"}]}, {"name": "Vocal - Gayathri Girish", "songs": [{"N": "0120", "T": "", "H": "Meena Lochani", "S": "mInalOcani ambA vEga nannu brOvavE ambA :  Rupaka", "R": "Thodi", "C": "Muthiah Bhagavathar", "A": "Gayathri Girish", "V": "TMAJil8iJkE"}]}, {"name": "Vocal - Madurai Mani Iyer", "songs": [{"N": "0260", "T": "", "H": "Meena Lochani", "S": "mInalOcani ambA vEga nannu brOvavE ambA :  Rupaka", "R": "Thodi", "C": "Muthiah Bhagavathar", "A": "Madurai Mani Iyer", "V": "HhEfxvJpAvw"}, {"N": "0261", "T": "", "H": "Meena Lochani", "S": "mInalOcani ambA vEga nannu brOvavE ambA :  Rupaka", "R": "Thodi", "C": "Muthiah Bhagavathar", "A": "Madurai Mani Iyer", "V": "hSZmIVRurGs"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0302", "T": "", "H": "Meena Lochani", "S": "mInalOcani ambA vEga nannu brOvavE ambA :  Rupaka", "R": "Thodi", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "C46xRC11jRA"}, {"N": "0303", "T": "", "H": "Meena Lochani", "S": "mInalOcani ambA vEga nannu brOvavE ambA :  Rupaka", "R": "Thodi", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "GwKi80GtZ08"}, {"N": "0304", "T": "", "H": "Meena Lochani", "S": "mInalOcani ambA vEga nannu brOvavE ambA :  Rupaka", "R": "Thodi", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "H9sr0VpByXw"}, {"N": "0305", "T": "", "H": "Meena Lochani", "S": "mInalOcani ambA vEga nannu brOvavE ambA :  Rupaka", "R": "Thodi", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "q-9npNXU2T8"}, {"N": "0306", "T": "", "H": "Meena Lochani", "S": "mInalOcani ambA vEga nannu brOvavE ambA :  Rupaka", "R": "Thodi", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "t_JuDg0VM4U"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "T. N. Seshagopalan", "songs": [{"C": "Muthiah Bhagavathar", "D": "5:05", "R": "Thodi", "T": "", "U": "423 views", "V": "H9sr0VpByXw"}, {"C": "Muthiah Bhagavathar", "D": "17:55", "R": "Thodi", "T": "", "U": "1,100 views", "V": "GwKi80GtZ08"}, {"C": "Muthiah Bhagavathar", "D": "15:15", "R": "Thodi", "T": "", "U": "25 views", "V": "t_JuDg0VM4U"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

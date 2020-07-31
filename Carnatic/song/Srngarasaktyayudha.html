@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>3</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>1</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>3</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -134,57 +134,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0852", "T": "", "H": "Srngarasaktyayudha", "S": "shRHNgAra shaktyAyudha dhara sharavaNasya :  Jhampa", "R": "Ramamanohari", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "Je9UnymFHqs"}, {"N": "0853", "T": "", "H": "Srngarasaktyayudha", "S": "shRHNgAra shaktyAyudha dhara sharavaNasya :  Jhampa", "R": "Ramamanohari", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "Y7R654ME-iI"}, {"N": "0854", "T": "", "H": "Srngarasaktyayudha", "S": "shRHNgAra shaktyAyudha dhara sharavaNasya :  Jhampa", "R": "Ramamanohari", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "hE9zF1vSvAo"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Sanjay Subrahmanyan", "songs": [{"C": "Muthuswami Dikshitar", "D": "12:51", "R": "Ramamanohari", "T": "", "U": "380 views", "V": "hE9zF1vSvAo"}, {"C": "Muthuswami Dikshitar", "D": "12:51", "R": "Ramamanohari", "T": "", "U": "150 views", "V": "Y7R654ME-iI"}, {"C": "Muthuswami Dikshitar", "D": "12:16", "R": "Ramamanohari", "T": "", "U": "977 views", "V": "Je9UnymFHqs"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

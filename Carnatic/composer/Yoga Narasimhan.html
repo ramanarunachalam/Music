@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>22</td></tr>
 <tr><td><em>Song</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>5</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Ekadantam upAsmahE anEkadam tam", "songs": [{"N": "0088", "T": "", "H": "Ekadantam Upasmahe", "S": "Ekadantam upAsmahE anEkadam tam pArvatIsutam  :  Adi", "R": "Begada", "C": "Yoga Narasimhan", "A": "G. N. Balasubramaniam", "V": "xcY15HYYNGk"}, {"N": "0342", "T": "", "H": "Ekadantam Upasmahe", "S": "Ekadantam upAsmahE anEkadam tam pArvatIsutam  :  Adi", "R": "Begada", "C": "Yoga Narasimhan", "A": "M. S. Subbulakshmi", "V": "918NCE01Abo"}, {"N": "0343", "T": "", "H": "Ekadantam Upasmahe", "S": "Ekadantam upAsmahE anEkadam tam pArvatIsutam  :  Adi", "R": "Begada", "C": "Yoga Narasimhan", "A": "M. S. Subbulakshmi", "V": "A1r-7UKA5uM"}, {"N": "0344", "T": "", "H": "Ekadantam Upasmahe", "S": "Ekadantam upAsmahE anEkadam tam pArvatIsutam  :  Adi", "R": "Begada", "C": "Yoga Narasimhan", "A": "M. S. Subbulakshmi", "V": "Pj21eaML7KI"}, {"N": "0345", "T": "", "H": "Ekadantam Upasmahe", "S": "Ekadantam upAsmahE anEkadam tam pArvatIsutam  :  Adi", "R": "Begada", "C": "Yoga Narasimhan", "A": "M. S. Subbulakshmi", "V": "Uh--87JAD8Y"}]}, {"name": "maracitivO mA ramaNa", "songs": [{"N": "0673", "T": "", "H": "Marachithivo Maramana", "S": "maracitivO mA ramaNa : Adi", "R": "Latantapriya", "C": "Yoga Narasimhan", "A": "M. S. Subbulakshmi", "V": "Q0uwkgUxblg"}]}, {"name": "nijada nija nInantE nijavenagE tOra", "songs": [{"N": "0800", "T": "", "H": "Nijada Nija Neenante", "S": "nijada nija nInantE nijavenagE tOra bAradE :  Khanda Caapu", "R": "Bhanudhanyasi", "C": "Yoga Narasimhan", "A": "M. S. Subbulakshmi", "V": "UWQfHfveZac"}]}, {"name": "rAjabhOga venitiddarenu virAja vAhanolume", "songs": [{"N": "0912", "T": "", "H": "Rajabhoga Venitiddarenu", "S": "rAjabhOga venitiddarenu virAja vAhanolume :  Adi", "R": "Gowrimanohari", "C": "Yoga Narasimhan", "A": "M. S. Subbulakshmi", "V": "8Yv8hxb0zxE"}, {"N": "0913", "T": "", "H": "Rajabhoga Venitiddarenu", "S": "rAjabhOga venitiddarenu virAja vAhanolume :  Adi", "R": "Gowrimanohari", "C": "Yoga Narasimhan", "A": "M. S. Subbulakshmi", "V": "gGtJBAtXtro"}]}, {"name": "sadA sAranga nayanE shrI sadAshivadayitE", "songs": [{"N": "0263", "T": "", "H": "Sadha Saranga Nayane", "S": "sadA sAranga nayanE shrI sadAshivadayitE mAmava :  Adi", "R": "Ranjani", "C": "Yoga Narasimhan", "A": "Aruna Sairam", "V": "iUBkdnWsWX4"}, {"N": "0966", "T": "", "H": "Sadha Saranga Nayane", "S": "sadA sAranga nayanE shrI sadAshivadayitE mAmava :  Adi", "R": "Ranjani", "C": "Yoga Narasimhan", "A": "M. S. Subbulakshmi", "V": "D7uwcz4cg9w"}, {"N": "0967", "T": "", "H": "Sadha Saranga Nayane", "S": "sadA sAranga nayanE shrI sadAshivadayitE mAmava :  Adi", "R": "Ranjani", "C": "Yoga Narasimhan", "A": "M. S. Subbulakshmi", "V": "Rsa2YREiKso"}, {"N": "0968", "T": "", "H": "Sadha Saranga Nayane", "S": "sadA sAranga nayanE shrI sadAshivadayitE mAmava :  Adi", "R": "Ranjani", "C": "Yoga Narasimhan", "A": "M. S. Subbulakshmi", "V": "jshb5156vP0"}, {"N": "0070", "T": "", "H": "Sadha Saranga Nayane", "S": "sadA sAranga nayanE shrI sadAshivadayitE mAmava :  Adi", "R": "Ranjani", "C": "Yoga Narasimhan", "A": "Neela Ramgopal", "V": "Dks5n2JlIwE"}, {"N": "0287", "T": "", "H": "Sadha Saranga Nayane", "S": "sadA sAranga nayanE shrI sadAshivadayitE mAmava :  Adi", "R": "Ranjani", "C": "Yoga Narasimhan", "A": "Nithyasree Mahadevan", "V": "CsmBE7olh-I"}, {"N": "0288", "T": "", "H": "Sadha Saranga Nayane", "S": "sadA sAranga nayanE shrI sadAshivadayitE mAmava :  Adi", "R": "Ranjani", "C": "Yoga Narasimhan", "A": "Nithyasree Mahadevan", "V": "I6XzrbvbCHc"}, {"N": "0289", "T": "", "H": "Sadha Saranga Nayane", "S": "sadA sAranga nayanE shrI sadAshivadayitE mAmava :  Adi", "R": "Ranjani", "C": "Yoga Narasimhan", "A": "Nithyasree Mahadevan", "V": "R1mZDev9Qo8"}, {"N": "0055", "T": "", "H": "Sadha Saranga Nayane", "S": "sadA sAranga nayanE shrI sadAshivadayitE mAmava :  Adi", "R": "Ranjani", "C": "Yoga Narasimhan", "A": "Radha Viswanathan", "V": "x_NQI7qzERY"}, {"N": "0089", "T": "", "H": "Sadha Saranga Nayane", "S": "sadA sAranga nayanE shrI sadAshivadayitE mAmava :  Adi", "R": "Ranjani", "C": "Yoga Narasimhan", "A": "S. Aishwarya", "V": "Cs058bYKzzM"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Ekadantam Upasmahe", "S": "Ekadantam upAsmahE anEkadam tam pArvatIsutam  :  Adi", "songs": [{"A": "M. S. Subbulakshmi", "D": "11:42", "R": "Begada", "T": "", "U": "0 views", "V": "Uh--87JAD8Y"}, {"A": "M. S. Subbulakshmi", "D": "13:16", "R": "Begada", "T": "", "U": "484 views", "V": "A1r-7UKA5uM"}, {"A": "M. S. Subbulakshmi", "D": "4:55", "R": "Begada", "T": "", "U": "5,482 views", "V": "918NCE01Abo"}, {"A": "M. S. Subbulakshmi", "D": "4:58", "R": "Begada", "T": "", "U": "0 views", "V": "Pj21eaML7KI"}]}, {"H": "Marachithivo Maramana", "S": "maracitivO mA ramaNa : Adi", "songs": [{"A": "M. S. Subbulakshmi", "D": "6:54", "R": "Latantapriya", "T": "", "U": "1,223 views", "V": "Q0uwkgUxblg"}]}, {"H": "Nijada Nija Neenante", "S": "nijada nija nInantE nijavenagE tOra bAradE :  Khanda Caapu", "songs": [{"A": "M. S. Subbulakshmi", "D": "3:09", "R": "Bhanudhanyasi", "T": "", "U": "3,625 views", "V": "UWQfHfveZac"}]}, {"H": "Rajabhoga Venitiddarenu", "S": "rAjabhOga venitiddarenu virAja vAhanolume :  Adi", "songs": [{"A": "M. S. Subbulakshmi", "D": "11:11", "R": "Gowrimanohari", "T": "", "U": "0 views", "V": "8Yv8hxb0zxE"}, {"A": "M. S. Subbulakshmi", "D": "11:09", "R": "Gowrimanohari", "T": "", "U": "5,862 views", "V": "gGtJBAtXtro"}]}, {"H": "Sadha Saranga Nayane", "S": "sadA sAranga nayanE shrI sadAshivadayitE mAmava :  Adi", "songs": [{"A": "Aruna Sairam", "D": "13:14", "R": "Ranjani", "T": "", "U": "3,263 views", "V": "iUBkdnWsWX4"}, {"A": "M. S. Subbulakshmi", "D": "11:40", "R": "Ranjani", "T": "", "U": "195 views", "V": "Rsa2YREiKso"}, {"A": "M. S. Subbulakshmi", "D": "11:51", "R": "Ranjani", "T": "", "U": "442 views", "V": "D7uwcz4cg9w"}, {"A": "M. S. Subbulakshmi", "D": "11:40", "R": "Ranjani", "T": "", "U": "339 views", "V": "jshb5156vP0"}, {"A": "Neela Ramgopal", "D": "33:05", "R": "Ranjani", "T": "", "U": "174 views", "V": "Dks5n2JlIwE"}, {"A": "Nithyasree Mahadevan", "D": "36:16", "R": "Ranjani", "T": "", "U": "4,000 views", "V": "R1mZDev9Qo8"}, {"A": "Nithyasree Mahadevan", "D": "14:34", "R": "Ranjani", "T": "", "U": "193 views", "V": "CsmBE7olh-I"}, {"A": "Nithyasree Mahadevan", "D": "3:01", "R": "Ranjani", "T": "", "U": "1,675 views", "V": "I6XzrbvbCHc"}, {"A": "Radha Viswanathan", "D": "8:51", "R": "Ranjani", "T": "", "U": "102,820 views", "V": "Cs058bYKzzM"}, {"A": "Radha Viswanathan", "D": "5:33", "R": "Ranjani", "T": "", "U": "5,530 views", "V": "x_NQI7qzERY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

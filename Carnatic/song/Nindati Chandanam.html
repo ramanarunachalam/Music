@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>12</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>10</td></tr>
-<tr><td><em>Concert</em></td><td>10</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -118,57 +118,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Sisters", "songs": [{"N": "0003", "T": "Ashtapadi", "H": "Nindati Chandanam", "S": "nindhathi chandanam indu kiraNam anu vindathi :  Adi", "R": "Darbari kaanada", "C": "Jayadeva", "A": "Bombay Sisters", "V": "_AeAKJhHrV4"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0014", "T": "Ashtapadi", "H": "Nindati Chandanam", "S": "nindhathi chandanam indu kiraNam anu vindathi :  Adi", "R": "Darbari kaanada", "C": "Jayadeva", "A": "M. L. Vasanthakumari", "V": "S0CRdN3-8u8"}, {"N": "0015", "T": "Ashtapadi", "H": "Nindati Chandanam", "S": "nindhathi chandanam indu kiraNam anu vindathi :  Adi", "R": "Darbari kaanada", "C": "Jayadeva", "A": "M. L. Vasanthakumari", "V": "ZjRT2LNv2I0"}]}, {"name": "Vocal - M. S. Sheela", "songs": [{"N": "0001", "T": "Ashtapadi", "H": "Nindati Chandanam", "S": "nindhathi chandanam indu kiraNam anu vindathi :  Adi", "R": "Darbari kaanada", "C": "Jayadeva", "A": "M. S. Sheela", "V": "-pueYhuRSa4"}]}, {"name": "Vocal - R. Vedavalli", "songs": [{"N": "0008", "T": "Ashtapadi", "H": "Nindati Chandanam", "S": "nindhathi chandanam indu kiraNam anu vindathi :  Adi", "R": "Darbari kaanada", "C": "Jayadeva", "A": "R. Vedavalli", "V": "7TZpayXNXBM"}, {"N": "0009", "T": "Ashtapadi", "H": "Nindati Chandanam", "S": "nindhathi chandanam indu kiraNam anu vindathi :  Adi", "R": "Darbari kaanada", "C": "Jayadeva", "A": "R. Vedavalli", "V": "tYpHk9QtAC4"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0009", "T": "Ashtapadi", "H": "Nindati Chandanam", "S": "nindhathi chandanam indu kiraNam anu vindathi :  Adi", "R": "Darbari kaanada", "C": "Jayadeva", "A": "Sudha Ragunathan", "V": "s_wUhHq_a4k"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0023", "T": "Ashtapadi", "H": "Nindati Chandanam", "S": "nindhathi chandanam indu kiraNam anu vindathi :  Adi", "R": "Darbari kaanada", "C": "Jayadeva", "A": "T. N. Seshagopalan", "V": "pqU2T5E_IqI"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Sisters", "songs": [{"C": "Jayadeva", "D": "8:28", "R": "Darbari kaanada", "T": "Ashtapadi", "U": "681 views", "V": "_AeAKJhHrV4"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Jayadeva", "D": "4:26", "R": "Darbari kaanada", "T": "Ashtapadi", "U": "517 views", "V": "ZjRT2LNv2I0"}, {"C": "Jayadeva", "D": "4:23", "R": "Darbari kaanada", "T": "Ashtapadi", "U": "0 views", "V": "S0CRdN3-8u8"}]}, {"A": "M. S. Sheela", "songs": [{"C": "Jayadeva", "D": "5:49", "R": "Darbari kaanada", "T": "Ashtapadi", "U": "785 views", "V": "-pueYhuRSa4"}]}, {"A": "R. Vedavalli", "songs": [{"C": "Jayadeva", "D": "6:01", "R": "Darbari kaanada", "T": "Ashtapadi", "U": "8,418 views", "V": "tYpHk9QtAC4"}, {"C": "Jayadeva", "D": "5:50", "R": "Darbari kaanada", "T": "Ashtapadi", "U": "0 views", "V": "7TZpayXNXBM"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Jayadeva", "D": "7:11", "R": "Darbari kaanada", "T": "Ashtapadi", "U": "404 views", "V": "s_wUhHq_a4k"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Jayadeva", "D": "8:56", "R": "Darbari kaanada", "T": "Ashtapadi", "U": "3,269 views", "V": "pqU2T5E_IqI"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

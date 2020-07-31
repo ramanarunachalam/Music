@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>7</td></tr>
-<tr><td><em>Concert</em></td><td>7</td></tr>
+<tr><td><em>Concert</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -130,57 +130,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0163", "T": "", "H": "Re Re Manasa", "S": "rE rE mAnasa bhajarE gajAnanam  rE  :  Rupaka", "R": "Nata", "C": "Cheyyur Chengalvaraya Sastri", "A": "P. Unnikrishnan", "V": "R7rvwmnvPE0"}, {"N": "0164", "T": "", "H": "Re Re Manasa", "S": "rE rE mAnasa bhajarE gajAnanam  rE  :  Rupaka", "R": "Nata", "C": "Cheyyur Chengalvaraya Sastri", "A": "P. Unnikrishnan", "V": "VmLeKYYFB7s"}]}, {"name": "Vocal - S. Saketharaman", "songs": [{"N": "0120", "T": "", "H": "Re Re Manasa", "S": "rE rE mAnasa bhajarE gajAnanam  rE  :  Rupaka", "R": "Nata", "C": "Cheyyur Chengalvaraya Sastri", "A": "S. Saketharaman", "V": "_2RyfbGrRvs"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0714", "T": "", "H": "Re Re Manasa", "S": "rE rE mAnasa bhajarE gajAnanam  rE  :  Rupaka", "R": "Nata", "C": "Cheyyur Chengalvaraya Sastri", "A": "Sanjay Subrahmanyan", "V": "SZaTx6UJuww"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0503", "T": "", "H": "Re Re Manasa", "S": "rE rE mAnasa bhajarE gajAnanam  rE  :  Rupaka", "R": "Nata", "C": "Cheyyur Chengalvaraya Sastri", "A": "Sudha Ragunathan", "V": "2Xe2nnlGQK4"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "P. Unnikrishnan", "songs": [{"C": "Cheyyur Chengalvaraya Sastri", "D": "7:36", "R": "Nata", "T": "", "U": "0 views", "V": "VmLeKYYFB7s"}, {"C": "Cheyyur Chengalvaraya Sastri", "D": "2:00:13", "R": "Nata", "T": "", "U": "390 views", "V": "R7rvwmnvPE0"}]}, {"A": "S. Saketharaman", "songs": [{"C": "Cheyyur Chengalvaraya Sastri", "D": "8:31", "R": "Nata", "T": "", "U": "130 views", "V": "_2RyfbGrRvs"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Cheyyur Chengalvaraya Sastri", "D": "3:40", "R": "Nata", "T": "", "U": "1,900 views", "V": "SZaTx6UJuww"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Cheyyur Chengalvaraya Sastri", "D": "10:41", "R": "Nata", "T": "", "U": "163 views", "V": "2Xe2nnlGQK4"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

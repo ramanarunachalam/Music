@@ -19,10 +19,10 @@
 </tbody>
 </table></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>6</td></tr>
+<tr><td><em>Audio</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
-<tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Artist</em></td><td>5</td></tr>
+<tr><td><em>Concert</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0408", "T": "", "H": "Ranjaniraga", "S": "Ranjaniraga", "R": "Ragamalika", "C": "UnknownComposer", "A": "D. K. Jayaraman", "V": "UA6yFAsFegw"}]}, {"name": "Vocal - S. Kalyanaraman", "songs": [{"N": "0202", "T": "", "H": "Ranjaniraga", "S": "Ranjaniraga", "R": "Ragamalika", "C": "UnknownComposer", "A": "S. Kalyanaraman", "V": "7VtbpEIkd0Y"}]}, {"name": "Vocal - Thanjavur Sankara Iyer", "songs": [{"N": "0030", "T": "", "H": "Ranjaniraga", "S": "Ranjaniraga", "R": "Ragamalika", "C": "UnknownComposer", "A": "Thanjavur Sankara Iyer", "V": "ec3dsObSxlU"}]}, {"name": "Violin - Ganesh Kumaresh", "songs": [{"N": "0024", "T": "", "H": "Ranjaniraga", "S": "Ranjaniraga", "R": "Ragamalika", "C": "UnknownComposer", "A": "Ganesh Kumaresh", "V": "qzwCqiQrA3Y"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. K. Jayaraman", "songs": [{"C": "UnknownComposer", "D": "5:45", "R": "Ragamalika", "T": "", "U": "14,000 views", "V": "UA6yFAsFegw"}]}, {"A": "S. Kalyanaraman", "songs": [{"C": "UnknownComposer", "D": "27:56", "R": "Ragamalika", "T": "", "U": "863 views", "V": "7VtbpEIkd0Y"}]}, {"A": "Ganesh Kumaresh", "songs": [{"C": "UnknownComposer", "D": "25:05", "R": "Ragamalika", "T": "", "U": "9,800 views", "V": "qzwCqiQrA3Y"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

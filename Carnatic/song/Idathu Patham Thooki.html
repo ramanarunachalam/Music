@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>22</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>12</td></tr>
-<tr><td><em>Concert</em></td><td>12</td></tr>
+<tr><td><em>Concert</em></td><td>21</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -130,57 +130,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Sisters", "songs": [{"N": "0099", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Bombay Sisters", "V": "rf81tY7fQ7c"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0254", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "M. L. Vasanthakumari", "V": "7TSSQFzSFDM"}, {"N": "0255", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "M. L. Vasanthakumari", "V": "FEPw6TF6llQ"}, {"N": "0257", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "M. L. Vasanthakumari", "V": "SR0GwecROMc"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "0478", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "M. S. Subbulakshmi", "V": "D3P8YieUSbQ"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0196", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Maharajapuram Santhanam", "V": "r8_2aNVhfvo"}, {"N": "0197", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Maharajapuram Santhanam", "V": "zz30QQ5LcSE"}]}, {"name": "Vocal - S. Aishwarya", "songs": [{"N": "0043", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "S. Aishwarya", "V": "UqP2bOINidQ"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0063", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Sankaran Namboothiri", "V": "1abM4BZuuh4"}, {"N": "0064", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Sankaran Namboothiri", "V": "sNkfOVSwJtY"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0309", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Semmangudi Srinivasa Iyer", "V": "2_aHcbRLt6Q"}, {"N": "0310", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Semmangudi Srinivasa Iyer", "V": "paI3at2eWp4"}, {"N": "0311", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Semmangudi Srinivasa Iyer", "V": "sSUoRtvQ4hc"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0210", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Sudha Ragunathan", "V": "fbVnKrVU5x0"}, {"N": "0211", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Sudha Ragunathan", "V": "iSCiy8Y_QoE"}, {"N": "0212", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Sudha Ragunathan", "V": "wKInJUnWc2A"}]}, {"name": "Veena - Chitti Babu", "songs": [{"N": "0020", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Chitti Babu", "V": "2m48ElW3THA"}, {"N": "0021", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "Chitti Babu", "V": "4ixLqJZJCQo"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0188", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "U. Srinivas", "V": "4A90j0H_5PI"}]}, {"name": "Violin - M. S. Gopalakrishnan", "songs": [{"N": "0163", "T": "", "H": "Idathu Patham Thooki", "S": "iDadu padam tUkki ADum naTarAjanaDi paNivaiyE :  Adi", "R": "Khamas", "C": "Papanasam Sivan", "A": "M. S. Gopalakrishnan", "V": "QRSYRjxx_Vc"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Sisters", "songs": [{"C": "Papanasam Sivan", "D": "5:38", "R": "Khamas", "T": "", "U": "15,353 views", "V": "rf81tY7fQ7c"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Papanasam Sivan", "D": "4:45", "R": "Khamas", "T": "", "U": "3,800 views", "V": "FEPw6TF6llQ"}, {"C": "Papanasam Sivan", "D": "4:55", "R": "Khamas", "T": "", "U": "386 views", "V": "7TSSQFzSFDM"}, {"C": "Papanasam Sivan", "D": "4:51", "R": "Khamas", "T": "", "U": "46 views", "V": "SR0GwecROMc"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Papanasam Sivan", "D": "3:01", "R": "Khamas", "T": "", "U": "3,400 views", "V": "D3P8YieUSbQ"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Papanasam Sivan", "D": "11:21", "R": "Khamas", "T": "", "U": "1,000 views", "V": "zz30QQ5LcSE"}, {"C": "Papanasam Sivan", "D": "5:58", "R": "Khamas", "T": "", "U": "0 views", "V": "r8_2aNVhfvo"}]}, {"A": "S. Aishwarya", "songs": [{"C": "Papanasam Sivan", "D": "3:13", "R": "Khamas", "T": "", "U": "14,005 views", "V": "UqP2bOINidQ"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Papanasam Sivan", "D": "5:53", "R": "Khamas", "T": "", "U": "786 views", "V": "1abM4BZuuh4"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Papanasam Sivan", "D": "4:15", "R": "Khamas", "T": "", "U": "83 views", "V": "2_aHcbRLt6Q"}, {"C": "Papanasam Sivan", "D": "4:07", "R": "Khamas", "T": "", "U": "26 views", "V": "paI3at2eWp4"}, {"C": "Papanasam Sivan", "D": "6:54", "R": "Khamas", "T": "", "U": "2,885 views", "V": "sSUoRtvQ4hc"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Papanasam Sivan", "D": "11:10", "R": "Khamas", "T": "", "U": "681 views", "V": "wKInJUnWc2A"}, {"C": "Papanasam Sivan", "D": "3:01", "R": "Khamas", "T": "", "U": "27,401 views", "V": "iSCiy8Y_QoE"}, {"C": "Papanasam Sivan", "D": "11:09", "R": "Khamas", "T": "", "U": "0 views", "V": "fbVnKrVU5x0"}]}, {"A": "Chitti Babu", "songs": [{"C": "Papanasam Sivan", "D": "11:05", "R": "Khamas", "T": "", "U": "888 views", "V": "4ixLqJZJCQo"}, {"C": "Papanasam Sivan", "D": "11:05", "R": "Khamas", "T": "", "U": "44 views", "V": "2m48ElW3THA"}]}, {"A": "U. Srinivas", "songs": [{"C": "Papanasam Sivan", "D": "5:56", "R": "Khamas", "T": "", "U": "558 views", "V": "4A90j0H_5PI"}]}, {"A": "M. S. Gopalakrishnan", "songs": [{"C": "Papanasam Sivan", "D": "5:25", "R": "Khamas", "T": "", "U": "212 views", "V": "QRSYRjxx_Vc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

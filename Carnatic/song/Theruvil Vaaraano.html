@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>4</td></tr>
-<tr><td><em>Concert</em></td><td>4</td></tr>
+<tr><td><em>Concert</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Cherthala K. N. Renganatha Sharma", "songs": [{"N": "0135", "T": "", "H": "Theruvil Vaaraano", "S": "teruvil vArAnO ennai shaTrE tirumbip pArAnO :  Adi", "R": "Khamas", "C": "Muthu Thandavar", "A": "Cherthala K. N. Renganatha Sharma", "V": "SkgMz6qcedM"}]}, {"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0181", "T": "", "H": "Theruvil Vaaraano", "S": "teruvil vArAnO ennai shaTrE tirumbip pArAnO :  Adi", "R": "Khamas", "C": "Muthu Thandavar", "A": "Hyderabad Brothers", "V": "BDGi1tkzLbg"}]}, {"name": "Vocal - O. S. Arun", "songs": [{"N": "0118", "T": "", "H": "Theruvil Vaaraano", "S": "teruvil vArAnO ennai shaTrE tirumbip pArAnO :  Adi", "R": "Khamas", "C": "Muthu Thandavar", "A": "O. S. Arun", "V": "6wWLKF-Meyc"}, {"N": "0119", "T": "", "H": "Theruvil Vaaraano", "S": "teruvil vArAnO ennai shaTrE tirumbip pArAnO :  Adi", "R": "Khamas", "C": "Muthu Thandavar", "A": "O. S. Arun", "V": "pC_1R3OLXlM"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0193", "T": "", "H": "Theruvil Vaaraano", "S": "teruvil vArAnO ennai shaTrE tirumbip pArAnO :  Adi", "R": "Khamas", "C": "Muthu Thandavar", "A": "Sikkil Gurucharan", "V": "D4kKlPW7cGM"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Cherthala K. N. Renganatha Sharma", "songs": [{"C": "Muthu Thandavar", "D": "7:27", "R": "Khamas", "T": "", "U": "528 views", "V": "SkgMz6qcedM"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Muthu Thandavar", "D": "2:26", "R": "Khamas", "T": "", "U": "272 views", "V": "BDGi1tkzLbg"}]}, {"A": "O. S. Arun", "songs": [{"C": "Muthu Thandavar", "D": "4:56", "R": "Khamas", "T": "", "U": "1,529 views", "V": "6wWLKF-Meyc"}, {"C": "Muthu Thandavar", "D": "3:01", "R": "Khamas", "T": "", "U": "2,414 views", "V": "pC_1R3OLXlM"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Muthu Thandavar", "D": "9:37", "R": "Khamas", "T": "", "U": "386 views", "V": "D4kKlPW7cGM"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

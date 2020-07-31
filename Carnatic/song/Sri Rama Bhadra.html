@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>10</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>7</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0351", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Bombay Jayashri", "V": "hekSAFPju-0"}, {"N": "0352", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Bombay Jayashri", "V": "oIA1SOSF4VI"}]}, {"name": "Vocal - Girijashankar Sundaresan", "songs": [{"N": "0015", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Girijashankar Sundaresan", "V": "IvaEsReOfOM"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0502", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "K. V. Narayanaswamy", "V": "51kvE5ieBfo"}]}, {"name": "Vocal - Madurai Mani Iyer", "songs": [{"N": "0414", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Madurai Mani Iyer", "V": "jz_Cx8qgzL8"}]}, {"name": "Vocal - Papanasam Ashok Ramani", "songs": [{"N": "0014", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Papanasam Ashok Ramani", "V": "FnGymAJORqY"}]}, {"name": "Vocal - Suguna Varadachari", "songs": [{"N": "0096", "T": "", "H": "Sri Rama Bhadra", "S": "shrI rAmabhadrA raghuvIra janakaAa nAyakA pAhimAm :  Adi", "R": "Saramathi", "C": "Papanasam Sivan", "A": "Suguna Varadachari", "V": "s5FsrWb3E3w"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Papanasam Sivan", "D": "4:46", "R": "Saramathi", "T": "", "U": "1,987 views", "V": "hekSAFPju-0"}, {"C": "Papanasam Sivan", "D": "4:47", "R": "Saramathi", "T": "", "U": "9,262 views", "V": "oIA1SOSF4VI"}]}, {"A": "Girijashankar Sundaresan", "songs": [{"C": "Papanasam Sivan", "D": "7:17", "R": "Saramathi", "T": "", "U": "193 views", "V": "IvaEsReOfOM"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Papanasam Sivan", "D": "30:38", "R": "Saramathi", "T": "", "U": "13,000 views", "V": "51kvE5ieBfo"}]}, {"A": "Madurai Mani Iyer", "songs": [{"C": "Papanasam Sivan", "D": "1:44:01", "R": "Saramathi", "T": "", "U": "8,700 views", "V": "jz_Cx8qgzL8"}]}, {"A": "Papanasam Ashok Ramani", "songs": [{"C": "Papanasam Sivan", "D": "4:44", "R": "Saramathi", "T": "", "U": "0 views", "V": "FnGymAJORqY"}]}, {"A": "Suguna Varadachari", "songs": [{"C": "Papanasam Sivan", "D": "5:16", "R": "Saramathi", "T": "", "U": "163 views", "V": "s5FsrWb3E3w"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

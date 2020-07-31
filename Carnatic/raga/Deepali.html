@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>14</td></tr>
 <tr><td><em>Song</em></td><td>3</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Hari Guna", "songs": [{"N": "0007", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "Abhishek Raghuram", "V": "N6_QwGlqXBk"}, {"N": "0008", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "Abhishek Raghuram", "V": "ZHBr1i1T06o"}, {"N": "0004", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "Cherthala K. N. Renganatha Sharma", "V": "CWiFijblsQc"}, {"N": "0004", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "Kunnakudi M. Balamuralikrishna", "V": "wyj4aC6-3N8"}, {"N": "0007", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "S. Kalyanaraman", "V": "KcP_Xn4vMNQ"}, {"N": "0008", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "S. Kalyanaraman", "V": "QCFP_hCiT0U"}, {"N": "0009", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "S. Kalyanaraman", "V": "l7LwARNq4Ow"}, {"N": "0004", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "J. A. Jayanth", "V": "ZU2Wr8aUq8E"}, {"N": "0005", "T": "Bhajan", "H": "Hari Guna", "S": "Hari Guna", "R": "Deepali", "C": "Meera Bhai", "A": "J. A. Jayanth", "V": "jFKMhH9cNLA"}]}, {"name": "Purandhara Vittala Punya Swaroopa", "songs": [{"N": "0195", "T": "", "H": "Purandhara Vittala Punya Swaroopa", "S": "Purandhara Vittala Punya Swaroopa", "R": "Deepali", "C": "UnknownComposer", "A": "S. Kalyanaraman", "V": "6dwLlj3rtAg"}]}, {"name": "Unknownsong", "songs": [{"N": "0217", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Deepali", "C": "UnknownComposer", "A": "Hyderabad Brothers", "V": "Xt3ZQdo82pY"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Hari Guna", "S": "Hari Guna", "songs": [{"A": "Abhishek Raghuram", "C": "Meera Bhai", "D": "6:41", "T": "Bhajan", "U": "36,839 views", "V": "N6_QwGlqXBk"}, {"A": "Abhishek Raghuram", "C": "Meera Bhai", "D": "6:41", "T": "Bhajan", "U": "1,344 views", "V": "ZHBr1i1T06o"}, {"A": "Cherthala K. N. Renganatha Sharma", "C": "Meera Bhai", "D": "9:07", "T": "Bhajan", "U": "0 views", "V": "CWiFijblsQc"}, {"A": "Kunnakudi M. Balamuralikrishna", "C": "Meera Bhai", "D": "11:44", "T": "Bhajan", "U": "7,728 views", "V": "wyj4aC6-3N8"}, {"A": "S. Kalyanaraman", "C": "Meera Bhai", "D": "11:05", "T": "Bhajan", "U": "54 views", "V": "QCFP_hCiT0U"}, {"A": "S. Kalyanaraman", "C": "Meera Bhai", "D": "10:15", "T": "Bhajan", "U": "0 views", "V": "l7LwARNq4Ow"}, {"A": "S. Kalyanaraman", "C": "Meera Bhai", "D": "10:09", "T": "Bhajan", "U": "14,576 views", "V": "KcP_Xn4vMNQ"}, {"A": "J. A. Jayanth", "C": "Meera Bhai", "D": "4:03", "T": "Bhajan", "U": "614 views", "V": "jFKMhH9cNLA"}, {"A": "J. A. Jayanth", "C": "Meera Bhai", "D": "2:51", "T": "Bhajan", "U": "249 views", "V": "ZU2Wr8aUq8E"}]}, {"H": "Purandhara Vittala Punya Swaroopa", "S": "Purandhara Vittala Punya Swaroopa", "songs": [{"A": "S. Kalyanaraman", "C": "UnknownComposer", "D": "6:55", "T": "", "U": "32 views", "V": "6dwLlj3rtAg"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Hyderabad Brothers", "C": "UnknownComposer", "D": "12:31", "T": "", "U": "1,251 views", "V": "Xt3ZQdo82pY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

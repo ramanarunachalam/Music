@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>14</td></tr>
 <tr><td><em>Song</em></td><td>1</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "sri vishNu pada citta bhakta varyam", "songs": [{"N": "0518", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "K. V. Narayanaswamy", "V": "Qn7Vt9kADQI"}, {"N": "1114", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "M. S. Subbulakshmi", "V": "AJySIEK4DBA"}, {"N": "1115", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "M. S. Subbulakshmi", "V": "BbDFQjxwuSU"}, {"N": "1116", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "M. S. Subbulakshmi", "V": "S8DcxJT9xIQ"}, {"N": "0249", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "R. Vedavalli", "V": "wvux5OdyMhU"}, {"N": "0063", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "Vishnudev Nampoothri", "V": "H--W9wgnJmU"}, {"N": "0068", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "Vishnudev Nampoothri", "V": "pODT94VGZjk"}, {"N": "0062", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "Vishnudev Nampoothri", "V": "4jQ8Wh5RqjQ"}, {"N": "0064", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "Vishnudev Nampoothri", "V": "JSdA8_-j1O8"}, {"N": "0065", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "Vishnudev Nampoothri", "V": "UxK0dHvekaQ"}, {"N": "0066", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "Vishnudev Nampoothri", "V": "XhzlEaAatvs"}, {"N": "0067", "T": "", "H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "R": "Ragamalika", "C": "T. S. Balakrishna Sastrigal", "A": "Vishnudev Nampoothri", "V": "kWrd_lhayaI"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Sri Vishnu Pada", "S": "sri vishNu pada citta bhakta varyam :  Jhampa", "songs": [{"A": "K. V. Narayanaswamy", "D": "10:41", "R": "Ragamalika", "T": "", "U": "398 views", "V": "Qn7Vt9kADQI"}, {"A": "M. S. Subbulakshmi", "D": "30:06", "R": "Ragamalika", "T": "", "U": "464,456 views", "V": "S8DcxJT9xIQ"}, {"A": "M. S. Subbulakshmi", "D": "29:59", "R": "Ragamalika", "T": "", "U": "8,544 views", "V": "BbDFQjxwuSU"}, {"A": "M. S. Subbulakshmi", "D": "30:00", "R": "Ragamalika", "T": "", "U": "26,071 views", "V": "AJySIEK4DBA"}, {"A": "R. Vedavalli", "D": "26:39", "R": "Ragamalika", "T": "", "U": "0 views", "V": "wvux5OdyMhU"}, {"A": "Vishnudev Nampoothri", "D": "7:58", "R": "Ragamalika", "T": "", "U": "0 views", "V": "UxK0dHvekaQ"}, {"A": "Vishnudev Nampoothri", "D": "10:58", "R": "Ragamalika", "T": "", "U": "0 views", "V": "JSdA8_-j1O8"}, {"A": "Vishnudev Nampoothri", "D": "45:47", "R": "Ragamalika", "T": "", "U": "0 views", "V": "pODT94VGZjk"}, {"A": "Vishnudev Nampoothri", "D": "1:59:46", "R": "Ragamalika", "T": "", "U": "2,028 views", "V": "XhzlEaAatvs"}, {"A": "Vishnudev Nampoothri", "D": "2:12:30", "R": "Ragamalika", "T": "", "U": "5,355 views", "V": "4jQ8Wh5RqjQ"}, {"A": "Vishnudev Nampoothri", "D": "1:36:10", "R": "Ragamalika", "T": "", "U": "2,354 views", "V": "kWrd_lhayaI"}, {"A": "Vishnudev Nampoothri", "D": "1:49:22", "R": "Ragamalika", "T": "", "U": "1,247 views", "V": "H--W9wgnJmU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

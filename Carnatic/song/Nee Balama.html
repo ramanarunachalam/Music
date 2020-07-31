@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. Seshachari", "songs": [{"N": "0015", "T": "", "H": "Nee Balama", "S": "nI balamA nAma balamA nijamuga balkavE :  Adi", "R": "Anandabhairavi", "C": "Thyagaraja", "A": "D. Seshachari", "V": "n5JnjVD55Vg"}]}, {"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0112", "T": "", "H": "Nee Balama", "S": "nI balamA nAma balamA nijamuga balkavE :  Adi", "R": "Anandabhairavi", "C": "Thyagaraja", "A": "Hyderabad Brothers", "V": "aX91hBsC2xI"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0947", "T": "", "H": "Nee Balama", "S": "nI balamA nAma balamA nijamuga balkavE :  Adi", "R": "Anandabhairavi", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "-ZTFi1EQS6Q"}, {"N": "0948", "T": "", "H": "Nee Balama", "S": "nI balamA nAma balamA nijamuga balkavE :  Adi", "R": "Anandabhairavi", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "EpbXzReH9Jw"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. Seshachari", "songs": [{"C": "Thyagaraja", "D": "5:15", "R": "Anandabhairavi", "T": "", "U": "211 views", "V": "n5JnjVD55Vg"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Thyagaraja", "D": "5:57", "R": "Anandabhairavi", "T": "", "U": "82 views", "V": "aX91hBsC2xI"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Thyagaraja", "D": "6:26", "R": "Anandabhairavi", "T": "", "U": "11,194 views", "V": "EpbXzReH9Jw"}, {"C": "Thyagaraja", "D": "5:30", "R": "Anandabhairavi", "T": "", "U": "5,240 views", "V": "-ZTFi1EQS6Q"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>19</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>12</td></tr>
-<tr><td><em>Concert</em></td><td>12</td></tr>
+<tr><td><em>Concert</em></td><td>16</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -130,57 +130,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0310", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Amrutha Venkatesh", "V": "SCBOuhHm5G8"}]}, {"name": "Vocal - Hyderabad Sisters", "songs": [{"N": "0049", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Hyderabad Sisters", "V": "GIu1sio6M6E"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "1090", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "M. L. Vasanthakumari", "V": "1mIAf55HLtg"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0265", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Ramakrishnan Murthy", "V": "kIaxJF8nO5M"}]}, {"name": "Flute - J. A. Jayanth", "songs": [{"N": "0082", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "J. A. Jayanth", "V": "yXbuV0xff_w"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0632", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "U. Srinivas", "V": "4w0Z4nPCVqo"}, {"N": "0633", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "U. Srinivas", "V": "ulaYgx125fM"}]}, {"name": "Violin - Charumathi Raghuraman", "songs": [{"N": "0065", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Charumathi Raghuraman", "V": "M8rKnHxrJGQ"}]}, {"name": "Violin - Lalgudi Jayaraman", "songs": [{"N": "0610", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "59XHOEPz9wE"}, {"N": "0611", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "Cu4k1vcLuWY"}, {"N": "0612", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "RhS4cgcQ_p4"}, {"N": "0613", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "TWvEs_iRnPE"}, {"N": "0614", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "VXXCbaueLQ0"}, {"N": "0615", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "_tKCCte9cq8"}, {"N": "0616", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "crAxYlbYDr0"}]}, {"name": "Mridangam - Palghat Mani Iyer", "songs": [{"N": "0268", "T": "Thillana", "H": "thillana_lalgudi_behag", "S": "dhIm tanadhIm jhaNuta dhiranA takadhIm jhaNudhIm :  Adi", "R": "Behag", "C": "Lalgudi Jayaraman", "A": "Palghat Mani Iyer", "V": "jao6d6fcB58"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amrutha Venkatesh", "songs": [{"C": "Lalgudi Jayaraman", "D": "5:37", "R": "Behag", "T": "Thillana", "U": "785 views", "V": "SCBOuhHm5G8"}]}, {"A": "Hyderabad Sisters", "songs": [{"C": "Lalgudi Jayaraman", "D": "9:26", "R": "Behag", "T": "Thillana", "U": "1,910 views", "V": "GIu1sio6M6E"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Lalgudi Jayaraman", "D": "4:40", "R": "Behag", "T": "Thillana", "U": "0 views", "V": "1mIAf55HLtg"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Lalgudi Jayaraman", "D": "5:10", "R": "Behag", "T": "Thillana", "U": "1,327 views", "V": "kIaxJF8nO5M"}]}, {"A": "J. A. Jayanth", "songs": [{"C": "Lalgudi Jayaraman", "D": "5:48", "R": "Behag", "T": "Thillana", "U": "1,176 views", "V": "yXbuV0xff_w"}]}, {"A": "U. Srinivas", "songs": [{"C": "Lalgudi Jayaraman", "D": "5:22", "R": "Behag", "T": "Thillana", "U": "26,953 views", "V": "4w0Z4nPCVqo"}, {"C": "Lalgudi Jayaraman", "D": "4:46", "R": "Behag", "T": "Thillana", "U": "113 views", "V": "ulaYgx125fM"}]}, {"A": "Charumathi Raghuraman", "songs": [{"C": "Lalgudi Jayaraman", "D": "5:56", "R": "Behag", "T": "Thillana", "U": "2,248 views", "V": "M8rKnHxrJGQ"}]}, {"A": "Lalgudi Jayaraman", "songs": [{"C": "Lalgudi Jayaraman", "D": "4:35", "R": "Behag", "T": "Thillana", "U": "0 views", "V": "Cu4k1vcLuWY"}, {"C": "Lalgudi Jayaraman", "D": "2:28", "R": "Behag", "T": "Thillana", "U": "11,714 views", "V": "RhS4cgcQ_p4"}, {"C": "Lalgudi Jayaraman", "D": "10:38", "R": "Behag", "T": "Thillana", "U": "1,463 views", "V": "crAxYlbYDr0"}, {"C": "Lalgudi Jayaraman", "D": "5:42", "R": "Behag", "T": "Thillana", "U": "325 views", "V": "VXXCbaueLQ0"}, {"C": "Lalgudi Jayaraman", "D": "4:42", "R": "Behag", "T": "Thillana", "U": "765 views", "V": "59XHOEPz9wE"}, {"C": "Lalgudi Jayaraman", "D": "7:33", "R": "Behag", "T": "Thillana", "U": "612 views", "V": "TWvEs_iRnPE"}, {"C": "Lalgudi Jayaraman", "D": "5:34", "R": "Behag", "T": "Thillana", "U": "91 views", "V": "_tKCCte9cq8"}]}, {"A": "Palghat Mani Iyer", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:23", "R": "Behag", "T": "Thillana", "U": "10,778 views", "V": "jao6d6fcB58"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

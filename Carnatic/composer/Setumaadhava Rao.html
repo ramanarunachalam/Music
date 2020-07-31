@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Raga</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Geetham", "songs": [{"N": "0030", "T": "", "H": "Geetham", "S": "Geetham", "R": "Unknownraga", "C": "Setumaadhava Rao", "A": "P. Unnikrishnan", "V": "zlVdbNtQANo"}]}, {"name": "sAnthi nilava vENdum", "songs": [{"N": "0436", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "D. K. Jayaraman", "V": "e-QoKSJWYuw"}, {"N": "0400", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "D. K. Pattammal", "V": "3TBSUOedCBo"}, {"N": "0401", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "D. K. Pattammal", "V": "8RZQuyV0tsc"}, {"N": "0402", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "D. K. Pattammal", "V": "CUxr1-fP2tM"}, {"N": "0403", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "D. K. Pattammal", "V": "JOeLGfioAIY"}, {"N": "0071", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "Padma Krishnan", "V": "k-5U2mLnwKk"}, {"N": "0170", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "Sikkil Gurucharan", "V": "bKmpLqNe4S0"}, {"N": "0540", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "Sudha Ragunathan", "V": "TFFTEpaCWQI"}, {"N": "0541", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "Sudha Ragunathan", "V": "UzjzCduZisM"}, {"N": "0542", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "Sudha Ragunathan", "V": "cmclVR49Y0c"}, {"N": "0543", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "Sudha Ragunathan", "V": "r3TwWycmpiE"}, {"N": "0533", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "T. M. Krishna", "V": "SD0R9obilNI"}, {"N": "0534", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "T. M. Krishna", "V": "pforx-Ie8OI"}, {"N": "0009", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "Vasumathi Badrinathan", "V": "4XN5Rbilk6U"}, {"N": "0095", "T": "", "H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "R": "Thilang", "C": "Setumaadhava Rao", "A": "Vijay Siva", "V": "3L4UjIajUNY"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Geetham", "S": "Geetham", "songs": [{"A": "P. Unnikrishnan", "D": "5:34", "R": "Unknownraga", "T": "", "U": "7,951 views", "V": "zlVdbNtQANo"}]}, {"H": "Shanthi Nilava Vendum", "S": "sAnthi nilava vENdum : Adi", "songs": [{"A": "D. K. Jayaraman", "D": "4:30", "R": "Thilang", "T": "", "U": "100 views", "V": "e-QoKSJWYuw"}, {"A": "D. K. Pattammal", "D": "0:23", "R": "Thilang", "T": "", "U": "850 views", "V": "CUxr1-fP2tM"}, {"A": "D. K. Pattammal", "D": "5:11", "R": "Thilang", "T": "", "U": "1,449 views", "V": "8RZQuyV0tsc"}, {"A": "D. K. Pattammal", "D": "4:01", "R": "Thilang", "T": "", "U": "1,606 views", "V": "JOeLGfioAIY"}, {"A": "D. K. Pattammal", "D": "5:11", "R": "Thilang", "T": "", "U": "0 views", "V": "3TBSUOedCBo"}, {"A": "Padma Krishnan", "D": "9:01", "R": "Thilang", "T": "", "U": "329 views", "V": "k-5U2mLnwKk"}, {"A": "Sikkil Gurucharan", "D": "7:13", "R": "Thilang", "T": "", "U": "1,580 views", "V": "bKmpLqNe4S0"}, {"A": "Sudha Ragunathan", "D": "6:02", "R": "Thilang", "T": "", "U": "10,595 views", "V": "cmclVR49Y0c"}, {"A": "Sudha Ragunathan", "D": "6:02", "R": "Thilang", "T": "", "U": "68 views", "V": "r3TwWycmpiE"}, {"A": "Sudha Ragunathan", "D": "7:36", "R": "Thilang", "T": "", "U": "0 views", "V": "UzjzCduZisM"}, {"A": "Sudha Ragunathan", "D": "7:41", "R": "Thilang", "T": "", "U": "12,926 views", "V": "TFFTEpaCWQI"}, {"A": "T. M. Krishna", "D": "6:41", "R": "Thilang", "T": "", "U": "4,170 views", "V": "pforx-Ie8OI"}, {"A": "T. M. Krishna", "D": "5:22", "R": "Thilang", "T": "", "U": "2,405 views", "V": "SD0R9obilNI"}, {"A": "Vasumathi Badrinathan", "D": "8:36", "R": "Thilang", "T": "", "U": "105 views", "V": "4XN5Rbilk6U"}, {"A": "Vijay Siva", "D": "4:54", "R": "Thilang", "T": "", "U": "0 views", "V": "3L4UjIajUNY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

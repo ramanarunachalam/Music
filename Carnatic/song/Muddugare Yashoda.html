@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>13</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>11</td></tr>
-<tr><td><em>Concert</em></td><td>11</td></tr>
+<tr><td><em>Concert</em></td><td>12</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -143,57 +143,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Abhishek Raghuram", "songs": [{"N": "0122", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "Abhishek Raghuram", "V": "LfmbtuKM-VQ"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0142", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "Malladi Brothers", "V": "dvQt6wgJkrA"}]}, {"name": "Vocal - Nedunuri Krishnamurthy", "songs": [{"N": "0238", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "Nedunuri Krishnamurthy", "V": "-slMjcxEI1M"}, {"N": "0239", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "Nedunuri Krishnamurthy", "V": "PILauEaCpCk"}]}, {"name": "Vocal - Pantula Rama", "songs": [{"N": "0082", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "Pantula Rama", "V": "8tcirKrTe4Y"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0138", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "Priya Sisters", "V": "XYChVs1Hq6Y"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0349", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "Sudha Ragunathan", "V": "oYR5bBlt5Sc"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0372", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "T. M. Krishna", "V": "lXSFaA0PDaQ"}, {"N": "0371", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "T. M. Krishna", "V": "QnppG37R9oc"}]}, {"name": "Vocal - Vasudha Ravi", "songs": [{"N": "0024", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "Vasudha Ravi", "V": "XaHbPRjoflU"}]}, {"name": "Violin - M. Vijay", "songs": [{"N": "0045", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "M. Vijay", "V": "qmRStOomzOo"}]}, {"name": "Violin - Padma Shankar", "songs": [{"N": "0021", "T": "", "H": "Muddugare Yashoda", "S": "MuddugAre YasodA mungiti muthyamuvidu :  Adi", "R": "Kurinji", "C": "Annamacharya", "A": "Padma Shankar", "V": "wfkMOipZExQ"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Abhishek Raghuram", "songs": [{"C": "Annamacharya", "D": "3:25", "R": "Kurinji", "T": "", "U": "18,191 views", "V": "LfmbtuKM-VQ"}]}, {"A": "Malladi Brothers", "songs": [{"C": "Annamacharya", "D": "4:51", "R": "Kurinji", "T": "", "U": "244 views", "V": "dvQt6wgJkrA"}]}, {"A": "Nedunuri Krishnamurthy", "songs": [{"C": "Annamacharya", "D": "9:06", "R": "Kurinji", "T": "", "U": "629 views", "V": "PILauEaCpCk"}, {"C": "Annamacharya", "D": "4:51", "R": "Kurinji", "T": "", "U": "1,198 views", "V": "-slMjcxEI1M"}]}, {"A": "Pantula Rama", "songs": [{"C": "Annamacharya", "D": "7:35", "R": "Kurinji", "T": "", "U": "2,270 views", "V": "8tcirKrTe4Y"}]}, {"A": "Priya Sisters", "songs": [{"C": "Annamacharya", "D": "4:48", "R": "Kurinji", "T": "", "U": "0 views", "V": "XYChVs1Hq6Y"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Annamacharya", "D": "4:08", "R": "Kurinji", "T": "", "U": "201,497 views", "V": "oYR5bBlt5Sc"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Annamacharya", "D": "6:56", "R": "Kurinji", "T": "", "U": "11,164 views", "V": "lXSFaA0PDaQ"}, {"C": "Annamacharya", "D": "4:58", "R": "Kurinji", "T": "", "U": "5,807 views", "V": "QnppG37R9oc"}]}, {"A": "Vasudha Ravi", "songs": [{"C": "Annamacharya", "D": "7:16", "R": "Kurinji", "T": "", "U": "44,166 views", "V": "XaHbPRjoflU"}]}, {"A": "M. Vijay", "songs": [{"C": "Annamacharya", "D": "5:02", "R": "Kurinji", "T": "", "U": "10,379 views", "V": "qmRStOomzOo"}]}, {"A": "Padma Shankar", "songs": [{"C": "Annamacharya", "D": "3:03", "R": "Kurinji", "T": "", "U": "211 views", "V": "wfkMOipZExQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

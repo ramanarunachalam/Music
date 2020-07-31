@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>30</td></tr>
 <tr><td><em>Song</em></td><td>5</td></tr>
 <tr><td><em>Composer</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "kanakAngakA sukhA guhA dinam kA", "songs": [{"N": "0046", "T": "", "H": "Kanakangaka Sukha", "S": "kanakAngakA sukhA guhA dinam kA murugA :  Adi", "R": "Kanakangi", "C": "Koteeswara Iyer", "A": "Vijayalakshmy Subramaniam", "V": "d2cVcUV-Kks"}, {"N": "0045", "T": "", "H": "Kanakangaka Sukha", "S": "kanakAngakA sukhA guhA dinam kA murugA :  Adi", "R": "Kanakangi", "C": "Koteeswara Iyer", "A": "Vijayalakshmy Subramaniam", "V": "82ityvVKqjo"}]}, {"name": "SrI gaNa nAthaM bhajAm y aham", "songs": [{"N": "0024", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "G. Srikanth", "V": "DDMije-geWI"}, {"N": "0327", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "6A2AsJB4_Qo"}, {"N": "0328", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "6lMj2bLSW6M"}, {"N": "0329", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "Dg7xmvC2e80"}, {"N": "0330", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "LJF3F7toOfU"}, {"N": "0331", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "TNJa1qJympM"}, {"N": "0332", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "yOPgW0ZVZZs"}, {"N": "0007", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "Mangalam Shankar", "V": "Kqj2Y-x_tdw"}, {"N": "0078", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "Neela Ramgopal", "V": "1zXH8OFALt0"}, {"N": "0456", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "U. Srinivas", "V": "3hUUAt8kzP8"}, {"N": "0457", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "U. Srinivas", "V": "42H0gJJVjzA"}, {"N": "0059", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "S. Krishna", "V": "cq56TpJaoiY"}, {"N": "0051", "T": "", "H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "R": "Kanakangi", "C": "Thyagaraja", "A": "G. Harishankar", "V": "0hO-uCsuK2w"}]}, {"name": "uLLam urugi urugi anbu veLLam AgAdO", "songs": [{"N": "0902", "T": "", "H": "Ullam Urugi Urugi", "S": "uLLam urugi urugi anbu veLLam AgAdO :  Adi", "R": "Kanakangi", "C": "Shuddhananda Bharathi", "A": "Sanjay Subrahmanyan", "V": "2VDZ3Yg3JjM"}, {"N": "0903", "T": "", "H": "Ullam Urugi Urugi", "S": "uLLam urugi urugi anbu veLLam AgAdO :  Adi", "R": "Kanakangi", "C": "Shuddhananda Bharathi", "A": "Sanjay Subrahmanyan", "V": "DzWsEfK_mRc"}, {"N": "0904", "T": "", "H": "Ullam Urugi Urugi", "S": "uLLam urugi urugi anbu veLLam AgAdO :  Adi", "R": "Kanakangi", "C": "Shuddhananda Bharathi", "A": "Sanjay Subrahmanyan", "V": "adkv9izY998"}]}, {"name": "Unknownsong", "songs": [{"N": "0023", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kanakangi", "C": "UnknownComposer", "A": "Dr. Vellore A. R. Srinivasan", "V": "oCF5y0G2IFY"}, {"N": "0050", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kanakangi", "C": "UnknownComposer", "A": "G. Srikanth", "V": "lMWVT_qffMc"}, {"N": "0517", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kanakangi", "C": "UnknownComposer", "A": "K. J. Yesudas", "V": "E5sVcRLT-Uw"}, {"N": "2022", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kanakangi", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "8PCohIPGdTE"}, {"N": "2023", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kanakangi", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "wejzTrgyAr4"}, {"N": "0453", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kanakangi", "C": "UnknownComposer", "A": "Nithyasree Mahadevan", "V": "VHTEEXV8rFo"}, {"N": "0454", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kanakangi", "C": "UnknownComposer", "A": "Nithyasree Mahadevan", "V": "u-MFdyZeDv8"}, {"N": "0059", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kanakangi", "C": "UnknownComposer", "A": "Nookala Chinna Satyanarayana", "V": "xDeT1aDGxt8"}, {"N": "0078", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kanakangi", "C": "UnknownComposer", "A": "S. Balachander", "V": "VzYEd01J8Ks"}]}, {"name": "Varnam", "songs": [{"N": "0888", "T": "", "H": "Varnam", "S": "Varnam", "R": "Kanakangi", "C": "UnknownComposer", "A": "T. M. Krishna", "V": "zCZMo2l88rM"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Kanakangaka Sukha", "S": "kanakAngakA sukhA guhA dinam kA murugA :  Adi", "songs": [{"A": "Vijayalakshmy Subramaniam", "C": "Koteeswara Iyer", "D": "6:35", "T": "", "U": "908 views", "V": "d2cVcUV-Kks"}, {"A": "Vijayalakshmy Subramaniam", "C": "Koteeswara Iyer", "D": "6:47", "T": "", "U": "246 views", "V": "82ityvVKqjo"}]}, {"H": "Sri Gana Natham", "S": "SrI gaNa nAthaM bhajAm y aham  :  Adi", "songs": [{"A": "G. Srikanth", "C": "Thyagaraja", "D": "4:57", "T": "", "U": "914 views", "V": "DDMije-geWI"}, {"A": "K. J. Yesudas", "C": "Thyagaraja", "D": "5:58", "T": "", "U": "23,000 views", "V": "LJF3F7toOfU"}, {"A": "K. J. Yesudas", "C": "Thyagaraja", "D": "15:36", "T": "", "U": "9,900 views", "V": "yOPgW0ZVZZs"}, {"A": "K. J. Yesudas", "C": "Thyagaraja", "D": "25:01", "T": "", "U": "468 views", "V": "6A2AsJB4_Qo"}, {"A": "K. J. Yesudas", "C": "Thyagaraja", "D": "22:51", "T": "", "U": "3,036 views", "V": "TNJa1qJympM"}, {"A": "K. J. Yesudas", "C": "Thyagaraja", "D": "21:04", "T": "", "U": "26 views", "V": "6lMj2bLSW6M"}, {"A": "K. J. Yesudas", "C": "Thyagaraja", "D": "23:04", "T": "", "U": "579 views", "V": "Dg7xmvC2e80"}, {"A": "Mangalam Shankar", "C": "Thyagaraja", "D": "4:25", "T": "", "U": "3,800 views", "V": "Kqj2Y-x_tdw"}, {"A": "Neela Ramgopal", "C": "Thyagaraja", "D": "13:21", "T": "", "U": "0 views", "V": "1zXH8OFALt0"}, {"A": "U. Srinivas", "C": "Thyagaraja", "D": "6:31", "T": "", "U": "283 views", "V": "3hUUAt8kzP8"}, {"A": "U. Srinivas", "C": "Thyagaraja", "D": "5:56", "T": "", "U": "872 views", "V": "42H0gJJVjzA"}, {"A": "S. Krishna", "C": "Thyagaraja", "D": "5:03", "T": "", "U": "232 views", "V": "cq56TpJaoiY"}, {"A": "G. Harishankar", "C": "Thyagaraja", "D": "7:00", "T": "", "U": "2,433 views", "V": "0hO-uCsuK2w"}]}, {"H": "Ullam Urugi Urugi", "S": "uLLam urugi urugi anbu veLLam AgAdO :  Adi", "songs": [{"A": "Sanjay Subrahmanyan", "C": "Shuddhananda Bharathi", "D": "4:00", "T": "", "U": "1,800 views", "V": "2VDZ3Yg3JjM"}, {"A": "Sanjay Subrahmanyan", "C": "Shuddhananda Bharathi", "D": "4:11", "T": "", "U": "0 views", "V": "adkv9izY998"}, {"A": "Sanjay Subrahmanyan", "C": "Shuddhananda Bharathi", "D": "", "T": "", "U": "253 views", "V": "DzWsEfK_mRc"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Dr. Vellore A. R. Srinivasan", "C": "UnknownComposer", "D": "3:16", "T": "", "U": "886 views", "V": "oCF5y0G2IFY"}, {"A": "G. Srikanth", "C": "UnknownComposer", "D": "2:15", "T": "", "U": "10,638 views", "V": "lMWVT_qffMc"}, {"A": "K. J. Yesudas", "C": "UnknownComposer", "D": "17:36", "T": "", "U": "209 views", "V": "E5sVcRLT-Uw"}, {"A": "M. Balamuralikrishna", "C": "UnknownComposer", "D": "6:26", "T": "", "U": "2,846 views", "V": "8PCohIPGdTE"}, {"A": "M. Balamuralikrishna", "C": "UnknownComposer", "D": "9:55", "T": "", "U": "10,072 views", "V": "wejzTrgyAr4"}, {"A": "Nithyasree Mahadevan", "C": "UnknownComposer", "D": "6:15", "T": "", "U": "8,909 views", "V": "VHTEEXV8rFo"}, {"A": "Nithyasree Mahadevan", "C": "UnknownComposer", "D": "5:17", "T": "", "U": "12,065 views", "V": "u-MFdyZeDv8"}, {"A": "Nookala Chinna Satyanarayana", "C": "UnknownComposer", "D": "5:35", "T": "", "U": "0 views", "V": "xDeT1aDGxt8"}, {"A": "S. Balachander", "C": "UnknownComposer", "D": "8:05", "T": "", "U": "0 views", "V": "VzYEd01J8Ks"}]}, {"H": "Varnam", "S": "Varnam", "songs": [{"A": "T. M. Krishna", "C": "UnknownComposer", "D": "3:01", "T": "", "U": "3,517 views", "V": "zCZMo2l88rM"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

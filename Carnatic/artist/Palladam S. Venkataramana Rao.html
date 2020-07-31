@@ -17,7 +17,7 @@
 <tr><td><em>Song</em></td><td>10</td></tr>
 <tr><td><em>Raga</em></td><td>8</td></tr>
 <tr><td><em>Composer</em></td><td>7</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>23</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "PSV01", "songs": [{"N": "0001", "T": "", "H": "Concert", "S": "Concert", "R": "Kambhoji", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "6MbrWM4AEOY"}, {"N": "0002", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "J1MZHsjnTaw"}, {"N": "0003", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "dzW6E4FFWug"}, {"N": "0004", "T": "", "H": "Marakoti Sundari", "S": "mArakOTi sundari mAnini mAmava sadA jaganmOhini :  Adi", "R": "Bahudhari", "C": "G. N. Balasubramaniam", "A": "Palladam S. Venkataramana Rao", "V": "7mzA6Z985yM"}, {"N": "0005", "T": "", "H": "Nekkurugi", "S": "Nekkurugi Unnai Panidha kullnejjam :  Adi", "R": "Abhogi", "C": "Papanasam Sivan", "A": "Palladam S. Venkataramana Rao", "V": "UjkOy6VBBoo"}, {"N": "0006", "T": "", "H": "Theerada Vilayattu", "S": "theeraadha vilaiyaattup pillai   kannan :  Eka", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Palladam S. Venkataramana Rao", "V": "PSKb4PlewQ8"}, {"N": "0007", "T": "", "H": "Venkataramana", "S": "Venkataramana Un Thiruvilayaadalai Yaar Arivar :  Rupaka", "R": "Lathangi", "C": "Papanasam Sivan", "A": "Palladam S. Venkataramana Rao", "V": "7SqwQhCEzMg"}, {"N": "0008", "T": "", "H": "Venkataramana", "S": "Venkataramana Un Thiruvilayaadalai Yaar Arivar :  Rupaka", "R": "Lathangi", "C": "Papanasam Sivan", "A": "Palladam S. Venkataramana Rao", "V": "IDQqfWs2xZQ"}, {"N": "0009", "T": "", "H": "Venkataramana", "S": "Venkataramana Un Thiruvilayaadalai Yaar Arivar :  Rupaka", "R": "Lathangi", "C": "Papanasam Sivan", "A": "Palladam S. Venkataramana Rao", "V": "PX8gDTycNVE"}, {"N": "0010", "T": "", "H": "Venkataramana", "S": "Venkataramana Un Thiruvilayaadalai Yaar Arivar :  Rupaka", "R": "Lathangi", "C": "Papanasam Sivan", "A": "Palladam S. Venkataramana Rao", "V": "R2mqZN_75oQ"}, {"N": "0011", "T": "", "H": "Venkataramana", "S": "Venkataramana Un Thiruvilayaadalai Yaar Arivar :  Rupaka", "R": "Lathangi", "C": "Papanasam Sivan", "A": "Palladam S. Venkataramana Rao", "V": "bW7bVn-aiiU"}, {"N": "0012", "T": "", "H": "Venkataramana", "S": "Venkataramana Un Thiruvilayaadalai Yaar Arivar :  Rupaka", "R": "Lathangi", "C": "Papanasam Sivan", "A": "Palladam S. Venkataramana Rao", "V": "udOWiJmBwBo"}, {"N": "0013", "T": "Pancharathnam", "H": "Endaro Mahanubhavulu", "S": "endarO mahAnubhAvulu : Adi", "R": "Sri", "C": "Thyagaraja", "A": "Palladam S. Venkataramana Rao", "V": "ZVWOFL5K7Xw"}, {"N": "0014", "T": "Pancharathnam", "H": "Endaro Mahanubhavulu", "S": "endarO mahAnubhAvulu : Adi", "R": "Sri", "C": "Thyagaraja", "A": "Palladam S. Venkataramana Rao", "V": "h9Mak1fiRos"}, {"N": "0017", "T": "", "H": "Varnam", "S": "Varnam", "R": "Unknownraga", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "9azD7XLpcQg"}, {"N": "0018", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kambhoji", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "nhAq7NDz9EE"}, {"N": "0019", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "3nTvbQAQ1bg"}, {"N": "0020", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "7vDuNP9F8aw"}, {"N": "0021", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "AVmp895HH7U"}, {"N": "0022", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "LKS3vAe9aWs"}, {"N": "0023", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "RGu8aws1zdI"}, {"N": "0024", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "SCKmv-gCnZk"}, {"N": "0025", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Palladam S. Venkataramana Rao", "V": "ap8W0T0pfmM"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Concert", "S": "Concert", "songs": [{"C": "UnknownComposer", "D": "1:03:29", "R": "Unknownraga", "T": "", "U": "1,696 views", "V": "J1MZHsjnTaw"}, {"C": "UnknownComposer", "D": "1:01:43", "R": "Unknownraga", "T": "", "U": "1,409 views", "V": "dzW6E4FFWug"}, {"C": "UnknownComposer", "D": "1:31:50", "R": "Unknownraga", "T": "", "U": "97 views", "V": "6MbrWM4AEOY"}]}, {"H": "Endaro Mahanubhavulu", "S": "endarO mahAnubhAvulu : Adi", "songs": [{"C": "Thyagaraja", "D": "12:02", "R": "Sri", "T": "Pancharathnam", "U": "1,213 views", "V": "ZVWOFL5K7Xw"}]}, {"H": "Marakoti Sundari", "S": "mArakOTi sundari mAnini mAmava sadA jaganmOhini :  Adi", "songs": [{"C": "G. N. Balasubramaniam", "D": "10:14", "R": "Bahudhari", "T": "", "U": "0 views", "V": "7mzA6Z985yM"}]}, {"H": "Nekkurugi", "S": "Nekkurugi Unnai Panidha kullnejjam :  Adi", "songs": [{"C": "Papanasam Sivan", "D": "8:15", "R": "Abhogi", "T": "", "U": "0 views", "V": "UjkOy6VBBoo"}]}, {"H": "Theerada Vilayattu", "S": "theeraadha vilaiyaattup pillai   kannan :  Eka", "songs": [{"C": "Subramanya Bharathiyar", "D": "5:15", "R": "Ragamalika", "T": "", "U": "573 views", "V": "PSKb4PlewQ8"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "55:59", "R": "Kambhoji", "T": "", "U": "9,943 views", "V": "nhAq7NDz9EE"}, {"C": "UnknownComposer", "D": "7:54", "R": "Unknownraga", "T": "", "U": "4,437 views", "V": "LKS3vAe9aWs"}, {"C": "UnknownComposer", "D": "11:25", "R": "Unknownraga", "T": "", "U": "512 views", "V": "7vDuNP9F8aw"}, {"C": "UnknownComposer", "D": "4:56", "R": "Unknownraga", "T": "", "U": "0 views", "V": "ap8W0T0pfmM"}, {"C": "UnknownComposer", "D": "6:02", "R": "Unknownraga", "T": "", "U": "4,042 views", "V": "AVmp895HH7U"}, {"C": "UnknownComposer", "D": "12:10", "R": "Unknownraga", "T": "", "U": "0 views", "V": "RGu8aws1zdI"}, {"C": "UnknownComposer", "D": "6:02", "R": "Unknownraga", "T": "", "U": "1,338 views", "V": "3nTvbQAQ1bg"}, {"C": "UnknownComposer", "D": "7:21", "R": "Unknownraga", "T": "", "U": "0 views", "V": "SCKmv-gCnZk"}]}, {"H": "Varnam", "S": "Varnam", "songs": [{"C": "UnknownComposer", "D": "3:54", "R": "Unknownraga", "T": "", "U": "0 views", "V": "9azD7XLpcQg"}]}, {"H": "Vathapi Ganapathim", "S": "vAtApi gaNa patiM bhajE a haM  :  Adi", "songs": [{"C": "Muthuswami Dikshitar", "D": "2:03:43", "R": "Hamsadhwani", "T": "Shodasa ganapati", "U": "0 views", "V": "h9Mak1fiRos"}]}, {"H": "Venkataramana", "S": "Venkataramana Un Thiruvilayaadalai Yaar Arivar :  Rupaka", "songs": [{"C": "Papanasam Sivan", "D": "1:00:54", "R": "Lathangi", "T": "", "U": "7,867 views", "V": "R2mqZN_75oQ"}, {"C": "Papanasam Sivan", "D": "54:27", "R": "Lathangi", "T": "", "U": "4,522 views", "V": "bW7bVn-aiiU"}, {"C": "Papanasam Sivan", "D": "1:02:49", "R": "Lathangi", "T": "", "U": "2,388 views", "V": "IDQqfWs2xZQ"}, {"C": "Papanasam Sivan", "D": "1:06:19", "R": "Lathangi", "T": "", "U": "2,662 views", "V": "7SqwQhCEzMg"}, {"C": "Papanasam Sivan", "D": "44:07", "R": "Lathangi", "T": "", "U": "368 views", "V": "PX8gDTycNVE"}, {"C": "Papanasam Sivan", "D": "1:52", "R": "Lathangi", "T": "", "U": "1,866 views", "V": "udOWiJmBwBo"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

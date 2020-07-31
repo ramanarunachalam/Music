@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>11</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>10</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -129,57 +129,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0219", "T": "", "H": "Karunai Seivai", "S": "karuNai seivAi gajarAjmukha  :  Deshadi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "D. K. Pattammal", "V": "-agb8wss4L4"}]}, {"name": "Vocal - Madurai Mani Iyer", "songs": [{"N": "0223", "T": "", "H": "Karunai Seivai", "S": "karuNai seivAi gajarAjmukha  :  Deshadi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Madurai Mani Iyer", "V": "TGHIMcXoZus"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0115", "T": "", "H": "Karunai Seivai", "S": "karuNai seivAi gajarAjmukha  :  Deshadi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Priya Sisters", "V": "SjxWa3RoJ-E"}]}, {"name": "Vocal - S. Ramanathan", "songs": [{"N": "0070", "T": "", "H": "Karunai Seivai", "S": "karuNai seivAi gajarAjmukha  :  Deshadi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "S. Ramanathan", "V": "Jp3L8jV5UG4"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0073", "T": "", "H": "Karunai Seivai", "S": "karuNai seivAi gajarAjmukha  :  Deshadi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Sankaran Namboothiri", "V": "ogZ082HAEOw"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0269", "T": "", "H": "Karunai Seivai", "S": "karuNai seivAi gajarAjmukha  :  Deshadi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Sudha Ragunathan", "V": "MK2ory1ow8A"}, {"N": "0270", "T": "", "H": "Karunai Seivai", "S": "karuNai seivAi gajarAjmukha  :  Deshadi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Sudha Ragunathan", "V": "aF0DFFCp8FU"}, {"N": "0271", "T": "", "H": "Karunai Seivai", "S": "karuNai seivAi gajarAjmukha  :  Deshadi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Sudha Ragunathan", "V": "wKG64Fm5CuU"}, {"N": "0272", "T": "", "H": "Karunai Seivai", "S": "karuNai seivAi gajarAjmukha  :  Deshadi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Sudha Ragunathan", "V": "wcTyCL49bHA"}]}, {"name": "Vocal - T. V. Sankaranarayanan", "songs": [{"N": "0108", "T": "", "H": "Karunai Seivai", "S": "karuNai seivAi gajarAjmukha  :  Deshadi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "T. V. Sankaranarayanan", "V": "GbeMufhEklw"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. K. Pattammal", "songs": [{"C": "Papanasam Sivan", "D": "5:50", "R": "Hamsadhwani", "T": "", "U": "97 views", "V": "-agb8wss4L4"}]}, {"A": "Madurai Mani Iyer", "songs": [{"C": "Papanasam Sivan", "D": "9:37", "R": "Hamsadhwani", "T": "", "U": "5,200 views", "V": "TGHIMcXoZus"}]}, {"A": "Priya Sisters", "songs": [{"C": "Papanasam Sivan", "D": "2:48", "R": "Hamsadhwani", "T": "", "U": "6,068 views", "V": "SjxWa3RoJ-E"}]}, {"A": "S. Ramanathan", "songs": [{"C": "Papanasam Sivan", "D": "14:46", "R": "Hamsadhwani", "T": "", "U": "279 views", "V": "Jp3L8jV5UG4"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Papanasam Sivan", "D": "7:01", "R": "Hamsadhwani", "T": "", "U": "253 views", "V": "ogZ082HAEOw"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Papanasam Sivan", "D": "10:55", "R": "Hamsadhwani", "T": "", "U": "203 views", "V": "aF0DFFCp8FU"}, {"C": "Papanasam Sivan", "D": "11:01", "R": "Hamsadhwani", "T": "", "U": "1,700 views", "V": "wKG64Fm5CuU"}, {"C": "Papanasam Sivan", "D": "3:01", "R": "Hamsadhwani", "T": "", "U": "5,652 views", "V": "MK2ory1ow8A"}, {"C": "Papanasam Sivan", "D": "6:46", "R": "Hamsadhwani", "T": "", "U": "233 views", "V": "wcTyCL49bHA"}]}, {"A": "T. V. Sankaranarayanan", "songs": [{"C": "Papanasam Sivan", "D": "14:31", "R": "Hamsadhwani", "T": "", "U": "163 views", "V": "GbeMufhEklw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

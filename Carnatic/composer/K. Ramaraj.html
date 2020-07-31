@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>38</td></tr>
 <tr><td><em>Song</em></td><td>21</td></tr>
 <tr><td><em>Raga</em></td><td>21</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Ambaasutha", "songs": [{"N": "0001", "T": "", "H": "Ambaasutha", "S": "Ambaasutha", "R": "Gambheeravani", "C": "K. Ramaraj", "A": "K. Ramaraj", "V": "TLOSGPGuUlQ"}]}, {"name": "Daya Mayi Shankari", "songs": [{"N": "0002", "T": "", "H": "Daya Mayi Shankari", "S": "Daya Mayi Shankari", "R": "Lathangi", "C": "K. Ramaraj", "A": "K. Ramaraj", "V": "XrJ6lexSk6M"}]}, {"name": "Gowri Nivaasaa Karunaa Vilaasa", "songs": [{"N": "0003", "T": "", "H": "Gowri Nivaasaa Karunaa Vilaasa", "S": "Gowri Nivaasaa Karunaa Vilaasa", "R": "Malayamarutham", "C": "K. Ramaraj", "A": "K. Ramaraj", "V": "_4bEsKNVpqA"}]}, {"name": "Hari Amsane", "songs": [{"N": "0024", "T": "", "H": "Hari Amsane", "S": "Hari Amsane", "R": "Ratipatipriya", "C": "K. Ramaraj", "A": "Raji Gopalakrishnan", "V": "3TRl8qfbk30"}]}, {"name": "Jayajaya Sri Bruhanaayaki", "songs": [{"N": "0004", "T": "", "H": "Jayajaya Sri Bruhanaayaki", "S": "Jayajaya Sri Bruhanaayaki", "R": "Dharmavathi", "C": "K. Ramaraj", "A": "K. Ramaraj", "V": "yY1UY6OK5yY"}]}, {"name": "Maargam Thandarul", "songs": [{"N": "0005", "T": "", "H": "Maargam Thandarul", "S": "Maargam Thandarul", "R": "Shadhvidhamargini", "C": "K. Ramaraj", "A": "K. Ramaraj", "V": "4KzGYoLvnE8"}]}, {"name": "Nee Manam", "songs": [{"N": "0041", "T": "", "H": "Nee Manam", "S": "Nee Manam", "R": "Sumanesaranjani", "C": "K. Ramaraj", "A": "Raji Gopalakrishnan", "V": "QQDOr26RW4Y"}]}, {"name": "Parameshwari", "songs": [{"N": "0004", "T": "", "H": "Parameshwari", "S": "Parameshwari", "R": "Shivaranjani", "C": "K. Ramaraj", "A": "V. Sivaranjani V. Nalinakanthi", "V": "D3JGuxlh7qA"}, {"N": "0113", "T": "", "H": "Parameshwari", "S": "Parameshwari", "R": "Shivaranjani", "C": "K. Ramaraj", "A": "Avaneeswaram S. R. Vinu", "V": "OpmNroUeVOU"}]}, {"name": "Punidane", "songs": [{"N": "0046", "T": "", "H": "Punidane", "S": "Punidane", "R": "Soorya", "C": "K. Ramaraj", "A": "Raji Gopalakrishnan", "V": "nwx3qZF3NCY"}]}, {"name": "Raaga Rasika", "songs": [{"N": "0332", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "G. N. Balasubramaniam", "V": "5KH6qB_GF38"}, {"N": "0333", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "G. N. Balasubramaniam", "V": "PxuRSB9unGQ"}, {"N": "0334", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "G. N. Balasubramaniam", "V": "ecxQz7AGUqM"}, {"N": "0335", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "G. N. Balasubramaniam", "V": "q-89X8089FA"}, {"N": "0048", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "Raji Gopalakrishnan", "V": "fFft4X8ulCg"}, {"N": "0007", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "Veenai Dhanammal", "V": "XveUkjAtwQA"}, {"N": "0348", "T": "", "H": "Raaga Rasika", "S": "Raaga Rasika", "R": "Keeravani", "C": "K. Ramaraj", "A": "Lalgudi Jayaraman", "V": "lq07Yy1eYQU"}]}, {"name": "Saaranga Paani", "songs": [{"N": "0006", "T": "", "H": "Saaranga Paani", "S": "Saaranga Paani", "R": "Hamsakalyani", "C": "K. Ramaraj", "A": "K. Ramaraj", "V": "WCLVMxKSAxc"}, {"N": "0052", "T": "", "H": "Saaranga Paani", "S": "Saaranga Paani", "R": "Hamsakalyani", "C": "K. Ramaraj", "A": "Raji Gopalakrishnan", "V": "UKSGdTp0kjk"}]}, {"name": "Sabari Giri Naadhaa", "songs": [{"N": "0283", "T": "", "H": "Sabari Giri Naadhaa", "S": "Sabari Giri Naadhaa", "R": "Thodi", "C": "K. Ramaraj", "A": "K. J. Yesudas", "V": "-R3QZHqu6cU"}, {"N": "0284", "T": "", "H": "Sabari Giri Naadhaa", "S": "Sabari Giri Naadhaa", "R": "Thodi", "C": "K. Ramaraj", "A": "K. J. Yesudas", "V": "2SL_EqToDbc"}]}, {"name": "Sankara Harapriya Gurunathaney", "songs": [{"N": "0007", "T": "", "H": "Sankara Harapriya Gurunathaney", "S": "Sankara Harapriya Gurunathaney", "R": "Karaharapriya", "C": "K. Ramaraj", "A": "K. Ramaraj", "V": "UafS8DmCjXs"}, {"N": "0057", "T": "", "H": "Sankara Harapriya Gurunathaney", "S": "Sankara Harapriya Gurunathaney", "R": "Karaharapriya", "C": "K. Ramaraj", "A": "Raji Gopalakrishnan", "V": "aP9ep32yahc"}]}, {"name": "Sannidhiye", "songs": [{"N": "0058", "T": "", "H": "Sannidhiye", "S": "Sannidhiye", "R": "Priyadarshani", "C": "K. Ramaraj", "A": "Raji Gopalakrishnan", "V": "HRqCNe-CWzw"}]}, {"name": "Sunaadhavinodhini Vaarini", "songs": [{"N": "0008", "T": "", "H": "Sunaadhavinodhini Vaarini", "S": "Sunaadhavinodhini Vaarini", "R": "Sunadhavinodhini", "C": "K. Ramaraj", "A": "K. Ramaraj", "V": "MMcTaDhJ4CM"}]}, {"name": "Thanigai Malai Mevum", "songs": [{"N": "0009", "T": "", "H": "Thanigai Malai Mevum", "S": "Thanigai Malai Mevum", "R": "Gowrimanohari", "C": "K. Ramaraj", "A": "K. Ramaraj", "V": "ejloojy_9IQ"}, {"N": "0035", "T": "", "H": "Thanigai Malai Mevum", "S": "Thanigai Malai Mevum", "R": "Gowrimanohari", "C": "K. Ramaraj", "A": "Sirkazhi Govindarajan", "V": "66jHr2cyNHg"}, {"N": "0036", "T": "", "H": "Thanigai Malai Mevum", "S": "Thanigai Malai Mevum", "R": "Gowrimanohari", "C": "K. Ramaraj", "A": "Sirkazhi Govindarajan", "V": "Dy-d5lES18k"}]}, {"name": "Uma Maheswari", "songs": [{"N": "0010", "T": "", "H": "Uma Maheswari", "S": "Uma Maheswari", "R": "Nalinakanthi", "C": "K. Ramaraj", "A": "K. Ramaraj", "V": "V8Hjm1qhPQo"}, {"N": "0457", "T": "", "H": "Uma Maheswari", "S": "Uma Maheswari", "R": "Nalinakanthi", "C": "K. Ramaraj", "A": "Madurai Mani Iyer", "V": "VLnsEZ9tIjU"}]}, {"name": "Veena Gaana Vishaaradhey", "songs": [{"N": "1522", "T": "", "H": "Veena Gaana Vishaaradhey", "S": "Veena Gaana Vishaaradhey", "R": "Sindhubhairavi", "C": "K. Ramaraj", "A": "M. Balamuralikrishna", "V": "JTJ7Y_O41-Q"}, {"N": "0103", "T": "", "H": "Veena Gaana Vishaaradhey", "S": "Veena Gaana Vishaaradhey", "R": "Sindhubhairavi", "C": "K. Ramaraj", "A": "Veena E. Gayathri", "V": "4KlzreZfTsI"}]}, {"name": "Venkata Gireevasa", "songs": [{"N": "0228", "T": "", "H": "Venkata Gireevasa", "S": "Venkata Gireevasa", "R": "Abheri", "C": "K. Ramaraj", "A": "Bombay Sisters", "V": "-6VEtakOgzk"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Ambaasutha", "S": "Ambaasutha", "songs": [{"A": "K. Ramaraj", "D": "3:47", "R": "Gambheeravani", "T": "", "U": "63 views", "V": "TLOSGPGuUlQ"}]}, {"H": "Daya Mayi Shankari", "S": "Daya Mayi Shankari", "songs": [{"A": "K. Ramaraj", "D": "3:39", "R": "Lathangi", "T": "", "U": "26 views", "V": "XrJ6lexSk6M"}]}, {"H": "Gowri Nivaasaa Karunaa Vilaasa", "S": "Gowri Nivaasaa Karunaa Vilaasa", "songs": [{"A": "K. Ramaraj", "D": "6:45", "R": "Malayamarutham", "T": "", "U": "94 views", "V": "_4bEsKNVpqA"}]}, {"H": "Hari Amsane", "S": "Hari Amsane", "songs": [{"A": "Raji Gopalakrishnan", "D": "4:02", "R": "Ratipatipriya", "T": "", "U": "328 views", "V": "3TRl8qfbk30"}]}, {"H": "Jayajaya Sri Bruhanaayaki", "S": "Jayajaya Sri Bruhanaayaki", "songs": [{"A": "K. Ramaraj", "D": "2:41", "R": "Dharmavathi", "T": "", "U": "93 views", "V": "yY1UY6OK5yY"}]}, {"H": "Maargam Thandarul", "S": "Maargam Thandarul", "songs": [{"A": "K. Ramaraj", "D": "4:41", "R": "Shadhvidhamargini", "T": "", "U": "26 views", "V": "4KzGYoLvnE8"}]}, {"H": "Nee Manam", "S": "Nee Manam", "songs": [{"A": "Raji Gopalakrishnan", "D": "5:04", "R": "Sumanesaranjani", "T": "", "U": "122 views", "V": "QQDOr26RW4Y"}]}, {"H": "Parameshwari", "S": "Parameshwari", "songs": [{"A": "V. Sivaranjani V. Nalinakanthi", "D": "18:07", "R": "Shivaranjani", "T": "", "U": "7,055 views", "V": "D3JGuxlh7qA"}, {"A": "Avaneeswaram S. R. Vinu", "D": "4:58", "R": "Shivaranjani", "T": "", "U": "370 views", "V": "OpmNroUeVOU"}]}, {"H": "Punidane", "S": "Punidane", "songs": [{"A": "Raji Gopalakrishnan", "D": "6:08", "R": "Soorya", "T": "", "U": "241 views", "V": "nwx3qZF3NCY"}]}, {"H": "Raaga Rasika", "S": "Raaga Rasika", "songs": [{"A": "G. N. Balasubramaniam", "D": "16:10", "R": "Keeravani", "T": "", "U": "50 views", "V": "5KH6qB_GF38"}, {"A": "G. N. Balasubramaniam", "D": "13:28", "R": "Keeravani", "T": "", "U": "70 views", "V": "ecxQz7AGUqM"}, {"A": "G. N. Balasubramaniam", "D": "19:23", "R": "Keeravani", "T": "", "U": "67 views", "V": "PxuRSB9unGQ"}, {"A": "G. N. Balasubramaniam", "D": "13:56", "R": "Keeravani", "T": "", "U": "43 views", "V": "q-89X8089FA"}, {"A": "Raji Gopalakrishnan", "D": "13:51", "R": "Keeravani", "T": "", "U": "95 views", "V": "fFft4X8ulCg"}, {"A": "Veenai Dhanammal", "D": "13:13", "R": "Keeravani", "T": "", "U": "68 views", "V": "XveUkjAtwQA"}, {"A": "Lalgudi Jayaraman", "D": "12:51", "R": "Keeravani", "T": "", "U": "128 views", "V": "lq07Yy1eYQU"}]}, {"H": "Saaranga Paani", "S": "Saaranga Paani", "songs": [{"A": "K. Ramaraj", "D": "3:04", "R": "Hamsakalyani", "T": "", "U": "106 views", "V": "WCLVMxKSAxc"}, {"A": "Raji Gopalakrishnan", "D": "5:17", "R": "Hamsakalyani", "T": "", "U": "119 views", "V": "UKSGdTp0kjk"}]}, {"H": "Sabari Giri Naadhaa", "S": "Sabari Giri Naadhaa", "songs": [{"A": "K. J. Yesudas", "D": "5:47", "R": "Thodi", "T": "", "U": "1,709 views", "V": "-R3QZHqu6cU"}, {"A": "K. J. Yesudas", "D": "5:44", "R": "Thodi", "T": "", "U": "31,828 views", "V": "2SL_EqToDbc"}]}, {"H": "Sankara Harapriya Gurunathaney", "S": "Sankara Harapriya Gurunathaney", "songs": [{"A": "K. Ramaraj", "D": "3:21", "R": "Karaharapriya", "T": "", "U": "7 views", "V": "UafS8DmCjXs"}, {"A": "Raji Gopalakrishnan", "D": "33:15", "R": "Karaharapriya", "T": "", "U": "92 views", "V": "aP9ep32yahc"}]}, {"H": "Sannidhiye", "S": "Sannidhiye", "songs": [{"A": "Raji Gopalakrishnan", "D": "5:03", "R": "Priyadarshani", "T": "", "U": "124 views", "V": "HRqCNe-CWzw"}]}, {"H": "Sunaadhavinodhini Vaarini", "S": "Sunaadhavinodhini Vaarini", "songs": [{"A": "K. Ramaraj", "D": "6:57", "R": "Sunadhavinodhini", "T": "", "U": "54 views", "V": "MMcTaDhJ4CM"}]}, {"H": "Thanigai Malai Mevum", "S": "Thanigai Malai Mevum", "songs": [{"A": "K. Ramaraj", "D": "4:24", "R": "Gowrimanohari", "T": "", "U": "68 views", "V": "ejloojy_9IQ"}, {"A": "Sirkazhi Govindarajan", "D": "3:20", "R": "Gowrimanohari", "T": "", "U": "0 views", "V": "66jHr2cyNHg"}, {"A": "Sirkazhi Govindarajan", "D": "3:18", "R": "Gowrimanohari", "T": "", "U": "0 views", "V": "Dy-d5lES18k"}]}, {"H": "Uma Maheswari", "S": "Uma Maheswari", "songs": [{"A": "K. Ramaraj", "D": "4:25", "R": "Nalinakanthi", "T": "", "U": "23 views", "V": "V8Hjm1qhPQo"}, {"A": "Madurai Mani Iyer", "D": "3:17", "R": "Nalinakanthi", "T": "", "U": "334 views", "V": "VLnsEZ9tIjU"}]}, {"H": "Veena Gaana Vishaaradhey", "S": "Veena Gaana Vishaaradhey", "songs": [{"A": "M. Balamuralikrishna", "D": "25:50", "R": "Sindhubhairavi", "T": "", "U": "0 views", "V": "JTJ7Y_O41-Q"}, {"A": "Veena E. Gayathri", "D": "3:38", "R": "Sindhubhairavi", "T": "", "U": "0 views", "V": "4KlzreZfTsI"}]}, {"H": "Venkata Gireevasa", "S": "Venkata Gireevasa", "songs": [{"A": "Bombay Sisters", "D": "4:46", "R": "Abheri", "T": "", "U": "0 views", "V": "-6VEtakOgzk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

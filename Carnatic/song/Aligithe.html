@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -135,57 +135,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Geetha Raja", "songs": [{"N": "0042", "T": "Padam", "H": "Aligithe", "S": "aligitE bhagya mAye marEmi vADalagitE bhAgyamAye :  Adi", "R": "Huseni", "C": "Kshetragna", "A": "Geetha Raja", "V": "fFKHH-btB-g"}]}, {"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0195", "T": "Padam", "H": "Aligithe", "S": "aligitE bhagya mAye marEmi vADalagitE bhAgyamAye :  Adi", "R": "Huseni", "C": "Kshetragna", "A": "Hyderabad Brothers", "V": "zkLV8diNmrA"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1586", "T": "Padam", "H": "Aligithe", "S": "aligitE bhagya mAye marEmi vADalagitE bhAgyamAye :  Adi", "R": "Huseni", "C": "Kshetragna", "A": "M. Balamuralikrishna", "V": "FAEUnvvnBTI"}, {"N": "1587", "T": "Padam", "H": "Aligithe", "S": "aligitE bhagya mAye marEmi vADalagitE bhAgyamAye :  Adi", "R": "Huseni", "C": "Kshetragna", "A": "M. Balamuralikrishna", "V": "_pK5etjCOz0"}, {"N": "1588", "T": "Padam", "H": "Aligithe", "S": "aligitE bhagya mAye marEmi vADalagitE bhAgyamAye :  Adi", "R": "Huseni", "C": "Kshetragna", "A": "M. Balamuralikrishna", "V": "eJPOtwCPQVE"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0271", "T": "Padam", "H": "Aligithe", "S": "aligitE bhagya mAye marEmi vADalagitE bhAgyamAye :  Adi", "R": "Huseni", "C": "Kshetragna", "A": "Malladi Brothers", "V": "AhcTEgVpReY"}, {"N": "0272", "T": "Padam", "H": "Aligithe", "S": "aligitE bhagya mAye marEmi vADalagitE bhAgyamAye :  Adi", "R": "Huseni", "C": "Kshetragna", "A": "Malladi Brothers", "V": "riG1rcLqwtM"}]}, {"name": "Chitra Veena - Chitravina Ravi Kiran", "songs": [{"N": "0167", "T": "Padam", "H": "Aligithe", "S": "aligitE bhagya mAye marEmi vADalagitE bhAgyamAye :  Adi", "R": "Huseni", "C": "Kshetragna", "A": "Chitravina Ravi Kiran", "V": "WNSBs0SSA7g"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Geetha Raja", "songs": [{"C": "Kshetragna", "D": "4:41", "R": "Huseni", "T": "Padam", "U": "6,540 views", "V": "fFKHH-btB-g"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Kshetragna", "D": "6:40", "R": "Huseni", "T": "Padam", "U": "507 views", "V": "zkLV8diNmrA"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Kshetragna", "D": "4:40", "R": "Huseni", "T": "Padam", "U": "0 views", "V": "FAEUnvvnBTI"}, {"C": "Kshetragna", "D": "6:48", "R": "Huseni", "T": "Padam", "U": "16,767 views", "V": "eJPOtwCPQVE"}, {"C": "Kshetragna", "D": "5:07", "R": "Huseni", "T": "Padam", "U": "32,094 views", "V": "_pK5etjCOz0"}]}, {"A": "Malladi Brothers", "songs": [{"C": "Kshetragna", "D": "10:19", "R": "Huseni", "T": "Padam", "U": "610 views", "V": "AhcTEgVpReY"}, {"C": "Kshetragna", "D": "3:01", "R": "Huseni", "T": "Padam", "U": "1,139 views", "V": "riG1rcLqwtM"}]}, {"A": "Chitravina Ravi Kiran", "songs": [{"C": "Kshetragna", "D": "6:02", "R": "Huseni", "T": "Padam", "U": "16 views", "V": "WNSBs0SSA7g"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

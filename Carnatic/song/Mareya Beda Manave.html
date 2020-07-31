@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>2</td></tr>
 <tr><td><em>Artist</em></td><td>7</td></tr>
-<tr><td><em>Concert</em></td><td>7</td></tr>
+<tr><td><em>Concert</em></td><td>6</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Krithika Natarajan", "songs": [{"N": "0021", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Rageshree", "C": "Purandara Dasa", "A": "Krithika Natarajan", "V": "-q_XQgAqq5w"}]}, {"name": "Vocal - Pattabhirama Pandit", "songs": [{"N": "0021", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Rageshree", "C": "Purandara Dasa", "A": "Pattabhirama Pandit", "V": "CqF0CLMnQv0"}]}, {"name": "Vocal - Vani Sateesh", "songs": [{"N": "0009", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vani Sateesh", "V": "71KH93ee6XU"}, {"N": "0010", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vani Sateesh", "V": "7IB2NYLqhAQ"}]}, {"name": "Vocal - Vasudha Ravi", "songs": [{"N": "0023", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vasudha Ravi", "V": "vbdsB4KHC_Y"}]}, {"name": "Vocal - Vidyabhushana", "songs": [{"N": "0063", "T": "", "H": "Mareya Beda Manave", "S": "mareya bEDa   manavE neenu    :  Rupaka", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vidyabhushana", "V": "0EmHI2VtOUQ"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Krithika Natarajan", "songs": [{"C": "Purandara Dasa", "D": "3:39", "R": "Rageshree", "T": "", "U": "2,927 views", "V": "-q_XQgAqq5w"}]}, {"A": "Pattabhirama Pandit", "songs": [{"C": "Purandara Dasa", "D": "10:02", "R": "Rageshree", "T": "", "U": "4 views", "V": "CqF0CLMnQv0"}]}, {"A": "Vani Sateesh", "songs": [{"C": "Purandara Dasa", "D": "9:40", "R": "Unknownraga", "T": "", "U": "26,713 views", "V": "7IB2NYLqhAQ"}, {"C": "Purandara Dasa", "D": "5:45", "R": "Unknownraga", "T": "", "U": "2,415 views", "V": "71KH93ee6XU"}]}, {"A": "Vasudha Ravi", "songs": [{"C": "Purandara Dasa", "D": "5:07", "R": "Unknownraga", "T": "", "U": "11,499 views", "V": "vbdsB4KHC_Y"}]}, {"A": "Vidyabhushana", "songs": [{"C": "Purandara Dasa", "D": "7:10", "R": "Unknownraga", "T": "", "U": "149,305 views", "V": "0EmHI2VtOUQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

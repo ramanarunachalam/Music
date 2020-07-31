@@ -17,7 +17,7 @@
 <tr><td><em>Song</em></td><td>18</td></tr>
 <tr><td><em>Raga</em></td><td>15</td></tr>
 <tr><td><em>Composer</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>23</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "CNC01", "songs": [{"N": "0002", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "C N Chandrashekar", "V": "x9EwLh23rDw"}, {"N": "0003", "T": "", "H": "Evarura", "S": "evarurA ninu vinA gati mAku  :  Caapu", "R": "Mohanam", "C": "Thyagaraja", "A": "C N Chandrashekar", "V": "G0hvmUJuoxg"}, {"N": "0004", "T": "", "H": "Jaya Jaya Padmanabha Murare", "S": "jaya jaya padmanAbha murArE jaya jagadIsha :  Adi", "R": "Sarasangi", "C": "Swathi Thirunal", "A": "C N Chandrashekar", "V": "280I8rsrOxs"}, {"N": "0006", "T": "", "H": "Pahimam Sri", "S": "pAhi mAM SrI rAja rAj E Svari amba :  Rupaka", "R": "Nata", "C": "Shyama Shastri", "A": "C N Chandrashekar", "V": "ox6_bNAJTJE"}, {"N": "0009", "T": "Madhuramba vibhakti", "H": "Madhurambikayam Sada", "S": "madhurAmbikAyAm sadA bhaktim karOmi shrI :  Rupaka", "R": "Hemavathi", "C": "Muthuswami Dikshitar", "A": "C N Chandrashekar", "V": "QgCev9LSWMs"}, {"N": "0011", "T": "Navarathri", "H": "Devi Pavane", "S": "dEvi pAvanE sEvE caraNa tE budhAvanE :  Adi", "R": "Saveri", "C": "Swathi Thirunal", "A": "C N Chandrashekar", "V": "Z1uCdpeqrb4"}, {"N": "0012", "T": "Navarathri", "H": "Pahimam Sri Vageswari", "S": "pAhimAm shrI vAgadIshvari  :  Adi", "R": "Kalyani", "C": "Swathi Thirunal", "A": "C N Chandrashekar", "V": "cIOjVHXTCIU"}, {"N": "0016", "T": "Thillana", "H": "thillana_unknowncomposer_hamirkalyani", "S": "thillana unknowncomposer hamirkalyani", "R": "Hamirkalyani", "C": "UnknownComposer", "A": "C N Chandrashekar", "V": "4oVx_eOxiyc"}, {"N": "0017", "T": "Varnam", "H": "Neeve Gatiyani", "S": "nIvE gatiyani niratamu nI pAdamulE nammiti :  Adi", "R": "Nalinakanthi", "C": "Lalgudi Jayaraman", "A": "C N Chandrashekar", "V": "W75ww2yn88Y"}, {"N": "0018", "T": "", "H": "Varnam", "S": "Varnam", "R": "Arabhi", "C": "UnknownComposer", "A": "C N Chandrashekar", "V": "0QMZmKNL6Ko"}, {"N": "0019", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kaanada", "C": "UnknownComposer", "A": "C N Chandrashekar", "V": "az_wANlHdPk"}, {"N": "0022", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "C N Chandrashekar", "V": "Gdnu7VVpHVw"}, {"N": "0023", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "C N Chandrashekar", "V": "Nrkdq10otTE"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Concert", "S": "Concert", "songs": [{"C": "UnknownComposer", "D": "1:23:49", "R": "Unknownraga", "T": "", "U": "1,798 views", "V": "x9EwLh23rDw"}]}, {"H": "Devi Pavane", "S": "dEvi pAvanE sEvE caraNa tE budhAvanE :  Adi", "songs": [{"C": "Swathi Thirunal", "D": "8:10", "R": "Saveri", "T": "Navarathri", "U": "175 views", "V": "Z1uCdpeqrb4"}]}, {"H": "Evarura", "S": "evarurA ninu vinA gati mAku  :  Caapu", "songs": [{"C": "Thyagaraja", "D": "25:32", "R": "Mohanam", "T": "", "U": "1,128 views", "V": "G0hvmUJuoxg"}]}, {"H": "Jaya Jaya Padmanabha Murare", "S": "jaya jaya padmanAbha murArE jaya jagadIsha :  Adi", "songs": [{"C": "Swathi Thirunal", "D": "10:10", "R": "Sarasangi", "T": "", "U": "160 views", "V": "280I8rsrOxs"}]}, {"H": "Madhurambikayam Sada", "S": "madhurAmbikAyAm sadA bhaktim karOmi shrI :  Rupaka", "songs": [{"C": "Muthuswami Dikshitar", "D": "12:52", "R": "Hemavathi", "T": "Madhuramba vibhakti", "U": "447 views", "V": "QgCev9LSWMs"}]}, {"H": "Neeve Gatiyani", "S": "nIvE gatiyani niratamu nI pAdamulE nammiti :  Adi", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:52", "R": "Nalinakanthi", "T": "Varnam", "U": "77 views", "V": "W75ww2yn88Y"}]}, {"H": "Pahimam Sri", "S": "pAhi mAM SrI rAja rAj E Svari amba :  Rupaka", "songs": [{"C": "Shyama Shastri", "D": "8:35", "R": "Nata", "T": "", "U": "112 views", "V": "ox6_bNAJTJE"}]}, {"H": "Pahimam Sri Vageswari", "S": "pAhimAm shrI vAgadIshvari  :  Adi", "songs": [{"C": "Swathi Thirunal", "D": "9:02", "R": "Kalyani", "T": "Navarathri", "U": "662 views", "V": "cIOjVHXTCIU"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "10:04", "R": "Kaanada", "T": "", "U": "28 views", "V": "az_wANlHdPk"}, {"C": "UnknownComposer", "D": "6:23", "R": "Unknownraga", "T": "", "U": "186 views", "V": "Nrkdq10otTE"}, {"C": "UnknownComposer", "D": "18:04", "R": "Unknownraga", "T": "", "U": "137 views", "V": "Gdnu7VVpHVw"}]}, {"H": "Varnam", "S": "Varnam", "songs": [{"C": "UnknownComposer", "D": "7:01", "R": "Arabhi", "T": "", "U": "47 views", "V": "0QMZmKNL6Ko"}]}, {"H": "thillana_unknowncomposer_hamirkalyani", "S": "thillana unknowncomposer hamirkalyani", "songs": [{"C": "UnknownComposer", "D": "3:12", "R": "Hamirkalyani", "T": "Thillana", "U": "59 views", "V": "4oVx_eOxiyc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

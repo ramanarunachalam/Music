@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>14</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "shrI dakSiNAmUrtimIsham citprakAsham", "songs": [{"N": "0026", "T": "", "H": "Shri Dakshinamurthim", "S": "shrI dakSiNAmUrtimIsham citprakAsham praNaumi :  Adi", "R": "Phenadyuthi", "C": "Muthuswami Dikshitar", "A": "BV Raman BV Lakshmanan", "V": "S-pWwp2UVhg"}, {"N": "0198", "T": "", "H": "Shri Dakshinamurthim", "S": "shrI dakSiNAmUrtimIsham citprakAsham praNaumi :  Adi", "R": "Phenadyuthi", "C": "Muthuswami Dikshitar", "A": "Bombay Sisters", "V": "S7mAJcLu5PM"}, {"N": "0199", "T": "", "H": "Shri Dakshinamurthim", "S": "shrI dakSiNAmUrtimIsham citprakAsham praNaumi :  Adi", "R": "Phenadyuthi", "C": "Muthuswami Dikshitar", "A": "Bombay Sisters", "V": "rMCYbhWNKmo"}, {"N": "0103", "T": "", "H": "Shri Dakshinamurthim", "S": "shrI dakSiNAmUrtimIsham citprakAsham praNaumi :  Adi", "R": "Phenadyuthi", "C": "Muthuswami Dikshitar", "A": "Mambalam Sisters", "V": "WsHFPdyvpV4"}, {"N": "0171", "T": "", "H": "Shri Dakshinamurthim", "S": "shrI dakSiNAmUrtimIsham citprakAsham praNaumi :  Adi", "R": "Phenadyuthi", "C": "Muthuswami Dikshitar", "A": "Sikkil Gurucharan", "V": "lx4ZX3XFHTw"}, {"N": "0172", "T": "", "H": "Shri Dakshinamurthim", "S": "shrI dakSiNAmUrtimIsham citprakAsham praNaumi :  Adi", "R": "Phenadyuthi", "C": "Muthuswami Dikshitar", "A": "Sikkil Gurucharan", "V": "qR1r-B8gROw"}, {"N": "0535", "T": "", "H": "Shri Dakshinamurthim", "S": "shrI dakSiNAmUrtimIsham citprakAsham praNaumi :  Adi", "R": "Phenadyuthi", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "PiqR9hocyd8"}, {"N": "0011", "T": "", "H": "Shri Dakshinamurthim", "S": "shrI dakSiNAmUrtimIsham citprakAsham praNaumi :  Adi", "R": "Phenadyuthi", "C": "Muthuswami Dikshitar", "A": "R. Thiagarajan", "V": "YeLDfvUG42I"}, {"N": "0012", "T": "", "H": "Shri Dakshinamurthim", "S": "shrI dakSiNAmUrtimIsham citprakAsham praNaumi :  Adi", "R": "Phenadyuthi", "C": "Muthuswami Dikshitar", "A": "R. Thiagarajan", "V": "wMZpVIEbOPg"}]}, {"name": "Unknownsong", "songs": [{"N": "0062", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Phenadyuthi", "C": "UnknownComposer", "A": "BV Raman BV Lakshmanan", "V": "hbhZAB_OfLY"}, {"N": "0020", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Phenadyuthi", "C": "UnknownComposer", "A": "Kannikeswaran", "V": "I2kUGCBGCps"}, {"N": "0326", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Phenadyuthi", "C": "UnknownComposer", "A": "Sikkil Gurucharan", "V": "WXm5g2dw7bo"}, {"N": "0327", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Phenadyuthi", "C": "UnknownComposer", "A": "Sikkil Gurucharan", "V": "qtqPx50fSTg"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Shri Dakshinamurthim", "S": "shrI dakSiNAmUrtimIsham citprakAsham praNaumi :  Adi", "songs": [{"A": "BV Raman BV Lakshmanan", "C": "Muthuswami Dikshitar", "D": "8:31", "T": "", "U": "271 views", "V": "S-pWwp2UVhg"}, {"A": "Bombay Sisters", "C": "Muthuswami Dikshitar", "D": "1:03:55", "T": "", "U": "670,844 views", "V": "rMCYbhWNKmo"}, {"A": "Bombay Sisters", "C": "Muthuswami Dikshitar", "D": "1:03:55", "T": "", "U": "5,677 views", "V": "S7mAJcLu5PM"}, {"A": "Mambalam Sisters", "C": "Muthuswami Dikshitar", "D": "5:26", "T": "", "U": "56 views", "V": "WsHFPdyvpV4"}, {"A": "Sikkil Gurucharan", "C": "Muthuswami Dikshitar", "D": "5:51", "T": "", "U": "177 views", "V": "lx4ZX3XFHTw"}, {"A": "Sikkil Gurucharan", "C": "Muthuswami Dikshitar", "D": "4:54", "T": "", "U": "883 views", "V": "qR1r-B8gROw"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "5:01", "T": "", "U": "100 views", "V": "PiqR9hocyd8"}, {"A": "R. Thiagarajan", "C": "Muthuswami Dikshitar", "D": "5:43", "T": "", "U": "37,708 views", "V": "YeLDfvUG42I"}, {"A": "R. Thiagarajan", "C": "Muthuswami Dikshitar", "D": "5:39", "T": "", "U": "14,601 views", "V": "wMZpVIEbOPg"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "BV Raman BV Lakshmanan", "C": "UnknownComposer", "D": "8:20", "T": "", "U": "194 views", "V": "hbhZAB_OfLY"}, {"A": "Kannikeswaran", "C": "UnknownComposer", "D": "5:44", "T": "", "U": "557 views", "V": "I2kUGCBGCps"}, {"A": "Sikkil Gurucharan", "C": "UnknownComposer", "D": "3:01", "T": "", "U": "136 views", "V": "WXm5g2dw7bo"}, {"A": "Sikkil Gurucharan", "C": "UnknownComposer", "D": "4:59", "T": "", "U": "112 views", "V": "qtqPx50fSTg"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

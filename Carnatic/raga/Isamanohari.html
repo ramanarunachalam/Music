@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>31</td></tr>
 <tr><td><em>Song</em></td><td>5</td></tr>
 <tr><td><em>Composer</em></td><td>3</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "ananta bAlakRSNamAm ava mukunda shrI", "songs": [{"N": "0041", "T": "", "H": "Ananta Balakrishnam", "S": "ananta bAlakRSNamAm ava mukunda shrI harE :  Adi", "R": "Isamanohari", "C": "Muthuswami Dikshitar", "A": "Amrutha Venkatesh", "V": "1coYQfBMOFc"}]}, {"name": "jagadIsha manOhari jaya karuNArasa lahari", "songs": [{"N": "0006", "T": "", "H": "Jagadisa Manohari", "S": "jagadIsha manOhari jaya karuNArasa lahari :  Rupaka", "R": "Isamanohari", "C": "Muthuswami Dikshitar", "A": "Aruna Ranganathan", "V": "igaAL4ZdDGY"}, {"N": "0615", "T": "", "H": "Jagadisa Manohari", "S": "jagadIsha manOhari jaya karuNArasa lahari :  Rupaka", "R": "Isamanohari", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "Uk_0k3A2McQ"}, {"N": "0142", "T": "", "H": "Jagadisa Manohari", "S": "jagadIsha manOhari jaya karuNArasa lahari :  Rupaka", "R": "Isamanohari", "C": "Muthuswami Dikshitar", "A": "Prince Rama Varma", "V": "MYfOznSmGig"}, {"N": "0143", "T": "", "H": "Jagadisa Manohari", "S": "jagadIsha manOhari jaya karuNArasa lahari :  Rupaka", "R": "Isamanohari", "C": "Muthuswami Dikshitar", "A": "Prince Rama Varma", "V": "af-1lPLOffM"}]}, {"name": "manasA SrI rAma candruni", "songs": [{"N": "0190", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "Aruna Sairam", "V": "LEsG6SgC9PY"}, {"N": "0786", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "5uiBjMWNkAk"}, {"N": "0787", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "np_ZppzQ1pM"}, {"N": "0788", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "tqXFpB9S49s"}, {"N": "0789", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "uFG9P3TDnu8"}, {"N": "0239", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "CJhfJDcyQsE"}, {"N": "0240", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "JmDBkcADF04"}, {"N": "0241", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "rtNeGTRlWBo"}, {"N": "0242", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "yS80zBesVX8"}, {"N": "0135", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "Malladi Brothers", "V": "EWSiMXUNp4c"}, {"N": "0260", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "U. Srinivas", "V": "RNmhRZTdc20"}, {"N": "0261", "T": "", "H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "R": "Isamanohari", "C": "Thyagaraja", "A": "U. Srinivas", "V": "co6D0Kvahjc"}]}, {"name": "shrIgaNanAtham bhajarE citta parAshakti", "songs": [{"N": "0333", "T": "", "H": "Sri Gananatham", "S": "shrIgaNanAtham bhajarE citta parAshakti yutam :  Rupaka", "R": "Isamanohari", "C": "Muthuswami Dikshitar", "A": "K. J. Yesudas", "V": "H-7ge36rE5I"}, {"N": "0334", "T": "", "H": "Sri Gananatham", "S": "shrIgaNanAtham bhajarE citta parAshakti yutam :  Rupaka", "R": "Isamanohari", "C": "Muthuswami Dikshitar", "A": "K. J. Yesudas", "V": "XpS1kiGZZrU"}, {"N": "0661", "T": "", "H": "Sri Gananatham", "S": "shrIgaNanAtham bhajarE citta parAshakti yutam :  Rupaka", "R": "Isamanohari", "C": "Muthuswami Dikshitar", "A": "M. D. Ramanathan", "V": "TKIyaonZdwc"}, {"N": "0662", "T": "", "H": "Sri Gananatham", "S": "shrIgaNanAtham bhajarE citta parAshakti yutam :  Rupaka", "R": "Isamanohari", "C": "Muthuswami Dikshitar", "A": "M. D. Ramanathan", "V": "vq7zX9yB2Yk"}, {"N": "0075", "T": "", "H": "Sri Gananatham", "S": "shrIgaNanAtham bhajarE citta parAshakti yutam :  Rupaka", "R": "Isamanohari", "C": "Muthuswami Dikshitar", "A": "Sumithra Vasudev", "V": "L4KX_5DQj_U"}, {"N": "0088", "T": "", "H": "Sri Gananatham", "S": "shrIgaNanAtham bhajarE citta parAshakti yutam :  Rupaka", "R": "Isamanohari", "C": "Muthuswami Dikshitar", "A": "Trichur Brothers", "V": "n-Sg6Q8psOY"}]}, {"name": "Unknownsong", "songs": [{"N": "0145", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Isamanohari", "C": "UnknownComposer", "A": "Vijay Siva", "V": "pM2otT7aBnc"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Ananta Balakrishnam", "S": "ananta bAlakRSNamAm ava mukunda shrI harE :  Adi", "songs": [{"A": "Amrutha Venkatesh", "C": "Muthuswami Dikshitar", "D": "3:41", "T": "", "U": "216 views", "V": "1coYQfBMOFc"}]}, {"H": "Jagadisa Manohari", "S": "jagadIsha manOhari jaya karuNArasa lahari :  Rupaka", "songs": [{"A": "Aruna Ranganathan", "C": "Muthuswami Dikshitar", "D": "3:26", "T": "", "U": "216 views", "V": "igaAL4ZdDGY"}, {"A": "M. Balamuralikrishna", "C": "Muthuswami Dikshitar", "D": "10:05", "T": "", "U": "0 views", "V": "Uk_0k3A2McQ"}, {"A": "M. Balamuralikrishna", "C": "Muthuswami Dikshitar", "D": "16:25", "T": "", "U": "0 views", "V": "HGyDQOLu3AE"}, {"A": "Prince Rama Varma", "C": "Muthuswami Dikshitar", "D": "4:19", "T": "", "U": "1,583 views", "V": "af-1lPLOffM"}, {"A": "Prince Rama Varma", "C": "Muthuswami Dikshitar", "D": "2:29", "T": "", "U": "2,417 views", "V": "MYfOznSmGig"}]}, {"H": "Manasa Sri Ramachandruni", "S": "manasA SrI rAma candruni  :  Adi", "songs": [{"A": "Aruna Sairam", "C": "Thyagaraja", "D": "3:41", "T": "", "U": "440 views", "V": "LEsG6SgC9PY"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "53:57", "T": "", "U": "264 views", "V": "tqXFpB9S49s"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "5:28", "T": "", "U": "583 views", "V": "5uiBjMWNkAk"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "4:59", "T": "", "U": "0 views", "V": "np_ZppzQ1pM"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "4:30", "T": "", "U": "58 views", "V": "uFG9P3TDnu8"}, {"A": "Madurai Mani Iyer", "C": "Thyagaraja", "D": "", "T": "", "U": "47 views", "V": "yS80zBesVX8"}, {"A": "Madurai Mani Iyer", "C": "Thyagaraja", "D": "3:53", "T": "", "U": "170 views", "V": "CJhfJDcyQsE"}, {"A": "Madurai Mani Iyer", "C": "Thyagaraja", "D": "3:51", "T": "", "U": "414 views", "V": "rtNeGTRlWBo"}, {"A": "Madurai Mani Iyer", "C": "Thyagaraja", "D": "3:45", "T": "", "U": "436 views", "V": "JmDBkcADF04"}, {"A": "Malladi Brothers", "C": "Thyagaraja", "D": "3:41", "T": "", "U": "5,169 views", "V": "EWSiMXUNp4c"}, {"A": "U. Srinivas", "C": "Thyagaraja", "D": "3:35", "T": "", "U": "26 views", "V": "co6D0Kvahjc"}, {"A": "U. Srinivas", "C": "Thyagaraja", "D": "3:25", "T": "", "U": "18 views", "V": "RNmhRZTdc20"}]}, {"H": "Sri Gananatham", "S": "shrIgaNanAtham bhajarE citta parAshakti yutam :  Rupaka", "songs": [{"A": "K. J. Yesudas", "C": "Muthuswami Dikshitar", "D": "15:55", "T": "", "U": "771 views", "V": "XpS1kiGZZrU"}, {"A": "K. J. Yesudas", "C": "Muthuswami Dikshitar", "D": "16:06", "T": "", "U": "4,800 views", "V": "H-7ge36rE5I"}, {"A": "M. D. Ramanathan", "C": "Muthuswami Dikshitar", "D": "3:56", "T": "", "U": "240 views", "V": "TKIyaonZdwc"}, {"A": "M. D. Ramanathan", "C": "Muthuswami Dikshitar", "D": "3:52", "T": "", "U": "2,287 views", "V": "vq7zX9yB2Yk"}, {"A": "Sumithra Vasudev", "C": "Muthuswami Dikshitar", "D": "2:58", "T": "", "U": "0 views", "V": "L4KX_5DQj_U"}, {"A": "Trichur Brothers", "C": "Muthuswami Dikshitar", "D": "3:56", "T": "", "U": "32,192 views", "V": "n-Sg6Q8psOY"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Vijay Siva", "C": "UnknownComposer", "D": "4:10", "T": "", "U": "302 views", "V": "pM2otT7aBnc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

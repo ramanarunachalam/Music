@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>19</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>17</td></tr>
-<tr><td><em>Concert</em></td><td>17</td></tr>
+<tr><td><em>Concert</em></td><td>13</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -130,57 +130,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bharat Sundar", "songs": [{"N": "0055", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "Bharat Sundar", "V": "ABmluHHWAUs"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0101", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "Bombay Jayashri", "V": "XfUA8tUQAko"}]}, {"name": "Vocal - Kruthi Bhat", "songs": [{"N": "0017", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "Kruthi Bhat", "V": "ARgLYeDmpnc"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0207", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "M. L. Vasanthakumari", "V": "eonOxER1KqY"}, {"N": "0208", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "M. L. Vasanthakumari", "V": "t-P6-E_ELw8"}]}, {"name": "Vocal - O. S. Arun", "songs": [{"N": "0056", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "O. S. Arun", "V": "-V_rXQX8_s4"}]}, {"name": "Vocal - T. M. Thiagarajan", "songs": [{"N": "0011", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "T. M. Thiagarajan", "V": "fc5btqapE3c"}]}, {"name": "Vocal - Thanmayee Krishnamurthy", "songs": [{"N": "0017", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "Thanmayee Krishnamurthy", "V": "sgu2oUOn_7E"}, {"N": "0016", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "Thanmayee Krishnamurthy", "V": "0SuVlMc8EFs"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0147", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "U. Srinivas", "V": "qtfpNH5riIk"}]}, {"name": "Violin - Kamalakiran Vinjamuri", "songs": [{"N": "0040", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "Kamalakiran Vinjamuri", "V": "54aeBmPhA2k"}]}, {"name": "Violin - R. K. Shriramkumar", "songs": [{"N": "0093", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "R. K. Shriramkumar", "V": "r3pgNRrP9Gc"}]}, {"name": "Mridangam - J. Vaidyanathan", "songs": [{"N": "0044", "T": "", "H": "Enthanine Vina", "S": "entani vinavinturA evaritO moraliDudurA :  Eka", "R": "Urmikaa", "C": "Pallavi Seshayya", "A": "J. Vaidyanathan", "V": "FWkxUJ-umBQ"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bharat Sundar", "songs": [{"C": "Pallavi Seshayya", "D": "7:19", "R": "Urmikaa", "T": "", "U": "480 views", "V": "ABmluHHWAUs"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Pallavi Seshayya", "D": "5:43", "R": "Urmikaa", "T": "", "U": "0 views", "V": "XfUA8tUQAko"}]}, {"A": "Kruthi Bhat", "songs": [{"C": "Pallavi Seshayya", "D": "6:29", "R": "Urmikaa", "T": "", "U": "1,732 views", "V": "ARgLYeDmpnc"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Pallavi Seshayya", "D": "11:01", "R": "Urmikaa", "T": "", "U": "1,400 views", "V": "t-P6-E_ELw8"}, {"C": "Pallavi Seshayya", "D": "22:25", "R": "Urmikaa", "T": "", "U": "297 views", "V": "eonOxER1KqY"}]}, {"A": "O. S. Arun", "songs": [{"C": "Pallavi Seshayya", "D": "7:24", "R": "Urmikaa", "T": "", "U": "235 views", "V": "-V_rXQX8_s4"}]}, {"A": "T. M. Thiagarajan", "songs": [{"C": "Pallavi Seshayya", "D": "28:46", "R": "Urmikaa", "T": "", "U": "325 views", "V": "fc5btqapE3c"}]}, {"A": "Thanmayee Krishnamurthy", "songs": [{"C": "Pallavi Seshayya", "D": "4:02", "R": "Urmikaa", "T": "", "U": "2,336 views", "V": "sgu2oUOn_7E"}, {"C": "Pallavi Seshayya", "D": "5:27", "R": "Urmikaa", "T": "", "U": "0 views", "V": "0SuVlMc8EFs"}]}, {"A": "U. Srinivas", "songs": [{"C": "Pallavi Seshayya", "D": "17:51", "R": "Urmikaa", "T": "", "U": "64 views", "V": "qtfpNH5riIk"}]}, {"A": "Kamalakiran Vinjamuri", "songs": [{"C": "Pallavi Seshayya", "D": "4:48", "R": "Urmikaa", "T": "", "U": "860 views", "V": "54aeBmPhA2k"}]}, {"A": "R. K. Shriramkumar", "songs": [{"C": "Pallavi Seshayya", "D": "8:17", "R": "Urmikaa", "T": "", "U": "37 views", "V": "r3pgNRrP9Gc"}]}, {"A": "J. Vaidyanathan", "songs": [{"C": "Pallavi Seshayya", "D": "5:09", "R": "Urmikaa", "T": "", "U": "504 views", "V": "FWkxUJ-umBQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

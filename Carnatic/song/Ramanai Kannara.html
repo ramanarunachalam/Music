@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aishwarya Shankar", "songs": [{"N": "0033", "T": "", "H": "Ramanai Kannara", "S": "rAmanaik kaNNArak kaNDAnE vibHISaNan kai :  Adi", "R": "Mohanam", "C": "Arunachala Kavi", "A": "Aishwarya Shankar", "V": "32BA9Xb3A68"}]}, {"name": "Vocal - Madurai Mani Iyer", "songs": [{"N": "0337", "T": "", "H": "Ramanai Kannara", "S": "rAmanaik kaNNArak kaNDAnE vibHISaNan kai :  Adi", "R": "Mohanam", "C": "Arunachala Kavi", "A": "Madurai Mani Iyer", "V": "iXb-wTR_eKQ"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0191", "T": "", "H": "Ramanai Kannara", "S": "rAmanaik kaNNArak kaNDAnE vibHISaNan kai :  Adi", "R": "Mohanam", "C": "Arunachala Kavi", "A": "S. Sowmya", "V": "9GvSwHQEMbo"}, {"N": "0192", "T": "", "H": "Ramanai Kannara", "S": "rAmanaik kaNNArak kaNDAnE vibHISaNan kai :  Adi", "R": "Mohanam", "C": "Arunachala Kavi", "A": "S. Sowmya", "V": "_b7uJjSJ7l4"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aishwarya Shankar", "songs": [{"C": "Arunachala Kavi", "D": "3:47", "R": "Mohanam", "T": "", "U": "1,691 views", "V": "32BA9Xb3A68"}]}, {"A": "Madurai Mani Iyer", "songs": [{"C": "Arunachala Kavi", "D": "5:05", "R": "Mohanam", "T": "", "U": "72 views", "V": "iXb-wTR_eKQ"}]}, {"A": "S. Sowmya", "songs": [{"C": "Arunachala Kavi", "D": "7:36", "R": "Mohanam", "T": "", "U": "195 views", "V": "9GvSwHQEMbo"}, {"C": "Arunachala Kavi", "D": "5:22", "R": "Mohanam", "T": "", "U": "89 views", "V": "_b7uJjSJ7l4"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

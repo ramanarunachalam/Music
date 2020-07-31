@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>15</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>15</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0271", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "D. K. Jayaraman", "V": "Cp5SM3Yo3UQ"}, {"N": "0272", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "D. K. Jayaraman", "V": "fJOEtDvtdW4"}, {"N": "0273", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "D. K. Jayaraman", "V": "h_Hxx6ECN6A"}]}, {"name": "Vocal - Deekshita Venkataraman", "songs": [{"N": "0016", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "Deekshita Venkataraman", "V": "pXJGoCH7i1o"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0454", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "M. L. Vasanthakumari", "V": "-lsU2IeMCGo"}, {"N": "0455", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "M. L. Vasanthakumari", "V": "9Hizppj3EFM"}, {"N": "0456", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "M. L. Vasanthakumari", "V": "kSRfHaQzXXc"}]}, {"name": "Vocal - Ram Kaushik", "songs": [{"N": "0042", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "Ram Kaushik", "V": "R2emcN-wHpg"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0117", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "Sikkil Gurucharan", "V": "XQMa7aDzynU"}]}, {"name": "Vocal - Thanjavur Sankara Iyer", "songs": [{"N": "0017", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "Thanjavur Sankara Iyer", "V": "5g79BGYKh0Y"}, {"N": "0018", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "Thanjavur Sankara Iyer", "V": "ZguFn7b7mbQ"}]}, {"name": "Flute - Sikkil Mala Chandrasekhar", "songs": [{"N": "0030", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "Sikkil Mala Chandrasekhar", "V": "MmHVneYIK3M"}, {"N": "0031", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "Sikkil Mala Chandrasekhar", "V": "ZC0oUz1_cWE"}, {"N": "0032", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "Sikkil Mala Chandrasekhar", "V": "cvhf9u2hulE"}]}, {"name": "Violin - Dr. M. Narmada", "songs": [{"N": "0059", "T": "", "H": "Muruga Thirumal Maruga", "S": "murugA tirumAl marugA SaNmukhA :  Rupaka", "R": "Harikambhoji", "C": "Thanjavur Sankara Iyer", "A": "Dr. M. Narmada", "V": "jsR170IkmXA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. K. Jayaraman", "songs": [{"C": "Thanjavur Sankara Iyer", "D": "15:26", "R": "Harikambhoji", "T": "", "U": "80 views", "V": "Cp5SM3Yo3UQ"}, {"C": "Thanjavur Sankara Iyer", "D": "19:01", "R": "Harikambhoji", "T": "", "U": "360 views", "V": "h_Hxx6ECN6A"}, {"C": "Thanjavur Sankara Iyer", "D": "22:23", "R": "Harikambhoji", "T": "", "U": "1,340 views", "V": "fJOEtDvtdW4"}]}, {"A": "Deekshita Venkataraman", "songs": [{"C": "Thanjavur Sankara Iyer", "D": "21:36", "R": "Harikambhoji", "T": "", "U": "335 views", "V": "pXJGoCH7i1o"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Thanjavur Sankara Iyer", "D": "7:56", "R": "Harikambhoji", "T": "", "U": "715 views", "V": "9Hizppj3EFM"}, {"C": "Thanjavur Sankara Iyer", "D": "7:51", "R": "Harikambhoji", "T": "", "U": "29 views", "V": "kSRfHaQzXXc"}, {"C": "Thanjavur Sankara Iyer", "D": "6:51", "R": "Harikambhoji", "T": "", "U": "4 views", "V": "-lsU2IeMCGo"}]}, {"A": "Ram Kaushik", "songs": [{"C": "Thanjavur Sankara Iyer", "D": "9:10", "R": "Harikambhoji", "T": "", "U": "884 views", "V": "R2emcN-wHpg"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Thanjavur Sankara Iyer", "D": "16:16", "R": "Harikambhoji", "T": "", "U": "1,500 views", "V": "XQMa7aDzynU"}]}, {"A": "Thanjavur Sankara Iyer", "songs": [{"C": "Thanjavur Sankara Iyer", "D": "13:03", "R": "Harikambhoji", "T": "", "U": "161 views", "V": "ZguFn7b7mbQ"}, {"C": "Thanjavur Sankara Iyer", "D": "6:22", "R": "Harikambhoji", "T": "", "U": "668 views", "V": "5g79BGYKh0Y"}]}, {"A": "Sikkil Mala Chandrasekhar", "songs": [{"C": "Thanjavur Sankara Iyer", "D": "5:52", "R": "Harikambhoji", "T": "", "U": "351 views", "V": "cvhf9u2hulE"}, {"C": "Thanjavur Sankara Iyer", "D": "5:41", "R": "Harikambhoji", "T": "", "U": "0 views", "V": "ZC0oUz1_cWE"}, {"C": "Thanjavur Sankara Iyer", "D": "5:41", "R": "Harikambhoji", "T": "", "U": "0 views", "V": "MmHVneYIK3M"}]}, {"A": "Dr. M. Narmada", "songs": [{"C": "Thanjavur Sankara Iyer", "D": "16:46", "R": "Harikambhoji", "T": "", "U": "336 views", "V": "jsR170IkmXA"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>6</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>5</td></tr>
-<tr><td><em>Concert</em></td><td>5</td></tr>
+<tr><td><em>Concert</em></td><td>4</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -148,57 +148,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0166", "T": "", "H": "Pattakura", "S": "oTTubeTTudu summI valadu I sarasAlu :  Rupaka", "R": "Anandabhairavi", "C": "Karvetnagar Sarangapani", "A": "Ramakrishnan Murthy", "V": "FWjHY6kTpk8"}]}, {"name": "Vocal - T. Brinda", "songs": [{"N": "0061", "T": "", "H": "Pattakura", "S": "oTTubeTTudu summI valadu I sarasAlu :  Rupaka", "R": "Anandabhairavi", "C": "Karvetnagar Sarangapani", "A": "T. Brinda", "V": "6uveWwg5Z6s"}]}, {"name": "Vocal - T. Muktha", "songs": [{"N": "0015", "T": "", "H": "Pattakura", "S": "oTTubeTTudu summI valadu I sarasAlu :  Rupaka", "R": "Anandabhairavi", "C": "Karvetnagar Sarangapani", "A": "T. Muktha", "V": "1ruBkaQAvdQ"}]}, {"name": "Veena - Veenai Dhanammal", "songs": [{"N": "0006", "T": "", "H": "Pattakura", "S": "oTTubeTTudu summI valadu I sarasAlu :  Rupaka", "R": "Anandabhairavi", "C": "Karvetnagar Sarangapani", "A": "Veenai Dhanammal", "V": "jpn1dvCXEUQ"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Brinda Muktha", "songs": [{"C": "Karvetnagar Sarangapani", "D": "4:57", "R": "Anandabhairavi", "T": "", "U": "389 views", "V": "6uveWwg5Z6s"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Karvetnagar Sarangapani", "D": "8:07", "R": "Anandabhairavi", "T": "", "U": "0 views", "V": "FWjHY6kTpk8"}]}, {"A": "T. Muktha", "songs": [{"C": "Karvetnagar Sarangapani", "D": "7:36", "R": "Anandabhairavi", "T": "", "U": "0 views", "V": "1ruBkaQAvdQ"}]}, {"A": "Veenai Dhanammal", "songs": [{"C": "Karvetnagar Sarangapani", "D": "2:46", "R": "Anandabhairavi", "T": "", "U": "1,311 views", "V": "jpn1dvCXEUQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

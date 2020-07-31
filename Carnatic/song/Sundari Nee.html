@@ -28,10 +28,10 @@
 </tbody>
 </table></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>36</td></tr>
+<tr><td><em>Audio</em></td><td>38</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
-<tr><td><em>Artist</em></td><td>21</td></tr>
-<tr><td><em>Concert</em></td><td>21</td></tr>
+<tr><td><em>Artist</em></td><td>22</td></tr>
+<tr><td><em>Concert</em></td><td>23</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -152,57 +152,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aruna Sairam", "songs": [{"N": "0375", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "Aruna Sairam", "V": "gSaQUHCOB-M"}]}, {"name": "Vocal - Bangalore Brothers", "songs": [{"N": "0113", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "Bangalore Brothers", "V": "rxlRX0fBJCM"}]}, {"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0208", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "Hyderabad Brothers", "V": "Jt-Fr1ZEhXM"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1783", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "0jbnUOvUrHY"}, {"N": "1784", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "6l91Hw6BYC8"}, {"N": "1785", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "S-0Fuf4Bn_I"}, {"N": "1787", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "b4l-QFdcvq8"}, {"N": "1788", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "c_zJsgc0a64"}, {"N": "1789", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "i3ChEgAIgfI"}, {"N": "1790", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "iTpjqFVLyEI"}, {"N": "1791", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "jyrUOqnBErY"}, {"N": "1792", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "xFIYV9ZYU2U"}]}, {"name": "Vocal - Maharajapuram Viswanatha Iyer", "songs": [{"N": "0048", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "Maharajapuram Viswanatha Iyer", "V": "q8_7Ck3hhuE"}]}, {"name": "Vocal - O. S. Arun", "songs": [{"N": "0133", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "O. S. Arun", "V": "JjZXN_-P0IA"}]}, {"name": "Vocal - O. S. Thyagarajan", "songs": [{"N": "0205", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "O. S. Thyagarajan", "V": "pohpCkK6NO4"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0273", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "Ramakrishnan Murthy", "V": "47pyIdu62M8"}, {"N": "0274", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "Ramakrishnan Murthy", "V": "Vy0ikzK2ndQ"}]}, {"name": "Vocal - Sattur Subramaniam", "songs": [{"N": "0019", "T": "Thiruvottiyur pancharathnam", "H": "Sundari Nee", "S": "sundari nI divya rUpamunu  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "Sattur Subramaniam", "V": "FUe_xvAnVkE"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aruna Sairam", "songs": [{"C": "Thyagaraja", "D": "36:51", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "580 views", "V": "gSaQUHCOB-M"}]}, {"A": "Bangalore Brothers", "songs": [{"C": "Thyagaraja", "D": "10:01", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "1,339 views", "V": "rxlRX0fBJCM"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Thyagaraja", "D": "11:35", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "0 views", "V": "OvKuhaT5qDs"}]}, {"A": "G. N. Balasubramaniam", "songs": [{"C": "Thyagaraja", "D": "33:36", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "369 views", "V": "5PZjfaiiPCY"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Thyagaraja", "D": "37:41", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "2,000 views", "V": "Jt-Fr1ZEhXM"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Thyagaraja", "D": "1:10:11", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "650 views", "V": "iHZQkWm8tdU"}, {"C": "Thyagaraja", "D": "2:20:53", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "589 views", "V": "WMeaqmDfNWM"}, {"C": "Thyagaraja", "D": "1:18:21", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "65,000 views", "V": "b4l-QFdcvq8"}, {"C": "Thyagaraja", "D": "38:39", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "276 views", "V": "jyrUOqnBErY"}, {"C": "Thyagaraja", "D": "1:16:07", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "0 views", "V": "c_zJsgc0a64"}, {"C": "Thyagaraja", "D": "48:35", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "0 views", "V": "i3ChEgAIgfI"}, {"C": "Thyagaraja", "D": "9:48", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "18,435 views", "V": "iTpjqFVLyEI"}, {"C": "Thyagaraja", "D": "15:27", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "0 views", "V": "S-0Fuf4Bn_I"}, {"C": "Thyagaraja", "D": "15:54", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "0 views", "V": "6l91Hw6BYC8"}, {"C": "Thyagaraja", "D": "9:53", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "13,783 views", "V": "xFIYV9ZYU2U"}, {"C": "Thyagaraja", "D": "33:08", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "49 views", "V": "0jbnUOvUrHY"}]}, {"A": "Maharajapuram Viswanatha Iyer", "songs": [{"C": "Thyagaraja", "D": "6:29", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "1,600 views", "V": "q8_7Ck3hhuE"}]}, {"A": "O. S. Arun", "songs": [{"C": "Thyagaraja", "D": "30:51", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "3,733 views", "V": "JjZXN_-P0IA"}]}, {"A": "O. S. Thyagarajan", "songs": [{"C": "Thyagaraja", "D": "6:07", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "4,179 views", "V": "pohpCkK6NO4"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Thyagaraja", "D": "30:41", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "4,700 views", "V": "47pyIdu62M8"}, {"C": "Thyagaraja", "D": "30:06", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "383 views", "V": "Vy0ikzK2ndQ"}]}, {"A": "Sattur Subramaniam", "songs": [{"C": "Thyagaraja", "D": "28:58", "R": "Kalyani", "T": "Thiruvottiyur pancharathnam", "U": "79 views", "V": "FUe_xvAnVkE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

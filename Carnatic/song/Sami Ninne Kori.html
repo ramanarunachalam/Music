@@ -15,10 +15,10 @@
 <tbody>
 <tr><td><em>Type</em></td><td>Varnam</td></tr>
 <tr><td><em>Composer</em></td><td>Kottavasal Venkataramana Iyer</td></tr>
-<tr><td><em>Raga</em></td><td>Shuddha thodi</td></tr>
+<tr><td><em>Raga</em></td><td>Thodi</td></tr>
 <tr><td><em>Melakartha</em></td><td>08 Hanuma thodi</td></tr>
-<tr><td><em>Arohana</em></td><td>S R1 G2 M1 D1 N2 S</td></tr>
-<tr><td><em>Avarohana</em></td><td>S N2 D1 M1 G2 R1 S</td></tr>
+<tr><td><em>Arohana</em></td><td>S R1 G2 M1 P D1 N2 S</td></tr>
+<tr><td><em>Avarohana</em></td><td>S N2 D1 P M1 G2 R1 S</td></tr>
 <tr><td><em>Tala</em></td><td>Adi</td></tr>
 <tr><td><em>Tala name</em></td><td>Chatusra Jaati Triputa Tala</td></tr>
 <tr><td><em>Tala angas</em></td><td>Laghu-1, Dhruta-2</td></tr>
@@ -27,10 +27,10 @@
 </tbody>
 </table></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>7</td></tr>
+<tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>2</td></tr>
-<tr><td><em>Artist</em></td><td>2</td></tr>
-<tr><td><em>Concert</em></td><td>2</td></tr>
+<tr><td><em>Artist</em></td><td>3</td></tr>
+<tr><td><em>Concert</em></td><td>7</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -135,57 +135,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "1210", "T": "Varnam", "H": "Sami Ninne Kori", "S": "sAmi ninnE kOriyunnAnura cAla nAmIda dayayAnara :  Adi", "R": "Shuddha thodi", "C": "Kottavasal Venkataramana Iyer", "A": "M. L. Vasanthakumari", "V": "peCe7JpZLIs"}, {"N": "1211", "T": "Varnam", "H": "Sami Ninne Kori", "S": "sAmi ninnE kOriyunnAnura cAla nAmIda dayayAnara :  Adi", "R": "Thodi", "C": "Kottavasal Venkataramana Iyer", "A": "M. L. Vasanthakumari", "V": "T9A1K-AoUDQ"}, {"N": "1212", "T": "Varnam", "H": "Sami Ninne Kori", "S": "sAmi ninnE kOriyunnAnura cAla nAmIda dayayAnara :  Adi", "R": "Thodi", "C": "Kottavasal Venkataramana Iyer", "A": "M. L. Vasanthakumari", "V": "g21-ZLPpIpU"}, {"N": "1213", "T": "Varnam", "H": "Sami Ninne Kori", "S": "sAmi ninnE kOriyunnAnura cAla nAmIda dayayAnara :  Adi", "R": "Thodi", "C": "Kottavasal Venkataramana Iyer", "A": "M. L. Vasanthakumari", "V": "j6DdAbLZBjA"}, {"N": "1214", "T": "Varnam", "H": "Sami Ninne Kori", "S": "sAmi ninnE kOriyunnAnura cAla nAmIda dayayAnara :  Adi", "R": "Thodi", "C": "Kottavasal Venkataramana Iyer", "A": "M. L. Vasanthakumari", "V": "nYrObPGkq_0"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0769", "T": "Varnam", "H": "Sami Ninne Kori", "S": "sAmi ninnE kOriyunnAnura cAla nAmIda dayayAnara :  Adi", "R": "Thodi", "C": "Kottavasal Venkataramana Iyer", "A": "Sudha Ragunathan", "V": "N4Jna9323QU"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "G. N. Balasubramaniam", "songs": [{"C": "Kottavasal Venkataramana Iyer", "D": "1:09:15", "R": "Thodi", "T": "Varnam", "U": "11,000 views", "V": "oEOO4YFoEiM"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Kottavasal Venkataramana Iyer", "D": "4:30", "R": "Thodi", "T": "Varnam", "U": "493 views", "V": "T9A1K-AoUDQ"}, {"C": "Kottavasal Venkataramana Iyer", "D": "4:21", "R": "Thodi", "T": "Varnam", "U": "242 views", "V": "g21-ZLPpIpU"}, {"C": "Kottavasal Venkataramana Iyer", "D": "3:05", "R": "Thodi", "T": "Varnam", "U": "10 views", "V": "nYrObPGkq_0"}, {"C": "Kottavasal Venkataramana Iyer", "D": "3:13", "R": "Thodi", "T": "Varnam", "U": "2 views", "V": "j6DdAbLZBjA"}, {"C": "Kottavasal Venkataramana Iyer", "D": "3:52", "R": "Shuddha thodi", "T": "Varnam", "U": "18 views", "V": "peCe7JpZLIs"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Kottavasal Venkataramana Iyer", "D": "3:47", "R": "Thodi", "T": "Varnam", "U": "474 views", "V": "N4Jna9323QU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>37</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>29</td></tr>
-<tr><td><em>Concert</em></td><td>29</td></tr>
+<tr><td><em>Concert</em></td><td>21</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ariyakudi Ramanuja Iyengar", "songs": [{"N": "0246", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Ariyakudi Ramanuja Iyengar", "V": "AXq8Fq0TYAA"}]}, {"name": "Vocal - Aruna Sairam", "songs": [{"N": "0383", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Aruna Sairam", "V": "27cInLpHAOI"}, {"N": "0384", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Aruna Sairam", "V": "aizqEdcqwTQ"}]}, {"name": "Vocal - B. Rajam Iyer", "songs": [{"N": "0038", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "B. Rajam Iyer", "V": "O1ZcBKkYdCY"}]}, {"name": "Vocal - G. N. Balasubramaniam", "songs": [{"N": "0717", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "G. N. Balasubramaniam", "V": "isF1v9bofN8"}]}, {"name": "Vocal - Gayathri Girish", "songs": [{"N": "0218", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Gayathri Girish", "V": "31q6pEzDXZI"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0704", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "K. V. Narayanaswamy", "V": "eOYyYJ8w_1w"}, {"N": "0705", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "K. V. Narayanaswamy", "V": "zCpKcMxmfZo"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0676", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Maharajapuram Santhanam", "V": "If_sUzX5vKU"}]}, {"name": "Vocal - S. Ramanathan", "songs": [{"N": "0159", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "S. Ramanathan", "V": "c5WJC_LRhWY"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0757", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "T. N. Seshagopalan", "V": "D6K_EAUFfSU"}, {"N": "0758", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "T. N. Seshagopalan", "V": "v__ZtTKd7IU"}]}, {"name": "Vocal - T. S. Sathyavathi", "songs": [{"N": "0050", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "T. S. Sathyavathi", "V": "VMHltluORDw"}]}, {"name": "Vocal - Trichur Brothers", "songs": [{"N": "0128", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Trichur Brothers", "V": "gzMgILK8oRw"}]}, {"name": "Vocal - Vijay Siva", "songs": [{"N": "0138", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Vijay Siva", "V": "T9rVVpWmJxQ"}]}, {"name": "Flute - K. V. Ramanujam", "songs": [{"N": "0013", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "K. V. Ramanujam", "V": "b4q9NW8nemw"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0660", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "U. Srinivas", "V": "8x7wyoIPWd4"}]}, {"name": "Violin - V. L. Kumar", "songs": [{"N": "0033", "T": "Varnam", "H": "Nera Nammiti", "S": "neranammitinayya nityamugA ninnu nIraja nayana :  Ata", "R": "Kaanada", "C": "Ramanathapuram Srinivasa Iyengar", "A": "V. L. Kumar", "V": "nGtCdTxujYQ"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Ariyakudi Ramanuja Iyengar", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "5:53", "R": "Kaanada", "T": "Varnam", "U": "2,600 views", "V": "AXq8Fq0TYAA"}]}, {"A": "Aruna Sairam", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "7:40", "R": "Kaanada", "T": "Varnam", "U": "2,400 views", "V": "27cInLpHAOI"}, {"C": "Ramanathapuram Srinivasa Iyengar", "D": "2:58:06", "R": "Kaanada", "T": "Varnam", "U": "6,152 views", "V": "aizqEdcqwTQ"}]}, {"A": "B. Rajam Iyer", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "6:26", "R": "Kaanada", "T": "Varnam", "U": "109 views", "V": "O1ZcBKkYdCY"}, {"C": "Ramanathapuram Srinivasa Iyengar", "D": "1:30:47", "R": "Kaanada", "T": "Varnam", "U": "2,577 views", "V": "We3kOPVcETs"}]}, {"A": "G. N. Balasubramaniam", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "1:54:20", "R": "Kaanada", "T": "Varnam", "U": "2,600 views", "V": "LZOzsPmRLDA"}, {"C": "Ramanathapuram Srinivasa Iyengar", "D": "3:37", "R": "Kaanada", "T": "Varnam", "U": "217 views", "V": "isF1v9bofN8"}]}, {"A": "Gayathri Girish", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "7:21", "R": "Kaanada", "T": "Varnam", "U": "2,034 views", "V": "31q6pEzDXZI"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "6:10", "R": "Kaanada", "T": "Varnam", "U": "44 views", "V": "eOYyYJ8w_1w"}, {"C": "Ramanathapuram Srinivasa Iyengar", "D": "5:06", "R": "Kaanada", "T": "Varnam", "U": "10,522 views", "V": "zCpKcMxmfZo"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "5:21", "R": "Kaanada", "T": "Varnam", "U": "2,700 views", "V": "If_sUzX5vKU"}]}, {"A": "S. Ramanathan", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "7:11", "R": "Kaanada", "T": "Varnam", "U": "457 views", "V": "c5WJC_LRhWY"}]}, {"A": "T. N. S. Krishna", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "11:32", "R": "Kaanada", "T": "Varnam", "U": "148 views", "V": "D6K_EAUFfSU"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "2:35:07", "R": "Kaanada", "T": "Varnam", "U": "0 views", "V": "v__ZtTKd7IU"}]}, {"A": "T. S. Sathyavathi", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "9:45", "R": "Kaanada", "T": "Varnam", "U": "3,248 views", "V": "VMHltluORDw"}]}, {"A": "Trichur Brothers", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "6:16", "R": "Kaanada", "T": "Varnam", "U": "159 views", "V": "gzMgILK8oRw"}]}, {"A": "Vijay Siva", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "6:32", "R": "Kaanada", "T": "Varnam", "U": "321 views", "V": "T9rVVpWmJxQ"}]}, {"A": "K. V. Ramanujam", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "8:21", "R": "Kaanada", "T": "Varnam", "U": "362 views", "V": "b4q9NW8nemw"}]}, {"A": "U. Srinivas", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "6:51", "R": "Kaanada", "T": "Varnam", "U": "1,200 views", "V": "8x7wyoIPWd4"}]}, {"A": "V. L. Kumar", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "8:16", "R": "Kaanada", "T": "Varnam", "U": "867 views", "V": "nGtCdTxujYQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

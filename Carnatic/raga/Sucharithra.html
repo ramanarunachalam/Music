@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>34</td></tr>
 <tr><td><em>Song</em></td><td>6</td></tr>
 <tr><td><em>Composer</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>3</td></tr>
+<tr><td><em>Type</em></td><td>3</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "cintayAmi santatam shrI muttusvAmi", "songs": [{"N": "0385", "T": "", "H": "Chinthayami Santhatham", "S": "cintayAmi santatam shrI muttusvAmi dIkSitam :  Adi", "R": "Sucharithra", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "kILcQNT8ANo"}, {"N": "0083", "T": "", "H": "Chinthayami Santhatham", "S": "cintayAmi santatam shrI muttusvAmi dIkSitam :  Adi", "R": "Sucharithra", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "hXLAeJvv_Rc"}]}, {"name": "hari nAma daragiNiyu hArutide jagadi", "songs": [{"N": "0010", "T": "", "H": "Hari Naamada Aragiliyu", "S": "hari nAma daragiNiyu hArutide jagadi parama :  Ata", "R": "Sucharithra", "C": "Purandara Dasa", "A": "Sampagodu Vighnaraja", "V": "FK_6sy6dT_w"}, {"N": "0011", "T": "", "H": "Hari Naamada Aragiliyu", "S": "hari nAma daragiNiyu hArutide jagadi parama :  Ata", "R": "Sucharithra", "C": "Purandara Dasa", "A": "Sampagodu Vighnaraja", "V": "XpsaEYSYAaI"}]}, {"name": "Ragam Thanam Pallavi", "songs": [{"N": "0176", "T": "", "H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "R": "Sucharithra", "C": "UnknownComposer", "A": "Chitravina Ravi Kiran", "V": "QGEHCB9eciU"}]}, {"name": "Unknownsong", "songs": [{"N": "0069", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sucharithra", "C": "UnknownComposer", "A": "Nookala Chinna Satyanarayana", "V": "_7BVaNqCer0"}, {"N": "0390", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sucharithra", "C": "UnknownComposer", "A": "S. Kalyanaraman", "V": "A9HyJtct_Ak"}, {"N": "0753", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sucharithra", "C": "UnknownComposer", "A": "U. Srinivas", "V": "4fvL6dlO_ts"}, {"N": "0754", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sucharithra", "C": "UnknownComposer", "A": "U. Srinivas", "V": "MImMHeRXof8"}]}, {"name": "Varnam", "songs": [{"N": "0723", "T": "", "H": "Varnam", "S": "Varnam", "R": "Sucharithra", "C": "UnknownComposer", "A": "K. V. Narayanaswamy", "V": "iu2Ec-qii2I"}]}, {"name": "vElu mayilumE veTri vElu mayilumE", "songs": [{"N": "0037", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "Deekshita Venkataraman", "V": "pFzNeODnzyI"}, {"N": "0108", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "Kunnakudi M. Balamuralikrishna", "V": "nP_zeTCpeJY"}, {"N": "0053", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "S. Mahathi", "V": "FFIoXyuqfw8"}, {"N": "0054", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "S. Mahathi", "V": "gGn0TVCfpCo"}, {"N": "0118", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "S. Rajam", "V": "4jlWW3IwuhY"}, {"N": "0237", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "S. Sowmya", "V": "gwWWcumX6bA"}, {"N": "0951", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "Sanjay Subrahmanyan", "V": "qanI7A4WmO4"}, {"N": "0948", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "Sanjay Subrahmanyan", "V": "3asQqNCyrqs"}, {"N": "0947", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "Sanjay Subrahmanyan", "V": "1GAQJvj8Wl4"}, {"N": "0949", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "Sanjay Subrahmanyan", "V": "LzbRNJlD2ys"}, {"N": "0950", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "Sanjay Subrahmanyan", "V": "dpJs_NX7s30"}, {"N": "0952", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "Sanjay Subrahmanyan", "V": "sYeI8-5eKZQ"}, {"N": "0210", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "Sikkil Gurucharan", "V": "jALjqesWkZ4"}, {"N": "0105", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "Vijayalakshmy Subramaniam", "V": "og58ogW1G50"}, {"N": "0035", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "Vivek Sadasivam", "V": "naO3RjDZ1oc"}, {"N": "0535", "T": "", "H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "R": "Sucharithra", "C": "Koteeswara Iyer", "A": "U. Srinivas", "V": "tL3WOoouP3M"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Chinthayami Santhatham", "S": "cintayAmi santatam shrI muttusvAmi dIkSitam :  Adi", "songs": [{"A": "M. Balamuralikrishna", "C": "M. Balamuralikrishna", "D": "6:56", "T": "", "U": "2,700 views", "V": "kILcQNT8ANo"}, {"A": "Prince Rama Varma", "C": "M. Balamuralikrishna", "D": "7:58", "T": "", "U": "0 views", "V": "hXLAeJvv_Rc"}]}, {"H": "Hari Naamada Aragiliyu", "S": "hari nAma daragiNiyu hArutide jagadi parama :  Ata", "songs": [{"A": "Sampagodu Vighnaraja", "C": "Purandara Dasa", "D": "6:30", "T": "", "U": "4,427 views", "V": "FK_6sy6dT_w"}, {"A": "Sampagodu Vighnaraja", "C": "Purandara Dasa", "D": "6:30", "T": "", "U": "3,343 views", "V": "XpsaEYSYAaI"}]}, {"H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "songs": [{"A": "Chitravina Ravi Kiran", "C": "UnknownComposer", "D": "44:41", "T": "", "U": "658 views", "V": "QGEHCB9eciU"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Nookala Chinna Satyanarayana", "C": "UnknownComposer", "D": "4:48", "T": "", "U": "0 views", "V": "_7BVaNqCer0"}, {"A": "S. Kalyanaraman", "C": "UnknownComposer", "D": "14:41", "T": "", "U": "72 views", "V": "A9HyJtct_Ak"}, {"A": "U. Srinivas", "C": "UnknownComposer", "D": "7:37", "T": "", "U": "0 views", "V": "MImMHeRXof8"}, {"A": "U. Srinivas", "C": "UnknownComposer", "D": "11:04", "T": "", "U": "0 views", "V": "4fvL6dlO_ts"}]}, {"H": "Varnam", "S": "Varnam", "songs": [{"A": "K. V. Narayanaswamy", "C": "UnknownComposer", "D": "5:46", "T": "", "U": "526 views", "V": "iu2Ec-qii2I"}]}, {"H": "Velum Mayilum", "S": "vElu mayilumE veTri vElu mayilumE evvELaiyilumE :  Rupaka", "songs": [{"A": "Deekshita Venkataraman", "C": "Koteeswara Iyer", "D": "11:52", "T": "", "U": "1,473 views", "V": "pFzNeODnzyI"}, {"A": "Kunnakudi M. Balamuralikrishna", "C": "Koteeswara Iyer", "D": "25:11", "T": "", "U": "746 views", "V": "nP_zeTCpeJY"}, {"A": "S. Mahathi", "C": "Koteeswara Iyer", "D": "8:25", "T": "", "U": "0 views", "V": "FFIoXyuqfw8"}, {"A": "S. Mahathi", "C": "Koteeswara Iyer", "D": "16:31", "T": "", "U": "1,984 views", "V": "gGn0TVCfpCo"}, {"A": "S. Rajam", "C": "Koteeswara Iyer", "D": "7:06", "T": "", "U": "0 views", "V": "4jlWW3IwuhY"}, {"A": "S. Sowmya", "C": "Koteeswara Iyer", "D": "1:08:16", "T": "", "U": "6,662 views", "V": "gwWWcumX6bA"}, {"A": "Sanjay Subrahmanyan", "C": "Koteeswara Iyer", "D": "5:48", "T": "", "U": "278 views", "V": "3asQqNCyrqs"}, {"A": "Sanjay Subrahmanyan", "C": "Koteeswara Iyer", "D": "11:56", "T": "", "U": "1,100 views", "V": "dpJs_NX7s30"}, {"A": "Sanjay Subrahmanyan", "C": "Koteeswara Iyer", "D": "6:01", "T": "", "U": "370 views", "V": "1GAQJvj8Wl4"}, {"A": "Sanjay Subrahmanyan", "C": "Koteeswara Iyer", "D": "", "T": "", "U": "0 views", "V": "qanI7A4WmO4"}, {"A": "Sanjay Subrahmanyan", "C": "Koteeswara Iyer", "D": "5:40", "T": "", "U": "148 views", "V": "sYeI8-5eKZQ"}, {"A": "Sanjay Subrahmanyan", "C": "Koteeswara Iyer", "D": "20:00", "T": "", "U": "0 views", "V": "LzbRNJlD2ys"}, {"A": "Sikkil Gurucharan", "C": "Koteeswara Iyer", "D": "6:48", "T": "", "U": "0 views", "V": "jALjqesWkZ4"}, {"A": "Vijayalakshmy Subramaniam", "C": "Koteeswara Iyer", "D": "5:41", "T": "", "U": "145 views", "V": "og58ogW1G50"}, {"A": "Vivek Sadasivam", "C": "Koteeswara Iyer", "D": "5:45", "T": "", "U": "742 views", "V": "naO3RjDZ1oc"}, {"A": "U. Srinivas", "C": "Koteeswara Iyer", "D": "27:21", "T": "", "U": "253 views", "V": "tL3WOoouP3M"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

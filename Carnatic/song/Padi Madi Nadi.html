@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>4</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -125,57 +125,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - K. J. Yesudas", "songs": [{"N": "0224", "T": "", "H": "Padi Madi Nadi", "S": "pAdhi madhi nadhi pOdhum aNisadai :  Adi", "R": "Panthuvarali", "C": "Arunagirinathar", "A": "K. J. Yesudas", "V": "37zU_VincYk"}, {"N": "0225", "T": "", "H": "Padi Madi Nadi", "S": "pAdhi madhi nadhi pOdhum aNisadai :  Adi", "R": "Panthuvarali", "C": "Arunagirinathar", "A": "K. J. Yesudas", "V": "wFl1z8S5Arg"}]}, {"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0147", "T": "", "H": "Padi Madi Nadi", "S": "pAdhi madhi nadhi pOdhum aNisadai :  Adi", "R": "Karaharapriya", "C": "Arunagirinathar", "A": "P. Unnikrishnan", "V": "fl9gVMlReaw"}]}, {"name": "Vocal - Seethalapathi Balasubramaniam", "songs": [{"N": "0024", "T": "", "H": "Padi Madi Nadi", "S": "pAdhi madhi nadhi pOdhum aNisadai :  Adi", "R": "Karaharapriya", "C": "Arunagirinathar", "A": "Seethalapathi Balasubramaniam", "V": "DeuES_EB6M4"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0429", "T": "", "H": "Padi Madi Nadi", "S": "pAdhi madhi nadhi pOdhum aNisadai :  Adi", "R": "Unknownraga", "C": "Arunagirinathar", "A": "Sudha Ragunathan", "V": "YqrEmuCIus4"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0433", "T": "", "H": "Padi Madi Nadi", "S": "pAdhi madhi nadhi pOdhum aNisadai :  Adi", "R": "Thodi", "C": "Arunagirinathar", "A": "T. M. Krishna", "V": "uvhPlC0APlI"}]}, {"name": "Vocal - Vijay Siva", "songs": [{"N": "0067", "T": "", "H": "Padi Madi Nadi", "S": "pAdhi madhi nadhi pOdhum aNisadai :  Adi", "R": "Karaharapriya", "C": "Arunagirinathar", "A": "Vijay Siva", "V": "4Prsnm0x1EI"}, {"N": "0068", "T": "", "H": "Padi Madi Nadi", "S": "pAdhi madhi nadhi pOdhum aNisadai :  Adi", "R": "Karaharapriya", "C": "Arunagirinathar", "A": "Vijay Siva", "V": "qU58CyX-wtc"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "K. J. Yesudas", "songs": [{"C": "Arunagirinathar", "D": "14:16", "R": "Panthuvarali", "T": "", "U": "1,100 views", "V": "wFl1z8S5Arg"}, {"C": "Arunagirinathar", "D": "13:50", "R": "Panthuvarali", "T": "", "U": "7,927 views", "V": "37zU_VincYk"}]}, {"A": "P. Unnikrishnan", "songs": [{"C": "Arunagirinathar", "D": "1:25", "R": "Karaharapriya", "T": "", "U": "0 views", "V": "fl9gVMlReaw"}]}, {"A": "Seethalapathi Balasubramaniam", "songs": [{"C": "Arunagirinathar", "D": "18:16", "R": "Karaharapriya", "T": "", "U": "481 views", "V": "DeuES_EB6M4"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Arunagirinathar", "D": "3:01", "R": "Unknownraga", "T": "", "U": "8,093 views", "V": "YqrEmuCIus4"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Arunagirinathar", "D": "33:56", "R": "Thodi", "T": "", "U": "8,857 views", "V": "uvhPlC0APlI"}]}, {"A": "Vijay Siva", "songs": [{"C": "Arunagirinathar", "D": "23:27", "R": "Karaharapriya", "T": "", "U": "302 views", "V": "4Prsnm0x1EI"}, {"C": "Arunagirinathar", "D": "3:01", "R": "Karaharapriya", "T": "", "U": "1,066 views", "V": "qU58CyX-wtc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

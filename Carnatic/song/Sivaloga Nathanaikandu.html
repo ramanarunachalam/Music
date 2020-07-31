@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>24</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>18</td></tr>
-<tr><td><em>Concert</em></td><td>18</td></tr>
+<tr><td><em>Concert</em></td><td>20</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aishwarya Vidhya Raghunath", "songs": [{"N": "0051", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Mayamalavagowla", "C": "Gopalakrishna Bharathi", "A": "Aishwarya Vidhya Raghunath", "V": "HkGxht6qcPc"}]}, {"name": "Vocal - Kunnakudi M. Balamuralikrishna", "songs": [{"N": "0096", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Unknownraga", "C": "Gopalakrishna Bharathi", "A": "Kunnakudi M. Balamuralikrishna", "V": "rRccxsi0i3w"}]}, {"name": "Vocal - M. Dandapani Desikar", "songs": [{"N": "0044", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Unknownraga", "C": "Gopalakrishna Bharathi", "A": "M. Dandapani Desikar", "V": "exBnzUtgdHs"}, {"N": "0045", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Unknownraga", "C": "Gopalakrishna Bharathi", "A": "M. Dandapani Desikar", "V": "f66NIO0bI-o"}, {"N": "0046", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Unknownraga", "C": "Gopalakrishna Bharathi", "A": "M. Dandapani Desikar", "V": "lGpKkE31rww"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0310", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Unknownraga", "C": "Gopalakrishna Bharathi", "A": "Nithyasree Mahadevan", "V": "zsAAouHl1Iw"}]}, {"name": "Vocal - Palghat Rama Bhagavathar", "songs": [{"N": "0010", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Nadanamakriya", "C": "Gopalakrishna Bharathi", "A": "Palghat Rama Bhagavathar", "V": "7SbIIS_HzjI"}, {"N": "0011", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Nadanamakriya", "C": "Gopalakrishna Bharathi", "A": "Palghat Rama Bhagavathar", "V": "8iBC4kgTXBQ"}]}, {"name": "Vocal - R. Suryaprakash", "songs": [{"N": "0071", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Unknownraga", "C": "Gopalakrishna Bharathi", "A": "R. Suryaprakash", "V": "IqGfN1nTc2c"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0192", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Mayamalavagowla", "C": "Gopalakrishna Bharathi", "A": "Ramakrishnan Murthy", "V": "X-jCp3-GM7k"}]}, {"name": "Vocal - S. Saketharaman", "songs": [{"N": "0135", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Unknownraga", "C": "Gopalakrishna Bharathi", "A": "S. Saketharaman", "V": "hRWN540tlxs"}, {"N": "0133", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Mayamalavagowla", "C": "Gopalakrishna Bharathi", "A": "S. Saketharaman", "V": "eCQqf08Rn3I"}, {"N": "0134", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Mayamalavagowla", "C": "Gopalakrishna Bharathi", "A": "S. Saketharaman", "V": "gtQK5bIRfYA"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0211", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Mayamalavagowla", "C": "Gopalakrishna Bharathi", "A": "S. Sowmya", "V": "7sNWhX7iGSc"}, {"N": "0212", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Mayamalavagowla", "C": "Gopalakrishna Bharathi", "A": "S. Sowmya", "V": "zADy8vLGTxY"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0802", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Mayamalavagowla", "C": "Gopalakrishna Bharathi", "A": "Sanjay Subrahmanyan", "V": "u-IFgwBdmU0"}]}, {"name": "Vocal - Sreevalsan J. Menon", "songs": [{"N": "0108", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Mayamalavagowla", "C": "Gopalakrishna Bharathi", "A": "Sreevalsan J. Menon", "V": "C1kqHuVL9SE"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0498", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Unknownraga", "C": "Gopalakrishna Bharathi", "A": "T. N. Seshagopalan", "V": "7Y9xGU67tg0"}]}, {"name": "Flute - V. K. Raman", "songs": [{"N": "0051", "T": "", "H": "Sivaloga Nathanaikandu", "S": "sivalOga nAthanaik kaNdu sEviththiduvOm vArIr :  Adi", "R": "Mayamalavagowla", "C": "Gopalakrishna Bharathi", "A": "V. K. Raman", "V": "34EKL1C_Ye8"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aishwarya Vidhya Raghunath", "songs": [{"C": "Gopalakrishna Bharathi", "D": "5:15", "R": "Mayamalavagowla", "T": "", "U": "429 views", "V": "HkGxht6qcPc"}]}, {"A": "Kunnakudi M. Balamuralikrishna", "songs": [{"C": "Gopalakrishna Bharathi", "D": "12:23", "R": "Unknownraga", "T": "", "U": "1,303 views", "V": "rRccxsi0i3w"}]}, {"A": "M. Dandapani Desikar", "songs": [{"C": "Gopalakrishna Bharathi", "D": "2:27", "R": "Unknownraga", "T": "", "U": "50,864 views", "V": "lGpKkE31rww"}, {"C": "Gopalakrishna Bharathi", "D": "2:11", "R": "Unknownraga", "T": "", "U": "373 views", "V": "f66NIO0bI-o"}, {"C": "Gopalakrishna Bharathi", "D": "2:12", "R": "Unknownraga", "T": "", "U": "0 views", "V": "exBnzUtgdHs"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Gopalakrishna Bharathi", "D": "5:06", "R": "Unknownraga", "T": "", "U": "16,224 views", "V": "zsAAouHl1Iw"}]}, {"A": "Palghat Rama Bhagavathar", "songs": [{"C": "Gopalakrishna Bharathi", "D": "2:48", "R": "Nadanamakriya", "T": "", "U": "1,000 views", "V": "7SbIIS_HzjI"}, {"C": "Gopalakrishna Bharathi", "D": "3:00", "R": "Nadanamakriya", "T": "", "U": "1,385 views", "V": "8iBC4kgTXBQ"}]}, {"A": "R. Suryaprakash", "songs": [{"C": "Gopalakrishna Bharathi", "D": "8:06", "R": "Unknownraga", "T": "", "U": "195 views", "V": "IqGfN1nTc2c"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Gopalakrishna Bharathi", "D": "8:31", "R": "Mayamalavagowla", "T": "", "U": "1,000 views", "V": "X-jCp3-GM7k"}]}, {"A": "S. Saketharaman", "songs": [{"C": "Gopalakrishna Bharathi", "D": "13:42", "R": "Unknownraga", "T": "", "U": "2,981 views", "V": "hRWN540tlxs"}, {"C": "Gopalakrishna Bharathi", "D": "13:43", "R": "Mayamalavagowla", "T": "", "U": "764 views", "V": "eCQqf08Rn3I"}, {"C": "Gopalakrishna Bharathi", "D": "13:43", "R": "Mayamalavagowla", "T": "", "U": "1,252 views", "V": "gtQK5bIRfYA"}]}, {"A": "S. Sowmya", "songs": [{"C": "Gopalakrishna Bharathi", "D": "15:01", "R": "Mayamalavagowla", "T": "", "U": "4,000 views", "V": "7sNWhX7iGSc"}, {"C": "Gopalakrishna Bharathi", "D": "10:58", "R": "Mayamalavagowla", "T": "", "U": "1,104 views", "V": "zADy8vLGTxY"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Gopalakrishna Bharathi", "D": "11:12", "R": "Mayamalavagowla", "T": "", "U": "36,000 views", "V": "u-IFgwBdmU0"}]}, {"A": "Sreevalsan J. Menon", "songs": [{"C": "Gopalakrishna Bharathi", "D": "7:01", "R": "Mayamalavagowla", "T": "", "U": "720 views", "V": "C1kqHuVL9SE"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Gopalakrishna Bharathi", "D": "6:56", "R": "Unknownraga", "T": "", "U": "74 views", "V": "7Y9xGU67tg0"}]}, {"A": "V. K. Raman", "songs": [{"C": "Gopalakrishna Bharathi", "D": "2:45", "R": "Mayamalavagowla", "T": "", "U": "139 views", "V": "34EKL1C_Ye8"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

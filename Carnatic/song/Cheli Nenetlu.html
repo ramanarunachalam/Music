@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>20</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>14</td></tr>
-<tr><td><em>Concert</em></td><td>14</td></tr>
+<tr><td><em>Concert</em></td><td>17</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -135,57 +135,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aishwarya Shankar", "songs": [{"N": "0017", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "Aishwarya Shankar", "V": "ubQro9uOixo"}]}, {"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0033", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "Amrutha Venkatesh", "V": "pOJsJ7y77Kk"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0037", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "Bombay Jayashri", "V": "rQKGZEdTyO0"}, {"N": "0038", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "Bombay Jayashri", "V": "s7unvPadNVk"}]}, {"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0027", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "D. K. Jayaraman", "V": "VovAGbI3YE4"}, {"N": "0028", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "D. K. Jayaraman", "V": "uaidZ1Y_mfM"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0035", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "D. K. Pattammal", "V": "FGsfWdC9QDE"}, {"N": "0036", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "D. K. Pattammal", "V": "XXylt3PajeQ"}, {"N": "0037", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "D. K. Pattammal", "V": "_3ra1XSNaDs"}, {"N": "0038", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "D. K. Pattammal", "V": "aHCawUeHMEE"}]}, {"name": "Vocal - G. Ravikiran", "songs": [{"N": "0016", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "G. Ravikiran", "V": "F9q9sgltReM"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "0095", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "M. S. Subbulakshmi", "V": "SKDgSdF_Bv8"}, {"N": "0096", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "M. S. Subbulakshmi", "V": "g4wa2ka4gE8"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0052", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "Nithyasree Mahadevan", "V": "-b1YiNK-oEo"}]}, {"name": "Vocal - Palghat R Ramprasad", "songs": [{"N": "0017", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "Palghat R Ramprasad", "V": "Ee8Q3L85zUM"}]}, {"name": "Flute - J. B. Sruthi Sagar", "songs": [{"N": "0022", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "J. B. Sruthi Sagar", "V": "Yz1flIPirWQ"}]}, {"name": "Violin - T. N. Krishnan", "songs": [{"N": "0047", "T": "Javali", "H": "Cheli Nenetlu", "S": "celi nEnETlu sahintunE alavAnenta varNintunE :  Adi", "R": "Paras", "C": "Tiruppanandal Pattabhiramayya", "A": "T. N. Krishnan", "V": "9riDdkD7dfo"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aishwarya Shankar", "songs": [{"C": "Tiruppanandal Pattabhiramayya", "D": "2:23", "R": "Paras", "T": "Javali", "U": "1,756 views", "V": "ubQro9uOixo"}]}, {"A": "Amrutha Venkatesh", "songs": [{"C": "Tiruppanandal Pattabhiramayya", "D": "3:16", "R": "Paras", "T": "Javali", "U": "2,168 views", "V": "pOJsJ7y77Kk"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Tiruppanandal Pattabhiramayya", "D": "3:32", "R": "Paras", "T": "Javali", "U": "1,144 views", "V": "s7unvPadNVk"}, {"C": "Tiruppanandal Pattabhiramayya", "D": "3:01", "R": "Paras", "T": "Javali", "U": "3,905 views", "V": "rQKGZEdTyO0"}]}, {"A": "D. K. Jayaraman", "songs": [{"C": "Tiruppanandal Pattabhiramayya", "D": "2:35", "R": "Paras", "T": "Javali", "U": "270 views", "V": "VovAGbI3YE4"}, {"C": "Tiruppanandal Pattabhiramayya", "D": "2:49", "R": "Paras", "T": "Javali", "U": "2,024 views", "V": "uaidZ1Y_mfM"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Tiruppanandal Pattabhiramayya", "D": "4:21", "R": "Paras", "T": "Javali", "U": "168 views", "V": "aHCawUeHMEE"}, {"C": "Tiruppanandal Pattabhiramayya", "D": "3:13", "R": "Paras", "T": "Javali", "U": "389 views", "V": "_3ra1XSNaDs"}, {"C": "Tiruppanandal Pattabhiramayya", "D": "4:41", "R": "Paras", "T": "Javali", "U": "28 views", "V": "FGsfWdC9QDE"}, {"C": "Tiruppanandal Pattabhiramayya", "D": "4:40", "R": "Paras", "T": "Javali", "U": "21 views", "V": "XXylt3PajeQ"}]}, {"A": "G. Ravikiran", "songs": [{"C": "Tiruppanandal Pattabhiramayya", "D": "2:38", "R": "Paras", "T": "Javali", "U": "1,221 views", "V": "F9q9sgltReM"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Tiruppanandal Pattabhiramayya", "D": "3:20", "R": "Paras", "T": "Javali", "U": "85 views", "V": "g4wa2ka4gE8"}, {"C": "Tiruppanandal Pattabhiramayya", "D": "3:23", "R": "Paras", "T": "Javali", "U": "5,151 views", "V": "SKDgSdF_Bv8"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Tiruppanandal Pattabhiramayya", "D": "3:25", "R": "Paras", "T": "Javali", "U": "248 views", "V": "-b1YiNK-oEo"}]}, {"A": "Palghat R Ramprasad", "songs": [{"C": "Tiruppanandal Pattabhiramayya", "D": "3:41", "R": "Paras", "T": "Javali", "U": "976 views", "V": "Ee8Q3L85zUM"}]}, {"A": "J. B. Sruthi Sagar", "songs": [{"C": "Tiruppanandal Pattabhiramayya", "D": "3:49", "R": "Paras", "T": "Javali", "U": "1,665 views", "V": "Yz1flIPirWQ"}]}, {"A": "T. N. Krishnan", "songs": [{"C": "Tiruppanandal Pattabhiramayya", "D": "4:15", "R": "Paras", "T": "Javali", "U": "34 views", "V": "9riDdkD7dfo"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

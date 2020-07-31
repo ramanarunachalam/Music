@@ -129,57 +129,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Alamelu Mani", "songs": [{"N": "0026", "T": "Padam", "H": "Ini Enna Pechu", "S": "ini enna pEccudukkidupOm pOm ellOrkkum :  Rupaka", "R": "Sahana", "C": "Vaidheeswaran Kovil Subbarama Iyer", "A": "Alamelu Mani", "V": "afrVtPaP-Jo"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0253", "T": "Padam", "H": "Ini Enna Pechu", "S": "ini enna pEccudukkidupOm pOm ellOrkkum :  Rupaka", "R": "Sahana", "C": "Vaidheeswaran Kovil Subbarama Iyer", "A": "Bombay Sisters", "V": "0YSFQwl8y3Q"}, {"N": "0254", "T": "Padam", "H": "Ini Enna Pechu", "S": "ini enna pEccudukkidupOm pOm ellOrkkum :  Rupaka", "R": "Sahana", "C": "Vaidheeswaran Kovil Subbarama Iyer", "A": "Bombay Sisters", "V": "pSom4cHyehQ"}]}, {"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0196", "T": "Padam", "H": "Ini Enna Pechu", "S": "ini enna pEccudukkidupOm pOm ellOrkkum :  Rupaka", "R": "Sahana", "C": "Vaidheeswaran Kovil Subbarama Iyer", "A": "Hyderabad Brothers", "V": "NYT2gxwmqe8"}]}, {"name": "Vocal - Ramnad Krishnan", "songs": [{"N": "0162", "T": "Padam", "H": "Ini Enna Pechu", "S": "ini enna pEccudukkidupOm pOm ellOrkkum :  Rupaka", "R": "Sahana", "C": "Vaidheeswaran Kovil Subbarama Iyer", "A": "Ramnad Krishnan", "V": "HjSMGbA28qw"}]}, {"name": "Vocal - Subhashini Parthasarathy", "songs": [{"N": "0033", "T": "Padam", "H": "Ini Enna Pechu", "S": "ini enna pEccudukkidupOm pOm ellOrkkum :  Rupaka", "R": "Sahana", "C": "Vaidheeswaran Kovil Subbarama Iyer", "A": "Subhashini Parthasarathy", "V": "Onp_wnmUw5o"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Alamelu Mani", "songs": [{"C": "Vaidheeswaran Kovil Subbarama Iyer", "D": "3:16", "R": "Sahana", "T": "Padam", "U": "0 views", "V": "afrVtPaP-Jo"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Vaidheeswaran Kovil Subbarama Iyer", "D": "4:11", "R": "Sahana", "T": "Padam", "U": "0 views", "V": "0YSFQwl8y3Q"}, {"C": "Vaidheeswaran Kovil Subbarama Iyer", "D": "5:27", "R": "Sahana", "T": "Padam", "U": "241 views", "V": "pSom4cHyehQ"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Vaidheeswaran Kovil Subbarama Iyer", "D": "2:34", "R": "Sahana", "T": "Padam", "U": "65 views", "V": "NYT2gxwmqe8"}]}, {"A": "Ramnad Krishnan", "songs": [{"C": "Vaidheeswaran Kovil Subbarama Iyer", "D": "8:03", "R": "Sahana", "T": "Padam", "U": "5,700 views", "V": "HjSMGbA28qw"}]}, {"A": "Subhashini Parthasarathy", "songs": [{"C": "Vaidheeswaran Kovil Subbarama Iyer", "D": "3:58", "R": "Sahana", "T": "Padam", "U": "0 views", "V": "Onp_wnmUw5o"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

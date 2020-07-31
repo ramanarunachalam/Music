@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>21</td></tr>
 <tr><td><em>Song</em></td><td>3</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Bujhat Shyam Kaun Toogori", "songs": [{"N": "0259", "T": "", "H": "Bujhat Shyam Kaun Toogori", "S": "Bujhat Shyam Kaun Toogori", "R": "Jonpuri", "C": "Surdas", "A": "M. S. Subbulakshmi", "V": "08HN4eDBwAc"}, {"N": "0260", "T": "", "H": "Bujhat Shyam Kaun Toogori", "S": "Bujhat Shyam Kaun Toogori", "R": "Jonpuri", "C": "Surdas", "A": "M. S. Subbulakshmi", "V": "sELKfaqityk"}, {"N": "0261", "T": "", "H": "Bujhat Shyam Kaun Toogori", "S": "Bujhat Shyam Kaun Toogori", "R": "Jonpuri", "C": "Surdas", "A": "M. S. Subbulakshmi", "V": "yQ5f_nmjVeA"}]}, {"name": "gOpi gOpAla lAla rAsa maNDalamAhi", "songs": [{"N": "0060", "T": "", "H": "Gopi Gopala", "S": "gOpi gOpAla lAla rAsa maNDalamAhi tAta :  Adi", "R": "Gamanashrama", "C": "Surdas", "A": "O. S. Arun", "V": "Brr14IdWJ8s"}, {"N": "0061", "T": "", "H": "Gopi Gopala", "S": "gOpi gOpAla lAla rAsa maNDalamAhi tAta :  Adi", "R": "Gamanashrama", "C": "Surdas", "A": "O. S. Arun", "V": "C3x5AIYETqk"}, {"N": "0062", "T": "", "H": "Gopi Gopala", "S": "gOpi gOpAla lAla rAsa maNDalamAhi tAta :  Adi", "R": "Gamanashrama", "C": "Surdas", "A": "O. S. Arun", "V": "EuWKnrkeOSU"}, {"N": "0063", "T": "", "H": "Gopi Gopala", "S": "gOpi gOpAla lAla rAsa maNDalamAhi tAta :  Adi", "R": "Gamanashrama", "C": "Surdas", "A": "O. S. Arun", "V": "XDGhpdagV70"}, {"N": "0064", "T": "", "H": "Gopi Gopala", "S": "gOpi gOpAla lAla rAsa maNDalamAhi tAta :  Adi", "R": "Gamanashrama", "C": "Surdas", "A": "O. S. Arun", "V": "b49R0VZOC2k"}, {"N": "0065", "T": "", "H": "Gopi Gopala", "S": "gOpi gOpAla lAla rAsa maNDalamAhi tAta :  Adi", "R": "Gamanashrama", "C": "Surdas", "A": "O. S. Arun", "V": "oPeMECLiGzE"}, {"N": "0218", "T": "", "H": "Gopi Gopala", "S": "gOpi gOpAla lAla rAsa maNDalamAhi tAta :  Adi", "R": "Gamanashrama", "C": "Surdas", "A": "T. N. Seshagopalan", "V": "M20NTBHCgFo"}, {"N": "0219", "T": "", "H": "Gopi Gopala", "S": "gOpi gOpAla lAla rAsa maNDalamAhi tAta :  Adi", "R": "Gamanashrama", "C": "Surdas", "A": "T. N. Seshagopalan", "V": "YCTGTA9APg0"}, {"N": "0220", "T": "", "H": "Gopi Gopala", "S": "gOpi gOpAla lAla rAsa maNDalamAhi tAta :  Adi", "R": "Gamanashrama", "C": "Surdas", "A": "T. N. Seshagopalan", "V": "_IPGrdEI5TM"}, {"N": "0221", "T": "", "H": "Gopi Gopala", "S": "gOpi gOpAla lAla rAsa maNDalamAhi tAta :  Adi", "R": "Gamanashrama", "C": "Surdas", "A": "T. N. Seshagopalan", "V": "dIa1DWfmmXw"}]}, {"name": "hE gOvinda hE gOpAla rAkhO sharaNa", "songs": [{"N": "0463", "T": "", "H": "He Govinda", "S": "hE gOvinda hE gOpAla rAkhO sharaNa :  Adi", "R": "Kapi", "C": "Surdas", "A": "M. S. Subbulakshmi", "V": "6b-b9PsZUUw"}, {"N": "0464", "T": "", "H": "He Govinda", "S": "hE gOvinda hE gOpAla rAkhO sharaNa :  Adi", "R": "Kapi", "C": "Surdas", "A": "M. S. Subbulakshmi", "V": "8iXdbxi6oVA"}, {"N": "0465", "T": "", "H": "He Govinda", "S": "hE gOvinda hE gOpAla rAkhO sharaNa :  Adi", "R": "Kapi", "C": "Surdas", "A": "M. S. Subbulakshmi", "V": "B8EwcE-7JKc"}, {"N": "0466", "T": "", "H": "He Govinda", "S": "hE gOvinda hE gOpAla rAkhO sharaNa :  Adi", "R": "Kapi", "C": "Surdas", "A": "M. S. Subbulakshmi", "V": "PQirc2A1l0Y"}, {"N": "0467", "T": "", "H": "He Govinda", "S": "hE gOvinda hE gOpAla rAkhO sharaNa :  Adi", "R": "Kapi", "C": "Surdas", "A": "M. S. Subbulakshmi", "V": "lORJ3GsTobo"}, {"N": "0093", "T": "", "H": "He Govinda", "S": "hE gOvinda hE gOpAla rAkhO sharaNa :  Adi", "R": "Kapi", "C": "Surdas", "A": "Ranjani Gayatri", "V": "eAMLeRYSDcw"}, {"N": "0042", "T": "", "H": "He Govinda", "S": "hE gOvinda hE gOpAla rAkhO sharaNa :  Adi", "R": "Kapi", "C": "Surdas", "A": "S. Aishwarya", "V": "jhuJK6yA1M0"}, {"N": "0091", "T": "", "H": "He Govinda", "S": "hE gOvinda hE gOpAla rAkhO sharaNa :  Adi", "R": "Kapi", "C": "Surdas", "A": "Voleti Venkateswarlu", "V": "PwkO4PPdM9Q"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Bujhat Shyam Kaun Toogori", "S": "Bujhat Shyam Kaun Toogori", "songs": [{"A": "M. S. Subbulakshmi", "D": "3:50", "R": "Jonpuri", "T": "", "U": "930 views", "V": "sELKfaqityk"}, {"A": "M. S. Subbulakshmi", "D": "4:16", "R": "Jonpuri", "T": "", "U": "0 views", "V": "08HN4eDBwAc"}, {"A": "M. S. Subbulakshmi", "D": "4:16", "R": "Jonpuri", "T": "", "U": "0 views", "V": "yQ5f_nmjVeA"}]}, {"H": "Gopi Gopala", "S": "gOpi gOpAla lAla rAsa maNDalamAhi tAta :  Adi", "songs": [{"A": "O. S. Arun", "D": "15:21", "R": "Gamanashrama", "T": "", "U": "15,737 views", "V": "EuWKnrkeOSU"}, {"A": "O. S. Arun", "D": "21:26", "R": "Gamanashrama", "T": "", "U": "1,594 views", "V": "C3x5AIYETqk"}, {"A": "O. S. Arun", "D": "3:07", "R": "Gamanashrama", "T": "", "U": "9,381 views", "V": "b49R0VZOC2k"}, {"A": "O. S. Arun", "D": "21:26", "R": "Gamanashrama", "T": "", "U": "145 views", "V": "XDGhpdagV70"}, {"A": "O. S. Arun", "D": "21:25", "R": "Gamanashrama", "T": "", "U": "347 views", "V": "oPeMECLiGzE"}, {"A": "O. S. Arun", "D": "21:25", "R": "Gamanashrama", "T": "", "U": "264 views", "V": "Brr14IdWJ8s"}, {"A": "T. N. Seshagopalan", "D": "7:10", "R": "Gamanashrama", "T": "", "U": "216 views", "V": "M20NTBHCgFo"}, {"A": "T. N. Seshagopalan", "D": "12:06", "R": "Gamanashrama", "T": "", "U": "1,200 views", "V": "_IPGrdEI5TM"}, {"A": "T. N. Seshagopalan", "D": "7:16", "R": "Gamanashrama", "T": "", "U": "0 views", "V": "dIa1DWfmmXw"}, {"A": "T. N. Seshagopalan", "D": "8:43", "R": "Gamanashrama", "T": "", "U": "6,140 views", "V": "YCTGTA9APg0"}]}, {"H": "He Govinda", "S": "hE gOvinda hE gOpAla rAkhO sharaNa :  Adi", "songs": [{"A": "M. S. Subbulakshmi", "D": "5:21", "R": "Kapi", "T": "", "U": "0 views", "V": "8iXdbxi6oVA"}, {"A": "M. S. Subbulakshmi", "D": "5:22", "R": "Kapi", "T": "", "U": "45,055 views", "V": "6b-b9PsZUUw"}, {"A": "M. S. Subbulakshmi", "D": "5:44", "R": "Kapi", "T": "", "U": "0 views", "V": "B8EwcE-7JKc"}, {"A": "M. S. Subbulakshmi", "D": "5:46", "R": "Kapi", "T": "", "U": "0 views", "V": "PQirc2A1l0Y"}, {"A": "M. S. Subbulakshmi", "D": "5:45", "R": "Kapi", "T": "", "U": "17,133 views", "V": "lORJ3GsTobo"}, {"A": "Ranjani Gayatri", "D": "8:55", "R": "Kapi", "T": "", "U": "474 views", "V": "eAMLeRYSDcw"}, {"A": "S. Aishwarya", "D": "5:51", "R": "Kapi", "T": "", "U": "117,515 views", "V": "jhuJK6yA1M0"}, {"A": "Voleti Venkateswarlu", "D": "5:25", "R": "Kapi", "T": "", "U": "303 views", "V": "PwkO4PPdM9Q"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

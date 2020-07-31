@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>7</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>5</td></tr>
-<tr><td><em>Concert</em></td><td>5</td></tr>
+<tr><td><em>Concert</em></td><td>7</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -150,57 +150,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0042", "T": "", "H": "Dayajuda Samayamide", "S": "daya jUDa manci samayam i dE vEvEgamE vacci :  Caapu", "R": "Jaganmohini", "C": "Shyama Shastri", "A": "Hyderabad Brothers", "V": "aNfXg2TKXyc"}, {"N": "0043", "T": "", "H": "Dayajuda Samayamide", "S": "daya jUDa manci samayam i dE vEvEgamE vacci :  Caapu", "R": "Jaganmohini", "C": "Shyama Shastri", "A": "Hyderabad Brothers", "V": "enUDvvbYoRU"}, {"N": "0044", "T": "", "H": "Dayajuda Samayamide", "S": "daya jUDa manci samayam i dE vEvEgamE vacci :  Caapu", "R": "Jaganmohini", "C": "Shyama Shastri", "A": "Hyderabad Brothers", "V": "tz94fqBwS_g"}]}, {"name": "Vocal - Hyderabad Sisters", "songs": [{"N": "0013", "T": "", "H": "Dayajuda Samayamide", "S": "daya jUDa manci samayam i dE vEvEgamE vacci :  Caapu", "R": "Jaganmohini", "C": "Shyama Shastri", "A": "Hyderabad Sisters", "V": "hLfcMGYjX4g"}]}, {"name": "Vocal - Padma Sugavanam", "songs": [{"N": "0022", "T": "", "H": "Dayajuda Samayamide", "S": "daya jUDa manci samayam i dE vEvEgamE vacci :  Caapu", "R": "Jaganmohini", "C": "Shyama Shastri", "A": "Padma Sugavanam", "V": "beSiODV1m30"}]}, {"name": "Vocal - Sugandha Kalamegham", "songs": [{"N": "0010", "T": "", "H": "Dayajuda Samayamide", "S": "daya jUDa manci samayam i dE vEvEgamE vacci :  Caapu", "R": "Jaganmohini", "C": "Shyama Shastri", "A": "Sugandha Kalamegham", "V": "qoSkAlZCUiM"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Balaji Shankar", "songs": [{"C": "Shyama Shastri", "D": "56:06", "R": "Jaganmohini", "T": "", "U": "2,587 views", "V": "uXaA2ycen0I"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Shyama Shastri", "D": "14:16", "R": "Jaganmohini", "T": "", "U": "558 views", "V": "aNfXg2TKXyc"}, {"C": "Shyama Shastri", "D": "19:31", "R": "Jaganmohini", "T": "", "U": "0 views", "V": "tz94fqBwS_g"}, {"C": "Shyama Shastri", "D": "6:57", "R": "Jaganmohini", "T": "", "U": "766 views", "V": "enUDvvbYoRU"}]}, {"A": "Hyderabad Sisters", "songs": [{"C": "Shyama Shastri", "D": "9:06", "R": "Jaganmohini", "T": "", "U": "51 views", "V": "hLfcMGYjX4g"}]}, {"A": "Padma Sugavanam", "songs": [{"C": "Shyama Shastri", "D": "9:21", "R": "Jaganmohini", "T": "", "U": "831 views", "V": "beSiODV1m30"}]}, {"A": "Sugandha Kalamegham", "songs": [{"C": "Shyama Shastri", "D": "8:30", "R": "Jaganmohini", "T": "", "U": "649 views", "V": "qoSkAlZCUiM"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

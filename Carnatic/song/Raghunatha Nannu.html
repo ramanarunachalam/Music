@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>5</td></tr>
-<tr><td><em>Concert</em></td><td>5</td></tr>
+<tr><td><em>Concert</em></td><td>7</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -130,57 +130,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Veena - P. Ganesh", "songs": [{"N": "0009", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Suraranjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "P. Ganesh", "V": "ZMFbNUzoI9U"}]}, {"name": "Flute - Sikkil Mala Chandrasekhar", "songs": [{"N": "0044", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Swararanjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Sikkil Mala Chandrasekhar", "V": "72NKuQLlhvU"}]}, {"name": "Mandolin - U. Rajesh", "songs": [{"N": "0057", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Swararanjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "U. Rajesh", "V": "cd3CuK2XZRo"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0386", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Suraranjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "U. Srinivas", "V": "9tAguZ2ExkA"}, {"N": "0387", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Swararanjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "U. Srinivas", "V": "_XIUmB4jpWI"}]}, {"name": "Violin - Ganesh Kumaresh", "songs": [{"N": "0021", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Suraranjani", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Ganesh Kumaresh", "V": "kswsNoIw270"}, {"N": "0022", "T": "", "H": "Raghunatha Nannu", "S": "raghunAthA nannu nayamuga nI rakSincuTakidi :  Rupaka", "R": "Unknownraga", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Ganesh Kumaresh", "V": "1XmI3bLrMc0"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "P. Ganesh", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "6:02", "R": "Suraranjani", "T": "", "U": "978 views", "V": "ZMFbNUzoI9U"}]}, {"A": "Sikkil Mala Chandrasekhar", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "5:51", "R": "Swararanjani", "T": "", "U": "0 views", "V": "72NKuQLlhvU"}]}, {"A": "U. Rajesh", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "5:16", "R": "Swararanjani", "T": "", "U": "288 views", "V": "cd3CuK2XZRo"}]}, {"A": "U. Srinivas", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "4:55", "R": "Swararanjani", "T": "", "U": "409 views", "V": "_XIUmB4jpWI"}, {"C": "Ramanathapuram Srinivasa Iyengar", "D": "7:10", "R": "Suraranjani", "T": "", "U": "156 views", "V": "9tAguZ2ExkA"}]}, {"A": "Ganesh Kumaresh", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "4:01", "R": "Suraranjani", "T": "", "U": "508 views", "V": "kswsNoIw270"}, {"C": "Ramanathapuram Srinivasa Iyengar", "D": "4:10", "R": "Unknownraga", "T": "", "U": "0 views", "V": "1XmI3bLrMc0"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Song</em></td><td>1</td></tr>
 <tr><td><em>Composer</em></td><td>1</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "shArade shubha hAre", "songs": [{"N": "0313", "T": "", "H": "Sharade", "S": "shArade shubha hAre : Adi", "R": "Sharadapriya", "C": "Mysore Venkatagiriappa", "A": "K. J. Yesudas", "V": "Hx-n_9EYG_8"}, {"N": "1293", "T": "", "H": "Sharade", "S": "shArade shubha hAre : Adi", "R": "Sharadapriya", "C": "Mysore Venkatagiriappa", "A": "M. Balamuralikrishna", "V": "54FZl6o6gsY"}, {"N": "0076", "T": "", "H": "Sharade", "S": "shArade shubha hAre : Adi", "R": "Sharadapriya", "C": "Mysore Venkatagiriappa", "A": "M. S. Sheela", "V": "iBlb_hMON0E"}, {"N": "0019", "T": "", "H": "Sharade", "S": "shArade shubha hAre : Adi", "R": "Sharadapriya", "C": "Mysore Venkatagiriappa", "A": "Manasi Prasad", "V": "yugM162_FF4"}, {"N": "0096", "T": "", "H": "Sharade", "S": "shArade shubha hAre : Adi", "R": "Sharadapriya", "C": "Mysore Venkatagiriappa", "A": "S. Aishwarya", "V": "oHMEqJ3bjlo"}, {"N": "0057", "T": "", "H": "Sharade", "S": "shArade shubha hAre : Adi", "R": "Sharadapriya", "C": "Mysore Venkatagiriappa", "A": "Vignesh Ishwar", "V": "XIK-5vWsPjA"}, {"N": "0146", "T": "", "H": "Sharade", "S": "shArade shubha hAre : Adi", "R": "Sharadapriya", "C": "Mysore Venkatagiriappa", "A": "R. K. Shriramkumar", "V": "Fo26HugYnuU"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Sharade", "S": "shArade shubha hAre : Adi", "songs": [{"A": "K. J. Yesudas", "C": "Mysore Venkatagiriappa", "D": "2:47", "T": "", "U": "19,333 views", "V": "Hx-n_9EYG_8"}, {"A": "M. Balamuralikrishna", "C": "Mysore Venkatagiriappa", "D": "7:26", "T": "", "U": "6,920 views", "V": "54FZl6o6gsY"}, {"A": "M. S. Sheela", "C": "Mysore Venkatagiriappa", "D": "3:23", "T": "", "U": "990 views", "V": "iBlb_hMON0E"}, {"A": "Manasi Prasad", "C": "Mysore Venkatagiriappa", "D": "6:18", "T": "", "U": "2,293 views", "V": "yugM162_FF4"}, {"A": "S. Aishwarya", "C": "Mysore Venkatagiriappa", "D": "4:38", "T": "", "U": "80,002 views", "V": "oHMEqJ3bjlo"}, {"A": "Vignesh Ishwar", "C": "Mysore Venkatagiriappa", "D": "3:40", "T": "", "U": "8,663 views", "V": "XIK-5vWsPjA"}, {"A": "R. K. Shriramkumar", "C": "Mysore Venkatagiriappa", "D": "3:40", "T": "", "U": "368 views", "V": "Fo26HugYnuU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

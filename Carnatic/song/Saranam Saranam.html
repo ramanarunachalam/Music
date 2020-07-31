@@ -129,57 +129,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0320", "T": "", "H": "Saranam Saranam", "S": "sharaNam sharaNam enRaanE KaaVade viTTaal :  Caapu", "R": "Sowrashtram", "C": "Arunachala Kavi", "A": "Bombay Jayashri", "V": "BzDpi96QK1I"}]}, {"name": "Vocal - K. Gayathri", "songs": [{"N": "0056", "T": "", "H": "Saranam Saranam", "S": "sharaNam sharaNam enRaanE KaaVade viTTaal :  Caapu", "R": "Sowrashtram", "C": "Arunachala Kavi", "A": "K. Gayathri", "V": "UwhC2DS8LKk"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1005", "T": "", "H": "Saranam Saranam", "S": "sharaNam sharaNam enRaanE KaaVade viTTaal :  Caapu", "R": "Sowrashtram", "C": "Arunachala Kavi", "A": "M. S. Subbulakshmi", "V": "JLcejs-ng1Q"}]}, {"name": "Vocal - Suguna Varadachari", "songs": [{"N": "0091", "T": "", "H": "Saranam Saranam", "S": "sharaNam sharaNam enRaanE KaaVade viTTaal :  Caapu", "R": "Sowrashtram", "C": "Arunachala Kavi", "A": "Suguna Varadachari", "V": "xRE9gPE80jI"}]}, {"name": "Vocal - Sumithra Vasudev", "songs": [{"N": "0067", "T": "", "H": "Saranam Saranam", "S": "sharaNam sharaNam enRaanE KaaVade viTTaal :  Caapu", "R": "Sowrashtram", "C": "Arunachala Kavi", "A": "Sumithra Vasudev", "V": "Kfi9qzQEjjE"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Arunachala Kavi", "D": "7:29", "R": "Sowrashtram", "T": "", "U": "1,954 views", "V": "BzDpi96QK1I"}]}, {"A": "K. Gayathri", "songs": [{"C": "Arunachala Kavi", "D": "4:25", "R": "Sowrashtram", "T": "", "U": "534 views", "V": "UwhC2DS8LKk"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Arunachala Kavi", "D": "4:56", "R": "Sowrashtram", "T": "", "U": "2,135 views", "V": "JLcejs-ng1Q"}]}, {"A": "Suguna Varadachari", "songs": [{"C": "Arunachala Kavi", "D": "3:02", "R": "Sowrashtram", "T": "", "U": "420 views", "V": "xRE9gPE80jI"}]}, {"A": "Sumithra Vasudev", "songs": [{"C": "Arunachala Kavi", "D": "6:21", "R": "Sowrashtram", "T": "", "U": "405 views", "V": "Kfi9qzQEjjE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

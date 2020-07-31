@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>25</td></tr>
 <tr><td><em>Song</em></td><td>9</td></tr>
 <tr><td><em>Composer</em></td><td>5</td></tr>
-<tr><td><em>Song Type</em></td><td>6</td></tr>
+<tr><td><em>Type</em></td><td>6</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "anilatharaLa kuvalaya nayanEna thapathi", "songs": [{"N": "0002", "T": "Ashtapadi", "H": "Anilatharala", "S": "anilatharaLa kuvalaya nayanEna thapathi na :  Adi", "R": "Shuddha sarang", "C": "Jayadeva", "A": "S. Kalyanaraman", "V": "XcsHliErwok"}]}, {"name": "Bhajan", "songs": [{"N": "0004", "T": "", "H": "Bhajan", "S": "Bhajan", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Ranjani Gayatri", "V": "7uTDJgRorvs"}, {"N": "0002", "T": "", "H": "Bhajan", "S": "Bhajan", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Ranganayaki Rajagopalan", "V": "blAKheOtm1I"}]}, {"name": "manavE mantralayA  nanna  nelesilli guruvE", "songs": [{"N": "0081", "T": "", "H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "R": "Shuddha sarang", "C": "A. V. Krishnammachar", "A": "Avaneeswaram S. R. Vinu", "V": "bz--b_kOd1k"}]}, {"name": "Mangalam", "songs": [{"N": "0295", "T": "", "H": "Mangalam", "S": "Mangalam", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "S. Kalyanaraman", "V": "fEAvLL2g_Vg"}]}, {"name": "mAruti varuvAn mangaLam taruvAn", "songs": [{"N": "0122", "T": "", "H": "Maruthi Varuvan", "S": "mAruti varuvAn mangaLam taruvAn :  Adi", "R": "Shuddha sarang", "C": "Dr. Krishnaswami Iyengar", "A": "S. Kalyanaraman", "V": "IB6mcSP3TFU"}, {"N": "0123", "T": "", "H": "Maruthi Varuvan", "S": "mAruti varuvAn mangaLam taruvAn :  Adi", "R": "Shuddha sarang", "C": "Dr. Krishnaswami Iyengar", "A": "S. Kalyanaraman", "V": "L0MYa_kEVB8"}, {"N": "0124", "T": "", "H": "Maruthi Varuvan", "S": "mAruti varuvAn mangaLam taruvAn :  Adi", "R": "Shuddha sarang", "C": "Dr. Krishnaswami Iyengar", "A": "S. Kalyanaraman", "V": "ZdvWbKPBCfw"}]}, {"name": "Nanda Nandana", "songs": [{"N": "0010", "T": "Bhajan", "H": "Nanda Nandana", "S": "Nanda Nandana", "R": "Shuddha sarang", "C": "Meera Bhai", "A": "Sudha Ragunathan", "V": "rMqk1r6wCHY"}]}, {"name": "Ragam Thanam Pallavi", "songs": [{"N": "0025", "T": "", "H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Manasi Prasad", "V": "zEv8ZdvDHCY"}, {"N": "0025", "T": "", "H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Ramana Balachandran", "V": "eyuAuBAyDj8"}]}, {"name": "Unknownsong", "songs": [{"N": "0193", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Cherthala K. N. Renganatha Sharma", "V": "bRc9NurFUu8"}, {"N": "0329", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Malladi Brothers", "V": "kduaYTyIGPk"}, {"N": "0386", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "S. Kalyanaraman", "V": "NVRJrbcbLBY"}, {"N": "0901", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Sudha Ragunathan", "V": "KdHhrD_ZbcQ"}, {"N": "0902", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Sudha Ragunathan", "V": "QChQfnlk-30"}]}, {"name": "thillana unknowncomposer shuddhasarang", "songs": [{"N": "0127", "T": "Thillana", "H": "thillana_unknowncomposer_shuddhasarang", "S": "thillana unknowncomposer shuddhasarang", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Kunnakudi M. Balamuralikrishna", "V": "1EZe1doBHz0"}, {"N": "0093", "T": "Thillana", "H": "thillana_unknowncomposer_shuddhasarang", "S": "thillana unknowncomposer shuddhasarang", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "R. Suryaprakash", "V": "qlTFOhCs_4s"}, {"N": "0028", "T": "Thillana", "H": "thillana_unknowncomposer_shuddhasarang", "S": "thillana unknowncomposer shuddhasarang", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Ramana Balachandran", "V": "-qrNZ8G1rEk"}, {"N": "0043", "T": "Thillana", "H": "thillana_unknowncomposer_shuddhasarang", "S": "thillana unknowncomposer shuddhasarang", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Lalgudi Vijayalakshmi", "V": "a5XgNVgTqyU"}, {"N": "0044", "T": "Thillana", "H": "thillana_unknowncomposer_shuddhasarang", "S": "thillana unknowncomposer shuddhasarang", "R": "Shuddha sarang", "C": "UnknownComposer", "A": "Lalgudi Vijayalakshmi", "V": "hC4g1Hy9sk8"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Anilatharala", "S": "anilatharaLa kuvalaya nayanEna thapathi na :  Adi", "songs": [{"A": "S. Kalyanaraman", "C": "Jayadeva", "D": "7:41", "T": "Ashtapadi", "U": "359 views", "V": "XcsHliErwok"}]}, {"H": "Bhajan", "S": "Bhajan", "songs": [{"A": "Ranjani Gayatri", "C": "UnknownComposer", "D": "7:58", "T": "", "U": "2,076 views", "V": "7uTDJgRorvs"}, {"A": "Ranganayaki Rajagopalan", "C": "UnknownComposer", "D": "2:11", "T": "", "U": "117 views", "V": "blAKheOtm1I"}]}, {"H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "songs": [{"A": "Avaneeswaram S. R. Vinu", "C": "A. V. Krishnammachar", "D": "6:21", "T": "", "U": "6,630 views", "V": "bz--b_kOd1k"}]}, {"H": "Mangalam", "S": "Mangalam", "songs": [{"A": "S. Kalyanaraman", "C": "UnknownComposer", "D": "7:45", "T": "", "U": "0 views", "V": "fEAvLL2g_Vg"}]}, {"H": "Maruthi Varuvan", "S": "mAruti varuvAn mangaLam taruvAn :  Adi", "songs": [{"A": "S. Kalyanaraman", "C": "Dr. Krishnaswami Iyengar", "D": "12:21", "T": "", "U": "430 views", "V": "ZdvWbKPBCfw"}, {"A": "S. Kalyanaraman", "C": "Dr. Krishnaswami Iyengar", "D": "8:00", "T": "", "U": "158 views", "V": "L0MYa_kEVB8"}, {"A": "S. Kalyanaraman", "C": "Dr. Krishnaswami Iyengar", "D": "12:21", "T": "", "U": "830 views", "V": "IB6mcSP3TFU"}]}, {"H": "Nanda Nandana", "S": "Nanda Nandana", "songs": [{"A": "Sudha Ragunathan", "C": "Meera Bhai", "D": "3:13", "T": "Bhajan", "U": "1,070 views", "V": "rMqk1r6wCHY"}]}, {"H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "songs": [{"A": "Manasi Prasad", "C": "UnknownComposer", "D": "30:43", "T": "", "U": "965 views", "V": "zEv8ZdvDHCY"}, {"A": "Ramana Balachandran", "C": "UnknownComposer", "D": "3:57", "T": "", "U": "3,449 views", "V": "eyuAuBAyDj8"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Cherthala K. N. Renganatha Sharma", "C": "UnknownComposer", "D": "5:22", "T": "", "U": "488 views", "V": "bRc9NurFUu8"}, {"A": "Malladi Brothers", "C": "UnknownComposer", "D": "7:10", "T": "", "U": "22,654 views", "V": "kduaYTyIGPk"}, {"A": "S. Kalyanaraman", "C": "UnknownComposer", "D": "4:30", "T": "", "U": "131 views", "V": "NVRJrbcbLBY"}, {"A": "Sudha Ragunathan", "C": "UnknownComposer", "D": "4:41", "T": "", "U": "381 views", "V": "QChQfnlk-30"}, {"A": "Sudha Ragunathan", "C": "UnknownComposer", "D": "3:01", "T": "", "U": "986 views", "V": "KdHhrD_ZbcQ"}]}, {"H": "thillana_unknowncomposer_shuddhasarang", "S": "thillana unknowncomposer shuddhasarang", "songs": [{"A": "Kunnakudi M. Balamuralikrishna", "C": "UnknownComposer", "D": "5:46", "T": "Thillana", "U": "0 views", "V": "1EZe1doBHz0"}, {"A": "R. Suryaprakash", "C": "UnknownComposer", "D": "4:53", "T": "Thillana", "U": "2,117 views", "V": "qlTFOhCs_4s"}, {"A": "Ramana Balachandran", "C": "UnknownComposer", "D": "9:17", "T": "Thillana", "U": "15,873 views", "V": "-qrNZ8G1rEk"}, {"A": "Lalgudi Vijayalakshmi", "C": "UnknownComposer", "D": "6:30", "T": "Thillana", "U": "5,359 views", "V": "a5XgNVgTqyU"}, {"A": "Lalgudi Vijayalakshmi", "C": "UnknownComposer", "D": "6:30", "T": "Thillana", "U": "1,032 views", "V": "hC4g1Hy9sk8"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

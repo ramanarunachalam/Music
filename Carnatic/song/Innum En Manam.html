@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>12</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>10</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -160,57 +160,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aruna Sairam", "songs": [{"N": "0381", "T": "Varnam", "H": "Innum En Manam", "S": "Innam en manam ariyAdavar pOla :  Adi", "R": "Charukesi", "C": "Lalgudi Jayaraman", "A": "Aruna Sairam", "V": "urOZbpUTxL4"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0672", "T": "Varnam", "H": "Innum En Manam", "S": "Innam en manam ariyAdavar pOla :  Adi", "R": "Charukesi", "C": "Lalgudi Jayaraman", "A": "Maharajapuram Santhanam", "V": "MU0cOUvWKD4"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0405", "T": "Varnam", "H": "Innum En Manam", "S": "Innam en manam ariyAdavar pOla :  Adi", "R": "Charukesi", "C": "Lalgudi Jayaraman", "A": "Nithyasree Mahadevan", "V": "oAQucK0nns4"}]}, {"name": "Vocal - Vechoor Harihara Subramania Iyer", "songs": [{"N": "0030", "T": "Varnam", "H": "Innum En Manam", "S": "Innam en manam ariyAdavar pOla :  Adi", "R": "Charukesi", "C": "Lalgudi Jayaraman", "A": "Vechoor Harihara Subramania Iyer", "V": "lAFvwpZL7gc"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0658", "T": "Varnam", "H": "Innum En Manam", "S": "Innam en manam ariyAdavar pOla :  Adi", "R": "Charukesi", "C": "Lalgudi Jayaraman", "A": "U. Srinivas", "V": "w3TdCLg9LC4"}, {"N": "0656", "T": "Varnam", "H": "Innum En Manam", "S": "Innam en manam ariyAdavar pOla :  Adi", "R": "Charukesi", "C": "Lalgudi Jayaraman", "A": "U. Srinivas", "V": "0R0GHcK_FuE"}, {"N": "0657", "T": "Varnam", "H": "Innum En Manam", "S": "Innam en manam ariyAdavar pOla :  Adi", "R": "Charukesi", "C": "Lalgudi Jayaraman", "A": "U. Srinivas", "V": "TiKlqXLj5j8"}]}, {"name": "Violin - Lalgudi Jayaraman", "songs": [{"N": "0770", "T": "Varnam", "H": "Innum En Manam", "S": "Innam en manam ariyAdavar pOla :  Adi", "R": "Charukesi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "02gVt9jgfCc"}, {"N": "0771", "T": "Varnam", "H": "Innum En Manam", "S": "Innam en manam ariyAdavar pOla :  Adi", "R": "Charukesi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "1vktE8hlPLY"}, {"N": "0772", "T": "Varnam", "H": "Innum En Manam", "S": "Innam en manam ariyAdavar pOla :  Adi", "R": "Charukesi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "Ifv5SAh_tkU"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aruna Sairam", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:00", "R": "Charukesi", "T": "Varnam", "U": "1,986 views", "V": "urOZbpUTxL4"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Lalgudi Jayaraman", "D": "7:26", "R": "Charukesi", "T": "Varnam", "U": "41,000 views", "V": "MU0cOUvWKD4"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Lalgudi Jayaraman", "D": "5:34", "R": "Charukesi", "T": "Varnam", "U": "0 views", "V": "oAQucK0nns4"}]}, {"A": "Vechoor Harihara Subramania Iyer", "songs": [{"C": "Lalgudi Jayaraman", "D": "10:04", "R": "Charukesi", "T": "Varnam", "U": "1,500 views", "V": "lAFvwpZL7gc"}]}, {"A": "U. Srinivas", "songs": [{"C": "Lalgudi Jayaraman", "D": "8:11", "R": "Charukesi", "T": "Varnam", "U": "0 views", "V": "TiKlqXLj5j8"}, {"C": "Lalgudi Jayaraman", "D": "9:21", "R": "Charukesi", "T": "Varnam", "U": "5,038 views", "V": "w3TdCLg9LC4"}, {"C": "Lalgudi Jayaraman", "D": "9:21", "R": "Charukesi", "T": "Varnam", "U": "183 views", "V": "0R0GHcK_FuE"}]}, {"A": "Lalgudi Jayaraman", "songs": [{"C": "Lalgudi Jayaraman", "D": "7:16", "R": "Charukesi", "T": "Varnam", "U": "548 views", "V": "1vktE8hlPLY"}, {"C": "Lalgudi Jayaraman", "D": "4:55", "R": "Charukesi", "T": "Varnam", "U": "671 views", "V": "02gVt9jgfCc"}, {"C": "Lalgudi Jayaraman", "D": "9:17", "R": "Charukesi", "T": "Varnam", "U": "507 views", "V": "Ifv5SAh_tkU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

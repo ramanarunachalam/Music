@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>18</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "mahA gaNa patE pAlayASu mAM", "songs": [{"N": "0045", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "Chittoor Subramaniam Pillai", "V": "KebwLprVyKE"}, {"N": "0046", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "Chittoor Subramaniam Pillai", "V": "iFOxbd5UPJY"}, {"N": "0628", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "0WeG7ThsWyc"}, {"N": "0629", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "LPgY6NwVXIU"}, {"N": "0630", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "ZaH828zXAtk"}, {"N": "0631", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "b2rcDuHYSic"}, {"N": "0632", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "g1vdrM-puYE"}, {"N": "0595", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "oHehK_mrjVA"}, {"N": "0296", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "Madurai Somu", "V": "JQfy-MT8Xg0"}, {"N": "0817", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "kAyO5s3j-Yk"}, {"N": "0042", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "T. M. Thiagarajan", "V": "3BlxkrrmidE"}, {"N": "0083", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "U. Rajesh", "V": "sbFl2mL3gI0"}, {"N": "0606", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "U. Srinivas", "V": "HgqKk3HM8mY"}, {"N": "0016", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "Akkarai Sornalatha", "V": "n29SaZ3auDo"}, {"N": "0575", "T": "Shodasa ganapati", "H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "R": "Nata narayani", "C": "Muthuswami Dikshitar", "A": "Lalgudi Jayaraman", "V": "WAxfx8tO1vM"}]}, {"name": "Unknownsong", "songs": [{"N": "0088", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Nata narayani", "C": "UnknownComposer", "A": "T. H. Subramaniam", "V": "785eRGnWxr8"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Maha Ganapathe", "S": "mahA gaNa patE pAlayASu mAM  :  Adi", "songs": [{"A": "Chittoor Subramaniam Pillai", "C": "Muthuswami Dikshitar", "D": "1:52:03", "T": "Shodasa ganapati", "U": "905 views", "V": "iFOxbd5UPJY"}, {"A": "Chittoor Subramaniam Pillai", "C": "Muthuswami Dikshitar", "D": "12:19", "T": "Shodasa ganapati", "U": "0 views", "V": "KebwLprVyKE"}, {"A": "D. K. Jayaraman", "C": "Muthuswami Dikshitar", "D": "4:15", "T": "Shodasa ganapati", "U": "213 views", "V": "0WeG7ThsWyc"}, {"A": "D. K. Jayaraman", "C": "Muthuswami Dikshitar", "D": "3:55", "T": "Shodasa ganapati", "U": "4,300 views", "V": "b2rcDuHYSic"}, {"A": "D. K. Jayaraman", "C": "Muthuswami Dikshitar", "D": "4:20", "T": "Shodasa ganapati", "U": "138 views", "V": "g1vdrM-puYE"}, {"A": "D. K. Jayaraman", "C": "Muthuswami Dikshitar", "D": "3:56", "T": "Shodasa ganapati", "U": "0 views", "V": "LPgY6NwVXIU"}, {"A": "D. K. Pattammal", "C": "Muthuswami Dikshitar", "D": "3:11", "T": "Shodasa ganapati", "U": "407 views", "V": "oHehK_mrjVA"}, {"A": "Madurai Somu", "C": "Muthuswami Dikshitar", "D": "10:56", "T": "Shodasa ganapati", "U": "277 views", "V": "JQfy-MT8Xg0"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "6:46", "T": "Shodasa ganapati", "U": "1,209 views", "V": "kAyO5s3j-Yk"}, {"A": "U. Rajesh", "C": "Muthuswami Dikshitar", "D": "7:12", "T": "Shodasa ganapati", "U": "0 views", "V": "sbFl2mL3gI0"}, {"A": "U. Srinivas", "C": "Muthuswami Dikshitar", "D": "12:01", "T": "Shodasa ganapati", "U": "2,182 views", "V": "HgqKk3HM8mY"}, {"A": "Akkarai Sornalatha", "C": "Muthuswami Dikshitar", "D": "3:03", "T": "Shodasa ganapati", "U": "795 views", "V": "n29SaZ3auDo"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "T. H. Subramaniam", "C": "UnknownComposer", "D": "10:38", "T": "", "U": "51 views", "V": "785eRGnWxr8"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

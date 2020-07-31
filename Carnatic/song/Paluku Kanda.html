@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>11</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>9</td></tr>
-<tr><td><em>Concert</em></td><td>9</td></tr>
+<tr><td><em>Concert</em></td><td>11</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -138,57 +138,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ambikapuram Sivaraman", "songs": [{"N": "0027", "T": "", "H": "Paluku Kanda", "S": "paluku kaNDa cakkeranu kErunE  :  Deshadi", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "Ambikapuram Sivaraman", "V": "MI9RJ8FZJo4"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0159", "T": "", "H": "Paluku Kanda", "S": "paluku kaNDa cakkeranu kErunE  :  Deshadi", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "QQ_6RKeb7J0"}, {"N": "0160", "T": "", "H": "Paluku Kanda", "S": "paluku kaNDa cakkeranu kErunE  :  Deshadi", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "YeO-itPhugo"}]}, {"name": "Vocal - Chembai Vaidyanatha Bhagavathar", "songs": [{"N": "0145", "T": "", "H": "Paluku Kanda", "S": "paluku kaNDa cakkeranu kErunE  :  Deshadi", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "Chembai Vaidyanatha Bhagavathar", "V": "kfwfX1jfur8"}]}, {"name": "Vocal - Madurai Srirangam Iyengar", "songs": [{"N": "0011", "T": "", "H": "Paluku Kanda", "S": "paluku kaNDa cakkeranu kErunE  :  Deshadi", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "Madurai Srirangam Iyengar", "V": "mDRXHdWycuQ"}]}, {"name": "Vocal - Nedunuri Krishnamurthy", "songs": [{"N": "0284", "T": "", "H": "Paluku Kanda", "S": "paluku kaNDa cakkeranu kErunE  :  Deshadi", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "bGzNYL5h85Q"}]}, {"name": "Veena - Jayanthi Kumaresh", "songs": [{"N": "0058", "T": "", "H": "Paluku Kanda", "S": "paluku kaNDa cakkeranu kErunE  :  Deshadi", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "Jayanthi Kumaresh", "V": "jP6na7VauM4"}]}, {"name": "Chitra Veena - N. Kiranavali", "songs": [{"N": "0004", "T": "", "H": "Paluku Kanda", "S": "paluku kaNDa cakkeranu kErunE  :  Deshadi", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "N. Kiranavali", "V": "mjXJIOhd4qw"}]}, {"name": "Flute - T. R. Mahalingam", "songs": [{"N": "0121", "T": "", "H": "Paluku Kanda", "S": "paluku kaNDa cakkeranu kErunE  :  Deshadi", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "T. R. Mahalingam", "V": "8IeEcDHWTRc"}, {"N": "0122", "T": "", "H": "Paluku Kanda", "S": "paluku kaNDa cakkeranu kErunE  :  Deshadi", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "T. R. Mahalingam", "V": "oyKXTjdQm1Y"}]}, {"name": "Violin - Ambi Subramaniam", "songs": [{"N": "0022", "T": "", "H": "Paluku Kanda", "S": "paluku kaNDa cakkeranu kErunE  :  Deshadi", "R": "Navarasa kannada", "C": "Thyagaraja", "A": "Ambi Subramaniam", "V": "zo3w0sg66lA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Ambikapuram Sivaraman", "songs": [{"C": "Thyagaraja", "D": "7:03", "R": "Navarasa kannada", "T": "", "U": "621 views", "V": "MI9RJ8FZJo4"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Thyagaraja", "D": "2:01", "R": "Navarasa kannada", "T": "", "U": "354 views", "V": "YeO-itPhugo"}, {"C": "Thyagaraja", "D": "4:33", "R": "Navarasa kannada", "T": "", "U": "0 views", "V": "QQ_6RKeb7J0"}]}, {"A": "Chembai Vaidyanatha Bhagavathar", "songs": [{"C": "Thyagaraja", "D": "4:43", "R": "Navarasa kannada", "T": "", "U": "644 views", "V": "kfwfX1jfur8"}]}, {"A": "Madurai Srirangam Iyengar", "songs": [{"C": "Thyagaraja", "D": "4:00", "R": "Navarasa kannada", "T": "", "U": "247 views", "V": "mDRXHdWycuQ"}]}, {"A": "Nedunuri Krishnamurthy", "songs": [{"C": "Thyagaraja", "D": "8:35", "R": "Navarasa kannada", "T": "", "U": "264 views", "V": "bGzNYL5h85Q"}]}, {"A": "Jayanthi Kumaresh", "songs": [{"C": "Thyagaraja", "D": "4:35", "R": "Navarasa kannada", "T": "", "U": "2,482 views", "V": "jP6na7VauM4"}]}, {"A": "N. Kiranavali", "songs": [{"C": "Thyagaraja", "D": "4:13", "R": "Navarasa kannada", "T": "", "U": "314 views", "V": "mjXJIOhd4qw"}]}, {"A": "T. R. Mahalingam", "songs": [{"C": "Thyagaraja", "D": "4:35", "R": "Navarasa kannada", "T": "", "U": "75 views", "V": "8IeEcDHWTRc"}, {"C": "Thyagaraja", "D": "2:40", "R": "Navarasa kannada", "T": "", "U": "127 views", "V": "oyKXTjdQm1Y"}]}, {"A": "Ambi Subramaniam", "songs": [{"C": "Thyagaraja", "D": "", "R": "Navarasa kannada", "T": "", "U": "1,100 views", "V": "zo3w0sg66lA"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -27,7 +27,7 @@
 <tr><td><em>Audio</em></td><td>10</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>9</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -122,57 +122,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0674", "T": "Virutham", "H": "Petra Thai Thanai", "S": "Petra thai thanai maga maranthalum :  Adi", "R": "Ragamalika", "C": "Ramalinga Swamigal", "A": "D. K. Jayaraman", "V": "k1Jzq4d7-RA"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0639", "T": "Virutham", "H": "Petra Thai Thanai", "S": "Petra thai thanai maga maranthalum :  Adi", "R": "Unknownraga", "C": "Ramalinga Swamigal", "A": "D. K. Pattammal", "V": "QOuA2EieVoY"}]}, {"name": "Vocal - M. Dandapani Desikar", "songs": [{"N": "0073", "T": "Virutham", "H": "Petra Thai Thanai", "S": "Petra thai thanai maga maranthalum :  Adi", "R": "Unknownraga", "C": "Ramalinga Swamigal", "A": "M. Dandapani Desikar", "V": "VY3P3JTaYAU"}, {"N": "0074", "T": "Virutham", "H": "Petra Thai Thanai", "S": "Petra thai thanai maga maranthalum :  Adi", "R": "Unknownraga", "C": "Ramalinga Swamigal", "A": "M. Dandapani Desikar", "V": "Z6B4m5m95O8"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1484", "T": "Virutham", "H": "Petra Thai Thanai", "S": "Petra thai thanai maga maranthalum :  Adi", "R": "Revathi", "C": "Ramalinga Swamigal", "A": "M. S. Subbulakshmi", "V": "Oo2zeJlHbjw"}, {"N": "1485", "T": "Virutham", "H": "Petra Thai Thanai", "S": "Petra thai thanai maga maranthalum :  Adi", "R": "Unknownraga", "C": "Ramalinga Swamigal", "A": "M. S. Subbulakshmi", "V": "zpBu9VWQmBU"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0267", "T": "Virutham", "H": "Petra Thai Thanai", "S": "Petra thai thanai maga maranthalum :  Adi", "R": "Unknownraga", "C": "Ramalinga Swamigal", "A": "Priya Sisters", "V": "p5RtzzCvHkc"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0263", "T": "Virutham", "H": "Petra Thai Thanai", "S": "Petra thai thanai maga maranthalum :  Adi", "R": "Unknownraga", "C": "Ramalinga Swamigal", "A": "Sikkil Gurucharan", "V": "ViQbQXoKjA8"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0788", "T": "Virutham", "H": "Petra Thai Thanai", "S": "Petra thai thanai maga maranthalum :  Adi", "R": "Unknownraga", "C": "Ramalinga Swamigal", "A": "T. N. Seshagopalan", "V": "JGBX-1uwHeA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. K. Jayaraman", "songs": [{"C": "Ramalinga Swamigal", "D": "23:12", "R": "Ragamalika", "T": "Virutham", "U": "0 views", "V": "k1Jzq4d7-RA"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Ramalinga Swamigal", "D": "6:45", "R": "Unknownraga", "T": "Virutham", "U": "3,400 views", "V": "QOuA2EieVoY"}]}, {"A": "M. Dandapani Desikar", "songs": [{"C": "Ramalinga Swamigal", "D": "2:36", "R": "Unknownraga", "T": "Virutham", "U": "89,913 views", "V": "VY3P3JTaYAU"}, {"C": "Ramalinga Swamigal", "D": "2:40", "R": "Unknownraga", "T": "Virutham", "U": "0 views", "V": "Z6B4m5m95O8"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Ramalinga Swamigal", "D": "6:38", "R": "Revathi", "T": "Virutham", "U": "9,000 views", "V": "Oo2zeJlHbjw"}, {"C": "Ramalinga Swamigal", "D": "6:29", "R": "Unknownraga", "T": "Virutham", "U": "0 views", "V": "zpBu9VWQmBU"}]}, {"A": "Priya Sisters", "songs": [{"C": "Ramalinga Swamigal", "D": "8:14", "R": "Unknownraga", "T": "Virutham", "U": "1,711 views", "V": "p5RtzzCvHkc"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Ramalinga Swamigal", "D": "17:15", "R": "Unknownraga", "T": "Virutham", "U": "28,533 views", "V": "ViQbQXoKjA8"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Ramalinga Swamigal", "D": "38:50", "R": "Unknownraga", "T": "Virutham", "U": "7,991 views", "V": "JGBX-1uwHeA"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

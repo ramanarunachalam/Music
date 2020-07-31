@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>13</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>12</td></tr>
-<tr><td><em>Concert</em></td><td>12</td></tr>
+<tr><td><em>Concert</em></td><td>10</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0362", "T": "", "H": "Sri Vathapi", "S": "shree vaataapi   gaNapatiyE nin    :  Adi", "R": "Sahana", "C": "Papanasam Sivan", "A": "Bombay Jayashri", "V": "kmMgeTQrWmw"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0519", "T": "", "H": "Sri Vathapi", "S": "shree vaataapi   gaNapatiyE nin    :  Adi", "R": "Sahana", "C": "Papanasam Sivan", "A": "Maharajapuram Santhanam", "V": "nk8qXSY1uFE"}, {"N": "0520", "T": "", "H": "Sri Vathapi", "S": "shree vaataapi   gaNapatiyE nin    :  Adi", "R": "Sahana", "C": "Papanasam Sivan", "A": "Maharajapuram Santhanam", "V": "pVHxAgkoxD8"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0323", "T": "", "H": "Sri Vathapi", "S": "shree vaataapi   gaNapatiyE nin    :  Adi", "R": "Sahana", "C": "Papanasam Sivan", "A": "Nithyasree Mahadevan", "V": "5Sx2hXTfSlQ"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0184", "T": "", "H": "Sri Vathapi", "S": "shree vaataapi   gaNapatiyE nin    :  Adi", "R": "Sahana", "C": "Papanasam Sivan", "A": "Sikkil Gurucharan", "V": "2yujGCbdKME"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0592", "T": "", "H": "Sri Vathapi", "S": "shree vaataapi   gaNapatiyE nin    :  Adi", "R": "Sahana", "C": "Papanasam Sivan", "A": "Sudha Ragunathan", "V": "yLj9SOxzcAQ"}]}, {"name": "Vocal - V. Sankaranarayanan", "songs": [{"N": "0028", "T": "", "H": "Sri Vathapi", "S": "shree vaataapi   gaNapatiyE nin    :  Adi", "R": "Sahana", "C": "Papanasam Sivan", "A": "V. Sankaranarayanan", "V": "wQqud6dJ6KA"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0484", "T": "", "H": "Sri Vathapi", "S": "shree vaataapi   gaNapatiyE nin    :  Adi", "R": "Sahana", "C": "Papanasam Sivan", "A": "U. Srinivas", "V": "BSQk6Phwvb0"}]}, {"name": "Keyboard - Keyboard Sathya", "songs": [{"N": "0080", "T": "", "H": "Sri Vathapi", "S": "shree vaataapi   gaNapatiyE nin    :  Adi", "R": "Sahana", "C": "Papanasam Sivan", "A": "Keyboard Sathya", "V": "pK9TmoYvdvQ"}]}, {"name": "Violin - A. Kanyakumari", "songs": [{"N": "0147", "T": "", "H": "Sri Vathapi", "S": "shree vaataapi   gaNapatiyE nin    :  Adi", "R": "Sahana", "C": "Papanasam Sivan", "A": "A. Kanyakumari", "V": "SMYq27QVO88"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Papanasam Sivan", "D": "5:53", "R": "Sahana", "T": "", "U": "4,582 views", "V": "kmMgeTQrWmw"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Papanasam Sivan", "D": "12:21", "R": "Sahana", "T": "", "U": "4,700 views", "V": "nk8qXSY1uFE"}, {"C": "Papanasam Sivan", "D": "9:46", "R": "Sahana", "T": "", "U": "965 views", "V": "pVHxAgkoxD8"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Papanasam Sivan", "D": "7:16", "R": "Sahana", "T": "", "U": "2,422 views", "V": "5Sx2hXTfSlQ"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Papanasam Sivan", "D": "5:56", "R": "Sahana", "T": "", "U": "2,455 views", "V": "2yujGCbdKME"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Papanasam Sivan", "D": "5:26", "R": "Sahana", "T": "", "U": "0 views", "V": "yLj9SOxzcAQ"}]}, {"A": "V. Sankaranarayanan", "songs": [{"C": "Papanasam Sivan", "D": "9:20", "R": "Sahana", "T": "", "U": "1,932 views", "V": "wQqud6dJ6KA"}]}, {"A": "U. Srinivas", "songs": [{"C": "Papanasam Sivan", "D": "9:55", "R": "Sahana", "T": "", "U": "1,800 views", "V": "BSQk6Phwvb0"}]}, {"A": "Keyboard Sathya", "songs": [{"C": "Papanasam Sivan", "D": "8:42", "R": "Sahana", "T": "", "U": "873 views", "V": "pK9TmoYvdvQ"}]}, {"A": "A. Kanyakumari", "songs": [{"C": "Papanasam Sivan", "D": "6:15", "R": "Sahana", "T": "", "U": "254 views", "V": "SMYq27QVO88"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

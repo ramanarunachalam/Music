@@ -19,10 +19,10 @@
 </tbody>
 </table></div></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>30</td></tr>
-<tr><td><em>Song</em></td><td>6</td></tr>
+<tr><td><em>Audio</em></td><td>26</td></tr>
+<tr><td><em>Song</em></td><td>5</td></tr>
 <tr><td><em>Composer</em></td><td>3</td></tr>
-<tr><td><em>Song Type</em></td><td>4</td></tr>
+<tr><td><em>Type</em></td><td>3</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Bhajan", "songs": [{"N": "0017", "T": "", "H": "Bhajan", "S": "Bhajan", "R": "Gowri", "C": "UnknownComposer", "A": "R. Vedavalli", "V": "YJcp0rntrLg"}]}, {"name": "Concert", "songs": [{"N": "0007", "T": "", "H": "Concert", "S": "Concert", "R": "Gowri", "C": "UnknownComposer", "A": "Amritha Murali", "V": "6zWY3eteS1Y"}]}, {"name": "gauri girirAjakumAri gAnavanamayUri", "songs": [{"N": "0040", "T": "", "H": "Gauri Girirajakumari", "S": "gauri girirAjakumAri gAnavanamayUri :  Rupaka", "R": "Gowri", "C": "Muthuswami Dikshitar", "A": "Sumithra Vasudev", "V": "BvoEBnOTp-I"}, {"N": "0041", "T": "", "H": "Gauri Girirajakumari", "S": "gauri girirAjakumAri gAnavanamayUri :  Rupaka", "R": "Gowri", "C": "Muthuswami Dikshitar", "A": "Sumithra Vasudev", "V": "KF2cfA9dFcw"}, {"N": "0240", "T": "", "H": "Gauri Girirajakumari", "S": "gauri girirAjakumAri gAnavanamayUri :  Rupaka", "R": "Gowri", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "NBk_pmQi6L4"}, {"N": "0012", "T": "", "H": "Gauri Girirajakumari", "S": "gauri girirAjakumAri gAnavanamayUri :  Rupaka", "R": "Gowri", "C": "Muthuswami Dikshitar", "A": "Kalpakam Swaminathan", "V": "rJ7JGp3zH0M"}]}, {"name": "jaya jaya SrI raghu rAma", "songs": [{"N": "0632", "T": "", "H": "Jaya Jaya Sri", "S": "jaya jaya SrI raghu rAma  :  Adi", "R": "Gowri", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "HaQ1pNdpa6A"}, {"N": "0016", "T": "", "H": "Jaya Jaya Sri", "S": "jaya jaya SrI raghu rAma  :  Adi", "R": "Gowri", "C": "Thyagaraja", "A": "Rajkumar Bharathi", "V": "cxMtWEU4nWI"}]}, {"name": "SrI mInAkshi gauri rAja SyAmaLE", "songs": [{"N": "1278", "T": "Madhuramba vibhakti", "H": "Sri Meenakshi", "S": "SrI mInAkshi gauri rAja SyAmaLE :  Rupaka", "R": "Gowri", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "cVtVYPBxfns"}, {"N": "1279", "T": "Madhuramba vibhakti", "H": "Sri Meenakshi", "S": "SrI mInAkshi gauri rAja SyAmaLE :  Rupaka", "R": "Gowri", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "ss01u3PfFBQ"}, {"N": "0690", "T": "Madhuramba vibhakti", "H": "Sri Meenakshi", "S": "SrI mInAkshi gauri rAja SyAmaLE :  Rupaka", "R": "Gowri", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "codVPU9hcGc"}]}, {"name": "Unknownsong", "songs": [{"N": "0303", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "Abhishek Raghuram", "V": "bzt6a_e1MQw"}, {"N": "0030", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "Alamelu Mani", "V": "Ig-2g_KV52E"}, {"N": "1957", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "WL99IuPzm4M"}, {"N": "1524", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "M. S. Subbulakshmi", "V": "4IuyCx8Y7MU"}, {"N": "1525", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "M. S. Subbulakshmi", "V": "8caa05noYR4"}, {"N": "1526", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "M. S. Subbulakshmi", "V": "Pj6XWkDuQdE"}, {"N": "1527", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "M. S. Subbulakshmi", "V": "bgtRaudNsWk"}, {"N": "1528", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "M. S. Subbulakshmi", "V": "pdTZ0S6wqIY"}, {"N": "1529", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "M. S. Subbulakshmi", "V": "xFPOtSyTtbw"}, {"N": "0012", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "Malladi Narayana Sarma", "V": "kka_iLa7Ano"}, {"N": "0442", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "Nithyasree Mahadevan", "V": "GoaaVM80XSw"}, {"N": "0028", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "R. K. Padmanabha", "V": "p05DNxYCzAQ"}, {"N": "0429", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "Ranjani Gayatri", "V": "hZ7Zue1wS4U"}, {"N": "0071", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "Shankari Krishnan", "V": "r9dqVwiRjQ8"}, {"N": "0019", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "Shrikantam Nagendra Shastri", "V": "fpkOZJz_vf4"}, {"N": "0836", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gowri", "C": "UnknownComposer", "A": "Sudha Ragunathan", "V": "iCID3w4y_N8"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Bhajan", "S": "Bhajan", "songs": [{"A": "R. Vedavalli", "C": "UnknownComposer", "D": "", "T": "", "U": "0 views", "V": "YJcp0rntrLg"}]}, {"H": "Gauri Girirajakumari", "S": "gauri girirAjakumAri gAnavanamayUri :  Rupaka", "songs": [{"A": "Sumithra Vasudev", "C": "Muthuswami Dikshitar", "D": "7:01", "T": "", "U": "493 views", "V": "BvoEBnOTp-I"}, {"A": "Sumithra Vasudev", "C": "Muthuswami Dikshitar", "D": "6:56", "T": "", "U": "822 views", "V": "KF2cfA9dFcw"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "12:26", "T": "", "U": "94 views", "V": "NBk_pmQi6L4"}, {"A": "Kalpakam Swaminathan", "C": "Muthuswami Dikshitar", "D": "6:44", "T": "", "U": "1,488 views", "V": "rJ7JGp3zH0M"}]}, {"H": "Jaya Jaya Sri", "S": "jaya jaya SrI raghu rAma  :  Adi", "songs": [{"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "5:20", "T": "", "U": "494 views", "V": "HaQ1pNdpa6A"}, {"A": "Rajkumar Bharathi", "C": "Thyagaraja", "D": "3:36", "T": "", "U": "399 views", "V": "cxMtWEU4nWI"}]}, {"H": "Sri Meenakshi", "S": "SrI mInAkshi gauri rAja SyAmaLE :  Rupaka", "songs": [{"A": "M. S. Subbulakshmi", "C": "Muthuswami Dikshitar", "D": "3:36", "T": "Madhuramba vibhakti", "U": "27,952 views", "V": "ss01u3PfFBQ"}, {"A": "M. S. Subbulakshmi", "C": "Muthuswami Dikshitar", "D": "3:33", "T": "Madhuramba vibhakti", "U": "0 views", "V": "cVtVYPBxfns"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "10:36", "T": "Madhuramba vibhakti", "U": "80 views", "V": "codVPU9hcGc"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Abhishek Raghuram", "C": "UnknownComposer", "D": "13:09", "T": "", "U": "0 views", "V": "bzt6a_e1MQw"}, {"A": "Alamelu Mani", "C": "UnknownComposer", "D": "5:51", "T": "", "U": "1,613 views", "V": "Ig-2g_KV52E"}, {"A": "M. Balamuralikrishna", "C": "UnknownComposer", "D": "12:04", "T": "", "U": "0 views", "V": "WL99IuPzm4M"}, {"A": "M. S. Subbulakshmi", "C": "UnknownComposer", "D": "14:27", "T": "", "U": "19,260 views", "V": "pdTZ0S6wqIY"}, {"A": "M. S. Subbulakshmi", "C": "UnknownComposer", "D": "4:47", "T": "", "U": "0 views", "V": "bgtRaudNsWk"}, {"A": "M. S. Subbulakshmi", "C": "UnknownComposer", "D": "15:21", "T": "", "U": "0 views", "V": "4IuyCx8Y7MU"}, {"A": "M. S. Subbulakshmi", "C": "UnknownComposer", "D": "4:32", "T": "", "U": "2 views", "V": "8caa05noYR4"}, {"A": "M. S. Subbulakshmi", "C": "UnknownComposer", "D": "0:55", "T": "", "U": "0 views", "V": "xFPOtSyTtbw"}, {"A": "M. S. Subbulakshmi", "C": "UnknownComposer", "D": "3:19", "T": "", "U": "0 views", "V": "Pj6XWkDuQdE"}, {"A": "Malladi Narayana Sarma", "C": "UnknownComposer", "D": "1:59", "T": "", "U": "106 views", "V": "kka_iLa7Ano"}, {"A": "Nithyasree Mahadevan", "C": "UnknownComposer", "D": "4:05", "T": "", "U": "0 views", "V": "GoaaVM80XSw"}, {"A": "R. K. Padmanabha", "C": "UnknownComposer", "D": "39:01", "T": "", "U": "8,604 views", "V": "p05DNxYCzAQ"}, {"A": "Ranjani Gayatri", "C": "UnknownComposer", "D": "5:14", "T": "", "U": "6,846 views", "V": "hZ7Zue1wS4U"}, {"A": "Shankari Krishnan", "C": "UnknownComposer", "D": "4:37", "T": "", "U": "34 views", "V": "r9dqVwiRjQ8"}, {"A": "Shrikantam Nagendra Shastri", "C": "UnknownComposer", "D": "3:40", "T": "", "U": "18 views", "V": "fpkOZJz_vf4"}, {"A": "Sudha Ragunathan", "C": "UnknownComposer", "D": "4:03", "T": "", "U": "77,171 views", "V": "iCID3w4y_N8"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

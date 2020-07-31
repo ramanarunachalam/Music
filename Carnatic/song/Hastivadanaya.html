@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>7</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>7</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -151,57 +151,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Brinda Muktha", "songs": [{"N": "0031", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "Brinda Muktha", "V": "4kxF_AqXEao"}]}, {"name": "Vocal - Gayathri Girish", "songs": [{"N": "0205", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "Gayathri Girish", "V": "vUXoiwSTISM"}]}, {"name": "Vocal - Geetha Raja", "songs": [{"N": "0047", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "Geetha Raja", "V": "4ZXDFsUuGBM"}]}, {"name": "Vocal - Sandhyavandanam Srinivasa Rao", "songs": [{"N": "0021", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "Sandhyavandanam Srinivasa Rao", "V": "xBm45lfMNmA"}]}, {"name": "Vocal - T. Brinda", "songs": [{"N": "0095", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "T. Brinda", "V": "EZja4iN4IKU"}, {"N": "0096", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "T. Brinda", "V": "Vo9uEYo-DBc"}]}, {"name": "Veena - Kalpakam Swaminathan", "songs": [{"N": "0049", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "Kalpakam Swaminathan", "V": "-XGXLY8AhSo"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Brinda Muktha", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:56", "R": "Navaroj", "T": "Shodasa ganapati", "U": "3,400 views", "V": "4kxF_AqXEao"}]}, {"A": "Gayathri Girish", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:26", "R": "Navaroj", "T": "Shodasa ganapati", "U": "1,900 views", "V": "vUXoiwSTISM"}]}, {"A": "Geetha Raja", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:46", "R": "Navaroj", "T": "Shodasa ganapati", "U": "311 views", "V": "4ZXDFsUuGBM"}]}, {"A": "Sandhyavandanam Srinivasa Rao", "songs": [{"C": "Muthuswami Dikshitar", "D": "9:16", "R": "Navaroj", "T": "Shodasa ganapati", "U": "43 views", "V": "xBm45lfMNmA"}]}, {"A": "T. Brinda", "songs": [{"C": "Muthuswami Dikshitar", "D": "8:11", "R": "Navaroj", "T": "Shodasa ganapati", "U": "584 views", "V": "EZja4iN4IKU"}, {"C": "Muthuswami Dikshitar", "D": "8:11", "R": "Navaroj", "T": "Shodasa ganapati", "U": "8 views", "V": "Vo9uEYo-DBc"}]}, {"A": "Kalpakam Swaminathan", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:54", "R": "Navaroj", "T": "Shodasa ganapati", "U": "5,903 views", "V": "-XGXLY8AhSo"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>10</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "kaDavuLai maravAdE  nannenjE  unran kaDamaiyai", "songs": [{"N": "0386", "T": "", "H": "Kadavulai Maravadhe", "S": "kaDavuLai maravAdE  nannenjE  unran kaDamaiyai :  Adi", "R": "Thandavam", "C": "M. Dandapani Desikar", "A": "Sanjay Subrahmanyan", "V": "YanzBIPWJek"}, {"N": "0387", "T": "", "H": "Kadavulai Maravadhe", "S": "kaDavuLai maravAdE  nannenjE  unran kaDamaiyai :  Adi", "R": "Thandavam", "C": "M. Dandapani Desikar", "A": "Sanjay Subrahmanyan", "V": "nNLnWXwlSQc"}, {"N": "0032", "T": "", "H": "Kadavulai Maravadhe", "S": "kaDavuLai maravAdE  nannenjE  unran kaDamaiyai :  Adi", "R": "Thandavam", "C": "M. Dandapani Desikar", "A": "Lalgudi G. J. R. Krishnan", "V": "Vkr6X8FOBp8"}]}, {"name": "Unknownsong", "songs": [{"N": "0705", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Thandavam", "C": "UnknownComposer", "A": "D. K. Pattammal", "V": "vn-XM--XidY"}, {"N": "1629", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Thandavam", "C": "UnknownComposer", "A": "M. S. Subbulakshmi", "V": "KxF2pYKJegs"}, {"N": "0648", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Thandavam", "C": "UnknownComposer", "A": "Madurai Mani Iyer", "V": "U7tbTmxkXuo"}, {"N": "0161", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Thandavam", "C": "UnknownComposer", "A": "Pantula Rama", "V": "iY_VGRdjopE"}, {"N": "0134", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Thandavam", "C": "UnknownComposer", "A": "Keyboard Sathya", "V": "-U8hxlkJ9Dc"}, {"N": "0116", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Thandavam", "C": "UnknownComposer", "A": "Vikku Vinayakram", "V": "s_Lqj3zC6w8"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Kadavulai Maravadhe", "S": "kaDavuLai maravAdE  nannenjE  unran kaDamaiyai :  Adi", "songs": [{"A": "Sanjay Subrahmanyan", "C": "M. Dandapani Desikar", "D": "9:11", "T": "", "U": "290 views", "V": "nNLnWXwlSQc"}, {"A": "Sanjay Subrahmanyan", "C": "M. Dandapani Desikar", "D": "8:46", "T": "", "U": "691 views", "V": "YanzBIPWJek"}, {"A": "Lalgudi G. J. R. Krishnan", "C": "M. Dandapani Desikar", "D": "3:43", "T": "", "U": "303 views", "V": "Vkr6X8FOBp8"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "D. K. Pattammal", "C": "UnknownComposer", "D": "4:17", "T": "", "U": "0 views", "V": "vn-XM--XidY"}, {"A": "M. S. Subbulakshmi", "C": "UnknownComposer", "D": "4:18", "T": "", "U": "0 views", "V": "KxF2pYKJegs"}, {"A": "Madurai Mani Iyer", "C": "UnknownComposer", "D": "9:51", "T": "", "U": "759 views", "V": "U7tbTmxkXuo"}, {"A": "Pantula Rama", "C": "UnknownComposer", "D": "4:14", "T": "", "U": "6,147 views", "V": "iY_VGRdjopE"}, {"A": "Keyboard Sathya", "C": "UnknownComposer", "D": "5:51", "T": "", "U": "420 views", "V": "-U8hxlkJ9Dc"}, {"A": "Vikku Vinayakram", "C": "UnknownComposer", "D": "4:43", "T": "", "U": "4,725 views", "V": "s_Lqj3zC6w8"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

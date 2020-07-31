@@ -45,57 +45,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "0064", "T": "Bhajan", "H": "Tum Bin Mori", "S": "Tum Bin Mori", "R": "Hindolam", "C": "UnknownComposer", "A": "M. S. Subbulakshmi", "V": "91CImINI69c"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0028", "T": "Bhajan", "H": "Tum Bin Mori", "S": "Tum Bin Mori", "R": "Hindolam", "C": "UnknownComposer", "A": "T. N. Seshagopalan", "V": "oHpOPQ39-9I"}]}, {"name": "Vocal - Vani Sateesh", "songs": [{"N": "0001", "T": "Bhajan", "H": "Tum Bin Mori", "S": "Tum Bin Mori", "R": "Hindolam", "C": "UnknownComposer", "A": "Vani Sateesh", "V": "EYFYBHSn-TM"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "M. S. Subbulakshmi", "songs": [{"C": "UnknownComposer", "D": "6:01", "R": "Hindolam", "T": "Bhajan", "U": "0 views", "V": "91CImINI69c"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "UnknownComposer", "D": "10:42", "R": "Hindolam", "T": "Bhajan", "U": "20,250 views", "V": "oHpOPQ39-9I"}]}, {"A": "Vani Sateesh", "songs": [{"C": "UnknownComposer", "D": "7:24", "R": "Hindolam", "T": "Bhajan", "U": "4,376 views", "V": "EYFYBHSn-TM"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

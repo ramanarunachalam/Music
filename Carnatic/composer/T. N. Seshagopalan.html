@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>10</td></tr>
 <tr><td><em>Song</em></td><td>4</td></tr>
 <tr><td><em>Raga</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "tomrudAni tataratAni tana dhiranA", "songs": [{"N": "0717", "T": "Thillana", "H": "thillana_tns_chandrakowns", "S": "tomrudAni tataratAni tana dhiranA :  Adi", "R": "Chandrakowns", "C": "T. N. Seshagopalan", "A": "T. N. Seshagopalan", "V": "4Xps5jDpngk"}, {"N": "0718", "T": "Thillana", "H": "thillana_tns_chandrakowns", "S": "tomrudAni tataratAni tana dhiranA :  Adi", "R": "Chandrakowns", "C": "T. N. Seshagopalan", "A": "T. N. Seshagopalan", "V": "6Upnq00yQ10"}, {"N": "0719", "T": "Thillana", "H": "thillana_tns_chandrakowns", "S": "tomrudAni tataratAni tana dhiranA :  Adi", "R": "Chandrakowns", "C": "T. N. Seshagopalan", "A": "T. N. Seshagopalan", "V": "rF8KLCb0DGw"}, {"N": "0720", "T": "Thillana", "H": "thillana_tns_chandrakowns", "S": "tomrudAni tataratAni tana dhiranA :  Adi", "R": "Chandrakowns", "C": "T. N. Seshagopalan", "A": "T. N. Seshagopalan", "V": "zt2rUY5g2sY"}]}, {"name": "thillana tns hamirkalyani", "songs": [{"N": "0077", "T": "Thillana", "H": "thillana_tns_hamirkalyani", "S": "thillana tns hamirkalyani", "R": "Hamirkalyani", "C": "T. N. Seshagopalan", "A": "Ram Kaushik", "V": "AWNc5aXBzt8"}, {"N": "0721", "T": "Thillana", "H": "thillana_tns_hamirkalyani", "S": "thillana tns hamirkalyani", "R": "Hamirkalyani", "C": "T. N. Seshagopalan", "A": "T. N. Seshagopalan", "V": "BkPFUvGePF8"}, {"N": "0722", "T": "Thillana", "H": "thillana_tns_hamirkalyani", "S": "thillana tns hamirkalyani", "R": "Hamirkalyani", "C": "T. N. Seshagopalan", "A": "T. N. Seshagopalan", "V": "uVhTC41yFzI"}]}, {"name": "thillana tns huseni", "songs": [{"N": "0724", "T": "Thillana", "H": "thillana_tns_huseni", "S": "thillana tns huseni", "R": "Huseni", "C": "T. N. Seshagopalan", "A": "T. N. Seshagopalan", "V": "Aln5F-F3yxk"}]}, {"name": "tanana dhIranA tadara tani tananana", "songs": [{"N": "0726", "T": "Thillana", "H": "thillana_tns_niroshta", "S": "tanana dhIranA tadara tani tananana nananana :  Adi", "R": "Niroshta", "C": "T. N. Seshagopalan", "A": "T. N. Seshagopalan", "V": "YzQxKLdvABY"}, {"N": "0014", "T": "Thillana", "H": "thillana_tns_niroshta", "S": "tanana dhIranA tadara tani tananana nananana :  Adi", "R": "Niroshta", "C": "T. N. Seshagopalan", "A": "Vasudha Keshav", "V": "wwoJU5DLXLQ"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "thillana_tns_chandrakowns", "S": "tomrudAni tataratAni tana dhiranA :  Adi", "songs": [{"A": "T. N. Seshagopalan", "D": "5:35", "R": "Chandrakowns", "T": "Thillana", "U": "199 views", "V": "6Upnq00yQ10"}, {"A": "T. N. Seshagopalan", "D": "7:30", "R": "Chandrakowns", "T": "Thillana", "U": "522 views", "V": "4Xps5jDpngk"}, {"A": "T. N. Seshagopalan", "D": "8:27", "R": "Chandrakowns", "T": "Thillana", "U": "275 views", "V": "rF8KLCb0DGw"}, {"A": "T. N. Seshagopalan", "D": "7:44", "R": "Chandrakowns", "T": "Thillana", "U": "1,918 views", "V": "zt2rUY5g2sY"}]}, {"H": "thillana_tns_hamirkalyani", "S": "thillana tns hamirkalyani", "songs": [{"A": "Ram Kaushik", "D": "8:06", "R": "Hamirkalyani", "T": "Thillana", "U": "1,147 views", "V": "AWNc5aXBzt8"}, {"A": "T. N. Seshagopalan", "D": "9:20", "R": "Hamirkalyani", "T": "Thillana", "U": "0 views", "V": "uVhTC41yFzI"}, {"A": "T. N. Seshagopalan", "D": "6:10", "R": "Hamirkalyani", "T": "Thillana", "U": "386 views", "V": "BkPFUvGePF8"}]}, {"H": "thillana_tns_huseni", "S": "thillana tns huseni", "songs": [{"A": "T. N. Seshagopalan", "D": "5:31", "R": "Huseni", "T": "Thillana", "U": "1,340 views", "V": "Aln5F-F3yxk"}]}, {"H": "thillana_tns_niroshta", "S": "tanana dhIranA tadara tani tananana nananana :  Adi", "songs": [{"A": "T. N. Seshagopalan", "D": "6:26", "R": "Niroshta", "T": "Thillana", "U": "689 views", "V": "YzQxKLdvABY"}, {"A": "Vasudha Keshav", "D": "6:00", "R": "Niroshta", "T": "Thillana", "U": "128 views", "V": "wwoJU5DLXLQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

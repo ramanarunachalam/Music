@@ -15,9 +15,9 @@
 <tbody>
 <tr><td><em>Audio</em></td><td>33</td></tr>
 <tr><td><em>Song</em></td><td>29</td></tr>
-<tr><td><em>Raga</em></td><td>25</td></tr>
+<tr><td><em>Raga</em></td><td>24</td></tr>
 <tr><td><em>Composer</em></td><td>19</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>32</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "MSSRINIVASAN01", "songs": [{"N": "0001", "T": "", "H": "Concert", "S": "Concert", "R": "Ragamalika,Manjari", "C": "UnknownComposer", "A": "Maharajapuram S. Srinivasan", "V": "qb7TNoCydek"}, {"N": "0002", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "Maharajapuram S. Srinivasan", "V": "krVAIeoVMHs"}, {"N": "0003", "T": "", "H": "Akhilandeshvari", "S": "akhilANDEshvari rakSamAm Agama sampradAya nipuNE :  Adi", "R": "Dwijavanthi", "C": "Muthuswami Dikshitar", "A": "Maharajapuram S. Srinivasan", "V": "VE2vl1qBxTw"}, {"N": "0004", "T": "", "H": "Ekambresha Nayakim", "S": "EkAmrEshanAyakIm IshvarIm bhajarE rE mAnasa :  Adi", "R": "Shanmukapriya", "C": "Muthuswami Dikshitar", "A": "Maharajapuram S. Srinivasan", "V": "S8Hsdwf2VTc"}, {"N": "0005", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "Maharajapuram S. Srinivasan", "V": "agyjb_dU8lc"}, {"N": "0007", "T": "", "H": "Gummani Yedi", "S": "Gummani yeDi Sruti gUDagAnu kammani nEtula :  Adi", "R": "Poorvikalyani", "C": "Annamacharya", "A": "Maharajapuram S. Srinivasan", "V": "k6J-h5f3wWk"}, {"N": "0008", "T": "", "H": "Janaki Ramana Dasaratha", "S": "jAnakI ramaNa dasharatha nandana sarvarIsha :  Adi", "R": "Kapi", "C": "Vanamalai Jeeyar Swamigal", "A": "Maharajapuram S. Srinivasan", "V": "heaxlJmYrx8"}, {"N": "0009", "T": "", "H": "Ksheerabdhi Kannike", "S": "kshIrAbdi kannige shrI mahAlakSmi :  Adi", "R": "Ragamalika", "C": "Purandara Dasa", "A": "Maharajapuram S. Srinivasan", "V": "pLQnUpsX41s"}, {"N": "0010", "T": "", "H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "R": "Unknownraga", "C": "A. V. Krishnammachar", "A": "Maharajapuram S. Srinivasan", "V": "4giwE44dXz4"}, {"N": "0011", "T": "", "H": "Manasuloni", "S": "manasu lOni marmamunu telusukO :  Deshadi", "R": "Hindolam", "C": "Thyagaraja", "A": "Maharajapuram S. Srinivasan", "V": "SFj1QDB-LQQ"}, {"N": "0012", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "Maharajapuram S. Srinivasan", "V": "EoXrAzgij_0"}, {"N": "0013", "T": "", "H": "Nagagandhari", "S": "nAgagAndhArI rAganutE nagajAnanditE mAmava :  Adi", "R": "Nagagandhari", "C": "Muthuswami Dikshitar", "A": "Maharajapuram S. Srinivasan", "V": "M3CCoML4Pr0"}, {"N": "0014", "T": "", "H": "Ne Vedhaki", "S": "nEvAtaki jUcuTaku taramA nAlOna :  Khanda Caapu", "R": "Karaharapriya", "C": "Mannargudi Sambasiva Bagavathar", "A": "Maharajapuram S. Srinivasan", "V": "Lg5_1MvjfCY"}, {"N": "0015", "T": "", "H": "Neerajadala Nayana", "S": "nIrajadaLA nayana harE krSNA  :  Adi", "R": "Maand", "C": "Mannargudi Sambasiva Bagavathar", "A": "Maharajapuram S. Srinivasan", "V": "GPjIflMTi9U"}, {"N": "0016", "T": "", "H": "Paramananda Varada", "S": "paramAnanda varada SaNmukhA bAlan ennai kArum :  Adi", "R": "Hamsanadam", "C": "Misu Krishna Iyer", "A": "Maharajapuram S. Srinivasan", "V": "d-kkqOb1D90"}, {"N": "0017", "T": "", "H": "Parengum Parttalum", "S": "pArengum pArttAlum ummai pOla parimaLamuLLa :  Adi", "R": "Kalyani", "C": "Ghanam Krishnaiyer", "A": "Maharajapuram S. Srinivasan", "V": "Cp9zGgTwqgs"}, {"N": "0018", "T": "", "H": "Parvai Onre Podume", "S": "pArvai onru pOdumE shanka padumanidhi iraNDum :  Adi", "R": "Suruti", "C": "Oothukkadu Venkata Kavi", "A": "Maharajapuram S. Srinivasan", "V": "e3jv-o47N90"}, {"N": "0019", "T": "", "H": "Pavanathmaja Agaccha", "S": "pavanAtmajAgaccha paripUrNa svaccha paramAtma :  Khanda Caapu", "R": "Nata", "C": "Muthuswami Dikshitar", "A": "Maharajapuram S. Srinivasan", "V": "p1dJ2b0_wGA"}, {"N": "0020", "T": "", "H": "Ragathil Sirandha", "S": "rAgattil shiranda rAgamEdu  kalyaaNiyA :  Adi", "R": "Ragamalika", "C": "Kadalur Subramaniam", "A": "Maharajapuram S. Srinivasan", "V": "Dnqgg8J4JvI"}, {"N": "0021", "T": "", "H": "Rama Ninnu Vina", "S": "rAma ninu vinA nanu : Rupaka", "R": "Sankarabharanam", "C": "Thyagaraja", "A": "Maharajapuram S. Srinivasan", "V": "3HsWGHw59ys"}, {"N": "0022", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Maharajapuram S. Srinivasan", "V": "f6OvpVa2pCE"}, {"N": "0023", "T": "", "H": "Saarasasamamukha", "S": "sArasa samamukha paramava mAm sanaka mukha :  Adi", "R": "Khamas", "C": "Swathi Thirunal", "A": "Maharajapuram S. Srinivasan", "V": "nmgaSzvXXVA"}, {"N": "0024", "T": "", "H": "Sharanam Bhava", "S": "sharaNam bhava karuNAm mayi kuru dInadayALO :  Adi", "R": "Hamsavinodhini", "C": "Narayana Theertha", "A": "Maharajapuram S. Srinivasan", "V": "rjrYtH88MtM"}, {"N": "0025", "T": "", "H": "Sharavanabhava Umai", "S": "sharavaNabhava umai tirumaghanE idu samayam :  Adi", "R": "Shuddha saveri", "C": "Mannargudi Sambasiva Bagavathar", "A": "Maharajapuram S. Srinivasan", "V": "A2nd3wggzic"}, {"N": "0026", "T": "", "H": "Sharavanabhava Umai", "S": "sharavaNabhava umai tirumaghanE idu samayam :  Adi", "R": "Shuddha saveri", "C": "Mannargudi Sambasiva Bagavathar", "A": "Maharajapuram S. Srinivasan", "V": "eHNqUiqUxp8"}, {"N": "0027", "T": "", "H": "Sri Jalandara", "S": "shrI jAlandharam AshrayAmyaham jalajAkSam :  Adi", "R": "Gambheeranata", "C": "Jayachamarajendra Wadiyar", "A": "Maharajapuram S. Srinivasan", "V": "vOsTVxH_ZlE"}, {"N": "0028", "T": "", "H": "Thani", "S": "Thani", "R": "Unknownraga", "C": "UnknownComposer", "A": "Maharajapuram S. Srinivasan", "V": "tDF_xDlBNQs"}, {"N": "0029", "T": "Thillana", "H": "thillana_santhanam_mishrashivaranjani", "S": "tom dhrudhru dhImta tadara dhImta", "R": "Mishra shivaranjani", "C": "Maharajapuram Santhanam", "A": "Maharajapuram S. Srinivasan", "V": "kv1g2jE-bIc"}, {"N": "0030", "T": "Thiruppugazh", "H": "Nadi Thedi", "S": "nAdith thEdith thozhuvAr pAl  :  Adi", "R": "Bageshree", "C": "Arunagirinathar", "A": "Maharajapuram S. Srinivasan", "V": "d5Ni7CmbDZA"}, {"N": "0031", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Mohanam", "C": "UnknownComposer", "A": "Maharajapuram S. Srinivasan", "V": "nwg7qE2Iq6M"}, {"N": "0032", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Neelambari", "C": "UnknownComposer", "A": "Maharajapuram S. Srinivasan", "V": "-R_2TFvPEUE"}, {"N": "0033", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Maharajapuram S. Srinivasan", "V": "GQq0mcPGYyc"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Akhilandeshvari", "S": "akhilANDEshvari rakSamAm Agama sampradAya nipuNE :  Adi", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:27", "R": "Dwijavanthi", "T": "", "U": "0 views", "V": "VE2vl1qBxTw"}]}, {"H": "Concert", "S": "Concert", "songs": [{"C": "UnknownComposer", "D": "1:13:59", "R": "Unknownraga", "T": "", "U": "5,900 views", "V": "qb7TNoCydek"}, {"C": "UnknownComposer", "D": "1:58:09", "R": "Unknownraga", "T": "", "U": "1,337 views", "V": "krVAIeoVMHs"}]}, {"H": "Ekambresha Nayakim", "S": "EkAmrEshanAyakIm IshvarIm bhajarE rE mAnasa :  Adi", "songs": [{"C": "Muthuswami Dikshitar", "D": "9:50", "R": "Shanmukapriya", "T": "", "U": "779 views", "V": "S8Hsdwf2VTc"}]}, {"H": "Gajavadana Mampahi", "S": "gajavadanA mAm pAhi gauri tanaya satatam :  Rupaka", "songs": [{"C": "M. D. Ramanathan", "D": "7:04", "R": "Hamsadhwani", "T": "", "U": "583 views", "V": "agyjb_dU8lc"}]}, {"H": "Gummani Yedi", "S": "Gummani yeDi Sruti gUDagAnu kammani nEtula :  Adi", "songs": [{"C": "Annamacharya", "D": "2:37", "R": "Poorvikalyani", "T": "", "U": "1,007 views", "V": "k6J-h5f3wWk"}]}, {"H": "Janaki Ramana Dasaratha", "S": "jAnakI ramaNa dasharatha nandana sarvarIsha :  Adi", "songs": [{"C": "Vanamalai Jeeyar Swamigal", "D": "4:31", "R": "Kapi", "T": "", "U": "148 views", "V": "heaxlJmYrx8"}]}, {"H": "Ksheerabdhi Kannike", "S": "kshIrAbdi kannige shrI mahAlakSmi :  Adi", "songs": [{"C": "Purandara Dasa", "D": "7:45", "R": "Ragamalika", "T": "", "U": "0 views", "V": "pLQnUpsX41s"}]}, {"H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "songs": [{"C": "A. V. Krishnammachar", "D": "6:30", "R": "Unknownraga", "T": "", "U": "0 views", "V": "4giwE44dXz4"}]}, {"H": "Manasuloni", "S": "manasu lOni marmamunu telusukO :  Deshadi", "songs": [{"C": "Thyagaraja", "D": "12:24", "R": "Hindolam", "T": "", "U": "6,438 views", "V": "SFj1QDB-LQQ"}]}, {"H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "songs": [{"C": "Thyagaraja", "D": "15:26", "R": "Karaharapriya", "T": "", "U": "2,156 views", "V": "EoXrAzgij_0"}]}, {"H": "Nadi Thedi", "S": "nAdith thEdith thozhuvAr pAl  :  Adi", "songs": [{"C": "Arunagirinathar", "D": "1:39", "R": "Bageshree", "T": "Thiruppugazh", "U": "5,188 views", "V": "d5Ni7CmbDZA"}]}, {"H": "Nagagandhari", "S": "nAgagAndhArI rAganutE nagajAnanditE mAmava :  Adi", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:39", "R": "Nagagandhari", "T": "", "U": "3,600 views", "V": "M3CCoML4Pr0"}]}, {"H": "Ne Vedhaki", "S": "nEvAtaki jUcuTaku taramA nAlOna :  Khanda Caapu", "songs": [{"C": "Mannargudi Sambasiva Bagavathar", "D": "22:16", "R": "Karaharapriya", "T": "", "U": "155 views", "V": "Lg5_1MvjfCY"}]}, {"H": "Neerajadala Nayana", "S": "nIrajadaLA nayana harE krSNA  :  Adi", "songs": [{"C": "Mannargudi Sambasiva Bagavathar", "D": "1:54", "R": "Maand", "T": "", "U": "240 views", "V": "GPjIflMTi9U"}]}, {"H": "Paramananda Varada", "S": "paramAnanda varada SaNmukhA bAlan ennai kArum :  Adi", "songs": [{"C": "Misu Krishna Iyer", "D": "9:06", "R": "Hamsanadam", "T": "", "U": "261 views", "V": "d-kkqOb1D90"}]}, {"H": "Parengum Parttalum", "S": "pArengum pArttAlum ummai pOla parimaLamuLLa :  Adi", "songs": [{"C": "Ghanam Krishnaiyer", "D": "18:26", "R": "Kalyani", "T": "", "U": "389 views", "V": "Cp9zGgTwqgs"}]}, {"H": "Parvai Onre Podume", "S": "pArvai onru pOdumE shanka padumanidhi iraNDum :  Adi", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "3:54", "R": "Suruti", "T": "", "U": "210 views", "V": "e3jv-o47N90"}]}, {"H": "Pavanathmaja Agaccha", "S": "pavanAtmajAgaccha paripUrNa svaccha paramAtma :  Khanda Caapu", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:28", "R": "Nata", "T": "", "U": "540 views", "V": "p1dJ2b0_wGA"}]}, {"H": "Ragathil Sirandha", "S": "rAgattil shiranda rAgamEdu  kalyaaNiyA :  Adi", "songs": [{"C": "Kadalur Subramaniam", "D": "11:11", "R": "Ragamalika", "T": "", "U": "0 views", "V": "Dnqgg8J4JvI"}]}, {"H": "Rama Ninnu Vina", "S": "rAma ninu vinA nanu : Rupaka", "songs": [{"C": "Thyagaraja", "D": "17:56", "R": "Sankarabharanam", "T": "", "U": "745 views", "V": "3HsWGHw59ys"}]}, {"H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "songs": [{"C": "Arunachala Kavi", "D": "14:41", "R": "Hindolam", "T": "", "U": "642 views", "V": "f6OvpVa2pCE"}]}, {"H": "Saarasasamamukha", "S": "sArasa samamukha paramava mAm sanaka mukha :  Adi", "songs": [{"C": "Swathi Thirunal", "D": "6:56", "R": "Khamas", "T": "", "U": "241 views", "V": "nmgaSzvXXVA"}]}, {"H": "Sharanam Bhava", "S": "sharaNam bhava karuNAm mayi kuru dInadayALO :  Adi", "songs": [{"C": "Narayana Theertha", "D": "7:57", "R": "Hamsavinodhini", "T": "", "U": "117 views", "V": "rjrYtH88MtM"}]}, {"H": "Sharavanabhava Umai", "S": "sharavaNabhava umai tirumaghanE idu samayam :  Adi", "songs": [{"C": "Mannargudi Sambasiva Bagavathar", "D": "14:06", "R": "Shuddha saveri", "T": "", "U": "114 views", "V": "eHNqUiqUxp8"}, {"C": "Mannargudi Sambasiva Bagavathar", "D": "14:03", "R": "Shuddha saveri", "T": "", "U": "351 views", "V": "A2nd3wggzic"}]}, {"H": "Sri Jalandara", "S": "shrI jAlandharam AshrayAmyaham jalajAkSam :  Adi", "songs": [{"C": "Jayachamarajendra Wadiyar", "D": "8:14", "R": "Gambheeranata", "T": "", "U": "15,080 views", "V": "vOsTVxH_ZlE"}]}, {"H": "Thani", "S": "Thani", "songs": [{"C": "UnknownComposer", "D": "3:27", "R": "Unknownraga", "T": "", "U": "3,220 views", "V": "tDF_xDlBNQs"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "8:26", "R": "Mohanam", "T": "", "U": "6,151 views", "V": "nwg7qE2Iq6M"}, {"C": "UnknownComposer", "D": "6:14", "R": "Neelambari", "T": "", "U": "12,675 views", "V": "-R_2TFvPEUE"}, {"C": "UnknownComposer", "D": "8:15", "R": "Unknownraga", "T": "", "U": "4,897 views", "V": "GQq0mcPGYyc"}]}, {"H": "thillana_santhanam_mishrashivaranjani", "S": "tom dhrudhru dhImta tadara dhImta", "songs": [{"C": "Maharajapuram Santhanam", "D": "4:54", "R": "Mishra shivaranjani", "T": "Thillana", "U": "9,090 views", "V": "kv1g2jE-bIc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

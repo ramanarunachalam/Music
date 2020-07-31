@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>17</td></tr>
 <tr><td><em>Song</em></td><td>3</td></tr>
 <tr><td><em>Raga</em></td><td>5</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "manju nigar kuntaLa minnE shata", "songs": [{"N": "0028", "T": "", "H": "Manju Nigar Kunthala Minne", "S": "manju nigar kuntaLa minnE shata taLangaL :  Adi", "R": "Unknownraga", "C": "Annamalai Reddiar", "A": "Geetha Bennett", "V": "uDUGJcc6vO0"}, {"N": "0663", "T": "", "H": "Manju Nigar Kunthala Minne", "S": "manju nigar kuntaLa minnE shata taLangaL :  Adi", "R": "Harikambhoji", "C": "Annamalai Reddiar", "A": "M. S. Subbulakshmi", "V": "2wtN1drH93o"}, {"N": "0664", "T": "", "H": "Manju Nigar Kunthala Minne", "S": "manju nigar kuntaLa minnE shata taLangaL :  Adi", "R": "Unknownraga", "C": "Annamalai Reddiar", "A": "M. S. Subbulakshmi", "V": "pY_608yZLoo"}, {"N": "0045", "T": "", "H": "Manju Nigar Kunthala Minne", "S": "manju nigar kuntaLa minnE shata taLangaL :  Adi", "R": "Harikambhoji", "C": "Annamalai Reddiar", "A": "Mani Krishnaswami", "V": "t8W8XJDvx4c"}, {"N": "0118", "T": "", "H": "Manju Nigar Kunthala Minne", "S": "manju nigar kuntaLa minnE shata taLangaL :  Adi", "R": "Unknownraga", "C": "Annamalai Reddiar", "A": "P. Unnikrishnan", "V": "MKGhZl8zk-c"}, {"N": "0073", "T": "", "H": "Manju Nigar Kunthala Minne", "S": "manju nigar kuntaLa minnE shata taLangaL :  Adi", "R": "Unknownraga", "C": "Annamalai Reddiar", "A": "S. Ramanathan", "V": "m1Jpb6YSP38"}, {"N": "0074", "T": "", "H": "Manju Nigar Kunthala Minne", "S": "manju nigar kuntaLa minnE shata taLangaL :  Adi", "R": "Unknownraga", "C": "Annamalai Reddiar", "A": "S. Ramanathan", "V": "yZZmcz4czrk"}, {"N": "0019", "T": "", "H": "Manju Nigar Kunthala Minne", "S": "manju nigar kuntaLa minnE shata taLangaL :  Adi", "R": "Chenchurutti", "C": "Annamalai Reddiar", "A": "Suguna Purushothaman", "V": "vxRKlKl3PcQ"}]}, {"name": "Moosu Vandu", "songs": [{"N": "0122", "T": "", "H": "Moosu Vandu", "S": "Moosu Vandu", "R": "Karnaranjani", "C": "Annamalai Reddiar", "A": "Gayathri Girish", "V": "tyS0ROIZhlg"}]}, {"name": "shIr vaLar pashum tOghai mayilAn", "songs": [{"N": "0174", "T": "", "H": "Seervalar Pasunthogai", "S": "shIr vaLar pashum tOghai mayilAn vaLLi :  Adi", "R": "Chakravakam", "C": "Annamalai Reddiar", "A": "P. Unnikrishnan", "V": "biPpDKjhTyc"}, {"N": "0775", "T": "", "H": "Seervalar Pasunthogai", "S": "shIr vaLar pashum tOghai mayilAn vaLLi :  Adi", "R": "Chakravakam", "C": "Annamalai Reddiar", "A": "Sanjay Subrahmanyan", "V": "qsCRO2Ce2pk"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Manju Nigar Kunthala Minne", "S": "manju nigar kuntaLa minnE shata taLangaL :  Adi", "songs": [{"A": "Geetha Bennett", "D": "4:20", "R": "Unknownraga", "T": "", "U": "0 views", "V": "uDUGJcc6vO0"}, {"A": "M. S. Subbulakshmi", "D": "4:18", "R": "Unknownraga", "T": "", "U": "1,485 views", "V": "pY_608yZLoo"}, {"A": "M. S. Subbulakshmi", "D": "5:14", "R": "Harikambhoji", "T": "", "U": "114 views", "V": "2wtN1drH93o"}, {"A": "Mani Krishnaswami", "D": "5:49", "R": "Harikambhoji", "T": "", "U": "246 views", "V": "t8W8XJDvx4c"}, {"A": "P. Unnikrishnan", "D": "4:34", "R": "Unknownraga", "T": "", "U": "0 views", "V": "MKGhZl8zk-c"}, {"A": "S. Ramanathan", "D": "4:31", "R": "Unknownraga", "T": "", "U": "306 views", "V": "m1Jpb6YSP38"}, {"A": "S. Ramanathan", "D": "4:25", "R": "Unknownraga", "T": "", "U": "38 views", "V": "yZZmcz4czrk"}, {"A": "Suguna Purushothaman", "D": "7:56", "R": "Chenchurutti", "T": "", "U": "49 views", "V": "vxRKlKl3PcQ"}]}, {"H": "Moosu Vandu", "S": "Moosu Vandu", "songs": [{"A": "Gayathri Girish", "D": "4:24", "R": "Karnaranjani", "T": "", "U": "220 views", "V": "tyS0ROIZhlg"}]}, {"H": "Seervalar Pasunthogai", "S": "shIr vaLar pashum tOghai mayilAn vaLLi :  Adi", "songs": [{"A": "P. Unnikrishnan", "D": "2:26", "R": "Chakravakam", "T": "", "U": "3,126 views", "V": "biPpDKjhTyc"}, {"A": "Sanjay Subrahmanyan", "D": "4:30", "R": "Chakravakam", "T": "", "U": "965 views", "V": "qsCRO2Ce2pk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

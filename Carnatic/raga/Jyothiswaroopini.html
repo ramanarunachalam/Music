@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>39</td></tr>
 <tr><td><em>Song</em></td><td>7</td></tr>
 <tr><td><em>Composer</em></td><td>6</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Anandamaya manavE O manasA", "songs": [{"N": "0017", "T": "", "H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "R": "Jyothiswaroopini", "C": "Walajapet Venkataramana Bhagavatar", "A": "S. Ramanathan", "V": "9IZfzCFFtyI"}, {"N": "0018", "T": "", "H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "R": "Jyothiswaroopini", "C": "Walajapet Venkataramana Bhagavatar", "A": "S. Ramanathan", "V": "KWUu6aU3uBg"}, {"N": "0019", "T": "", "H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "R": "Jyothiswaroopini", "C": "Walajapet Venkataramana Bhagavatar", "A": "S. Ramanathan", "V": "jh8UJGBAW0o"}, {"N": "0020", "T": "", "H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "R": "Jyothiswaroopini", "C": "Walajapet Venkataramana Bhagavatar", "A": "S. Ramanathan", "V": "rOIa535wjsk"}, {"N": "0009", "T": "", "H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "R": "Jyothiswaroopini", "C": "Walajapet Venkataramana Bhagavatar", "A": "V. R. Dileep Kumar", "V": "1Pj6DP61Qz8"}]}, {"name": "gAnAmuda pAnam kanda irukka vEru", "songs": [{"N": "0059", "T": "", "H": "Gana Amuda Panam", "S": "gAnAmuda pAnam kanda irukka vEru pAnamIdu :  Caapu", "R": "Jyothiswaroopini", "C": "Koteeswara Iyer", "A": "Bharat Sundar", "V": "0kgoIk3sFZ4"}, {"N": "0161", "T": "", "H": "Gana Amuda Panam", "S": "gAnAmuda pAnam kanda irukka vEru pAnamIdu :  Caapu", "R": "Jyothiswaroopini", "C": "Koteeswara Iyer", "A": "Madurai Mani Iyer", "V": "NV9njndh90E"}, {"N": "0303", "T": "", "H": "Gana Amuda Panam", "S": "gAnAmuda pAnam kanda irukka vEru pAnamIdu :  Caapu", "R": "Jyothiswaroopini", "C": "Koteeswara Iyer", "A": "Sanjay Subrahmanyan", "V": "JEe4AmNct4o"}, {"N": "0304", "T": "", "H": "Gana Amuda Panam", "S": "gAnAmuda pAnam kanda irukka vEru pAnamIdu :  Caapu", "R": "Jyothiswaroopini", "C": "Koteeswara Iyer", "A": "Sanjay Subrahmanyan", "V": "U7er_b_2iwQ"}, {"N": "0066", "T": "", "H": "Gana Amuda Panam", "S": "gAnAmuda pAnam kanda irukka vEru pAnamIdu :  Caapu", "R": "Jyothiswaroopini", "C": "Koteeswara Iyer", "A": "T. V. Sankaranarayanan", "V": "ApivZNVY1n0"}]}, {"name": "Jyothiswarupini", "songs": [{"N": "0643", "T": "", "H": "Jyothiswarupini", "S": "Jyothiswarupini : Adi", "R": "Jyothiswaroopini", "C": "Periaswamy Thooran", "A": "M. Balamuralikrishna", "V": "wBiRgf__dOg"}, {"N": "0195", "T": "", "H": "Jyothiswarupini", "S": "Jyothiswarupini : Adi", "R": "Jyothiswaroopini", "C": "Periaswamy Thooran", "A": "Madurai Mani Iyer", "V": "L5lD9ZdkEks"}, {"N": "0038", "T": "", "H": "Jyothiswarupini", "S": "Jyothiswarupini : Adi", "R": "Jyothiswaroopini", "C": "Periaswamy Thooran", "A": "Akkarai Sisters", "V": "D-cuT2QfzDA"}]}, {"name": "rAmE bhAratapAlita rAjyamarpayAmi rAjAdhi rAja", "songs": [{"N": "0048", "T": "Rama vibhakti", "H": "Rame Bharatha Palitha", "S": "rAmE bhAratapAlita rAjyamarpayAmi rAjAdhi rAja :  Khanda Caapu", "R": "Jyothiswaroopini", "C": "Muthuswami Dikshitar", "A": "BV Raman BV Lakshmanan", "V": "P-GUh7XNjS8"}, {"N": "0049", "T": "Rama vibhakti", "H": "Rame Bharatha Palitha", "S": "rAmE bhAratapAlita rAjyamarpayAmi rAjAdhi rAja :  Khanda Caapu", "R": "Jyothiswaroopini", "C": "Muthuswami Dikshitar", "A": "BV Raman BV Lakshmanan", "V": "aHkh9y1jixw"}, {"N": "0092", "T": "Rama vibhakti", "H": "Rame Bharatha Palitha", "S": "rAmE bhAratapAlita rAjyamarpayAmi rAjAdhi rAja :  Khanda Caapu", "R": "Jyothiswaroopini", "C": "Muthuswami Dikshitar", "A": "Neela Ramgopal", "V": "Z-441-vnyuc"}]}, {"name": "Unknownsong", "songs": [{"N": "0751", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jyothiswaroopini", "C": "UnknownComposer", "A": "G. N. Balasubramaniam", "V": "NUZ5hVl7nK0"}, {"N": "0058", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jyothiswaroopini", "C": "UnknownComposer", "A": "Nookala Chinna Satyanarayana", "V": "PMXlBgrawZE"}, {"N": "0010", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jyothiswaroopini", "C": "UnknownComposer", "A": "Prof K. Venkataramanan", "V": "tQZmwl4Ux3g"}, {"N": "0017", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jyothiswaroopini", "C": "UnknownComposer", "A": "Sulochana Pattabhiraman", "V": "VDRn5vmP0J4"}, {"N": "0018", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jyothiswaroopini", "C": "UnknownComposer", "A": "Sulochana Pattabhiraman", "V": "gQW4ocOus5g"}, {"N": "0019", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jyothiswaroopini", "C": "UnknownComposer", "A": "Sulochana Pattabhiraman", "V": "wtz8I9GqYLc"}, {"N": "0088", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jyothiswaroopini", "C": "UnknownComposer", "A": "Akkarai Sisters", "V": "pSJSVPZyvXM"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "songs": [{"A": "S. Ramanathan", "C": "Walajapet Venkataramana Bhagavatar", "D": "21:51", "T": "", "U": "72 views", "V": "KWUu6aU3uBg"}, {"A": "S. Ramanathan", "C": "Walajapet Venkataramana Bhagavatar", "D": "35:10", "T": "", "U": "561 views", "V": "rOIa535wjsk"}, {"A": "S. Ramanathan", "C": "Walajapet Venkataramana Bhagavatar", "D": "3:01", "T": "", "U": "900 views", "V": "jh8UJGBAW0o"}, {"A": "V. R. Dileep Kumar", "C": "Walajapet Venkataramana Bhagavatar", "D": "13:04", "T": "", "U": "260 views", "V": "1Pj6DP61Qz8"}]}, {"H": "Gana Amuda Panam", "S": "gAnAmuda pAnam kanda irukka vEru pAnamIdu :  Caapu", "songs": [{"A": "Bharat Sundar", "C": "Koteeswara Iyer", "D": "8:38", "T": "", "U": "388 views", "V": "0kgoIk3sFZ4"}, {"A": "Sanjay Subrahmanyan", "C": "Koteeswara Iyer", "D": "6:26", "T": "", "U": "1,500 views", "V": "U7er_b_2iwQ"}, {"A": "Sanjay Subrahmanyan", "C": "Koteeswara Iyer", "D": "6:26", "T": "", "U": "378 views", "V": "JEe4AmNct4o"}, {"A": "T. V. Sankaranarayanan", "C": "Koteeswara Iyer", "D": "5:37", "T": "", "U": "0 views", "V": "ApivZNVY1n0"}]}, {"H": "Jyothiswarupini", "S": "Jyothiswarupini : Adi", "songs": [{"A": "M. Balamuralikrishna", "C": "Periaswamy Thooran", "D": "8:56", "T": "", "U": "321 views", "V": "wBiRgf__dOg"}, {"A": "Madurai Mani Iyer", "C": "Periaswamy Thooran", "D": "34:47", "T": "", "U": "971 views", "V": "L5lD9ZdkEks"}, {"A": "Madurai Mani Iyer", "C": "Periaswamy Thooran", "D": "4:23", "T": "", "U": "864 views", "V": "NV9njndh90E"}, {"A": "S. Ramanathan", "C": "Periaswamy Thooran", "D": "35:16", "T": "", "U": "364 views", "V": "9IZfzCFFtyI"}, {"A": "Akkarai Sisters", "C": "Periaswamy Thooran", "D": "26:51", "T": "", "U": "297 views", "V": "D-cuT2QfzDA"}]}, {"H": "Rame Bharatha Palitha", "S": "rAmE bhAratapAlita rAjyamarpayAmi rAjAdhi rAja :  Khanda Caapu", "songs": [{"A": "BV Raman BV Lakshmanan", "C": "Muthuswami Dikshitar", "D": "16:16", "T": "Rama vibhakti", "U": "249 views", "V": "P-GUh7XNjS8"}, {"A": "BV Raman BV Lakshmanan", "C": "Muthuswami Dikshitar", "D": "26:46", "T": "Rama vibhakti", "U": "421 views", "V": "aHkh9y1jixw"}, {"A": "Neela Ramgopal", "C": "Muthuswami Dikshitar", "D": "5:31", "T": "Rama vibhakti", "U": "160 views", "V": "Z-441-vnyuc"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "G. N. Balasubramaniam", "C": "UnknownComposer", "D": "4:04", "T": "", "U": "0 views", "V": "NUZ5hVl7nK0"}, {"A": "Nookala Chinna Satyanarayana", "C": "UnknownComposer", "D": "4:49", "T": "", "U": "0 views", "V": "PMXlBgrawZE"}, {"A": "Prof K. Venkataramanan", "C": "UnknownComposer", "D": "13:01", "T": "", "U": "125 views", "V": "tQZmwl4Ux3g"}, {"A": "Sulochana Pattabhiraman", "C": "UnknownComposer", "D": "6:27", "T": "", "U": "0 views", "V": "VDRn5vmP0J4"}, {"A": "Sulochana Pattabhiraman", "C": "UnknownComposer", "D": "41:30", "T": "", "U": "1,476 views", "V": "gQW4ocOus5g"}, {"A": "Sulochana Pattabhiraman", "C": "UnknownComposer", "D": "7:12", "T": "", "U": "0 views", "V": "wtz8I9GqYLc"}, {"A": "Akkarai Sisters", "C": "UnknownComposer", "D": "26:51", "T": "", "U": "577 views", "V": "pSJSVPZyvXM"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

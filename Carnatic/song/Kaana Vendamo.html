@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>19</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>13</td></tr>
-<tr><td><em>Concert</em></td><td>13</td></tr>
+<tr><td><em>Concert</em></td><td>19</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aruna Sairam", "songs": [{"N": "0140", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Aruna Sairam", "V": "fQ-iC6arOfE"}, {"N": "0141", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Aruna Sairam", "V": "rf5pgvb1fy4"}]}, {"name": "Vocal - Bharat Sundar", "songs": [{"N": "0076", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Bharat Sundar", "V": "-994xMVZt2I"}, {"N": "0077", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Bharat Sundar", "V": "VrwbIwAyqyE"}]}, {"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0186", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "D. K. Jayaraman", "V": "cI4rfxGMc_U"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0211", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "K. V. Narayanaswamy", "V": "5EO15y-1TWs"}, {"N": "0212", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "K. V. Narayanaswamy", "V": "78EqwJqhbsQ"}, {"N": "0213", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "K. V. Narayanaswamy", "V": "ekS3UJwOSTU"}, {"N": "0214", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "K. V. Narayanaswamy", "V": "uUftFDoUbgw"}]}, {"name": "Vocal - M. Dandapani Desikar", "songs": [{"N": "0030", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "M. Dandapani Desikar", "V": "GPXMjVhHytU"}]}, {"name": "Vocal - O. S. Thyagarajan", "songs": [{"N": "0066", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "O. S. Thyagarajan", "V": "VsdayARa-Z4"}]}, {"name": "Vocal - Palghat R Ramprasad", "songs": [{"N": "0033", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Palghat R Ramprasad", "V": "HQuVy5d4Vkk"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0109", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Ramakrishnan Murthy", "V": "yB34x5BwpxQ"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0108", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "S. Sowmya", "V": "HPioPddt9iI"}]}, {"name": "Vocal - Sandeep Narayan", "songs": [{"N": "0063", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Sandeep Narayan", "V": "NdCI9TIYZXc"}]}, {"name": "Vocal - Savita Narasimhan", "songs": [{"N": "0020", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Savita Narasimhan", "V": "PdLsXLnJQwI"}]}, {"name": "Vocal - Seethalapathi Balasubramaniam", "songs": [{"N": "0011", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Seethalapathi Balasubramaniam", "V": "Z7qDzvlG20M"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0294", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "T. M. Krishna", "V": "3kvMdsecWjU"}, {"N": "0295", "T": "", "H": "Kaana Vendamo", "S": "kANa vENDAmO iru kaNNirukkum pOdE viNNuyar :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "T. M. Krishna", "V": "cZGti2d50Uw"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aruna Sairam", "songs": [{"C": "Papanasam Sivan", "D": "3:44", "R": "Sriranjani", "T": "", "U": "932 views", "V": "fQ-iC6arOfE"}]}, {"A": "Bharat Sundar", "songs": [{"C": "Papanasam Sivan", "D": "6:03", "R": "Sriranjani", "T": "", "U": "3,430 views", "V": "VrwbIwAyqyE"}, {"C": "Papanasam Sivan", "D": "4:35", "R": "Sriranjani", "T": "", "U": "332 views", "V": "-994xMVZt2I"}]}, {"A": "D. K. Jayaraman", "songs": [{"C": "Papanasam Sivan", "D": "12:31", "R": "Sriranjani", "T": "", "U": "1,071 views", "V": "cI4rfxGMc_U"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Papanasam Sivan", "D": "3:51", "R": "Sriranjani", "T": "", "U": "574 views", "V": "5EO15y-1TWs"}, {"C": "Papanasam Sivan", "D": "3:40", "R": "Sriranjani", "T": "", "U": "18 views", "V": "uUftFDoUbgw"}, {"C": "Papanasam Sivan", "D": "10:53", "R": "Sriranjani", "T": "", "U": "31 views", "V": "ekS3UJwOSTU"}, {"C": "Papanasam Sivan", "D": "3:40", "R": "Sriranjani", "T": "", "U": "8 views", "V": "78EqwJqhbsQ"}]}, {"A": "M. Dandapani Desikar", "songs": [{"C": "Papanasam Sivan", "D": "5:08", "R": "Sriranjani", "T": "", "U": "267 views", "V": "GPXMjVhHytU"}]}, {"A": "O. S. Thyagarajan", "songs": [{"C": "Papanasam Sivan", "D": "4:30", "R": "Sriranjani", "T": "", "U": "51 views", "V": "VsdayARa-Z4"}]}, {"A": "Palghat R Ramprasad", "songs": [{"C": "Papanasam Sivan", "D": "4:51", "R": "Sriranjani", "T": "", "U": "337 views", "V": "HQuVy5d4Vkk"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Papanasam Sivan", "D": "4:40", "R": "Sriranjani", "T": "", "U": "1,111 views", "V": "yB34x5BwpxQ"}]}, {"A": "S. Sowmya", "songs": [{"C": "Papanasam Sivan", "D": "6:16", "R": "Sriranjani", "T": "", "U": "702 views", "V": "HPioPddt9iI"}]}, {"A": "Sandeep Narayan", "songs": [{"C": "Papanasam Sivan", "D": "8:52", "R": "Sriranjani", "T": "", "U": "1,395 views", "V": "NdCI9TIYZXc"}]}, {"A": "Savita Narasimhan", "songs": [{"C": "Papanasam Sivan", "D": "14:10", "R": "Sriranjani", "T": "", "U": "40 views", "V": "PdLsXLnJQwI"}]}, {"A": "Seethalapathi Balasubramaniam", "songs": [{"C": "Papanasam Sivan", "D": "3:01", "R": "Sriranjani", "T": "", "U": "593 views", "V": "Z7qDzvlG20M"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Papanasam Sivan", "D": "5:48", "R": "Sriranjani", "T": "", "U": "7,420 views", "V": "3kvMdsecWjU"}, {"C": "Papanasam Sivan", "D": "3:01", "R": "Sriranjani", "T": "", "U": "6,008 views", "V": "cZGti2d50Uw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

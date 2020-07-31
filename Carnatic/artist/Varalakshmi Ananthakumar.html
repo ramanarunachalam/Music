@@ -17,7 +17,7 @@
 <tr><td><em>Song</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>7</td></tr>
 <tr><td><em>Composer</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>14</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "AVARALAKSHMI01", "songs": [{"N": "0001", "T": "", "H": "Brovavamma Bangaru", "S": "brOv av ammA bangAru bommA mA y ammA nanu  brOva  :  Caapu", "R": "Neelambari", "C": "Shyama Shastri", "A": "Varalakshmi Ananthakumar", "V": "PI6p_iqItk4"}, {"N": "0002", "T": "", "H": "Natanalabharamayaku", "S": "naTanala Bramayaku nA manasA   GaTiyiMcu :  Adi", "R": "Lalitha", "C": "Annamacharya", "A": "Varalakshmi Ananthakumar", "V": "TN2JLFrE8D8"}, {"N": "0003", "T": "", "H": "Renukadevi", "S": "rENukAdEvi samrakSitOhamanisham :  Khanda Caapu", "R": "Kannadabangala", "C": "Muthuswami Dikshitar", "A": "Varalakshmi Ananthakumar", "V": "G4PS5xv8TG0"}, {"N": "0004", "T": "", "H": "Smarasada Manasa", "S": "smara sada manasa balagopalam", "R": "Bilahari", "C": "Swathi Thirunal", "A": "Varalakshmi Ananthakumar", "V": "aUalTw3e8VI"}, {"N": "0005", "T": "", "H": "Smariso Sarvada", "S": "Smariso Sarvada Hariyaaaa Suravana dhareya  :  Adi", "R": "Rasikapriya", "C": "Purandara Dasa", "A": "Varalakshmi Ananthakumar", "V": "1CAaXflBAuM"}, {"N": "0006", "T": "", "H": "Smariso Sarvada", "S": "Smariso Sarvada Hariyaaaa Suravana dhareya  :  Adi", "R": "Rasikapriya", "C": "Purandara Dasa", "A": "Varalakshmi Ananthakumar", "V": "SbTwVrw-BWU"}, {"N": "0007", "T": "", "H": "Tholi Janma", "S": "toli janmamuna jEyu duDuku telisenu rAma :  Jhampa", "R": "Bilahari", "C": "Thyagaraja", "A": "Varalakshmi Ananthakumar", "V": "3SvfixUlf-Y"}, {"N": "0008", "T": "", "H": "Varalakshmi", "S": "varalakSmi namOstutE varadE narahari sukhadE :  Rupaka", "R": "Gowrimanohari", "C": "Mysore Vasudevachar", "A": "Varalakshmi Ananthakumar", "V": "2TFwUHwcLL4"}, {"N": "0009", "T": "", "H": "Varalakshmi", "S": "varalakSmi namOstutE varadE narahari sukhadE :  Rupaka", "R": "Gowrimanohari", "C": "Mysore Vasudevachar", "A": "Varalakshmi Ananthakumar", "V": "9xGFhX0d7cE"}, {"N": "0010", "T": "", "H": "Varalakshmi", "S": "varalakSmi namOstutE varadE narahari sukhadE :  Rupaka", "R": "Gowrimanohari", "C": "Mysore Vasudevachar", "A": "Varalakshmi Ananthakumar", "V": "LpGRmL8f66k"}, {"N": "0011", "T": "", "H": "Varalakshmi", "S": "varalakSmi namOstutE varadE narahari sukhadE :  Rupaka", "R": "Gowrimanohari", "C": "Mysore Vasudevachar", "A": "Varalakshmi Ananthakumar", "V": "MYa8g3XxMlM"}, {"N": "0012", "T": "", "H": "Varalakshmi", "S": "varalakSmi namOstutE varadE narahari sukhadE :  Rupaka", "R": "Gowrimanohari", "C": "Mysore Vasudevachar", "A": "Varalakshmi Ananthakumar", "V": "rqVBVUcMC2o"}, {"N": "0013", "T": "", "H": "Varalakshmi", "S": "varalakSmi namOstutE varadE narahari sukhadE :  Rupaka", "R": "Gowrimanohari", "C": "Mysore Vasudevachar", "A": "Varalakshmi Ananthakumar", "V": "yxX4xAdaExw"}, {"N": "0014", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Varalakshmi Ananthakumar", "V": "3LaHALYD6QI"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Brovavamma Bangaru", "S": "brOv av ammA bangAru bommA mA y ammA nanu  brOva  :  Caapu", "songs": [{"C": "Shyama Shastri", "D": "7:17", "R": "Neelambari", "T": "", "U": "511 views", "V": "PI6p_iqItk4"}]}, {"H": "Natanalabharamayaku", "S": "naTanala Bramayaku nA manasA   GaTiyiMcu :  Adi", "songs": [{"C": "Annamacharya", "D": "5:27", "R": "Lalitha", "T": "", "U": "676 views", "V": "TN2JLFrE8D8"}]}, {"H": "Renukadevi", "S": "rENukAdEvi samrakSitOhamanisham :  Khanda Caapu", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:53", "R": "Kannadabangala", "T": "", "U": "24 views", "V": "G4PS5xv8TG0"}]}, {"H": "Smariso Sarvada", "S": "Smariso Sarvada Hariyaaaa Suravana dhareya  :  Adi", "songs": [{"C": "Purandara Dasa", "D": "18:25", "R": "Rasikapriya", "T": "", "U": "57 views", "V": "1CAaXflBAuM"}, {"C": "Purandara Dasa", "D": "2:42", "R": "Rasikapriya", "T": "", "U": "25 views", "V": "SbTwVrw-BWU"}]}, {"H": "Tholi Janma", "S": "toli janmamuna jEyu duDuku telisenu rAma :  Jhampa", "songs": [{"C": "Thyagaraja", "D": "16:51", "R": "Bilahari", "T": "", "U": "1,009 views", "V": "3SvfixUlf-Y"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "33:26", "R": "Unknownraga", "T": "", "U": "162 views", "V": "3LaHALYD6QI"}]}, {"H": "Varalakshmi", "S": "varalakSmi namOstutE varadE narahari sukhadE :  Rupaka", "songs": [{"C": "Mysore Vasudevachar", "D": "2:10:23", "R": "Gowrimanohari", "T": "", "U": "1,482 views", "V": "2TFwUHwcLL4"}, {"C": "Mysore Vasudevachar", "D": "2:09:41", "R": "Gowrimanohari", "T": "", "U": "869 views", "V": "9xGFhX0d7cE"}, {"C": "Mysore Vasudevachar", "D": "2:18:14", "R": "Gowrimanohari", "T": "", "U": "951 views", "V": "yxX4xAdaExw"}, {"C": "Mysore Vasudevachar", "D": "2:02:44", "R": "Gowrimanohari", "T": "", "U": "699 views", "V": "rqVBVUcMC2o"}, {"C": "Mysore Vasudevachar", "D": "2:03:24", "R": "Gowrimanohari", "T": "", "U": "851 views", "V": "MYa8g3XxMlM"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

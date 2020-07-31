@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>4</td></tr>
 <tr><td><em>Song</em></td><td>1</td></tr>
 <tr><td><em>Composer</em></td><td>1</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "gaNEsha skanda jananI gandharva gAna", "songs": [{"N": "0017", "T": "", "H": "Ganesa Skanda Janani", "S": "gaNEsha skanda jananI gandharva gAna vinOdini :  Rupaka", "R": "Nagabhushani", "C": "Muthiah Bhagavathar", "A": "Hyderabad Sisters", "V": "GSCK_Y_JnFg"}, {"N": "0019", "T": "", "H": "Ganesa Skanda Janani", "S": "gaNEsha skanda jananI gandharva gAna vinOdini :  Rupaka", "R": "Nagabhushani", "C": "Muthiah Bhagavathar", "A": "Srirangam Gopalaratnam", "V": "BxtlFoDj-Ms"}, {"N": "0020", "T": "", "H": "Ganesa Skanda Janani", "S": "gaNEsha skanda jananI gandharva gAna vinOdini :  Rupaka", "R": "Nagabhushani", "C": "Muthiah Bhagavathar", "A": "Srirangam Gopalaratnam", "V": "I8H1XZpr0gk"}, {"N": "0008", "T": "", "H": "Ganesa Skanda Janani", "S": "gaNEsha skanda jananI gandharva gAna vinOdini :  Rupaka", "R": "Nagabhushani", "C": "Muthiah Bhagavathar", "A": "Sulochana Pattabhiraman", "V": "YnBlbeZbk9E"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Ganesa Skanda Janani", "S": "gaNEsha skanda jananI gandharva gAna vinOdini :  Rupaka", "songs": [{"A": "Hyderabad Sisters", "C": "Muthiah Bhagavathar", "D": "8:26", "T": "", "U": "268 views", "V": "GSCK_Y_JnFg"}, {"A": "Srirangam Gopalaratnam", "C": "Muthiah Bhagavathar", "D": "13:11", "T": "", "U": "355 views", "V": "I8H1XZpr0gk"}, {"A": "Srirangam Gopalaratnam", "C": "Muthiah Bhagavathar", "D": "13:11", "T": "", "U": "303 views", "V": "BxtlFoDj-Ms"}, {"A": "Sulochana Pattabhiraman", "C": "Muthiah Bhagavathar", "D": "5:34", "T": "", "U": "0 views", "V": "YnBlbeZbk9E"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

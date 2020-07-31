@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>24</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>22</td></tr>
-<tr><td><em>Concert</em></td><td>22</td></tr>
+<tr><td><em>Concert</em></td><td>18</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -138,57 +138,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bangalore S. Shankar", "songs": [{"N": "0040", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "Bangalore S. Shankar", "V": "Aq7SD8yqWPM"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0289", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "Bombay Jayashri", "V": "DXlzDHfsTeM"}, {"N": "0290", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "Bombay Jayashri", "V": "SSvjUj36734"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0168", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "Bombay Sisters", "V": "RLpjm7ZppDA"}, {"N": "0169", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "Bombay Sisters", "V": "yvaWI_-zu14"}]}, {"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0149", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "Hyderabad Brothers", "V": "QOHFzKv3Nrs"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0408", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "K. V. Narayanaswamy", "V": "28iAO8qUrbs"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0539", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "M. D. Ramanathan", "V": "xxOUP1DZ6-k"}]}, {"name": "Vocal - M. S. Sheela", "songs": [{"N": "0062", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "M. S. Sheela", "V": "lfjaMS6Ugc4"}]}, {"name": "Vocal - Ramnad Krishnan", "songs": [{"N": "0127", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "Ramnad Krishnan", "V": "N7V1leV8ni8"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0189", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "S. Sowmya", "V": "_evuI4wZVHI"}]}, {"name": "Vocal - Sandhyavandanam Srinivasa Rao", "songs": [{"N": "0013", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "Sandhyavandanam Srinivasa Rao", "V": "gvT_WVgEAxU"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0692", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "Sanjay Subrahmanyan", "V": "eoNaqpDOKhg"}]}, {"name": "Vocal - Savita Sreeram", "songs": [{"N": "0013", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "Savita Sreeram", "V": "gNoIxi0n7rY"}]}, {"name": "Vocal - T. Brinda", "songs": [{"N": "0065", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "T. Brinda", "V": "3xz8JbQpzfg"}]}, {"name": "Vocal - T. K. Govindarao", "songs": [{"N": "0015", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "T. K. Govindarao", "V": "fxYyfdIR_E4"}]}, {"name": "Flute - B. Vijayagopal", "songs": [{"N": "0012", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "B. Vijayagopal", "V": "ElwZv1UJCLU"}]}, {"name": "Violin - M. S. Anantharaman", "songs": [{"N": "0024", "T": "", "H": "Rama Ika Nannu", "S": "rAmA ika nannu brOva rAdA daya :  Rupaka", "R": "Sahana", "C": "Patnam Subramanya Iyer", "A": "M. S. Anantharaman", "V": "CpFI6e-Y1pw"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bangalore S. Shankar", "songs": [{"C": "Patnam Subramanya Iyer", "D": "7:11", "R": "Sahana", "T": "", "U": "1,338 views", "V": "Aq7SD8yqWPM"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Patnam Subramanya Iyer", "D": "9:51", "R": "Sahana", "T": "", "U": "0 views", "V": "SSvjUj36734"}, {"C": "Patnam Subramanya Iyer", "D": "9:50", "R": "Sahana", "T": "", "U": "10,410 views", "V": "DXlzDHfsTeM"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Patnam Subramanya Iyer", "D": "15:45", "R": "Sahana", "T": "", "U": "0 views", "V": "yvaWI_-zu14"}, {"C": "Patnam Subramanya Iyer", "D": "4:28", "R": "Sahana", "T": "", "U": "71 views", "V": "RLpjm7ZppDA"}]}, {"A": "Brinda Muktha", "songs": [{"C": "Patnam Subramanya Iyer", "D": "14:15", "R": "Sahana", "T": "", "U": "311 views", "V": "3xz8JbQpzfg"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Patnam Subramanya Iyer", "D": "12:41", "R": "Sahana", "T": "", "U": "531 views", "V": "QOHFzKv3Nrs"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Patnam Subramanya Iyer", "D": "14:05", "R": "Sahana", "T": "", "U": "837 views", "V": "28iAO8qUrbs"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Patnam Subramanya Iyer", "D": "14:48", "R": "Sahana", "T": "", "U": "0 views", "V": "xxOUP1DZ6-k"}]}, {"A": "M. S. Sheela", "songs": [{"C": "Patnam Subramanya Iyer", "D": "20:16", "R": "Sahana", "T": "", "U": "5 views", "V": "lfjaMS6Ugc4"}]}, {"A": "Ramnad Krishnan", "songs": [{"C": "Patnam Subramanya Iyer", "D": "7:36", "R": "Sahana", "T": "", "U": "710 views", "V": "N7V1leV8ni8"}]}, {"A": "S. Sowmya", "songs": [{"C": "Patnam Subramanya Iyer", "D": "39:19", "R": "Sahana", "T": "", "U": "2,941 views", "V": "_evuI4wZVHI"}]}, {"A": "Sandhyavandanam Srinivasa Rao", "songs": [{"C": "Patnam Subramanya Iyer", "D": "24:31", "R": "Sahana", "T": "", "U": "641 views", "V": "gvT_WVgEAxU"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Patnam Subramanya Iyer", "D": "11:45", "R": "Sahana", "T": "", "U": "407 views", "V": "eoNaqpDOKhg"}]}, {"A": "Savita Sreeram", "songs": [{"C": "Patnam Subramanya Iyer", "D": "6:45", "R": "Sahana", "T": "", "U": "293 views", "V": "gNoIxi0n7rY"}]}, {"A": "T. K. Govindarao", "songs": [{"C": "Patnam Subramanya Iyer", "D": "18:36", "R": "Sahana", "T": "", "U": "644 views", "V": "fxYyfdIR_E4"}]}, {"A": "B. Vijayagopal", "songs": [{"C": "Patnam Subramanya Iyer", "D": "14:18", "R": "Sahana", "T": "", "U": "781 views", "V": "ElwZv1UJCLU"}]}, {"A": "M. S. Anantharaman", "songs": [{"C": "Patnam Subramanya Iyer", "D": "24:39", "R": "Sahana", "T": "", "U": "380 views", "V": "CpFI6e-Y1pw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

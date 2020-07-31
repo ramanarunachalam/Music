@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>2</td></tr>
-<tr><td><em>Concert</em></td><td>2</td></tr>
+<tr><td><em>Concert</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - K. J. Yesudas", "songs": [{"N": "0336", "T": "", "H": "Sri Mahaganapathe Surapathe", "S": "shrI mahA ganapatE surapate siddhi vinAyaka :  Adi", "R": "Nata", "C": "Mayavaram Viswanatha Sastry", "A": "K. J. Yesudas", "V": "z70PVyxIf7Y"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0497", "T": "", "H": "Sri Mahaganapathe Surapathe", "S": "shrI mahA ganapatE surapate siddhi vinAyaka :  Adi", "R": "Nata", "C": "Mayavaram Viswanatha Sastry", "A": "Maharajapuram Santhanam", "V": "AgI3O1__Fv8"}, {"N": "0498", "T": "", "H": "Sri Mahaganapathe Surapathe", "S": "shrI mahA ganapatE surapate siddhi vinAyaka :  Adi", "R": "Nata", "C": "Mayavaram Viswanatha Sastry", "A": "Maharajapuram Santhanam", "V": "Kv0RrhEEMoY"}, {"N": "0499", "T": "", "H": "Sri Mahaganapathe Surapathe", "S": "shrI mahA ganapatE surapate siddhi vinAyaka :  Adi", "R": "Nata", "C": "Mayavaram Viswanatha Sastry", "A": "Maharajapuram Santhanam", "V": "XbvOnsvj0ds"}, {"N": "0500", "T": "", "H": "Sri Mahaganapathe Surapathe", "S": "shrI mahA ganapatE surapate siddhi vinAyaka :  Adi", "R": "Nata", "C": "Mayavaram Viswanatha Sastry", "A": "Maharajapuram Santhanam", "V": "crfJlgJ9N9g"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "K. J. Yesudas", "songs": [{"C": "Mayavaram Viswanatha Sastry", "D": "4:53", "R": "Nata", "T": "", "U": "10,950 views", "V": "z70PVyxIf7Y"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Mayavaram Viswanatha Sastry", "D": "7:16", "R": "Nata", "T": "", "U": "596 views", "V": "Kv0RrhEEMoY"}, {"C": "Mayavaram Viswanatha Sastry", "D": "14:45", "R": "Nata", "T": "", "U": "39 views", "V": "crfJlgJ9N9g"}, {"C": "Mayavaram Viswanatha Sastry", "D": "17:15", "R": "Nata", "T": "", "U": "113 views", "V": "AgI3O1__Fv8"}, {"C": "Mayavaram Viswanatha Sastry", "D": "13:11", "R": "Nata", "T": "", "U": "1,802 views", "V": "XbvOnsvj0ds"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

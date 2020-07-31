@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>10</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>7</td></tr>
-<tr><td><em>Concert</em></td><td>7</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -149,57 +149,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0045", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "D. K. Jayaraman", "V": "9jdIePvgqsg"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0026", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "Ranjani Gayatri", "V": "-ALmNpuMj0g"}, {"N": "0027", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "Ranjani Gayatri", "V": "FQeJc_luMIQ"}, {"N": "0028", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "Ranjani Gayatri", "V": "zGMUndPrYyU"}]}, {"name": "Vocal - S. G. Kittappa", "songs": [{"N": "0001", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "S. G. Kittappa", "V": "1Mj7fSBGyzU"}, {"N": "0002", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "S. G. Kittappa", "V": "QpkbU0hoXug"}]}, {"name": "Vocal - Vijay Siva", "songs": [{"N": "0015", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "Vijay Siva", "V": "dszFPc56E0Y"}]}, {"name": "Mridangam - Archana Aarathi", "songs": [{"N": "0008", "T": "", "H": "Aandavan Darisaname", "S": "ANDavan darishanamE tyAgEshan tANDava darishanamE :  Adi", "R": "Jonpuri", "C": "Muthiah Bhagavathar", "A": "Archana Aarathi", "V": "rYLhPcYORFI"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. K. Jayaraman", "songs": [{"C": "Muthiah Bhagavathar", "D": "28:09", "R": "Jonpuri", "T": "", "U": "1,200 views", "V": "9jdIePvgqsg"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Muthiah Bhagavathar", "D": "8:46", "R": "Jonpuri", "T": "", "U": "755 views", "V": "FQeJc_luMIQ"}, {"C": "Muthiah Bhagavathar", "D": "3:39", "R": "Jonpuri", "T": "", "U": "215 views", "V": "zGMUndPrYyU"}, {"C": "Muthiah Bhagavathar", "D": "3:01", "R": "Jonpuri", "T": "", "U": "1,249 views", "V": "-ALmNpuMj0g"}]}, {"A": "S. G. Kittappa", "songs": [{"C": "Muthiah Bhagavathar", "D": "2:48", "R": "Jonpuri", "T": "", "U": "40,701 views", "V": "QpkbU0hoXug"}, {"C": "Muthiah Bhagavathar", "D": "2:35", "R": "Jonpuri", "T": "", "U": "478 views", "V": "1Mj7fSBGyzU"}]}, {"A": "Vijay Siva", "songs": [{"C": "Muthiah Bhagavathar", "D": "4:39", "R": "Jonpuri", "T": "", "U": "22,895 views", "V": "dszFPc56E0Y"}]}, {"A": "Archana Aarathi", "songs": [{"C": "Muthiah Bhagavathar", "D": "11:41", "R": "Jonpuri", "T": "", "U": "107 views", "V": "rYLhPcYORFI"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

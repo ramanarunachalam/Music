@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>5</td></tr>
 <tr><td><em>Song</em></td><td>1</td></tr>
 <tr><td><em>Composer</em></td><td>1</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "maHNgaLadEvatE paradEvatE maHNgaLam bhavatu nata", "songs": [{"N": "0080", "T": "", "H": "Mangaladevadha", "S": "maHNgaLadEvatE paradEvatE maHNgaLam bhavatu nata :  Adi", "R": "Maargadesi", "C": "Muthuswami Dikshitar", "A": "Amritha Murali", "V": "4iP7zhvyQg0"}, {"N": "0024", "T": "", "H": "Mangaladevadha", "S": "maHNgaLadEvatE paradEvatE maHNgaLam bhavatu nata :  Adi", "R": "Maargadesi", "C": "Muthuswami Dikshitar", "A": "S. R. Janakiraman", "V": "_tb2meuW8eg"}, {"N": "0354", "T": "", "H": "Mangaladevadha", "S": "maHNgaLadEvatE paradEvatE maHNgaLam bhavatu nata :  Adi", "R": "Maargadesi", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "Mu1uMKrQfKQ"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Mangaladevadha", "S": "maHNgaLadEvatE paradEvatE maHNgaLam bhavatu nata :  Adi", "songs": [{"A": "Amritha Murali", "C": "Muthuswami Dikshitar", "D": "5:10", "T": "", "U": "211 views", "V": "4iP7zhvyQg0"}, {"A": "S. R. Janakiraman", "C": "Muthuswami Dikshitar", "D": "6:36", "T": "", "U": "192 views", "V": "_tb2meuW8eg"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "3:41", "T": "", "U": "418 views", "V": "Mu1uMKrQfKQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

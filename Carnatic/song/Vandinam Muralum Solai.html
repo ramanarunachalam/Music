@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>3</td></tr>
-<tr><td><em>Concert</em></td><td>3</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -124,57 +124,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aruna Sairam", "songs": [{"N": "0320", "T": "", "H": "Vandinam Muralum Solai", "S": "vaNdinam muralum sOlai mayilinam Alum sOlai :  Adi", "R": "Thodi", "C": "Thondaradipodi Azhwar", "A": "Aruna Sairam", "V": "EHaYAlQy3gg"}, {"N": "0321", "T": "", "H": "Vandinam Muralum Solai", "S": "vaNdinam muralum sOlai mayilinam Alum sOlai :  Adi", "R": "Thodi", "C": "Thondaradipodi Azhwar", "A": "Aruna Sairam", "V": "iy5iYeZw750"}, {"N": "0322", "T": "", "H": "Vandinam Muralum Solai", "S": "vaNdinam muralum sOlai mayilinam Alum sOlai :  Adi", "R": "Thodi", "C": "Thondaradipodi Azhwar", "A": "Aruna Sairam", "V": "jlKf0CJPo1Y"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1224", "T": "", "H": "Vandinam Muralum Solai", "S": "vaNdinam muralum sOlai mayilinam Alum sOlai :  Adi", "R": "Thodi", "C": "Thondaradipodi Azhwar", "A": "M. S. Subbulakshmi", "V": "bpnjtO-aJmo"}, {"N": "1225", "T": "", "H": "Vandinam Muralum Solai", "S": "vaNdinam muralum sOlai mayilinam Alum sOlai :  Adi", "R": "Thodi", "C": "Thondaradipodi Azhwar", "A": "M. S. Subbulakshmi", "V": "pVbV2JnQe9s"}, {"N": "1226", "T": "", "H": "Vandinam Muralum Solai", "S": "vaNdinam muralum sOlai mayilinam Alum sOlai :  Adi", "R": "Thodi", "C": "Thondaradipodi Azhwar", "A": "M. S. Subbulakshmi", "V": "pY9NFFV2T8E"}, {"N": "1227", "T": "", "H": "Vandinam Muralum Solai", "S": "vaNdinam muralum sOlai mayilinam Alum sOlai :  Adi", "R": "Thodi", "C": "Thondaradipodi Azhwar", "A": "M. S. Subbulakshmi", "V": "xha7mmY7eOA"}, {"N": "1228", "T": "", "H": "Vandinam Muralum Solai", "S": "vaNdinam muralum sOlai mayilinam Alum sOlai :  Adi", "R": "Thodi", "C": "Thondaradipodi Azhwar", "A": "M. S. Subbulakshmi", "V": "xrvK5AulHJ4"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aruna Sairam", "songs": [{"C": "Thondaradipodi Azhwar", "D": "5:16", "R": "Thodi", "T": "", "U": "573 views", "V": "EHaYAlQy3gg"}, {"C": "Thondaradipodi Azhwar", "D": "6:33", "R": "Thodi", "T": "", "U": "1,829 views", "V": "iy5iYeZw750"}, {"C": "Thondaradipodi Azhwar", "D": "5:20", "R": "Thodi", "T": "", "U": "230 views", "V": "jlKf0CJPo1Y"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Thondaradipodi Azhwar", "D": "5:35", "R": "Thodi", "T": "", "U": "4,900 views", "V": "xrvK5AulHJ4"}, {"C": "Thondaradipodi Azhwar", "D": "5:49", "R": "Thodi", "T": "", "U": "55,562 views", "V": "bpnjtO-aJmo"}, {"C": "Thondaradipodi Azhwar", "D": "3:21", "R": "Thodi", "T": "", "U": "3,664 views", "V": "pY9NFFV2T8E"}, {"C": "Thondaradipodi Azhwar", "D": "6:07", "R": "Thodi", "T": "", "U": "306 views", "V": "xha7mmY7eOA"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

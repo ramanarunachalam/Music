@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>12</td></tr>
 <tr><td><em>Raga</em></td><td>2</td></tr>
 <tr><td><em>Artist</em></td><td>7</td></tr>
-<tr><td><em>Concert</em></td><td>7</td></tr>
+<tr><td><em>Concert</em></td><td>12</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -148,57 +148,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aruna Sairam", "songs": [{"N": "0298", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Shanmukapriya", "C": "Gopalakrishna Bharathi", "A": "Aruna Sairam", "V": "bxEd0eGn-rQ"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0385", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Shanmukapriya", "C": "Gopalakrishna Bharathi", "A": "Bombay Jayashri", "V": "ivQFe985uz0"}, {"N": "0386", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Shanmukapriya", "C": "Gopalakrishna Bharathi", "A": "Bombay Jayashri", "V": "kVL4ezTjU7I"}, {"N": "0387", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Unknownraga", "C": "Gopalakrishna Bharathi", "A": "Bombay Jayashri", "V": "x677ljcE_0E"}]}, {"name": "Vocal - J. B. Keerthana", "songs": [{"N": "0064", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Unknownraga", "C": "Gopalakrishna Bharathi", "A": "J. B. Keerthana", "V": "dOQHNJvEs84"}]}, {"name": "Vocal - S. Saketharaman", "songs": [{"N": "0146", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Shanmukapriya", "C": "Gopalakrishna Bharathi", "A": "S. Saketharaman", "V": "82lXT5EsDdg"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0220", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Shanmukapriya", "C": "Gopalakrishna Bharathi", "A": "S. Sowmya", "V": "E1CUiKB0-BU"}, {"N": "0221", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Shanmukapriya", "C": "Gopalakrishna Bharathi", "A": "S. Sowmya", "V": "Ks0864MnTX4"}, {"N": "0222", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Shanmukapriya", "C": "Gopalakrishna Bharathi", "A": "S. Sowmya", "V": "ym6INBDT_Eo"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0549", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Shanmukapriya", "C": "Gopalakrishna Bharathi", "A": "T. N. Seshagopalan", "V": "E6g9xgYhmYk"}, {"N": "0550", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Shanmukapriya", "C": "Gopalakrishna Bharathi", "A": "T. N. Seshagopalan", "V": "mVilnP9hI0s"}]}, {"name": "Vocal - Vasumathi Badrinathan", "songs": [{"N": "0011", "T": "", "H": "Thandai Thai", "S": "Thandai thai irundhal umakku inda  :  Caapu", "R": "Shanmukapriya", "C": "Gopalakrishna Bharathi", "A": "Vasumathi Badrinathan", "V": "zsclq6H-a9w"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aruna Sairam", "songs": [{"C": "Gopalakrishna Bharathi", "D": "5:11", "R": "Shanmukapriya", "T": "", "U": "1,500 views", "V": "bxEd0eGn-rQ"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Gopalakrishna Bharathi", "D": "5:16", "R": "Shanmukapriya", "T": "", "U": "1,862 views", "V": "kVL4ezTjU7I"}, {"C": "Gopalakrishna Bharathi", "D": "3:01", "R": "Shanmukapriya", "T": "", "U": "3,535 views", "V": "ivQFe985uz0"}, {"C": "Gopalakrishna Bharathi", "D": "3:01", "R": "Unknownraga", "T": "", "U": "1,506 views", "V": "x677ljcE_0E"}]}, {"A": "J. B. Keerthana", "songs": [{"C": "Gopalakrishna Bharathi", "D": "5:06", "R": "Unknownraga", "T": "", "U": "0 views", "V": "dOQHNJvEs84"}]}, {"A": "S. Saketharaman", "songs": [{"C": "Gopalakrishna Bharathi", "D": "4:31", "R": "Shanmukapriya", "T": "", "U": "65 views", "V": "82lXT5EsDdg"}]}, {"A": "S. Sowmya", "songs": [{"C": "Gopalakrishna Bharathi", "D": "5:32", "R": "Shanmukapriya", "T": "", "U": "2,435 views", "V": "Ks0864MnTX4"}, {"C": "Gopalakrishna Bharathi", "D": "3:01", "R": "Shanmukapriya", "T": "", "U": "5,302 views", "V": "ym6INBDT_Eo"}, {"C": "Gopalakrishna Bharathi", "D": "3:01", "R": "Shanmukapriya", "T": "", "U": "280 views", "V": "E1CUiKB0-BU"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Gopalakrishna Bharathi", "D": "25:36", "R": "Shanmukapriya", "T": "", "U": "297 views", "V": "E6g9xgYhmYk"}, {"C": "Gopalakrishna Bharathi", "D": "25:36", "R": "Shanmukapriya", "T": "", "U": "279 views", "V": "mVilnP9hI0s"}]}, {"A": "Vasumathi Badrinathan", "songs": [{"C": "Gopalakrishna Bharathi", "D": "4:00", "R": "Shanmukapriya", "T": "", "U": "309 views", "V": "zsclq6H-a9w"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

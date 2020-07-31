@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>23</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>17</td></tr>
-<tr><td><em>Concert</em></td><td>17</td></tr>
+<tr><td><em>Concert</em></td><td>19</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -130,57 +130,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Sisters", "songs": [{"N": "0108", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Bombay Sisters", "V": "DNvtkwDujs8"}]}, {"name": "Vocal - Bushani Kalyanaraman", "songs": [{"N": "0003", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Bushani Kalyanaraman", "V": "53A4IC8sE4M"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0147", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Nithyasree Mahadevan", "V": "HR0IilvGspg"}, {"N": "0148", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Nithyasree Mahadevan", "V": "OR_e8TV1V9M"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0108", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Ramakrishnan Murthy", "V": "-uMPE01q68A"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0108", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Ranjani Gayatri", "V": "20PXdNxVXII"}]}, {"name": "Vocal - S. Saketharaman", "songs": [{"N": "0058", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "S. Saketharaman", "V": "BmdDk67KUZY"}, {"N": "0059", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "S. Saketharaman", "V": "MWD0oaY0hpM"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0107", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "S. Sowmya", "V": "xcof-FhBmAw"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0382", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Sanjay Subrahmanyan", "V": "uiC4VoMXskU"}, {"N": "0379", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Sanjay Subrahmanyan", "V": "4QwdXNihPwo"}, {"N": "0380", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Sanjay Subrahmanyan", "V": "eHwI-qPxw4A"}, {"N": "0381", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Sanjay Subrahmanyan", "V": "uhomyYANL4c"}]}, {"name": "Vocal - Savita Narasimhan", "songs": [{"N": "0018", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Savita Narasimhan", "V": "3dG_54cr9ds"}, {"N": "0019", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Savita Narasimhan", "V": "jz3cy1zUm_0"}]}, {"name": "Vocal - Shankari Krishnan", "songs": [{"N": "0036", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Shankari Krishnan", "V": "Hc5PYxzJ34Q"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0231", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Sudha Ragunathan", "V": "AuKX4pqa4Fo"}]}, {"name": "Vocal - Vasumathi Badrinathan", "songs": [{"N": "0004", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Vasumathi Badrinathan", "V": "SjFlbUbvr2E"}]}, {"name": "Vocal - Vignesh Ishwar", "songs": [{"N": "0029", "T": "", "H": "Kaalai Thookki Nindradum", "S": "kAlai tUkki ninru Adum deivamE ennai :  Adi", "R": "Yadukulakambhoji", "C": "Marimuthu Pillai", "A": "Vignesh Ishwar", "V": "GMNgWkwXCQk"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Sisters", "songs": [{"C": "Marimuthu Pillai", "D": "7:21", "R": "Yadukulakambhoji", "T": "", "U": "0 views", "V": "DNvtkwDujs8"}]}, {"A": "Bushani Kalyanaraman", "songs": [{"C": "Marimuthu Pillai", "D": "3:02", "R": "Yadukulakambhoji", "T": "", "U": "3,524 views", "V": "53A4IC8sE4M"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Marimuthu Pillai", "D": "8:04", "R": "Yadukulakambhoji", "T": "", "U": "903 views", "V": "HR0IilvGspg"}, {"C": "Marimuthu Pillai", "D": "3:01", "R": "Yadukulakambhoji", "T": "", "U": "10,522 views", "V": "OR_e8TV1V9M"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Marimuthu Pillai", "D": "8:51", "R": "Yadukulakambhoji", "T": "", "U": "1,800 views", "V": "-uMPE01q68A"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Marimuthu Pillai", "D": "8:21", "R": "Yadukulakambhoji", "T": "", "U": "8,000 views", "V": "20PXdNxVXII"}]}, {"A": "S. Saketharaman", "songs": [{"C": "Marimuthu Pillai", "D": "10:54", "R": "Yadukulakambhoji", "T": "", "U": "341 views", "V": "MWD0oaY0hpM"}, {"C": "Marimuthu Pillai", "D": "10:54", "R": "Yadukulakambhoji", "T": "", "U": "701 views", "V": "BmdDk67KUZY"}]}, {"A": "S. Sowmya", "songs": [{"C": "Marimuthu Pillai", "D": "7:57", "R": "Yadukulakambhoji", "T": "", "U": "991 views", "V": "xcof-FhBmAw"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Marimuthu Pillai", "D": "8:06", "R": "Yadukulakambhoji", "T": "", "U": "0 views", "V": "uhomyYANL4c"}, {"C": "Marimuthu Pillai", "D": "19:31", "R": "Yadukulakambhoji", "T": "", "U": "553 views", "V": "4QwdXNihPwo"}, {"C": "Marimuthu Pillai", "D": "9:22", "R": "Yadukulakambhoji", "T": "", "U": "0 views", "V": "eHwI-qPxw4A"}, {"C": "Marimuthu Pillai", "D": "7:15", "R": "Yadukulakambhoji", "T": "", "U": "0 views", "V": "uiC4VoMXskU"}]}, {"A": "Savita Narasimhan", "songs": [{"C": "Marimuthu Pillai", "D": "17:51", "R": "Yadukulakambhoji", "T": "", "U": "1,200 views", "V": "jz3cy1zUm_0"}, {"C": "Marimuthu Pillai", "D": "17:47", "R": "Yadukulakambhoji", "T": "", "U": "54 views", "V": "3dG_54cr9ds"}]}, {"A": "Shankari Krishnan", "songs": [{"C": "Marimuthu Pillai", "D": "6:54", "R": "Yadukulakambhoji", "T": "", "U": "312 views", "V": "Hc5PYxzJ34Q"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Marimuthu Pillai", "D": "7:27", "R": "Yadukulakambhoji", "T": "", "U": "1,670 views", "V": "AuKX4pqa4Fo"}]}, {"A": "Vasumathi Badrinathan", "songs": [{"C": "Marimuthu Pillai", "D": "12:05", "R": "Yadukulakambhoji", "T": "", "U": "1,324 views", "V": "SjFlbUbvr2E"}]}, {"A": "Vignesh Ishwar", "songs": [{"C": "Marimuthu Pillai", "D": "8:26", "R": "Yadukulakambhoji", "T": "", "U": "11,430 views", "V": "GMNgWkwXCQk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

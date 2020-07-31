@@ -17,7 +17,7 @@
 <tr><td><em>Song</em></td><td>12</td></tr>
 <tr><td><em>Raga</em></td><td>10</td></tr>
 <tr><td><em>Composer</em></td><td>5</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>10</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "PAPA01", "songs": [{"N": "0003", "T": "", "H": "Dinamani Vamsa", "S": "dina maNi vaMSa tilaka lAvaNya :  Adi", "R": "Harikambhoji", "C": "Thyagaraja", "A": "Papa K. S. Venkataramaiah", "V": "-avJ1Butytk"}, {"N": "0005", "T": "", "H": "Mamava Raghurama", "S": "mAm ava raghurAma marakata maNi SyAma :  Deshadi", "R": "Saranga", "C": "Thyagaraja", "A": "Papa K. S. Venkataramaiah", "V": "WWpdubyPaDw"}, {"N": "0006", "T": "", "H": "Mamava Raghurama", "S": "mAm ava raghurAma marakata maNi SyAma :  Deshadi", "R": "Saranga", "C": "Thyagaraja", "A": "Papa K. S. Venkataramaiah", "V": "aYZVssgbpuI"}, {"N": "0008", "T": "", "H": "Raghunayaka", "S": "raghu nAyaka nI pAda yuga  :  Adi", "R": "Hamsadhwani", "C": "Thyagaraja", "A": "Papa K. S. Venkataramaiah", "V": "J8JM6uPjX3I"}, {"N": "0010", "T": "", "H": "Thera Theeyaga", "S": "tera tIyaga rAdA lOni : Adi", "R": "Gowlipanthu", "C": "Thyagaraja", "A": "Papa K. S. Venkataramaiah", "V": "LSlriBL4n94"}, {"N": "0012", "T": "Varnam", "H": "Viriboni", "S": "viriboni ninne kori marulu konnadira :  Ata", "R": "Bhairavi", "C": "Pichimiriyam Adiyappaya", "A": "Papa K. S. Venkataramaiah", "V": "wtBhMW_SpVc"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Dinamani Vamsa", "S": "dina maNi vaMSa tilaka lAvaNya :  Adi", "songs": [{"C": "Thyagaraja", "D": "23:06", "R": "Harikambhoji", "T": "", "U": "281 views", "V": "-avJ1Butytk"}]}, {"H": "Mamava Raghurama", "S": "mAm ava raghurAma marakata maNi SyAma :  Deshadi", "songs": [{"C": "Thyagaraja", "D": "3:11", "R": "Saranga", "T": "", "U": "265 views", "V": "aYZVssgbpuI"}]}, {"H": "Raghunayaka", "S": "raghu nAyaka nI pAda yuga  :  Adi", "songs": [{"C": "Thyagaraja", "D": "6:36", "R": "Hamsadhwani", "T": "", "U": "496 views", "V": "J8JM6uPjX3I"}]}, {"H": "Thanayuni Brova", "S": "tanayuni brOva janani vaccunO  :  Adi", "songs": [{"C": "Thyagaraja", "D": "52:16", "R": "Bhairavi", "T": "", "U": "83 views", "V": "WWpdubyPaDw"}]}, {"H": "Thera Theeyaga", "S": "tera tIyaga rAdA lOni : Adi", "songs": [{"C": "Thyagaraja", "D": "4:26", "R": "Gowlipanthu", "T": "", "U": "126 views", "V": "LSlriBL4n94"}]}, {"H": "Viriboni", "S": "viriboni ninne kori marulu konnadira :  Ata", "songs": [{"C": "Pichimiriyam Adiyappaya", "D": "7:51", "R": "Bhairavi", "T": "Varnam", "U": "330 views", "V": "wtBhMW_SpVc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

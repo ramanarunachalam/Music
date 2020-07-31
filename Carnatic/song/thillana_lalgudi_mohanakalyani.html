@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>18</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>5</td></tr>
-<tr><td><em>Concert</em></td><td>5</td></tr>
+<tr><td><em>Concert</em></td><td>18</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -130,57 +130,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0352", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Amrutha Venkatesh", "V": "eLTrvo9hYEo"}]}, {"name": "Vocal - Vasudha Keshav", "songs": [{"N": "0012", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Vasudha Keshav", "V": "5pHYGYyokP4"}, {"N": "0013", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Vasudha Keshav", "V": "QAY8wu2uIws"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0642", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "U. Srinivas", "V": "9c2CjNAGg-0"}]}, {"name": "Violin - Embar Kannan", "songs": [{"N": "0095", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Embar Kannan", "V": "AeAgHtEgST4"}]}, {"name": "Violin - Lalgudi Jayaraman", "songs": [{"N": "0677", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "05K9H-gZalY"}, {"N": "0678", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "1p-_1dP-OUE"}, {"N": "0679", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "AT8jBz11otE"}, {"N": "0680", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "DHbFVSVXWaw"}, {"N": "0681", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "PH1gZdlzoeI"}, {"N": "0682", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "TvJTYYZFykU"}, {"N": "0683", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "XbdTqPNG6nM"}, {"N": "0684", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "jWcQPC9bxLE"}, {"N": "0685", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "kHKhN0yadV0"}, {"N": "0686", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "kmXsHrl-uv4"}, {"N": "0687", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "rVi3tHzjXCE"}, {"N": "0688", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "tg-3QV9OraE"}, {"N": "0689", "T": "Thillana", "H": "thillana_lalgudi_mohanakalyani", "S": "taka tajhaNu dhImta tajhaNu dhImta tadhiranA :  Adi", "R": "Mohanakalyani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "v1qFs7TCEAE"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amrutha Venkatesh", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:43", "R": "Mohanakalyani", "T": "Thillana", "U": "0 views", "V": "eLTrvo9hYEo"}]}, {"A": "Vasudha Keshav", "songs": [{"C": "Lalgudi Jayaraman", "D": "7:38", "R": "Mohanakalyani", "T": "Thillana", "U": "542 views", "V": "5pHYGYyokP4"}, {"C": "Lalgudi Jayaraman", "D": "3:01", "R": "Mohanakalyani", "T": "Thillana", "U": "196 views", "V": "QAY8wu2uIws"}]}, {"A": "U. Srinivas", "songs": [{"C": "Lalgudi Jayaraman", "D": "5:11", "R": "Mohanakalyani", "T": "Thillana", "U": "570 views", "V": "9c2CjNAGg-0"}]}, {"A": "Embar Kannan", "songs": [{"C": "Lalgudi Jayaraman", "D": "5:28", "R": "Mohanakalyani", "T": "Thillana", "U": "362 views", "V": "AeAgHtEgST4"}]}, {"A": "Lalgudi Jayaraman", "songs": [{"C": "Lalgudi Jayaraman", "D": "5:33", "R": "Mohanakalyani", "T": "Thillana", "U": "100,794 views", "V": "kmXsHrl-uv4"}, {"C": "Lalgudi Jayaraman", "D": "5:33", "R": "Mohanakalyani", "T": "Thillana", "U": "654 views", "V": "DHbFVSVXWaw"}, {"C": "Lalgudi Jayaraman", "D": "3:23", "R": "Mohanakalyani", "T": "Thillana", "U": "684,903 views", "V": "PH1gZdlzoeI"}, {"C": "Lalgudi Jayaraman", "D": "8:34", "R": "Mohanakalyani", "T": "Thillana", "U": "4,989 views", "V": "jWcQPC9bxLE"}, {"C": "Lalgudi Jayaraman", "D": "6:05", "R": "Mohanakalyani", "T": "Thillana", "U": "1,309 views", "V": "rVi3tHzjXCE"}, {"C": "Lalgudi Jayaraman", "D": "4:35", "R": "Mohanakalyani", "T": "Thillana", "U": "455 views", "V": "XbdTqPNG6nM"}, {"C": "Lalgudi Jayaraman", "D": "5:44", "R": "Mohanakalyani", "T": "Thillana", "U": "1,089 views", "V": "kHKhN0yadV0"}, {"C": "Lalgudi Jayaraman", "D": "3:42", "R": "Mohanakalyani", "T": "Thillana", "U": "3,260 views", "V": "05K9H-gZalY"}, {"C": "Lalgudi Jayaraman", "D": "4:18", "R": "Mohanakalyani", "T": "Thillana", "U": "172 views", "V": "tg-3QV9OraE"}, {"C": "Lalgudi Jayaraman", "D": "3:39", "R": "Mohanakalyani", "T": "Thillana", "U": "3,249 views", "V": "TvJTYYZFykU"}, {"C": "Lalgudi Jayaraman", "D": "5:46", "R": "Mohanakalyani", "T": "Thillana", "U": "2,968 views", "V": "1p-_1dP-OUE"}, {"C": "Lalgudi Jayaraman", "D": "5:46", "R": "Mohanakalyani", "T": "Thillana", "U": "3,093 views", "V": "AT8jBz11otE"}, {"C": "Lalgudi Jayaraman", "D": "4:37", "R": "Mohanakalyani", "T": "Thillana", "U": "342 views", "V": "v1qFs7TCEAE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

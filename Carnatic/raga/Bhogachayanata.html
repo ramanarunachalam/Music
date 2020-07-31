@@ -19,10 +19,10 @@
 </tbody>
 </table></div></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>6</td></tr>
+<tr><td><em>Audio</em></td><td>7</td></tr>
 <tr><td><em>Song</em></td><td>1</td></tr>
 <tr><td><em>Composer</em></td><td>1</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "bhOgachAyA nATakapriyE bOdham dEhi bRhadIsha", "songs": [{"N": "0354", "T": "", "H": "Bhogachaayanaatakapriye", "S": "bhOgachAyA nATakapriyE bOdham dEhi bRhadIsha jAyE :  Adi", "R": "Bhogachayanata", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "fA482570kc0"}, {"N": "0355", "T": "", "H": "Bhogachaayanaatakapriye", "S": "bhOgachAyA nATakapriyE bOdham dEhi bRhadIsha jAyE :  Adi", "R": "Bhogachayanata", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "iSwQBLS0b0Y"}, {"N": "0169", "T": "", "H": "Bhogachaayanaatakapriye", "S": "bhOgachAyA nATakapriyE bOdham dEhi bRhadIsha jAyE :  Adi", "R": "Bhogachayanata", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "RLxS7-g6Glw"}, {"N": "0017", "T": "", "H": "Bhogachaayanaatakapriye", "S": "bhOgachAyA nATakapriyE bOdham dEhi bRhadIsha jAyE :  Adi", "R": "Bhogachayanata", "C": "Muthuswami Dikshitar", "A": "Annavarapu Ramaswamy", "V": "QKvehSooqWQ"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Bhogachaayanaatakapriye", "S": "bhOgachAyA nATakapriyE bOdham dEhi bRhadIsha jAyE :  Adi", "songs": [{"A": "M. Balamuralikrishna", "C": "Muthuswami Dikshitar", "D": "2:20:01", "T": "", "U": "360 views", "V": "QKvehSooqWQ"}, {"A": "M. Balamuralikrishna", "C": "Muthuswami Dikshitar", "D": "1:04:47", "T": "", "U": "669 views", "V": "iSwQBLS0b0Y"}, {"A": "M. Balamuralikrishna", "C": "Muthuswami Dikshitar", "D": "5:01", "T": "", "U": "148 views", "V": "fA482570kc0"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "3:41", "T": "", "U": "743 views", "V": "RLxS7-g6Glw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

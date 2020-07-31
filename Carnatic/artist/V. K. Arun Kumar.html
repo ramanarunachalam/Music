@@ -17,7 +17,7 @@
 <tr><td><em>Song</em></td><td>9</td></tr>
 <tr><td><em>Raga</em></td><td>9</td></tr>
 <tr><td><em>Composer</em></td><td>4</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>12</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "VKAK01", "songs": [{"N": "0001", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "V. K. Arun Kumar", "V": "-0IujGEDyPY"}, {"N": "0002", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "V. K. Arun Kumar", "V": "R2-efA8Z5dw"}, {"N": "0003", "T": "", "H": "Balakrishnan Padamalar", "S": "bAlakrSNan pAdamalar paNivOrkkiDarilai vara guNa :  Rupaka", "R": "Dhanyasi", "C": "Papanasam Sivan", "A": "V. K. Arun Kumar", "V": "obzP0gZcw6Q"}, {"N": "0004", "T": "", "H": "Deva Deva", "S": "Deva Deva Kalayamithe Charanambuja Sevanam :  Rupaka", "R": "Mayamalavagowla", "C": "Swathi Thirunal", "A": "V. K. Arun Kumar", "V": "K6gHrq9-x_E"}, {"N": "0005", "T": "", "H": "Kanindu Arul Purindal", "S": "kanindharul purindhaal karunai kuraindhidumo :  Adi", "R": "Kalyani", "C": "Papanasam Sivan", "A": "V. K. Arun Kumar", "V": "TeGmPv1WHf8"}, {"N": "0006", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "V. K. Arun Kumar", "V": "LYHrd1FTirE"}, {"N": "0007", "T": "", "H": "Vachamagocharame", "S": "vAcAm agOcaramE manasA  :  Deshadi", "R": "Kaikavasi", "C": "Thyagaraja", "A": "V. K. Arun Kumar", "V": "jGT11xPwrpk"}, {"N": "0008", "T": "Srirangam pancharathnam", "H": "O Rangasayee", "S": "O ranga SAyi pilicitE  :  Rupaka", "R": "Kambhoji", "C": "Thyagaraja", "A": "V. K. Arun Kumar", "V": "JVIjEfAGGgA"}, {"N": "0009", "T": "", "H": "Varnam", "S": "Varnam", "R": "Kannada", "C": "UnknownComposer", "A": "V. K. Arun Kumar", "V": "QBm0skLeaa4"}, {"N": "0010", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Neelambari", "C": "UnknownComposer", "A": "V. K. Arun Kumar", "V": "wewPkGEAClY"}, {"N": "0011", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "V. K. Arun Kumar", "V": "-ke2yGuLS70"}, {"N": "0012", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "V. K. Arun Kumar", "V": "musicalarun"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Balakrishnan Padamalar", "S": "bAlakrSNan pAdamalar paNivOrkkiDarilai vara guNa :  Rupaka", "songs": [{"C": "Papanasam Sivan", "D": "6:14", "R": "Dhanyasi", "T": "", "U": "454 views", "V": "obzP0gZcw6Q"}]}, {"H": "Concert", "S": "Concert", "songs": [{"C": "UnknownComposer", "D": "2:04:22", "R": "Unknownraga", "T": "", "U": "1,548 views", "V": "-0IujGEDyPY"}, {"C": "UnknownComposer", "D": "1:23:22", "R": "Unknownraga", "T": "", "U": "185 views", "V": "R2-efA8Z5dw"}]}, {"H": "Deva Deva", "S": "Deva Deva Kalayamithe Charanambuja Sevanam :  Rupaka", "songs": [{"C": "Swathi Thirunal", "D": "14:49", "R": "Mayamalavagowla", "T": "", "U": "3,189 views", "V": "K6gHrq9-x_E"}]}, {"H": "Kanindu Arul Purindal", "S": "kanindharul purindhaal karunai kuraindhidumo :  Adi", "songs": [{"C": "Papanasam Sivan", "D": "14:05", "R": "Kalyani", "T": "", "U": "176 views", "V": "TeGmPv1WHf8"}]}, {"H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "songs": [{"C": "Thyagaraja", "D": "10:41", "R": "Hamirkalyani", "T": "", "U": "28 views", "V": "LYHrd1FTirE"}]}, {"H": "O Rangasayee", "S": "O ranga SAyi pilicitE  :  Rupaka", "songs": [{"C": "Thyagaraja", "D": "11:09", "R": "Kambhoji", "T": "Srirangam pancharathnam", "U": "488 views", "V": "JVIjEfAGGgA"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "5:31", "R": "Neelambari", "T": "", "U": "605 views", "V": "wewPkGEAClY"}, {"C": "UnknownComposer", "D": "- Channel", "R": "Unknownraga", "T": "", "U": "0 views", "V": "/user/musicalarun"}, {"C": "UnknownComposer", "D": "24:23", "R": "Unknownraga", "T": "", "U": "147 views", "V": "-ke2yGuLS70"}]}, {"H": "Vachamagocharame", "S": "vAcAm agOcaramE manasA  :  Deshadi", "songs": [{"C": "Thyagaraja", "D": "5:06", "R": "Kaikavasi", "T": "", "U": "460 views", "V": "jGT11xPwrpk"}]}, {"H": "Varnam", "S": "Varnam", "songs": [{"C": "UnknownComposer", "D": "7:03", "R": "Kannada", "T": "", "U": "4,817 views", "V": "QBm0skLeaa4"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

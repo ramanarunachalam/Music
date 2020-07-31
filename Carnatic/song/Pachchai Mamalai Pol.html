@@ -27,7 +27,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>4</td></tr>
 <tr><td><em>Artist</em></td><td>5</td></tr>
-<tr><td><em>Concert</em></td><td>5</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -121,57 +121,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0260", "T": "", "H": "Pachchai Mamalai Pol", "S": "pachchaimA malaipOl mEnip pavaLavAik kamalach :  Adi", "R": "Unknownraga", "C": "Thondaradipodi Azhwar", "A": "Bombay Jayashri", "V": "Hu8CD_y-dhU"}, {"N": "0261", "T": "", "H": "Pachchai Mamalai Pol", "S": "pachchaimA malaipOl mEnip pavaLavAik kamalach :  Adi", "R": "Unknownraga", "C": "Thondaradipodi Azhwar", "A": "Bombay Jayashri", "V": "ggFx5e3OzMI"}]}, {"name": "Vocal - Kunnakudi M. Balamuralikrishna", "songs": [{"N": "0074", "T": "", "H": "Pachchai Mamalai Pol", "S": "pachchaimA malaipOl mEnip pavaLavAik kamalach :  Adi", "R": "Ragamalika", "C": "Thondaradipodi Azhwar", "A": "Kunnakudi M. Balamuralikrishna", "V": "6Q2QcMXLqyI"}, {"N": "0075", "T": "", "H": "Pachchai Mamalai Pol", "S": "pachchaimA malaipOl mEnip pavaLavAik kamalach :  Adi", "R": "Sumanesaranjani", "C": "Thondaradipodi Azhwar", "A": "Kunnakudi M. Balamuralikrishna", "V": "eP8-KrWIm8E"}]}, {"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0145", "T": "", "H": "Pachchai Mamalai Pol", "S": "pachchaimA malaipOl mEnip pavaLavAik kamalach :  Adi", "R": "Unknownraga", "C": "Thondaradipodi Azhwar", "A": "P. Unnikrishnan", "V": "7ufWU2u6JbY"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0628", "T": "", "H": "Pachchai Mamalai Pol", "S": "pachchaimA malaipOl mEnip pavaLavAik kamalach :  Adi", "R": "Bhairavi", "C": "Thondaradipodi Azhwar", "A": "Sanjay Subrahmanyan", "V": "r92WjA1rFEo"}, {"N": "0629", "T": "", "H": "Pachchai Mamalai Pol", "S": "pachchaimA malaipOl mEnip pavaLavAik kamalach :  Adi", "R": "Bhairavi", "C": "Thondaradipodi Azhwar", "A": "Sanjay Subrahmanyan", "V": "y7lTIQ8X9yA"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0372", "T": "", "H": "Pachchai Mamalai Pol", "S": "pachchaimA malaipOl mEnip pavaLavAik kamalach :  Adi", "R": "Ragamalika", "C": "Thondaradipodi Azhwar", "A": "T. N. Seshagopalan", "V": "KlCyXlDR-cI"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Thondaradipodi Azhwar", "D": "4:18", "R": "Unknownraga", "T": "", "U": "136,972 views", "V": "Hu8CD_y-dhU"}, {"C": "Thondaradipodi Azhwar", "D": "6:28", "R": "Unknownraga", "T": "", "U": "15,092 views", "V": "ggFx5e3OzMI"}]}, {"A": "Kunnakudi M. Balamuralikrishna", "songs": [{"C": "Thondaradipodi Azhwar", "D": "14:29", "R": "Sumanesaranjani", "T": "", "U": "2,900 views", "V": "eP8-KrWIm8E"}, {"C": "Thondaradipodi Azhwar", "D": "14:25", "R": "Ragamalika", "T": "", "U": "586 views", "V": "6Q2QcMXLqyI"}]}, {"A": "P. Unnikrishnan", "songs": [{"C": "Thondaradipodi Azhwar", "D": "5:29", "R": "Unknownraga", "T": "", "U": "0 views", "V": "7ufWU2u6JbY"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Thondaradipodi Azhwar", "D": "38:06", "R": "Bhairavi", "T": "", "U": "3,600 views", "V": "y7lTIQ8X9yA"}, {"C": "Thondaradipodi Azhwar", "D": "38:02", "R": "Bhairavi", "T": "", "U": "275 views", "V": "r92WjA1rFEo"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Thondaradipodi Azhwar", "D": "3:55", "R": "Ragamalika", "T": "", "U": "708 views", "V": "KlCyXlDR-cI"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

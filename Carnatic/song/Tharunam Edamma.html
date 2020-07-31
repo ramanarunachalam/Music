@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>18</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>13</td></tr>
-<tr><td><em>Concert</em></td><td>13</td></tr>
+<tr><td><em>Concert</em></td><td>17</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -152,57 +152,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bangalore Brothers", "songs": [{"N": "0083", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "Bangalore Brothers", "V": "xDUvj2iWeOU"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0485", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "D. K. Pattammal", "V": "5xMg8d9vU3w"}, {"N": "0486", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "D. K. Pattammal", "V": "8_4znI03eQQ"}, {"N": "0487", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "D. K. Pattammal", "V": "8nc58DqMOBA"}, {"N": "0488", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "D. K. Pattammal", "V": "cX_DTXs9zSg"}]}, {"name": "Vocal - G. N. Balasubramaniam", "songs": [{"N": "0552", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "G. N. Balasubramaniam", "V": "SYJ4dTwcDXw"}]}, {"name": "Vocal - Geetha Raja", "songs": [{"N": "0030", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "Geetha Raja", "V": "jEd6qXbLErY"}]}, {"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0177", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "Hyderabad Brothers", "V": "8kQtN7QCV2A"}]}, {"name": "Vocal - Hyderabad Sisters", "songs": [{"N": "0042", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "Hyderabad Sisters", "V": "VpLBsybbDxo"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1146", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "M. S. Subbulakshmi", "V": "j4Uv0iyPrNM"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0542", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "Maharajapuram Santhanam", "V": "yAdr2TjoiFQ"}]}, {"name": "Vocal - Mani Krishnaswami", "songs": [{"N": "0075", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "Mani Krishnaswami", "V": "sP9nmwjyQUw"}]}, {"name": "Vocal - Neyveli Santhanagopalan", "songs": [{"N": "0133", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "Neyveli Santhanagopalan", "V": "bctMLj7_kjc"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0189", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "Sikkil Gurucharan", "V": "A8zFTiSfDdQ"}, {"N": "0190", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "Sikkil Gurucharan", "V": "CqA1n7gFBss"}, {"N": "0191", "T": "", "H": "Tharunam Edamma", "S": "taruNam id a mmA ennai rakshikka :  Adi", "R": "Gowlipanthu", "C": "Shyama Shastri", "A": "Sikkil Gurucharan", "V": "E-sjf0TxSNE"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bangalore Brothers", "songs": [{"C": "Shyama Shastri", "D": "3:31", "R": "Gowlipanthu", "T": "", "U": "52 views", "V": "xDUvj2iWeOU"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Shyama Shastri", "D": "5:57", "R": "Gowlipanthu", "T": "", "U": "350 views", "V": "8_4znI03eQQ"}, {"C": "Shyama Shastri", "D": "3:10", "R": "Gowlipanthu", "T": "", "U": "55 views", "V": "cX_DTXs9zSg"}, {"C": "Shyama Shastri", "D": "3:16", "R": "Gowlipanthu", "T": "", "U": "606 views", "V": "8nc58DqMOBA"}, {"C": "Shyama Shastri", "D": "3:16", "R": "Gowlipanthu", "T": "", "U": "81 views", "V": "5xMg8d9vU3w"}]}, {"A": "G. N. Balasubramaniam", "songs": [{"C": "Shyama Shastri", "D": "2:33", "R": "Gowlipanthu", "T": "", "U": "857 views", "V": "SYJ4dTwcDXw"}]}, {"A": "Geetha Raja", "songs": [{"C": "Shyama Shastri", "D": "4:22", "R": "Gowlipanthu", "T": "", "U": "1,414 views", "V": "jEd6qXbLErY"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Shyama Shastri", "D": "4:05", "R": "Gowlipanthu", "T": "", "U": "0 views", "V": "8kQtN7QCV2A"}]}, {"A": "Hyderabad Sisters", "songs": [{"C": "Shyama Shastri", "D": "4:49", "R": "Gowlipanthu", "T": "", "U": "125 views", "V": "VpLBsybbDxo"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Shyama Shastri", "D": "3:52", "R": "Gowlipanthu", "T": "", "U": "575 views", "V": "j4Uv0iyPrNM"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Shyama Shastri", "D": "2:36", "R": "Gowlipanthu", "T": "", "U": "0 views", "V": "yAdr2TjoiFQ"}]}, {"A": "Mani Krishnaswami", "songs": [{"C": "Shyama Shastri", "D": "4:15", "R": "Gowlipanthu", "T": "", "U": "60 views", "V": "sP9nmwjyQUw"}]}, {"A": "Neyveli Santhanagopalan", "songs": [{"C": "Shyama Shastri", "D": "8:22", "R": "Gowlipanthu", "T": "", "U": "139 views", "V": "bctMLj7_kjc"}]}, {"A": "S. Ramanathan", "songs": [{"C": "Shyama Shastri", "D": "29:57", "R": "Gowlipanthu", "T": "", "U": "5,300 views", "V": "1sDUNNNm440"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Shyama Shastri", "D": "3:36", "R": "Gowlipanthu", "T": "", "U": "489 views", "V": "E-sjf0TxSNE"}, {"C": "Shyama Shastri", "D": "3:01", "R": "Gowlipanthu", "T": "", "U": "2,072 views", "V": "CqA1n7gFBss"}, {"C": "Shyama Shastri", "D": "3:01", "R": "Gowlipanthu", "T": "", "U": "65 views", "V": "A8zFTiSfDdQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

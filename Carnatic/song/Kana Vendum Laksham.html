@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>6</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>4</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bharat Sundar", "songs": [{"N": "0082", "T": "", "H": "Kana Vendum Laksham", "S": "kANa vENum lakSam kaNgaL sItA dEviyin :  Ata", "R": "Suruti", "C": "Arunachala Kavi", "A": "Bharat Sundar", "V": "qf_ds3nJZiY"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0113", "T": "", "H": "Kana Vendum Laksham", "S": "kANa vENum lakSam kaNgaL sItA dEviyin :  Ata", "R": "Suruti", "C": "Arunachala Kavi", "A": "Bombay Sisters", "V": "7QMTQXbRl0s"}]}, {"name": "Vocal - Suguna Varadachari", "songs": [{"N": "0061", "T": "", "H": "Kana Vendum Laksham", "S": "kANa vENum lakSam kaNgaL sItA dEviyin :  Ata", "R": "Suruti", "C": "Arunachala Kavi", "A": "Suguna Varadachari", "V": "lkusLurFKrw"}]}, {"name": "Vocal - V. V. Sadagopan", "songs": [{"N": "0001", "T": "", "H": "Kana Vendum Laksham", "S": "kANa vENum lakSam kaNgaL sItA dEviyin :  Ata", "R": "Suruti", "C": "Arunachala Kavi", "A": "V. V. Sadagopan", "V": "qjcNKyyZjdI"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bharat Sundar", "songs": [{"C": "Arunachala Kavi", "D": "16:06", "R": "Suruti", "T": "", "U": "680 views", "V": "qf_ds3nJZiY"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Arunachala Kavi", "D": "4:15", "R": "Suruti", "T": "", "U": "0 views", "V": "7QMTQXbRl0s"}]}, {"A": "Suguna Varadachari", "songs": [{"C": "Arunachala Kavi", "D": "3:01", "R": "Suruti", "T": "", "U": "1,407 views", "V": "lkusLurFKrw"}]}, {"A": "V. V. Sadagopan", "songs": [{"C": "Arunachala Kavi", "D": "3:06", "R": "Suruti", "T": "", "U": "393 views", "V": "qjcNKyyZjdI"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

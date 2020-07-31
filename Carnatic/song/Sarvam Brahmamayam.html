@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>28</td></tr>
 <tr><td><em>Raga</em></td><td>4</td></tr>
 <tr><td><em>Artist</em></td><td>18</td></tr>
-<tr><td><em>Concert</em></td><td>18</td></tr>
+<tr><td><em>Concert</em></td><td>26</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -133,57 +133,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0324", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Unknownraga", "C": "Sadasiva Brahmendra", "A": "Bombay Jayashri", "V": "PIMpiA-qsnk"}]}, {"name": "Vocal - Dr. Nagavalli Nagaraj", "songs": [{"N": "0092", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Unknownraga", "C": "Sadasiva Brahmendra", "A": "Dr. Nagavalli Nagaraj", "V": "vu98XMVDzSo"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1282", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Khamas", "C": "Sadasiva Brahmendra", "A": "M. Balamuralikrishna", "V": "Okmc4D3BDkI"}, {"N": "1283", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Khamas", "C": "Sadasiva Brahmendra", "A": "M. Balamuralikrishna", "V": "gRshtitCqic"}, {"N": "1284", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Unknownraga", "C": "Sadasiva Brahmendra", "A": "M. Balamuralikrishna", "V": "TjNVLt8sc8w"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0219", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Madhuvanthi", "C": "Sadasiva Brahmendra", "A": "Malladi Brothers", "V": "Q9TE16F61Aw"}, {"N": "0220", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Madhuvanthi", "C": "Sadasiva Brahmendra", "A": "Malladi Brothers", "V": "eW5EWKgxEFA"}, {"N": "0221", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Madhuvanthi", "C": "Sadasiva Brahmendra", "A": "Malladi Brothers", "V": "z-YeXbtR4tc"}]}, {"name": "Vocal - Malladi Suribabu", "songs": [{"N": "0047", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Unknownraga", "C": "Sadasiva Brahmendra", "A": "Malladi Suribabu", "V": "7oAq3mZoP9U"}]}, {"name": "Vocal - Prince Rama Varma", "songs": [{"N": "0354", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Khamas", "C": "Sadasiva Brahmendra", "A": "Prince Rama Varma", "V": "qyOPiNEa2UQ"}, {"N": "0355", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Unknownraga", "C": "Sadasiva Brahmendra", "A": "Prince Rama Varma", "V": "A0DMM0hrkHY"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0220", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Chenchurutti", "C": "Sadasiva Brahmendra", "A": "Priya Sisters", "V": "o3nmqbLQYQ8"}, {"N": "0221", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Unknownraga", "C": "Sadasiva Brahmendra", "A": "Priya Sisters", "V": "Ea0_vjzSpD8"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0711", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Chenchurutti", "C": "Sadasiva Brahmendra", "A": "Semmangudi Srinivasa Iyer", "V": "o5yYy_33wa4"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0166", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Madhuvanthi", "C": "Sadasiva Brahmendra", "A": "Sikkil Gurucharan", "V": "GaBrNpVxQO4"}, {"N": "0167", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Unknownraga", "C": "Sadasiva Brahmendra", "A": "Sikkil Gurucharan", "V": "BpVmzgCOppk"}]}, {"name": "Vocal - Sriram Parthasarathy", "songs": [{"N": "0052", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Unknownraga", "C": "Sadasiva Brahmendra", "A": "Sriram Parthasarathy", "V": "mnnQsSVDc2c"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0532", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Madhuvanthi", "C": "Sadasiva Brahmendra", "A": "Sudha Ragunathan", "V": "GsWizZuYeiY"}, {"N": "0533", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Unknownraga", "C": "Sadasiva Brahmendra", "A": "Sudha Ragunathan", "V": "EZ6-hTGIti8"}]}, {"name": "Vocal - Sumithra Vasudev", "songs": [{"N": "0070", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Madhuvanthi", "C": "Sadasiva Brahmendra", "A": "Sumithra Vasudev", "V": "X-xM0d1afyw"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0520", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Madhuvanthi", "C": "Sadasiva Brahmendra", "A": "T. M. Krishna", "V": "U4l3wkmWeU0"}, {"N": "0521", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Madhuvanthi", "C": "Sadasiva Brahmendra", "A": "T. M. Krishna", "V": "p2OHqBlTg30"}]}, {"name": "Vocal - Voleti Venkateswarlu", "songs": [{"N": "0215", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Madhuvanthi", "C": "Sadasiva Brahmendra", "A": "Voleti Venkateswarlu", "V": "wnPQjcnBBzE"}, {"N": "0216", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Unknownraga", "C": "Sadasiva Brahmendra", "A": "Voleti Venkateswarlu", "V": "6bwu9zK4mco"}]}, {"name": "Veena - Ramana Balachandran", "songs": [{"N": "0018", "T": "", "H": "Sarvam Brahmamayam", "S": "sarvam brahmamayam rE rE", "R": "Madhuvanthi", "C": "Sadasiva Brahmendra", "A": "Ramana Balachandran", "V": "lzFDQI-DsLw"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Sadasiva Brahmendra", "D": "7:55", "R": "Unknownraga", "T": "", "U": "0 views", "V": "PIMpiA-qsnk"}]}, {"A": "Dr. Nagavalli Nagaraj", "songs": [{"C": "Sadasiva Brahmendra", "D": "7:10", "R": "Unknownraga", "T": "", "U": "1,743 views", "V": "vu98XMVDzSo"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Sadasiva Brahmendra", "D": "8:27", "R": "Khamas", "T": "", "U": "549 views", "V": "Okmc4D3BDkI"}, {"C": "Sadasiva Brahmendra", "D": "7:55", "R": "Khamas", "T": "", "U": "2,182 views", "V": "gRshtitCqic"}, {"C": "Sadasiva Brahmendra", "D": "7:55", "R": "Unknownraga", "T": "", "U": "0 views", "V": "TjNVLt8sc8w"}]}, {"A": "Malladi Brothers", "songs": [{"C": "Sadasiva Brahmendra", "D": "4:50", "R": "Madhuvanthi", "T": "", "U": "2,781 views", "V": "Q9TE16F61Aw"}, {"C": "Sadasiva Brahmendra", "D": "6:23", "R": "Madhuvanthi", "T": "", "U": "4,911 views", "V": "z-YeXbtR4tc"}, {"C": "Sadasiva Brahmendra", "D": "6:23", "R": "Madhuvanthi", "T": "", "U": "34 views", "V": "eW5EWKgxEFA"}]}, {"A": "Malladi Suribabu", "songs": [{"C": "Sadasiva Brahmendra", "D": "26:12", "R": "Unknownraga", "T": "", "U": "6,424 views", "V": "7oAq3mZoP9U"}]}, {"A": "Prince Rama Varma", "songs": [{"C": "Sadasiva Brahmendra", "D": "5:12", "R": "Unknownraga", "T": "", "U": "13,203 views", "V": "A0DMM0hrkHY"}, {"C": "Sadasiva Brahmendra", "D": "5:03", "R": "Khamas", "T": "", "U": "4,665 views", "V": "qyOPiNEa2UQ"}]}, {"A": "Priya Sisters", "songs": [{"C": "Sadasiva Brahmendra", "D": "5:27", "R": "Chenchurutti", "T": "", "U": "23,495 views", "V": "o3nmqbLQYQ8"}, {"C": "Sadasiva Brahmendra", "D": "5:31", "R": "Unknownraga", "T": "", "U": "120,862 views", "V": "Ea0_vjzSpD8"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Sadasiva Brahmendra", "D": "3:23", "R": "Chenchurutti", "T": "", "U": "0 views", "V": "o5yYy_33wa4"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Sadasiva Brahmendra", "D": "11:40", "R": "Unknownraga", "T": "", "U": "67,893 views", "V": "BpVmzgCOppk"}, {"C": "Sadasiva Brahmendra", "D": "10:49", "R": "Madhuvanthi", "T": "", "U": "43 views", "V": "GaBrNpVxQO4"}]}, {"A": "Sriram Parthasarathy", "songs": [{"C": "Sadasiva Brahmendra", "D": "5:34", "R": "Unknownraga", "T": "", "U": "960 views", "V": "mnnQsSVDc2c"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Sadasiva Brahmendra", "D": "5:40", "R": "Madhuvanthi", "T": "", "U": "3,777 views", "V": "GsWizZuYeiY"}, {"C": "Sadasiva Brahmendra", "D": "7:21", "R": "Unknownraga", "T": "", "U": "0 views", "V": "EZ6-hTGIti8"}]}, {"A": "Sumithra Vasudev", "songs": [{"C": "Sadasiva Brahmendra", "D": "2:31", "R": "Madhuvanthi", "T": "", "U": "425 views", "V": "X-xM0d1afyw"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Sadasiva Brahmendra", "D": "5:43", "R": "Madhuvanthi", "T": "", "U": "291 views", "V": "U4l3wkmWeU0"}, {"C": "Sadasiva Brahmendra", "D": "8:01", "R": "Madhuvanthi", "T": "", "U": "1,118 views", "V": "p2OHqBlTg30"}]}, {"A": "Voleti Venkateswarlu", "songs": [{"C": "Sadasiva Brahmendra", "D": "4:10", "R": "Unknownraga", "T": "", "U": "592 views", "V": "6bwu9zK4mco"}, {"C": "Sadasiva Brahmendra", "D": "4:34", "R": "Madhuvanthi", "T": "", "U": "10,261 views", "V": "wnPQjcnBBzE"}]}, {"A": "Ramana Balachandran", "songs": [{"C": "Sadasiva Brahmendra", "D": "7:02", "R": "Madhuvanthi", "T": "", "U": "2,300 views", "V": "lzFDQI-DsLw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

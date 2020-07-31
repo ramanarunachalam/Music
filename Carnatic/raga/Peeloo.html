@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>32</td></tr>
 <tr><td><em>Song</em></td><td>7</td></tr>
 <tr><td><em>Composer</em></td><td>5</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Bhajan", "songs": [{"N": "0002", "T": "", "H": "Bhajan", "S": "Bhajan", "R": "Peeloo", "C": "UnknownComposer", "A": "Seetha Narayanan", "V": "K7v307wezvE"}]}, {"name": "bhajarE yadunAtham mAnasa bhajarE", "songs": [{"N": "0007", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "Bharathi Ramasubban", "V": "DeiXqzVvppQ"}, {"N": "0214", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "M. S. Subbulakshmi", "V": "CNCtPo1yQKQ"}, {"N": "0029", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "O. S. Thyagarajan", "V": "4CNAtkvH4Ks"}, {"N": "0030", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "O. S. Thyagarajan", "V": "LtlgAXtoGWw"}, {"N": "0031", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "O. S. Thyagarajan", "V": "tR-XKyje52E"}, {"N": "0047", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "Priya Sisters", "V": "XZ5DX1jXy5M"}, {"N": "0020", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "Radha Viswanathan", "V": "r8gVea-4QbA"}, {"N": "0022", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "J. A. Jayanth", "V": "O6xeQDLfg_k"}, {"N": "0023", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "J. A. Jayanth", "V": "ZAa7mzRas8I"}, {"N": "0024", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "J. A. Jayanth", "V": "mjSGykFpZ40"}, {"N": "0003", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "Thiruvizha Jayashankar", "V": "i4Jf8htWci8"}, {"N": "0005", "T": "", "H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE", "R": "Peeloo", "C": "Sadasiva Brahmendra", "A": "T. H. Subramaniam", "V": "LQh5dU_cm-8"}]}, {"name": "jagadOddhAraNa ADisidaLe yashOde", "songs": [{"N": "0105", "T": "", "H": "Jagadodharana", "S": "jagadOddhAraNa ADisidaLe yashOde :  Adi", "R": "Peeloo", "C": "Purandara Dasa", "A": "Ranjani Gayatri", "V": "9r1uhOCwkj8"}, {"N": "0012", "T": "", "H": "Jagadodharana", "S": "jagadOddhAraNa ADisidaLe yashOde :  Adi", "R": "Peeloo", "C": "Purandara Dasa", "A": "Nirmala Rajasekar", "V": "-Cb4ttqQqzk"}]}, {"name": "jamunA kinArE pyArE kadamatara mOhan", "songs": [{"N": "0072", "T": "", "H": "Jamunakinare", "S": "jamunA kinArE pyArE kadamatara mOhan bAnsuri :  cautAl", "R": "Peeloo", "C": "Swathi Thirunal", "A": "Bharat Sundar", "V": "jopeGjNrOeU"}, {"N": "0621", "T": "", "H": "Jamunakinare", "S": "jamunA kinArE pyArE kadamatara mOhan bAnsuri :  cautAl", "R": "Peeloo", "C": "Swathi Thirunal", "A": "M. Balamuralikrishna", "V": "Ma_Vu3c9m-8"}, {"N": "0622", "T": "", "H": "Jamunakinare", "S": "jamunA kinArE pyArE kadamatara mOhan bAnsuri :  cautAl", "R": "Peeloo", "C": "Swathi Thirunal", "A": "M. Balamuralikrishna", "V": "UFKqEDjEWcw"}]}, {"name": "manuja kulAbharaNam gAndhI mahAntamiha sharaNam", "songs": [{"N": "0024", "T": "", "H": "Manuj Kulabharanam", "S": "manuja kulAbharaNam gAndhI mahAntamiha sharaNam :  Adi", "R": "Peeloo", "C": "Mayavaram Viswanatha Sastry", "A": "Bangalore S. Shankar", "V": "NoYLEtKCI4A"}]}, {"name": "parAku mADade parAmbarisi enna aparAdhangaLa", "songs": [{"N": "0065", "T": "", "H": "Paraku Madada", "S": "parAku mADade parAmbarisi enna aparAdhangaLa :  Adi", "R": "Peeloo", "C": "Purandara Dasa", "A": "Neela Ramgopal", "V": "Xpr4UKQzsiE"}, {"N": "0019", "T": "", "H": "Paraku Madada", "S": "parAku mADade parAmbarisi enna aparAdhangaLa :  Adi", "R": "Peeloo", "C": "Purandara Dasa", "A": "Y. G. Srilatha", "V": "G7q0IgI2y4E"}]}, {"name": "Unknownsong", "songs": [{"N": "0448", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Peeloo", "C": "UnknownComposer", "A": "Aruna Sairam", "V": "vU7-XvG_vmw"}, {"N": "2139", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Peeloo", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "sgy9kX-tMZU"}, {"N": "0322", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Peeloo", "C": "UnknownComposer", "A": "Malladi Brothers", "V": "2yMCY031yMs"}, {"N": "0455", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Peeloo", "C": "UnknownComposer", "A": "Ranjani Gayatri", "V": "l24JzEKQuBE"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Bhajan", "S": "Bhajan", "songs": [{"A": "Seetha Narayanan", "C": "UnknownComposer", "D": "5:09", "T": "", "U": "394 views", "V": "K7v307wezvE"}]}, {"H": "Bhajare Yadunatham", "S": "bhajarE yadunAtham mAnasa bhajarE yadunAtham :  Adi", "songs": [{"A": "Bharathi Ramasubban", "C": "Sadasiva Brahmendra", "D": "4:32", "T": "", "U": "586 views", "V": "DeiXqzVvppQ"}, {"A": "M. S. Subbulakshmi", "C": "Sadasiva Brahmendra", "D": "5:14", "T": "", "U": "1,155 views", "V": "CNCtPo1yQKQ"}, {"A": "O. S. Thyagarajan", "C": "Sadasiva Brahmendra", "D": "2:05", "T": "", "U": "162 views", "V": "4CNAtkvH4Ks"}, {"A": "O. S. Thyagarajan", "C": "Sadasiva Brahmendra", "D": "4:25", "T": "", "U": "51 views", "V": "tR-XKyje52E"}, {"A": "O. S. Thyagarajan", "C": "Sadasiva Brahmendra", "D": "4:35", "T": "", "U": "45 views", "V": "LtlgAXtoGWw"}, {"A": "Priya Sisters", "C": "Sadasiva Brahmendra", "D": "5:14", "T": "", "U": "0 views", "V": "XZ5DX1jXy5M"}, {"A": "Radha Viswanathan", "C": "Sadasiva Brahmendra", "D": "3:58", "T": "", "U": "8,078 views", "V": "r8gVea-4QbA"}, {"A": "J. A. Jayanth", "C": "Sadasiva Brahmendra", "D": "3:28", "T": "", "U": "1,893 views", "V": "mjSGykFpZ40"}, {"A": "J. A. Jayanth", "C": "Sadasiva Brahmendra", "D": "4:56", "T": "", "U": "1,065 views", "V": "ZAa7mzRas8I"}, {"A": "J. A. Jayanth", "C": "Sadasiva Brahmendra", "D": "3:28", "T": "", "U": "890 views", "V": "O6xeQDLfg_k"}, {"A": "Thiruvizha Jayashankar", "C": "Sadasiva Brahmendra", "D": "10:26", "T": "", "U": "441 views", "V": "i4Jf8htWci8"}, {"A": "T. H. Subramaniam", "C": "Sadasiva Brahmendra", "D": "5:36", "T": "", "U": "566 views", "V": "LQh5dU_cm-8"}]}, {"H": "Jagadodharana", "S": "jagadOddhAraNa ADisidaLe yashOde :  Adi", "songs": [{"A": "Ranjani Gayatri", "C": "Purandara Dasa", "D": "6:44", "T": "", "U": "891 views", "V": "9r1uhOCwkj8"}, {"A": "Nirmala Rajasekar", "C": "Purandara Dasa", "D": "6:01", "T": "", "U": "0 views", "V": "-Cb4ttqQqzk"}]}, {"H": "Jamunakinare", "S": "jamunA kinArE pyArE kadamatara mOhan bAnsuri :  cautAl", "songs": [{"A": "Bharat Sundar", "C": "Swathi Thirunal", "D": "8:34", "T": "", "U": "1,336 views", "V": "jopeGjNrOeU"}, {"A": "M. Balamuralikrishna", "C": "Swathi Thirunal", "D": "6:27", "T": "", "U": "0 views", "V": "UFKqEDjEWcw"}, {"A": "M. Balamuralikrishna", "C": "Swathi Thirunal", "D": "6:25", "T": "", "U": "196 views", "V": "Ma_Vu3c9m-8"}]}, {"H": "Manuj Kulabharanam", "S": "manuja kulAbharaNam gAndhI mahAntamiha sharaNam :  Adi", "songs": [{"A": "Bangalore S. Shankar", "C": "Mayavaram Viswanatha Sastry", "D": "3:11", "T": "", "U": "17 views", "V": "NoYLEtKCI4A"}]}, {"H": "Paraku Madada", "S": "parAku mADade parAmbarisi enna aparAdhangaLa :  Adi", "songs": [{"A": "Neela Ramgopal", "C": "Purandara Dasa", "D": "7:19", "T": "", "U": "2,073 views", "V": "Xpr4UKQzsiE"}, {"A": "Y. G. Srilatha", "C": "Purandara Dasa", "D": "6:37", "T": "", "U": "261 views", "V": "G7q0IgI2y4E"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Aruna Sairam", "C": "UnknownComposer", "D": "3:18", "T": "", "U": "30,759 views", "V": "vU7-XvG_vmw"}, {"A": "M. Balamuralikrishna", "C": "UnknownComposer", "D": "11:45", "T": "", "U": "110 views", "V": "sgy9kX-tMZU"}, {"A": "Malladi Brothers", "C": "UnknownComposer", "D": "5:07", "T": "", "U": "452 views", "V": "2yMCY031yMs"}, {"A": "Ranjani Gayatri", "C": "UnknownComposer", "D": "7:41", "T": "", "U": "14,845 views", "V": "l24JzEKQuBE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

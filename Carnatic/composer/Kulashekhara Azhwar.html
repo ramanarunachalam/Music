@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>20</td></tr>
 <tr><td><em>Song</em></td><td>3</td></tr>
 <tr><td><em>Raga</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>3</td></tr>
+<tr><td><em>Type</em></td><td>3</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Ennai Varugavena", "songs": [{"N": "0147", "T": "Padam", "H": "Ennai Varugavena", "S": "Ennai Varugavena", "R": "Thodi", "C": "Kulashekhara Azhwar", "A": "S. Ramanathan", "V": "ybSuROUFq4Q"}]}, {"name": "Mannu pugazh kosalai than mani", "songs": [{"N": "0015", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "BV Raman BV Lakshmanan", "V": "GjeI7N5FqKE"}, {"N": "0016", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "BV Raman BV Lakshmanan", "V": "HquZI5CgoJ4"}, {"N": "0017", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "BV Raman BV Lakshmanan", "V": "h4szTefqRQI"}, {"N": "0097", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "Bharat Sundar", "V": "eXj5ZsoOg9A"}, {"N": "0098", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "Bharat Sundar", "V": "oKWC2SUwovI"}, {"N": "0209", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Neelambari", "C": "Kulashekhara Azhwar", "A": "Bombay Jayashri", "V": "1wex8kGzQlg"}, {"N": "0210", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Neelambari", "C": "Kulashekhara Azhwar", "A": "Bombay Jayashri", "V": "JVgNquvnFZY"}, {"N": "0068", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "Mambalam Sisters", "V": "kMGYZR9soqc"}, {"N": "0075", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "S. Saketharaman", "V": "EaQxbUd6PJs"}, {"N": "0515", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "Sanjay Subrahmanyan", "V": "CDbKrl1sLfU"}, {"N": "0516", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "Sanjay Subrahmanyan", "V": "eiXjM_wH3hs"}, {"N": "0290", "T": "", "H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "R": "Unknownraga", "C": "Kulashekhara Azhwar", "A": "T. N. Seshagopalan", "V": "NDYtXgcx_Ww"}]}, {"name": "Vande Mukundam Aravinda", "songs": [{"N": "0455", "T": "Slokam", "H": "Vande Mukundam Aravinda", "S": "Vande Mukundam Aravinda", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "K. J. Yesudas", "V": "7VWX9dGybhs"}, {"N": "0456", "T": "Slokam", "H": "Vande Mukundam Aravinda", "S": "Vande Mukundam Aravinda", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "K. J. Yesudas", "V": "LVQ8cvgc_Og"}, {"N": "0457", "T": "Slokam", "H": "Vande Mukundam Aravinda", "S": "Vande Mukundam Aravinda", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "K. J. Yesudas", "V": "NM5obfGKve8"}, {"N": "0664", "T": "Slokam", "H": "Vande Mukundam Aravinda", "S": "Vande Mukundam Aravinda", "R": "Ragamalika", "C": "Kulashekhara Azhwar", "A": "K. V. Narayanaswamy", "V": "JEZAZEYhQ1M"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Ennai Varugavena", "S": "Ennai Varugavena", "songs": [{"A": "S. Ramanathan", "D": "6:16", "R": "Thodi", "T": "Padam", "U": "203 views", "V": "ybSuROUFq4Q"}]}, {"H": "Mannupugazh Kosalai", "S": "Mannu pugazh kosalai than mani vayiru :  Adi", "songs": [{"A": "BV Raman BV Lakshmanan", "D": "5:46", "R": "Ragamalika", "T": "", "U": "20,450 views", "V": "h4szTefqRQI"}, {"A": "BV Raman BV Lakshmanan", "D": "6:13", "R": "Ragamalika", "T": "", "U": "1,030 views", "V": "GjeI7N5FqKE"}, {"A": "BV Raman BV Lakshmanan", "D": "6:42", "R": "Ragamalika", "T": "", "U": "496 views", "V": "HquZI5CgoJ4"}, {"A": "Bharat Sundar", "D": "9:56", "R": "Ragamalika", "T": "", "U": "246 views", "V": "eXj5ZsoOg9A"}, {"A": "Bharat Sundar", "D": "8:01", "R": "Ragamalika", "T": "", "U": "1,701 views", "V": "oKWC2SUwovI"}, {"A": "Bombay Jayashri", "D": "9:53", "R": "Neelambari", "T": "", "U": "2,920 views", "V": "1wex8kGzQlg"}, {"A": "Bombay Jayashri", "D": "10:09", "R": "Neelambari", "T": "", "U": "75,488 views", "V": "JVgNquvnFZY"}, {"A": "Mambalam Sisters", "D": "6:16", "R": "Ragamalika", "T": "", "U": "2,226 views", "V": "kMGYZR9soqc"}, {"A": "S. Saketharaman", "D": "6:13", "R": "Ragamalika", "T": "", "U": "3,699 views", "V": "EaQxbUd6PJs"}, {"A": "Sanjay Subrahmanyan", "D": "5:33", "R": "Ragamalika", "T": "", "U": "275,000 views", "V": "eiXjM_wH3hs"}, {"A": "Sanjay Subrahmanyan", "D": "6:26", "R": "Ragamalika", "T": "", "U": "0 views", "V": "CDbKrl1sLfU"}, {"A": "T. N. Seshagopalan", "D": "3:53", "R": "Unknownraga", "T": "", "U": "4,996 views", "V": "NDYtXgcx_Ww"}]}, {"H": "Vande Mukundam Aravinda", "S": "Vande Mukundam Aravinda", "songs": [{"A": "K. J. Yesudas", "D": "4:46", "R": "Ragamalika", "T": "Slokam", "U": "43,996 views", "V": "NM5obfGKve8"}, {"A": "K. J. Yesudas", "D": "4:09", "R": "Ragamalika", "T": "Slokam", "U": "24,646 views", "V": "LVQ8cvgc_Og"}, {"A": "K. J. Yesudas", "D": "4:21", "R": "Ragamalika", "T": "Slokam", "U": "4,675 views", "V": "7VWX9dGybhs"}, {"A": "K. V. Narayanaswamy", "D": "12:06", "R": "Ragamalika", "T": "Slokam", "U": "568 views", "V": "JEZAZEYhQ1M"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>12</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>9</td></tr>
-<tr><td><em>Concert</em></td><td>9</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bangalore Brothers", "songs": [{"N": "0054", "T": "", "H": "Padmavathi Ramanam", "S": "padmAvati ramaNam jayadEva kavirAja bhOja dEva :  Adi", "R": "Poorvikalyani", "C": "Oothukkadu Venkata Kavi", "A": "Bangalore Brothers", "V": "Cwx7mlLxZ-Y"}]}, {"name": "Vocal - R. Ganesh", "songs": [{"N": "0053", "T": "", "H": "Padmavathi Ramanam", "S": "padmAvati ramaNam jayadEva kavirAja bhOja dEva :  Adi", "R": "Poorvikalyani", "C": "Oothukkadu Venkata Kavi", "A": "R. Ganesh", "V": "is2b-mokFcE"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0374", "T": "", "H": "Padmavathi Ramanam", "S": "padmAvati ramaNam jayadEva kavirAja bhOja dEva :  Adi", "R": "Poorvikalyani", "C": "Oothukkadu Venkata Kavi", "A": "T. N. Seshagopalan", "V": "V6_V8Pn_kfw"}]}, {"name": "Vocal - Trichur Brothers", "songs": [{"N": "0061", "T": "", "H": "Padmavathi Ramanam", "S": "padmAvati ramaNam jayadEva kavirAja bhOja dEva :  Adi", "R": "Poorvikalyani", "C": "Oothukkadu Venkata Kavi", "A": "Trichur Brothers", "V": "hPBQzq9IlHw"}]}, {"name": "Violin - Akkarai Sisters", "songs": [{"N": "0051", "T": "", "H": "Padmavathi Ramanam", "S": "padmAvati ramaNam jayadEva kavirAja bhOja dEva :  Adi", "R": "Poorvikalyani", "C": "Oothukkadu Venkata Kavi", "A": "Akkarai Sisters", "V": "D60RMFaOlqI"}, {"N": "0052", "T": "", "H": "Padmavathi Ramanam", "S": "padmAvati ramaNam jayadEva kavirAja bhOja dEva :  Adi", "R": "Poorvikalyani", "C": "Oothukkadu Venkata Kavi", "A": "Akkarai Sisters", "V": "Ds-PDt9RpJE"}, {"N": "0053", "T": "", "H": "Padmavathi Ramanam", "S": "padmAvati ramaNam jayadEva kavirAja bhOja dEva :  Adi", "R": "Poorvikalyani", "C": "Oothukkadu Venkata Kavi", "A": "Akkarai Sisters", "V": "vA34LuIAiaE"}]}, {"name": "Violin - Akkarai Subhalakshmi", "songs": [{"N": "0048", "T": "", "H": "Padmavathi Ramanam", "S": "padmAvati ramaNam jayadEva kavirAja bhOja dEva :  Adi", "R": "Poorvikalyani", "C": "Oothukkadu Venkata Kavi", "A": "Akkarai Subhalakshmi", "V": "PjVmQfdyw-M"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bangalore Brothers", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "14:59", "R": "Poorvikalyani", "T": "", "U": "46 views", "V": "Cwx7mlLxZ-Y"}]}, {"A": "R. Ganesh", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "9:53", "R": "Poorvikalyani", "T": "", "U": "2,272 views", "V": "is2b-mokFcE"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "12:20", "R": "Poorvikalyani", "T": "", "U": "1,662 views", "V": "V6_V8Pn_kfw"}]}, {"A": "Trichur Brothers", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "30:36", "R": "Poorvikalyani", "T": "", "U": "6,400 views", "V": "hPBQzq9IlHw"}]}, {"A": "Akkarai Sisters", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "30:36", "R": "Poorvikalyani", "T": "", "U": "906 views", "V": "vA34LuIAiaE"}, {"C": "Oothukkadu Venkata Kavi", "D": "41:03", "R": "Poorvikalyani", "T": "", "U": "0 views", "V": "Ds-PDt9RpJE"}, {"C": "Oothukkadu Venkata Kavi", "D": "25:53", "R": "Poorvikalyani", "T": "", "U": "982 views", "V": "D60RMFaOlqI"}]}, {"A": "Akkarai Subhalakshmi", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "6:37", "R": "Poorvikalyani", "T": "", "U": "139 views", "V": "PjVmQfdyw-M"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

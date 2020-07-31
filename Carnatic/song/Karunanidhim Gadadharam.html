@@ -143,57 +143,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Nedunuri Krishnamurthy", "songs": [{"N": "0193", "T": "", "H": "Karunanidhim Gadadharam", "S": "karuNAnidhiM gadAdharaM   SaraNAgatavatsalaM BajE :  Adi", "R": "Kannadagowla", "C": "Annamacharya", "A": "Nedunuri Krishnamurthy", "V": "138KskUTo68"}, {"N": "0194", "T": "", "H": "Karunanidhim Gadadharam", "S": "karuNAnidhiM gadAdharaM   SaraNAgatavatsalaM BajE :  Adi", "R": "Kannadagowla", "C": "Annamacharya", "A": "Nedunuri Krishnamurthy", "V": "rNv1-7G_CGA"}]}, {"name": "Vocal - Padma Sugavanam", "songs": [{"N": "0035", "T": "", "H": "Karunanidhim Gadadharam", "S": "karuNAnidhiM gadAdharaM   SaraNAgatavatsalaM BajE :  Adi", "R": "Kannadagowla", "C": "Annamacharya", "A": "Padma Sugavanam", "V": "C5szrSBDvc4"}]}, {"name": "Vocal - Pantula Rama", "songs": [{"N": "0063", "T": "", "H": "Karunanidhim Gadadharam", "S": "karuNAnidhiM gadAdharaM   SaraNAgatavatsalaM BajE :  Adi", "R": "Kannadagowla", "C": "Annamacharya", "A": "Pantula Rama", "V": "lyUZJ2FQOas"}]}, {"name": "Vocal - Voleti Venkateswarlu", "songs": [{"N": "0103", "T": "", "H": "Karunanidhim Gadadharam", "S": "karuNAnidhiM gadAdharaM   SaraNAgatavatsalaM BajE :  Adi", "R": "Kannadagowla", "C": "Annamacharya", "A": "Voleti Venkateswarlu", "V": "ci9zHILjXOE"}]}, {"name": "Flute - V. K. Raman", "songs": [{"N": "0031", "T": "", "H": "Karunanidhim Gadadharam", "S": "karuNAnidhiM gadAdharaM   SaraNAgatavatsalaM BajE :  Adi", "R": "Unknownraga", "C": "Annamacharya", "A": "V. K. Raman", "V": "1Z6j_Fw5ahk"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Nedunuri Krishnamurthy", "songs": [{"C": "Annamacharya", "D": "4:26", "R": "Kannadagowla", "T": "", "U": "335 views", "V": "138KskUTo68"}, {"C": "Annamacharya", "D": "4:26", "R": "Kannadagowla", "T": "", "U": "273 views", "V": "rNv1-7G_CGA"}]}, {"A": "Padma Sugavanam", "songs": [{"C": "Annamacharya", "D": "10:33", "R": "Kannadagowla", "T": "", "U": "508 views", "V": "C5szrSBDvc4"}]}, {"A": "Pantula Rama", "songs": [{"C": "Annamacharya", "D": "6:47", "R": "Kannadagowla", "T": "", "U": "3,679 views", "V": "lyUZJ2FQOas"}]}, {"A": "Voleti Venkateswarlu", "songs": [{"C": "Annamacharya", "D": "4:01", "R": "Kannadagowla", "T": "", "U": "496 views", "V": "ci9zHILjXOE"}]}, {"A": "V. K. Raman", "songs": [{"C": "Annamacharya", "D": "2:41", "R": "Unknownraga", "T": "", "U": "134 views", "V": "1Z6j_Fw5ahk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

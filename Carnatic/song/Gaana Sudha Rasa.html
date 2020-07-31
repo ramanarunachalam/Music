@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>15</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>10</td></tr>
-<tr><td><em>Concert</em></td><td>10</td></tr>
+<tr><td><em>Concert</em></td><td>11</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Abhishek Raghuram", "songs": [{"N": "0071", "T": "", "H": "Gaana Sudha Rasa", "S": "gAna sudhArasa pAna niratam gAnam karOmi :  Adi", "R": "Nata", "C": "M. Balamuralikrishna", "A": "Abhishek Raghuram", "V": "2eYW4r4MV_E"}, {"N": "0072", "T": "", "H": "Gaana Sudha Rasa", "S": "gAna sudhArasa pAna niratam gAnam karOmi :  Adi", "R": "Nata", "C": "M. Balamuralikrishna", "A": "Abhishek Raghuram", "V": "rW8Ck_4zTzs"}, {"N": "0073", "T": "", "H": "Gaana Sudha Rasa", "S": "gAna sudhArasa pAna niratam gAnam karOmi :  Adi", "R": "Nata", "C": "M. Balamuralikrishna", "A": "Abhishek Raghuram", "V": "vY6Hga2wzdY"}]}, {"name": "Vocal - K. Krishnakumar", "songs": [{"N": "0006", "T": "", "H": "Gaana Sudha Rasa", "S": "gAna sudhArasa pAna niratam gAnam karOmi :  Adi", "R": "Nata", "C": "M. Balamuralikrishna", "A": "K. Krishnakumar", "V": "3bxhVCCd6sc"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0521", "T": "", "H": "Gaana Sudha Rasa", "S": "gAna sudhArasa pAna niratam gAnam karOmi :  Adi", "R": "Nata", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "-jjNC0Zc3QU"}, {"N": "0522", "T": "", "H": "Gaana Sudha Rasa", "S": "gAna sudhArasa pAna niratam gAnam karOmi :  Adi", "R": "Nata", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "GsD2A_5V_qE"}, {"N": "0523", "T": "", "H": "Gaana Sudha Rasa", "S": "gAna sudhArasa pAna niratam gAnam karOmi :  Adi", "R": "Nata", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "ptp83TqUR6U"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0086", "T": "", "H": "Gaana Sudha Rasa", "S": "gAna sudhArasa pAna niratam gAnam karOmi :  Adi", "R": "Nata", "C": "M. Balamuralikrishna", "A": "Ramakrishnan Murthy", "V": "7hkwFRKQg_Q"}, {"N": "0087", "T": "", "H": "Gaana Sudha Rasa", "S": "gAna sudhArasa pAna niratam gAnam karOmi :  Adi", "R": "Nata", "C": "M. Balamuralikrishna", "A": "Ramakrishnan Murthy", "V": "B_FykG_Wgzc"}]}, {"name": "Violin - Annavarapu Ramaswamy", "songs": [{"N": "0026", "T": "", "H": "Gaana Sudha Rasa", "S": "gAna sudhArasa pAna niratam gAnam karOmi :  Adi", "R": "Nata", "C": "M. Balamuralikrishna", "A": "Annavarapu Ramaswamy", "V": "_shlmqsvMBo"}]}, {"name": "Violin - M. S. Gopalakrishnan", "songs": [{"N": "0147", "T": "", "H": "Gaana Sudha Rasa", "S": "gAna sudhArasa pAna niratam gAnam karOmi :  Adi", "R": "Nata", "C": "M. Balamuralikrishna", "A": "M. S. Gopalakrishnan", "V": "hlpskC2Th8o"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Abhishek Raghuram", "songs": [{"C": "M. Balamuralikrishna", "D": "10:39", "R": "Nata", "T": "", "U": "516 views", "V": "2eYW4r4MV_E"}, {"C": "M. Balamuralikrishna", "D": "9:16", "R": "Nata", "T": "", "U": "7,019 views", "V": "vY6Hga2wzdY"}, {"C": "M. Balamuralikrishna", "D": "2:11", "R": "Nata", "T": "", "U": "1,256 views", "V": "rW8Ck_4zTzs"}]}, {"A": "K. Krishnakumar", "songs": [{"C": "M. Balamuralikrishna", "D": "6:17", "R": "Nata", "T": "", "U": "359 views", "V": "3bxhVCCd6sc"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "M. Balamuralikrishna", "D": "59:44", "R": "Nata", "T": "", "U": "693 views", "V": "GsD2A_5V_qE"}, {"C": "M. Balamuralikrishna", "D": "6:28", "R": "Nata", "T": "", "U": "736 views", "V": "ptp83TqUR6U"}, {"C": "M. Balamuralikrishna", "D": "14:40", "R": "Nata", "T": "", "U": "203 views", "V": "-jjNC0Zc3QU"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "M. Balamuralikrishna", "D": "15:01", "R": "Nata", "T": "", "U": "357 views", "V": "7hkwFRKQg_Q"}, {"C": "M. Balamuralikrishna", "D": "15:16", "R": "Nata", "T": "", "U": "206 views", "V": "B_FykG_Wgzc"}]}, {"A": "Annavarapu Ramaswamy", "songs": [{"C": "M. Balamuralikrishna", "D": "2:26:37", "R": "Nata", "T": "", "U": "549 views", "V": "_shlmqsvMBo"}]}, {"A": "M. S. Gopalakrishnan", "songs": [{"C": "M. Balamuralikrishna", "D": "2:33:04", "R": "Nata", "T": "", "U": "0 views", "V": "hlpskC2Th8o"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

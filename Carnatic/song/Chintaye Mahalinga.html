@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>6</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>4</td></tr>
-<tr><td><em>Concert</em></td><td>4</td></tr>
+<tr><td><em>Concert</em></td><td>6</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Brindha Manickavasakan", "songs": [{"N": "0022", "T": "", "H": "Chintaye Mahalinga", "S": "cintayE mahAliHNgamUrttim cidrUpa sphUrttim :  Adi", "R": "Paras", "C": "Muthuswami Dikshitar", "A": "Brindha Manickavasakan", "V": "jYIDZqzN-u8"}]}, {"name": "Vocal - G. N. Balasubramaniam", "songs": [{"N": "0070", "T": "", "H": "Chintaye Mahalinga", "S": "cintayE mahAliHNgamUrttim cidrUpa sphUrttim :  Adi", "R": "Paras", "C": "Muthuswami Dikshitar", "A": "G. N. Balasubramaniam", "V": "Rh_Vvg5e8pQ"}, {"N": "0071", "T": "", "H": "Chintaye Mahalinga", "S": "cintayE mahAliHNgamUrttim cidrUpa sphUrttim :  Adi", "R": "Paras", "C": "Muthuswami Dikshitar", "A": "G. N. Balasubramaniam", "V": "qtE2LVmj-z0"}]}, {"name": "Vocal - Gayathri Girish", "songs": [{"N": "0063", "T": "", "H": "Chintaye Mahalinga", "S": "cintayE mahAliHNgamUrttim cidrUpa sphUrttim :  Adi", "R": "Paras", "C": "Muthuswami Dikshitar", "A": "Gayathri Girish", "V": "0pincO2e5p8"}, {"N": "0064", "T": "", "H": "Chintaye Mahalinga", "S": "cintayE mahAliHNgamUrttim cidrUpa sphUrttim :  Adi", "R": "Paras", "C": "Muthuswami Dikshitar", "A": "Gayathri Girish", "V": "cVr-3BSaUa4"}]}, {"name": "Vocal - Vijay Siva", "songs": [{"N": "0025", "T": "", "H": "Chintaye Mahalinga", "S": "cintayE mahAliHNgamUrttim cidrUpa sphUrttim :  Adi", "R": "Paras", "C": "Muthuswami Dikshitar", "A": "Vijay Siva", "V": "lDcq6AO0quE"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Brindha Manickavasakan", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:12", "R": "Paras", "T": "", "U": "382 views", "V": "jYIDZqzN-u8"}]}, {"A": "G. N. Balasubramaniam", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:50", "R": "Paras", "T": "", "U": "121 views", "V": "qtE2LVmj-z0"}, {"C": "Muthuswami Dikshitar", "D": "", "R": "Paras", "T": "", "U": "672 views", "V": "Rh_Vvg5e8pQ"}]}, {"A": "Gayathri Girish", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:56", "R": "Paras", "T": "", "U": "107 views", "V": "0pincO2e5p8"}, {"C": "Muthuswami Dikshitar", "D": "6:51", "R": "Paras", "T": "", "U": "303 views", "V": "cVr-3BSaUa4"}]}, {"A": "Vijay Siva", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:25", "R": "Paras", "T": "", "U": "0 views", "V": "lDcq6AO0quE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

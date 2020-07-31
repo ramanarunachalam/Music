@@ -143,57 +143,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Dr. Nagavalli Nagaraj", "songs": [{"N": "0031", "T": "", "H": "Dooru Maduva Rene", "S": "Duru Maduvarene Caru Maddiyolage Muru Lokake :  Adi", "R": "Hindusthani kapi", "C": "Purandara Dasa", "A": "Dr. Nagavalli Nagaraj", "V": "hJAbVAF7Or8"}, {"N": "0032", "T": "", "H": "Dooru Maduva Rene", "S": "Duru Maduvarene Caru Maddiyolage Muru Lokake :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Dr. Nagavalli Nagaraj", "V": "uRw4ZE5Wtko"}]}, {"name": "Vocal - Ranjani Hebbar", "songs": [{"N": "0015", "T": "", "H": "Dooru Maduva Rene", "S": "Duru Maduvarene Caru Maddiyolage Muru Lokake :  Adi", "R": "Khamas", "C": "Purandara Dasa", "A": "Ranjani Hebbar", "V": "ndzPDC3JbQc"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Dr. Nagavalli Nagaraj", "songs": [{"C": "Purandara Dasa", "D": "5:32", "R": "Hindusthani kapi", "T": "", "U": "688 views", "V": "hJAbVAF7Or8"}, {"C": "Purandara Dasa", "D": "10:26", "R": "Unknownraga", "T": "", "U": "511 views", "V": "uRw4ZE5Wtko"}]}, {"A": "Ranjani Hebbar", "songs": [{"C": "Purandara Dasa", "D": "6:17", "R": "Khamas", "T": "", "U": "6,041 views", "V": "ndzPDC3JbQc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

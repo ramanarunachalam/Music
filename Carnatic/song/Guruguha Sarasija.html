@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>19</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>19</td></tr>
-<tr><td><em>Concert</em></td><td>19</td></tr>
+<tr><td><em>Concert</em></td><td>15</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -128,57 +128,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1313", "T": "Nottu", "H": "Guruguha Sarasija", "S": "guruguha sarasija karapada shubhakaramUrtE :  Chatusra Eka", "R": "Sankarabharanam", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "JyEcoX0sRik"}]}, {"name": "Vocal - Nirmala Sundarajan", "songs": [{"N": "0017", "T": "Nottu", "H": "Guruguha Sarasija", "S": "guruguha sarasija karapada shubhakaramUrtE :  Chatusra Eka", "R": "Sankarabharanam", "C": "Muthuswami Dikshitar", "A": "Nirmala Sundarajan", "V": "9uDgxL_wZk4"}]}, {"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0222", "T": "Nottu", "H": "Guruguha Sarasija", "S": "guruguha sarasija karapada shubhakaramUrtE :  Chatusra Eka", "R": "Sankarabharanam", "C": "Muthuswami Dikshitar", "A": "P. Unnikrishnan", "V": "F7P2HfqEIo8"}]}, {"name": "Vocal - Sunil Gargyan", "songs": [{"N": "0035", "T": "Nottu", "H": "Guruguha Sarasija", "S": "guruguha sarasija karapada shubhakaramUrtE :  Chatusra Eka", "R": "Sankarabharanam", "C": "Muthuswami Dikshitar", "A": "Sunil Gargyan", "V": "Kn6BWIMzpf8"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0712", "T": "Nottu", "H": "Guruguha Sarasija", "S": "guruguha sarasija karapada shubhakaramUrtE :  Chatusra Eka", "R": "Sankarabharanam", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "vhE8Y50hH9I"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amritha Murali", "songs": [{"C": "Muthuswami Dikshitar", "D": "11:26", "R": "Sankarabharanam", "T": "Nottu", "U": "894 views", "V": "O5sqsIc7Ykw"}]}, {"A": "Nirmala Sundarajan", "songs": [{"C": "Muthuswami Dikshitar", "D": "28:31", "R": "Sankarabharanam", "T": "Nottu", "U": "212 views", "V": "9uDgxL_wZk4"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Muthuswami Dikshitar", "D": "1:42", "R": "Sankarabharanam", "T": "Nottu", "U": "0 views", "V": "vhE8Y50hH9I"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

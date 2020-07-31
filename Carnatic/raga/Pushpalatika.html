@@ -19,10 +19,10 @@
 </tbody>
 </table></div></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>44</td></tr>
+<tr><td><em>Audio</em></td><td>43</td></tr>
 <tr><td><em>Song</em></td><td>5</td></tr>
 <tr><td><em>Composer</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Alapana", "songs": [{"N": "0009", "T": "", "H": "Alapana", "S": "Alapana", "R": "Pushpalatika", "C": "UnknownComposer", "A": "Keyboard Sathya", "V": "cmOchW-Ee9w"}]}, {"name": "bhAvayE gOpabAlam bhuvanatraya", "songs": [{"N": "0016", "T": "", "H": "Bhaavayegopaalam", "S": "bhAvayE gOpabAlam bhuvanatraya pAlam :  Adi", "R": "Pushpalatika", "C": "Swathi Thirunal", "A": "Mani Krishnaswami", "V": "TxX_qLaOGpo"}, {"N": "0013", "T": "", "H": "Bhaavayegopaalam", "S": "bhAvayE gOpabAlam bhuvanatraya pAlam :  Adi", "R": "Pushpalatika", "C": "Swathi Thirunal", "A": "N. J. Nandini", "V": "-kiyRAKQ_Qg"}, {"N": "0042", "T": "", "H": "Bhaavayegopaalam", "S": "bhAvayE gOpabAlam bhuvanatraya pAlam :  Adi", "R": "Pushpalatika", "C": "Swathi Thirunal", "A": "Suguna Varadachari", "V": "pv3aB7mPPsc"}, {"N": "0043", "T": "", "H": "Bhaavayegopaalam", "S": "bhAvayE gOpabAlam bhuvanatraya pAlam :  Adi", "R": "Pushpalatika", "C": "Swathi Thirunal", "A": "Suguna Varadachari", "V": "qIliSK4kG04"}, {"N": "0028", "T": "", "H": "Bhaavayegopaalam", "S": "bhAvayE gOpabAlam bhuvanatraya pAlam :  Adi", "R": "Pushpalatika", "C": "Swathi Thirunal", "A": "Keyboard Sathya", "V": "WiNwj0lthDE"}, {"N": "0029", "T": "", "H": "Bhaavayegopaalam", "S": "bhAvayE gOpabAlam bhuvanatraya pAlam :  Adi", "R": "Pushpalatika", "C": "Swathi Thirunal", "A": "Keyboard Sathya", "V": "zXB1F3lpQsM"}]}, {"name": "guru krpalEka shrI hari krpa galgunA", "songs": [{"N": "0043", "T": "", "H": "Guru Kripa Lekha", "S": "guru krpalEka shrI hari krpa galgunA :  Rupaka", "R": "Pushpalatika", "C": "Mysore Vasudevachar", "A": "Dr. Nagavalli Nagaraj", "V": "vs6vBIgGwL0"}, {"N": "0057", "T": "", "H": "Guru Kripa Lekha", "S": "guru krpalEka shrI hari krpa galgunA :  Rupaka", "R": "Pushpalatika", "C": "Mysore Vasudevachar", "A": "R. K. Srikantan", "V": "-4zTAl-kyL8"}]}, {"name": "ikanainanA moravina rAdA inakula candrA", "songs": [{"N": "0171", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "D. K. Jayaraman", "V": "xxauicSda5U"}, {"N": "0172", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "D. K. Jayaraman", "V": "yB26evNXnCo"}, {"N": "0135", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "G. N. Balasubramaniam", "V": "oEOO4YFoEiM"}, {"N": "0082", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "Gayathri Venkataraghavan", "V": "aiRKY1mTPT8"}, {"N": "0006", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "Geetha Rajasekhar", "V": "sGV5L-jdCfs"}, {"N": "0258", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. L. Vasanthakumari", "V": "7TMN_hBI2ZU"}, {"N": "0259", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. L. Vasanthakumari", "V": "N2d_Partsko"}, {"N": "0260", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. L. Vasanthakumari", "V": "Qg1kQaF-ygo"}, {"N": "0261", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. L. Vasanthakumari", "V": "_79dwReO09c"}, {"N": "0262", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. L. Vasanthakumari", "V": "kqDmzTSdlDc"}, {"N": "0480", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. S. Subbulakshmi", "V": "5fV18UEfO-Y"}, {"N": "0481", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. S. Subbulakshmi", "V": "8gtgwLZNJ1I"}, {"N": "0482", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. S. Subbulakshmi", "V": "DE6ElweJMz4"}, {"N": "0483", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. S. Subbulakshmi", "V": "Fsha7VJtSuM"}, {"N": "0484", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. S. Subbulakshmi", "V": "MuY-sRDMnNA"}, {"N": "0485", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. S. Subbulakshmi", "V": "NPypCqiV-Jo"}, {"N": "0486", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. S. Subbulakshmi", "V": "ruqiUyWbDI8"}, {"N": "0487", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "M. S. Subbulakshmi", "V": "zrdXoc_GLwE"}, {"N": "0032", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "Mani Krishnaswami", "V": "32k7s7WMIQk"}, {"N": "0019", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "N. J. Nandini", "V": "Llkp6C1Oj-g"}, {"N": "0020", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "N. J. Nandini", "V": "liRrJm7rk38"}, {"N": "0004", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "R. N. Srilatha", "V": "E4m_pK5XHDs"}, {"N": "0012", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "Vidhya Raghavan", "V": "4thorkwJo_w"}, {"N": "0040", "T": "", "H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "R": "Pushpalatika", "C": "Thirupathi Narayanaswamy", "A": "Vijay Siva", "V": "FuagWnYIeWM"}]}, {"name": "Unknownsong", "songs": [{"N": "0079", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Pushpalatika", "C": "UnknownComposer", "A": "Bangalore S. Shankar", "V": "ChPm5qPM4q4"}, {"N": "0688", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Pushpalatika", "C": "UnknownComposer", "A": "D. K. Pattammal", "V": "x_WhSf1B6FI"}, {"N": "0076", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Pushpalatika", "C": "UnknownComposer", "A": "Vignesh Ishwar", "V": "sG2sypGrAtw"}, {"N": "0075", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Pushpalatika", "C": "UnknownComposer", "A": "Vignesh Ishwar", "V": "b1ZS8vxzvJg"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Alapana", "S": "Alapana", "songs": [{"A": "Keyboard Sathya", "C": "UnknownComposer", "D": "5:21", "T": "", "U": "610 views", "V": "cmOchW-Ee9w"}]}, {"H": "Bhaavayegopaalam", "S": "bhAvayE gOpabAlam bhuvanatraya pAlam :  Adi", "songs": [{"A": "Mani Krishnaswami", "C": "Swathi Thirunal", "D": "10:18", "T": "", "U": "266 views", "V": "TxX_qLaOGpo"}, {"A": "N. J. Nandini", "C": "Swathi Thirunal", "D": "9:26", "T": "", "U": "682 views", "V": "-kiyRAKQ_Qg"}, {"A": "Suguna Varadachari", "C": "Swathi Thirunal", "D": "4:01", "T": "", "U": "360 views", "V": "qIliSK4kG04"}, {"A": "Suguna Varadachari", "C": "Swathi Thirunal", "D": "4:29", "T": "", "U": "294 views", "V": "pv3aB7mPPsc"}, {"A": "Keyboard Sathya", "C": "Swathi Thirunal", "D": "12:34", "T": "", "U": "506 views", "V": "zXB1F3lpQsM"}, {"A": "Keyboard Sathya", "C": "Swathi Thirunal", "D": "5:27", "T": "", "U": "476 views", "V": "WiNwj0lthDE"}]}, {"H": "Guru Kripa Lekha", "S": "guru krpalEka shrI hari krpa galgunA :  Rupaka", "songs": [{"A": "Dr. Nagavalli Nagaraj", "C": "Mysore Vasudevachar", "D": "5:26", "T": "", "U": "564 views", "V": "vs6vBIgGwL0"}, {"A": "R. K. Srikantan", "C": "Mysore Vasudevachar", "D": "3:26", "T": "", "U": "350 views", "V": "-4zTAl-kyL8"}]}, {"H": "Ika Naina", "S": "ikanainanA moravina rAdA inakula candrA idi :  Adi", "songs": [{"A": "D. K. Jayaraman", "C": "Thirupathi Narayanaswamy", "D": "5:16", "T": "", "U": "83 views", "V": "xxauicSda5U"}, {"A": "D. K. Jayaraman", "C": "Thirupathi Narayanaswamy", "D": "5:13", "T": "", "U": "0 views", "V": "yB26evNXnCo"}, {"A": "Gayathri Venkataraghavan", "C": "Thirupathi Narayanaswamy", "D": "5:08", "T": "", "U": "551 views", "V": "aiRKY1mTPT8"}, {"A": "Geetha Rajasekhar", "C": "Thirupathi Narayanaswamy", "D": "4:52", "T": "", "U": "0 views", "V": "sGV5L-jdCfs"}, {"A": "M. L. Vasanthakumari", "C": "Thirupathi Narayanaswamy", "D": "31:36", "T": "", "U": "396 views", "V": "N2d_Partsko"}, {"A": "M. L. Vasanthakumari", "C": "Thirupathi Narayanaswamy", "D": "15:16", "T": "", "U": "1,600 views", "V": "Qg1kQaF-ygo"}, {"A": "M. L. Vasanthakumari", "C": "Thirupathi Narayanaswamy", "D": "31:32", "T": "", "U": "84 views", "V": "kqDmzTSdlDc"}, {"A": "M. L. Vasanthakumari", "C": "Thirupathi Narayanaswamy", "D": "31:16", "T": "", "U": "448 views", "V": "7TMN_hBI2ZU"}, {"A": "M. L. Vasanthakumari", "C": "Thirupathi Narayanaswamy", "D": "15:14", "T": "", "U": "27 views", "V": "_79dwReO09c"}, {"A": "M. S. Subbulakshmi", "C": "Thirupathi Narayanaswamy", "D": "10:25", "T": "", "U": "3,400 views", "V": "ruqiUyWbDI8"}, {"A": "M. S. Subbulakshmi", "C": "Thirupathi Narayanaswamy", "D": "9:05", "T": "", "U": "2,600 views", "V": "Fsha7VJtSuM"}, {"A": "M. S. Subbulakshmi", "C": "Thirupathi Narayanaswamy", "D": "10:06", "T": "", "U": "567 views", "V": "8gtgwLZNJ1I"}, {"A": "M. S. Subbulakshmi", "C": "Thirupathi Narayanaswamy", "D": "8:32", "T": "", "U": "6,217 views", "V": "MuY-sRDMnNA"}, {"A": "M. S. Subbulakshmi", "C": "Thirupathi Narayanaswamy", "D": "9:49", "T": "", "U": "567 views", "V": "zrdXoc_GLwE"}, {"A": "M. S. Subbulakshmi", "C": "Thirupathi Narayanaswamy", "D": "9:48", "T": "", "U": "440 views", "V": "DE6ElweJMz4"}, {"A": "M. S. Subbulakshmi", "C": "Thirupathi Narayanaswamy", "D": "8:48", "T": "", "U": "0 views", "V": "5fV18UEfO-Y"}, {"A": "M. S. Subbulakshmi", "C": "Thirupathi Narayanaswamy", "D": "8:48", "T": "", "U": "0 views", "V": "NPypCqiV-Jo"}, {"A": "Mani Krishnaswami", "C": "Thirupathi Narayanaswamy", "D": "10:42", "T": "", "U": "1,939 views", "V": "32k7s7WMIQk"}, {"A": "N. J. Nandini", "C": "Thirupathi Narayanaswamy", "D": "10:22", "T": "", "U": "1,816 views", "V": "liRrJm7rk38"}, {"A": "N. J. Nandini", "C": "Thirupathi Narayanaswamy", "D": "18:04", "T": "", "U": "1,345 views", "V": "Llkp6C1Oj-g"}, {"A": "R. N. Srilatha", "C": "Thirupathi Narayanaswamy", "D": "4:04", "T": "", "U": "0 views", "V": "E4m_pK5XHDs"}, {"A": "Vidhya Raghavan", "C": "Thirupathi Narayanaswamy", "D": "4:53", "T": "", "U": "342 views", "V": "4thorkwJo_w"}, {"A": "Vijay Siva", "C": "Thirupathi Narayanaswamy", "D": "5:31", "T": "", "U": "2,299 views", "V": "FuagWnYIeWM"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Bangalore S. Shankar", "C": "UnknownComposer", "D": "5:16", "T": "", "U": "81 views", "V": "ChPm5qPM4q4"}, {"A": "D. K. Pattammal", "C": "UnknownComposer", "D": "1:55", "T": "", "U": "204 views", "V": "x_WhSf1B6FI"}, {"A": "Vignesh Ishwar", "C": "UnknownComposer", "D": "3:23", "T": "", "U": "239 views", "V": "sG2sypGrAtw"}, {"A": "Vignesh Ishwar", "C": "UnknownComposer", "D": "3:23", "T": "", "U": "175 views", "V": "b1ZS8vxzvJg"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>12</td></tr>
-<tr><td><em>Concert</em></td><td>12</td></tr>
+<tr><td><em>Concert</em></td><td>16</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Sisters", "songs": [{"N": "0138", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Bombay Sisters", "V": "yd3WtkIbFOI"}]}, {"name": "Vocal - Gayathri Venkataraghavan", "songs": [{"N": "0131", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Gayathri Venkataraghavan", "V": "8l4Xqhy1UUk"}]}, {"name": "Vocal - K. B. Sundarambal", "songs": [{"N": "0008", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "K. B. Sundarambal", "V": "6FrV8GXPB5M"}]}, {"name": "Vocal - K. J. Yesudas", "songs": [{"N": "0179", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "K. J. Yesudas", "V": "WNeJhAzW4w8"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0442", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "M. L. Vasanthakumari", "V": "-kn2X0cBua0"}, {"N": "0443", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "M. L. Vasanthakumari", "V": "rnRIVox_fhU"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0201", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Nithyasree Mahadevan", "V": "3tuvMk2kijo"}, {"N": "0202", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Nithyasree Mahadevan", "V": "_4pMhq_aEUs"}]}, {"name": "Vocal - Radha Jayalakshmi", "songs": [{"N": "0071", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Radha Jayalakshmi", "V": "TBdPW4FZdQs"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0141", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "S. Sowmya", "V": "NcFzTKOOtr0"}, {"N": "0142", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "S. Sowmya", "V": "Vsrk9yd5gJc"}, {"N": "0143", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "S. Sowmya", "V": "stMVe23jYp0"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0101", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "Sankaran Namboothiri", "V": "opGNyqyG-ik"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0291", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "U. Srinivas", "V": "FEpIfNbxqPk"}]}, {"name": "Kanjira - V. Nagarajan", "songs": [{"N": "0031", "T": "", "H": "Mooladhara Murthe", "S": "mulaa dhara murthy gaja    :  Adi", "R": "Hamsadhwani", "C": "Papanasam Sivan", "A": "V. Nagarajan", "V": "ZG1efTrdpS4"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Sisters", "songs": [{"C": "Papanasam Sivan", "D": "7:24", "R": "Hamsadhwani", "T": "", "U": "0 views", "V": "yd3WtkIbFOI"}]}, {"A": "Gayathri Venkataraghavan", "songs": [{"C": "Papanasam Sivan", "D": "10:11", "R": "Hamsadhwani", "T": "", "U": "830 views", "V": "8l4Xqhy1UUk"}]}, {"A": "K. B. Sundarambal", "songs": [{"C": "Papanasam Sivan", "D": "6:23", "R": "Hamsadhwani", "T": "", "U": "364 views", "V": "6FrV8GXPB5M"}]}, {"A": "K. J. Yesudas", "songs": [{"C": "Papanasam Sivan", "D": "16:42", "R": "Hamsadhwani", "T": "", "U": "1,096 views", "V": "WNeJhAzW4w8"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Papanasam Sivan", "D": "4:17", "R": "Hamsadhwani", "T": "", "U": "20 views", "V": "rnRIVox_fhU"}, {"C": "Papanasam Sivan", "D": "4:08", "R": "Hamsadhwani", "T": "", "U": "1,201 views", "V": "-kn2X0cBua0"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Papanasam Sivan", "D": "3:38", "R": "Hamsadhwani", "T": "", "U": "8,949 views", "V": "_4pMhq_aEUs"}, {"C": "Papanasam Sivan", "D": "3:01", "R": "Hamsadhwani", "T": "", "U": "2,034 views", "V": "3tuvMk2kijo"}]}, {"A": "Radha Jayalakshmi", "songs": [{"C": "Papanasam Sivan", "D": "4:06", "R": "Hamsadhwani", "T": "", "U": "0 views", "V": "TBdPW4FZdQs"}]}, {"A": "S. Sowmya", "songs": [{"C": "Papanasam Sivan", "D": "4:16", "R": "Hamsadhwani", "T": "", "U": "6,281 views", "V": "Vsrk9yd5gJc"}, {"C": "Papanasam Sivan", "D": "4:16", "R": "Hamsadhwani", "T": "", "U": "0 views", "V": "NcFzTKOOtr0"}, {"C": "Papanasam Sivan", "D": "3:01", "R": "Hamsadhwani", "T": "", "U": "8,520 views", "V": "stMVe23jYp0"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Papanasam Sivan", "D": "9:46", "R": "Hamsadhwani", "T": "", "U": "854 views", "V": "opGNyqyG-ik"}]}, {"A": "B. Vijayagopal", "songs": [{"C": "Papanasam Sivan", "D": "59:53", "R": "Hamsadhwani", "T": "", "U": "696 views", "V": "BmNwPVrR2vs"}]}, {"A": "U. Srinivas", "songs": [{"C": "Papanasam Sivan", "D": "6:30", "R": "Hamsadhwani", "T": "", "U": "1,100 views", "V": "FEpIfNbxqPk"}]}, {"A": "V. Nagarajan", "songs": [{"C": "Papanasam Sivan", "D": "22:32", "R": "Hamsadhwani", "T": "", "U": "8,172 views", "V": "ZG1efTrdpS4"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

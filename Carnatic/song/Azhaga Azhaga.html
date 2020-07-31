@@ -29,7 +29,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>11</td></tr>
-<tr><td><em>Concert</em></td><td>11</td></tr>
+<tr><td><em>Concert</em></td><td>14</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -134,57 +134,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0057", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "Bombay Jayashri", "V": "TziRQNLyNq8"}]}, {"name": "Vocal - Charulatha Mani", "songs": [{"N": "0013", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "Charulatha Mani", "V": "P60sY1GNaOo"}, {"N": "0014", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "Charulatha Mani", "V": "WhbNLtAz9aM"}]}, {"name": "Vocal - Gayathri Girish", "songs": [{"N": "0050", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "Gayathri Girish", "V": "kYc1VVCvOsk"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0102", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "M. L. Vasanthakumari", "V": "Cmgp2S-yv1Q"}, {"N": "0103", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "M. L. Vasanthakumari", "V": "LjDRqSz-Wpg"}, {"N": "0104", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "M. L. Vasanthakumari", "V": "U4Rg7LkS7_g"}, {"N": "0105", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "M. L. Vasanthakumari", "V": "eNNm8lAp9tc"}, {"N": "0106", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "M. L. Vasanthakumari", "V": "x43HQn-A6a0"}]}, {"name": "Vocal - S. Saketharaman", "songs": [{"N": "0032", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "S. Saketharaman", "V": "vNa2TF0kZfo"}]}, {"name": "Vocal - Srividya Sriram", "songs": [{"N": "0008", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "Srividya Sriram", "V": "7_OcpJZ0epY"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0112", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "Sudha Ragunathan", "V": "4aNYaZAI_fQ"}]}, {"name": "Vocal - Sumitra Nitin", "songs": [{"N": "0008", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "Sumitra Nitin", "V": "roWggrMBU9s"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0132", "T": "", "H": "Azhaga Azhaga", "S": "azhagA azhagA azhagA enrazhaittuk kai tozhudu :  Khanda Caapu", "R": "Shuddha dhanyasi", "C": "Ambujam Krishna", "A": "T. N. Seshagopalan", "V": "m3RZCH8qnFk"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Ambujam Krishna", "D": "5:56", "R": "Shuddha dhanyasi", "T": "", "U": "9,812 views", "V": "TziRQNLyNq8"}]}, {"A": "Charulatha Mani", "songs": [{"C": "Ambujam Krishna", "D": "10:18", "R": "Shuddha dhanyasi", "T": "", "U": "191 views", "V": "WhbNLtAz9aM"}, {"C": "Ambujam Krishna", "D": "10:18", "R": "Shuddha dhanyasi", "T": "", "U": "10 views", "V": "P60sY1GNaOo"}]}, {"A": "Gayathri Girish", "songs": [{"C": "Ambujam Krishna", "D": "13:28", "R": "Shuddha dhanyasi", "T": "", "U": "296 views", "V": "kYc1VVCvOsk"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Ambujam Krishna", "D": "7:14", "R": "Shuddha dhanyasi", "T": "", "U": "83 views", "V": "Cmgp2S-yv1Q"}, {"C": "Ambujam Krishna", "D": "6:49", "R": "Shuddha dhanyasi", "T": "", "U": "4,080 views", "V": "x43HQn-A6a0"}, {"C": "Ambujam Krishna", "D": "9:43", "R": "Shuddha dhanyasi", "T": "", "U": "2,823 views", "V": "U4Rg7LkS7_g"}, {"C": "Ambujam Krishna", "D": "9:49", "R": "Shuddha dhanyasi", "T": "", "U": "34 views", "V": "LjDRqSz-Wpg"}, {"C": "Ambujam Krishna", "D": "7:21", "R": "Shuddha dhanyasi", "T": "", "U": "0 views", "V": "eNNm8lAp9tc"}]}, {"A": "S. Saketharaman", "songs": [{"C": "Ambujam Krishna", "D": "18:21", "R": "Shuddha dhanyasi", "T": "", "U": "589 views", "V": "vNa2TF0kZfo"}]}, {"A": "Srividya Sriram", "songs": [{"C": "Ambujam Krishna", "D": "10:12", "R": "Shuddha dhanyasi", "T": "", "U": "265 views", "V": "7_OcpJZ0epY"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Ambujam Krishna", "D": "17:45", "R": "Shuddha dhanyasi", "T": "", "U": "292 views", "V": "4aNYaZAI_fQ"}]}, {"A": "Sumitra Nitin", "songs": [{"C": "Ambujam Krishna", "D": "7:32", "R": "Shuddha dhanyasi", "T": "", "U": "302 views", "V": "roWggrMBU9s"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Ambujam Krishna", "D": "13:13", "R": "Shuddha dhanyasi", "T": "", "U": "3,840 views", "V": "m3RZCH8qnFk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

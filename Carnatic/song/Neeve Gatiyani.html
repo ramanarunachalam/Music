@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>4</td></tr>
-<tr><td><em>Concert</em></td><td>4</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -143,57 +143,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Mani Krishnaswami", "songs": [{"N": "0101", "T": "Varnam", "H": "Neeve Gatiyani", "S": "nIvE gatiyani niratamu nI pAdamulE nammiti :  Adi", "R": "Nalinakanthi", "C": "Lalgudi Jayaraman", "A": "Mani Krishnaswami", "V": "xBwIO76YexE"}]}, {"name": "Vocal - S. P. Ramh", "songs": [{"N": "0034", "T": "Varnam", "H": "Neeve Gatiyani", "S": "nIvE gatiyani niratamu nI pAdamulE nammiti :  Adi", "R": "Nalinakanthi", "C": "Lalgudi Jayaraman", "A": "S. P. Ramh", "V": "ECHlNylnLo8"}]}, {"name": "Violin - C N Chandrashekar", "songs": [{"N": "0017", "T": "Varnam", "H": "Neeve Gatiyani", "S": "nIvE gatiyani niratamu nI pAdamulE nammiti :  Adi", "R": "Nalinakanthi", "C": "Lalgudi Jayaraman", "A": "C N Chandrashekar", "V": "W75ww2yn88Y"}]}, {"name": "Violin - Lalgudi Jayaraman", "songs": [{"N": "0775", "T": "Varnam", "H": "Neeve Gatiyani", "S": "nIvE gatiyani niratamu nI pAdamulE nammiti :  Adi", "R": "Nalinakanthi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "0GkPokYtBzI"}, {"N": "0776", "T": "Varnam", "H": "Neeve Gatiyani", "S": "nIvE gatiyani niratamu nI pAdamulE nammiti :  Adi", "R": "Nalinakanthi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "5aGdONgjjAw"}, {"N": "0777", "T": "Varnam", "H": "Neeve Gatiyani", "S": "nIvE gatiyani niratamu nI pAdamulE nammiti :  Adi", "R": "Nalinakanthi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "JUqwir830B8"}, {"N": "0778", "T": "Varnam", "H": "Neeve Gatiyani", "S": "nIvE gatiyani niratamu nI pAdamulE nammiti :  Adi", "R": "Nalinakanthi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "aIrMmHCz29Y"}, {"N": "0779", "T": "Varnam", "H": "Neeve Gatiyani", "S": "nIvE gatiyani niratamu nI pAdamulE nammiti :  Adi", "R": "Nalinakanthi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "tRFm1em1y70"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Mani Krishnaswami", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:05", "R": "Nalinakanthi", "T": "Varnam", "U": "326 views", "V": "xBwIO76YexE"}]}, {"A": "S. P. Ramh", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:53", "R": "Nalinakanthi", "T": "Varnam", "U": "0 views", "V": "ECHlNylnLo8"}]}, {"A": "C N Chandrashekar", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:52", "R": "Nalinakanthi", "T": "Varnam", "U": "77 views", "V": "W75ww2yn88Y"}]}, {"A": "Lalgudi Jayaraman", "songs": [{"C": "Lalgudi Jayaraman", "D": "7:36", "R": "Nalinakanthi", "T": "Varnam", "U": "600 views", "V": "tRFm1em1y70"}, {"C": "Lalgudi Jayaraman", "D": "6:06", "R": "Nalinakanthi", "T": "Varnam", "U": "385 views", "V": "0GkPokYtBzI"}, {"C": "Lalgudi Jayaraman", "D": "5:02", "R": "Nalinakanthi", "T": "Varnam", "U": "4,182 views", "V": "aIrMmHCz29Y"}, {"C": "Lalgudi Jayaraman", "D": "8:03", "R": "Nalinakanthi", "T": "Varnam", "U": "22 views", "V": "JUqwir830B8"}, {"C": "Lalgudi Jayaraman", "D": "7:12", "R": "Nalinakanthi", "T": "Varnam", "U": "191 views", "V": "5aGdONgjjAw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

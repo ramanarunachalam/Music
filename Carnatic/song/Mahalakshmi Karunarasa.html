@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>24</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>17</td></tr>
-<tr><td><em>Concert</em></td><td>17</td></tr>
+<tr><td><em>Concert</em></td><td>21</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -152,57 +152,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - A. S. Murali", "songs": [{"N": "0025", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "A. S. Murali", "V": "bMXo7gxGOLs"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0232", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "av8esJZuzUg"}]}, {"name": "Vocal - K. Krishnakumar", "songs": [{"N": "0014", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "K. Krishnakumar", "V": "HRelTklWl5c"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0759", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "SjWuD1-ifa4"}, {"N": "0760", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "dlpTcqp32QI"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "0634", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "B5QrKHAUzDc"}]}, {"name": "Vocal - Neela Ramgopal", "songs": [{"N": "0047", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Neela Ramgopal", "V": "G_CohuXIjOE"}]}, {"name": "Vocal - Neyveli Santhanagopalan", "songs": [{"N": "0086", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Neyveli Santhanagopalan", "V": "2fZ479bTJCQ"}, {"N": "0087", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Neyveli Santhanagopalan", "V": "YZkoCe_gByw"}]}, {"name": "Vocal - Padma Sugavanam", "songs": [{"N": "0038", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Padma Sugavanam", "V": "51jVMRDnOhw"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0151", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Ranjani Gayatri", "V": "IaGZ_PRf_Yg"}, {"N": "0152", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Ranjani Gayatri", "V": "gKJu0Li-4q4"}, {"N": "0153", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Ranjani Gayatri", "V": "oWKeqc_p3rU"}]}, {"name": "Vocal - S. Aishwarya", "songs": [{"N": "0059", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "S. Aishwarya", "V": "o2va-uQu4JI"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0401", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "1cCSBzGpfa0"}, {"N": "0402", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "3PAlMsfYBVk"}, {"N": "0404", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "fPZ15O6O2AI"}]}, {"name": "Vocal - Sumithra Vasudev", "songs": [{"N": "0050", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Sumithra Vasudev", "V": "I5wKGiadJ4I"}]}, {"name": "Vocal - Vijay Siva", "songs": [{"N": "0052", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "Vijay Siva", "V": "O8EaF0oDiQA"}]}, {"name": "Veena - S. Srinivasan", "songs": [{"N": "0012", "T": "", "H": "Mahalakshmi Karunarasa", "S": "mahAlakSmi karuNArasa lahari  :  Adi", "R": "Madhavamanohari", "C": "Muthuswami Dikshitar", "A": "S. Srinivasan", "V": "EqdByjgWo50"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "A. S. Murali", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:51", "R": "Madhavamanohari", "T": "", "U": "132 views", "V": "bMXo7gxGOLs"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Muthuswami Dikshitar", "D": "3:50", "R": "Madhavamanohari", "T": "", "U": "1,700 views", "V": "av8esJZuzUg"}]}, {"A": "K. Krishnakumar", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:26", "R": "Madhavamanohari", "T": "", "U": "505 views", "V": "HRelTklWl5c"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:30", "R": "Madhavamanohari", "T": "", "U": "0 views", "V": "SjWuD1-ifa4"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:31", "R": "Madhavamanohari", "T": "", "U": "20,423 views", "V": "B5QrKHAUzDc"}]}, {"A": "Neela Ramgopal", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:25", "R": "Madhavamanohari", "T": "", "U": "146 views", "V": "G_CohuXIjOE"}]}, {"A": "Neyveli Santhanagopalan", "songs": [{"C": "Muthuswami Dikshitar", "D": "19:01", "R": "Madhavamanohari", "T": "", "U": "169 views", "V": "YZkoCe_gByw"}, {"C": "Muthuswami Dikshitar", "D": "19:27", "R": "Madhavamanohari", "T": "", "U": "4,215 views", "V": "2fZ479bTJCQ"}]}, {"A": "Padma Sugavanam", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:54", "R": "Madhavamanohari", "T": "", "U": "509 views", "V": "51jVMRDnOhw"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:36", "R": "Madhavamanohari", "T": "", "U": "3,800 views", "V": "IaGZ_PRf_Yg"}, {"C": "Muthuswami Dikshitar", "D": "6:29", "R": "Madhavamanohari", "T": "", "U": "0 views", "V": "gKJu0Li-4q4"}, {"C": "Muthuswami Dikshitar", "D": "6:18", "R": "Madhavamanohari", "T": "", "U": "25 views", "V": "oWKeqc_p3rU"}]}, {"A": "S. Aishwarya", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:09", "R": "Madhavamanohari", "T": "", "U": "27,493 views", "V": "o2va-uQu4JI"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:50", "R": "Madhavamanohari", "T": "", "U": "1,200 views", "V": "3PAlMsfYBVk"}, {"C": "Muthuswami Dikshitar", "D": "2:56:43", "R": "Madhavamanohari", "T": "", "U": "70 views", "V": "BhGKliBNxrM"}, {"C": "Muthuswami Dikshitar", "D": "5:26", "R": "Madhavamanohari", "T": "", "U": "50 views", "V": "1cCSBzGpfa0"}, {"C": "Muthuswami Dikshitar", "D": "6:50", "R": "Madhavamanohari", "T": "", "U": "718 views", "V": "fPZ15O6O2AI"}]}, {"A": "Sumithra Vasudev", "songs": [{"C": "Muthuswami Dikshitar", "D": "3:41", "R": "Madhavamanohari", "T": "", "U": "421 views", "V": "I5wKGiadJ4I"}]}, {"A": "Vijay Siva", "songs": [{"C": "Muthuswami Dikshitar", "D": "3:59", "R": "Madhavamanohari", "T": "", "U": "0 views", "V": "O8EaF0oDiQA"}]}, {"A": "S. Srinivasan", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:19", "R": "Madhavamanohari", "T": "", "U": "30 views", "V": "EqdByjgWo50"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

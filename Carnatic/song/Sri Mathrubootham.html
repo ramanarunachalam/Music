@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>36</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>22</td></tr>
-<tr><td><em>Concert</em></td><td>22</td></tr>
+<tr><td><em>Concert</em></td><td>30</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -138,57 +138,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bharat Sundar", "songs": [{"N": "0136", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Bharat Sundar", "V": "BPjeR1aCnqc"}, {"N": "0137", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Bharat Sundar", "V": "c7Oc4eltUK0"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0342", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Bombay Jayashri", "V": "ELwpqpIrE0A"}, {"N": "0343", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Bombay Jayashri", "V": "Gdscq0Uss4U"}]}, {"name": "Vocal - Madurai Mani Iyer", "songs": [{"N": "0406", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "K5dDmqSMC_o"}, {"N": "0407", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "LqKNeSCpROE"}, {"N": "0408", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "Z9rAA4QW2Uo"}, {"N": "0409", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "ctnelELGOW4"}, {"N": "0410", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "fvvVLJKSxd4"}]}, {"name": "Vocal - Palghat R Ramprasad", "songs": [{"N": "0055", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Palghat R Ramprasad", "V": "QFgh96eTy1g"}]}, {"name": "Vocal - Raji Gopalakrishnan", "songs": [{"N": "0061", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Raji Gopalakrishnan", "V": "aQje6ASO_ZM"}]}, {"name": "Vocal - Ramnad Krishnan", "songs": [{"N": "0145", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Ramnad Krishnan", "V": "On3jyGhNzIA"}]}, {"name": "Vocal - Sandeep Narayan", "songs": [{"N": "0120", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Sandeep Narayan", "V": "ZLStsxoJuvk"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0830", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "QA8-Xtgml_4"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0776", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "Ax5PX9NeO58"}, {"N": "0777", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "gYakZleIB9g"}, {"N": "0778", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "wKcBjYY6lmw"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0182", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Sikkil Gurucharan", "V": "_gfZ9_kUCWY"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0560", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "8upNeiMEdVc"}, {"N": "0561", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "AUn-yfGMZMo"}, {"N": "0562", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "PhXprFKZEeM"}, {"N": "0563", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "p7_A-a_cI2U"}]}, {"name": "Vocal - T. V. Sankaranarayanan", "songs": [{"N": "0212", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "T. V. Sankaranarayanan", "V": "DIEdicNuKiI"}, {"N": "0213", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "T. V. Sankaranarayanan", "V": "Ul0W9UuuqzY"}, {"N": "0214", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "T. V. Sankaranarayanan", "V": "bVH869r8jD4"}, {"N": "0215", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "T. V. Sankaranarayanan", "V": "tsM7F7I3qfM"}]}, {"name": "Vocal - Vignesh Ishwar", "songs": [{"N": "0059", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Vignesh Ishwar", "V": "zE1d5of8zhU"}]}, {"name": "Vocal - Vishnudev Nampoothri", "songs": [{"N": "0061", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Vishnudev Nampoothri", "V": "FZkszFxsskU"}]}, {"name": "Chitra Veena - Chitravina Ravi Kiran", "songs": [{"N": "0142", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "Chitravina Ravi Kiran", "V": "lOs-OJu_LzA"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0468", "T": "", "H": "Sri Mathrubootham", "S": "shrI mAtRbhUtam trishiragri nAtham hRdi cintayE :  Caapu", "R": "Kannada", "C": "Muthuswami Dikshitar", "A": "U. Srinivas", "V": "Tf8ZXquTJwk"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bharat Sundar", "songs": [{"C": "Muthuswami Dikshitar", "D": "24:11", "R": "Kannada", "T": "", "U": "1,600 views", "V": "c7Oc4eltUK0"}, {"C": "Muthuswami Dikshitar", "D": "10:13", "R": "Kannada", "T": "", "U": "2,073 views", "V": "BPjeR1aCnqc"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Muthuswami Dikshitar", "D": "14:40", "R": "Kannada", "T": "", "U": "982 views", "V": "ELwpqpIrE0A"}, {"C": "Muthuswami Dikshitar", "D": "14:40", "R": "Kannada", "T": "", "U": "0 views", "V": "Gdscq0Uss4U"}]}, {"A": "Madurai Mani Iyer", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:25", "R": "Kannada", "T": "", "U": "342 views", "V": "fvvVLJKSxd4"}, {"C": "Muthuswami Dikshitar", "D": "6:05", "R": "Kannada", "T": "", "U": "78 views", "V": "ctnelELGOW4"}, {"C": "Muthuswami Dikshitar", "D": "6:01", "R": "Kannada", "T": "", "U": "2,500 views", "V": "Z9rAA4QW2Uo"}, {"C": "Muthuswami Dikshitar", "D": "6:05", "R": "Kannada", "T": "", "U": "171 views", "V": "LqKNeSCpROE"}, {"C": "Muthuswami Dikshitar", "D": "5:54", "R": "Kannada", "T": "", "U": "3,161 views", "V": "K5dDmqSMC_o"}]}, {"A": "Palghat R Ramprasad", "songs": [{"C": "Muthuswami Dikshitar", "D": "9:45", "R": "Kannada", "T": "", "U": "232 views", "V": "QFgh96eTy1g"}]}, {"A": "Raji Gopalakrishnan", "songs": [{"C": "Muthuswami Dikshitar", "D": "8:07", "R": "Kannada", "T": "", "U": "745 views", "V": "aQje6ASO_ZM"}]}, {"A": "Ramnad Krishnan", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:21", "R": "Kannada", "T": "", "U": "631 views", "V": "On3jyGhNzIA"}]}, {"A": "Sandeep Narayan", "songs": [{"C": "Muthuswami Dikshitar", "D": "14:28", "R": "Kannada", "T": "", "U": "2,266 views", "V": "ZLStsxoJuvk"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Muthuswami Dikshitar", "D": "16:26", "R": "Kannada", "T": "", "U": "1,500 views", "V": "QA8-Xtgml_4"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Muthuswami Dikshitar", "D": "13:25", "R": "Kannada", "T": "", "U": "868 views", "V": "gYakZleIB9g"}, {"C": "Muthuswami Dikshitar", "D": "8:02", "R": "Kannada", "T": "", "U": "4,500 views", "V": "wKcBjYY6lmw"}, {"C": "Muthuswami Dikshitar", "D": "8:20", "R": "Kannada", "T": "", "U": "64 views", "V": "Ax5PX9NeO58"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Muthuswami Dikshitar", "D": "11:25", "R": "Kannada", "T": "", "U": "2,980 views", "V": "_gfZ9_kUCWY"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Muthuswami Dikshitar", "D": "15:54", "R": "Kannada", "T": "", "U": "11,932 views", "V": "8upNeiMEdVc"}, {"C": "Muthuswami Dikshitar", "D": "35:16", "R": "Kannada", "T": "", "U": "500 views", "V": "p7_A-a_cI2U"}, {"C": "Muthuswami Dikshitar", "D": "8:28", "R": "Kannada", "T": "", "U": "10,394 views", "V": "AUn-yfGMZMo"}, {"C": "Muthuswami Dikshitar", "D": "8:33", "R": "Kannada", "T": "", "U": "0 views", "V": "PhXprFKZEeM"}]}, {"A": "T. V. Sankaranarayanan", "songs": [{"C": "Muthuswami Dikshitar", "D": "11:46", "R": "Kannada", "T": "", "U": "716 views", "V": "bVH869r8jD4"}, {"C": "Muthuswami Dikshitar", "D": "6:55", "R": "Kannada", "T": "", "U": "78 views", "V": "Ul0W9UuuqzY"}, {"C": "Muthuswami Dikshitar", "D": "6:41", "R": "Kannada", "T": "", "U": "0 views", "V": "DIEdicNuKiI"}, {"C": "Muthuswami Dikshitar", "D": "5:06", "R": "Kannada", "T": "", "U": "773 views", "V": "tsM7F7I3qfM"}]}, {"A": "Vignesh Ishwar", "songs": [{"C": "Muthuswami Dikshitar", "D": "13:02", "R": "Kannada", "T": "", "U": "5,018 views", "V": "zE1d5of8zhU"}]}, {"A": "Vishnudev Nampoothri", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:33", "R": "Kannada", "T": "", "U": "273 views", "V": "FZkszFxsskU"}]}, {"A": "Chitravina Ravi Kiran", "songs": [{"C": "Muthuswami Dikshitar", "D": "10:25", "R": "Kannada", "T": "", "U": "178 views", "V": "lOs-OJu_LzA"}]}, {"A": "U. Srinivas", "songs": [{"C": "Muthuswami Dikshitar", "D": "18:10", "R": "Kannada", "T": "", "U": "449 views", "V": "Tf8ZXquTJwk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

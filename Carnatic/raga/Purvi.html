@@ -19,10 +19,10 @@
 </tbody>
 </table></div></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>28</td></tr>
-<tr><td><em>Song</em></td><td>5</td></tr>
+<tr><td><em>Audio</em></td><td>26</td></tr>
+<tr><td><em>Song</em></td><td>4</td></tr>
 <tr><td><em>Composer</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>4</td></tr>
+<tr><td><em>Type</em></td><td>3</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Concert", "songs": [{"N": "0011", "T": "", "H": "Concert", "S": "Concert", "R": "Purvi", "C": "UnknownComposer", "A": "Abhishek Raghuram", "V": "Vk4v-y71Iu4"}]}, {"name": "ikkalAre kai enjalu cikka makkaLu", "songs": [{"N": "0049", "T": "", "H": "Ikkalare Kai Enjalu", "S": "ikkalAre kai enjalu cikka makkaLu aLutAre :  Ata", "R": "Purvi", "C": "Purandara Dasa", "A": "Vidyabhushana", "V": "_EJTLW6RWo8"}]}, {"name": "shrI guruguhasya dAsOham nOcEt cidguruguha", "songs": [{"N": "0033", "T": "Guruguha vibhakti", "H": "Shri Guruguhasya", "S": "shrI guruguhasya dAsOham nOcEt cidguruguha EvAham :  Caapu", "R": "Purvi", "C": "Muthuswami Dikshitar", "A": "Amritha Murali", "V": "F3tklc-stGA"}, {"N": "0064", "T": "Guruguha vibhakti", "H": "Shri Guruguhasya", "S": "shrI guruguhasya dAsOham nOcEt cidguruguha EvAham :  Caapu", "R": "Purvi", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "IZE1krZs4mU"}, {"N": "0023", "T": "Guruguha vibhakti", "H": "Shri Guruguhasya", "S": "shrI guruguhasya dAsOham nOcEt cidguruguha EvAham :  Caapu", "R": "Purvi", "C": "Muthuswami Dikshitar", "A": "Ramakrishnan Murthy", "V": "KqhL0C6KgXY"}, {"N": "0024", "T": "Guruguha vibhakti", "H": "Shri Guruguhasya", "S": "shrI guruguhasya dAsOham nOcEt cidguruguha EvAham :  Caapu", "R": "Purvi", "C": "Muthuswami Dikshitar", "A": "Ramakrishnan Murthy", "V": "rbuOSbcwfi4"}, {"N": "0106", "T": "Guruguha vibhakti", "H": "Shri Guruguhasya", "S": "shrI guruguhasya dAsOham nOcEt cidguruguha EvAham :  Caapu", "R": "Purvi", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "v2BvTTjOZFk"}]}, {"name": "Unknownsong", "songs": [{"N": "0768", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Purvi", "C": "UnknownComposer", "A": "K. V. Narayanaswamy", "V": "A0QjQj1rg3U"}, {"N": "0145", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Purvi", "C": "UnknownComposer", "A": "Kunnakudi M. Balamuralikrishna", "V": "xZMxWVNWiYs"}, {"N": "0996", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Purvi", "C": "UnknownComposer", "A": "M. D. Ramanathan", "V": "9AtFnoCBcA0"}, {"N": "1021", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Purvi", "C": "UnknownComposer", "A": "T. M. Krishna", "V": "__UaWGlMbaU"}]}, {"name": "ni ri ni ri ga ma", "songs": [{"N": "0355", "T": "Thillana", "H": "thillana_tvb_purvi", "S": "ni ri ni ri ga ma : Rupaka", "R": "Purvi", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "A": "Amrutha Venkatesh", "V": "Xe-9-2g6-cI"}, {"N": "0055", "T": "Thillana", "H": "thillana_tvb_purvi", "S": "ni ri ni ri ga ma : Rupaka", "R": "Purvi", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "A": "BV Raman BV Lakshmanan", "V": "gDoD0qtafoo"}, {"N": "0915", "T": "Thillana", "H": "thillana_tvb_purvi", "S": "ni ri ni ri ga ma : Rupaka", "R": "Purvi", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "A": "M. D. Ramanathan", "V": "cR6sKD_yo8M"}, {"N": "0029", "T": "Thillana", "H": "thillana_tvb_purvi", "S": "ni ri ni ri ga ma : Rupaka", "R": "Purvi", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "A": "Manasi Prasad", "V": "bEsFv624MR0"}, {"N": "0267", "T": "Thillana", "H": "thillana_tvb_purvi", "S": "ni ri ni ri ga ma : Rupaka", "R": "Purvi", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "A": "Ramakrishnan Murthy", "V": "OQH9Se71fso"}, {"N": "0239", "T": "Thillana", "H": "thillana_tvb_purvi", "S": "ni ri ni ri ga ma : Rupaka", "R": "Purvi", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "A": "Sikkil Gurucharan", "V": "u3nmb21XXuo"}, {"N": "0145", "T": "Thillana", "H": "thillana_tvb_purvi", "S": "ni ri ni ri ga ma : Rupaka", "R": "Purvi", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "A": "Sreevalsan J. Menon", "V": "Ukp27uq0YgA"}, {"N": "0146", "T": "Thillana", "H": "thillana_tvb_purvi", "S": "ni ri ni ri ga ma : Rupaka", "R": "Purvi", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "A": "Sreevalsan J. Menon", "V": "uph-aZ84qj8"}, {"N": "0045", "T": "Thillana", "H": "thillana_tvb_purvi", "S": "ni ri ni ri ga ma : Rupaka", "R": "Purvi", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "A": "Ambi Subramaniam", "V": "onppVV0ExYg"}, {"N": "0044", "T": "Thillana", "H": "thillana_tvb_purvi", "S": "ni ri ni ri ga ma : Rupaka", "R": "Purvi", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "A": "Ambi Subramaniam", "V": "HkgXczLK3cY"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Ikkalare Kai Enjalu", "S": "ikkalAre kai enjalu cikka makkaLu aLutAre :  Ata", "songs": [{"A": "Vidyabhushana", "C": "Purandara Dasa", "D": "5:14", "T": "", "U": "540,106 views", "V": "_EJTLW6RWo8"}]}, {"H": "Shri Guruguhasya", "S": "shrI guruguhasya dAsOham nOcEt cidguruguha EvAham :  Caapu", "songs": [{"A": "Amritha Murali", "C": "Muthuswami Dikshitar", "D": "7:32", "T": "Guruguha vibhakti", "U": "3,089 views", "V": "F3tklc-stGA"}, {"A": "R. Vedavalli", "C": "Muthuswami Dikshitar", "D": "3:01", "T": "Guruguha vibhakti", "U": "115 views", "V": "IZE1krZs4mU"}, {"A": "Ramakrishnan Murthy", "C": "Muthuswami Dikshitar", "D": "6:06", "T": "Guruguha vibhakti", "U": "539 views", "V": "KqhL0C6KgXY"}, {"A": "Ramakrishnan Murthy", "C": "Muthuswami Dikshitar", "D": "6:01", "T": "Guruguha vibhakti", "U": "970 views", "V": "rbuOSbcwfi4"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "6:31", "T": "Guruguha vibhakti", "U": "53 views", "V": "v2BvTTjOZFk"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "K. V. Narayanaswamy", "C": "UnknownComposer", "D": "2:30", "T": "", "U": "622 views", "V": "A0QjQj1rg3U"}, {"A": "Kunnakudi M. Balamuralikrishna", "C": "UnknownComposer", "D": "2:41", "T": "", "U": "299 views", "V": "xZMxWVNWiYs"}, {"A": "M. D. Ramanathan", "C": "UnknownComposer", "D": "9:49", "T": "", "U": "3,235 views", "V": "9AtFnoCBcA0"}, {"A": "T. M. Krishna", "C": "UnknownComposer", "D": "30:16", "T": "", "U": "17,000 views", "V": "__UaWGlMbaU"}]}, {"H": "thillana_tvb_purvi", "S": "ni ri ni ri ga ma : Rupaka", "songs": [{"A": "Amrutha Venkatesh", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "D": "6:23", "T": "Thillana", "U": "0 views", "V": "Xe-9-2g6-cI"}, {"A": "BV Raman BV Lakshmanan", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "D": "3:50", "T": "Thillana", "U": "0 views", "V": "gDoD0qtafoo"}, {"A": "M. D. Ramanathan", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "D": "8:36", "T": "Thillana", "U": "8,600 views", "V": "cR6sKD_yo8M"}, {"A": "Manasi Prasad", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "D": "6:50", "T": "Thillana", "U": "5,652 views", "V": "bEsFv624MR0"}, {"A": "Ramakrishnan Murthy", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "D": "5:47", "T": "Thillana", "U": "0 views", "V": "OQH9Se71fso"}, {"A": "Sikkil Gurucharan", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "D": "4:23", "T": "Thillana", "U": "524 views", "V": "u3nmb21XXuo"}, {"A": "Sreevalsan J. Menon", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "D": "4:38", "T": "Thillana", "U": "16,192 views", "V": "Ukp27uq0YgA"}, {"A": "Sreevalsan J. Menon", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "D": "4:38", "T": "Thillana", "U": "662 views", "V": "uph-aZ84qj8"}, {"A": "Ambi Subramaniam", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "D": "3:52", "T": "Thillana", "U": "428 views", "V": "onppVV0ExYg"}, {"A": "Ambi Subramaniam", "C": "Thirugokarnam Vaithiyanatha Bhagavathar", "D": "3:52", "T": "Thillana", "U": "896 views", "V": "HkgXczLK3cY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

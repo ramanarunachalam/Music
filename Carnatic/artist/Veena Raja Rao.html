@@ -15,9 +15,9 @@
 <tbody>
 <tr><td><em>Audio</em></td><td>10</td></tr>
 <tr><td><em>Song</em></td><td>4</td></tr>
-<tr><td><em>Raga</em></td><td>10</td></tr>
+<tr><td><em>Raga</em></td><td>9</td></tr>
 <tr><td><em>Composer</em></td><td>3</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>10</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "VRR01", "songs": [{"N": "0001", "T": "", "H": "Concert", "S": "Concert", "R": "Bhairavi", "C": "UnknownComposer", "A": "Veena Raja Rao", "V": "INuQk8ZSxbQ"}, {"N": "0002", "T": "", "H": "Mayatheetha Swaroopini", "S": "Mayaa Atheetha Swaroopini Nannu brovave :  Rupaka", "R": "Mayamalavagowla", "C": "Ponniah Pillai", "A": "Veena Raja Rao", "V": "dtoHDiPPCsE"}, {"N": "0003", "T": "", "H": "Pranatharthi Haram", "S": "praNatArtiharam aham bhajE shankaram :  Khanda Triputa", "R": "Chenchurutti", "C": "Mysore Vasudevachar", "A": "Veena Raja Rao", "V": "HZA7y-UNaKo"}, {"N": "0007", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Nata", "C": "UnknownComposer", "A": "Veena Raja Rao", "V": "WBfb8I5mdTc"}, {"N": "0008", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sahana", "C": "UnknownComposer", "A": "Veena Raja Rao", "V": "2Cx65UrvyHw"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Concert", "S": "Concert", "songs": [{"C": "UnknownComposer", "D": "1:09:01", "R": "Unknownraga", "T": "", "U": "262 views", "V": "INuQk8ZSxbQ"}]}, {"H": "Mayatheetha Swaroopini", "S": "Mayaa Atheetha Swaroopini Nannu brovave :  Rupaka", "songs": [{"C": "Ponniah Pillai", "D": "8:15", "R": "Mayamalavagowla", "T": "", "U": "2,122 views", "V": "dtoHDiPPCsE"}]}, {"H": "Pranatharthi Haram", "S": "praNatArtiharam aham bhajE shankaram :  Khanda Triputa", "songs": [{"C": "Mysore Vasudevachar", "D": "6:40", "R": "Chenchurutti", "T": "", "U": "3,000 views", "V": "HZA7y-UNaKo"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "8:15", "R": "Nata", "T": "", "U": "354 views", "V": "WBfb8I5mdTc"}, {"C": "UnknownComposer", "D": "4:07", "R": "Sahana", "T": "", "U": "1,952 views", "V": "2Cx65UrvyHw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

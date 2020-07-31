@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>13</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>12</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "0680", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "M. S. Subbulakshmi", "V": "IFXD0iv5Lqo"}, {"N": "0681", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "M. S. Subbulakshmi", "V": "hGmt5XrcKYk"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0139", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "Malladi Brothers", "V": "f-qMfH8NpAo"}]}, {"name": "Vocal - Musiri Subramania Iyer", "songs": [{"N": "0029", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "Musiri Subramania Iyer", "V": "HRDARrZ3WPw"}]}, {"name": "Vocal - Nedunuri Krishnamurthy", "songs": [{"N": "0224", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "Nedunuri Krishnamurthy", "V": "LMtV_ziQDt4"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0517", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "Sanjay Subrahmanyan", "V": "C_sSUwjMKFo"}, {"N": "0518", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "Sanjay Subrahmanyan", "V": "_IGsXnGRhS0"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0438", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "Semmangudi Srinivasa Iyer", "V": "-Tt_5cjdxVw"}, {"N": "0439", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "Semmangudi Srinivasa Iyer", "V": "NgmrsZEY39o"}, {"N": "0440", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "Semmangudi Srinivasa Iyer", "V": "dLiSFsK4JJE"}, {"N": "0441", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "Semmangudi Srinivasa Iyer", "V": "xb9lrm7vMXc"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0270", "T": "", "H": "Maravakve O Manasa", "S": "maravakavE O manasA mA rAmuni nimiSamaina :  Rupaka", "R": "Sama", "C": "Patnam Subramanya Iyer", "A": "U. Srinivas", "V": "qShx-WZIFCg"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "M. S. Subbulakshmi", "songs": [{"C": "Patnam Subramanya Iyer", "D": "6:16", "R": "Sama", "T": "", "U": "3,300 views", "V": "IFXD0iv5Lqo"}, {"C": "Patnam Subramanya Iyer", "D": "5:38", "R": "Sama", "T": "", "U": "30 views", "V": "hGmt5XrcKYk"}]}, {"A": "Malladi Brothers", "songs": [{"C": "Patnam Subramanya Iyer", "D": "4:50", "R": "Sama", "T": "", "U": "0 views", "V": "f-qMfH8NpAo"}]}, {"A": "Musiri Subramania Iyer", "songs": [{"C": "Patnam Subramanya Iyer", "D": "6:30", "R": "Sama", "T": "", "U": "701 views", "V": "HRDARrZ3WPw"}]}, {"A": "Nedunuri Krishnamurthy", "songs": [{"C": "Patnam Subramanya Iyer", "D": "15:50", "R": "Sama", "T": "", "U": "1,100 views", "V": "LMtV_ziQDt4"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Patnam Subramanya Iyer", "D": "20:11", "R": "Sama", "T": "", "U": "1,100 views", "V": "_IGsXnGRhS0"}, {"C": "Patnam Subramanya Iyer", "D": "30:46", "R": "Sama", "T": "", "U": "303 views", "V": "C_sSUwjMKFo"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Patnam Subramanya Iyer", "D": "8:05", "R": "Sama", "T": "", "U": "94 views", "V": "NgmrsZEY39o"}, {"C": "Patnam Subramanya Iyer", "D": "7:58", "R": "Sama", "T": "", "U": "1,100 views", "V": "dLiSFsK4JJE"}, {"C": "Patnam Subramanya Iyer", "D": "8:16", "R": "Sama", "T": "", "U": "632 views", "V": "xb9lrm7vMXc"}, {"C": "Patnam Subramanya Iyer", "D": "8:17", "R": "Sama", "T": "", "U": "779 views", "V": "-Tt_5cjdxVw"}]}, {"A": "U. Srinivas", "songs": [{"C": "Patnam Subramanya Iyer", "D": "5:00", "R": "Sama", "T": "", "U": "218 views", "V": "qShx-WZIFCg"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

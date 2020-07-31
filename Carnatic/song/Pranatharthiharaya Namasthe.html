@@ -134,57 +134,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Balaji Shankar", "songs": [{"N": "0018", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "Balaji Shankar", "V": "SGZRAh--5zs"}, {"N": "0019", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "Balaji Shankar", "V": "Z0nGHWHF368"}]}, {"name": "Vocal - R. Vedavalli", "songs": [{"N": "0206", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "b9PzLUvM-Xw"}, {"N": "0207", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "o9p39Vr13XA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Balaji Shankar", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:06", "R": "Samanta", "T": "", "U": "672 views", "V": "SGZRAh--5zs"}, {"C": "Muthuswami Dikshitar", "D": "3:02", "R": "Samanta", "T": "", "U": "4,816 views", "V": "Z0nGHWHF368"}]}, {"A": "R. Vedavalli", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:01", "R": "Samanta", "T": "", "U": "20 views", "V": "o9p39Vr13XA"}, {"C": "Muthuswami Dikshitar", "D": "", "R": "Samanta", "T": "", "U": "19 views", "V": "b9PzLUvM-Xw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

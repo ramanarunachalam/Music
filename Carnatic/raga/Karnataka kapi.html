@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>25</td></tr>
 <tr><td><em>Song</em></td><td>5</td></tr>
 <tr><td><em>Composer</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "akhil A ND E SvarI durusuga brOvumu", "songs": [{"N": "0230", "T": "", "H": "Akhilandeshwari", "S": "akhil A ND E SvarI durusuga brOvumu :  Adi", "R": "Karnataka kapi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "_ce9K__NzfI"}, {"N": "0231", "T": "", "H": "Akhilandeshwari", "S": "akhil A ND E SvarI durusuga brOvumu :  Adi", "R": "Karnataka kapi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "aVeruHGZsKM"}, {"N": "0232", "T": "", "H": "Akhilandeshwari", "S": "akhil A ND E SvarI durusuga brOvumu :  Adi", "R": "Karnataka kapi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "tB570RGvtBQ"}, {"N": "0233", "T": "", "H": "Akhilandeshwari", "S": "akhil A ND E SvarI durusuga brOvumu :  Adi", "R": "Karnataka kapi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "tVLlcaUKks4"}, {"N": "0234", "T": "", "H": "Akhilandeshwari", "S": "akhil A ND E SvarI durusuga brOvumu :  Adi", "R": "Karnataka kapi", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "vfron8Vqj54"}]}, {"name": "shambhO satatam pAhi krpArasa", "songs": [{"N": "0679", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Karnataka kapi", "C": "Swathi Thirunal", "A": "Semmangudi Srinivasa Iyer", "V": "oZy2zznkp6k"}, {"N": "0680", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Karnataka kapi", "C": "Swathi Thirunal", "A": "Semmangudi Srinivasa Iyer", "V": "vbztHUrSq50"}]}, {"name": "Unknownsong", "songs": [{"N": "0034", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Karnataka kapi", "C": "UnknownComposer", "A": "Alamelu Mani", "V": "rxRXMbb6jvU"}, {"N": "0522", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Karnataka kapi", "C": "UnknownComposer", "A": "K. J. Yesudas", "V": "wpAGNdS3UpU"}, {"N": "0151", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Karnataka kapi", "C": "UnknownComposer", "A": "S. Rajam", "V": "74sdGlVAs-w"}]}, {"name": "Varnam", "songs": [{"N": "0052", "T": "", "H": "Varnam", "S": "Varnam", "R": "Karnataka kapi", "C": "UnknownComposer", "A": "N. J. Nandini", "V": "eNObgXvrjUU"}, {"N": "0889", "T": "", "H": "Varnam", "S": "Varnam", "R": "Karnataka kapi", "C": "UnknownComposer", "A": "T. M. Krishna", "V": "Avk6W-dX9Z0"}]}, {"name": "veHNkaTAcalapatE ninnu nammiti vEgamE", "songs": [{"N": "0408", "T": "", "H": "Venkatachalapathe", "S": "veHNkaTAcalapatE ninnu nammiti vEgamE :  Adi", "R": "Karnataka kapi", "C": "Muthuswami Dikshitar", "A": "K. J. Yesudas", "V": "8T4jFDahDo4"}, {"N": "0465", "T": "", "H": "Venkatachalapathe", "S": "veHNkaTAcalapatE ninnu nammiti vEgamE :  Adi", "R": "Karnataka kapi", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "F24FdTM_Ros"}, {"N": "0466", "T": "", "H": "Venkatachalapathe", "S": "veHNkaTAcalapatE ninnu nammiti vEgamE :  Adi", "R": "Karnataka kapi", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "FKH88ULjDPI"}, {"N": "0467", "T": "", "H": "Venkatachalapathe", "S": "veHNkaTAcalapatE ninnu nammiti vEgamE :  Adi", "R": "Karnataka kapi", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "G7waJpJ0F5M"}, {"N": "0468", "T": "", "H": "Venkatachalapathe", "S": "veHNkaTAcalapatE ninnu nammiti vEgamE :  Adi", "R": "Karnataka kapi", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "I16el9MPnao"}, {"N": "0469", "T": "", "H": "Venkatachalapathe", "S": "veHNkaTAcalapatE ninnu nammiti vEgamE :  Adi", "R": "Karnataka kapi", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "KIadyfmYZ3o"}, {"N": "0470", "T": "", "H": "Venkatachalapathe", "S": "veHNkaTAcalapatE ninnu nammiti vEgamE :  Adi", "R": "Karnataka kapi", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "wMev-SDPVUM"}, {"N": "0079", "T": "", "H": "Venkatachalapathe", "S": "veHNkaTAcalapatE ninnu nammiti vEgamE :  Adi", "R": "Karnataka kapi", "C": "Muthuswami Dikshitar", "A": "R. Suryaprakash", "V": "fDTd8wpytGE"}, {"N": "0049", "T": "", "H": "Venkatachalapathe", "S": "veHNkaTAcalapatE ninnu nammiti vEgamE :  Adi", "R": "Karnataka kapi", "C": "Muthuswami Dikshitar", "A": "Rudrapatnam Brothers", "V": "Y4LLvfX4hYQ"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Akhilandeshwari", "S": "akhil A ND E SvarI durusuga brOvumu :  Adi", "songs": [{"A": "M. Balamuralikrishna", "C": "Shyama Shastri", "D": "3:45", "T": "", "U": "1,000 views", "V": "tVLlcaUKks4"}, {"A": "M. Balamuralikrishna", "C": "Shyama Shastri", "D": "3:46", "T": "", "U": "468 views", "V": "_ce9K__NzfI"}, {"A": "M. Balamuralikrishna", "C": "Shyama Shastri", "D": "5:48", "T": "", "U": "0 views", "V": "vfron8Vqj54"}, {"A": "M. Balamuralikrishna", "C": "Shyama Shastri", "D": "3:20", "T": "", "U": "0 views", "V": "aVeruHGZsKM"}, {"A": "M. Balamuralikrishna", "C": "Shyama Shastri", "D": "4:04", "T": "", "U": "175 views", "V": "tB570RGvtBQ"}]}, {"H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "songs": [{"A": "Semmangudi Srinivasa Iyer", "C": "Swathi Thirunal", "D": "5:55", "T": "", "U": "327 views", "V": "oZy2zznkp6k"}, {"A": "Semmangudi Srinivasa Iyer", "C": "Swathi Thirunal", "D": "6:01", "T": "", "U": "134 views", "V": "vbztHUrSq50"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Alamelu Mani", "C": "UnknownComposer", "D": "10:57", "T": "", "U": "2,600 views", "V": "rxRXMbb6jvU"}, {"A": "K. J. Yesudas", "C": "UnknownComposer", "D": "12:32", "T": "", "U": "1,100 views", "V": "wpAGNdS3UpU"}, {"A": "S. Rajam", "C": "UnknownComposer", "D": "5:47", "T": "", "U": "450 views", "V": "74sdGlVAs-w"}]}, {"H": "Varnam", "S": "Varnam", "songs": [{"A": "N. J. Nandini", "C": "UnknownComposer", "D": "6:06", "T": "", "U": "580 views", "V": "eNObgXvrjUU"}, {"A": "T. M. Krishna", "C": "UnknownComposer", "D": "32:54", "T": "", "U": "10,000 views", "V": "Avk6W-dX9Z0"}]}, {"H": "Venkatachalapathe", "S": "veHNkaTAcalapatE ninnu nammiti vEgamE :  Adi", "songs": [{"A": "K. J. Yesudas", "C": "Muthuswami Dikshitar", "D": "12:36", "T": "", "U": "10,597 views", "V": "8T4jFDahDo4"}, {"A": "Madurai Mani Iyer", "C": "Muthuswami Dikshitar", "D": "3:19", "T": "", "U": "2,500 views", "V": "F24FdTM_Ros"}, {"A": "Madurai Mani Iyer", "C": "Muthuswami Dikshitar", "D": "10:11", "T": "", "U": "11 views", "V": "KIadyfmYZ3o"}, {"A": "Madurai Mani Iyer", "C": "Muthuswami Dikshitar", "D": "3:50", "T": "", "U": "34 views", "V": "I16el9MPnao"}, {"A": "Madurai Mani Iyer", "C": "Muthuswami Dikshitar", "D": "11:16", "T": "", "U": "80 views", "V": "wMev-SDPVUM"}, {"A": "Madurai Mani Iyer", "C": "Muthuswami Dikshitar", "D": "5:21", "T": "", "U": "78 views", "V": "FKH88ULjDPI"}, {"A": "Madurai Mani Iyer", "C": "Muthuswami Dikshitar", "D": "3:14", "T": "", "U": "179 views", "V": "G7waJpJ0F5M"}, {"A": "R. Suryaprakash", "C": "Muthuswami Dikshitar", "D": "4:21", "T": "", "U": "0 views", "V": "fDTd8wpytGE"}, {"A": "Rudrapatnam Brothers", "C": "Muthuswami Dikshitar", "D": "7:06", "T": "", "U": "492 views", "V": "Y4LLvfX4hYQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

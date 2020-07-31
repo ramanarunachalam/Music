@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>18</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>9</td></tr>
-<tr><td><em>Concert</em></td><td>9</td></tr>
+<tr><td><em>Concert</em></td><td>16</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - K. J. Yesudas", "songs": [{"N": "0360", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "UQlEhiyftBc"}, {"N": "0361", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "uXX5KnJwfOw"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1417", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "4mdzu5gBVsM"}, {"N": "1418", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "8eb8YYu6JdA"}, {"N": "1419", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "xff9ffK0thU"}]}, {"name": "Vocal - Mangalam Shankar", "songs": [{"N": "0008", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "Mangalam Shankar", "V": "-iQhF1nKJ8I"}]}, {"name": "Vocal - S. Ramanathan", "songs": [{"N": "0113", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "S. Ramanathan", "V": "MenJ--g12ck"}]}, {"name": "Vocal - Srividya Sriram", "songs": [{"N": "0028", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "Srividya Sriram", "V": "Q2qkO5YDO9g"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0606", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "JdCStL_kvNY"}, {"N": "0607", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "McL9paHa2yA"}, {"N": "0608", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "QKh5nla6aaM"}, {"N": "0609", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "RZfK5QS8CdE"}, {"N": "0610", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "_qgwTPQ-6R8"}, {"N": "0611", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "g-qf8j-43jo"}]}, {"name": "Flute - T. R. Mahalingam", "songs": [{"N": "0170", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "T. R. Mahalingam", "V": "URb4whDu-NE"}, {"N": "0171", "T": "", "H": "Sudha Madhurya", "S": "sudhA mAdhurya bhAshaNa : Adi", "R": "Sindhuramakriya", "C": "Thyagaraja", "A": "T. R. Mahalingam", "V": "ZFVlxV-ndQw"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "K. J. Yesudas", "songs": [{"C": "Thyagaraja", "D": "6:11", "R": "Sindhuramakriya", "T": "", "U": "291 views", "V": "uXX5KnJwfOw"}, {"C": "Thyagaraja", "D": "4:11", "R": "Sindhuramakriya", "T": "", "U": "53 views", "V": "UQlEhiyftBc"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Thyagaraja", "D": "7:13", "R": "Sindhuramakriya", "T": "", "U": "0 views", "V": "xff9ffK0thU"}, {"C": "Thyagaraja", "D": "7:32", "R": "Sindhuramakriya", "T": "", "U": "0 views", "V": "4mdzu5gBVsM"}, {"C": "Thyagaraja", "D": "4:50", "R": "Sindhuramakriya", "T": "", "U": "0 views", "V": "8eb8YYu6JdA"}]}, {"A": "Mangalam Shankar", "songs": [{"C": "Thyagaraja", "D": "6:02", "R": "Sindhuramakriya", "T": "", "U": "362 views", "V": "-iQhF1nKJ8I"}]}, {"A": "S. Ramanathan", "songs": [{"C": "Thyagaraja", "D": "5:50", "R": "Sindhuramakriya", "T": "", "U": "525 views", "V": "MenJ--g12ck"}]}, {"A": "Srividya Sriram", "songs": [{"C": "Thyagaraja", "D": "4:46", "R": "Sindhuramakriya", "T": "", "U": "74 views", "V": "Q2qkO5YDO9g"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Thyagaraja", "D": "1:05:51", "R": "Sindhuramakriya", "T": "", "U": "143 views", "V": "McL9paHa2yA"}, {"C": "Thyagaraja", "D": "6:17", "R": "Sindhuramakriya", "T": "", "U": "3,532 views", "V": "QKh5nla6aaM"}, {"C": "Thyagaraja", "D": "6:17", "R": "Sindhuramakriya", "T": "", "U": "215 views", "V": "JdCStL_kvNY"}, {"C": "Thyagaraja", "D": "6:30", "R": "Sindhuramakriya", "T": "", "U": "23 views", "V": "RZfK5QS8CdE"}, {"C": "Thyagaraja", "D": "3:01", "R": "Sindhuramakriya", "T": "", "U": "2,779 views", "V": "_qgwTPQ-6R8"}, {"C": "Thyagaraja", "D": "3:24", "R": "Sindhuramakriya", "T": "", "U": "958 views", "V": "g-qf8j-43jo"}]}, {"A": "T. R. Mahalingam", "songs": [{"C": "Thyagaraja", "D": "4:57", "R": "Sindhuramakriya", "T": "", "U": "288 views", "V": "URb4whDu-NE"}, {"C": "Thyagaraja", "D": "4:45", "R": "Sindhuramakriya", "T": "", "U": "77 views", "V": "ZFVlxV-ndQw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0099", "T": "", "H": "Kakka Unakkirakkam", "S": "kAkka unakkirakkam illaiyA shrI kapAlIsha jAyE :  Adi", "R": "Karaharapriya", "C": "Papanasam Sivan", "A": "P. Unnikrishnan", "V": "EfVQX7GkK1w"}, {"N": "0100", "T": "", "H": "Kakka Unakkirakkam", "S": "kAkka unakkirakkam illaiyA shrI kapAlIsha jAyE :  Adi", "R": "Karaharapriya", "C": "Papanasam Sivan", "A": "P. Unnikrishnan", "V": "bo7k_AVXlfE"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0392", "T": "", "H": "Kakka Unakkirakkam", "S": "kAkka unakkirakkam illaiyA shrI kapAlIsha jAyE :  Adi", "R": "Karaharapriya", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "Tj_hXbDibQE"}, {"N": "0393", "T": "", "H": "Kakka Unakkirakkam", "S": "kAkka unakkirakkam illaiyA shrI kapAlIsha jAyE :  Adi", "R": "Karaharapriya", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "f9j9zX0AH18"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "P. Unnikrishnan", "songs": [{"C": "Papanasam Sivan", "D": "25:41", "R": "Karaharapriya", "T": "", "U": "903 views", "V": "bo7k_AVXlfE"}, {"C": "Papanasam Sivan", "D": "25:41", "R": "Karaharapriya", "T": "", "U": "427 views", "V": "EfVQX7GkK1w"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Papanasam Sivan", "D": "45:21", "R": "Karaharapriya", "T": "", "U": "0 views", "V": "Tj_hXbDibQE"}, {"C": "Papanasam Sivan", "D": "3:46", "R": "Karaharapriya", "T": "", "U": "624 views", "V": "f9j9zX0AH18"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

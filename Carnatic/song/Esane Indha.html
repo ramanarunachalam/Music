@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>4</td></tr>
-<tr><td><em>Concert</em></td><td>4</td></tr>
+<tr><td><em>Concert</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -143,57 +143,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Palghat R Ramprasad", "songs": [{"N": "0025", "T": "", "H": "Esane Indha", "S": "eesanE inda Ezhakkiranga innum taamasamaa :  Rupaka", "R": "Chakravakam", "C": "Papanasam Sivan", "A": "Palghat R Ramprasad", "V": "8SgNe0OINfE"}, {"N": "0026", "T": "", "H": "Esane Indha", "S": "eesanE inda Ezhakkiranga innum taamasamaa :  Rupaka", "R": "Chakravakam", "C": "Papanasam Sivan", "A": "Palghat R Ramprasad", "V": "vb08KoO_W30"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0069", "T": "", "H": "Esane Indha", "S": "eesanE inda Ezhakkiranga innum taamasamaa :  Rupaka", "R": "Chakravakam", "C": "Papanasam Sivan", "A": "Sikkil Gurucharan", "V": "VQnTrxBMf9A"}]}, {"name": "Vocal - T. M. Soundarajan", "songs": [{"N": "0008", "T": "", "H": "Esane Indha", "S": "eesanE inda Ezhakkiranga innum taamasamaa :  Rupaka", "R": "Chakravakam", "C": "Papanasam Sivan", "A": "T. M. Soundarajan", "V": "HZ5i1ESb99g"}]}, {"name": "Veena - S. Balachander", "songs": [{"N": "0014", "T": "", "H": "Esane Indha", "S": "eesanE inda Ezhakkiranga innum taamasamaa :  Rupaka", "R": "Chakravakam", "C": "Papanasam Sivan", "A": "S. Balachander", "V": "EttIeDIeGq8"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Palghat R Ramprasad", "songs": [{"C": "Papanasam Sivan", "D": "21:06", "R": "Chakravakam", "T": "", "U": "278 views", "V": "vb08KoO_W30"}, {"C": "Papanasam Sivan", "D": "21:01", "R": "Chakravakam", "T": "", "U": "131 views", "V": "8SgNe0OINfE"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Papanasam Sivan", "D": "28:26", "R": "Chakravakam", "T": "", "U": "6,955 views", "V": "VQnTrxBMf9A"}]}, {"A": "T. M. Soundarajan", "songs": [{"C": "Papanasam Sivan", "D": "11:16", "R": "Chakravakam", "T": "", "U": "575 views", "V": "HZ5i1ESb99g"}]}, {"A": "S. Balachander", "songs": [{"C": "Papanasam Sivan", "D": "28:57", "R": "Chakravakam", "T": "", "U": "360 views", "V": "EttIeDIeGq8"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>25</td></tr>
 <tr><td><em>Song</em></td><td>6</td></tr>
 <tr><td><em>Composer</em></td><td>5</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "bhajana sEyu mArgamunu jUpavE parama", "songs": [{"N": "0073", "T": "", "H": "Bhajana Seyu", "S": "bhajana sEyu mArgamunu jUpavE parama :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "ShXiNz-wh1g"}, {"N": "0074", "T": "", "H": "Bhajana Seyu", "S": "bhajana sEyu mArgamunu jUpavE parama :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "lAfFkZ2vs2s"}, {"N": "0076", "T": "", "H": "Bhajana Seyu", "S": "bhajana sEyu mArgamunu jUpavE parama :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "iBmohqLRX5g"}, {"N": "0077", "T": "", "H": "Bhajana Seyu", "S": "bhajana sEyu mArgamunu jUpavE parama :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "v9dqbPMpDZg"}, {"N": "0061", "T": "", "H": "Bhajana Seyu", "S": "bhajana sEyu mArgamunu jUpavE parama :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "S. Sowmya", "V": "auQnsaMid-A"}]}, {"name": "kanna tanDri neevE eelAguna nannu", "songs": [{"N": "0199", "T": "", "H": "Kanna Tandri Neeve", "S": "kanna tanDri neevE eelAguna nannu :  Adi", "R": "Narayani", "C": "Patnam Subramanya Iyer", "A": "D. K. Jayaraman", "V": "rMSMXiK6O60"}, {"N": "0164", "T": "", "H": "Kanna Tandri Neeve", "S": "kanna tanDri neevE eelAguna nannu :  Adi", "R": "Narayani", "C": "Patnam Subramanya Iyer", "A": "G. N. Balasubramaniam", "V": "XzXPdNDIB_k"}, {"N": "0432", "T": "", "H": "Kanna Tandri Neeve", "S": "kanna tanDri neevE eelAguna nannu :  Adi", "R": "Narayani", "C": "Patnam Subramanya Iyer", "A": "Sanjay Subrahmanyan", "V": "7db6gzFqLXg"}, {"N": "0018", "T": "", "H": "Kanna Tandri Neeve", "S": "kanna tanDri neevE eelAguna nannu :  Adi", "R": "Narayani", "C": "Patnam Subramanya Iyer", "A": "Vivek Sadasivam", "V": "p1NGF-ansmI"}]}, {"name": "mahiSAsura marddinIm namAmi mahanIya", "songs": [{"N": "0096", "T": "", "H": "Mahisasura Marddinim", "S": "mahiSAsura marddinIm namAmi mahanIya kaparddinIm :  Caapu", "R": "Narayani", "C": "Muthuswami Dikshitar", "A": "Chembai Vaidyanatha Bhagavathar", "V": "tgrSr0eALoI"}, {"N": "0045", "T": "", "H": "Mahisasura Marddinim", "S": "mahiSAsura marddinIm namAmi mahanIya kaparddinIm :  Caapu", "R": "Narayani", "C": "Muthuswami Dikshitar", "A": "Seetha Rajan", "V": "qg7U0fMiyEk"}]}, {"name": "nA moralanu vinarAdA nArAyaNi nAtO", "songs": [{"N": "0067", "T": "", "H": "Na Moralanu Vinaradha", "S": "nA moralanu vinarAdA nArAyaNi nAtO vAdA :  Rupaka", "R": "Narayani", "C": "G. N. Balasubramaniam", "A": "S. Rajam", "V": "ofywzxIUYeo"}, {"N": "0355", "T": "", "H": "Na Moralanu Vinaradha", "S": "nA moralanu vinarAdA nArAyaNi nAtO vAdA :  Rupaka", "R": "Narayani", "C": "G. N. Balasubramaniam", "A": "Sudha Ragunathan", "V": "tSh9bajU1tk"}]}, {"name": "rAma nIvE kAni nannu rakshincu", "songs": [{"N": "0107", "T": "", "H": "Rama Neeve Kaani", "S": "rAma nIvE kAni nannu rakshincu vAr e vvarE :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "Pantula Rama", "V": "ElKqmh2k808"}, {"N": "0111", "T": "", "H": "Rama Neeve Kaani", "S": "rAma nIvE kAni nannu rakshincu vAr e vvarE :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "Sandeep Narayan", "V": "aGurKJ0MJv0"}, {"N": "0068", "T": "", "H": "Rama Neeve Kaani", "S": "rAma nIvE kAni nannu rakshincu vAr e vvarE :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "Trichur V. Ramachandran", "V": "I5Yc_GwEvgo"}, {"N": "0093", "T": "", "H": "Rama Neeve Kaani", "S": "rAma nIvE kAni nannu rakshincu vAr e vvarE :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "Kadri Gopalnath", "V": "1enzOoCvElU"}, {"N": "0076", "T": "", "H": "Rama Neeve Kaani", "S": "rAma nIvE kAni nannu rakshincu vAr e vvarE :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "Kunnakudi Vaidyanathan", "V": "VTK2ISxm3HY"}, {"N": "0373", "T": "", "H": "Rama Neeve Kaani", "S": "rAma nIvE kAni nannu rakshincu vAr e vvarE :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "Lalgudi Jayaraman", "V": "gW8ayBB_kXA"}, {"N": "0078", "T": "", "H": "Rama Neeve Kaani", "S": "rAma nIvE kAni nannu rakshincu vAr e vvarE :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "Nagai Muralidharan", "V": "kTTVg5pgpR8"}, {"N": "0032", "T": "", "H": "Rama Neeve Kaani", "S": "rAma nIvE kAni nannu rakshincu vAr e vvarE :  Adi", "R": "Narayani", "C": "Thyagaraja", "A": "T. K. V. Ramanujacharyalu", "V": "cJU5Y0j8erg"}]}, {"name": "Unknownsong", "songs": [{"N": "0242", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Narayani", "C": "UnknownComposer", "A": "Gayathri Girish", "V": "LDH1To5MDEE"}, {"N": "1280", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Narayani", "C": "UnknownComposer", "A": "Sanjay Subrahmanyan", "V": "8EC7uP2kX9w"}, {"N": "0875", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Narayani", "C": "UnknownComposer", "A": "Sudha Ragunathan", "V": "Wcysbs6jtbo"}, {"N": "0086", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Narayani", "C": "UnknownComposer", "A": "T. H. Subramaniam", "V": "_xSaM0Wf1JQ"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Bhajana Seyu", "S": "bhajana sEyu mArgamunu jUpavE parama :  Adi", "songs": [{"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "5:05", "T": "", "U": "125 views", "V": "lAfFkZ2vs2s"}, {"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "5:15", "T": "", "U": "199 views", "V": "ShXiNz-wh1g"}, {"A": "D. K. Pattammal", "C": "Thyagaraja", "D": "4:10", "T": "", "U": "209 views", "V": "v9dqbPMpDZg"}, {"A": "D. K. Pattammal", "C": "Thyagaraja", "D": "3:44", "T": "", "U": "133 views", "V": "iBmohqLRX5g"}, {"A": "S. Sowmya", "C": "Thyagaraja", "D": "9:31", "T": "", "U": "246 views", "V": "auQnsaMid-A"}]}, {"H": "Kanna Tandri Neeve", "S": "kanna tanDri neevE eelAguna nannu :  Adi", "songs": [{"A": "D. K. Jayaraman", "C": "Patnam Subramanya Iyer", "D": "5:55", "T": "", "U": "47 views", "V": "rMSMXiK6O60"}, {"A": "G. N. Balasubramaniam", "C": "Patnam Subramanya Iyer", "D": "3:06", "T": "", "U": "49 views", "V": "XzXPdNDIB_k"}, {"A": "Sanjay Subrahmanyan", "C": "Patnam Subramanya Iyer", "D": "17:31", "T": "", "U": "458 views", "V": "7db6gzFqLXg"}, {"A": "Vivek Sadasivam", "C": "Patnam Subramanya Iyer", "D": "5:12", "T": "", "U": "179 views", "V": "p1NGF-ansmI"}]}, {"H": "Mahisasura Marddinim", "S": "mahiSAsura marddinIm namAmi mahanIya kaparddinIm :  Caapu", "songs": [{"A": "Chembai Vaidyanatha Bhagavathar", "C": "Muthuswami Dikshitar", "D": "", "T": "", "U": "644 views", "V": "tgrSr0eALoI"}, {"A": "Seetha Rajan", "C": "Muthuswami Dikshitar", "D": "10:35", "T": "", "U": "4,131 views", "V": "qg7U0fMiyEk"}]}, {"H": "Na Moralanu Vinaradha", "S": "nA moralanu vinarAdA nArAyaNi nAtO vAdA :  Rupaka", "songs": [{"A": "S. Rajam", "C": "G. N. Balasubramaniam", "D": "8:17", "T": "", "U": "221 views", "V": "ofywzxIUYeo"}, {"A": "Sudha Ragunathan", "C": "G. N. Balasubramaniam", "D": "", "T": "", "U": "321 views", "V": "tSh9bajU1tk"}]}, {"H": "Rama Neeve Kaani", "S": "rAma nIvE kAni nannu rakshincu vAr e vvarE :  Adi", "songs": [{"A": "Pantula Rama", "C": "Thyagaraja", "D": "8:20", "T": "", "U": "0 views", "V": "ElKqmh2k808"}, {"A": "Sandeep Narayan", "C": "Thyagaraja", "D": "6:06", "T": "", "U": "4,062 views", "V": "aGurKJ0MJv0"}, {"A": "Trichur V. Ramachandran", "C": "Thyagaraja", "D": "4:00", "T": "", "U": "0 views", "V": "I5Yc_GwEvgo"}, {"A": "Kadri Gopalnath", "C": "Thyagaraja", "D": "4:08", "T": "", "U": "0 views", "V": "1enzOoCvElU"}, {"A": "Kunnakudi Vaidyanathan", "C": "Thyagaraja", "D": "8:39", "T": "", "U": "0 views", "V": "VTK2ISxm3HY"}, {"A": "Lalgudi Jayaraman", "C": "Thyagaraja", "D": "14:31", "T": "", "U": "396 views", "V": "gW8ayBB_kXA"}, {"A": "Nagai Muralidharan", "C": "Thyagaraja", "D": "16:30", "T": "", "U": "930 views", "V": "kTTVg5pgpR8"}, {"A": "T. K. V. Ramanujacharyalu", "C": "Thyagaraja", "D": "5:23", "T": "", "U": "1,324 views", "V": "cJU5Y0j8erg"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Gayathri Girish", "C": "UnknownComposer", "D": "3:51", "T": "", "U": "175 views", "V": "LDH1To5MDEE"}, {"A": "Sanjay Subrahmanyan", "C": "UnknownComposer", "D": "7:05", "T": "", "U": "20,000 views", "V": "8EC7uP2kX9w"}, {"A": "Sudha Ragunathan", "C": "UnknownComposer", "D": "5:13", "T": "", "U": "815 views", "V": "Wcysbs6jtbo"}, {"A": "T. H. Subramaniam", "C": "UnknownComposer", "D": "9:45", "T": "", "U": "34 views", "V": "_xSaM0Wf1JQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -17,7 +17,7 @@
 <tr><td><em>Song</em></td><td>15</td></tr>
 <tr><td><em>Raga</em></td><td>14</td></tr>
 <tr><td><em>Composer</em></td><td>9</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>20</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "SPAP01", "songs": [{"N": "0001", "T": "", "H": "Concert", "S": "Concert", "R": "Bhairavi", "C": "UnknownComposer", "A": "S. P. Ananthapadmanabha", "V": "TpH7O5p56ZQ"}, {"N": "0002", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "S. P. Ananthapadmanabha", "V": "SjguYnOIUjY"}, {"N": "0004", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "S. P. Ananthapadmanabha", "V": "ze1CE3tpR1o"}, {"N": "0007", "T": "", "H": "Balagopala", "S": "bAlagOpAla pAlaya Ashu mAm bhaktavatsala :  Adi", "R": "Bhairavi", "C": "Muthuswami Dikshitar", "A": "S. P. Ananthapadmanabha", "V": "5Eb7YQMhGW8"}, {"N": "0009", "T": "", "H": "Gajavadana Karuna", "S": "Gajavadana Karuna Sadana  Sri  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "S. P. Ananthapadmanabha", "V": "jJiV9hbXsv4"}, {"N": "0016", "T": "Thillana", "H": "thillana_st_dhanashree", "S": "gidhu nadiku takiTa takadhrka Duta tOm :  Jhampa", "R": "Dhanashree", "C": "Swathi Thirunal", "A": "S. P. Ananthapadmanabha", "V": "zopJb2pruR4"}, {"N": "0017", "T": "Thillana", "H": "thillana_unknowncomposer_gurjari,gurjarithodi", "S": "thillana unknowncomposer gurjari gurjarithodi", "R": "Gurjari,Gurjarithodi", "C": "UnknownComposer", "A": "S. P. Ananthapadmanabha", "V": "3CJSUS2u3Lk"}, {"N": "0018", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Bhairavi,Malavi", "C": "UnknownComposer", "A": "S. P. Ananthapadmanabha", "V": "aS36XJQl9DI"}, {"N": "0019", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Bhairavi,Malavi", "C": "UnknownComposer", "A": "S. P. Ananthapadmanabha", "V": "i91gtnqJu2E"}, {"N": "0020", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Bhairavi,Malavi", "C": "UnknownComposer", "A": "S. P. Ananthapadmanabha", "V": "jbff_QAKFVI"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Balagopala", "S": "bAlagOpAla pAlaya Ashu mAm bhaktavatsala :  Adi", "songs": [{"C": "Muthuswami Dikshitar", "D": "21:46", "R": "Bhairavi", "T": "", "U": "0 views", "V": "5Eb7YQMhGW8"}]}, {"H": "Concert", "S": "Concert", "songs": [{"C": "UnknownComposer", "D": "1:17:12", "R": "Unknownraga", "T": "", "U": "990 views", "V": "ze1CE3tpR1o"}, {"C": "UnknownComposer", "D": "1:27:44", "R": "Unknownraga", "T": "", "U": "531 views", "V": "SjguYnOIUjY"}, {"C": "UnknownComposer", "D": "1:40:52", "R": "Unknownraga", "T": "", "U": "1,395 views", "V": "TpH7O5p56ZQ"}]}, {"H": "Gajavadana Karuna", "S": "Gajavadana Karuna Sadana  Sri  :  Adi", "songs": [{"C": "Papanasam Sivan", "D": "7:36", "R": "Sriranjani", "T": "", "U": "1,108 views", "V": "jJiV9hbXsv4"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "8:30", "R": "Bhairavi,Malavi", "T": "", "U": "0 views", "V": "aS36XJQl9DI"}, {"C": "UnknownComposer", "D": "19:36", "R": "Bhairavi,Malavi", "T": "", "U": "0 views", "V": "i91gtnqJu2E"}, {"C": "UnknownComposer", "D": "4:01", "R": "Bhairavi,Malavi", "T": "", "U": "0 views", "V": "jbff_QAKFVI"}]}, {"H": "thillana_st_dhanashree", "S": "gidhu nadiku takiTa takadhrka Duta tOm :  Jhampa", "songs": [{"C": "Swathi Thirunal", "D": "4:09", "R": "Dhanashree", "T": "Thillana", "U": "590 views", "V": "zopJb2pruR4"}]}, {"H": "thillana_unknowncomposer_gurjari,gurjarithodi", "S": "thillana unknowncomposer gurjari gurjarithodi", "songs": [{"C": "UnknownComposer", "D": "3:35", "R": "Gurjari,Gurjarithodi", "T": "Thillana", "U": "509 views", "V": "3CJSUS2u3Lk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

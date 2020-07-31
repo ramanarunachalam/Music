@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>15</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>9</td></tr>
-<tr><td><em>Concert</em></td><td>9</td></tr>
+<tr><td><em>Concert</em></td><td>15</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0105", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "Hyderabad Brothers", "V": "C4kvXyhMcAM"}, {"N": "0106", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "Hyderabad Brothers", "V": "al5Fqf1Xh_M"}]}, {"name": "Vocal - Maharajapuram S. Srinivasan", "songs": [{"N": "0012", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "Maharajapuram S. Srinivasan", "V": "EoXrAzgij_0"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0278", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "Maharajapuram Santhanam", "V": "fHE2945iIws"}]}, {"name": "Vocal - Nedunuri Krishnamurthy", "songs": [{"N": "0232", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "6MjiIJo3PH8"}, {"N": "0233", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "AlYcSRKgT9k"}, {"N": "0234", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "sK2SGj65-pw"}]}, {"name": "Vocal - O. S. Thyagarajan", "songs": [{"N": "0091", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "O. S. Thyagarajan", "V": "UDuO9oCmUjo"}, {"N": "0092", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "O. S. Thyagarajan", "V": "nseW7ZBOFaI"}, {"N": "0093", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "O. S. Thyagarajan", "V": "pJfZ0cXJoos"}]}, {"name": "Vocal - R. Vedavalli", "songs": [{"N": "0167", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "R. Vedavalli", "V": "7S9L8Fotzjw"}]}, {"name": "Vocal - Ram Kaushik", "songs": [{"N": "0039", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "Ram Kaushik", "V": "zP4SOj6lfAU"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0342", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "LH68TwlyuhE"}, {"N": "0343", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "O5bcKGTggYE"}]}, {"name": "Violin - T. K. V. Ramanujacharyalu", "songs": [{"N": "0025", "T": "", "H": "Mitri Bhagyame", "S": "mitri bhAgyamE bhAgyamu manasA sau mitri  :  Adi", "R": "Karaharapriya", "C": "Thyagaraja", "A": "T. K. V. Ramanujacharyalu", "V": "n-DD-wg8gR4"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Hyderabad Brothers", "songs": [{"C": "Thyagaraja", "D": "28:00", "R": "Karaharapriya", "T": "", "U": "621 views", "V": "al5Fqf1Xh_M"}, {"C": "Thyagaraja", "D": "7:49", "R": "Karaharapriya", "T": "", "U": "0 views", "V": "C4kvXyhMcAM"}]}, {"A": "Maharajapuram S. Srinivasan", "songs": [{"C": "Thyagaraja", "D": "15:26", "R": "Karaharapriya", "T": "", "U": "2,156 views", "V": "EoXrAzgij_0"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Thyagaraja", "D": "16:26", "R": "Karaharapriya", "T": "", "U": "771 views", "V": "fHE2945iIws"}]}, {"A": "Nedunuri Krishnamurthy", "songs": [{"C": "Thyagaraja", "D": "40:51", "R": "Karaharapriya", "T": "", "U": "580 views", "V": "sK2SGj65-pw"}, {"C": "Thyagaraja", "D": "4:25", "R": "Karaharapriya", "T": "", "U": "124 views", "V": "AlYcSRKgT9k"}, {"C": "Thyagaraja", "D": "36:04", "R": "Karaharapriya", "T": "", "U": "116 views", "V": "6MjiIJo3PH8"}]}, {"A": "O. S. Thyagarajan", "songs": [{"C": "Thyagaraja", "D": "19:05", "R": "Karaharapriya", "T": "", "U": "309 views", "V": "pJfZ0cXJoos"}, {"C": "Thyagaraja", "D": "24:36", "R": "Karaharapriya", "T": "", "U": "814 views", "V": "nseW7ZBOFaI"}, {"C": "Thyagaraja", "D": "1:04:56", "R": "Karaharapriya", "T": "", "U": "155 views", "V": "UDuO9oCmUjo"}]}, {"A": "R. Vedavalli", "songs": [{"C": "Thyagaraja", "D": "33:04", "R": "Karaharapriya", "T": "", "U": "146 views", "V": "7S9L8Fotzjw"}]}, {"A": "Ram Kaushik", "songs": [{"C": "Thyagaraja", "D": "8:23", "R": "Karaharapriya", "T": "", "U": "362 views", "V": "zP4SOj6lfAU"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Thyagaraja", "D": "15:16", "R": "Karaharapriya", "T": "", "U": "948 views", "V": "LH68TwlyuhE"}, {"C": "Thyagaraja", "D": "15:16", "R": "Karaharapriya", "T": "", "U": "0 views", "V": "O5bcKGTggYE"}]}, {"A": "T. K. V. Ramanujacharyalu", "songs": [{"C": "Thyagaraja", "D": "13:39", "R": "Karaharapriya", "T": "", "U": "947 views", "V": "n-DD-wg8gR4"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

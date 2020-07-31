@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>22</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>18</td></tr>
-<tr><td><em>Concert</em></td><td>18</td></tr>
+<tr><td><em>Concert</em></td><td>15</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -161,57 +161,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - A. S. Murali", "songs": [{"N": "0032", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "A. S. Murali", "V": "XdX5JWCKZZk"}]}, {"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0139", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "Amrutha Venkatesh", "V": "g8YWVjlEp44"}]}, {"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0330", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "D. K. Jayaraman", "V": "WdB2YRe9f78"}]}, {"name": "Vocal - Dr. Sripada Pinakapani", "songs": [{"N": "0034", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "Dr. Sripada Pinakapani", "V": "lMkyN5iF4II"}]}, {"name": "Vocal - Gayathri Girish", "songs": [{"N": "0136", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "Gayathri Girish", "V": "qgsRXlNVhsQ"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0978", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "M. Balamuralikrishna", "V": "2Bez-aFG5pE"}, {"N": "0979", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "M. Balamuralikrishna", "V": "zPHUGlhC-6s"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0455", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "M. D. Ramanathan", "V": "50RearazpVc"}, {"N": "0456", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "M. D. Ramanathan", "V": "AMwLvE5DU3U"}, {"N": "0457", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "M. D. Ramanathan", "V": "rokhMRsv_n4"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0538", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "M. L. Vasanthakumari", "V": "NB3BYJseXf0"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0153", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "Ramakrishnan Murthy", "V": "Jb4uvhlHPf0"}]}, {"name": "Veena - Iyer Brothers", "songs": [{"N": "0020", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "Iyer Brothers", "V": "YENGHnWTJiI"}]}, {"name": "Veena - Jayanthi Kumaresh", "songs": [{"N": "0053", "T": "", "H": "Ninnu Vina Gati", "S": "ninnu vinA gati gAna jagAna vanaruhAkSi :  Adi", "R": "Kalyani", "C": "Subbaraya Shastry", "A": "Jayanthi Kumaresh", "V": "-15-a01OJP8"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "A. S. Murali", "songs": [{"C": "Subbaraya Shastry", "D": "32:06", "R": "Kalyani", "T": "", "U": "514 views", "V": "XdX5JWCKZZk"}]}, {"A": "Amrutha Venkatesh", "songs": [{"C": "Subbaraya Shastry", "D": "33:51", "R": "Kalyani", "T": "", "U": "228 views", "V": "g8YWVjlEp44"}]}, {"A": "D. K. Jayaraman", "songs": [{"C": "Subbaraya Shastry", "D": "18:43", "R": "Kalyani", "T": "", "U": "76 views", "V": "WdB2YRe9f78"}]}, {"A": "Dr. Sripada Pinakapani", "songs": [{"C": "Subbaraya Shastry", "D": "1:01:41", "R": "Kalyani", "T": "", "U": "440 views", "V": "lMkyN5iF4II"}]}, {"A": "Gayathri Girish", "songs": [{"C": "Subbaraya Shastry", "D": "20:12", "R": "Kalyani", "T": "", "U": "390 views", "V": "qgsRXlNVhsQ"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Subbaraya Shastry", "D": "52:49", "R": "Kalyani", "T": "", "U": "0 views", "V": "zPHUGlhC-6s"}, {"C": "Subbaraya Shastry", "D": "20:12", "R": "Kalyani", "T": "", "U": "0 views", "V": "2Bez-aFG5pE"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Subbaraya Shastry", "D": "47:47", "R": "Kalyani", "T": "", "U": "2,700 views", "V": "AMwLvE5DU3U"}, {"C": "Subbaraya Shastry", "D": "53:46", "R": "Kalyani", "T": "", "U": "347 views", "V": "50RearazpVc"}, {"C": "Subbaraya Shastry", "D": "58:56", "R": "Kalyani", "T": "", "U": "16 views", "V": "rokhMRsv_n4"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Subbaraya Shastry", "D": "28:06", "R": "Kalyani", "T": "", "U": "170 views", "V": "NB3BYJseXf0"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Subbaraya Shastry", "D": "9:15", "R": "Kalyani", "T": "", "U": "103 views", "V": "ZUQCi5NAYn8"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Subbaraya Shastry", "D": "28:01", "R": "Kalyani", "T": "", "U": "846 views", "V": "Jb4uvhlHPf0"}]}, {"A": "Iyer Brothers", "songs": [{"C": "Subbaraya Shastry", "D": "8:01", "R": "Kalyani", "T": "", "U": "61 views", "V": "YENGHnWTJiI"}]}, {"A": "Jayanthi Kumaresh", "songs": [{"C": "Subbaraya Shastry", "D": "28:21", "R": "Kalyani", "T": "", "U": "579 views", "V": "-15-a01OJP8"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

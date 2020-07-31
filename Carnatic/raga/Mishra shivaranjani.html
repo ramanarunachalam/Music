@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>25</td></tr>
 <tr><td><em>Song</em></td><td>6</td></tr>
 <tr><td><em>Composer</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>3</td></tr>
+<tr><td><em>Type</em></td><td>3</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "brahmai vAham kila sadguru krpayA", "songs": [{"N": "0057", "T": "", "H": "Brahmai Vaaham", "S": "brahmai vAham kila sadguru krpayA", "R": "Mishra shivaranjani", "C": "Sadasiva Brahmendra", "A": "Voleti Venkateswarlu", "V": "VfCZla2xtwM"}]}, {"name": "Unknownsong", "songs": [{"N": "2097", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Mishra shivaranjani", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "FUC7SDGJGLY"}, {"N": "2098", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Mishra shivaranjani", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "dlZrfZyK4-A"}, {"N": "0466", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Mishra shivaranjani", "C": "UnknownComposer", "A": "Nithyasree Mahadevan", "V": "BvDs_fF3bbI"}]}, {"name": "Varnam", "songs": [{"N": "0019", "T": "", "H": "Varnam", "S": "Varnam", "R": "Mishra shivaranjani", "C": "UnknownComposer", "A": "Salem Gayathri Venkatesan", "V": "g1kuy3TKLh8"}]}, {"name": "tana dhim tadhIm tajhaNU dhIm tOm", "songs": [{"N": "0185", "T": "Thillana", "H": "thillana_lalgudi_mishrashivaranjani", "S": "tana dhim tadhIm tajhaNU dhIm tOm", "R": "Mishra shivaranjani", "C": "Lalgudi Jayaraman", "A": "S. Saketharaman", "V": "oUX013rm3sc"}, {"N": "0091", "T": "Thillana", "H": "thillana_lalgudi_mishrashivaranjani", "S": "tana dhim tadhIm tajhaNU dhIm tOm", "R": "Mishra shivaranjani", "C": "Lalgudi Jayaraman", "A": "U. Rajesh", "V": "23pAiFYVCTs"}, {"N": "0676", "T": "Thillana", "H": "thillana_lalgudi_mishrashivaranjani", "S": "tana dhim tadhIm tajhaNU dhIm tOm", "R": "Mishra shivaranjani", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "6507MSQVoGk"}]}, {"name": "tom dhrudhru dhImta tadara dhImta", "songs": [{"N": "0351", "T": "Thillana", "H": "thillana_santhanam_mishrashivaranjani", "S": "tom dhrudhru dhImta tadara dhImta", "R": "Mishra shivaranjani", "C": "Maharajapuram Santhanam", "A": "Amrutha Venkatesh", "V": "j8v26LY8Mss"}, {"N": "0029", "T": "Thillana", "H": "thillana_santhanam_mishrashivaranjani", "S": "tom dhrudhru dhImta tadara dhImta", "R": "Mishra shivaranjani", "C": "Maharajapuram Santhanam", "A": "Maharajapuram S. Srinivasan", "V": "kv1g2jE-bIc"}, {"N": "0649", "T": "Thillana", "H": "thillana_santhanam_mishrashivaranjani", "S": "tom dhrudhru dhImta tadara dhImta", "R": "Mishra shivaranjani", "C": "Maharajapuram Santhanam", "A": "Maharajapuram Santhanam", "V": "3xW2_DxXwtM"}, {"N": "0650", "T": "Thillana", "H": "thillana_santhanam_mishrashivaranjani", "S": "tom dhrudhru dhImta tadara dhImta", "R": "Mishra shivaranjani", "C": "Maharajapuram Santhanam", "A": "Maharajapuram Santhanam", "V": "60m6lMNGBXM"}, {"N": "0651", "T": "Thillana", "H": "thillana_santhanam_mishrashivaranjani", "S": "tom dhrudhru dhImta tadara dhImta", "R": "Mishra shivaranjani", "C": "Maharajapuram Santhanam", "A": "Maharajapuram Santhanam", "V": "attocXQcpaw"}, {"N": "0652", "T": "Thillana", "H": "thillana_santhanam_mishrashivaranjani", "S": "tom dhrudhru dhImta tadara dhImta", "R": "Mishra shivaranjani", "C": "Maharajapuram Santhanam", "A": "Maharajapuram Santhanam", "V": "j5BZyLhgcnA"}, {"N": "0653", "T": "Thillana", "H": "thillana_santhanam_mishrashivaranjani", "S": "tom dhrudhru dhImta tadara dhImta", "R": "Mishra shivaranjani", "C": "Maharajapuram Santhanam", "A": "Maharajapuram Santhanam", "V": "l1-0yyAvbyo"}, {"N": "1132", "T": "Thillana", "H": "thillana_santhanam_mishrashivaranjani", "S": "tom dhrudhru dhImta tadara dhImta", "R": "Mishra shivaranjani", "C": "Maharajapuram Santhanam", "A": "Sanjay Subrahmanyan", "V": "TblMIx02aAw"}]}, {"name": "thillana unknowncomposer mishrashivaranjani", "songs": [{"N": "0463", "T": "Thillana", "H": "thillana_unknowncomposer_mishrashivaranjani", "S": "thillana unknowncomposer mishrashivaranjani", "R": "Mishra shivaranjani", "C": "UnknownComposer", "A": "Bombay Jayashri", "V": "svCx7d1Wv9s"}, {"N": "0023", "T": "Thillana", "H": "thillana_unknowncomposer_mishrashivaranjani", "S": "thillana unknowncomposer mishrashivaranjani", "R": "Mishra shivaranjani", "C": "UnknownComposer", "A": "Sangeetha Swaminathan", "V": "otEjkulJVPY"}, {"N": "0726", "T": "Thillana", "H": "thillana_unknowncomposer_mishrashivaranjani", "S": "thillana unknowncomposer mishrashivaranjani", "R": "Mishra shivaranjani", "C": "UnknownComposer", "A": "Sudha Ragunathan", "V": "XEA_FL2EDIo"}, {"N": "0114", "T": "Thillana", "H": "thillana_unknowncomposer_mishrashivaranjani", "S": "thillana unknowncomposer mishrashivaranjani", "R": "Mishra shivaranjani", "C": "UnknownComposer", "A": "Jayanthi Kumaresh", "V": "qwcS1GfXLL8"}, {"N": "0075", "T": "Thillana", "H": "thillana_unknowncomposer_mishrashivaranjani", "S": "thillana unknowncomposer mishrashivaranjani", "R": "Mishra shivaranjani", "C": "UnknownComposer", "A": "Thiruvarur Bakthavathsalam", "V": "Gm5YWMi4vQc"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Brahmai Vaaham", "S": "brahmai vAham kila sadguru krpayA :  Adi", "songs": [{"A": "Voleti Venkateswarlu", "C": "Sadasiva Brahmendra", "D": "6:16", "T": "", "U": "856 views", "V": "VfCZla2xtwM"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "M. Balamuralikrishna", "C": "UnknownComposer", "D": "3:41", "T": "", "U": "0 views", "V": "dlZrfZyK4-A"}, {"A": "M. Balamuralikrishna", "C": "UnknownComposer", "D": "3:26", "T": "", "U": "0 views", "V": "FUC7SDGJGLY"}, {"A": "Nithyasree Mahadevan", "C": "UnknownComposer", "D": "11:11", "T": "", "U": "931 views", "V": "BvDs_fF3bbI"}]}, {"H": "Varnam", "S": "Varnam", "songs": [{"A": "Salem Gayathri Venkatesan", "C": "UnknownComposer", "D": "10:24", "T": "", "U": "2,149 views", "V": "g1kuy3TKLh8"}]}, {"H": "thillana_lalgudi_mishrashivaranjani", "S": "tana dhim tadhIm tajhaNU dhIm tOm", "songs": [{"A": "S. Saketharaman", "C": "Lalgudi Jayaraman", "D": "6:01", "T": "Thillana", "U": "286 views", "V": "oUX013rm3sc"}, {"A": "U. Rajesh", "C": "Lalgudi Jayaraman", "D": "5:01", "T": "Thillana", "U": "891 views", "V": "23pAiFYVCTs"}, {"A": "Lalgudi Jayaraman", "C": "Lalgudi Jayaraman", "D": "6:31", "T": "Thillana", "U": "4,669 views", "V": "6507MSQVoGk"}]}, {"H": "thillana_santhanam_mishrashivaranjani", "S": "tom dhrudhru dhImta tadara dhImta", "songs": [{"A": "Amrutha Venkatesh", "C": "Maharajapuram Santhanam", "D": "- Dauer: 6:06", "T": "Thillana", "U": "0 views", "V": "j8v26LY8Mss"}, {"A": "Maharajapuram S. Srinivasan", "C": "Maharajapuram Santhanam", "D": "4:54", "T": "Thillana", "U": "9,090 views", "V": "kv1g2jE-bIc"}, {"A": "Maharajapuram Santhanam", "C": "Maharajapuram Santhanam", "D": "6:00", "T": "Thillana", "U": "1,100 views", "V": "60m6lMNGBXM"}, {"A": "Maharajapuram Santhanam", "C": "Maharajapuram Santhanam", "D": "4:51", "T": "Thillana", "U": "2,082 views", "V": "l1-0yyAvbyo"}, {"A": "Maharajapuram Santhanam", "C": "Maharajapuram Santhanam", "D": "5:41", "T": "Thillana", "U": "3,911 views", "V": "attocXQcpaw"}, {"A": "Maharajapuram Santhanam", "C": "Maharajapuram Santhanam", "D": "3:23", "T": "Thillana", "U": "5,019 views", "V": "j5BZyLhgcnA"}, {"A": "Maharajapuram Santhanam", "C": "Maharajapuram Santhanam", "D": "6:16", "T": "Thillana", "U": "3 views", "V": "3xW2_DxXwtM"}, {"A": "Sanjay Subrahmanyan", "C": "Maharajapuram Santhanam", "D": "8:58", "T": "Thillana", "U": "0 views", "V": "TblMIx02aAw"}]}, {"H": "thillana_unknowncomposer_mishrashivaranjani", "S": "thillana unknowncomposer mishrashivaranjani", "songs": [{"A": "Bombay Jayashri", "C": "UnknownComposer", "D": "6:37", "T": "Thillana", "U": "65,000 views", "V": "svCx7d1Wv9s"}, {"A": "Sangeetha Swaminathan", "C": "UnknownComposer", "D": "4:21", "T": "Thillana", "U": "172 views", "V": "otEjkulJVPY"}, {"A": "Sudha Ragunathan", "C": "UnknownComposer", "D": "5:37", "T": "Thillana", "U": "1,155 views", "V": "XEA_FL2EDIo"}, {"A": "Jayanthi Kumaresh", "C": "UnknownComposer", "D": "6:49", "T": "Thillana", "U": "2,400 views", "V": "qwcS1GfXLL8"}, {"A": "Thiruvarur Bakthavathsalam", "C": "UnknownComposer", "D": "6:31", "T": "Thillana", "U": "1,631 views", "V": "Gm5YWMi4vQc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

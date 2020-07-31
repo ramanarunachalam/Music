@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>14</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>13</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -135,57 +135,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0277", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "Bombay Jayashri", "V": "8mpvdm_uWhQ"}]}, {"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0364", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "D. K. Jayaraman", "V": "AfK814RlXMk"}, {"N": "0365", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "D. K. Jayaraman", "V": "b_VE7VH1d7o"}, {"N": "0366", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "D. K. Jayaraman", "V": "uyqUwU6thFA"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0330", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "D. K. Pattammal", "V": "FbgzORgEd8s"}, {"N": "0331", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "D. K. Pattammal", "V": "QDkstvy0iOs"}, {"N": "0332", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "D. K. Pattammal", "V": "f-KkC-geGKg"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0256", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "Nithyasree Mahadevan", "V": "3-xgDleFZF0"}, {"N": "0257", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "Nithyasree Mahadevan", "V": "9QEs10Gptuk"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0168", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "Ramakrishnan Murthy", "V": "zAGbSqkX458"}]}, {"name": "Vocal - Seethalapathi Balasubramaniam", "songs": [{"N": "0027", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "Seethalapathi Balasubramaniam", "V": "bn298-7lTC0"}]}, {"name": "Vocal - Sriranjani Santhanagopalan", "songs": [{"N": "0071", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "Sriranjani Santhanagopalan", "V": "tJuGHkljGQk"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0459", "T": "", "H": "Poonguil Koovum", "S": "pUnkuyil kUvum pUnjOlaiyil orunAL mAmayil mIdu :  Eka", "R": "Kapi", "C": "Kalki Krishnamoorthy", "A": "T. M. Krishna", "V": "ndGtcR8mRdc"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Kalki Krishnamoorthy", "D": "3:01", "R": "Kapi", "T": "", "U": "8,005 views", "V": "8mpvdm_uWhQ"}]}, {"A": "D. K. Jayaraman", "songs": [{"C": "Kalki Krishnamoorthy", "D": "4:50", "R": "Kapi", "T": "", "U": "626 views", "V": "AfK814RlXMk"}, {"C": "Kalki Krishnamoorthy", "D": "5:11", "R": "Kapi", "T": "", "U": "6,518 views", "V": "uyqUwU6thFA"}, {"C": "Kalki Krishnamoorthy", "D": "5:13", "R": "Kapi", "T": "", "U": "0 views", "V": "b_VE7VH1d7o"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Kalki Krishnamoorthy", "D": "4:10", "R": "Kapi", "T": "", "U": "0 views", "V": "FbgzORgEd8s"}, {"C": "Kalki Krishnamoorthy", "D": "3:49", "R": "Kapi", "T": "", "U": "7,225 views", "V": "f-KkC-geGKg"}, {"C": "Kalki Krishnamoorthy", "D": "5:15", "R": "Kapi", "T": "", "U": "6,913 views", "V": "QDkstvy0iOs"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Kalki Krishnamoorthy", "D": "5:16", "R": "Kapi", "T": "", "U": "8,939 views", "V": "3-xgDleFZF0"}, {"C": "Kalki Krishnamoorthy", "D": "3:01", "R": "Kapi", "T": "", "U": "10,799 views", "V": "9QEs10Gptuk"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Kalki Krishnamoorthy", "D": "5:27", "R": "Kapi", "T": "", "U": "765 views", "V": "zAGbSqkX458"}]}, {"A": "Seethalapathi Balasubramaniam", "songs": [{"C": "Kalki Krishnamoorthy", "D": "3:01", "R": "Kapi", "T": "", "U": "185 views", "V": "bn298-7lTC0"}]}, {"A": "Sriranjani Santhanagopalan", "songs": [{"C": "Kalki Krishnamoorthy", "D": "8:34", "R": "Kapi", "T": "", "U": "1,892 views", "V": "tJuGHkljGQk"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Kalki Krishnamoorthy", "D": "8:16", "R": "Kapi", "T": "", "U": "1,164 views", "V": "ndGtcR8mRdc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

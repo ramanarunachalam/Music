@@ -13,10 +13,10 @@
 <div class="card-body">
 <div class="row SONG_TABLE"><div class="col-7"></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>26</td></tr>
-<tr><td><em>Song</em></td><td>4</td></tr>
+<tr><td><em>Audio</em></td><td>20</td></tr>
+<tr><td><em>Song</em></td><td>3</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Concert", "songs": [{"N": "0002", "T": "", "H": "Concert", "S": "Concert", "R": "Shivashakti", "C": "UnknownComposer", "A": "Ashwath Narayanan", "V": "ft5AwQWsgqE"}, {"N": "0005", "T": "", "H": "Concert", "S": "Concert", "R": "Shivashakti", "C": "UnknownComposer", "A": "G. N. Balasubramaniam", "V": "EMjAeCz4uEs"}, {"N": "0006", "T": "", "H": "Concert", "S": "Concert", "R": "Shivashakti", "C": "UnknownComposer", "A": "Gayathri Girish", "V": "ZWSHB7YEM4s"}]}, {"name": "sri chakra raja nilaye shivashakthi", "songs": [{"N": "0494", "T": "", "H": "Sri Chakra Raja", "S": "sri chakra raja nilaye shivashakthi aikya :  Adi", "R": "Shivashakti", "C": "G. N. Balasubramaniam", "A": "G. N. Balasubramaniam", "V": "LBymhTyWUnc"}, {"N": "0495", "T": "", "H": "Sri Chakra Raja", "S": "sri chakra raja nilaye shivashakthi aikya :  Adi", "R": "Shivashakti", "C": "G. N. Balasubramaniam", "A": "G. N. Balasubramaniam", "V": "xKSQgwxcVSQ"}, {"N": "0822", "T": "", "H": "Sri Chakra Raja", "S": "sri chakra raja nilaye shivashakthi aikya :  Adi", "R": "Shivashakti", "C": "G. N. Balasubramaniam", "A": "M. L. Vasanthakumari", "V": "W65XbldqPNg"}, {"N": "0020", "T": "", "H": "Sri Chakra Raja", "S": "sri chakra raja nilaye shivashakthi aikya :  Adi", "R": "Shivashakti", "C": "G. N. Balasubramaniam", "A": "Manasi Prasad", "V": "kZXJN2uvQFo"}, {"N": "0080", "T": "", "H": "Sri Chakra Raja", "S": "sri chakra raja nilaye shivashakthi aikya :  Adi", "R": "Shivashakti", "C": "G. N. Balasubramaniam", "A": "Prema Rangarajan", "V": "RHi3NlkYsx4"}, {"N": "0234", "T": "", "H": "Sri Chakra Raja", "S": "sri chakra raja nilaye shivashakthi aikya :  Adi", "R": "Shivashakti", "C": "G. N. Balasubramaniam", "A": "S. Kalyanaraman", "V": "KIdmYlVC39Y"}, {"N": "0566", "T": "", "H": "Sri Chakra Raja", "S": "sri chakra raja nilaye shivashakthi aikya :  Adi", "R": "Shivashakti", "C": "G. N. Balasubramaniam", "A": "Sudha Ragunathan", "V": "Kb0YShfEHbQ"}, {"N": "0567", "T": "", "H": "Sri Chakra Raja", "S": "sri chakra raja nilaye shivashakthi aikya :  Adi", "R": "Shivashakti", "C": "G. N. Balasubramaniam", "A": "Sudha Ragunathan", "V": "aRlT2ZHG39s"}, {"N": "0106", "T": "", "H": "Sri Chakra Raja", "S": "sri chakra raja nilaye shivashakthi aikya :  Adi", "R": "Shivashakti", "C": "G. N. Balasubramaniam", "A": "Kadri Gopalnath", "V": "uAHIeA3XxEY"}]}, {"name": "Unknownsong", "songs": [{"N": "0785", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shivashakti", "C": "UnknownComposer", "A": "G. N. Balasubramaniam", "V": "-PRIb-Kc4Vo"}, {"N": "0257", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shivashakti", "C": "UnknownComposer", "A": "Gayathri Girish", "V": "FBvGPKVq5dc"}, {"N": "0015", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shivashakti", "C": "UnknownComposer", "A": "Lalitha Sivakumar", "V": "cx_F---Ovfc"}, {"N": "0499", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shivashakti", "C": "UnknownComposer", "A": "Nithyasree Mahadevan", "V": "TTGjaR8iv9E"}, {"N": "0050", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shivashakti", "C": "UnknownComposer", "A": "Rajkumar Bharathi", "V": "pa3Ql2F2X3g"}, {"N": "0228", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shivashakti", "C": "UnknownComposer", "A": "A. Kanyakumari", "V": "IM-XMq9FS3I"}, {"N": "0229", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shivashakti", "C": "UnknownComposer", "A": "A. Kanyakumari", "V": "rCE5sArD-yI"}]}, {"name": "vinutapAlini gadA vEga brOva rAdA", "songs": [{"N": "0587", "T": "", "H": "Vinuthapalini", "S": "vinutapAlini gadA vEga brOva rAdA  :  Rupaka", "R": "Shivashakti", "C": "G. N. Balasubramaniam", "A": "G. N. Balasubramaniam", "V": "3ULIDhNFjLo"}, {"N": "0122", "T": "", "H": "Vinuthapalini", "S": "vinutapAlini gadA vEga brOva rAdA  :  Rupaka", "R": "Shivashakti", "C": "G. N. Balasubramaniam", "A": "Trichur V. Ramachandran", "V": "fU9b3XT_NB0"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Sri Chakra Raja", "S": "sri chakra raja nilaye shivashakthi aikya :  Adi", "songs": [{"A": "G. N. Balasubramaniam", "C": "G. N. Balasubramaniam", "D": "6:40", "T": "", "U": "3,687 views", "V": "xKSQgwxcVSQ"}, {"A": "G. N. Balasubramaniam", "C": "G. N. Balasubramaniam", "D": "5:00", "T": "", "U": "473 views", "V": "LBymhTyWUnc"}, {"A": "M. L. Vasanthakumari", "C": "G. N. Balasubramaniam", "D": "11:40", "T": "", "U": "469 views", "V": "W65XbldqPNg"}, {"A": "Manasi Prasad", "C": "G. N. Balasubramaniam", "D": "5:02", "T": "", "U": "731 views", "V": "kZXJN2uvQFo"}, {"A": "Prema Rangarajan", "C": "G. N. Balasubramaniam", "D": "12:56", "T": "", "U": "100 views", "V": "RHi3NlkYsx4"}, {"A": "S. Kalyanaraman", "C": "G. N. Balasubramaniam", "D": "11:00", "T": "", "U": "679 views", "V": "KIdmYlVC39Y"}, {"A": "Sudha Ragunathan", "C": "G. N. Balasubramaniam", "D": "", "T": "", "U": "920 views", "V": "aRlT2ZHG39s"}, {"A": "Sudha Ragunathan", "C": "G. N. Balasubramaniam", "D": "7:39", "T": "", "U": "5,027 views", "V": "Kb0YShfEHbQ"}, {"A": "Kadri Gopalnath", "C": "G. N. Balasubramaniam", "D": "37:33", "T": "", "U": "3,313 views", "V": "uAHIeA3XxEY"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "G. N. Balasubramaniam", "C": "UnknownComposer", "D": "5:34", "T": "", "U": "553 views", "V": "-PRIb-Kc4Vo"}, {"A": "Gayathri Girish", "C": "UnknownComposer", "D": "58:16", "T": "", "U": "3 views", "V": "FBvGPKVq5dc"}, {"A": "Lalitha Sivakumar", "C": "UnknownComposer", "D": "4:49", "T": "", "U": "2,824 views", "V": "cx_F---Ovfc"}, {"A": "Nithyasree Mahadevan", "C": "UnknownComposer", "D": "6:38", "T": "", "U": "3,653 views", "V": "TTGjaR8iv9E"}, {"A": "Rajkumar Bharathi", "C": "UnknownComposer", "D": "45:28", "T": "", "U": "17,462 views", "V": "pa3Ql2F2X3g"}, {"A": "A. Kanyakumari", "C": "UnknownComposer", "D": "24:59", "T": "", "U": "0 views", "V": "rCE5sArD-yI"}, {"A": "A. Kanyakumari", "C": "UnknownComposer", "D": "2:05", "T": "", "U": "0 views", "V": "IM-XMq9FS3I"}]}, {"H": "Vinuthapalini", "S": "vinutapAlini gadA vEga brOva rAdA  :  Rupaka", "songs": [{"A": "G. N. Balasubramaniam", "C": "G. N. Balasubramaniam", "D": "4:07", "T": "", "U": "79 views", "V": "3ULIDhNFjLo"}, {"A": "Trichur V. Ramachandran", "C": "G. N. Balasubramaniam", "D": "10:51", "T": "", "U": "411 views", "V": "fU9b3XT_NB0"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

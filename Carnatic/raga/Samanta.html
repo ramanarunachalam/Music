@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>13</td></tr>
 <tr><td><em>Song</em></td><td>3</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "praNatArttiharAya namastE vara dharmasamvarddhanI", "songs": [{"N": "0018", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "Balaji Shankar", "V": "SGZRAh--5zs"}, {"N": "0019", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "Balaji Shankar", "V": "Z0nGHWHF368"}, {"N": "0206", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "b9PzLUvM-Xw"}, {"N": "0207", "T": "", "H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "o9p39Vr13XA"}]}, {"name": "Unknownsong", "songs": [{"N": "0036", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Samanta", "C": "UnknownComposer", "A": "Carnatica Brothers", "V": "DiSu7ENNBVQ"}, {"N": "0030", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Samanta", "C": "UnknownComposer", "A": "S. Srinivasan", "V": "auycGt6wKdM"}]}, {"name": "vishvanAthEna rakSitOham", "songs": [{"N": "0674", "T": "", "H": "Viswanathena", "S": "vishvanAthEna rakSitOham  :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "I1rpRPSjK0M"}, {"N": "0044", "T": "", "H": "Viswanathena", "S": "vishvanAthEna rakSitOham  :  Adi", "R": "Samanta", "C": "Muthuswami Dikshitar", "A": "Kalpakam Swaminathan", "V": "mNhkLn-01pY"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Pranatharthiharaya Namasthe", "S": "praNatArttiharAya namastE vara dharmasamvarddhanI :  Adi", "songs": [{"A": "Balaji Shankar", "C": "Muthuswami Dikshitar", "D": "5:06", "T": "", "U": "672 views", "V": "SGZRAh--5zs"}, {"A": "Balaji Shankar", "C": "Muthuswami Dikshitar", "D": "3:02", "T": "", "U": "4,816 views", "V": "Z0nGHWHF368"}, {"A": "R. Vedavalli", "C": "Muthuswami Dikshitar", "D": "4:01", "T": "", "U": "20 views", "V": "o9p39Vr13XA"}, {"A": "R. Vedavalli", "C": "Muthuswami Dikshitar", "D": "", "T": "", "U": "19 views", "V": "b9PzLUvM-Xw"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Carnatica Brothers", "C": "UnknownComposer", "D": "15:28", "T": "", "U": "724 views", "V": "DiSu7ENNBVQ"}, {"A": "S. Srinivasan", "C": "UnknownComposer", "D": "5:10", "T": "", "U": "31 views", "V": "auycGt6wKdM"}]}, {"H": "Viswanathena", "S": "vishvanAthEna rakSitOham  :  Adi", "songs": [{"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "3:40", "T": "", "U": "572 views", "V": "I1rpRPSjK0M"}, {"A": "Kalpakam Swaminathan", "C": "Muthuswami Dikshitar", "D": "7:25", "T": "", "U": "696 views", "V": "mNhkLn-01pY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

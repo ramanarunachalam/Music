@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>15</td></tr>
 <tr><td><em>Raga</em></td><td>2</td></tr>
 <tr><td><em>Artist</em></td><td>11</td></tr>
-<tr><td><em>Concert</em></td><td>11</td></tr>
+<tr><td><em>Concert</em></td><td>15</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Kannikeswaran", "songs": [{"N": "0001", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Udhaya ravichandrika", "C": "Muthuswami Dikshitar", "A": "Kannikeswaran", "V": "Lw2WW90YqbY"}]}, {"name": "Vocal - R. Vedavalli", "songs": [{"N": "0065", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Udhaya ravichandrika", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "2-rOdhrqPbs"}, {"N": "0066", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Udhaya ravichandrika", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "9egWhBOiQlM"}, {"N": "0067", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "C35QLJn3lIY"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0017", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Udhaya ravichandrika", "C": "Muthuswami Dikshitar", "A": "Ranjani Gayatri", "V": "_k_OqgS0znE"}]}, {"name": "Vocal - Rithvik Raja", "songs": [{"N": "0010", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Udhaya ravichandrika", "C": "Muthuswami Dikshitar", "A": "Rithvik Raja", "V": "bAdI55of4sM"}]}, {"name": "Vocal - S. R. Janakiraman", "songs": [{"N": "0008", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Udhaya ravichandrika", "C": "Muthuswami Dikshitar", "A": "S. R. Janakiraman", "V": "o_tx5kGb82M"}, {"N": "0009", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Udhaya ravichandrika", "C": "Muthuswami Dikshitar", "A": "S. R. Janakiraman", "V": "sCP-o3ctm1o"}]}, {"name": "Vocal - Sumithra Vasudev", "songs": [{"N": "0021", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Udhaya ravichandrika", "C": "Muthuswami Dikshitar", "A": "Sumithra Vasudev", "V": "8ljAy18GDBs"}, {"N": "0022", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Udhaya ravichandrika", "C": "Muthuswami Dikshitar", "A": "Sumithra Vasudev", "V": "hAL5K5j0Dd4"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0107", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Udhaya ravichandrika", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "iD20lXpOlWE"}]}, {"name": "Vocal - Vijayalakshmy Subramaniam", "songs": [{"N": "0011", "T": "Guruguha vibhakti", "H": "Sri Guruguha Murthe", "S": "shrI guruguha mUrtE cicchakti sphUrtE :  Rupaka", "R": "Udhaya ravichandrika", "C": "Muthuswami Dikshitar", "A": "Vijayalakshmy Subramaniam", "V": "pTeJk3jQHHc"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Kannikeswaran", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:14", "R": "Udhaya ravichandrika", "T": "Guruguha vibhakti", "U": "1,694 views", "V": "Lw2WW90YqbY"}]}, {"A": "R. Vedavalli", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:21", "R": "Udhaya ravichandrika", "T": "Guruguha vibhakti", "U": "684 views", "V": "2-rOdhrqPbs"}, {"C": "Muthuswami Dikshitar", "D": "9:31", "R": "Udhaya ravichandrika", "T": "Guruguha vibhakti", "U": "262 views", "V": "9egWhBOiQlM"}, {"C": "Muthuswami Dikshitar", "D": "9:29", "R": "Unknownraga", "T": "Guruguha vibhakti", "U": "0 views", "V": "C35QLJn3lIY"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:20", "R": "Udhaya ravichandrika", "T": "Guruguha vibhakti", "U": "761 views", "V": "_k_OqgS0znE"}]}, {"A": "Rithvik Raja", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:43", "R": "Udhaya ravichandrika", "T": "Guruguha vibhakti", "U": "726 views", "V": "bAdI55of4sM"}]}, {"A": "S. R. Janakiraman", "songs": [{"C": "Muthuswami Dikshitar", "D": "10:21", "R": "Udhaya ravichandrika", "T": "Guruguha vibhakti", "U": "165 views", "V": "o_tx5kGb82M"}, {"C": "Muthuswami Dikshitar", "D": "8:05", "R": "Udhaya ravichandrika", "T": "Guruguha vibhakti", "U": "3,106 views", "V": "sCP-o3ctm1o"}]}, {"A": "Sumithra Vasudev", "songs": [{"C": "Muthuswami Dikshitar", "D": "12:56", "R": "Udhaya ravichandrika", "T": "Guruguha vibhakti", "U": "390 views", "V": "hAL5K5j0Dd4"}, {"C": "Muthuswami Dikshitar", "D": "13:01", "R": "Udhaya ravichandrika", "T": "Guruguha vibhakti", "U": "225 views", "V": "8ljAy18GDBs"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Muthuswami Dikshitar", "D": "8:21", "R": "Udhaya ravichandrika", "T": "Guruguha vibhakti", "U": "1,300 views", "V": "iD20lXpOlWE"}]}, {"A": "Vijayalakshmy Subramaniam", "songs": [{"C": "Muthuswami Dikshitar", "D": "18:41", "R": "Udhaya ravichandrika", "T": "Guruguha vibhakti", "U": "929 views", "V": "pTeJk3jQHHc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

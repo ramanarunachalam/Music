@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>12</td></tr>
-<tr><td><em>Concert</em></td><td>12</td></tr>
+<tr><td><em>Concert</em></td><td>16</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Alamelu Mani", "songs": [{"N": "0022", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "Alamelu Mani", "V": "gfRL0bfyha4"}]}, {"name": "Vocal - Cherthala K. N. Renganatha Sharma", "songs": [{"N": "0140", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "Cherthala K. N. Renganatha Sharma", "V": "TYmgjOjerbk"}, {"N": "0141", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "Cherthala K. N. Renganatha Sharma", "V": "vvxX9YdIAR8"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1514", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "UeMxM2ZTcOM"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0257", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "Malladi Brothers", "V": "YlZFybWvHko"}]}, {"name": "Vocal - Malladi Suribabu", "songs": [{"N": "0053", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "Malladi Suribabu", "V": "LYldcskzrMo"}, {"N": "0054", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "Malladi Suribabu", "V": "Ujnw8DijATM"}]}, {"name": "Vocal - Mambalam Sisters", "songs": [{"N": "0115", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "Mambalam Sisters", "V": "_bdhVP9RqMI"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0202", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "Sikkil Gurucharan", "V": "Bv6S3hGAv_A"}, {"N": "0203", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "Sikkil Gurucharan", "V": "woyxZL44HdE"}]}, {"name": "Vocal - Vishnudev Nampoothri", "songs": [{"N": "0071", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "Vishnudev Nampoothri", "V": "yi1J0zJpinw"}]}, {"name": "Veena - B. Sivakumar", "songs": [{"N": "0007", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "B. Sivakumar", "V": "LSUXyKI3iyg"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0531", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "U. Srinivas", "V": "HUmU1goYfgY"}, {"N": "0532", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "U. Srinivas", "V": "ZGvy3dKk_ZQ"}]}, {"name": "Nadaswaram - Sheik Mahaboob Subhani", "songs": [{"N": "0028", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "Sheik Mahaboob Subhani", "V": "30qMOSPxtK8"}]}, {"name": "Violin - S. R. Mahadeva Sarma", "songs": [{"N": "0019", "T": "", "H": "Varashikhivahana", "S": "vara Sikhi vAhana vArija lOcana :  Adi", "R": "Supradeepam", "C": "Thyagaraja", "A": "S. R. Mahadeva Sarma", "V": "iFBptkb6mRA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Alamelu Mani", "songs": [{"C": "Thyagaraja", "D": "5:35", "R": "Supradeepam", "T": "", "U": "0 views", "V": "gfRL0bfyha4"}]}, {"A": "Cherthala K. N. Renganatha Sharma", "songs": [{"C": "Thyagaraja", "D": "6:41", "R": "Supradeepam", "T": "", "U": "601 views", "V": "vvxX9YdIAR8"}, {"C": "Thyagaraja", "D": "2:30", "R": "Supradeepam", "T": "", "U": "92 views", "V": "TYmgjOjerbk"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Thyagaraja", "D": "7:17", "R": "Supradeepam", "T": "", "U": "0 views", "V": "UeMxM2ZTcOM"}]}, {"A": "Malladi Brothers", "songs": [{"C": "Thyagaraja", "D": "3:01", "R": "Supradeepam", "T": "", "U": "2,090 views", "V": "YlZFybWvHko"}]}, {"A": "Malladi Suribabu", "songs": [{"C": "Thyagaraja", "D": "4:41", "R": "Supradeepam", "T": "", "U": "68 views", "V": "LYldcskzrMo"}, {"C": "Thyagaraja", "D": "4:59", "R": "Supradeepam", "T": "", "U": "197 views", "V": "Ujnw8DijATM"}]}, {"A": "Mambalam Sisters", "songs": [{"C": "Thyagaraja", "D": "11:11", "R": "Supradeepam", "T": "", "U": "19 views", "V": "_bdhVP9RqMI"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Thyagaraja", "D": "8:03", "R": "Supradeepam", "T": "", "U": "678 views", "V": "woyxZL44HdE"}, {"C": "Thyagaraja", "D": "3:01", "R": "Supradeepam", "T": "", "U": "965 views", "V": "Bv6S3hGAv_A"}]}, {"A": "Vishnudev Nampoothri", "songs": [{"C": "Thyagaraja", "D": "6:51", "R": "Supradeepam", "T": "", "U": "858 views", "V": "yi1J0zJpinw"}]}, {"A": "B. Sivakumar", "songs": [{"C": "Thyagaraja", "D": "5:00", "R": "Supradeepam", "T": "", "U": "119 views", "V": "LSUXyKI3iyg"}]}, {"A": "U. Srinivas", "songs": [{"C": "Thyagaraja", "D": "6:15", "R": "Supradeepam", "T": "", "U": "134 views", "V": "ZGvy3dKk_ZQ"}, {"C": "Thyagaraja", "D": "6:20", "R": "Supradeepam", "T": "", "U": "87 views", "V": "HUmU1goYfgY"}]}, {"A": "Sheik Mahaboob Subhani", "songs": [{"C": "Thyagaraja", "D": "6:35", "R": "Supradeepam", "T": "", "U": "141 views", "V": "30qMOSPxtK8"}]}, {"A": "S. R. Mahadeva Sarma", "songs": [{"C": "Thyagaraja", "D": "7:57", "R": "Supradeepam", "T": "", "U": "89 views", "V": "iFBptkb6mRA"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

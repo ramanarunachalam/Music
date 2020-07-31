@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>15</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>11</td></tr>
-<tr><td><em>Concert</em></td><td>11</td></tr>
+<tr><td><em>Concert</em></td><td>15</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -134,57 +134,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aishwarya Shankar", "songs": [{"N": "0032", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "Aishwarya Shankar", "V": "uBvJLmd7HwQ"}]}, {"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0369", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "8dMlT58-LZY"}, {"N": "0370", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "of6EtvQeOw0"}]}, {"name": "Vocal - Maharajapuram S. Ramachandran", "songs": [{"N": "0009", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "Maharajapuram S. Ramachandran", "V": "9d7aH4UCFBM"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0389", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Santhanam", "V": "P1h4w2CfAeA"}, {"N": "0390", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Santhanam", "V": "usrOiLOF0BA"}]}, {"name": "Vocal - Palghat R Ramprasad", "songs": [{"N": "0043", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "Palghat R Ramprasad", "V": "Hws60IniLt0"}]}, {"name": "Vocal - Raji Gopalakrishnan", "songs": [{"N": "0047", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "Raji Gopalakrishnan", "V": "C9uj6OPhlnU"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0181", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "S. Sowmya", "V": "3YkKOdRGw54"}, {"N": "0182", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "S. Sowmya", "V": "EdzYXBOR_9U"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0136", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "Sankaran Namboothiri", "V": "R3inlhMm9hg"}]}, {"name": "Vocal - Suguna Purushothaman", "songs": [{"N": "0026", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "Suguna Purushothaman", "V": "wByRMKkqsF0"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0397", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "T. N. Seshagopalan", "V": "0f5my4rBIkk"}, {"N": "0398", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "T. N. Seshagopalan", "V": "NbNcEeg_lTs"}]}, {"name": "Veena - Jayanthi Kumaresh", "songs": [{"N": "0066", "T": "", "H": "Purahara Nandana", "S": "purahara nandana ripukula bhaHnjana shikhIndra :  Adi", "R": "Hamirkalyani", "C": "Muthuswami Dikshitar", "A": "Jayanthi Kumaresh", "V": "v9n6kNPKIdw"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aishwarya Shankar", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:28", "R": "Hamirkalyani", "T": "", "U": "903 views", "V": "uBvJLmd7HwQ"}]}, {"A": "D. K. Jayaraman", "songs": [{"C": "Muthuswami Dikshitar", "D": "2:36", "R": "Hamirkalyani", "T": "", "U": "422 views", "V": "8dMlT58-LZY"}, {"C": "Muthuswami Dikshitar", "D": "2:15", "R": "Hamirkalyani", "T": "", "U": "81 views", "V": "of6EtvQeOw0"}]}, {"A": "Maharajapuram S. Ramachandran", "songs": [{"C": "Muthuswami Dikshitar", "D": "8:11", "R": "Hamirkalyani", "T": "", "U": "176 views", "V": "9d7aH4UCFBM"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:47", "R": "Hamirkalyani", "T": "", "U": "0 views", "V": "P1h4w2CfAeA"}, {"C": "Muthuswami Dikshitar", "D": "5:51", "R": "Hamirkalyani", "T": "", "U": "1,478 views", "V": "usrOiLOF0BA"}]}, {"A": "Palghat R Ramprasad", "songs": [{"C": "Muthuswami Dikshitar", "D": "19:51", "R": "Hamirkalyani", "T": "", "U": "267 views", "V": "Hws60IniLt0"}]}, {"A": "Raji Gopalakrishnan", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:51", "R": "Hamirkalyani", "T": "", "U": "413 views", "V": "C9uj6OPhlnU"}]}, {"A": "S. Sowmya", "songs": [{"C": "Muthuswami Dikshitar", "D": "3:28", "R": "Hamirkalyani", "T": "", "U": "1,697 views", "V": "3YkKOdRGw54"}, {"C": "Muthuswami Dikshitar", "D": "3:01", "R": "Hamirkalyani", "T": "", "U": "2,419 views", "V": "EdzYXBOR_9U"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Muthuswami Dikshitar", "D": "3:26", "R": "Hamirkalyani", "T": "", "U": "141 views", "V": "R3inlhMm9hg"}]}, {"A": "Suguna Purushothaman", "songs": [{"C": "Muthuswami Dikshitar", "D": "3:17", "R": "Hamirkalyani", "T": "", "U": "0 views", "V": "wByRMKkqsF0"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:35", "R": "Hamirkalyani", "T": "", "U": "1,378 views", "V": "NbNcEeg_lTs"}, {"C": "Muthuswami Dikshitar", "D": "4:34", "R": "Hamirkalyani", "T": "", "U": "0 views", "V": "0f5my4rBIkk"}]}, {"A": "Jayanthi Kumaresh", "songs": [{"C": "Muthuswami Dikshitar", "D": "2:30", "R": "Hamirkalyani", "T": "", "U": "241 views", "V": "v9n6kNPKIdw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

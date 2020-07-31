@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>10</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>9</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -155,57 +155,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0144", "T": "", "H": "Brahmamokate", "S": "tandanAnA Ahi tandanAnA purE tandanAna bhALa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "M. L. Vasanthakumari", "V": "1vs0FZ1dIko"}]}, {"name": "Vocal - Nandini Rao Gujar", "songs": [{"N": "0002", "T": "", "H": "Brahmamokate", "S": "tandanAnA Ahi tandanAnA purE tandanAna bhALa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Nandini Rao Gujar", "V": "7IIKIHY37Eo"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0048", "T": "", "H": "Brahmamokate", "S": "tandanAnA Ahi tandanAnA purE tandanAna bhALa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Priya Sisters", "V": "2bHXIczaPF4"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0135", "T": "", "H": "Brahmamokate", "S": "tandanAnA Ahi tandanAnA purE tandanAna bhALa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Sudha Ragunathan", "V": "1qVaDn89gsY"}, {"N": "0136", "T": "", "H": "Brahmamokate", "S": "tandanAnA Ahi tandanAnA purE tandanAna bhALa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Sudha Ragunathan", "V": "2Xt1pe_Bidg"}, {"N": "0137", "T": "", "H": "Brahmamokate", "S": "tandanAnA Ahi tandanAnA purE tandanAna bhALa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Sudha Ragunathan", "V": "dueB1QxMQiE"}, {"N": "0138", "T": "", "H": "Brahmamokate", "S": "tandanAnA Ahi tandanAnA purE tandanAna bhALa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Sudha Ragunathan", "V": "lL719S81FS0"}, {"N": "0139", "T": "", "H": "Brahmamokate", "S": "tandanAnA Ahi tandanAnA purE tandanAna bhALa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Sudha Ragunathan", "V": "ubntEAZv5P0"}]}, {"name": "Violin - A. Kanyakumari", "songs": [{"N": "0043", "T": "", "H": "Brahmamokate", "S": "tandanAnA Ahi tandanAnA purE tandanAna bhALa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "A. Kanyakumari", "V": "74l_ee1X5fk"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "M. L. Vasanthakumari", "songs": [{"C": "Annamacharya", "D": "4:23", "R": "Bowli", "T": "", "U": "42 views", "V": "1vs0FZ1dIko"}]}, {"A": "Nandini Rao Gujar", "songs": [{"C": "Annamacharya", "D": "5:55", "R": "Bowli", "T": "", "U": "83,931 views", "V": "7IIKIHY37Eo"}]}, {"A": "Priya Sisters", "songs": [{"C": "Annamacharya", "D": "5:45", "R": "Bowli", "T": "", "U": "0 views", "V": "2bHXIczaPF4"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Annamacharya", "D": "6:10", "R": "Bowli", "T": "", "U": "88,550 views", "V": "ubntEAZv5P0"}, {"C": "Annamacharya", "D": "6:13", "R": "Bowli", "T": "", "U": "213,396 views", "V": "lL719S81FS0"}, {"C": "Annamacharya", "D": "5:36", "R": "Bowli", "T": "", "U": "0 views", "V": "2Xt1pe_Bidg"}, {"C": "Annamacharya", "D": "6:13", "R": "Bowli", "T": "", "U": "1,673 views", "V": "dueB1QxMQiE"}, {"C": "Annamacharya", "D": "5:32", "R": "Bowli", "T": "", "U": "4,106 views", "V": "1qVaDn89gsY"}]}, {"A": "A. Kanyakumari", "songs": [{"C": "Annamacharya", "D": "2:29", "R": "Bowli", "T": "", "U": "13,079 views", "V": "74l_ee1X5fk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

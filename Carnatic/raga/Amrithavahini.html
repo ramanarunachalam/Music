@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>37</td></tr>
 <tr><td><em>Song</em></td><td>3</td></tr>
 <tr><td><em>Composer</em></td><td>3</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "mahAgaNapatiM bhajEhaM", "songs": [{"N": "0249", "T": "", "H": "Mahaganapatim Bhajeham", "S": "mahAgaNapatiM bhajEhaM : Adi", "R": "Amrithavahini", "C": "Jayachamarajendra Wadiyar", "A": "Maharajapuram Santhanam", "V": "YCNWNlnqAkI"}]}, {"name": "SrI rAma pAdamA nI kRpa cAlunE", "songs": [{"N": "0120", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Amritha Murali", "V": "-mlPVd7zhpY"}, {"N": "0232", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Amrutha Venkatesh", "V": "CM3VwKFfZwA"}, {"N": "0207", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "9XrL0EY5JbQ"}, {"N": "0208", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "TObWDb7vrPk"}, {"N": "0209", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "dI--UnoL8mQ"}, {"N": "0210", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "gj3Sdn4pe9E"}, {"N": "0079", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Charulatha Mani", "V": "7yu8ECn4oWc"}, {"N": "0080", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Charulatha Mani", "V": "OrQRqeJOWdQ"}, {"N": "0498", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "ECgJHFyl5CI"}, {"N": "0499", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "gE-YsRf84p0"}, {"N": "0500", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "tPGqctt1gbk"}, {"N": "0447", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "PhsBjCl8pXw"}, {"N": "0448", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "R9y5MJkSiD8"}, {"N": "0449", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "dcWu8IThCz4"}, {"N": "0450", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "eHRXxXYbYwg"}, {"N": "0451", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "mvRmI8zKAyU"}, {"N": "0040", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Hyderabad Sisters", "V": "5JKDBTpabfQ"}, {"N": "0041", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Hyderabad Sisters", "V": "mivvVH217VI"}, {"N": "0346", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "RZiDpj48uBc"}, {"N": "0347", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "T63YWfi6LE4"}, {"N": "0348", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "cUowzwwLtqY"}, {"N": "1370", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "SYHqBa30F4U"}, {"N": "0378", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "JVKicCdjGjU"}, {"N": "0231", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Priya Sisters", "V": "vdAzbwdeo9o"}, {"N": "0183", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Sikkil Gurucharan", "V": "CSBjEqypKTg"}, {"N": "0143", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Chitravina Ravi Kiran", "V": "D3gwyPEoQR0"}, {"N": "0163", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "T. R. Mahalingam", "V": "Iyq4Xai_sq0"}, {"N": "0164", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "T. R. Mahalingam", "V": "O8y4mCoG_UQ"}, {"N": "0165", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "T. R. Mahalingam", "V": "ewRs8ieOHeM"}, {"N": "0166", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "T. R. Mahalingam", "V": "vo0JvHWYn3w"}, {"N": "0024", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Charulatha Ramanujam", "V": "0TF-5rHtYeo"}, {"N": "0444", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Lalgudi Jayaraman", "V": "ms3HaDOP3RU"}, {"N": "0445", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "Lalgudi Jayaraman", "V": "xa70bZgb5kk"}, {"N": "0059", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "R Raghul", "V": "IUrk5OG1IpA"}, {"N": "0020", "T": "", "H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "R": "Amrithavahini", "C": "Thyagaraja", "A": "C. Cheluvaraju", "V": "imzmwU-J2TI"}]}, {"name": "Unknownsong", "songs": [{"N": "0031", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Amrithavahini", "C": "UnknownComposer", "A": "Mambalam MKS Siva", "V": "bNZmZYIM67I"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Mahaganapatim Bhajeham", "S": "mahAgaNapatiM bhajEhaM : Adi", "songs": [{"A": "Maharajapuram Santhanam", "C": "Jayachamarajendra Wadiyar", "D": "4:29", "T": "", "U": "0 views", "V": "YCNWNlnqAkI"}]}, {"H": "Sri Rama Paadama", "S": "SrI rAma pAdamA nI kRpa cAlunE :  Adi", "songs": [{"A": "Amritha Murali", "C": "Thyagaraja", "D": "14:06", "T": "", "U": "387 views", "V": "-mlPVd7zhpY"}, {"A": "Amrutha Venkatesh", "C": "Thyagaraja", "D": "4:55", "T": "", "U": "0 views", "V": "CM3VwKFfZwA"}, {"A": "Bombay Sisters", "C": "Thyagaraja", "D": "4:58", "T": "", "U": "0 views", "V": "9XrL0EY5JbQ"}, {"A": "Bombay Sisters", "C": "Thyagaraja", "D": "4:26", "T": "", "U": "12 views", "V": "dI--UnoL8mQ"}, {"A": "Bombay Sisters", "C": "Thyagaraja", "D": "4:23", "T": "", "U": "36 views", "V": "gj3Sdn4pe9E"}, {"A": "Bombay Sisters", "C": "Thyagaraja", "D": "4:23", "T": "", "U": "0 views", "V": "TObWDb7vrPk"}, {"A": "Charulatha Mani", "C": "Thyagaraja", "D": "3:39", "T": "", "U": "14,995 views", "V": "7yu8ECn4oWc"}, {"A": "Charulatha Mani", "C": "Thyagaraja", "D": "3:32", "T": "", "U": "11,386 views", "V": "OrQRqeJOWdQ"}, {"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "3:26", "T": "", "U": "564 views", "V": "tPGqctt1gbk"}, {"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "3:35", "T": "", "U": "37 views", "V": "gE-YsRf84p0"}, {"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "3:34", "T": "", "U": "64 views", "V": "ECgJHFyl5CI"}, {"A": "D. K. Pattammal", "C": "Thyagaraja", "D": "3:22", "T": "", "U": "6,800 views", "V": "mvRmI8zKAyU"}, {"A": "D. K. Pattammal", "C": "Thyagaraja", "D": "3:21", "T": "", "U": "800 views", "V": "eHRXxXYbYwg"}, {"A": "D. K. Pattammal", "C": "Thyagaraja", "D": "3:04", "T": "", "U": "113 views", "V": "R9y5MJkSiD8"}, {"A": "D. K. Pattammal", "C": "Thyagaraja", "D": "3:28", "T": "", "U": "0 views", "V": "dcWu8IThCz4"}, {"A": "D. K. Pattammal", "C": "Thyagaraja", "D": "3:36", "T": "", "U": "1,391 views", "V": "PhsBjCl8pXw"}, {"A": "Hyderabad Sisters", "C": "Thyagaraja", "D": "8:30", "T": "", "U": "10,936 views", "V": "mivvVH217VI"}, {"A": "Hyderabad Sisters", "C": "Thyagaraja", "D": "5:38", "T": "", "U": "105 views", "V": "5JKDBTpabfQ"}, {"A": "K. J. Yesudas", "C": "Thyagaraja", "D": "4:06", "T": "", "U": "12,671 views", "V": "T63YWfi6LE4"}, {"A": "K. J. Yesudas", "C": "Thyagaraja", "D": "4:06", "T": "", "U": "31,081 views", "V": "cUowzwwLtqY"}, {"A": "K. J. Yesudas", "C": "Thyagaraja", "D": "4:07", "T": "", "U": "12,733 views", "V": "RZiDpj48uBc"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "21:08", "T": "", "U": "0 views", "V": "SYHqBa30F4U"}, {"A": "Nedunuri Krishnamurthy", "C": "Thyagaraja", "D": "5:12", "T": "", "U": "0 views", "V": "JVKicCdjGjU"}, {"A": "Priya Sisters", "C": "Thyagaraja", "D": "7:38", "T": "", "U": "0 views", "V": "vdAzbwdeo9o"}, {"A": "Sikkil Gurucharan", "C": "Thyagaraja", "D": "7:07", "T": "", "U": "300 views", "V": "CSBjEqypKTg"}, {"A": "Chitravina Ravi Kiran", "C": "Thyagaraja", "D": "11:01", "T": "", "U": "25 views", "V": "D3gwyPEoQR0"}, {"A": "T. R. Mahalingam", "C": "Thyagaraja", "D": "5:10", "T": "", "U": "60 views", "V": "ewRs8ieOHeM"}, {"A": "T. R. Mahalingam", "C": "Thyagaraja", "D": "7:45", "T": "", "U": "485 views", "V": "vo0JvHWYn3w"}, {"A": "T. R. Mahalingam", "C": "Thyagaraja", "D": "4:50", "T": "", "U": "0 views", "V": "Iyq4Xai_sq0"}, {"A": "T. R. Mahalingam", "C": "Thyagaraja", "D": "5:10", "T": "", "U": "42 views", "V": "O8y4mCoG_UQ"}, {"A": "Charulatha Ramanujam", "C": "Thyagaraja", "D": "5:21", "T": "", "U": "300 views", "V": "0TF-5rHtYeo"}, {"A": "Lalgudi Jayaraman", "C": "Thyagaraja", "D": "6:02", "T": "", "U": "6,600 views", "V": "ms3HaDOP3RU"}, {"A": "Lalgudi Jayaraman", "C": "Thyagaraja", "D": "7:41", "T": "", "U": "121 views", "V": "xa70bZgb5kk"}, {"A": "R Raghul", "C": "Thyagaraja", "D": "18:06", "T": "", "U": "464 views", "V": "IUrk5OG1IpA"}, {"A": "C. Cheluvaraju", "C": "Thyagaraja", "D": "12:25", "T": "", "U": "1,011 views", "V": "imzmwU-J2TI"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Mambalam MKS Siva", "C": "UnknownComposer", "D": "8:35", "T": "", "U": "581 views", "V": "bNZmZYIM67I"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

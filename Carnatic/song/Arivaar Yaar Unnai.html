@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>17</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>10</td></tr>
-<tr><td><em>Concert</em></td><td>10</td></tr>
+<tr><td><em>Concert</em></td><td>14</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -129,57 +129,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0066", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "D. K. Jayaraman", "V": "jYYKWER1yto"}, {"N": "0067", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Unknownraga", "C": "Arunachala Kavi", "A": "D. K. Jayaraman", "V": "t0epamQyso0"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0066", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "D. K. Pattammal", "V": "790j_htcFsI"}, {"N": "0067", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "D. K. Pattammal", "V": "GQmpkxn2fmc"}]}, {"name": "Vocal - Kothamangalam Seenu", "songs": [{"N": "0001", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Bhairavi", "C": "Arunachala Kavi", "A": "Kothamangalam Seenu", "V": "4bG70TRGKA4"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0038", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "Ranjani Gayatri", "V": "SzKDYF0E3Jg"}, {"N": "0039", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "Ranjani Gayatri", "V": "qjT2rG15U6g"}]}, {"name": "Vocal - S. Saketharaman", "songs": [{"N": "0031", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "S. Saketharaman", "V": "zEN0q5imyMo"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0147", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "Sanjay Subrahmanyan", "V": "7_YLGweGm9I"}, {"N": "0148", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "Sanjay Subrahmanyan", "V": "SmWmilqtnuk"}]}, {"name": "Vocal - Sriram Gangadharan", "songs": [{"N": "0006", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "Sriram Gangadharan", "V": "Xehh5Se9ehg"}, {"N": "0007", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "Sriram Gangadharan", "V": "psc75ZuubSA"}]}, {"name": "Violin - T. N. Krishnan", "songs": [{"N": "0070", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "T. N. Krishnan", "V": "M6hHN80t1_E"}, {"N": "0071", "T": "", "H": "Arivaar Yaar Unnai", "S": "aRivAr yAr unnai aRivAr yAr  :  Caapu", "R": "Mukhari", "C": "Arunachala Kavi", "A": "T. N. Krishnan", "V": "cSWHjmDWJFU"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. K. Jayaraman", "songs": [{"C": "Arunachala Kavi", "D": "6:48", "R": "Mukhari", "T": "", "U": "96 views", "V": "jYYKWER1yto"}, {"C": "Arunachala Kavi", "D": "4:10", "R": "Unknownraga", "T": "", "U": "830 views", "V": "t0epamQyso0"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Arunachala Kavi", "D": "5:25", "R": "Mukhari", "T": "", "U": "87 views", "V": "790j_htcFsI"}, {"C": "Arunachala Kavi", "D": "5:05", "R": "Mukhari", "T": "", "U": "59 views", "V": "GQmpkxn2fmc"}]}, {"A": "Kothamangalam Seenu", "songs": [{"C": "Arunachala Kavi", "D": "4:58", "R": "Bhairavi", "T": "", "U": "8,147 views", "V": "4bG70TRGKA4"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Arunachala Kavi", "D": "3:01", "R": "Mukhari", "T": "", "U": "2,846 views", "V": "qjT2rG15U6g"}, {"C": "Arunachala Kavi", "D": "6:16", "R": "Mukhari", "T": "", "U": "297 views", "V": "SzKDYF0E3Jg"}]}, {"A": "S. Saketharaman", "songs": [{"C": "Arunachala Kavi", "D": "17:26", "R": "Mukhari", "T": "", "U": "110 views", "V": "zEN0q5imyMo"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Arunachala Kavi", "D": "18:41", "R": "Mukhari", "T": "", "U": "3,300 views", "V": "7_YLGweGm9I"}, {"C": "Arunachala Kavi", "D": "18:36", "R": "Mukhari", "T": "", "U": "935 views", "V": "SmWmilqtnuk"}]}, {"A": "Sriram Gangadharan", "songs": [{"C": "Arunachala Kavi", "D": "5:42", "R": "Mukhari", "T": "", "U": "151 views", "V": "Xehh5Se9ehg"}, {"C": "Arunachala Kavi", "D": "3:01", "R": "Mukhari", "T": "", "U": "1,208 views", "V": "psc75ZuubSA"}]}, {"A": "T. N. Krishnan", "songs": [{"C": "Arunachala Kavi", "D": "25:30", "R": "Mukhari", "T": "", "U": "0 views", "V": "cSWHjmDWJFU"}, {"C": "Arunachala Kavi", "D": "4:46", "R": "Mukhari", "T": "", "U": "95 views", "V": "M6hHN80t1_E"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -28,7 +28,7 @@
 <tr><td><em>Audio</em></td><td>39</td></tr>
 <tr><td><em>Raga</em></td><td>5</td></tr>
 <tr><td><em>Artist</em></td><td>26</td></tr>
-<tr><td><em>Concert</em></td><td>26</td></tr>
+<tr><td><em>Concert</em></td><td>28</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -134,57 +134,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0109", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Bombay Jayashri", "V": "zWKS9Owux98"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0165", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Kedaram", "C": "Purandara Dasa", "A": "D. K. Pattammal", "V": "uz7Mkr6-57I"}]}, {"name": "Vocal - K. J. Yesudas", "songs": [{"N": "0084", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "K. J. Yesudas", "V": "0-_ejJ584BE"}, {"N": "0085", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "K. J. Yesudas", "V": "pRzJwhnpKAM"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0188", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "M. D. Ramanathan", "V": "QZ_4ewTesXg"}, {"N": "0185", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "M. D. Ramanathan", "V": "2E9XeUzkCkc"}, {"N": "0186", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "M. D. Ramanathan", "V": "2qVOLocpxmc"}, {"N": "0187", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "M. D. Ramanathan", "V": "9PP1-HmjZn0"}, {"N": "0189", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "M. D. Ramanathan", "V": "SDhnWN7q_Uo"}, {"N": "0190", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "M. D. Ramanathan", "V": "dde5imt0li4"}, {"N": "0191", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "M. D. Ramanathan", "V": "kqjTiF9AUEw"}, {"N": "0192", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "M. D. Ramanathan", "V": "nzcQHcoGi7I"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0234", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Dhanyasi", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "vloOFJnESP0"}]}, {"name": "Vocal - M. S. Sheela", "songs": [{"N": "0026", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "M. S. Sheela", "V": "aCYBgot2UsM"}]}, {"name": "Vocal - Madurai Somu", "songs": [{"N": "0075", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "Madurai Somu", "V": "sel-haTVI2U"}]}, {"name": "Vocal - Maharajapuram S. Srinivasan", "songs": [{"N": "0005", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "Maharajapuram S. Srinivasan", "V": "agyjb_dU8lc"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0163", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "Maharajapuram Santhanam", "V": "XDd3cGXCWes"}, {"N": "0164", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "Maharajapuram Santhanam", "V": "ZVMBqpDY-Bg"}]}, {"name": "Vocal - Mani Krishnaswami", "songs": [{"N": "0029", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Nata", "C": "Purandara Dasa", "A": "Mani Krishnaswami", "V": "IOd5-iqklAU"}]}, {"name": "Vocal - Prince Rama Varma", "songs": [{"N": "0116", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Prince Rama Varma", "V": "zmJ6TAhfdNg"}, {"N": "0114", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "Prince Rama Varma", "V": "BOYBlNc_e2A"}, {"N": "0115", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "Prince Rama Varma", "V": "ydso4LVxQZY"}]}, {"name": "Vocal - R. Ganesh", "songs": [{"N": "0035", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "R. Ganesh", "V": "BHGQMfaT4_c"}, {"N": "0036", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "R. Ganesh", "V": "c1CvpyysfqI"}, {"N": "0037", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "R. Ganesh", "V": "DVr4gwIIP1s"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0051", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "Sankaran Namboothiri", "V": "W_uXTESlNG0"}]}, {"name": "Vocal - Sirkazhi Govindarajan", "songs": [{"N": "0019", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "Sirkazhi Govindarajan", "V": "aMsMXH9MBwY"}]}, {"name": "Mandolin - U. Rajesh", "songs": [{"N": "0033", "T": "", "H": "Gajavadana Beduve", "S": "gajavadhanaa bEduvE gowri thanaya :  Adi", "R": "Hamsadhwani", "C": "Purandara Dasa", "A": "U. Rajesh", "V": "6Icgrcbg2-U"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Purandara Dasa", "D": "5:21", "R": "Unknownraga", "T": "", "U": "0 views", "V": "zWKS9Owux98"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Purandara Dasa", "D": "3:34", "R": "Kedaram", "T": "", "U": "104 views", "V": "uz7Mkr6-57I"}]}, {"A": "K. J. Yesudas", "songs": [{"C": "Purandara Dasa", "D": "12:56", "R": "Unknownraga", "T": "", "U": "80,104 views", "V": "pRzJwhnpKAM"}, {"C": "Purandara Dasa", "D": "12:58", "R": "Hamsadhwani", "T": "", "U": "16,983 views", "V": "0-_ejJ584BE"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Purandara Dasa", "D": "9:04", "R": "Hamsadhwani", "T": "", "U": "499 views", "V": "QZ_4ewTesXg"}, {"C": "Purandara Dasa", "D": "9:13", "R": "Hamsadhwani", "T": "", "U": "308 views", "V": "dde5imt0li4"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Purandara Dasa", "D": "4:05", "R": "Dhanyasi", "T": "", "U": "176 views", "V": "vloOFJnESP0"}]}, {"A": "M. S. Sheela", "songs": [{"C": "Purandara Dasa", "D": "3:39", "R": "Unknownraga", "T": "", "U": "0 views", "V": "aCYBgot2UsM"}]}, {"A": "Madurai Somu", "songs": [{"C": "Purandara Dasa", "D": "13:42", "R": "Hamsadhwani", "T": "", "U": "6,100 views", "V": "sel-haTVI2U"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Purandara Dasa", "D": "4:21", "R": "Hamsadhwani", "T": "", "U": "8,800 views", "V": "ZVMBqpDY-Bg"}, {"C": "Purandara Dasa", "D": "12:55", "R": "Hamsadhwani", "T": "", "U": "707 views", "V": "XDd3cGXCWes"}]}, {"A": "Mani Krishnaswami", "songs": [{"C": "Purandara Dasa", "D": "8:36", "R": "Nata", "T": "", "U": "121 views", "V": "IOd5-iqklAU"}]}, {"A": "Prince Rama Varma", "songs": [{"C": "Purandara Dasa", "D": "8:21", "R": "Hamsadhwani", "T": "", "U": "4,848 views", "V": "BOYBlNc_e2A"}, {"C": "Purandara Dasa", "D": "16:29", "R": "Hamsadhwani", "T": "", "U": "1,649 views", "V": "ydso4LVxQZY"}, {"C": "Purandara Dasa", "D": "18:49", "R": "Unknownraga", "T": "", "U": "2,225 views", "V": "zmJ6TAhfdNg"}]}, {"A": "R. Ganesh", "songs": [{"C": "Purandara Dasa", "D": "14:36", "R": "Hamsadhwani", "T": "", "U": "4,060 views", "V": "BHGQMfaT4_c"}, {"C": "Purandara Dasa", "D": "14:36", "R": "Hamsadhwani", "T": "", "U": "415 views", "V": "c1CvpyysfqI"}, {"C": "Purandara Dasa", "D": "14:40", "R": "Unknownraga", "T": "", "U": "0 views", "V": "DVr4gwIIP1s"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Purandara Dasa", "D": "5:55", "R": "Hamsadhwani", "T": "", "U": "229 views", "V": "W_uXTESlNG0"}]}, {"A": "Sirkazhi Govindarajan", "songs": [{"C": "Purandara Dasa", "D": "14:45", "R": "Hamsadhwani", "T": "", "U": "2,000 views", "V": "aMsMXH9MBwY"}]}, {"A": "U. Rajesh", "songs": [{"C": "Purandara Dasa", "D": "15:41", "R": "Hamsadhwani", "T": "", "U": "685 views", "V": "6Icgrcbg2-U"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

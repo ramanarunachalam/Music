@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>23</td></tr>
 <tr><td><em>Song</em></td><td>1</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "vinaayakaa  ninnu vinaa brOcuTakoo", "songs": [{"N": "0583", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "G. N. Balasubramaniam", "V": "K2wKm9bTtbg"}, {"N": "0584", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "G. N. Balasubramaniam", "V": "QmdwEaNPWCo"}, {"N": "0946", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "M. L. Vasanthakumari", "V": "9cmlwZFrz1E"}, {"N": "0947", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "M. L. Vasanthakumari", "V": "AHhIH2WKp4Q"}, {"N": "0948", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "M. L. Vasanthakumari", "V": "YmNu0WMG1NA"}, {"N": "0082", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "Padma Krishnan", "V": "PLxSp8wFeto"}, {"N": "0292", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "S. Kalyanaraman", "V": "_kU1q3eqU14"}, {"N": "0240", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "S. Sowmya", "V": "3VwZ78RbTRs"}, {"N": "0241", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "S. Sowmya", "V": "WECH-x2uHfs"}, {"N": "0254", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "T. V. Sankaranarayanan", "V": "6lKz0M5vb58"}, {"N": "0245", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "Voleti Venkateswarlu", "V": "m4LmZIW1fhM"}, {"N": "0207", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "N. Ramani", "V": "iXdYjMM80gg"}, {"N": "0057", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "V. K. Raman", "V": "legBhg6tQFU"}, {"N": "0542", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "U. Srinivas", "V": "paEeoc6vNP4"}, {"N": "0034", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "Namagiripettai Krishnan", "V": "MOgHabGIU5s"}, {"N": "0166", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "A. Kanyakumari", "V": "M2s4_KH89sE"}, {"N": "0392", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "T. N. Krishnan", "V": "X7ZmeIxcgCg"}, {"N": "0040", "T": "", "H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "R": "Hamsadhwani", "C": "E. V. Ramakrishna Bhagavatar", "A": "V. V. S. Murari", "V": "hL06LR5LDAs"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Vinayaka Ninnuvinaa", "S": "vinaayakaa  ninnu vinaa brOcuTakoo :  Adi", "songs": [{"A": "G. N. Balasubramaniam", "D": "3:37:05", "R": "Hamsadhwani", "T": "", "U": "2,300 views", "V": "xcY15HYYNGk"}, {"A": "G. N. Balasubramaniam", "D": "10:30", "R": "Hamsadhwani", "T": "", "U": "341 views", "V": "QmdwEaNPWCo"}, {"A": "G. N. Balasubramaniam", "D": "6:46", "R": "Hamsadhwani", "T": "", "U": "1,900 views", "V": "K2wKm9bTtbg"}, {"A": "M. L. Vasanthakumari", "D": "4:40", "R": "Hamsadhwani", "T": "", "U": "42 views", "V": "9cmlwZFrz1E"}, {"A": "M. L. Vasanthakumari", "D": "6:06", "R": "Hamsadhwani", "T": "", "U": "4,250 views", "V": "YmNu0WMG1NA"}, {"A": "M. L. Vasanthakumari", "D": "6:06", "R": "Hamsadhwani", "T": "", "U": "67 views", "V": "AHhIH2WKp4Q"}, {"A": "Padma Krishnan", "D": "13:51", "R": "Hamsadhwani", "T": "", "U": "7,260 views", "V": "PLxSp8wFeto"}, {"A": "S. Kalyanaraman", "D": "11:55", "R": "Hamsadhwani", "T": "", "U": "303 views", "V": "_kU1q3eqU14"}, {"A": "S. Sowmya", "D": "6:42", "R": "Hamsadhwani", "T": "", "U": "0 views", "V": "WECH-x2uHfs"}, {"A": "S. Sowmya", "D": "6:38", "R": "Hamsadhwani", "T": "", "U": "0 views", "V": "3VwZ78RbTRs"}, {"A": "T. V. Sankaranarayanan", "D": "10:50", "R": "Hamsadhwani", "T": "", "U": "34 views", "V": "6lKz0M5vb58"}, {"A": "Voleti Venkateswarlu", "D": "10:15", "R": "Hamsadhwani", "T": "", "U": "1,480 views", "V": "m4LmZIW1fhM"}, {"A": "N. Ramani", "D": "7:14", "R": "Hamsadhwani", "T": "", "U": "502 views", "V": "iXdYjMM80gg"}, {"A": "V. K. Raman", "D": "3:03", "R": "Hamsadhwani", "T": "", "U": "37 views", "V": "legBhg6tQFU"}, {"A": "U. Srinivas", "D": "8:16", "R": "Hamsadhwani", "T": "", "U": "0 views", "V": "paEeoc6vNP4"}, {"A": "Namagiripettai Krishnan", "D": "19:45", "R": "Hamsadhwani", "T": "", "U": "6,545 views", "V": "MOgHabGIU5s"}, {"A": "A. Kanyakumari", "D": "11:22", "R": "Hamsadhwani", "T": "", "U": "4,767 views", "V": "M2s4_KH89sE"}, {"A": "T. N. Krishnan", "D": "9:05", "R": "Hamsadhwani", "T": "", "U": "58 views", "V": "X7ZmeIxcgCg"}, {"A": "V. V. S. Murari", "D": "12:10", "R": "Hamsadhwani", "T": "", "U": "62 views", "V": "hL06LR5LDAs"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

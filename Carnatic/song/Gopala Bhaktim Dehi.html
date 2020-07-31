@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>12</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>10</td></tr>
-<tr><td><em>Concert</em></td><td>10</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -149,57 +149,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0084", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "v_cDfutvwUQ"}]}, {"name": "Vocal - Krithika Natarajan", "songs": [{"N": "0020", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Krithika Natarajan", "V": "HPu9RZyorWQ"}]}, {"name": "Vocal - Padma Krishnan", "songs": [{"N": "0022", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Padma Krishnan", "V": "TsBlNj3NGBA"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0315", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "HqEA-G1c6ug"}, {"N": "0316", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "NXjzjGkAZ5Y"}, {"N": "0317", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "ParWb-Ukn0Y"}]}, {"name": "Vocal - Thamarakkad Govindan Namboothiri", "songs": [{"N": "0012", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Thamarakkad Govindan Namboothiri", "V": "o3nQbpNj50Y"}]}, {"name": "Vocal - Trichur V. Ramachandran", "songs": [{"N": "0026", "T": "", "H": "Gopala Bhaktim Dehi", "S": "gOpAla bhaktim mE dEhi gOpikA ramaNa :  Adi", "R": "Bageshree", "C": "Swathi Thirunal", "A": "Trichur V. Ramachandran", "V": "uwJceaWyMeA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amrutha Venkatesh", "songs": [{"C": "Swathi Thirunal", "D": "8:50", "R": "Bageshree", "T": "", "U": "0 views", "V": "v_cDfutvwUQ"}]}, {"A": "Krithika Natarajan", "songs": [{"C": "Swathi Thirunal", "D": "5:32", "R": "Bageshree", "T": "", "U": "8,303 views", "V": "HPu9RZyorWQ"}]}, {"A": "Padma Krishnan", "songs": [{"C": "Swathi Thirunal", "D": "5:57", "R": "Bageshree", "T": "", "U": "854 views", "V": "TsBlNj3NGBA"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Swathi Thirunal", "D": "5:52", "R": "Bageshree", "T": "", "U": "2,500 views", "V": "HqEA-G1c6ug"}, {"C": "Swathi Thirunal", "D": "13:01", "R": "Bageshree", "T": "", "U": "2,000 views", "V": "NXjzjGkAZ5Y"}, {"C": "Swathi Thirunal", "D": "13:11", "R": "Bageshree", "T": "", "U": "974 views", "V": "ParWb-Ukn0Y"}]}, {"A": "Thamarakkad Govindan Namboothiri", "songs": [{"C": "Swathi Thirunal", "D": "7:31", "R": "Bageshree", "T": "", "U": "56 views", "V": "o3nQbpNj50Y"}]}, {"A": "Trichur V. Ramachandran", "songs": [{"C": "Swathi Thirunal", "D": "7:26", "R": "Bageshree", "T": "", "U": "249 views", "V": "uwJceaWyMeA"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

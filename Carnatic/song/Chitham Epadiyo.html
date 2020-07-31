@@ -29,7 +29,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>4</td></tr>
-<tr><td><em>Concert</em></td><td>4</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -147,57 +147,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aruna Sairam", "songs": [{"N": "0077", "T": "", "H": "Chitham Epadiyo", "S": "cittam eppaDiyO ayyA nin  :  Caapu", "R": "Nadanamakriya", "C": "Mayavaram Vedanayakam Pillai", "A": "Aruna Sairam", "V": "Sh2yPeP3Hag"}, {"N": "0078", "T": "", "H": "Chitham Epadiyo", "S": "cittam eppaDiyO ayyA nin  :  Caapu", "R": "Nadanamakriya", "C": "Mayavaram Vedanayakam Pillai", "A": "Aruna Sairam", "V": "b1KOoGJGI5Q"}, {"N": "0079", "T": "", "H": "Chitham Epadiyo", "S": "cittam eppaDiyO ayyA nin  :  Caapu", "R": "Nadanamakriya", "C": "Mayavaram Vedanayakam Pillai", "A": "Aruna Sairam", "V": "o7rbUI32-E4"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0077", "T": "", "H": "Chitham Epadiyo", "S": "cittam eppaDiyO ayyA nin  :  Caapu", "R": "Nadanamakriya", "C": "Mayavaram Vedanayakam Pillai", "A": "Bombay Jayashri", "V": "6fXxxDS8gj8"}, {"N": "0078", "T": "", "H": "Chitham Epadiyo", "S": "cittam eppaDiyO ayyA nin  :  Caapu", "R": "Nadanamakriya", "C": "Mayavaram Vedanayakam Pillai", "A": "Bombay Jayashri", "V": "Fob7Mu55_ig"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0091", "T": "", "H": "Chitham Epadiyo", "S": "cittam eppaDiyO ayyA nin  :  Caapu", "R": "Nadanamakriya", "C": "Mayavaram Vedanayakam Pillai", "A": "K. V. Narayanaswamy", "V": "J_3eWULUeE0"}, {"N": "0092", "T": "", "H": "Chitham Epadiyo", "S": "cittam eppaDiyO ayyA nin  :  Caapu", "R": "Nadanamakriya", "C": "Mayavaram Vedanayakam Pillai", "A": "K. V. Narayanaswamy", "V": "l262wHr7lBs"}]}, {"name": "Vocal - Sumithra Vasudev", "songs": [{"N": "0033", "T": "", "H": "Chitham Epadiyo", "S": "cittam eppaDiyO ayyA nin  :  Caapu", "R": "Nadanamakriya", "C": "Mayavaram Vedanayakam Pillai", "A": "Sumithra Vasudev", "V": "v-zWEixqhUI"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aruna Sairam", "songs": [{"C": "Mayavaram Vedanayakam Pillai", "D": "7:36", "R": "Nadanamakriya", "T": "", "U": "1,100 views", "V": "o7rbUI32-E4"}, {"C": "Mayavaram Vedanayakam Pillai", "D": "4:56", "R": "Nadanamakriya", "T": "", "U": "119 views", "V": "b1KOoGJGI5Q"}, {"C": "Mayavaram Vedanayakam Pillai", "D": "7:30", "R": "Nadanamakriya", "T": "", "U": "866 views", "V": "Sh2yPeP3Hag"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Mayavaram Vedanayakam Pillai", "D": "6:59", "R": "Nadanamakriya", "T": "", "U": "190 views", "V": "Fob7Mu55_ig"}, {"C": "Mayavaram Vedanayakam Pillai", "D": "3:01", "R": "Nadanamakriya", "T": "", "U": "411 views", "V": "6fXxxDS8gj8"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Mayavaram Vedanayakam Pillai", "D": "3:00", "R": "Nadanamakriya", "T": "", "U": "7 views", "V": "l262wHr7lBs"}, {"C": "Mayavaram Vedanayakam Pillai", "D": "2:58", "R": "Nadanamakriya", "T": "", "U": "1,188 views", "V": "J_3eWULUeE0"}]}, {"A": "Sumithra Vasudev", "songs": [{"C": "Mayavaram Vedanayakam Pillai", "D": "13:11", "R": "Nadanamakriya", "T": "", "U": "473 views", "V": "v-zWEixqhUI"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

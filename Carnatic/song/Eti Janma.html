@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>38</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>27</td></tr>
-<tr><td><em>Concert</em></td><td>27</td></tr>
+<tr><td><em>Concert</em></td><td>31</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -158,57 +158,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Abhishek Raghuram", "songs": [{"N": "0068", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Abhishek Raghuram", "V": "9fHVa1rWKjk"}, {"N": "0069", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Abhishek Raghuram", "V": "XwjaQQ403D8"}]}, {"name": "Vocal - Aruna Sairam", "songs": [{"N": "0117", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Aruna Sairam", "V": "xkW3N4AfFiw"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0108", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Bombay Jayashri", "V": "LxwYOkCmZig"}]}, {"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0146", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "ZEXj-HibNWI"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0157", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "2oMPOPYOaGM"}, {"N": "0158", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "4s1bptQjcyM"}, {"N": "0159", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "RXFwRaR3FYI"}, {"N": "0160", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "f2_NnNsMZRg"}]}, {"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0071", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Hyderabad Brothers", "V": "NHsG3nDwTFU"}]}, {"name": "Vocal - Kunnakudi M. Balamuralikrishna", "songs": [{"N": "0039", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Kunnakudi M. Balamuralikrishna", "V": "GMM3xs3-89U"}, {"N": "0040", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Kunnakudi M. Balamuralikrishna", "V": "YLlrKWF_hGk"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0074", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Malladi Brothers", "V": "kCKgrIeSHbk"}]}, {"name": "Vocal - Nedunuri Krishnamurthy", "songs": [{"N": "0142", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "17Rs2g_-Meo"}]}, {"name": "Vocal - O. S. Thyagarajan", "songs": [{"N": "0052", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "O. S. Thyagarajan", "V": "bKPn6Ur_iD4"}]}, {"name": "Vocal - Ramnad Krishnan", "songs": [{"N": "0065", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Ramnad Krishnan", "V": "TpB_A-KvDE8"}, {"N": "0066", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Ramnad Krishnan", "V": "Tu53UFnCTNg"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0082", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Ranjani Gayatri", "V": "VlFWLH7Vuuk"}, {"N": "0083", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Ranjani Gayatri", "V": "xnFDLGJdpq0"}]}, {"name": "Vocal - Sandeep Narayan", "songs": [{"N": "0050", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Sandeep Narayan", "V": "HzMWutsKWSA"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0283", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "OW8pChPaROU"}, {"N": "0284", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "VBa0Zv6nbxU"}]}, {"name": "Vocal - Sreevalsan J. Menon", "songs": [{"N": "0047", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Sreevalsan J. Menon", "V": "6zVhEYEZS6g"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0233", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "T. M. Krishna", "V": "nqbFO99ON5A"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0200", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "T. N. Seshagopalan", "V": "8Aq3gOmaJRs"}]}, {"name": "Vocal - Voleti Venkateswarlu", "songs": [{"N": "0084", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Voleti Venkateswarlu", "V": "BZ7vFTcSTA8"}, {"N": "0085", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Voleti Venkateswarlu", "V": "U09APPWNhAw"}, {"N": "0086", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Voleti Venkateswarlu", "V": "nZ5aSPcrsEQ"}, {"N": "0087", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "Voleti Venkateswarlu", "V": "xJc4nOWBGr4"}]}, {"name": "Flute - K. S. Gopalakrishnan", "songs": [{"N": "0018", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "K. S. Gopalakrishnan", "V": "R7ARtUeoolU"}]}, {"name": "Violin - V. L. Kumar", "songs": [{"N": "0016", "T": "", "H": "Eti Janma", "S": "ETi janmam i di hA O rAma  :  Caapu", "R": "Varali", "C": "Thyagaraja", "A": "V. L. Kumar", "V": "Aidhk-siets"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Abhishek Raghuram", "songs": [{"C": "Thyagaraja", "D": "11:50", "R": "Varali", "T": "", "U": "8,580 views", "V": "9fHVa1rWKjk"}, {"C": "Thyagaraja", "D": "40:57", "R": "Varali", "T": "", "U": "3 views", "V": "XwjaQQ403D8"}]}, {"A": "Aruna Sairam", "songs": [{"C": "Thyagaraja", "D": "30:13", "R": "Varali", "T": "", "U": "731 views", "V": "xkW3N4AfFiw"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Thyagaraja", "D": "5:57", "R": "Varali", "T": "", "U": "20,227 views", "V": "LxwYOkCmZig"}]}, {"A": "D. K. Jayaraman", "songs": [{"C": "Thyagaraja", "D": "8:31", "R": "Varali", "T": "", "U": "264 views", "V": "ZEXj-HibNWI"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Thyagaraja", "D": "10:30", "R": "Varali", "T": "", "U": "625 views", "V": "RXFwRaR3FYI"}, {"C": "Thyagaraja", "D": "3:45", "R": "Varali", "T": "", "U": "124 views", "V": "4s1bptQjcyM"}, {"C": "Thyagaraja", "D": "8:25", "R": "Varali", "T": "", "U": "0 views", "V": "2oMPOPYOaGM"}, {"C": "Thyagaraja", "D": "3:17", "R": "Varali", "T": "", "U": "449 views", "V": "f2_NnNsMZRg"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Thyagaraja", "D": "7:38", "R": "Varali", "T": "", "U": "0 views", "V": "NHsG3nDwTFU"}]}, {"A": "Kunnakudi M. Balamuralikrishna", "songs": [{"C": "Thyagaraja", "D": "5:01", "R": "Varali", "T": "", "U": "101 views", "V": "GMM3xs3-89U"}, {"C": "Thyagaraja", "D": "30:46", "R": "Varali", "T": "", "U": "64 views", "V": "YLlrKWF_hGk"}]}, {"A": "Malladi Brothers", "songs": [{"C": "Thyagaraja", "D": "16:09", "R": "Varali", "T": "", "U": "784 views", "V": "kCKgrIeSHbk"}]}, {"A": "Nedunuri Krishnamurthy", "songs": [{"C": "Thyagaraja", "D": "5:05", "R": "Varali", "T": "", "U": "295 views", "V": "17Rs2g_-Meo"}]}, {"A": "O. S. Thyagarajan", "songs": [{"C": "Thyagaraja", "D": "35:15", "R": "Varali", "T": "", "U": "888 views", "V": "bKPn6Ur_iD4"}]}, {"A": "Ramnad Krishnan", "songs": [{"C": "Thyagaraja", "D": "11:46", "R": "Varali", "T": "", "U": "186 views", "V": "Tu53UFnCTNg"}, {"C": "Thyagaraja", "D": "4:41", "R": "Varali", "T": "", "U": "186 views", "V": "TpB_A-KvDE8"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Thyagaraja", "D": "12:03", "R": "Varali", "T": "", "U": "8,134 views", "V": "VlFWLH7Vuuk"}, {"C": "Thyagaraja", "D": "12:14", "R": "Varali", "T": "", "U": "7,180 views", "V": "xnFDLGJdpq0"}]}, {"A": "Sandeep Narayan", "songs": [{"C": "Thyagaraja", "D": "8:32", "R": "Varali", "T": "", "U": "0 views", "V": "HzMWutsKWSA"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Thyagaraja", "D": "18:51", "R": "Varali", "T": "", "U": "1,100 views", "V": "OW8pChPaROU"}, {"C": "Thyagaraja", "D": "6:16", "R": "Varali", "T": "", "U": "231 views", "V": "VBa0Zv6nbxU"}]}, {"A": "Sreevalsan J. Menon", "songs": [{"C": "Thyagaraja", "D": "25:27", "R": "Varali", "T": "", "U": "521 views", "V": "6zVhEYEZS6g"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Thyagaraja", "D": "34:06", "R": "Varali", "T": "", "U": "530 views", "V": "nqbFO99ON5A"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Thyagaraja", "D": "13:24", "R": "Varali", "T": "", "U": "581 views", "V": "8Aq3gOmaJRs"}]}, {"A": "Voleti Venkateswarlu", "songs": [{"C": "Thyagaraja", "D": "7:15", "R": "Varali", "T": "", "U": "0 views", "V": "U09APPWNhAw"}, {"C": "Thyagaraja", "D": "20:45", "R": "Varali", "T": "", "U": "0 views", "V": "xJc4nOWBGr4"}, {"C": "Thyagaraja", "D": "5:10", "R": "Varali", "T": "", "U": "49 views", "V": "nZ5aSPcrsEQ"}, {"C": "Thyagaraja", "D": "7:35", "R": "Varali", "T": "", "U": "73 views", "V": "BZ7vFTcSTA8"}]}, {"A": "K. S. Gopalakrishnan", "songs": [{"C": "Thyagaraja", "D": "8:15", "R": "Varali", "T": "", "U": "109 views", "V": "R7ARtUeoolU"}]}, {"A": "V. L. Kumar", "songs": [{"C": "Thyagaraja", "D": "33:39", "R": "Varali", "T": "", "U": "42 views", "V": "Aidhk-siets"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

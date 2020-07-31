@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>13</td></tr>
 <tr><td><em>Raga</em></td><td>2</td></tr>
 <tr><td><em>Artist</em></td><td>12</td></tr>
-<tr><td><em>Concert</em></td><td>12</td></tr>
+<tr><td><em>Concert</em></td><td>13</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -118,57 +118,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0170", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Khamas", "C": "Andal", "A": "Bombay Jayashri", "V": "7xCZMrnxm4I"}, {"N": "0171", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Bombay Jayashri", "V": "Su_2fgQLLiw"}]}, {"name": "Vocal - Kannikeswaran", "songs": [{"N": "0005", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Kannikeswaran", "V": "2nMLpGYOiEQ"}]}, {"name": "Vocal - Kuzhikkarai S. P. Viswalingam", "songs": [{"N": "0005", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Kuzhikkarai S. P. Viswalingam", "V": "EyOBhIhKBLw"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0684", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Khamas", "C": "Andal", "A": "M. Balamuralikrishna", "V": "HCaymugxVDM"}]}, {"name": "Vocal - Pantula Rama", "songs": [{"N": "0061", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Khamas", "C": "Andal", "A": "Pantula Rama", "V": "ifz_sWTP6_g"}]}, {"name": "Vocal - Salem Shriram", "songs": [{"N": "0009", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Salem Shriram", "V": "jsACPQFI5ro"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0454", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Sanjay Subrahmanyan", "V": "XYr1qEGnDfc"}]}, {"name": "Vocal - Subhashini Parthasarathy", "songs": [{"N": "0022", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Khamas", "C": "Andal", "A": "Subhashini Parthasarathy", "V": "m0oqnzdInEc"}]}, {"name": "Vocal - Swarna Rethas", "songs": [{"N": "0006", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Swarna Rethas", "V": "jW1YPiS1k1M"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0310", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Khamas", "C": "Andal", "A": "T. M. Krishna", "V": "AhURZSkgvjM"}]}, {"name": "Vocal - T. M. Thiagarajan", "songs": [{"N": "0016", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Unknownraga", "C": "Andal", "A": "T. M. Thiagarajan", "V": "TC4BKHr65uU"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0235", "T": "", "H": "Karpooram Naarumo", "S": "kaRpooram nARumO kamallp poo nARumO :  Adi", "R": "Khamas", "C": "Andal", "A": "U. Srinivas", "V": "1TpExgod9Rk"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Andal", "D": "4:32", "R": "Khamas", "T": "", "U": "2,483 views", "V": "7xCZMrnxm4I"}, {"C": "Andal", "D": "3:01", "R": "Unknownraga", "T": "", "U": "2,053 views", "V": "Su_2fgQLLiw"}]}, {"A": "Kannikeswaran", "songs": [{"C": "Andal", "D": "6:01", "R": "Unknownraga", "T": "", "U": "808 views", "V": "2nMLpGYOiEQ"}]}, {"A": "Kuzhikkarai S. P. Viswalingam", "songs": [{"C": "Andal", "D": "4:07", "R": "Unknownraga", "T": "", "U": "0 views", "V": "EyOBhIhKBLw"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Andal", "D": "7:42", "R": "Khamas", "T": "", "U": "2,888 views", "V": "HCaymugxVDM"}]}, {"A": "Pantula Rama", "songs": [{"C": "Andal", "D": "4:06", "R": "Khamas", "T": "", "U": "355 views", "V": "ifz_sWTP6_g"}]}, {"A": "Salem Shriram", "songs": [{"C": "Andal", "D": "8:44", "R": "Unknownraga", "T": "", "U": "2,219 views", "V": "jsACPQFI5ro"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Andal", "D": "5:23", "R": "Unknownraga", "T": "", "U": "0 views", "V": "XYr1qEGnDfc"}]}, {"A": "Subhashini Parthasarathy", "songs": [{"C": "Andal", "D": "7:04", "R": "Khamas", "T": "", "U": "2,524 views", "V": "m0oqnzdInEc"}]}, {"A": "Swarna Rethas", "songs": [{"C": "Andal", "D": "4:59", "R": "Unknownraga", "T": "", "U": "3,044 views", "V": "jW1YPiS1k1M"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Andal", "D": "6:56", "R": "Khamas", "T": "", "U": "970 views", "V": "AhURZSkgvjM"}]}, {"A": "T. M. Thiagarajan", "songs": [{"C": "Andal", "D": "3:46", "R": "Unknownraga", "T": "", "U": "511 views", "V": "TC4BKHr65uU"}]}, {"A": "U. Srinivas", "songs": [{"C": "Andal", "D": "6:36", "R": "Khamas", "T": "", "U": "449 views", "V": "1TpExgod9Rk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

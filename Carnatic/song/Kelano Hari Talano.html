@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Raga</em></td><td>6</td></tr>
 <tr><td><em>Artist</em></td><td>13</td></tr>
-<tr><td><em>Concert</em></td><td>13</td></tr>
+<tr><td><em>Concert</em></td><td>14</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bangalore Brothers", "songs": [{"N": "0035", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Suruti", "C": "Purandara Dasa", "A": "Bangalore Brothers", "V": "7MYwaa2JQ5I"}]}, {"name": "Vocal - Hyderabad Sisters", "songs": [{"N": "0023", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Kalyani", "C": "Purandara Dasa", "A": "Hyderabad Sisters", "V": "PaUfDK40a4I"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0342", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Kalyani", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "itX1Vfo-bOE"}, {"N": "0341", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Kalyani", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "WeMLxVhiDLA"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0230", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Suruti", "C": "Purandara Dasa", "A": "Maharajapuram Santhanam", "V": "RxsvALvYb_g"}]}, {"name": "Vocal - Mysore Nagamani Srinath", "songs": [{"N": "0017", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Kalyani", "C": "Purandara Dasa", "A": "Mysore Nagamani Srinath", "V": "ZG5q_0t3Sfc"}]}, {"name": "Vocal - R. Vedavalli", "songs": [{"N": "0146", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "R. Vedavalli", "V": "DfoqB7Iun3E"}, {"N": "0147", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "R. Vedavalli", "V": "g0YoOMHvuNU"}]}, {"name": "Vocal - Ranjani Hebbar", "songs": [{"N": "0024", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Begada", "C": "Purandara Dasa", "A": "Ranjani Hebbar", "V": "80hKMxtuPjg"}]}, {"name": "Vocal - Rudrapatnam Brothers", "songs": [{"N": "0024", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Rudrapatnam Brothers", "V": "KzwnPgDSKms"}]}, {"name": "Vocal - Seetha Narayanan", "songs": [{"N": "0026", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Shanmukapriya", "C": "Purandara Dasa", "A": "Seetha Narayanan", "V": "ASAbUllmxiM"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0274", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Kalyani", "C": "Purandara Dasa", "A": "Sudha Ragunathan", "V": "m5lkMj9jiRw"}]}, {"name": "Vocal - Tadepalli Lokanatha Sarma", "songs": [{"N": "0005", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Subhapanthuvarali", "C": "Purandara Dasa", "A": "Tadepalli Lokanatha Sarma", "V": "yZsuBlmdeSk"}]}, {"name": "Vocal - Vani Sateesh", "songs": [{"N": "0006", "T": "", "H": "Kelano Hari Talano", "S": "kELanO hari tALano : Adi", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vani Sateesh", "V": "srxAiQDLHLk"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bangalore Brothers", "songs": [{"C": "Purandara Dasa", "D": "14:22", "R": "Suruti", "T": "", "U": "195 views", "V": "7MYwaa2JQ5I"}]}, {"A": "Hyderabad Sisters", "songs": [{"C": "Purandara Dasa", "D": "19:13", "R": "Kalyani", "T": "", "U": "10,052 views", "V": "PaUfDK40a4I"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Purandara Dasa", "D": "14:37", "R": "Kalyani", "T": "", "U": "748 views", "V": "WeMLxVhiDLA"}, {"C": "Purandara Dasa", "D": "54:53", "R": "Kalyani", "T": "", "U": "1,181 views", "V": "itX1Vfo-bOE"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Purandara Dasa", "D": "3:56", "R": "Suruti", "T": "", "U": "791 views", "V": "RxsvALvYb_g"}]}, {"A": "Mysore Nagamani Srinath", "songs": [{"C": "Purandara Dasa", "D": "9:11", "R": "Kalyani", "T": "", "U": "0 views", "V": "ZG5q_0t3Sfc"}]}, {"A": "R. Vedavalli", "songs": [{"C": "Purandara Dasa", "D": "4:03", "R": "Unknownraga", "T": "", "U": "42 views", "V": "g0YoOMHvuNU"}, {"C": "Purandara Dasa", "D": "9:49", "R": "Unknownraga", "T": "", "U": "111 views", "V": "DfoqB7Iun3E"}]}, {"A": "Ranjani Hebbar", "songs": [{"C": "Purandara Dasa", "D": "8:49", "R": "Begada", "T": "", "U": "24,424 views", "V": "80hKMxtuPjg"}]}, {"A": "Rudrapatnam Brothers", "songs": [{"C": "Purandara Dasa", "D": "3:07", "R": "Unknownraga", "T": "", "U": "1,063 views", "V": "KzwnPgDSKms"}]}, {"A": "Seetha Narayanan", "songs": [{"C": "Purandara Dasa", "D": "7:50", "R": "Shanmukapriya", "T": "", "U": "215 views", "V": "ASAbUllmxiM"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Purandara Dasa", "D": "42:57", "R": "Kalyani", "T": "", "U": "236 views", "V": "m5lkMj9jiRw"}]}, {"A": "Tadepalli Lokanatha Sarma", "songs": [{"C": "Purandara Dasa", "D": "11:21", "R": "Subhapanthuvarali", "T": "", "U": "142 views", "V": "yZsuBlmdeSk"}]}, {"A": "Vani Sateesh", "songs": [{"C": "Purandara Dasa", "D": "8:03", "R": "Unknownraga", "T": "", "U": "1,508 views", "V": "srxAiQDLHLk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

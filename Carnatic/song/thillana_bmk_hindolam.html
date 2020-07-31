@@ -29,7 +29,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>12</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -128,57 +128,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0333", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "Amrutha Venkatesh", "V": "OjQvTH_PCUo"}, {"N": "0334", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "Amrutha Venkatesh", "V": "gVU5YantYVQ"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1746", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "QWvAZMKWCXs"}, {"N": "1747", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "vvr21a1hW58"}, {"N": "1748", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "yR1568mPebI"}]}, {"name": "Vocal - Prince Rama Varma", "songs": [{"N": "0522", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "RZkVhgMFRQk"}, {"N": "0519", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "D6hU__UX4zM"}, {"N": "0520", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "IEiKtsTflSY"}, {"N": "0523", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "Uq310zRHgJ0"}, {"N": "0524", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "dGxKb0S9WVo"}, {"N": "0525", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "kprGwjr5TXw"}, {"N": "0526", "T": "Thillana", "H": "thillana_bmk_hindolam", "S": "dhImnanA ta dhiranA takiTataka dhImna nAta :  Adi", "R": "Hindolam", "C": "M. Balamuralikrishna", "A": "Prince Rama Varma", "V": "wJcI46BR8xA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amrutha Venkatesh", "songs": [{"C": "M. Balamuralikrishna", "D": "5:49", "R": "Hindolam", "T": "Thillana", "U": "0 views", "V": "OjQvTH_PCUo"}, {"C": "M. Balamuralikrishna", "D": "4:19", "R": "Hindolam", "T": "Thillana", "U": "0 views", "V": "gVU5YantYVQ"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "M. Balamuralikrishna", "D": "6:36", "R": "Hindolam", "T": "Thillana", "U": "8,800 views", "V": "vvr21a1hW58"}, {"C": "M. Balamuralikrishna", "D": "6:53", "R": "Hindolam", "T": "Thillana", "U": "56,635 views", "V": "QWvAZMKWCXs"}, {"C": "M. Balamuralikrishna", "D": "6:48", "R": "Hindolam", "T": "Thillana", "U": "39,127 views", "V": "yR1568mPebI"}]}, {"A": "Prince Rama Varma", "songs": [{"C": "M. Balamuralikrishna", "D": "6:00", "R": "Hindolam", "T": "Thillana", "U": "0 views", "V": "RZkVhgMFRQk"}, {"C": "M. Balamuralikrishna", "D": "5:58", "R": "Hindolam", "T": "Thillana", "U": "0 views", "V": "wJcI46BR8xA"}, {"C": "M. Balamuralikrishna", "D": "7:37", "R": "Hindolam", "T": "Thillana", "U": "0 views", "V": "dGxKb0S9WVo"}, {"C": "M. Balamuralikrishna", "D": "5:33", "R": "Hindolam", "T": "Thillana", "U": "0 views", "V": "kprGwjr5TXw"}, {"C": "M. Balamuralikrishna", "D": "5:39", "R": "Hindolam", "T": "Thillana", "U": "0 views", "V": "IEiKtsTflSY"}, {"C": "M. Balamuralikrishna", "D": "5:57", "R": "Hindolam", "T": "Thillana", "U": "0 views", "V": "Uq310zRHgJ0"}, {"C": "M. Balamuralikrishna", "D": "5:32", "R": "Hindolam", "T": "Thillana", "U": "0 views", "V": "D6hU__UX4zM"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

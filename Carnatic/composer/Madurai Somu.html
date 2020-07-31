@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>25</td></tr>
 <tr><td><em>Song</em></td><td>11</td></tr>
 <tr><td><em>Raga</em></td><td>10</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "abhayam osagavE kanakapurAlaya aparAdhita dEvi", "songs": [{"N": "0066", "T": "", "H": "Abhayam Osagave", "S": "abhayam osagavE kanakapurAlaya aparAdhita dEvi :  Adi", "R": "Ahiri", "C": "Madurai Somu", "A": "M. S. Gopalakrishnan", "V": "IfUYxxRd2mE"}]}, {"name": "Angaiyarkanni", "songs": [{"N": "0023", "T": "", "H": "Angaiyarkanni", "S": "Angaiyarkanni", "R": "Kunthalavarali", "C": "Madurai Somu", "A": "Madurai Somu", "V": "FxeX3zp9PrQ"}, {"N": "0041", "T": "", "H": "Angaiyarkanni", "S": "Angaiyarkanni", "R": "Kunthalavarali", "C": "Madurai Somu", "A": "P. Unnikrishnan", "V": "C_KZKaxyOu4"}, {"N": "0042", "T": "", "H": "Angaiyarkanni", "S": "Angaiyarkanni", "R": "Kunthalavarali", "C": "Madurai Somu", "A": "P. Unnikrishnan", "V": "zzRVXkekpvU"}]}, {"name": "Kalaimagalum", "songs": [{"N": "0090", "T": "", "H": "Kalaimagalum", "S": "Kalaimagalum", "R": "Kalyani", "C": "Madurai Somu", "A": "Madurai Somu", "V": "7j_JQDyLzgk"}, {"N": "0091", "T": "", "H": "Kalaimagalum", "S": "Kalaimagalum", "R": "Kalyani", "C": "Madurai Somu", "A": "Madurai Somu", "V": "AWa3C9napyQ"}, {"N": "0092", "T": "", "H": "Kalaimagalum", "S": "Kalaimagalum", "R": "Kalyani", "C": "Madurai Somu", "A": "Madurai Somu", "V": "h0740cu5-O4"}]}, {"name": "ninaikkAda nEramillai murugA ninaindu ninaindu", "songs": [{"N": "0091", "T": "", "H": "Ninaikada Neramillai", "S": "ninaikkAda nEramillai murugA ninaindu ninaindu :  Adi", "R": "Rageshree", "C": "Madurai Somu", "A": "O. S. Arun", "V": "eajj_euI9Pc"}, {"N": "0037", "T": "", "H": "Ninaikada Neramillai", "S": "ninaikkAda nEramillai murugA ninaindu ninaindu :  Adi", "R": "Rageshree", "C": "Madurai Somu", "A": "V. K. Raman", "V": "Xi4RLi8ehtU"}]}, {"name": "Ninaindhu Ninaindhu", "songs": [{"N": "0019", "T": "", "H": "Ninaindhu Ninaindhu", "S": "Ninaindhu Ninaindhu", "R": "Behag", "C": "Madurai Somu", "A": "T. M. Soundarajan", "V": "1TFjaLdGl0M"}]}, {"name": "Ninnu Nammi", "songs": [{"N": "0307", "T": "Varnam", "H": "Ninnu Nammi", "S": "Ninnu Nammi : Adi", "R": "Shuddha dhanyasi", "C": "Madurai Somu", "A": "Madurai Somu", "V": "bQtsSlQSBro"}, {"N": "0105", "T": "Varnam", "H": "Ninnu Nammi", "S": "Ninnu Nammi : Adi", "R": "Shuddha dhanyasi", "C": "Madurai Somu", "A": "Guruvayur Dorai", "V": "-oMqsw-ScGA"}]}, {"name": "Ninnu namminanu", "songs": [{"N": "0308", "T": "Varnam", "H": "Ninnu Nammi Nanu", "S": "Ninnu namminanu : Adi", "R": "Devamanohari", "C": "Madurai Somu", "A": "Madurai Somu", "V": "164wMDtq9uY"}, {"N": "0309", "T": "Varnam", "H": "Ninnu Nammi Nanu", "S": "Ninnu namminanu : Adi", "R": "Devamanohari", "C": "Madurai Somu", "A": "Madurai Somu", "V": "3k47ev_hmTs"}]}, {"name": "Sankaraparane", "songs": [{"N": "0396", "T": "", "H": "Sankaraparane", "S": "Sankaraparane", "R": "Ragamalika", "C": "Madurai Somu", "A": "Lalgudi Jayaraman", "V": "s-K-qJtneE4"}]}, {"name": "Shri Rajarajeshwari", "songs": [{"N": "0229", "T": "", "H": "Shri Rajarajeshwari", "S": "Shri Rajarajeshwari", "R": "Kambhoji", "C": "Madurai Somu", "A": "Madurai Somu", "V": "Po7aKnhG2KQ"}]}, {"name": "Vallabha Maha Ganapathe", "songs": [{"N": "0262", "T": "", "H": "Vallabha Maha Ganapathe", "S": "Vallabha Maha Ganapathe", "R": "Gomedhikapriya", "C": "Madurai Somu", "A": "Madurai Somu", "V": "zMO1HXdMWgI"}, {"N": "0159", "T": "", "H": "Vallabha Maha Ganapathe", "S": "Vallabha Maha Ganapathe", "R": "Gomedhikapriya", "C": "Madurai Somu", "A": "M. Chandrasekaran", "V": "Mkb7q7MH2zo"}]}, {"name": "Varnam", "songs": [{"N": "0318", "T": "", "H": "Varnam", "S": "Varnam", "R": "Devamanohari", "C": "Madurai Somu", "A": "Madurai Somu", "V": "4mj5qCbHml0"}, {"N": "0319", "T": "", "H": "Varnam", "S": "Varnam", "R": "Devamanohari", "C": "Madurai Somu", "A": "Madurai Somu", "V": "MoI0mCIHaWY"}, {"N": "0203", "T": "", "H": "Varnam", "S": "Varnam", "R": "Devamanohari", "C": "Madurai Somu", "A": "M. Chandrasekaran", "V": "NVVqLKzBxbw"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Abhayam Osagave", "S": "abhayam osagavE kanakapurAlaya aparAdhita dEvi :  Adi", "songs": [{"A": "M. S. Gopalakrishnan", "D": "", "R": "Ahiri", "T": "", "U": "591 views", "V": "IfUYxxRd2mE"}]}, {"H": "Angaiyarkanni", "S": "Angaiyarkanni", "songs": [{"A": "Madurai Somu", "D": "6:35", "R": "Kunthalavarali", "T": "", "U": "118 views", "V": "FxeX3zp9PrQ"}, {"A": "P. Unnikrishnan", "D": "5:24", "R": "Kunthalavarali", "T": "", "U": "1,372 views", "V": "C_KZKaxyOu4"}, {"A": "P. Unnikrishnan", "D": "5:26", "R": "Kunthalavarali", "T": "", "U": "0 views", "V": "zzRVXkekpvU"}]}, {"H": "Kalaimagalum", "S": "Kalaimagalum", "songs": [{"A": "Madurai Somu", "D": "24:06", "R": "Kalyani", "T": "", "U": "357 views", "V": "h0740cu5-O4"}, {"A": "Madurai Somu", "D": "20:04", "R": "Kalyani", "T": "", "U": "0 views", "V": "AWa3C9napyQ"}, {"A": "Madurai Somu", "D": "20:03", "R": "Kalyani", "T": "", "U": "0 views", "V": "7j_JQDyLzgk"}]}, {"H": "Ninaikada Neramillai", "S": "ninaikkAda nEramillai murugA ninaindu ninaindu :  Adi", "songs": [{"A": "O. S. Arun", "D": "7:32", "R": "Rageshree", "T": "", "U": "0 views", "V": "eajj_euI9Pc"}, {"A": "V. K. Raman", "D": "2:44", "R": "Rageshree", "T": "", "U": "106 views", "V": "Xi4RLi8ehtU"}]}, {"H": "Ninaindhu Ninaindhu", "S": "Ninaindhu Ninaindhu", "songs": [{"A": "T. M. Soundarajan", "D": "3:10", "R": "Behag", "T": "", "U": "1,934 views", "V": "1TFjaLdGl0M"}]}, {"H": "Ninnu Nammi", "S": "Ninnu Nammi : Adi", "songs": [{"A": "Madurai Somu", "D": "6:43", "R": "Shuddha dhanyasi", "T": "Varnam", "U": "0 views", "V": "bQtsSlQSBro"}, {"A": "Guruvayur Dorai", "D": "3:43:30", "R": "Shuddha dhanyasi", "T": "Varnam", "U": "754 views", "V": "-oMqsw-ScGA"}]}, {"H": "Ninnu Nammi Nanu", "S": "Ninnu namminanu : Adi", "songs": [{"A": "Madurai Somu", "D": "6:16", "R": "Devamanohari", "T": "Varnam", "U": "0 views", "V": "3k47ev_hmTs"}, {"A": "Madurai Somu", "D": "6:20", "R": "Devamanohari", "T": "Varnam", "U": "0 views", "V": "164wMDtq9uY"}]}, {"H": "Sankaraparane", "S": "Sankaraparane", "songs": [{"A": "Lalgudi Jayaraman", "D": "4:11", "R": "Ragamalika", "T": "", "U": "6,900 views", "V": "s-K-qJtneE4"}]}, {"H": "Vallabha Maha Ganapathe", "S": "Vallabha Maha Ganapathe", "songs": [{"A": "Madurai Somu", "D": "15:56", "R": "Gomedhikapriya", "T": "", "U": "109 views", "V": "zMO1HXdMWgI"}, {"A": "M. Chandrasekaran", "D": "19:18", "R": "Gomedhikapriya", "T": "", "U": "3,100 views", "V": "Mkb7q7MH2zo"}]}, {"H": "Varnam", "S": "Varnam", "songs": [{"A": "Madurai Somu", "D": "7:21", "R": "Devamanohari", "T": "", "U": "326 views", "V": "MoI0mCIHaWY"}, {"A": "Madurai Somu", "D": "6:30", "R": "Devamanohari", "T": "", "U": "520 views", "V": "4mj5qCbHml0"}, {"A": "M. Chandrasekaran", "D": "3:20:46", "R": "Devamanohari", "T": "", "U": "2,300 views", "V": "NVVqLKzBxbw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

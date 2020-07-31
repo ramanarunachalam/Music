@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>7</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>7</td></tr>
-<tr><td><em>Concert</em></td><td>7</td></tr>
+<tr><td><em>Concert</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -151,57 +151,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Alathur Brothers", "songs": [{"N": "0104", "T": "", "H": "Rama Nee Vadu", "S": "rAma nIv A dukonduvO konavO  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "Alathur Brothers", "V": "RJBum45JTw4"}]}, {"name": "Vocal - Madurai Somu", "songs": [{"N": "0206", "T": "", "H": "Rama Nee Vadu", "S": "rAma nIv A dukonduvO konavO  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "Madurai Somu", "V": "HxwnmKh5efY"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0695", "T": "", "H": "Rama Nee Vadu", "S": "rAma nIv A dukonduvO konavO  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "yewVcp5JZ9g"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0668", "T": "", "H": "Rama Nee Vadu", "S": "rAma nIv A dukonduvO konavO  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "q9A8B43gA6U"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0471", "T": "", "H": "Rama Nee Vadu", "S": "rAma nIv A dukonduvO konavO  :  Adi", "R": "Kalyani", "C": "Thyagaraja", "A": "T. M. Krishna", "V": "9FLX7icsj8w"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Alathur Brothers", "songs": [{"C": "Thyagaraja", "D": "1:13:02", "R": "Kalyani", "T": "", "U": "1,600 views", "V": "RJBum45JTw4"}]}, {"A": "Madurai Somu", "songs": [{"C": "Thyagaraja", "D": "5:20", "R": "Kalyani", "T": "", "U": "1,897 views", "V": "HxwnmKh5efY"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Thyagaraja", "D": "43:26", "R": "Kalyani", "T": "", "U": "196 views", "V": "yewVcp5JZ9g"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Thyagaraja", "D": "17:36", "R": "Kalyani", "T": "", "U": "624 views", "V": "q9A8B43gA6U"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Thyagaraja", "D": "4:40", "R": "Kalyani", "T": "", "U": "969 views", "V": "9FLX7icsj8w"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

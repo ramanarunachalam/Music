@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Raga</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "mukhattai kAtTTiye dEham muzhumaiyum kATTAmal", "songs": [{"N": "0169", "T": "", "H": "Muhathai Kaati", "S": "mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu", "R": "Bhairavi", "C": "Papavinacha Mudaliar", "A": "R. Vedavalli", "V": "55Vme47ALGY"}, {"N": "0170", "T": "", "H": "Muhathai Kaati", "S": "mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu", "R": "Bhairavi", "C": "Papavinacha Mudaliar", "A": "R. Vedavalli", "V": "CSNYRlxz_t4"}, {"N": "0171", "T": "", "H": "Muhathai Kaati", "S": "mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu", "R": "Bhairavi", "C": "Papavinacha Mudaliar", "A": "R. Vedavalli", "V": "oBljVPOvNhg"}, {"N": "0172", "T": "", "H": "Muhathai Kaati", "S": "mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu", "R": "Bhairavi", "C": "Papavinacha Mudaliar", "A": "R. Vedavalli", "V": "vc5GIHHFCEQ"}]}, {"name": "naTamADit tirinda umadiDadu kAl udavAmal", "songs": [{"N": "0326", "T": "", "H": "Nadamaadi Thirinda", "S": "naTamADit tirinda umadiDadu kAl udavAmal :  Adi", "R": "Kambhoji", "C": "Papavinacha Mudaliar", "A": "K. V. Narayanaswamy", "V": "TQj1P_i4zWQ"}, {"N": "0027", "T": "", "H": "Nadamaadi Thirinda", "S": "naTamADit tirinda umadiDadu kAl udavAmal :  Adi", "R": "Kambhoji", "C": "Papavinacha Mudaliar", "A": "Savita Narasimhan", "V": "8FjkSILUtO4"}, {"N": "0002", "T": "", "H": "Nadamaadi Thirinda", "S": "naTamADit tirinda umadiDadu kAl udavAmal :  Adi", "R": "Kambhoji", "C": "Papavinacha Mudaliar", "A": "V. V. Sadagopan", "V": "85n6tBFGwDk"}, {"N": "0052", "T": "", "H": "Nadamaadi Thirinda", "S": "naTamADit tirinda umadiDadu kAl udavAmal :  Adi", "R": "Kambhoji", "C": "Papavinacha Mudaliar", "A": "R Raghul", "V": "qMC3ZqmEpQw"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Muhathai Kaati", "S": "mukhattai kAtTTiye dEham muzhumaiyum kATTAmal :  Caapu", "songs": [{"A": "R. Vedavalli", "D": "17:01", "R": "Bhairavi", "T": "", "U": "1,000 views", "V": "55Vme47ALGY"}, {"A": "R. Vedavalli", "D": "16:51", "R": "Bhairavi", "T": "", "U": "237 views", "V": "CSNYRlxz_t4"}, {"A": "R. Vedavalli", "D": "17:26", "R": "Bhairavi", "T": "", "U": "516 views", "V": "oBljVPOvNhg"}, {"A": "R. Vedavalli", "D": "17:26", "R": "Bhairavi", "T": "", "U": "6 views", "V": "vc5GIHHFCEQ"}]}, {"H": "Nadamaadi Thirinda", "S": "naTamADit tirinda umadiDadu kAl udavAmal :  Adi", "songs": [{"A": "K. V. Narayanaswamy", "D": "27:08", "R": "Kambhoji", "T": "", "U": "2,372 views", "V": "TQj1P_i4zWQ"}, {"A": "Savita Narasimhan", "D": "12:46", "R": "Kambhoji", "T": "", "U": "118 views", "V": "8FjkSILUtO4"}, {"A": "V. V. Sadagopan", "D": "6:16", "R": "Kambhoji", "T": "", "U": "596 views", "V": "85n6tBFGwDk"}, {"A": "R Raghul", "D": "53:01", "R": "Kambhoji", "T": "", "U": "98 views", "V": "qMC3ZqmEpQw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>25</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>20</td></tr>
-<tr><td><em>Concert</em></td><td>20</td></tr>
+<tr><td><em>Concert</em></td><td>23</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ambikapuram Sivaraman", "songs": [{"N": "0032", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Ambikapuram Sivaraman", "V": "uhJ1x2HQcRw"}]}, {"name": "Vocal - Bangalore Brothers", "songs": [{"N": "0063", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Bangalore Brothers", "V": "oc1R4_j4TOo"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0293", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Bombay Jayashri", "V": "vSb0KbV_hao"}, {"N": "0294", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Bombay Jayashri", "V": "ydf2jRwdFPo"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0185", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Bombay Sisters", "V": "2vcCAFjK_H8"}, {"N": "0186", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Bombay Sisters", "V": "IiEog6-nRns"}]}, {"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0395", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "D. K. Jayaraman", "V": "yhv_C0anO_0"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0357", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "D. K. Pattammal", "V": "YL5Ntwnfdk4"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0417", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "K. V. Narayanaswamy", "V": "Gsgu2jM0oGU"}, {"N": "0418", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "K. V. Narayanaswamy", "V": "j4xgcrs0yuE"}]}, {"name": "Vocal - Kasturi Rangan", "songs": [{"N": "0007", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Kasturi Rangan", "V": "_ATe9Hlycn0"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0568", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "M. D. Ramanathan", "V": "9dUMDi8fmgc"}, {"N": "0569", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "M. D. Ramanathan", "V": "xnLQyGCCTGQ"}]}, {"name": "Vocal - Maharajapuram S. Srinivasan", "songs": [{"N": "0022", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Maharajapuram S. Srinivasan", "V": "f6OvpVa2pCE"}]}, {"name": "Vocal - Neyveli Santhanagopalan", "songs": [{"N": "0114", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Neyveli Santhanagopalan", "V": "6lCt4O6OIzU"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0278", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Nithyasree Mahadevan", "V": "5-qS0bwMo54"}, {"N": "0279", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Nithyasree Mahadevan", "V": "pHhpneYap10"}]}, {"name": "Vocal - R. Suryaprakash", "songs": [{"N": "0058", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "R. Suryaprakash", "V": "whTJQI-6_SY"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0710", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Sanjay Subrahmanyan", "V": "63N37apcqHA"}]}, {"name": "Vocal - T. V. Sankaranarayanan", "songs": [{"N": "0181", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "T. V. Sankaranarayanan", "V": "VIFXruh458M"}]}, {"name": "Vocal - Thanjavur Sankara Iyer", "songs": [{"N": "0029", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Thanjavur Sankara Iyer", "V": "qbmedStzYO4"}]}, {"name": "Veena - Veena E. Gayathri", "songs": [{"N": "0081", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Veena E. Gayathri", "V": "K31Lg2xI6OA"}]}, {"name": "Saxaphone - Kadri Gopalnath", "songs": [{"N": "0095", "T": "", "H": "Ramanukku Mannan", "S": "raamanukku mannan muDi taritaalE :  Adi", "R": "Hindolam", "C": "Arunachala Kavi", "A": "Kadri Gopalnath", "V": "P9M3IaSqcYo"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Ambikapuram Sivaraman", "songs": [{"C": "Arunachala Kavi", "D": "14:37", "R": "Hindolam", "T": "", "U": "4,809 views", "V": "uhJ1x2HQcRw"}]}, {"A": "Bangalore Brothers", "songs": [{"C": "Arunachala Kavi", "D": "12:54", "R": "Hindolam", "T": "", "U": "186 views", "V": "oc1R4_j4TOo"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Arunachala Kavi", "D": "4:52", "R": "Hindolam", "T": "", "U": "5,735 views", "V": "vSb0KbV_hao"}, {"C": "Arunachala Kavi", "D": "4:52", "R": "Hindolam", "T": "", "U": "0 views", "V": "ydf2jRwdFPo"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Arunachala Kavi", "D": "4:14", "R": "Hindolam", "T": "", "U": "0 views", "V": "IiEog6-nRns"}, {"C": "Arunachala Kavi", "D": "4:01", "R": "Hindolam", "T": "", "U": "0 views", "V": "2vcCAFjK_H8"}]}, {"A": "D. K. Jayaraman", "songs": [{"C": "Arunachala Kavi", "D": "4:55", "R": "Hindolam", "T": "", "U": "238 views", "V": "yhv_C0anO_0"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Arunachala Kavi", "D": "5:23", "R": "Hindolam", "T": "", "U": "7,400 views", "V": "YL5Ntwnfdk4"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Arunachala Kavi", "D": "14:45", "R": "Hindolam", "T": "", "U": "569 views", "V": "Gsgu2jM0oGU"}, {"C": "Arunachala Kavi", "D": "14:49", "R": "Hindolam", "T": "", "U": "4,102 views", "V": "j4xgcrs0yuE"}]}, {"A": "Kasturi Rangan", "songs": [{"C": "Arunachala Kavi", "D": "33:16", "R": "Hindolam", "T": "", "U": "18,221 views", "V": "_ATe9Hlycn0"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Arunachala Kavi", "D": "3:18", "R": "Hindolam", "T": "", "U": "395 views", "V": "9dUMDi8fmgc"}, {"C": "Arunachala Kavi", "D": "2:46", "R": "Hindolam", "T": "", "U": "162 views", "V": "xnLQyGCCTGQ"}]}, {"A": "Maharajapuram S. Srinivasan", "songs": [{"C": "Arunachala Kavi", "D": "14:41", "R": "Hindolam", "T": "", "U": "642 views", "V": "f6OvpVa2pCE"}]}, {"A": "Neyveli Santhanagopalan", "songs": [{"C": "Arunachala Kavi", "D": "9:56", "R": "Hindolam", "T": "", "U": "3,974 views", "V": "6lCt4O6OIzU"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Arunachala Kavi", "D": "10:42", "R": "Hindolam", "T": "", "U": "21,568 views", "V": "5-qS0bwMo54"}, {"C": "Arunachala Kavi", "D": "3:01", "R": "Hindolam", "T": "", "U": "18,776 views", "V": "pHhpneYap10"}]}, {"A": "R. Suryaprakash", "songs": [{"C": "Arunachala Kavi", "D": "10:13", "R": "Hindolam", "T": "", "U": "3,099 views", "V": "whTJQI-6_SY"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Arunachala Kavi", "D": "5:33", "R": "Hindolam", "T": "", "U": "166 views", "V": "63N37apcqHA"}]}, {"A": "T. V. Sankaranarayanan", "songs": [{"C": "Arunachala Kavi", "D": "5:00", "R": "Hindolam", "T": "", "U": "0 views", "V": "VIFXruh458M"}]}, {"A": "Thanjavur Sankara Iyer", "songs": [{"C": "Arunachala Kavi", "D": "4:34", "R": "Hindolam", "T": "", "U": "253 views", "V": "qbmedStzYO4"}]}, {"A": "Veena E. Gayathri", "songs": [{"C": "Arunachala Kavi", "D": "16:04", "R": "Hindolam", "T": "", "U": "3,825 views", "V": "K31Lg2xI6OA"}]}, {"A": "Kadri Gopalnath", "songs": [{"C": "Arunachala Kavi", "D": "33:14", "R": "Hindolam", "T": "", "U": "11,287 views", "V": "P9M3IaSqcYo"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

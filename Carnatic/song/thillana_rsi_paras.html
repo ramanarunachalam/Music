@@ -29,7 +29,7 @@
 <tr><td><em>Audio</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>5</td></tr>
-<tr><td><em>Concert</em></td><td>5</td></tr>
+<tr><td><em>Concert</em></td><td>4</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -134,57 +134,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bharat Sundar", "songs": [{"N": "0179", "T": "Thillana", "H": "thillana_rsi_paras", "S": "tAnOm tanata dhiranA drudru tAnOm tanata :  Deshadi", "R": "Paras", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Bharat Sundar", "V": "TG0G-VXztbQ"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0266", "T": "Thillana", "H": "thillana_rsi_paras", "S": "tAnOm tanata dhiranA drudru tAnOm tanata :  Deshadi", "R": "Paras", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Ramakrishnan Murthy", "V": "oRD0heAAySQ"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0371", "T": "Thillana", "H": "thillana_rsi_paras", "S": "tAnOm tanata dhiranA drudru tAnOm tanata :  Deshadi", "R": "Paras", "C": "Ramanathapuram Srinivasa Iyengar", "A": "Ranjani Gayatri", "V": "dBTAkAI1VQk"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0851", "T": "Thillana", "H": "thillana_rsi_paras", "S": "tAnOm tanata dhiranA drudru tAnOm tanata :  Deshadi", "R": "Paras", "C": "Ramanathapuram Srinivasa Iyengar", "A": "T. M. Krishna", "V": "lKiLfvXdrdU"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bharat Sundar", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "3:59", "R": "Paras", "T": "Thillana", "U": "4,173 views", "V": "TG0G-VXztbQ"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "5:30", "R": "Paras", "T": "Thillana", "U": "6,455 views", "V": "oRD0heAAySQ"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "3:01", "R": "Paras", "T": "Thillana", "U": "388 views", "V": "dBTAkAI1VQk"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Ramanathapuram Srinivasa Iyengar", "D": "4:33", "R": "Paras", "T": "Thillana", "U": "13,095 views", "V": "lKiLfvXdrdU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

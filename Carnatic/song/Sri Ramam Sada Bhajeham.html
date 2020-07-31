@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>11</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>3</td></tr>
-<tr><td><em>Concert</em></td><td>3</td></tr>
+<tr><td><em>Concert</em></td><td>11</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1375", "T": "", "H": "Sri Ramam Sada Bhajeham", "S": "shrI rAmam sadA bhajEham shrtajana pAlakam :  Adi", "R": "Thanarupi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "2LWAn-XCVMc"}, {"N": "1377", "T": "", "H": "Sri Ramam Sada Bhajeham", "S": "shrI rAmam sadA bhajEham shrtajana pAlakam :  Adi", "R": "Thanarupi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "GRRafRbq88U"}, {"N": "1379", "T": "", "H": "Sri Ramam Sada Bhajeham", "S": "shrI rAmam sadA bhajEham shrtajana pAlakam :  Adi", "R": "Thanarupi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "VdhsWn7mOzU"}, {"N": "1381", "T": "", "H": "Sri Ramam Sada Bhajeham", "S": "shrI rAmam sadA bhajEham shrtajana pAlakam :  Adi", "R": "Thanarupi", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "h38l2pcW3tE"}]}, {"name": "Whistle - Whistle K. Sivaprasad", "songs": [{"N": "0016", "T": "", "H": "Sri Ramam Sada Bhajeham", "S": "shrI rAmam sadA bhajEham shrtajana pAlakam :  Adi", "R": "Thanarupi", "C": "M. Balamuralikrishna", "A": "Whistle K. Sivaprasad", "V": "AUhmVItA59M"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "M. Balamuralikrishna", "songs": [{"C": "M. Balamuralikrishna", "D": "5:35", "R": "Thanarupi", "T": "", "U": "509 views", "V": "GRRafRbq88U"}, {"C": "M. Balamuralikrishna", "D": "9:04", "R": "Thanarupi", "T": "", "U": "2,000 views", "V": "h38l2pcW3tE"}, {"C": "M. Balamuralikrishna", "D": "1:03:43", "R": "Thanarupi", "T": "", "U": "434 views", "V": "2LWAn-XCVMc"}, {"C": "M. Balamuralikrishna", "D": "5:36", "R": "Thanarupi", "T": "", "U": "0 views", "V": "Cy26kFjJGHo"}, {"C": "M. Balamuralikrishna", "D": "5:37", "R": "Thanarupi", "T": "", "U": "11,928 views", "V": "KDb0rOB8CEA"}, {"C": "M. Balamuralikrishna", "D": "11:59", "R": "Thanarupi", "T": "", "U": "105 views", "V": "VdhsWn7mOzU"}, {"C": "M. Balamuralikrishna", "D": "4:50", "R": "Thanarupi", "T": "", "U": "0 views", "V": "bXkvRdQgApc"}]}, {"A": "Whistle K. Sivaprasad", "songs": [{"C": "M. Balamuralikrishna", "D": "1:15:07", "R": "Thanarupi", "T": "", "U": "700 views", "V": "AUhmVItA59M"}]}, {"A": "M. Chandrasekaran", "songs": [{"C": "M. Balamuralikrishna", "D": "4:16", "R": "Thanarupi", "T": "", "U": "369 views", "V": "XSbDcZ4Hbno"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -133,57 +133,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Dr. Nagavalli Nagaraj", "songs": [{"N": "0006", "T": "", "H": "Alli Nodalu Rama", "S": "alli nODalu rAma illi nODalu rAma :  Rupaka", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Dr. Nagavalli Nagaraj", "V": "Le9q4LPA1C0"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0242", "T": "", "H": "Alli Nodalu Rama", "S": "alli nODalu rAma illi nODalu rAma :  Rupaka", "R": "Natakurinji", "C": "Purandara Dasa", "A": "M. Balamuralikrishna", "V": "TeW8PvjZUfk"}]}, {"name": "Vocal - Mambalam Sisters", "songs": [{"N": "0020", "T": "", "H": "Alli Nodalu Rama", "S": "alli nODalu rAma illi nODalu rAma :  Rupaka", "R": "Natakurinji", "C": "Purandara Dasa", "A": "Mambalam Sisters", "V": "TMbfeVfdpcE"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Dr. Nagavalli Nagaraj", "songs": [{"C": "Purandara Dasa", "D": "6:01", "R": "Unknownraga", "T": "", "U": "19,971 views", "V": "Le9q4LPA1C0"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Purandara Dasa", "D": "5:46", "R": "Natakurinji", "T": "", "U": "736 views", "V": "TeW8PvjZUfk"}]}, {"A": "Mambalam Sisters", "songs": [{"C": "Purandara Dasa", "D": "4:50", "R": "Natakurinji", "T": "", "U": "7,491 views", "V": "TMbfeVfdpcE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

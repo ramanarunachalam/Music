@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>15</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>12</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0376", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "Qn2yWn8JCa0"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0159", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "7rEDS_NxiHA"}, {"N": "0160", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "U1f277UH_4k"}, {"N": "0161", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "W7LMHOQ1VUk"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0100", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Santhanam", "V": "9ZlGnggFJ-g"}, {"N": "0101", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Santhanam", "V": "tM_cUA4mbOw"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0147", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "Sudha Ragunathan", "V": "6wfceXsCkdk"}, {"N": "0148", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "Sudha Ragunathan", "V": "91d333iBLFg"}, {"N": "0149", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "Sudha Ragunathan", "V": "ASzUSjeum1A"}, {"N": "0150", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "Sudha Ragunathan", "V": "_8Z0M4hPqfE"}, {"N": "0151", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "Sudha Ragunathan", "V": "ampfXZxHQEU"}]}, {"name": "Flute - K. S. Gopalakrishnan", "songs": [{"N": "0008", "T": "", "H": "Chandrasekharam", "S": "indrAdi dEva sannutapadam  :  Adi", "R": "Margahindolam", "C": "Muthuswami Dikshitar", "A": "K. S. Gopalakrishnan", "V": "r-ka3_sqmyk"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "M. Balamuralikrishna", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:39", "R": "Margahindolam", "T": "", "U": "0 views", "V": "Qn2yWn8JCa0"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:06", "R": "Margahindolam", "T": "", "U": "464 views", "V": "U1f277UH_4k"}, {"C": "Muthuswami Dikshitar", "D": "4:05", "R": "Margahindolam", "T": "", "U": "0 views", "V": "W7LMHOQ1VUk"}, {"C": "Muthuswami Dikshitar", "D": "4:03", "R": "Margahindolam", "T": "", "U": "134 views", "V": "7rEDS_NxiHA"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:18", "R": "Margahindolam", "T": "", "U": "11,455 views", "V": "9ZlGnggFJ-g"}, {"C": "Muthuswami Dikshitar", "D": "7:31", "R": "Margahindolam", "T": "", "U": "0 views", "V": "tM_cUA4mbOw"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:00", "R": "Margahindolam", "T": "", "U": "907 views", "V": "91d333iBLFg"}, {"C": "Muthuswami Dikshitar", "D": "5:26", "R": "Margahindolam", "T": "", "U": "260 views", "V": "6wfceXsCkdk"}, {"C": "Muthuswami Dikshitar", "D": "5:15", "R": "Margahindolam", "T": "", "U": "203 views", "V": "ampfXZxHQEU"}, {"C": "Muthuswami Dikshitar", "D": "5:31", "R": "Margahindolam", "T": "", "U": "1,000 views", "V": "ASzUSjeum1A"}, {"C": "Muthuswami Dikshitar", "D": "5:18", "R": "Margahindolam", "T": "", "U": "7,856 views", "V": "_8Z0M4hPqfE"}]}, {"A": "K. S. Gopalakrishnan", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:07", "R": "Margahindolam", "T": "", "U": "0 views", "V": "r-ka3_sqmyk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -15,9 +15,9 @@
 <tbody>
 <tr><td><em>Audio</em></td><td>17</td></tr>
 <tr><td><em>Song</em></td><td>14</td></tr>
-<tr><td><em>Raga</em></td><td>14</td></tr>
+<tr><td><em>Raga</em></td><td>13</td></tr>
 <tr><td><em>Composer</em></td><td>5</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>13</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "ALATHURSRINI01", "songs": [{"N": "0002", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "Alathur Srinivasa Iyer", "V": "V9InH8znfwc"}, {"N": "0003", "T": "", "H": "Chani Thodi", "S": "cani tODi tEvE O manasA : Adi", "R": "Harikambhoji", "C": "Thyagaraja", "A": "Alathur Srinivasa Iyer", "V": "5oGY_pVs0zo"}, {"N": "0004", "T": "", "H": "Chelimini", "S": "celimini jalaj A kshu kaNTE  :  Adi", "R": "Yadukulakambhoji", "C": "Thyagaraja", "A": "Alathur Srinivasa Iyer", "V": "Ag4s4L7pv9s"}, {"N": "0006", "T": "", "H": "Pahi Jagajjanani", "S": "paahi jagajjanani santatam  :  Adi", "R": "Vachaspathi", "C": "Swathi Thirunal", "A": "Alathur Srinivasa Iyer", "V": "3uDE3p7u03g"}, {"N": "0007", "T": "", "H": "Paripalayamam", "S": "paripAlaya mAm shrI padmanAbha murArE :  Rupaka", "R": "Reethigowla", "C": "Swathi Thirunal", "A": "Alathur Srinivasa Iyer", "V": "C-gs41D5914"}, {"N": "0011", "T": "", "H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "R": "Bhairavi", "C": "UnknownComposer", "A": "Alathur Srinivasa Iyer", "V": "gVH-__ftmik"}, {"N": "0012", "T": "", "H": "Thani", "S": "Thani", "R": "Unknownraga", "C": "UnknownComposer", "A": "Alathur Srinivasa Iyer", "V": "Bg2rCuObeYo"}, {"N": "0013", "T": "Varnam", "H": "Chalamela Jesevura", "S": "calamEla jEsEvurA sarasagu rArA sAmi :  Ata", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "Alathur Srinivasa Iyer", "V": "BT4ZfJG0cYg"}, {"N": "0015", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Arabhi,Gowla,Kunthalavarali,Shanmukapriya", "C": "UnknownComposer", "A": "Alathur Srinivasa Iyer", "V": "srgPVS50ZYw"}, {"N": "0016", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Thodi", "C": "UnknownComposer", "A": "Alathur Srinivasa Iyer", "V": "a_OPtQeOx7U"}, {"N": "0017", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Alathur Srinivasa Iyer", "V": "hiv1au7sj-s"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Chalamela Jesevura", "S": "calamEla jEsEvurA sarasagu rArA sAmi :  Ata", "songs": [{"C": "Swathi Thirunal", "D": "2:40:20", "R": "Sankarabharanam", "T": "Varnam", "U": "1,900 views", "V": "BT4ZfJG0cYg"}]}, {"H": "Chelimini", "S": "celimini jalaj A kshu kaNTE  :  Adi", "songs": [{"C": "Thyagaraja", "D": "26:26", "R": "Yadukulakambhoji", "T": "", "U": "486 views", "V": "Ag4s4L7pv9s"}]}, {"H": "Concert", "S": "Concert", "songs": [{"C": "UnknownComposer", "D": "1:56:39", "R": "Unknownraga", "T": "", "U": "862 views", "V": "V9InH8znfwc"}]}, {"H": "Pahi Jagajjanani", "S": "paahi jagajjanani santatam  :  Adi", "songs": [{"C": "Swathi Thirunal", "D": "30:54", "R": "Vachaspathi", "T": "", "U": "994 views", "V": "3uDE3p7u03g"}]}, {"H": "Paripalayamam", "S": "paripAlaya mAm shrI padmanAbha murArE :  Rupaka", "songs": [{"C": "Swathi Thirunal", "D": "15:51", "R": "Reethigowla", "T": "", "U": "348 views", "V": "C-gs41D5914"}]}, {"H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "songs": [{"C": "UnknownComposer", "D": "1:56:39", "R": "Bhairavi", "T": "", "U": "1,000 views", "V": "gVH-__ftmik"}]}, {"H": "Raghuvara", "S": "raghu vara nannu marava tagunA :  Adi", "songs": [{"C": "Thyagaraja", "D": "1:20:30", "R": "Panthuvarali", "T": "", "U": "558 views", "V": "5oGY_pVs0zo"}]}, {"H": "Thani", "S": "Thani", "songs": [{"C": "UnknownComposer", "D": "26:21", "R": "Unknownraga", "T": "", "U": "140,626 views", "V": "Bg2rCuObeYo"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "55:58", "R": "Arabhi,Gowla,Kunthalavarali,Shanmukapriya", "T": "", "U": "427 views", "V": "srgPVS50ZYw"}, {"C": "UnknownComposer", "D": "16:11", "R": "Thodi", "T": "", "U": "0 views", "V": "a_OPtQeOx7U"}, {"C": "UnknownComposer", "D": "17:38", "R": "Unknownraga", "T": "", "U": "252 views", "V": "hiv1au7sj-s"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

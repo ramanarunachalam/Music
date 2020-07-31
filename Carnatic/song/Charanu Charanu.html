@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>7</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -149,57 +149,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Geetha Raja", "songs": [{"N": "0019", "T": "", "H": "Charanu Charanu", "S": "sharaNU sharaNu sharaNu sharaNu shAradA :  Rupaka", "R": "Chenchurutti", "C": "Anai Ayya", "A": "Geetha Raja", "V": "9cJ2RTEOf5g"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0085", "T": "", "H": "Charanu Charanu", "S": "sharaNU sharaNu sharaNu sharaNu shAradA :  Rupaka", "R": "Chenchurutti", "C": "Anai Ayya", "A": "K. V. Narayanaswamy", "V": "WlJy8Yc5_B8"}, {"N": "0086", "T": "", "H": "Charanu Charanu", "S": "sharaNU sharaNu sharaNu sharaNu shAradA :  Rupaka", "R": "Chenchurutti", "C": "Anai Ayya", "A": "K. V. Narayanaswamy", "V": "kfJQrHgKWNI"}]}, {"name": "Vocal - M. S. Sheela", "songs": [{"N": "0018", "T": "", "H": "Charanu Charanu", "S": "sharaNU sharaNu sharaNu sharaNu shAradA :  Rupaka", "R": "Chenchurutti", "C": "Anai Ayya", "A": "M. S. Sheela", "V": "WlR9piTnYjc"}]}, {"name": "Vocal - Prince Rama Varma", "songs": [{"N": "0082", "T": "", "H": "Charanu Charanu", "S": "sharaNU sharaNu sharaNu sharaNu shAradA :  Rupaka", "R": "Chenchurutti", "C": "Anai Ayya", "A": "Prince Rama Varma", "V": "Tbe7WkihlHQ"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0177", "T": "", "H": "Charanu Charanu", "S": "sharaNU sharaNu sharaNu sharaNu shAradA :  Rupaka", "R": "Chenchurutti", "C": "Anai Ayya", "A": "Semmangudi Srinivasa Iyer", "V": "hsYARb4r2WE"}]}, {"name": "Veena - Padma Varadhan", "songs": [{"N": "0002", "T": "", "H": "Charanu Charanu", "S": "sharaNU sharaNu sharaNu sharaNu shAradA :  Rupaka", "R": "Chenchurutti", "C": "Anai Ayya", "A": "Padma Varadhan", "V": "eTsF2Ne0cHE"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Geetha Raja", "songs": [{"C": "Anai Ayya", "D": "7:14", "R": "Chenchurutti", "T": "", "U": "309 views", "V": "9cJ2RTEOf5g"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Anai Ayya", "D": "8:35", "R": "Chenchurutti", "T": "", "U": "189 views", "V": "WlJy8Yc5_B8"}, {"C": "Anai Ayya", "D": "8:46", "R": "Chenchurutti", "T": "", "U": "440 views", "V": "kfJQrHgKWNI"}]}, {"A": "M. S. Sheela", "songs": [{"C": "Anai Ayya", "D": "45:14", "R": "Chenchurutti", "T": "", "U": "2,605 views", "V": "WlR9piTnYjc"}]}, {"A": "Prince Rama Varma", "songs": [{"C": "Anai Ayya", "D": "3:36", "R": "Chenchurutti", "T": "", "U": "1,899 views", "V": "Tbe7WkihlHQ"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Anai Ayya", "D": "8:07", "R": "Chenchurutti", "T": "", "U": "223 views", "V": "hsYARb4r2WE"}]}, {"A": "Padma Varadhan", "songs": [{"C": "Anai Ayya", "D": "5:02", "R": "Chenchurutti", "T": "", "U": "604 views", "V": "eTsF2Ne0cHE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

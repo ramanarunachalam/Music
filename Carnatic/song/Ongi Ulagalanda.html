@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>15</td></tr>
 <tr><td><em>Raga</em></td><td>2</td></tr>
 <tr><td><em>Artist</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>14</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -118,57 +118,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ariyakudi Ramanuja Iyengar", "songs": [{"N": "0226", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Arabhi", "C": "Andal", "A": "Ariyakudi Ramanuja Iyengar", "V": "MAEsEvW6qlo"}, {"N": "0227", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Ariyakudi Ramanuja Iyengar", "V": "BXg-ZELpMf8"}, {"N": "0228", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Ariyakudi Ramanuja Iyengar", "V": "qjCQIP0JR1U"}]}, {"name": "Vocal - Ashwath Narayanan", "songs": [{"N": "0064", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Arabhi", "C": "Andal", "A": "Ashwath Narayanan", "V": "YZyE13PNKYc"}, {"N": "0065", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Ashwath Narayanan", "V": "7MMrQmNfIeQ"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0691", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Arabhi", "C": "Andal", "A": "K. V. Narayanaswamy", "V": "Q9C3wyHqbac"}, {"N": "0692", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Arabhi", "C": "Andal", "A": "K. V. Narayanaswamy", "V": "nl7HFyUp4t0"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "1154", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Arabhi", "C": "Andal", "A": "M. L. Vasanthakumari", "V": "X95fVDqg7i4"}, {"N": "1155", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Arabhi", "C": "Andal", "A": "M. L. Vasanthakumari", "V": "haFf-E9iXF0"}, {"N": "1156", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Unknownraga", "C": "Andal", "A": "M. L. Vasanthakumari", "V": "eg8zyRx5iVw"}]}, {"name": "Vocal - Padma Sugavanam", "songs": [{"N": "0094", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Arabhi", "C": "Andal", "A": "Padma Sugavanam", "V": "lasWL4ywLeM"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "1141", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Arabhi", "C": "Andal", "A": "Sanjay Subrahmanyan", "V": "12TYnhxCPTI"}, {"N": "1142", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Arabhi", "C": "Andal", "A": "Sanjay Subrahmanyan", "V": "FBUaII7dw2w"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0245", "T": "Thiruppavai", "H": "Ongi Ulagalanda", "S": "Ongi ulagalanda uthaman per paadi :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Sikkil Gurucharan", "V": "UqNis2Dq_iA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Ariyakudi Ramanuja Iyengar", "songs": [{"C": "Andal", "D": "7:06", "R": "Arabhi", "T": "Thiruppavai", "U": "45 views", "V": "MAEsEvW6qlo"}, {"C": "Andal", "D": "5:46", "R": "Unknownraga", "T": "Thiruppavai", "U": "618 views", "V": "BXg-ZELpMf8"}, {"C": "Andal", "D": "7:01", "R": "Unknownraga", "T": "Thiruppavai", "U": "179 views", "V": "qjCQIP0JR1U"}]}, {"A": "Ashwath Narayanan", "songs": [{"C": "Andal", "D": "4:59", "R": "Arabhi", "T": "Thiruppavai", "U": "72 views", "V": "YZyE13PNKYc"}, {"C": "Andal", "D": "5:51", "R": "Unknownraga", "T": "Thiruppavai", "U": "4,511 views", "V": "7MMrQmNfIeQ"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Andal", "D": "4:50", "R": "Arabhi", "T": "Thiruppavai", "U": "239 views", "V": "Q9C3wyHqbac"}, {"C": "Andal", "D": "2:56", "R": "Arabhi", "T": "Thiruppavai", "U": "61 views", "V": "nl7HFyUp4t0"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Andal", "D": "2:36", "R": "Unknownraga", "T": "Thiruppavai", "U": "0 views", "V": "eg8zyRx5iVw"}, {"C": "Andal", "D": "2:46", "R": "Arabhi", "T": "Thiruppavai", "U": "204,701 views", "V": "haFf-E9iXF0"}, {"C": "Andal", "D": "2:36", "R": "Arabhi", "T": "Thiruppavai", "U": "21,626 views", "V": "X95fVDqg7i4"}]}, {"A": "Padma Sugavanam", "songs": [{"C": "Andal", "D": "2:54", "R": "Arabhi", "T": "Thiruppavai", "U": "1,502 views", "V": "lasWL4ywLeM"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Andal", "D": "9:11", "R": "Arabhi", "T": "Thiruppavai", "U": "902 views", "V": "12TYnhxCPTI"}, {"C": "Andal", "D": "6:49", "R": "Arabhi", "T": "Thiruppavai", "U": "0 views", "V": "FBUaII7dw2w"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Andal", "D": "1:45", "R": "Unknownraga", "T": "Thiruppavai", "U": "15,673 views", "V": "UqNis2Dq_iA"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Raga</em></td><td>2</td></tr>
 <tr><td><em>Artist</em></td><td>9</td></tr>
-<tr><td><em>Concert</em></td><td>9</td></tr>
+<tr><td><em>Concert</em></td><td>16</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -118,57 +118,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ariyakudi Ramanuja Iyengar", "songs": [{"N": "0219", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "Ariyakudi Ramanuja Iyengar", "V": "16Sy_RlEWN0"}, {"N": "0220", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "Ariyakudi Ramanuja Iyengar", "V": "HFNiqdirTro"}, {"N": "0221", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Ariyakudi Ramanuja Iyengar", "V": "zHXV9zBqnmk"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0267", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Unknownraga", "C": "Andal", "A": "Bombay Sisters", "V": "mOI89mUI7Ig"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0606", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "D. K. Pattammal", "V": "x3bT5UvM1OI"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0689", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "K. V. Narayanaswamy", "V": "k1oQDm5s_j8"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "1143", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "M. L. Vasanthakumari", "V": "iCaWpekvhJ4"}, {"N": "1144", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Unknownraga", "C": "Andal", "A": "M. L. Vasanthakumari", "V": "3w8XherkWvM"}, {"N": "1145", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Unknownraga", "C": "Andal", "A": "M. L. Vasanthakumari", "V": "CkGID1VxaOI"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1424", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "M. S. Subbulakshmi", "V": "3CK3aiObqS8"}, {"N": "1425", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "M. S. Subbulakshmi", "V": "pxQSipgZ5oU"}]}, {"name": "Vocal - Madurai Mani Iyer", "songs": [{"N": "0593", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "Madurai Mani Iyer", "V": "QkfNXLs8-IU"}, {"N": "0594", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "Madurai Mani Iyer", "V": "uRniCt-2dQI"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0665", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "Maharajapuram Santhanam", "V": "GPam8cfgb4o"}, {"N": "0666", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "Maharajapuram Santhanam", "V": "RGknuKVXJOY"}]}, {"name": "Vocal - Padma Sugavanam", "songs": [{"N": "0087", "T": "Thiruppavai", "H": "Male Manivanna", "S": "Maaley  Manivanna  Maargazhi neeraaduvaam :  Adi", "R": "Kunthalavarali", "C": "Andal", "A": "Padma Sugavanam", "V": "W9r3_-vEAdM"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Ariyakudi Ramanuja Iyengar", "songs": [{"C": "Andal", "D": "13:09", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "69 views", "V": "HFNiqdirTro"}, {"C": "Andal", "D": "3:01", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "817 views", "V": "16Sy_RlEWN0"}, {"C": "Andal", "D": "4:40", "R": "Unknownraga", "T": "Thiruppavai", "U": "106 views", "V": "zHXV9zBqnmk"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Andal", "D": "1:52", "R": "Unknownraga", "T": "Thiruppavai", "U": "0 views", "V": "mOI89mUI7Ig"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Andal", "D": "2:09", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "1,658 views", "V": "x3bT5UvM1OI"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Andal", "D": "1:50", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "22 views", "V": "k1oQDm5s_j8"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Andal", "D": "2:51", "R": "Unknownraga", "T": "Thiruppavai", "U": "85,766 views", "V": "CkGID1VxaOI"}, {"C": "Andal", "D": "2:45", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "0 views", "V": "iCaWpekvhJ4"}, {"C": "Andal", "D": "2:02", "R": "Unknownraga", "T": "Thiruppavai", "U": "0 views", "V": "3w8XherkWvM"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Andal", "D": "2:21", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "11,000 views", "V": "pxQSipgZ5oU"}, {"C": "Andal", "D": "2:27", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "0 views", "V": "3CK3aiObqS8"}]}, {"A": "Madurai Mani Iyer", "songs": [{"C": "Andal", "D": "4:33", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "2,231 views", "V": "uRniCt-2dQI"}, {"C": "Andal", "D": "4:33", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "2,227 views", "V": "QkfNXLs8-IU"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Andal", "D": "4:26", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "1,462 views", "V": "RGknuKVXJOY"}, {"C": "Andal", "D": "4:24", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "0 views", "V": "GPam8cfgb4o"}]}, {"A": "Padma Sugavanam", "songs": [{"C": "Andal", "D": "2:43", "R": "Kunthalavarali", "T": "Thiruppavai", "U": "651 views", "V": "W9r3_-vEAdM"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

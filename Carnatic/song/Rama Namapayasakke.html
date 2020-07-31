@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>7</td></tr>
-<tr><td><em>Concert</em></td><td>7</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aruna Sairam", "songs": [{"N": "0249", "T": "", "H": "Rama Namapayasakke", "S": "RaMa nama payasake : Rupaka", "R": "Hamsanandi", "C": "Purandara Dasa", "A": "Aruna Sairam", "V": "BKR2kuYyhEQ"}, {"N": "0250", "T": "", "H": "Rama Namapayasakke", "S": "RaMa nama payasake : Rupaka", "R": "Hamsanandi", "C": "Purandara Dasa", "A": "Aruna Sairam", "V": "Gcpgj5cgs5Q"}]}, {"name": "Vocal - Prasanna Venkataraman", "songs": [{"N": "0024", "T": "", "H": "Rama Namapayasakke", "S": "RaMa nama payasake : Rupaka", "R": "Anandabhairavi", "C": "Purandara Dasa", "A": "Prasanna Venkataraman", "V": "Vq4eixnvE8Q"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0152", "T": "", "H": "Rama Namapayasakke", "S": "RaMa nama payasake : Rupaka", "R": "Anandabhairavi", "C": "Purandara Dasa", "A": "Sikkil Gurucharan", "V": "TU0St5MVimc"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0490", "T": "", "H": "Rama Namapayasakke", "S": "RaMa nama payasake : Rupaka", "R": "Anandabhairavi", "C": "Purandara Dasa", "A": "Sudha Ragunathan", "V": "3UG_D8OrQ24"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aruna Sairam", "songs": [{"C": "Purandara Dasa", "D": "6:06", "R": "Hamsanandi", "T": "", "U": "73 views", "V": "Gcpgj5cgs5Q"}, {"C": "Purandara Dasa", "D": "6:06", "R": "Hamsanandi", "T": "", "U": "0 views", "V": "BKR2kuYyhEQ"}]}, {"A": "Prasanna Venkataraman", "songs": [{"C": "Purandara Dasa", "D": "16:06", "R": "Anandabhairavi", "T": "", "U": "608 views", "V": "Vq4eixnvE8Q"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Purandara Dasa", "D": "3:01", "R": "Anandabhairavi", "T": "", "U": "5,160 views", "V": "TU0St5MVimc"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Purandara Dasa", "D": "5:16", "R": "Anandabhairavi", "T": "", "U": "0 views", "V": "3UG_D8OrQ24"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

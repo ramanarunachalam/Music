@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>33</td></tr>
 <tr><td><em>Song</em></td><td>1</td></tr>
 <tr><td><em>Composer</em></td><td>1</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "sArasamukhi sakala bhAgyadE shrI", "songs": [{"N": "0213", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Amrutha Venkatesh", "V": "MyyPPB-wOLo"}, {"N": "0214", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Amrutha Venkatesh", "V": "WmCEGnSofNw"}, {"N": "0757", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "M. L. Vasanthakumari", "V": "0V2yohxOKO4"}, {"N": "0371", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Madurai Mani Iyer", "V": "4YTy8dAQfyk"}, {"N": "0372", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Madurai Mani Iyer", "V": "8gDYZsbZKek"}, {"N": "0374", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Madurai Mani Iyer", "V": "Z7c0MV11Zps"}, {"N": "0375", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Madurai Mani Iyer", "V": "dflejq-GQwg"}, {"N": "0376", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Madurai Mani Iyer", "V": "fB66Var5Gd4"}, {"N": "0377", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Madurai Mani Iyer", "V": "uPJSGWUMMd8"}, {"N": "0378", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Madurai Mani Iyer", "V": "vvXpc7XLY7g"}, {"N": "0464", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Maharajapuram Santhanam", "V": "PZY70ubWCfk"}, {"N": "0465", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Maharajapuram Santhanam", "V": "SOsq-8NXDrc"}, {"N": "0217", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Priya Sisters", "V": "vrSk-m6ZIEI"}, {"N": "0262", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Ranjani Gayatri", "V": "gBxLY8mva8s"}, {"N": "0203", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "S. Sowmya", "V": "vmb5zq4n_sw"}, {"N": "0194", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "T. V. Sankaranarayanan", "V": "p17B-CxpSdM"}, {"N": "0006", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "B. Sivakumar", "V": "-BSlFuyOpdc"}, {"N": "0059", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "K. S. Gopalakrishnan", "V": "-u18N7MIuX0"}, {"N": "0060", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "K. S. Gopalakrishnan", "V": "lLDYnx5-bHI"}, {"N": "0038", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Kudamaloor Janardanan", "V": "-fA4QZgUqNI"}, {"N": "0436", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "U. Srinivas", "V": "iBnPf6VCdFI"}, {"N": "0026", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "Sheik Mahaboob Subhani", "V": "SnrVrLJdgdQ"}, {"N": "0006", "T": "", "H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "R": "Gowdamalhar", "C": "Muthiah Bhagavathar", "A": "G. Bharathi", "V": "hqKOuVOPzjU"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Sarasamukhi", "S": "sArasamukhi sakala bhAgyadE shrI cAmuNDEshvari :  Rupaka", "songs": [{"A": "Amrutha Venkatesh", "C": "Muthiah Bhagavathar", "D": "5:03", "T": "", "U": "0 views", "V": "WmCEGnSofNw"}, {"A": "Amrutha Venkatesh", "C": "Muthiah Bhagavathar", "D": "4:56", "T": "", "U": "6,906 views", "V": "MyyPPB-wOLo"}, {"A": "M. L. Vasanthakumari", "C": "Muthiah Bhagavathar", "D": "4:46", "T": "", "U": "712 views", "V": "0V2yohxOKO4"}, {"A": "Madurai Mani Iyer", "C": "Muthiah Bhagavathar", "D": "1:01:55", "T": "", "U": "2,400 views", "V": "CXhnTonIXJs"}, {"A": "Madurai Mani Iyer", "C": "Muthiah Bhagavathar", "D": "", "T": "", "U": "15,000 views", "V": "uPJSGWUMMd8"}, {"A": "Madurai Mani Iyer", "C": "Muthiah Bhagavathar", "D": "16:16", "T": "", "U": "403 views", "V": "Z7c0MV11Zps"}, {"A": "Madurai Mani Iyer", "C": "Muthiah Bhagavathar", "D": "", "T": "", "U": "0 views", "V": "4YTy8dAQfyk"}, {"A": "Madurai Mani Iyer", "C": "Muthiah Bhagavathar", "D": "5:56", "T": "", "U": "566 views", "V": "8gDYZsbZKek"}, {"A": "Madurai Mani Iyer", "C": "Muthiah Bhagavathar", "D": "7:51", "T": "", "U": "97 views", "V": "fB66Var5Gd4"}, {"A": "Madurai Mani Iyer", "C": "Muthiah Bhagavathar", "D": "5:42", "T": "", "U": "3,320 views", "V": "vvXpc7XLY7g"}, {"A": "Madurai Mani Iyer", "C": "Muthiah Bhagavathar", "D": "3:06", "T": "", "U": "124 views", "V": "dflejq-GQwg"}, {"A": "Maharajapuram Santhanam", "C": "Muthiah Bhagavathar", "D": "4:15", "T": "", "U": "0 views", "V": "SOsq-8NXDrc"}, {"A": "Maharajapuram Santhanam", "C": "Muthiah Bhagavathar", "D": "4:15", "T": "", "U": "356 views", "V": "PZY70ubWCfk"}, {"A": "Priya Sisters", "C": "Muthiah Bhagavathar", "D": "3:47", "T": "", "U": "0 views", "V": "vrSk-m6ZIEI"}, {"A": "Ranjani Gayatri", "C": "Muthiah Bhagavathar", "D": "3:02", "T": "", "U": "1,545 views", "V": "gBxLY8mva8s"}, {"A": "S. Sowmya", "C": "Muthiah Bhagavathar", "D": "4:36", "T": "", "U": "12,485 views", "V": "vmb5zq4n_sw"}, {"A": "T. V. Sankaranarayanan", "C": "Muthiah Bhagavathar", "D": "5:14", "T": "", "U": "231 views", "V": "p17B-CxpSdM"}, {"A": "B. Sivakumar", "C": "Muthiah Bhagavathar", "D": "3:51", "T": "", "U": "61 views", "V": "-BSlFuyOpdc"}, {"A": "K. S. Gopalakrishnan", "C": "Muthiah Bhagavathar", "D": "5:51", "T": "", "U": "591 views", "V": "-u18N7MIuX0"}, {"A": "K. S. Gopalakrishnan", "C": "Muthiah Bhagavathar", "D": "4:35", "T": "", "U": "97 views", "V": "lLDYnx5-bHI"}, {"A": "Kudamaloor Janardanan", "C": "Muthiah Bhagavathar", "D": "9:28", "T": "", "U": "274 views", "V": "-fA4QZgUqNI"}, {"A": "U. Srinivas", "C": "Muthiah Bhagavathar", "D": "13:34", "T": "", "U": "0 views", "V": "iBnPf6VCdFI"}, {"A": "Sheik Mahaboob Subhani", "C": "Muthiah Bhagavathar", "D": "7:55", "T": "", "U": "298 views", "V": "SnrVrLJdgdQ"}, {"A": "G. Bharathi", "C": "Muthiah Bhagavathar", "D": "3:57", "T": "", "U": "46 views", "V": "hqKOuVOPzjU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

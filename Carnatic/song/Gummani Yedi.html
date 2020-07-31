@@ -143,57 +143,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Maharajapuram S. Srinivasan", "songs": [{"N": "0007", "T": "", "H": "Gummani Yedi", "S": "Gummani yeDi Sruti gUDagAnu kammani nEtula :  Adi", "R": "Poorvikalyani", "C": "Annamacharya", "A": "Maharajapuram S. Srinivasan", "V": "k6J-h5f3wWk"}]}, {"name": "Vocal - Nedunuri Krishnamurthy", "songs": [{"N": "0159", "T": "", "H": "Gummani Yedi", "S": "Gummani yeDi Sruti gUDagAnu kammani nEtula :  Adi", "R": "Poorvikalyani", "C": "Annamacharya", "A": "Nedunuri Krishnamurthy", "V": "QT5HB9NeEYE"}, {"N": "0160", "T": "", "H": "Gummani Yedi", "S": "Gummani yeDi Sruti gUDagAnu kammani nEtula :  Adi", "R": "Poorvikalyani", "C": "Annamacharya", "A": "Nedunuri Krishnamurthy", "V": "j62JAHREG-M"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Maharajapuram S. Srinivasan", "songs": [{"C": "Annamacharya", "D": "2:37", "R": "Poorvikalyani", "T": "", "U": "1,007 views", "V": "k6J-h5f3wWk"}]}, {"A": "Nedunuri Krishnamurthy", "songs": [{"C": "Annamacharya", "D": "20:30", "R": "Poorvikalyani", "T": "", "U": "1,100 views", "V": "QT5HB9NeEYE"}, {"C": "Annamacharya", "D": "11:00", "R": "Poorvikalyani", "T": "", "U": "156 views", "V": "j62JAHREG-M"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>4</td></tr>
-<tr><td><em>Concert</em></td><td>4</td></tr>
+<tr><td><em>Concert</em></td><td>7</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0201", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Shuddha hindolam", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "KiJwk1aquyA"}, {"N": "0202", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Shuddha hindolam", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "wCbqJ_x6JXE"}, {"N": "0203", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Unknownraga", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "ybM3B95Xtdo"}]}, {"name": "Vocal - C. K. Ramachandran", "songs": [{"N": "0014", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Unknownraga", "C": "Swathi Thirunal", "A": "C. K. Ramachandran", "V": "8WBXmx6xS2w"}, {"N": "0015", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Unknownraga", "C": "Swathi Thirunal", "A": "C. K. Ramachandran", "V": "B6oDTLMVUGU"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0679", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Karnataka kapi", "C": "Swathi Thirunal", "A": "Semmangudi Srinivasa Iyer", "V": "oZy2zznkp6k"}, {"N": "0680", "T": "", "H": "Sambho Satatam", "S": "shambhO satatam pAhi krpArasa  :  Adi", "R": "Karnataka kapi", "C": "Swathi Thirunal", "A": "Semmangudi Srinivasa Iyer", "V": "vbztHUrSq50"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amrutha Venkatesh", "songs": [{"C": "Swathi Thirunal", "D": "19:56", "R": "Shuddha hindolam", "T": "", "U": "1,300 views", "V": "wCbqJ_x6JXE"}, {"C": "Swathi Thirunal", "D": "11:16", "R": "Shuddha hindolam", "T": "", "U": "332 views", "V": "KiJwk1aquyA"}, {"C": "Swathi Thirunal", "D": "13:57", "R": "Unknownraga", "T": "", "U": "0 views", "V": "ybM3B95Xtdo"}]}, {"A": "C. K. Ramachandran", "songs": [{"C": "Swathi Thirunal", "D": "11:48", "R": "Unknownraga", "T": "", "U": "748 views", "V": "B6oDTLMVUGU"}, {"C": "Swathi Thirunal", "D": "3:24", "R": "Unknownraga", "T": "", "U": "176 views", "V": "8WBXmx6xS2w"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Swathi Thirunal", "D": "5:55", "R": "Karnataka kapi", "T": "", "U": "327 views", "V": "oZy2zznkp6k"}, {"C": "Swathi Thirunal", "D": "6:01", "R": "Karnataka kapi", "T": "", "U": "134 views", "V": "vbztHUrSq50"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

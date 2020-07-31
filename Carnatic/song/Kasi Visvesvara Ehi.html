@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - B. Rajam Iyer", "songs": [{"N": "0017", "T": "", "H": "Kasi Visvesvara Ehi", "S": "kAshivishvEshvara Ehi mAm pAhi karuNAnidhE :  Ata", "R": "Kambhoji", "C": "Muthuswami Dikshitar", "A": "B. Rajam Iyer", "V": "cGeN4uESwmg"}]}, {"name": "Vocal - Chittoor Subramaniam Pillai", "songs": [{"N": "0020", "T": "", "H": "Kasi Visvesvara Ehi", "S": "kAshivishvEshvara Ehi mAm pAhi karuNAnidhE :  Ata", "R": "Kambhoji", "C": "Muthuswami Dikshitar", "A": "Chittoor Subramaniam Pillai", "V": "3IJfiA06XVM"}]}, {"name": "Vocal - G. Ravikiran", "songs": [{"N": "0036", "T": "", "H": "Kasi Visvesvara Ehi", "S": "kAshivishvEshvara Ehi mAm pAhi karuNAnidhE :  Ata", "R": "Kambhoji", "C": "Muthuswami Dikshitar", "A": "G. Ravikiran", "V": "a4gtOGffOHM"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "B. Rajam Iyer", "songs": [{"C": "Muthuswami Dikshitar", "D": "10:01", "R": "Kambhoji", "T": "", "U": "706 views", "V": "cGeN4uESwmg"}]}, {"A": "Chittoor Subramaniam Pillai", "songs": [{"C": "Muthuswami Dikshitar", "D": "10:11", "R": "Kambhoji", "T": "", "U": "783 views", "V": "3IJfiA06XVM"}]}, {"A": "G. Ravikiran", "songs": [{"C": "Muthuswami Dikshitar", "D": "37:46", "R": "Kambhoji", "T": "", "U": "183 views", "V": "a4gtOGffOHM"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

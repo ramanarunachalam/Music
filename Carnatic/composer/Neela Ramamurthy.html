@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>12</td></tr>
 <tr><td><em>Song</em></td><td>3</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Ayiram Ayiram", "songs": [{"N": "0006", "T": "", "H": "Ayiram Ayiram", "S": "Ayiram Ayiram", "R": "Charukesi", "C": "Neela Ramamurthy", "A": "Deekshita Venkataraman", "V": "pSkm6K0YcKU"}, {"N": "0099", "T": "", "H": "Ayiram Ayiram", "S": "Ayiram Ayiram", "R": "Charukesi", "C": "Neela Ramamurthy", "A": "M. L. Vasanthakumari", "V": "BYsSISgZOVw"}, {"N": "0100", "T": "", "H": "Ayiram Ayiram", "S": "Ayiram Ayiram", "R": "Charukesi", "C": "Neela Ramamurthy", "A": "M. L. Vasanthakumari", "V": "Q33C4jH1l48"}, {"N": "0101", "T": "", "H": "Ayiram Ayiram", "S": "Ayiram Ayiram", "R": "Charukesi", "C": "Neela Ramamurthy", "A": "M. L. Vasanthakumari", "V": "pfsRDotmJ4s"}, {"N": "0109", "T": "", "H": "Ayiram Ayiram", "S": "Ayiram Ayiram", "R": "Charukesi", "C": "Neela Ramamurthy", "A": "Sudha Ragunathan", "V": "YyYnSlcrDdo"}, {"N": "0110", "T": "", "H": "Ayiram Ayiram", "S": "Ayiram Ayiram", "R": "Charukesi", "C": "Neela Ramamurthy", "A": "Sudha Ragunathan", "V": "y9PG0LyFoCc"}]}, {"name": "Karuna Sagara", "songs": [{"N": "0457", "T": "", "H": "Karuna Sagara", "S": "Karuna Sagara", "R": "Atana", "C": "Neela Ramamurthy", "A": "Sanjay Subrahmanyan", "V": "8ek4tBN2wIE"}]}, {"name": "mAshil ayOddhiyil mannan dasharathan mA", "songs": [{"N": "0250", "T": "", "H": "Masil Ayodhiyil", "S": "mAshil ayOddhiyil mannan dasharathan mA tavattAL :  Adi", "R": "Ragamalika", "C": "Neela Ramamurthy", "A": "D. K. Pattammal", "V": "IlQ6XFaeOhE"}, {"N": "0251", "T": "", "H": "Masil Ayodhiyil", "S": "mAshil ayOddhiyil mannan dasharathan mA tavattAL :  Adi", "R": "Ragamalika", "C": "Neela Ramamurthy", "A": "D. K. Pattammal", "V": "b0T0R08bPKQ"}, {"N": "0187", "T": "", "H": "Masil Ayodhiyil", "S": "mAshil ayOddhiyil mannan dasharathan mA tavattAL :  Adi", "R": "Ragamalika", "C": "Neela Ramamurthy", "A": "Nithyasree Mahadevan", "V": "gMzGmfIuz04"}, {"N": "0522", "T": "", "H": "Masil Ayodhiyil", "S": "mAshil ayOddhiyil mannan dasharathan mA tavattAL :  Adi", "R": "Ragamalika", "C": "Neela Ramamurthy", "A": "Sanjay Subrahmanyan", "V": "NGWwM8Ki6nc"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Ayiram Ayiram", "S": "Ayiram Ayiram", "songs": [{"A": "Deekshita Venkataraman", "D": "3:01", "R": "Charukesi", "T": "", "U": "421 views", "V": "pSkm6K0YcKU"}, {"A": "M. L. Vasanthakumari", "D": "4:06", "R": "Charukesi", "T": "", "U": "0 views", "V": "BYsSISgZOVw"}, {"A": "M. L. Vasanthakumari", "D": "4:07", "R": "Charukesi", "T": "", "U": "0 views", "V": "Q33C4jH1l48"}, {"A": "M. L. Vasanthakumari", "D": "4:06", "R": "Charukesi", "T": "", "U": "0 views", "V": "pfsRDotmJ4s"}, {"A": "Sudha Ragunathan", "D": "5:51", "R": "Charukesi", "T": "", "U": "582 views", "V": "YyYnSlcrDdo"}, {"A": "Sudha Ragunathan", "D": "5:51", "R": "Charukesi", "T": "", "U": "17 views", "V": "y9PG0LyFoCc"}]}, {"H": "Karuna Sagara", "S": "Karuna Sagara", "songs": [{"A": "Sanjay Subrahmanyan", "D": "34:31", "R": "Atana", "T": "", "U": "0 views", "V": "8ek4tBN2wIE"}]}, {"H": "Masil Ayodhiyil", "S": "mAshil ayOddhiyil mannan dasharathan mA tavattAL :  Adi", "songs": [{"A": "D. K. Pattammal", "D": "6:41", "R": "Ragamalika", "T": "", "U": "0 views", "V": "IlQ6XFaeOhE"}, {"A": "D. K. Pattammal", "D": "7:28", "R": "Ragamalika", "T": "", "U": "1,398 views", "V": "b0T0R08bPKQ"}, {"A": "Nithyasree Mahadevan", "D": "5:04", "R": "Ragamalika", "T": "", "U": "0 views", "V": "gMzGmfIuz04"}, {"A": "Sanjay Subrahmanyan", "D": "12:29", "R": "Ragamalika", "T": "", "U": "1,848 views", "V": "NGWwM8Ki6nc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

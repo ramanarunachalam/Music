@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>14</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Raga</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "aDaikkalam pughundEn ayyanE ennai AdarittaruLvAi", "songs": [{"N": "0001", "T": "", "H": "Adaikkalam", "S": "aDaikkalam pughundEn ayyanE ennai AdarittaruLvAi :  Adi", "R": "Saramathi", "C": "Ku. Sa. Krishnamoorthy", "A": "Ananthalakshmi Sadagopan", "V": "kmWYvo1gaEU"}, {"N": "0044", "T": "", "H": "Adaikkalam", "S": "aDaikkalam pughundEn ayyanE ennai AdarittaruLvAi :  Adi", "R": "Saramathi", "C": "Ku. Sa. Krishnamoorthy", "A": "U. Srinivas", "V": "5B9zNoHid5U"}]}, {"name": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya", "songs": [{"N": "0007", "T": "", "H": "Alli Unditalam", "S": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya shen :  Adi", "R": "Panthuvarali", "C": "Ku. Sa. Krishnamoorthy", "A": "M. Dandapani Desikar", "V": "-BaKD1oZ1rU"}, {"N": "0008", "T": "", "H": "Alli Unditalam", "S": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya shen :  Adi", "R": "Panthuvarali", "C": "Ku. Sa. Krishnamoorthy", "A": "M. Dandapani Desikar", "V": "0MUIXR6Uq1s"}, {"N": "0009", "T": "", "H": "Alli Unditalam", "S": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya shen :  Adi", "R": "Panthuvarali", "C": "Ku. Sa. Krishnamoorthy", "A": "M. Dandapani Desikar", "V": "Misbh0HgglM"}, {"N": "0010", "T": "", "H": "Alli Unditalam", "S": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya shen :  Adi", "R": "Panthuvarali", "C": "Ku. Sa. Krishnamoorthy", "A": "M. Dandapani Desikar", "V": "YEcg7UnA6qA"}, {"N": "0011", "T": "", "H": "Alli Unditalam", "S": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya shen :  Adi", "R": "Panthuvarali", "C": "Ku. Sa. Krishnamoorthy", "A": "M. Dandapani Desikar", "V": "i5-alhCq2Uc"}, {"N": "0012", "T": "", "H": "Alli Unditalam", "S": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya shen :  Adi", "R": "Panthuvarali", "C": "Ku. Sa. Krishnamoorthy", "A": "M. Dandapani Desikar", "V": "j4my5Cfo5IM"}, {"N": "0013", "T": "", "H": "Alli Unditalam", "S": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya shen :  Adi", "R": "Panthuvarali", "C": "Ku. Sa. Krishnamoorthy", "A": "M. Dandapani Desikar", "V": "ta57Bx8bF5A"}, {"N": "0014", "T": "", "H": "Alli Unditalam", "S": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya shen :  Adi", "R": "Panthuvarali", "C": "Ku. Sa. Krishnamoorthy", "A": "M. Dandapani Desikar", "V": "zZZ7JQ3E7xE"}, {"N": "0012", "T": "", "H": "Alli Unditalam", "S": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya shen :  Adi", "R": "Panthuvarali", "C": "Ku. Sa. Krishnamoorthy", "A": "Sirkazhi Govindarajan", "V": "HdipA50xC_g"}, {"N": "0013", "T": "", "H": "Alli Unditalam", "S": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya shen :  Adi", "R": "Panthuvarali", "C": "Ku. Sa. Krishnamoorthy", "A": "Sirkazhi Govindarajan", "V": "w2Sjms8KXcE"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Adaikkalam", "S": "aDaikkalam pughundEn ayyanE ennai AdarittaruLvAi :  Adi", "songs": [{"A": "Ananthalakshmi Sadagopan", "D": "3:00", "R": "Saramathi", "T": "", "U": "0 views", "V": "kmWYvo1gaEU"}, {"A": "U. Srinivas", "D": "4:34", "R": "Saramathi", "T": "", "U": "2,862 views", "V": "5B9zNoHid5U"}]}, {"H": "Alli Unditalam", "S": "aLLi uNDiDalAm vArIr ellOrum teLLamudAghiya shen :  Adi", "songs": [{"A": "M. Dandapani Desikar", "D": "12:11", "R": "Panthuvarali", "T": "", "U": "68 views", "V": "0MUIXR6Uq1s"}, {"A": "M. Dandapani Desikar", "D": "10:13", "R": "Panthuvarali", "T": "", "U": "205 views", "V": "j4my5Cfo5IM"}, {"A": "M. Dandapani Desikar", "D": "10:13", "R": "Panthuvarali", "T": "", "U": "900 views", "V": "Misbh0HgglM"}, {"A": "M. Dandapani Desikar", "D": "3:01", "R": "Panthuvarali", "T": "", "U": "1,184 views", "V": "zZZ7JQ3E7xE"}, {"A": "M. Dandapani Desikar", "D": "10:02", "R": "Panthuvarali", "T": "", "U": "135 views", "V": "ta57Bx8bF5A"}, {"A": "M. Dandapani Desikar", "D": "8:02", "R": "Panthuvarali", "T": "", "U": "94 views", "V": "i5-alhCq2Uc"}, {"A": "M. Dandapani Desikar", "D": "10:02", "R": "Panthuvarali", "T": "", "U": "0 views", "V": "-BaKD1oZ1rU"}, {"A": "M. Dandapani Desikar", "D": "10:06", "R": "Panthuvarali", "T": "", "U": "2,967 views", "V": "YEcg7UnA6qA"}, {"A": "Sirkazhi Govindarajan", "D": "9:35", "R": "Panthuvarali", "T": "", "U": "179 views", "V": "w2Sjms8KXcE"}, {"A": "Sirkazhi Govindarajan", "D": "8:25", "R": "Panthuvarali", "T": "", "U": "387 views", "V": "HdipA50xC_g"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

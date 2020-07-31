@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>15</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>13</td></tr>
-<tr><td><em>Concert</em></td><td>13</td></tr>
+<tr><td><em>Concert</em></td><td>14</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Alathur Brothers", "songs": [{"N": "0036", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "Alathur Brothers", "V": "AE_7shRIxlU"}]}, {"name": "Vocal - Aruna Sairam", "songs": [{"N": "0076", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "Aruna Sairam", "V": "d_GAzFUxw9U"}]}, {"name": "Vocal - Balaji Shankar", "songs": [{"N": "0008", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "Balaji Shankar", "V": "6xp12sXJQQA"}]}, {"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0096", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "ytr1fzWBVfw"}]}, {"name": "Vocal - Gayathri Venkataraghavan", "songs": [{"N": "0039", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "Gayathri Venkataraghavan", "V": "PZwHJvFNYaE"}, {"N": "0040", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "Gayathri Venkataraghavan", "V": "w-3e40Q3Kzk"}]}, {"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0036", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "Hyderabad Brothers", "V": "25ZM9c5kZwY"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0049", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "Malladi Brothers", "V": "5XKd1T52JB8"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0056", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "Ramakrishnan Murthy", "V": "c3LQ9sQjprw"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0190", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "T. M. Krishna", "V": "9855e2Ff-Qk"}, {"N": "0191", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "T. M. Krishna", "V": "hkc2ToKwT7Y"}]}, {"name": "Flute - Prapancham S. Balachandran", "songs": [{"N": "0002", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "Prapancham S. Balachandran", "V": "uek9deM4RGY"}]}, {"name": "Violin - Kamalakiran Vinjamuri", "songs": [{"N": "0035", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "Kamalakiran Vinjamuri", "V": "aMGHdhkFbLg"}]}, {"name": "Mridangam - Palghat Mani Iyer", "songs": [{"N": "0058", "T": "", "H": "Chera Ravademira", "S": "cEra rAv a dEmirA rAm a yya  :  Adi", "R": "Reethigowla", "C": "Thyagaraja", "A": "Palghat Mani Iyer", "V": "jfadOlv049E"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Alathur Brothers", "songs": [{"C": "Thyagaraja", "D": "13:50", "R": "Reethigowla", "T": "", "U": "3,000 views", "V": "AE_7shRIxlU"}]}, {"A": "Aruna Sairam", "songs": [{"C": "Thyagaraja", "D": "18:16", "R": "Reethigowla", "T": "", "U": "362 views", "V": "d_GAzFUxw9U"}]}, {"A": "Balaji Shankar", "songs": [{"C": "Thyagaraja", "D": "7:47", "R": "Reethigowla", "T": "", "U": "29,234 views", "V": "6xp12sXJQQA"}]}, {"A": "D. K. Jayaraman", "songs": [{"C": "Thyagaraja", "D": "6:35", "R": "Reethigowla", "T": "", "U": "1,200 views", "V": "ytr1fzWBVfw"}]}, {"A": "Gayathri Venkataraghavan", "songs": [{"C": "Thyagaraja", "D": "14:21", "R": "Reethigowla", "T": "", "U": "345 views", "V": "PZwHJvFNYaE"}, {"C": "Thyagaraja", "D": "8:41", "R": "Reethigowla", "T": "", "U": "6,162 views", "V": "w-3e40Q3Kzk"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Thyagaraja", "D": "10:44", "R": "Reethigowla", "T": "", "U": "1,778 views", "V": "25ZM9c5kZwY"}]}, {"A": "Malladi Brothers", "songs": [{"C": "Thyagaraja", "D": "8:53", "R": "Reethigowla", "T": "", "U": "2,105 views", "V": "5XKd1T52JB8"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Thyagaraja", "D": "19:56", "R": "Reethigowla", "T": "", "U": "5,400 views", "V": "c3LQ9sQjprw"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Thyagaraja", "D": "7:39", "R": "Reethigowla", "T": "", "U": "8,293 views", "V": "hkc2ToKwT7Y"}, {"C": "Thyagaraja", "D": "8:56", "R": "Reethigowla", "T": "", "U": "4,929 views", "V": "9855e2Ff-Qk"}]}, {"A": "Prapancham S. Balachandran", "songs": [{"C": "Thyagaraja", "D": "5:44", "R": "Reethigowla", "T": "", "U": "215 views", "V": "uek9deM4RGY"}]}, {"A": "Kamalakiran Vinjamuri", "songs": [{"C": "Thyagaraja", "D": "6:29", "R": "Reethigowla", "T": "", "U": "1,244 views", "V": "aMGHdhkFbLg"}]}, {"A": "Palghat Mani Iyer", "songs": [{"C": "Thyagaraja", "D": "14:26", "R": "Reethigowla", "T": "", "U": "566 views", "V": "jfadOlv049E"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

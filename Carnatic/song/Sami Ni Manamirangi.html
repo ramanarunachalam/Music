@@ -160,57 +160,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Mysore Nagamani Srinath", "songs": [{"N": "0057", "T": "Varnam", "H": "Sami Ni Manamirangi", "S": "svAmi nI manam irangi aruL tA  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Mysore Nagamani Srinath", "V": "pg_rChnQ8yY"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0256", "T": "Varnam", "H": "Sami Ni Manamirangi", "S": "svAmi nI manam irangi aruL tA  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Sikkil Gurucharan", "V": "jHveiFQ6mAc"}]}, {"name": "Vocal - Suguna Purushothaman", "songs": [{"N": "0050", "T": "Varnam", "H": "Sami Ni Manamirangi", "S": "svAmi nI manam irangi aruL tA  :  Adi", "R": "Sriranjani", "C": "Papanasam Sivan", "A": "Suguna Purushothaman", "V": "uQV6BR8fJsU"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Mysore Nagamani Srinath", "songs": [{"C": "Papanasam Sivan", "D": "35:16", "R": "Sriranjani", "T": "Varnam", "U": "0 views", "V": "pg_rChnQ8yY"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Papanasam Sivan", "D": "3:01", "R": "Sriranjani", "T": "Varnam", "U": "1,343 views", "V": "jHveiFQ6mAc"}]}, {"A": "Suguna Purushothaman", "songs": [{"C": "Papanasam Sivan", "D": "7:36", "R": "Sriranjani", "T": "Varnam", "U": "195 views", "V": "uQV6BR8fJsU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

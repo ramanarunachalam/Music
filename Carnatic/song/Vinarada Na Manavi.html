@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>27</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>20</td></tr>
-<tr><td><em>Concert</em></td><td>20</td></tr>
+<tr><td><em>Concert</em></td><td>24</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -147,57 +147,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Abhishek Raghuram", "songs": [{"N": "0265", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Abhishek Raghuram", "V": "0dLI49GZCio"}, {"N": "0266", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Abhishek Raghuram", "V": "kPUwBQQThyo"}]}, {"name": "Vocal - Bellary M. Venkatesh Achar", "songs": [{"N": "0007", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Bellary M. Venkatesh Achar", "V": "QTerr5iyPHo"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0264", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "BkkusCic4zM"}]}, {"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0207", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Hyderabad Brothers", "V": "E_z3hnNoIRQ"}]}, {"name": "Vocal - Madurai Somu", "songs": [{"N": "0300", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Madurai Somu", "V": "0LZ_GOdxkGg"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0292", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Malladi Brothers", "V": "7Kw5ilsjRtY"}]}, {"name": "Vocal - Nedunuri Krishnamurthy", "songs": [{"N": "0439", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "RZp0xktsuiQ"}]}, {"name": "Vocal - O. S. Arun", "songs": [{"N": "0129", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "O. S. Arun", "V": "29VR5ueOPeY"}]}, {"name": "Vocal - O. S. Thyagarajan", "songs": [{"N": "0202", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "O. S. Thyagarajan", "V": "NN8ZPl5gb50"}, {"N": "0203", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "O. S. Thyagarajan", "V": "VN7Snc4XGNI"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0263", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Priya Sisters", "V": "t-7m9UZGYyg"}]}, {"name": "Vocal - Ramnad Krishnan", "songs": [{"N": "0178", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Ramnad Krishnan", "V": "-CP7qEfRivo"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "1015", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "3npgVpBD_-4"}, {"N": "1016", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "GGd7q_VSlHE"}, {"N": "1017", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "JHPVyP-nolM"}, {"N": "1018", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "Jlo3U3Bkqk8"}, {"N": "1019", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "KK4wKnyy8z4"}, {"N": "1020", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "LL8qeoxF8Uc"}]}, {"name": "Vocal - Sreevalsan J. Menon", "songs": [{"N": "0136", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Sreevalsan J. Menon", "V": "jEGfKadtAmE"}]}, {"name": "Vocal - Suguna Varadachari", "songs": [{"N": "0137", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Suguna Varadachari", "V": "28IPSaynHRM"}]}, {"name": "Vocal - Sumitra Nitin", "songs": [{"N": "0019", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Sumitra Nitin", "V": "cbQW2zTcwgM"}]}, {"name": "Vocal - Voleti Venkateswarlu", "songs": [{"N": "0274", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Voleti Venkateswarlu", "V": "V8UmVd1C3_o"}]}, {"name": "Violin - Ganesh Kumaresh", "songs": [{"N": "0048", "T": "Srirangam pancharathnam", "H": "Vinarada Na Manavi", "S": "vina rAdA nA manavi : Rupaka", "R": "Devagandhari", "C": "Thyagaraja", "A": "Ganesh Kumaresh", "V": "5T6WtDoV14w"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Abhishek Raghuram", "songs": [{"C": "Thyagaraja", "D": "5:01", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "449 views", "V": "kPUwBQQThyo"}, {"C": "Thyagaraja", "D": "7:06", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "23 views", "V": "0dLI49GZCio"}]}, {"A": "Bellary M. Venkatesh Achar", "songs": [{"C": "Thyagaraja", "D": "5:24", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "1,455 views", "V": "QTerr5iyPHo"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Thyagaraja", "D": "5:56", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "0 views", "V": "BkkusCic4zM"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Thyagaraja", "D": "10:15", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "1,600 views", "V": "E_z3hnNoIRQ"}]}, {"A": "Madurai Somu", "songs": [{"C": "Thyagaraja", "D": "", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "107 views", "V": "0LZ_GOdxkGg"}]}, {"A": "Malladi Brothers", "songs": [{"C": "Thyagaraja", "D": "9:16", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "495 views", "V": "7Kw5ilsjRtY"}]}, {"A": "Nedunuri Krishnamurthy", "songs": [{"C": "Thyagaraja", "D": "3:40", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "485 views", "V": "RZp0xktsuiQ"}]}, {"A": "O. S. Arun", "songs": [{"C": "Thyagaraja", "D": "4:06", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "0 views", "V": "29VR5ueOPeY"}]}, {"A": "O. S. Thyagarajan", "songs": [{"C": "Thyagaraja", "D": "8:46", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "0 views", "V": "VN7Snc4XGNI"}, {"C": "Thyagaraja", "D": "8:48", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "0 views", "V": "NN8ZPl5gb50"}]}, {"A": "Priya Sisters", "songs": [{"C": "Thyagaraja", "D": "4:11", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "0 views", "V": "t-7m9UZGYyg"}]}, {"A": "Ramnad Krishnan", "songs": [{"C": "Thyagaraja", "D": "4:46", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "421 views", "V": "-CP7qEfRivo"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Thyagaraja", "D": "4:32", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "145 views", "V": "LL8qeoxF8Uc"}, {"C": "Thyagaraja", "D": "10:21", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "1,100 views", "V": "Jlo3U3Bkqk8"}, {"C": "Thyagaraja", "D": "4:06", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "576 views", "V": "JHPVyP-nolM"}, {"C": "Thyagaraja", "D": "5:36", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "150 views", "V": "GGd7q_VSlHE"}, {"C": "Thyagaraja", "D": "8:35", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "686 views", "V": "KK4wKnyy8z4"}, {"C": "Thyagaraja", "D": "6:57", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "2,535 views", "V": "3npgVpBD_-4"}]}, {"A": "Sreevalsan J. Menon", "songs": [{"C": "Thyagaraja", "D": "10:26", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "429 views", "V": "jEGfKadtAmE"}]}, {"A": "Suguna Varadachari", "songs": [{"C": "Thyagaraja", "D": "5:30", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "136 views", "V": "28IPSaynHRM"}]}, {"A": "Sumitra Nitin", "songs": [{"C": "Thyagaraja", "D": "3:25", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "207 views", "V": "cbQW2zTcwgM"}]}, {"A": "Voleti Venkateswarlu", "songs": [{"C": "Thyagaraja", "D": "5:20", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "339 views", "V": "V8UmVd1C3_o"}]}, {"A": "Ganesh Kumaresh", "songs": [{"C": "Thyagaraja", "D": "8:06", "R": "Devagandhari", "T": "Srirangam pancharathnam", "U": "149 views", "V": "5T6WtDoV14w"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -32,7 +32,7 @@
 <tr><td><em>Audio</em></td><td>24</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>18</td></tr>
-<tr><td><em>Concert</em></td><td>18</td></tr>
+<tr><td><em>Concert</em></td><td>21</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -147,57 +147,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Abhishek Raghuram", "songs": [{"N": "0028", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "Abhishek Raghuram", "V": "H4lWwx-UXHk"}]}, {"name": "Vocal - Balaji Shankar", "songs": [{"N": "0004", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Balaji Shankar", "V": "OO_dzjkmi9k"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0044", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "BHZvYkgxZBM"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "0104", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "WvahV-P4afY"}]}, {"name": "Vocal - Madurai Mani Iyer", "songs": [{"N": "0041", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "Roxpoi8lPr0"}, {"N": "0040", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "5g6VxysTOLk"}, {"N": "0042", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "F1BciCy8JU4"}, {"N": "0043", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "jt3GgMNfOWw"}]}, {"name": "Vocal - Puducode Krishnamoorthy", "songs": [{"N": "0004", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "Puducode Krishnamoorthy", "V": "tvZSu36fd1o"}]}, {"name": "Vocal - S. Aishwarya", "songs": [{"N": "0018", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "S. Aishwarya", "V": "yzMKcy9NyI0"}]}, {"name": "Vocal - S. Prema S. Jaya", "songs": [{"N": "0004", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "S. Prema S. Jaya", "V": "ZLWNyKaDUBM"}]}, {"name": "Vocal - S. Rajam", "songs": [{"N": "0013", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "S. Rajam", "V": "zSPEUK4wnZA"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0018", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "Sankaran Namboothiri", "V": "FQHhX37ztoQ"}]}, {"name": "Vocal - Savita Narasimhan", "songs": [{"N": "0004", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "Savita Narasimhan", "V": "2SGM1UziHJg"}, {"N": "0005", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "Savita Narasimhan", "V": "PkeK0TeZUSs"}]}, {"name": "Vocal - Seetha Rajan", "songs": [{"N": "0025", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Thodi", "C": "Muthuswami Dikshitar", "A": "Seetha Rajan", "V": "YuIN62Kxv8Y"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0128", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Janathodi", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "qpD0ieOPUzw"}, {"N": "0129", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Janathodi", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "yWaXFZvISJs"}]}, {"name": "Vocal - T. S. Sathyavathi", "songs": [{"N": "0011", "T": "Kamalamba navavaranam", "H": "Kamalambike", "S": "kamalAmbikE ASrita kalpa latikE caNDikE :  Rupaka", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "T. S. Sathyavathi", "V": "c4_GElNh7Us"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Abhishek Raghuram", "songs": [{"C": "Muthuswami Dikshitar", "D": "18:31", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "2,595 views", "V": "H4lWwx-UXHk"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Muthuswami Dikshitar", "D": "31:15", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "898 views", "V": "BHZvYkgxZBM"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Muthuswami Dikshitar", "D": "26:01", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "1,600 views", "V": "WvahV-P4afY"}]}, {"A": "Madurai Mani Iyer", "songs": [{"C": "Muthuswami Dikshitar", "D": "11:13", "R": "Unknownraga", "T": "Kamalamba Navavaranam", "U": "11,000 views", "V": "F1BciCy8JU4"}, {"C": "Muthuswami Dikshitar", "D": "22:11", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "220 views", "V": "5g6VxysTOLk"}, {"C": "Muthuswami Dikshitar", "D": "2:01", "R": "Unknownraga", "T": "Kamalamba Navavaranam", "U": "906 views", "V": "jt3GgMNfOWw"}, {"C": "Muthuswami Dikshitar", "D": "24:56", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "102 views", "V": "Roxpoi8lPr0"}]}, {"A": "Puducode Krishnamoorthy", "songs": [{"C": "Muthuswami Dikshitar", "D": "9:06", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "657 views", "V": "tvZSu36fd1o"}]}, {"A": "S. Aishwarya", "songs": [{"C": "Muthuswami Dikshitar", "D": "16:08", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "344,485 views", "V": "yzMKcy9NyI0"}]}, {"A": "S. Prema S. Jaya", "songs": [{"C": "Muthuswami Dikshitar", "D": "13:12", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "623 views", "V": "ZLWNyKaDUBM"}]}, {"A": "S. Rajam", "songs": [{"C": "Muthuswami Dikshitar", "D": "8:21", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "216 views", "V": "zSPEUK4wnZA"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Muthuswami Dikshitar", "D": "41:11", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "172 views", "V": "FQHhX37ztoQ"}]}, {"A": "Savita Narasimhan", "songs": [{"C": "Muthuswami Dikshitar", "D": "25:18", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "420 views", "V": "PkeK0TeZUSs"}, {"C": "Muthuswami Dikshitar", "D": "3:01", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "294 views", "V": "2SGM1UziHJg"}]}, {"A": "Seetha Rajan", "songs": [{"C": "Muthuswami Dikshitar", "D": "10:12", "R": "Thodi", "T": "Kamalamba Navavaranam", "U": "1,781 views", "V": "YuIN62Kxv8Y"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:56", "R": "Janathodi", "T": "Kamalamba Navavaranam", "U": "228 views", "V": "qpD0ieOPUzw"}, {"C": "Muthuswami Dikshitar", "D": "13:11", "R": "Janathodi", "T": "Kamalamba Navavaranam", "U": "461 views", "V": "yWaXFZvISJs"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

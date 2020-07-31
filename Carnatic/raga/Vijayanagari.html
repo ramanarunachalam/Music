@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>33</td></tr>
 <tr><td><em>Song</em></td><td>5</td></tr>
 <tr><td><em>Composer</em></td><td>5</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "mahAnubhavA tyAgarAjA mahA sad bhakta", "songs": [{"N": "0251", "T": "", "H": "Mahanubhava Tyagara", "S": "mahAnubhavA tyAgarAjA mahA sad bhakta puruSa :  Adi", "R": "Vijayanagari", "C": "Thiruvottiyur Thyagayya", "A": "Maharajapuram Santhanam", "V": "ktinre0C-yY"}]}, {"name": "rArA muraLIdhara guru pavana purAlaya", "songs": [{"N": "0189", "T": "", "H": "Rara Muralidhara", "S": "rArA muraLIdhara guru pavana purAlaya krSNa :  Adi", "R": "Vijayanagari", "C": "Lalitha Dasa", "A": "Chembai Vaidyanatha Bhagavathar", "V": "B22OfbEQF7g"}, {"N": "0190", "T": "", "H": "Rara Muralidhara", "S": "rArA muraLIdhara guru pavana purAlaya krSNa :  Adi", "R": "Vijayanagari", "C": "Lalitha Dasa", "A": "Chembai Vaidyanatha Bhagavathar", "V": "ktwzIIrKzbE"}, {"N": "0191", "T": "", "H": "Rara Muralidhara", "S": "rArA muraLIdhara guru pavana purAlaya krSNa :  Adi", "R": "Vijayanagari", "C": "Lalitha Dasa", "A": "Chembai Vaidyanatha Bhagavathar", "V": "w81muqux9k0"}]}, {"name": "Unknownsong", "songs": [{"N": "1361", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Vijayanagari", "C": "UnknownComposer", "A": "M. L. Vasanthakumari", "V": "swZ_bXP97kI"}, {"N": "0115", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Vijayanagari", "C": "UnknownComposer", "A": "T. Chowdiah", "V": "eti3CCyUXvU"}]}, {"name": "vijayAmbikE vimalAtmikE", "songs": [{"N": "0111", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "Dr. Nagavalli Nagaraj", "V": "2sLWmKXn7vM"}, {"N": "0942", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "M. L. Vasanthakumari", "V": "65D9mSi2THc"}, {"N": "0943", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "M. L. Vasanthakumari", "V": "JjvQWBCF4uo"}, {"N": "0944", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "M. L. Vasanthakumari", "V": "ueaJgCOPkXQ"}, {"N": "0945", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "M. L. Vasanthakumari", "V": "wGMAMrWbTQI"}, {"N": "0477", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "Madurai Mani Iyer", "V": "hqsczc77AD8"}, {"N": "0476", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "Madurai Mani Iyer", "V": "VqfOzSQ8Ixc"}, {"N": "0042", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "Mysore Nagamani Srinath", "V": "VCkFo_d7Cas"}, {"N": "0190", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "O. S. Thyagarajan", "V": "ryImvcN14ls"}, {"N": "0080", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "R. Suryaprakash", "V": "HPt530lG8FQ"}, {"N": "0161", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "S. Saketharaman", "V": "y7jFfdv2fSo"}, {"N": "0253", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "T. V. Sankaranarayanan", "V": "2ILrpRToAQY"}, {"N": "0104", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "Veena E. Gayathri", "V": "vEDc3OAcRvU"}, {"N": "0006", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "N. Kiranavali", "V": "xjx7dydxrCM"}, {"N": "0164", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "A. Kanyakumari", "V": "UavWuAgv3Gg"}, {"N": "0165", "T": "", "H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "R": "Vijayanagari", "C": "Muthiah Bhagavathar", "A": "A. Kanyakumari", "V": "Ud8SX-b87Q8"}]}, {"name": "yAke nirdayanAde elO dEvane", "songs": [{"N": "0589", "T": "", "H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "R": "Vijayanagari", "C": "Purandara Dasa", "A": "Maharajapuram Santhanam", "V": "NaK6NApNUlU"}, {"N": "0591", "T": "", "H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "R": "Vijayanagari", "C": "Purandara Dasa", "A": "Maharajapuram Santhanam", "V": "jDULnaXcUoc"}, {"N": "0081", "T": "", "H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "R": "Vijayanagari", "C": "Purandara Dasa", "A": "R. Ganesh", "V": "Ro-dd9VKj58"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Mahanubhava Tyagara", "S": "mahAnubhavA tyAgarAjA mahA sad bhakta puruSa :  Adi", "songs": [{"A": "Maharajapuram Santhanam", "C": "Thiruvottiyur Thyagayya", "D": "23:26", "T": "", "U": "1,745 views", "V": "ktinre0C-yY"}]}, {"H": "Rara Muralidhara", "S": "rArA muraLIdhara guru pavana purAlaya krSNa :  Adi", "songs": [{"A": "Chembai Vaidyanatha Bhagavathar", "C": "Lalitha Dasa", "D": "4:31", "T": "", "U": "1,000 views", "V": "B22OfbEQF7g"}, {"A": "Chembai Vaidyanatha Bhagavathar", "C": "Lalitha Dasa", "D": "4:23", "T": "", "U": "18,347 views", "V": "w81muqux9k0"}, {"A": "Chembai Vaidyanatha Bhagavathar", "C": "Lalitha Dasa", "D": "5:28", "T": "", "U": "67 views", "V": "ktwzIIrKzbE"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "M. L. Vasanthakumari", "C": "UnknownComposer", "D": "3:44", "T": "", "U": "70 views", "V": "swZ_bXP97kI"}, {"A": "T. Chowdiah", "C": "UnknownComposer", "D": "6:55", "T": "", "U": "698 views", "V": "eti3CCyUXvU"}]}, {"H": "Vijayambike", "S": "vijayAmbikE vimalAtmikE : Adi", "songs": [{"A": "Dr. Nagavalli Nagaraj", "C": "Muthiah Bhagavathar", "D": "3:55", "T": "", "U": "4,732 views", "V": "2sLWmKXn7vM"}, {"A": "M. L. Vasanthakumari", "C": "Muthiah Bhagavathar", "D": "14:57", "T": "", "U": "1,012 views", "V": "wGMAMrWbTQI"}, {"A": "M. L. Vasanthakumari", "C": "Muthiah Bhagavathar", "D": "3:37", "T": "", "U": "485 views", "V": "65D9mSi2THc"}, {"A": "M. L. Vasanthakumari", "C": "Muthiah Bhagavathar", "D": "20:11", "T": "", "U": "210 views", "V": "JjvQWBCF4uo"}, {"A": "M. L. Vasanthakumari", "C": "Muthiah Bhagavathar", "D": "3:15", "T": "", "U": "0 views", "V": "ueaJgCOPkXQ"}, {"A": "Madurai Mani Iyer", "C": "Muthiah Bhagavathar", "D": "25:00", "T": "", "U": "6,900 views", "V": "VqfOzSQ8Ixc"}, {"A": "Madurai Mani Iyer", "C": "Muthiah Bhagavathar", "D": "24:01", "T": "", "U": "675 views", "V": "hqsczc77AD8"}, {"A": "Mysore Nagamani Srinath", "C": "Muthiah Bhagavathar", "D": "17:53", "T": "", "U": "0 views", "V": "VCkFo_d7Cas"}, {"A": "O. S. Thyagarajan", "C": "Muthiah Bhagavathar", "D": "7:21", "T": "", "U": "0 views", "V": "ryImvcN14ls"}, {"A": "R. Suryaprakash", "C": "Muthiah Bhagavathar", "D": "8:49", "T": "", "U": "912 views", "V": "HPt530lG8FQ"}, {"A": "S. Saketharaman", "C": "Muthiah Bhagavathar", "D": "24:41", "T": "", "U": "665 views", "V": "y7jFfdv2fSo"}, {"A": "T. V. Sankaranarayanan", "C": "Muthiah Bhagavathar", "D": "23:16", "T": "", "U": "533 views", "V": "2ILrpRToAQY"}, {"A": "Veena E. Gayathri", "C": "Muthiah Bhagavathar", "D": "1:00:36", "T": "", "U": "2,294 views", "V": "vEDc3OAcRvU"}, {"A": "N. Kiranavali", "C": "Muthiah Bhagavathar", "D": "3:30", "T": "", "U": "2,945 views", "V": "xjx7dydxrCM"}, {"A": "A. Kanyakumari", "C": "Muthiah Bhagavathar", "D": "9:01", "T": "", "U": "0 views", "V": "UavWuAgv3Gg"}, {"A": "A. Kanyakumari", "C": "Muthiah Bhagavathar", "D": "8:56", "T": "", "U": "433 views", "V": "Ud8SX-b87Q8"}]}, {"H": "Yaake Nirdayanadiyo", "S": "yAke nirdayanAde elO dEvane  :  Jhampa", "songs": [{"A": "Maharajapuram Santhanam", "C": "Purandara Dasa", "D": "19:55", "T": "", "U": "0 views", "V": "jDULnaXcUoc"}, {"A": "Maharajapuram Santhanam", "C": "Purandara Dasa", "D": "6:17", "T": "", "U": "0 views", "V": "NaK6NApNUlU"}, {"A": "Maharajapuram Santhanam", "C": "Purandara Dasa", "D": "6:03", "T": "", "U": "101 views", "V": "Ro-dd9VKj58"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

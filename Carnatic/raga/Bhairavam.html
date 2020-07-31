@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>33</td></tr>
 <tr><td><em>Song</em></td><td>4</td></tr>
 <tr><td><em>Composer</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "kAlabhairavam bhajEhamanisham kAshIpuravAsam", "songs": [{"N": "0225", "T": "", "H": "Kalabhairavam", "S": "kAlabhairavam bhajEhamanisham kAshIpuravAsam :  Adi", "R": "Bhairavam", "C": "Muthuswami Dikshitar", "A": "K. V. Narayanaswamy", "V": "2Ism2J96TfY"}, {"N": "0226", "T": "", "H": "Kalabhairavam", "S": "kAlabhairavam bhajEhamanisham kAshIpuravAsam :  Adi", "R": "Bhairavam", "C": "Muthuswami Dikshitar", "A": "K. V. Narayanaswamy", "V": "8252P_sICDk"}, {"N": "0227", "T": "", "H": "Kalabhairavam", "S": "kAlabhairavam bhajEhamanisham kAshIpuravAsam :  Adi", "R": "Bhairavam", "C": "Muthuswami Dikshitar", "A": "K. V. Narayanaswamy", "V": "AsM9p4Nj3EI"}, {"N": "0297", "T": "", "H": "Kalabhairavam", "S": "kAlabhairavam bhajEhamanisham kAshIpuravAsam :  Adi", "R": "Bhairavam", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "DcgdlVK048A"}, {"N": "0030", "T": "", "H": "Kalabhairavam", "S": "kAlabhairavam bhajEhamanisham kAshIpuravAsam :  Adi", "R": "Bhairavam", "C": "Muthuswami Dikshitar", "A": "Trichur V. Ramachandran", "V": "0GwUVUjlrsc"}]}, {"name": "mariyAda kAd a yya manupav a d E m a yya", "songs": [{"N": "0197", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "Aruna Sairam", "V": "Eti1uLGhkfY"}, {"N": "0239", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "G. N. Balasubramaniam", "V": "drkwjzZsZ1U"}, {"N": "0240", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "G. N. Balasubramaniam", "V": "ul1_iInAc0w"}, {"N": "0415", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "7yHEkUuwe_E"}, {"N": "0416", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "ICAHoBLCrSY"}, {"N": "0417", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "XMpvH0Kqp0Q"}, {"N": "0418", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "M. L. Vasanthakumari", "V": "Xw2hsqAgTDA"}, {"N": "0682", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "M. S. Subbulakshmi", "V": "mgti8rncM8E"}, {"N": "0133", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "Madurai Somu", "V": "5BhTbGNwHhE"}, {"N": "0134", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "Madurai Somu", "V": "RXdSDhw-zC4"}, {"N": "0135", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "Madurai Somu", "V": "ZC52K-B0Lu8"}, {"N": "0136", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "Madurai Somu", "V": "il0Yit_bJ0k"}, {"N": "0137", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "Madurai Somu", "V": "nVbiyE8Mcwo"}, {"N": "0120", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "S. Kalyanaraman", "V": "ETESaKKQ9-Q"}, {"N": "0133", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "S. Sowmya", "V": "VBE9R9xnwgA"}, {"N": "0323", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "wNmbIXOkO9o"}, {"N": "0058", "T": "", "H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "R": "Bhairavam", "C": "Thyagaraja", "A": "Vijay Siva", "V": "uNfctZzArDY"}]}, {"name": "nannubrOva rAdA  rAma  nAmIda dayalEdA", "songs": [{"N": "0257", "T": "", "H": "Nannu Brova Rada", "S": "nannubrOva rAdA  rAma  nAmIda dayalEdA :  Rupaka", "R": "Bhairavam", "C": "Patnam Subramanya Iyer", "A": "G. N. Balasubramaniam", "V": "LwDdSdfnFIw"}, {"N": "0258", "T": "", "H": "Nannu Brova Rada", "S": "nannubrOva rAdA  rAma  nAmIda dayalEdA :  Rupaka", "R": "Bhairavam", "C": "Patnam Subramanya Iyer", "A": "G. N. Balasubramaniam", "V": "VQBvXhHqNg0"}, {"N": "0259", "T": "", "H": "Nannu Brova Rada", "S": "nannubrOva rAdA  rAma  nAmIda dayalEdA :  Rupaka", "R": "Bhairavam", "C": "Patnam Subramanya Iyer", "A": "G. N. Balasubramaniam", "V": "X6eTiV5d7-0"}]}, {"name": "Unknownsong", "songs": [{"N": "0741", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Bhairavam", "C": "UnknownComposer", "A": "G. N. Balasubramaniam", "V": "p89BoGXgBgY"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Kalabhairavam", "S": "kAlabhairavam bhajEhamanisham kAshIpuravAsam :  Adi", "songs": [{"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "7:11", "T": "", "U": "157 views", "V": "DcgdlVK048A"}, {"A": "Trichur V. Ramachandran", "C": "Muthuswami Dikshitar", "D": "5:16", "T": "", "U": "885 views", "V": "0GwUVUjlrsc"}]}, {"H": "Mariyada Kadayya", "S": "mariyAda kAd a yya manupav a d E m a yya :  Deshadi", "songs": [{"A": "Aruna Sairam", "C": "Thyagaraja", "D": "5:16", "T": "", "U": "231 views", "V": "Eti1uLGhkfY"}, {"A": "G. N. Balasubramaniam", "C": "Thyagaraja", "D": "5:52", "T": "", "U": "236 views", "V": "ul1_iInAc0w"}, {"A": "G. N. Balasubramaniam", "C": "Thyagaraja", "D": "5:34", "T": "", "U": "289 views", "V": "drkwjzZsZ1U"}, {"A": "M. L. Vasanthakumari", "C": "Thyagaraja", "D": "6:01", "T": "", "U": "457 views", "V": "XMpvH0Kqp0Q"}, {"A": "M. L. Vasanthakumari", "C": "Thyagaraja", "D": "5:46", "T": "", "U": "566 views", "V": "ICAHoBLCrSY"}, {"A": "M. L. Vasanthakumari", "C": "Thyagaraja", "D": "4:11", "T": "", "U": "146 views", "V": "7yHEkUuwe_E"}, {"A": "M. L. Vasanthakumari", "C": "Thyagaraja", "D": "6:30", "T": "", "U": "33 views", "V": "Xw2hsqAgTDA"}, {"A": "M. S. Subbulakshmi", "C": "Thyagaraja", "D": "5:01", "T": "", "U": "624 views", "V": "mgti8rncM8E"}, {"A": "Madurai Somu", "C": "Thyagaraja", "D": "", "T": "", "U": "84 views", "V": "il0Yit_bJ0k"}, {"A": "Madurai Somu", "C": "Thyagaraja", "D": "5:36", "T": "", "U": "273 views", "V": "5BhTbGNwHhE"}, {"A": "Madurai Somu", "C": "Thyagaraja", "D": "5:36", "T": "", "U": "55 views", "V": "nVbiyE8Mcwo"}, {"A": "Madurai Somu", "C": "Thyagaraja", "D": "3:30", "T": "", "U": "67 views", "V": "ZC52K-B0Lu8"}, {"A": "Madurai Somu", "C": "Thyagaraja", "D": "3:30", "T": "", "U": "31 views", "V": "RXdSDhw-zC4"}, {"A": "S. Kalyanaraman", "C": "Thyagaraja", "D": "5:46", "T": "", "U": "49 views", "V": "ETESaKKQ9-Q"}, {"A": "S. Sowmya", "C": "Thyagaraja", "D": "13:36", "T": "", "U": "300 views", "V": "VBE9R9xnwgA"}, {"A": "Sudha Ragunathan", "C": "Thyagaraja", "D": "6:40", "T": "", "U": "198 views", "V": "wNmbIXOkO9o"}, {"A": "Vijay Siva", "C": "Thyagaraja", "D": "4:30", "T": "", "U": "343 views", "V": "uNfctZzArDY"}]}, {"H": "Nannu Brova Rada", "S": "nannubrOva rAdA  rAma  nAmIda dayalEdA :  Rupaka", "songs": [{"A": "G. N. Balasubramaniam", "C": "Patnam Subramanya Iyer", "D": "2:54:44", "T": "", "U": "6,700 views", "V": "X6eTiV5d7-0"}, {"A": "G. N. Balasubramaniam", "C": "Patnam Subramanya Iyer", "D": "4:53", "T": "", "U": "278 views", "V": "LwDdSdfnFIw"}, {"A": "G. N. Balasubramaniam", "C": "Patnam Subramanya Iyer", "D": "4:29", "T": "", "U": "32 views", "V": "VQBvXhHqNg0"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "G. N. Balasubramaniam", "C": "UnknownComposer", "D": "5:31", "T": "", "U": "1,500 views", "V": "p89BoGXgBgY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

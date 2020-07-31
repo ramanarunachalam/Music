@@ -28,10 +28,10 @@
 </tbody>
 </table></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>9</td></tr>
+<tr><td><em>Audio</em></td><td>12</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
-<tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Artist</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -160,57 +160,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Brindha Manickavasakan", "songs": [{"N": "0044", "T": "Varnam", "H": "Entha Ninne", "S": "entani nE delupudurA ElAgu tALudurA :  Tisra Eka", "R": "Khamas", "C": "Subbarama Dikshitar", "A": "Brindha Manickavasakan", "V": "I8RD-N9a76g"}]}, {"name": "Vocal - Mani Krishnaswami", "songs": [{"N": "0098", "T": "Varnam", "H": "Entha Ninne", "S": "entani nE delupudurA ElAgu tALudurA :  Tisra Eka", "R": "Khamas", "C": "Subbarama Dikshitar", "A": "Mani Krishnaswami", "V": "-HhQPqGxK1k"}, {"N": "0099", "T": "Varnam", "H": "Entha Ninne", "S": "entani nE delupudurA ElAgu tALudurA :  Tisra Eka", "R": "Khamas", "C": "Subbarama Dikshitar", "A": "Mani Krishnaswami", "V": "LBRfIxxDTBU"}]}, {"name": "Vocal - Musiri Subramania Iyer", "songs": [{"N": "0060", "T": "Varnam", "H": "Entha Ninne", "S": "entani nE delupudurA ElAgu tALudurA :  Tisra Eka", "R": "Khamas", "C": "Subbarama Dikshitar", "A": "Musiri Subramania Iyer", "V": "Wrp1GLtl-nQ"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Brindha Manickavasakan", "songs": [{"C": "Subbarama Dikshitar", "D": "12:31", "R": "Khamas", "T": "Varnam", "U": "458 views", "V": "I8RD-N9a76g"}]}, {"A": "Mani Krishnaswami", "songs": [{"C": "Subbarama Dikshitar", "D": "11:13", "R": "Khamas", "T": "Varnam", "U": "113 views", "V": "LBRfIxxDTBU"}, {"C": "Subbarama Dikshitar", "D": "11:43", "R": "Khamas", "T": "Varnam", "U": "60 views", "V": "-HhQPqGxK1k"}]}, {"A": "Musiri Subramania Iyer", "songs": [{"C": "Subbarama Dikshitar", "D": "1:19:48", "R": "Khamas", "T": "Varnam", "U": "1,600 views", "V": "I0_wXKEf0JY"}, {"C": "Subbarama Dikshitar", "D": "10:38", "R": "Khamas", "T": "Varnam", "U": "155 views", "V": "Wrp1GLtl-nQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

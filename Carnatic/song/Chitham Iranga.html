@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>18</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>12</td></tr>
-<tr><td><em>Concert</em></td><td>12</td></tr>
+<tr><td><em>Concert</em></td><td>15</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -129,57 +129,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Abhishek Raghuram", "songs": [{"N": "0054", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Abhishek Raghuram", "V": "9UihXqmnO7c"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0079", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Bombay Jayashri", "V": "LQ3Y5j_nTaM"}, {"N": "0080", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Bombay Jayashri", "V": "lRuhVVLgsZY"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0105", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "D. K. Pattammal", "V": "Tf-eK9Tz_tU"}]}, {"name": "Vocal - Kunnakudi M. Balamuralikrishna", "songs": [{"N": "0033", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Kunnakudi M. Balamuralikrishna", "V": "inbXzQTKf6I"}]}, {"name": "Vocal - Padma Sugavanam", "songs": [{"N": "0019", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Padma Sugavanam", "V": "dCb95iBHGRA"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0058", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Ranjani Gayatri", "V": "Iq8YuAY1CTo"}, {"N": "0059", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Ranjani Gayatri", "V": "jtVehy-criI"}, {"N": "0060", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Ranjani Gayatri", "V": "pgOVv7QjHJY"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0070", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "S. Sowmya", "V": "RTWvBnuR_ys"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0209", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "6rLLRM_coNc"}, {"N": "0210", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "Xp34Z5JBMmE"}, {"N": "0211", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "es6jn0wg6js"}, {"N": "0212", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Sanjay Subrahmanyan", "V": "mzwKlGlsXXY"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0053", "T": "", "H": "Chitham Iranga", "S": "cittam irangAdEnayya sendil vElayyA :  Caapu", "R": "Sahana", "C": "Papanasam Sivan", "A": "Sikkil Gurucharan", "V": "e7CbkzuOk8g"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Abhishek Raghuram", "songs": [{"C": "Papanasam Sivan", "D": "13:36", "R": "Sahana", "T": "", "U": "3,072 views", "V": "9UihXqmnO7c"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Papanasam Sivan", "D": "7:53", "R": "Sahana", "T": "", "U": "1,075 views", "V": "LQ3Y5j_nTaM"}, {"C": "Papanasam Sivan", "D": "3:01", "R": "Sahana", "T": "", "U": "22,355 views", "V": "lRuhVVLgsZY"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Papanasam Sivan", "D": "11:16", "R": "Sahana", "T": "", "U": "1,141 views", "V": "Tf-eK9Tz_tU"}]}, {"A": "Kunnakudi M. Balamuralikrishna", "songs": [{"C": "Papanasam Sivan", "D": "28:31", "R": "Sahana", "T": "", "U": "144 views", "V": "inbXzQTKf6I"}]}, {"A": "Padma Sugavanam", "songs": [{"C": "Papanasam Sivan", "D": "29:01", "R": "Sahana", "T": "", "U": "347 views", "V": "dCb95iBHGRA"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Papanasam Sivan", "D": "15:25", "R": "Sahana", "T": "", "U": "63,000 views", "V": "Iq8YuAY1CTo"}, {"C": "Papanasam Sivan", "D": "15:26", "R": "Sahana", "T": "", "U": "6,900 views", "V": "jtVehy-criI"}, {"C": "Papanasam Sivan", "D": "15:16", "R": "Sahana", "T": "", "U": "405 views", "V": "pgOVv7QjHJY"}]}, {"A": "S. Sowmya", "songs": [{"C": "Papanasam Sivan", "D": "10:56", "R": "Sahana", "T": "", "U": "0 views", "V": "RTWvBnuR_ys"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Papanasam Sivan", "D": "5:55", "R": "Sahana", "T": "", "U": "2,400 views", "V": "Xp34Z5JBMmE"}, {"C": "Papanasam Sivan", "D": "4:28", "R": "Sahana", "T": "", "U": "0 views", "V": "es6jn0wg6js"}, {"C": "Papanasam Sivan", "D": "6:02", "R": "Sahana", "T": "", "U": "4,806 views", "V": "mzwKlGlsXXY"}, {"C": "Papanasam Sivan", "D": "6:02", "R": "Sahana", "T": "", "U": "0 views", "V": "6rLLRM_coNc"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Papanasam Sivan", "D": "14:16", "R": "Sahana", "T": "", "U": "0 views", "V": "e7CbkzuOk8g"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

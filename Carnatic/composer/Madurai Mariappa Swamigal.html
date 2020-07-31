@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Song</em></td><td>1</td></tr>
 <tr><td><em>Raga</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam", "songs": [{"N": "0313", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Aruna Sairam", "V": "_N_2W4mJVPQ"}, {"N": "0314", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Aruna Sairam", "V": "zYcij3b4lSI"}, {"N": "0548", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "D. K. Jayaraman", "V": "wCkzwXTdqVk"}, {"N": "0506", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "D. K. Pattammal", "V": "a25Uk6GdIW4"}, {"N": "0653", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Sudha Ragunathan", "V": "BXsoIztGQrk"}, {"N": "0654", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Sudha Ragunathan", "V": "fiTT5hRlHcw"}, {"N": "0655", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Sudha Ragunathan", "V": "lpEhf4M7bVU"}, {"N": "0087", "T": "", "H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "R": "Chenchurutti", "C": "Madurai Mariappa Swamigal", "A": "Kunnakudi Vaidyanathan", "V": "6YnZOowAGC4"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Valli Kanavan", "S": "vaLLik kaNavan pErai vazhippOkkan shonnAlum uLLam :  Adi", "songs": [{"A": "Aruna Sairam", "D": "4:11", "R": "Chenchurutti", "T": "", "U": "0 views", "V": "_N_2W4mJVPQ"}, {"A": "Aruna Sairam", "D": "4:01", "R": "Chenchurutti", "T": "", "U": "0 views", "V": "zYcij3b4lSI"}, {"A": "D. K. Jayaraman", "D": "4:40", "R": "Chenchurutti", "T": "", "U": "121 views", "V": "wCkzwXTdqVk"}, {"A": "D. K. Pattammal", "D": "4:16", "R": "Chenchurutti", "T": "", "U": "0 views", "V": "a25Uk6GdIW4"}, {"A": "D. K. Pattammal", "D": "3:00", "R": "Ragamalika", "T": "", "U": "106 views", "V": "ylZX0EHahHc"}, {"A": "Sudha Ragunathan", "D": "3:23", "R": "Chenchurutti", "T": "", "U": "1,378 views", "V": "fiTT5hRlHcw"}, {"A": "Sudha Ragunathan", "D": "3:23", "R": "Chenchurutti", "T": "", "U": "5,475 views", "V": "lpEhf4M7bVU"}, {"A": "Sudha Ragunathan", "D": "6:34", "R": "Chenchurutti", "T": "", "U": "314 views", "V": "BXsoIztGQrk"}, {"A": "Kunnakudi Vaidyanathan", "D": "3:01", "R": "Chenchurutti", "T": "", "U": "3,395 views", "V": "6YnZOowAGC4"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

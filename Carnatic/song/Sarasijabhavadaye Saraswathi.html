@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -130,57 +130,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Padma Sugavanam", "songs": [{"N": "0051", "T": "", "H": "Sarasijabhavadaye Saraswathi", "S": "sarasijabhava jAyE saraswati namostutE :  Tisra Adi", "R": "Kalyani", "C": "Oothukkadu Venkata Kavi", "A": "Padma Sugavanam", "V": "6kako8koydw"}, {"N": "0052", "T": "", "H": "Sarasijabhavadaye Saraswathi", "S": "sarasijabhava jAyE saraswati namostutE :  Tisra Adi", "R": "Kalyani", "C": "Oothukkadu Venkata Kavi", "A": "Padma Sugavanam", "V": "WX5rsafNqeg"}]}, {"name": "Vocal - Prema Rangarajan", "songs": [{"N": "0068", "T": "", "H": "Sarasijabhavadaye Saraswathi", "S": "sarasijabhava jAyE saraswati namostutE :  Tisra Adi", "R": "Kalyani", "C": "Oothukkadu Venkata Kavi", "A": "Prema Rangarajan", "V": "5VvNz6w_odU"}]}, {"name": "Vocal - Savita Narasimhan", "songs": [{"N": "0032", "T": "", "H": "Sarasijabhavadaye Saraswathi", "S": "sarasijabhava jAyE saraswati namostutE :  Tisra Adi", "R": "Kalyani", "C": "Oothukkadu Venkata Kavi", "A": "Savita Narasimhan", "V": "2Vkip0pFCE4"}]}, {"name": "Vocal - Seetha Rajan", "songs": [{"N": "0055", "T": "", "H": "Sarasijabhavadaye Saraswathi", "S": "sarasijabhava jAyE saraswati namostutE :  Tisra Adi", "R": "Kalyani", "C": "Oothukkadu Venkata Kavi", "A": "Seetha Rajan", "V": "DcCxZePMYIE"}]}, {"name": "Vocal - Sriranjani Santhanagopalan", "songs": [{"N": "0079", "T": "", "H": "Sarasijabhavadaye Saraswathi", "S": "sarasijabhava jAyE saraswati namostutE :  Tisra Adi", "R": "Kalyani", "C": "Oothukkadu Venkata Kavi", "A": "Sriranjani Santhanagopalan", "V": "OM0771Cw6Zc"}, {"N": "0080", "T": "", "H": "Sarasijabhavadaye Saraswathi", "S": "sarasijabhava jAyE saraswati namostutE :  Tisra Adi", "R": "Kalyani", "C": "Oothukkadu Venkata Kavi", "A": "Sriranjani Santhanagopalan", "V": "lNJXDOsi97U"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0528", "T": "", "H": "Sarasijabhavadaye Saraswathi", "S": "sarasijabhava jAyE saraswati namostutE :  Tisra Adi", "R": "Kalyani", "C": "Oothukkadu Venkata Kavi", "A": "Sudha Ragunathan", "V": "PQx2JbZOv6s"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Padma Sugavanam", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "29:51", "R": "Kalyani", "T": "", "U": "977 views", "V": "6kako8koydw"}, {"C": "Oothukkadu Venkata Kavi", "D": "29:41", "R": "Kalyani", "T": "", "U": "172 views", "V": "WX5rsafNqeg"}]}, {"A": "Prema Rangarajan", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "26:35", "R": "Kalyani", "T": "", "U": "28 views", "V": "5VvNz6w_odU"}]}, {"A": "Savita Narasimhan", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "18:56", "R": "Kalyani", "T": "", "U": "27 views", "V": "2Vkip0pFCE4"}]}, {"A": "Seetha Rajan", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "30:46", "R": "Kalyani", "T": "", "U": "210 views", "V": "DcCxZePMYIE"}]}, {"A": "Sriranjani Santhanagopalan", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "24:27", "R": "Kalyani", "T": "", "U": "397 views", "V": "lNJXDOsi97U"}, {"C": "Oothukkadu Venkata Kavi", "D": "11:36", "R": "Kalyani", "T": "", "U": "41 views", "V": "OM0771Cw6Zc"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "32:51", "R": "Kalyani", "T": "", "U": "1,000 views", "V": "PQx2JbZOv6s"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

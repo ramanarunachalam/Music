@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>34</td></tr>
 <tr><td><em>Song</em></td><td>13</td></tr>
 <tr><td><em>Composer</em></td><td>9</td></tr>
-<tr><td><em>Song Type</em></td><td>5</td></tr>
+<tr><td><em>Type</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "AdanUril oru vEdiyarkkuLLE aDimaikkArap paraiyan", "songs": [{"N": "0048", "T": "", "H": "Adanuril Oru Vediyar", "S": "AdanUril oru vEdiyarkkuLLE aDimaikkArap paraiyan :  Adi", "R": "Navaroj", "C": "Gopalakrishna Bharathi", "A": "S. Sowmya", "V": "wwdeWUHsj2Q"}]}, {"name": "Bhajan", "songs": [{"N": "0026", "T": "", "H": "Bhajan", "S": "Bhajan", "R": "Navaroj", "C": "UnknownComposer", "A": "M. S. Subbulakshmi", "V": "SeHgrALi_BY"}]}, {"name": "Geetham", "songs": [{"N": "0048", "T": "", "H": "Geetham", "S": "Geetham", "R": "Navaroj", "C": "UnknownComposer", "A": "Chitravina Ravi Kiran", "V": "vG6fGB3TayE"}]}, {"name": "hasti vadanAya namastubhyaM", "songs": [{"N": "0031", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "Brinda Muktha", "V": "4kxF_AqXEao"}, {"N": "0205", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "Gayathri Girish", "V": "vUXoiwSTISM"}, {"N": "0047", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "Geetha Raja", "V": "4ZXDFsUuGBM"}, {"N": "0021", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "Sandhyavandanam Srinivasa Rao", "V": "xBm45lfMNmA"}, {"N": "0095", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "T. Brinda", "V": "EZja4iN4IKU"}, {"N": "0096", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "T. Brinda", "V": "Vo9uEYo-DBc"}, {"N": "0049", "T": "Shodasa ganapati", "H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "R": "Navaroj", "C": "Muthuswami Dikshitar", "A": "Kalpakam Swaminathan", "V": "-XGXLY8AhSo"}]}, {"name": "indirApati viLangumindira vAhanattin nava", "songs": [{"N": "0004", "T": "", "H": "Indiraapathi", "S": "indirApati viLangumindira vAhanattin nava :  Rupaka", "R": "Navaroj", "C": "Swathi Thirunal", "A": "S. R. Mahadeva Sarma", "V": "mbBuzUOuiCo"}]}, {"name": "jO accutaananda jOjO mukundaa", "songs": [{"N": "0641", "T": "", "H": "Jo Achyuthanandha", "S": "jO accutaananda jOjO mukundaa  :  Khanda Caapu", "R": "Navaroj", "C": "Annamacharya", "A": "M. Balamuralikrishna", "V": "cnalTK7ZAUg"}, {"N": "0639", "T": "", "H": "Jo Achyuthanandha", "S": "jO accutaananda jOjO mukundaa  :  Khanda Caapu", "R": "Navaroj", "C": "Annamacharya", "A": "M. Balamuralikrishna", "V": "SjzChdXSdf4"}, {"N": "0640", "T": "", "H": "Jo Achyuthanandha", "S": "jO accutaananda jOjO mukundaa  :  Khanda Caapu", "R": "Navaroj", "C": "Annamacharya", "A": "M. Balamuralikrishna", "V": "bvayPvv2A-Y"}]}, {"name": "Madhar Peerai", "songs": [{"N": "0037", "T": "", "H": "Madhar Peerai", "S": "Madhar Peerai", "R": "Navaroj", "C": "Appar", "A": "Padma Sugavanam", "V": "ZT93TcetGFE"}]}, {"name": "Mangalam", "songs": [{"N": "1556", "T": "", "H": "Mangalam", "S": "Mangalam", "R": "Navaroj", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "YZqdWJJR5us"}, {"N": "0050", "T": "", "H": "Mangalam", "S": "Mangalam", "R": "Navaroj", "C": "UnknownComposer", "A": "Kudamaloor Janardanan", "V": "fBa-OJQmJAY"}, {"N": "0203", "T": "", "H": "Mangalam", "S": "Mangalam", "R": "Navaroj", "C": "UnknownComposer", "A": "T. R. Mahalingam", "V": "2zJhJbsgjkE"}]}, {"name": "mukti aLikkum tillai mUlattAnaraik kaNDu bhakti", "songs": [{"N": "0536", "T": "", "H": "Mukti Alikkum", "S": "mukti aLikkum tillai mUlattAnaraik kaNDu bhakti :  Adi", "R": "Navaroj", "C": "Gopalakrishna Bharathi", "A": "Sanjay Subrahmanyan", "V": "5w37HdbUE0w"}]}, {"name": "nApAli SrI rAma bhU pAlaka stOma", "songs": [{"N": "0144", "T": "", "H": "Naapali Sriraama", "S": "nApAli SrI rAma bhU pAlaka stOma :  Adi", "R": "Navaroj", "C": "Thyagaraja", "A": "S. Sowmya", "V": "T4G38RXvFqE"}]}, {"name": "Omanathinkal Kidavo", "songs": [{"N": "0259", "T": "", "H": "Omana Thingal", "S": "Omanathinkal Kidavo  : Caapu", "R": "Navaroj", "C": "Irayimman Thambi", "A": "Bombay Jayashri", "V": "vaqDt2Or-YM"}, {"N": "0041", "T": "", "H": "Omana Thingal", "S": "Omanathinkal Kidavo  : Caapu", "R": "Navaroj", "C": "Irayimman Thambi", "A": "Jayashree Rajeev", "V": "0ZSK7fpNLck"}, {"N": "0370", "T": "", "H": "Omana Thingal", "S": "Omanathinkal Kidavo  : Caapu", "R": "Navaroj", "C": "Irayimman Thambi", "A": "K. V. Narayanaswamy", "V": "m385MAmXwi0"}, {"N": "0091", "T": "", "H": "Omana Thingal", "S": "Omanathinkal Kidavo  : Caapu", "R": "Navaroj", "C": "Irayimman Thambi", "A": "Sreevalsan J. Menon", "V": "Drmvmd3hOPI"}, {"N": "0059", "T": "", "H": "Omana Thingal", "S": "Omanathinkal Kidavo  : Caapu", "R": "Navaroj", "C": "Irayimman Thambi", "A": "Trichur Brothers", "V": "2JpAt5zOcHk"}]}, {"name": "sAma mudal vEdangaLai sangiliyAik kATTi", "songs": [{"N": "0133", "T": "", "H": "Samam Mudal", "S": "sAma mudal vEdangaLai sangiliyAik kATTi :  Adi", "R": "Navaroj", "C": "Oothukkadu Venkata Kavi", "A": "Chitravina Ravi Kiran", "V": "kdnllUP3mMg"}]}, {"name": "Unknownsong", "songs": [{"N": "1312", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Navaroj", "C": "UnknownComposer", "A": "M. L. Vasanthakumari", "V": "-PcCvDvrRC4"}, {"N": "0174", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Navaroj", "C": "UnknownComposer", "A": "Sreevalsan J. Menon", "V": "6aCI8s8Slmk"}, {"N": "0175", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Navaroj", "C": "UnknownComposer", "A": "Sreevalsan J. Menon", "V": "W9m3_uIfLsw"}, {"N": "0045", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Navaroj", "C": "UnknownComposer", "A": "Tiger Varadachariar", "V": "kUvmjJuQ3EY"}, {"N": "0040", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Navaroj", "C": "UnknownComposer", "A": "Ramana Balachandran", "V": "nG2UPRSCFAw"}, {"N": "0070", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Navaroj", "C": "UnknownComposer", "A": "Kudamaloor Janardanan", "V": "Q62k-MOX3zc"}, {"N": "0071", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Navaroj", "C": "UnknownComposer", "A": "Kudamaloor Janardanan", "V": "ZsrVeJUXA9Y"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Adanuril Oru Vediyar", "S": "AdanUril oru vEdiyarkkuLLE aDimaikkArap paraiyan :  Adi", "songs": [{"A": "S. Sowmya", "C": "Gopalakrishna Bharathi", "D": "3:41", "T": "", "U": "286 views", "V": "wwdeWUHsj2Q"}]}, {"H": "Bhajan", "S": "Bhajan", "songs": [{"A": "M. S. Subbulakshmi", "C": "UnknownComposer", "D": "2:46", "T": "", "U": "695 views", "V": "SeHgrALi_BY"}]}, {"H": "Geetham", "S": "Geetham", "songs": [{"A": "Chitravina Ravi Kiran", "C": "UnknownComposer", "D": "1:06", "T": "", "U": "0 views", "V": "vG6fGB3TayE"}]}, {"H": "Hastivadanaya", "S": "hasti vadanAya namastubhyaM  :  Caapu", "songs": [{"A": "Brinda Muktha", "C": "Muthuswami Dikshitar", "D": "7:56", "T": "Shodasa ganapati", "U": "3,400 views", "V": "4kxF_AqXEao"}, {"A": "Gayathri Girish", "C": "Muthuswami Dikshitar", "D": "7:26", "T": "Shodasa ganapati", "U": "1,900 views", "V": "vUXoiwSTISM"}, {"A": "Geetha Raja", "C": "Muthuswami Dikshitar", "D": "6:46", "T": "Shodasa ganapati", "U": "311 views", "V": "4ZXDFsUuGBM"}, {"A": "Sandhyavandanam Srinivasa Rao", "C": "Muthuswami Dikshitar", "D": "9:16", "T": "Shodasa ganapati", "U": "43 views", "V": "xBm45lfMNmA"}, {"A": "T. Brinda", "C": "Muthuswami Dikshitar", "D": "8:11", "T": "Shodasa ganapati", "U": "584 views", "V": "EZja4iN4IKU"}, {"A": "T. Brinda", "C": "Muthuswami Dikshitar", "D": "8:11", "T": "Shodasa ganapati", "U": "8 views", "V": "Vo9uEYo-DBc"}, {"A": "Kalpakam Swaminathan", "C": "Muthuswami Dikshitar", "D": "7:54", "T": "Shodasa ganapati", "U": "5,903 views", "V": "-XGXLY8AhSo"}]}, {"H": "Indiraapathi", "S": "indirApati viLangumindira vAhanattin nava :  Rupaka", "songs": [{"A": "S. R. Mahadeva Sarma", "C": "Swathi Thirunal", "D": "7:44", "T": "", "U": "43 views", "V": "mbBuzUOuiCo"}]}, {"H": "Jo Achyuthanandha", "S": "jO accutaananda jOjO mukundaa  :  Khanda Caapu", "songs": [{"A": "M. Balamuralikrishna", "C": "Annamacharya", "D": "4:28", "T": "", "U": "880 views", "V": "bvayPvv2A-Y"}, {"A": "M. Balamuralikrishna", "C": "Annamacharya", "D": "5:51", "T": "", "U": "472 views", "V": "cnalTK7ZAUg"}, {"A": "M. Balamuralikrishna", "C": "Annamacharya", "D": "6:25", "T": "", "U": "5,605 views", "V": "SjzChdXSdf4"}]}, {"H": "Madhar Peerai", "S": "Madhar Peerai", "songs": [{"A": "Padma Sugavanam", "C": "Appar", "D": "4:26", "T": "", "U": "322 views", "V": "ZT93TcetGFE"}]}, {"H": "Mangalam", "S": "Mangalam", "songs": [{"A": "M. Balamuralikrishna", "C": "UnknownComposer", "D": "1:27", "T": "", "U": "116 views", "V": "YZqdWJJR5us"}, {"A": "Kudamaloor Janardanan", "C": "UnknownComposer", "D": "5:12", "T": "", "U": "746 views", "V": "fBa-OJQmJAY"}, {"A": "T. R. Mahalingam", "C": "UnknownComposer", "D": "9:49", "T": "", "U": "0 views", "V": "2zJhJbsgjkE"}]}, {"H": "Mukti Alikkum", "S": "mukti aLikkum tillai mUlattAnaraik kaNDu bhakti :  Adi", "songs": [{"A": "Sanjay Subrahmanyan", "C": "Gopalakrishna Bharathi", "D": "5:13", "T": "", "U": "5,700 views", "V": "5w37HdbUE0w"}]}, {"H": "Naapali Sriraama", "S": "nApAli SrI rAma bhU pAlaka stOma :  Adi", "songs": [{"A": "S. Sowmya", "C": "Thyagaraja", "D": "4:18", "T": "", "U": "0 views", "V": "T4G38RXvFqE"}]}, {"H": "Omana Thingal", "S": "Omanathinkal Kidavo  : Caapu", "songs": [{"A": "Bombay Jayashri", "C": "Irayimman Thambi", "D": "13:34", "T": "", "U": "290 views", "V": "vaqDt2Or-YM"}, {"A": "Jayashree Rajeev", "C": "Irayimman Thambi", "D": "6:32", "T": "", "U": "1,867 views", "V": "0ZSK7fpNLck"}, {"A": "K. V. Narayanaswamy", "C": "Irayimman Thambi", "D": "7:40", "T": "", "U": "2,628 views", "V": "m385MAmXwi0"}, {"A": "Sreevalsan J. Menon", "C": "Irayimman Thambi", "D": "7:13", "T": "", "U": "24,923 views", "V": "Drmvmd3hOPI"}, {"A": "Trichur Brothers", "C": "Irayimman Thambi", "D": "6:48", "T": "", "U": "107,227 views", "V": "2JpAt5zOcHk"}]}, {"H": "Samam Mudal", "S": "sAma mudal vEdangaLai sangiliyAik kATTi :  Adi", "songs": [{"A": "Chitravina Ravi Kiran", "C": "Oothukkadu Venkata Kavi", "D": "3:41", "T": "", "U": "12 views", "V": "kdnllUP3mMg"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "M. L. Vasanthakumari", "C": "UnknownComposer", "D": "4:49", "T": "", "U": "22 views", "V": "-PcCvDvrRC4"}, {"A": "Sreevalsan J. Menon", "C": "UnknownComposer", "D": "5:18", "T": "", "U": "506 views", "V": "W9m3_uIfLsw"}, {"A": "Sreevalsan J. Menon", "C": "UnknownComposer", "D": "5:18", "T": "", "U": "28 views", "V": "6aCI8s8Slmk"}, {"A": "Tiger Varadachariar", "C": "UnknownComposer", "D": "3:00", "T": "", "U": "123 views", "V": "kUvmjJuQ3EY"}, {"A": "Ramana Balachandran", "C": "UnknownComposer", "D": "3:58", "T": "", "U": "1,430 views", "V": "nG2UPRSCFAw"}, {"A": "Kudamaloor Janardanan", "C": "UnknownComposer", "D": "9:49", "T": "", "U": "3,408 views", "V": "Q62k-MOX3zc"}, {"A": "Kudamaloor Janardanan", "C": "UnknownComposer", "D": "9:49", "T": "", "U": "491 views", "V": "ZsrVeJUXA9Y"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

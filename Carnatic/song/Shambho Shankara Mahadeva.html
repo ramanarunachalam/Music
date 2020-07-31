@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>4</td></tr>
-<tr><td><em>Concert</em></td><td>4</td></tr>
+<tr><td><em>Concert</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -148,57 +148,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1292", "T": "", "H": "Shambho Shankara Mahadeva", "S": "shambhO shankara mahAdEvA sadAshiva shambhO :  Adi", "R": "Shanmukapriya", "C": "Muthu Thandavar", "A": "M. Balamuralikrishna", "V": "Te95NIU_lNY"}]}, {"name": "Vocal - Maruthi Prasad", "songs": [{"N": "0029", "T": "", "H": "Shambho Shankara Mahadeva", "S": "shambhO shankara mahAdEvA sadAshiva shambhO :  Adi", "R": "Shanmukapriya", "C": "Muthu Thandavar", "A": "Maruthi Prasad", "V": "LAn3UqM6PNc"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0306", "T": "", "H": "Shambho Shankara Mahadeva", "S": "shambhO shankara mahAdEvA sadAshiva shambhO :  Adi", "R": "Shanmukapriya", "C": "Muthu Thandavar", "A": "Nithyasree Mahadevan", "V": "LBLIl_6Dphg"}, {"N": "0307", "T": "", "H": "Shambho Shankara Mahadeva", "S": "shambhO shankara mahAdEvA sadAshiva shambhO :  Adi", "R": "Shanmukapriya", "C": "Muthu Thandavar", "A": "Nithyasree Mahadevan", "V": "veU2jHgpduE"}]}, {"name": "Vocal - Prema Rangarajan", "songs": [{"N": "0073", "T": "", "H": "Shambho Shankara Mahadeva", "S": "shambhO shankara mahAdEvA sadAshiva shambhO :  Adi", "R": "Shanmukapriya", "C": "Muthu Thandavar", "A": "Prema Rangarajan", "V": "ZjAEPCZZQBg"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "M. Balamuralikrishna", "songs": [{"C": "Muthu Thandavar", "D": "1:24:47", "R": "Shanmukapriya", "T": "", "U": "43,466 views", "V": "Te95NIU_lNY"}]}, {"A": "Maruthi Prasad", "songs": [{"C": "Muthu Thandavar", "D": "6:25", "R": "Shanmukapriya", "T": "", "U": "81 views", "V": "LAn3UqM6PNc"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Muthu Thandavar", "D": "17:21", "R": "Shanmukapriya", "T": "", "U": "792 views", "V": "LBLIl_6Dphg"}, {"C": "Muthu Thandavar", "D": "17:21", "R": "Shanmukapriya", "T": "", "U": "175 views", "V": "veU2jHgpduE"}]}, {"A": "Prema Rangarajan", "songs": [{"C": "Muthu Thandavar", "D": "20:13", "R": "Shanmukapriya", "T": "", "U": "40 views", "V": "ZjAEPCZZQBg"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

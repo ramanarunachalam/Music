@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>10</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "E dAri sancarinturA y ika palkarA", "songs": [{"N": "0434", "T": "", "H": "Edari Sancharintura", "S": "E dAri sancarinturA y ika palkarA :  Deshadi", "R": "Shruthiranjani", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "EWy8qA-9MsU"}, {"N": "0015", "T": "", "H": "Edari Sancharintura", "S": "E dAri sancarinturA y ika palkarA :  Deshadi", "R": "Shruthiranjani", "C": "Thyagaraja", "A": "Sriram Gangadharan", "V": "8NEG_m5ujOY"}, {"N": "0021", "T": "", "H": "Edari Sancharintura", "S": "E dAri sancarinturA y ika palkarA :  Deshadi", "R": "Shruthiranjani", "C": "Thyagaraja", "A": "Charumathi Raghuraman", "V": "3OVx1kc6NOo"}]}, {"name": "Unknownsong", "songs": [{"N": "1620", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "M. S. Subbulakshmi", "V": "3V1UlwzOhj0"}, {"N": "0148", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "Mambalam Sisters", "V": "8FRlOVEjg0o"}, {"N": "0050", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "Vivek Sadasivam", "V": "RhgCECIlgU4"}, {"N": "0011", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "B. Sivakumar", "V": "yYXCldqJwaE"}, {"N": "0284", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "N. Ramani", "V": "eeBvs6g_0Rc"}, {"N": "0065", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Shruthiranjani", "C": "UnknownComposer", "A": "Ambi Subramaniam", "V": "1zioPavgcpU"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Edari Sancharintura", "S": "E dAri sancarinturA y ika palkarA :  Deshadi", "songs": [{"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "5:45", "T": "", "U": "0 views", "V": "EWy8qA-9MsU"}, {"A": "Sriram Gangadharan", "C": "Thyagaraja", "D": "14:46", "T": "", "U": "569 views", "V": "8NEG_m5ujOY"}, {"A": "Charumathi Raghuraman", "C": "Thyagaraja", "D": "6:51", "T": "", "U": "1,433 views", "V": "3OVx1kc6NOo"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "M. S. Subbulakshmi", "C": "UnknownComposer", "D": "6:05", "T": "", "U": "188 views", "V": "3V1UlwzOhj0"}, {"A": "Mambalam Sisters", "C": "UnknownComposer", "D": "4:01", "T": "", "U": "80 views", "V": "8FRlOVEjg0o"}, {"A": "Vivek Sadasivam", "C": "UnknownComposer", "D": "1:09", "T": "", "U": "24 views", "V": "RhgCECIlgU4"}, {"A": "B. Sivakumar", "C": "UnknownComposer", "D": "3:48", "T": "", "U": "83 views", "V": "yYXCldqJwaE"}, {"A": "N. Ramani", "C": "UnknownComposer", "D": "10:14", "T": "", "U": "1,117 views", "V": "eeBvs6g_0Rc"}, {"A": "Ambi Subramaniam", "C": "UnknownComposer", "D": "5:29", "T": "", "U": "0 views", "V": "1zioPavgcpU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

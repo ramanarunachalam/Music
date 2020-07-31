@@ -15,9 +15,9 @@
 <tbody>
 <tr><td><em>Audio</em></td><td>72</td></tr>
 <tr><td><em>Song</em></td><td>40</td></tr>
-<tr><td><em>Raga</em></td><td>40</td></tr>
+<tr><td><em>Raga</em></td><td>39</td></tr>
 <tr><td><em>Composer</em></td><td>15</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>72</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "AKSHAYANAND01", "songs": [{"N": "0003", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "Akshay Anand", "V": "78vgUpEmZ6w"}, {"N": "0011", "T": "", "H": "Concert", "S": "Concert", "R": "Unknownraga", "C": "UnknownComposer", "A": "Akshay Anand", "V": "xUKZVAJoFqA"}, {"N": "0020", "T": "", "H": "Devi Brova", "S": "dEvI brOva samayam i dE ati vEgamE vacci :  Adi", "R": "Chinthamani", "C": "Shyama Shastri", "A": "Akshay Anand", "V": "ASGjs6RZ8Nk"}, {"N": "0022", "T": "", "H": "Emani Pogadudura", "S": "Emani pogaDudurA SrI rAma ninn Emani  :  Adi", "R": "Veeravasantham", "C": "Thyagaraja", "A": "Akshay Anand", "V": "SFXJn_dO8B4"}, {"N": "0027", "T": "", "H": "Irakam Varamal", "S": "irakkam varAmal pOnadenna kAraNam En svAmi :  Rupaka", "R": "Behag", "C": "Gopalakrishna Bharathi", "A": "Akshay Anand", "V": "Xja302lMu2U"}, {"N": "0029", "T": "", "H": "Kanukontini", "S": "kanukoNTini SrI rAmuni nEDu  :  Deshadi", "R": "Bilahari", "C": "Thyagaraja", "A": "Akshay Anand", "V": "x0qJvKZTo0k"}, {"N": "0031", "T": "", "H": "Lalisidhalu Magana", "S": "lAlisidaLu magana yashOde lAlisidaLu magana :  Ata", "R": "Arabhi", "C": "Purandara Dasa", "A": "Akshay Anand", "V": "oR9UmoBBrUQ"}, {"N": "0032", "T": "", "H": "Lalisidhalu Magana", "S": "lAlisidaLu magana yashOde lAlisidaLu magana :  Ata", "R": "Arabhi", "C": "Purandara Dasa", "A": "Akshay Anand", "V": "rUU7oC-w62w"}, {"N": "0033", "T": "", "H": "Maname Unakku", "S": "manamE unakku kAval illai un ninaivin :  Adi", "R": "Shuddha hindolam", "C": "T. M. Thiagarajan", "A": "Akshay Anand", "V": "eSJ0o2mtvS8"}, {"N": "0035", "T": "", "H": "Munnu Ravana", "S": "munnu rAvaNa bAdhan O rvaka  :  Jhampa", "R": "Thodi", "C": "Thyagaraja", "A": "Akshay Anand", "V": "4ywOaJMk49Y"}, {"N": "0037", "T": "", "H": "Ninne Nera", "S": "ninnE nera namminAnurA O rAma rAmayya :  Rupaka", "R": "Panthuvarali", "C": "Thyagaraja", "A": "Akshay Anand", "V": "OM5BUMO2P6c"}, {"N": "0055", "T": "", "H": "Thani", "S": "Thani", "R": "Unknownraga", "C": "UnknownComposer", "A": "Akshay Anand", "V": "3o_Gw2Vp0FU"}, {"N": "0056", "T": "", "H": "Thani", "S": "Thani", "R": "Unknownraga", "C": "UnknownComposer", "A": "Akshay Anand", "V": "KgLy8O5H0SU"}, {"N": "0058", "T": "Thillana", "H": "thillana_unknowncomposer_darbarikaanada", "S": "thillana unknowncomposer darbarikaanada", "R": "Darbari kaanada", "C": "UnknownComposer", "A": "Akshay Anand", "V": "h5LBmeveLzo"}, {"N": "0062", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Poorvikalyani", "C": "UnknownComposer", "A": "Akshay Anand", "V": "4eCC6Ulrm8o"}, {"N": "0066", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Akshay Anand", "V": "anandmisys"}, {"N": "0067", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Akshay Anand", "V": "JGf0eOeIB-k"}, {"N": "0068", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Akshay Anand", "V": "XsZnzgzIK98"}, {"N": "0070", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Akshay Anand", "V": "bXQr_ABKBwY"}, {"N": "0071", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Akshay Anand", "V": "ecoCQP79GvI"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Concert", "S": "Concert", "songs": [{"C": "UnknownComposer", "D": "3:01:39", "R": "Unknownraga", "T": "", "U": "498 views", "V": "78vgUpEmZ6w"}, {"C": "UnknownComposer", "D": "2:29:58", "R": "Unknownraga", "T": "", "U": "1,108 views", "V": "xUKZVAJoFqA"}]}, {"H": "Devi Brova", "S": "dEvI brOva samayam i dE ati vEgamE vacci :  Adi", "songs": [{"C": "Shyama Shastri", "D": "9:35", "R": "Chinthamani", "T": "", "U": "6,314 views", "V": "ASGjs6RZ8Nk"}]}, {"H": "Emani Pogadudura", "S": "Emani pogaDudurA SrI rAma ninn Emani  :  Adi", "songs": [{"C": "Thyagaraja", "D": "3:10", "R": "Veeravasantham", "T": "", "U": "1,085 views", "V": "SFXJn_dO8B4"}]}, {"H": "Irakam Varamal", "S": "irakkam varAmal pOnadenna kAraNam En svAmi :  Rupaka", "songs": [{"C": "Gopalakrishna Bharathi", "D": "6:29", "R": "Behag", "T": "", "U": "3,669 views", "V": "Xja302lMu2U"}]}, {"H": "Kanukontini", "S": "kanukoNTini SrI rAmuni nEDu  :  Deshadi", "songs": [{"C": "Thyagaraja", "D": "27:19", "R": "Bilahari", "T": "", "U": "0 views", "V": "x0qJvKZTo0k"}]}, {"H": "Lalisidhalu Magana", "S": "lAlisidaLu magana yashOde lAlisidaLu magana :  Ata", "songs": [{"C": "Purandara Dasa", "D": "14:01", "R": "Arabhi", "T": "", "U": "678 views", "V": "oR9UmoBBrUQ"}, {"C": "Purandara Dasa", "D": "14:00", "R": "Arabhi", "T": "", "U": "135 views", "V": "rUU7oC-w62w"}]}, {"H": "Maname Unakku", "S": "manamE unakku kAval illai un ninaivin :  Adi", "songs": [{"C": "T. M. Thiagarajan", "D": "7:28", "R": "Shuddha hindolam", "T": "", "U": "1,905 views", "V": "eSJ0o2mtvS8"}]}, {"H": "Munnu Ravana", "S": "munnu rAvaNa bAdhan O rvaka  :  Jhampa", "songs": [{"C": "Thyagaraja", "D": "15:37", "R": "Thodi", "T": "", "U": "1,671 views", "V": "4ywOaJMk49Y"}]}, {"H": "Ninne Nera", "S": "ninnE nera namminAnurA O rAma rAmayya :  Rupaka", "songs": [{"C": "Thyagaraja", "D": "11:37", "R": "Panthuvarali", "T": "", "U": "7,073 views", "V": "OM5BUMO2P6c"}]}, {"H": "Thani", "S": "Thani", "songs": [{"C": "UnknownComposer", "D": "4:33", "R": "Unknownraga", "T": "", "U": "0 views", "V": "KgLy8O5H0SU"}, {"C": "UnknownComposer", "D": "16:34", "R": "Unknownraga", "T": "", "U": "178 views", "V": "3o_Gw2Vp0FU"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "24:44", "R": "Poorvikalyani", "T": "", "U": "3,478 views", "V": "4eCC6Ulrm8o"}, {"C": "UnknownComposer", "D": "- Channel", "R": "Unknownraga", "T": "", "U": "0 views", "V": "/user/anandmisys"}, {"C": "UnknownComposer", "D": "19:35", "R": "Unknownraga", "T": "", "U": "49,882 views", "V": "ecoCQP79GvI"}, {"C": "UnknownComposer", "D": "13:03", "R": "Unknownraga", "T": "", "U": "1,199 views", "V": "XsZnzgzIK98"}, {"C": "UnknownComposer", "D": "27:50", "R": "Unknownraga", "T": "", "U": "338 views", "V": "bXQr_ABKBwY"}, {"C": "UnknownComposer", "D": "13:46", "R": "Unknownraga", "T": "", "U": "340 views", "V": "JGf0eOeIB-k"}]}, {"H": "thillana_unknowncomposer_darbarikaanada", "S": "thillana unknowncomposer darbarikaanada", "songs": [{"C": "UnknownComposer", "D": "6:02", "R": "Darbari kaanada", "T": "Thillana", "U": "7,789 views", "V": "h5LBmeveLzo"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

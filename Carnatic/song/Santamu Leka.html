@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>30</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>19</td></tr>
-<tr><td><em>Concert</em></td><td>19</td></tr>
+<tr><td><em>Concert</em></td><td>25</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -158,57 +158,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Alathur Brothers", "songs": [{"N": "0113", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Alathur Brothers", "V": "4T2Gg_XdCSw"}]}, {"name": "Vocal - Charumathi Ramachandran", "songs": [{"N": "0031", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Charumathi Ramachandran", "V": "HpYpjPmLdMw"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0373", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "dVrYvyUrGTw"}, {"N": "0374", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "hwP5CTp_yaw"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0445", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "K. V. Narayanaswamy", "V": "E3SP33qJtNA"}, {"N": "0446", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "K. V. Narayanaswamy", "V": "wdljhs7r_kc"}, {"N": "0447", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "K. V. Narayanaswamy", "V": "zp0tNOtI2tE"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0613", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "1F65OAUMD5E"}, {"N": "0614", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "kHuiQCfFK24"}, {"N": "0615", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "wSxlT_UPby8"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0299", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Nithyasree Mahadevan", "V": "ASfuinE3Gm0"}]}, {"name": "Vocal - Palghat R Ramprasad", "songs": [{"N": "0048", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Palghat R Ramprasad", "V": "YS7dV6PqF5A"}]}, {"name": "Vocal - Ram Kaushik", "songs": [{"N": "0057", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Ram Kaushik", "V": "7vCUD6J4sCQ"}]}, {"name": "Vocal - Sandeep Narayan", "songs": [{"N": "0112", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Sandeep Narayan", "V": "6XpQZH4BlRM"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0744", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "U5eEjde0I7Y"}, {"N": "0743", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "5EBliPM8yO0"}, {"N": "0745", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "_T2eSfVxHUE"}, {"N": "0746", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "iTWjMQQnYNw"}, {"N": "0747", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "oWrumn2prT4"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0684", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "57JzWnmzsK8"}, {"N": "0685", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "cGORUQGNH3Q"}]}, {"name": "Flute - T. R. Mahalingam", "songs": [{"N": "0143", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "T. R. Mahalingam", "V": "bo6eQdJIuIg"}]}, {"name": "Whistle - Whistle K. Sivaprasad", "songs": [{"N": "0015", "T": "", "H": "Santamu Leka", "S": "SAntamu lEka saukhyamu lEdu  :  Adi", "R": "Sama", "C": "Thyagaraja", "A": "Whistle K. Sivaprasad", "V": "WdIkGNhQ_5o"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Alathur Brothers", "songs": [{"C": "Thyagaraja", "D": "9:06", "R": "Sama", "T": "", "U": "615 views", "V": "4T2Gg_XdCSw"}]}, {"A": "Charumathi Ramachandran", "songs": [{"C": "Thyagaraja", "D": "6:59", "R": "Sama", "T": "", "U": "64 views", "V": "HpYpjPmLdMw"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Thyagaraja", "D": "5:50", "R": "Sama", "T": "", "U": "6,300 views", "V": "dVrYvyUrGTw"}, {"C": "Thyagaraja", "D": "5:56", "R": "Sama", "T": "", "U": "5,200 views", "V": "hwP5CTp_yaw"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Thyagaraja", "D": "7:00", "R": "Sama", "T": "", "U": "59 views", "V": "zp0tNOtI2tE"}, {"C": "Thyagaraja", "D": "5:09", "R": "Sama", "T": "", "U": "5,400 views", "V": "E3SP33qJtNA"}, {"C": "Thyagaraja", "D": "8:11", "R": "Sama", "T": "", "U": "340 views", "V": "wdljhs7r_kc"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Thyagaraja", "D": "7:21", "R": "Sama", "T": "", "U": "825 views", "V": "wSxlT_UPby8"}, {"C": "Thyagaraja", "D": "8:04", "R": "Sama", "T": "", "U": "973 views", "V": "kHuiQCfFK24"}, {"C": "Thyagaraja", "D": "7:10", "R": "Sama", "T": "", "U": "109 views", "V": "1F65OAUMD5E"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Thyagaraja", "D": "5:46", "R": "Sama", "T": "", "U": "8,500 views", "V": "ASfuinE3Gm0"}, {"C": "Thyagaraja", "D": "5:46", "R": "Sama", "T": "", "U": "23,074 views", "V": "EHPTJPl9-t8"}]}, {"A": "Palghat R Ramprasad", "songs": [{"C": "Thyagaraja", "D": "40:46", "R": "Sama", "T": "", "U": "272 views", "V": "YS7dV6PqF5A"}]}, {"A": "Ram Kaushik", "songs": [{"C": "Thyagaraja", "D": "8:53", "R": "Sama", "T": "", "U": "1,574 views", "V": "7vCUD6J4sCQ"}]}, {"A": "Sandeep Narayan", "songs": [{"C": "Thyagaraja", "D": "47:03", "R": "Sama", "T": "", "U": "2,118 views", "V": "6XpQZH4BlRM"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Thyagaraja", "D": "6:54", "R": "Sama", "T": "", "U": "3,000 views", "V": "U5eEjde0I7Y"}, {"C": "Thyagaraja", "D": "41:36", "R": "Sama", "T": "", "U": "549 views", "V": "_T2eSfVxHUE"}, {"C": "Thyagaraja", "D": "41:36", "R": "Sama", "T": "", "U": "2,200 views", "V": "oWrumn2prT4"}, {"C": "Thyagaraja", "D": "20:01", "R": "Sama", "T": "", "U": "17,352 views", "V": "iTWjMQQnYNw"}, {"C": "Thyagaraja", "D": "24:36", "R": "Sama", "T": "", "U": "0 views", "V": "5EBliPM8yO0"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Thyagaraja", "D": "30:05", "R": "Sama", "T": "", "U": "1,300 views", "V": "cGORUQGNH3Q"}, {"C": "Thyagaraja", "D": "29:47", "R": "Sama", "T": "", "U": "627 views", "V": "57JzWnmzsK8"}]}, {"A": "T. R. Mahalingam", "songs": [{"C": "Thyagaraja", "D": "5:15", "R": "Sama", "T": "", "U": "682 views", "V": "bo6eQdJIuIg"}]}, {"A": "Whistle K. Sivaprasad", "songs": [{"C": "Thyagaraja", "D": "3:55", "R": "Sama", "T": "", "U": "583 views", "V": "WdIkGNhQ_5o"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

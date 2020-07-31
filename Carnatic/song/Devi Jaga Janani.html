@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>14</td></tr>
-<tr><td><em>Concert</em></td><td>14</td></tr>
+<tr><td><em>Concert</em></td><td>11</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -156,57 +156,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ashwath Narayanan", "songs": [{"N": "0059", "T": "Navarathri", "H": "Devi Jaga Janani", "S": "dEvi jagajjanai dEvi krpayAmama tAvaka caraNa :  Adi", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "Ashwath Narayanan", "V": "cbHQE8mAdrU"}]}, {"name": "Vocal - Cherthala K. N. Renganatha Sharma", "songs": [{"N": "0147", "T": "Navarathri", "H": "Devi Jaga Janani", "S": "dEvi jagajjanai dEvi krpayAmama tAvaka caraNa :  Adi", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "Cherthala K. N. Renganatha Sharma", "V": "KW_FR67rIRI"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0594", "T": "Navarathri", "H": "Devi Jaga Janani", "S": "dEvi jagajjanai dEvi krpayAmama tAvaka caraNa :  Adi", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "P7E1b8Gxsew"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1295", "T": "Navarathri", "H": "Devi Jaga Janani", "S": "dEvi jagajjanai dEvi krpayAmama tAvaka caraNa :  Adi", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "ZZcwHKO2bEs"}, {"N": "1296", "T": "Navarathri", "H": "Devi Jaga Janani", "S": "dEvi jagajjanai dEvi krpayAmama tAvaka caraNa :  Adi", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "hFObZkF2RGs"}, {"N": "1297", "T": "Navarathri", "H": "Devi Jaga Janani", "S": "dEvi jagajjanai dEvi krpayAmama tAvaka caraNa :  Adi", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "z68pqJKtJKE"}]}, {"name": "Vocal - Omanakutty", "songs": [{"N": "0022", "T": "Navarathri", "H": "Devi Jaga Janani", "S": "dEvi jagajjanai dEvi krpayAmama tAvaka caraNa :  Adi", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "Omanakutty", "V": "wlVejBDlTug"}]}, {"name": "Vocal - S. Saketharaman", "songs": [{"N": "0167", "T": "Navarathri", "H": "Devi Jaga Janani", "S": "dEvi jagajjanai dEvi krpayAmama tAvaka caraNa :  Adi", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "S. Saketharaman", "V": "qGEhkG3yg6M"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0986", "T": "Navarathri", "H": "Devi Jaga Janani", "S": "dEvi jagajjanai dEvi krpayAmama tAvaka caraNa :  Adi", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "qOrPLaQlHys"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0694", "T": "Navarathri", "H": "Devi Jaga Janani", "S": "dEvi jagajjanai dEvi krpayAmama tAvaka caraNa :  Adi", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "T. M. Krishna", "V": "LfOu0EAtwMU"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0611", "T": "Navarathri", "H": "Devi Jaga Janani", "S": "dEvi jagajjanai dEvi krpayAmama tAvaka caraNa :  Adi", "R": "Sankarabharanam", "C": "Swathi Thirunal", "A": "T. N. Seshagopalan", "V": "F3aCuJJxFUQ"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Ashwath Narayanan", "songs": [{"C": "Swathi Thirunal", "D": "36:56", "R": "Sankarabharanam", "T": "Navarathri", "U": "1,600 views", "V": "cbHQE8mAdrU"}]}, {"A": "Cherthala K. N. Renganatha Sharma", "songs": [{"C": "Swathi Thirunal", "D": "33:16", "R": "Sankarabharanam", "T": "Navarathri", "U": "1,300 views", "V": "KW_FR67rIRI"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Swathi Thirunal", "D": "33:06", "R": "Sankarabharanam", "T": "Navarathri", "U": "519 views", "V": "P7E1b8Gxsew"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Swathi Thirunal", "D": "38:26", "R": "Sankarabharanam", "T": "Navarathri", "U": "1,300 views", "V": "hFObZkF2RGs"}, {"C": "Swathi Thirunal", "D": "38:26", "R": "Sankarabharanam", "T": "Navarathri", "U": "4,700 views", "V": "ZZcwHKO2bEs"}, {"C": "Swathi Thirunal", "D": "20:47", "R": "Sankarabharanam", "T": "Navarathri", "U": "4,799 views", "V": "z68pqJKtJKE"}]}, {"A": "Omanakutty", "songs": [{"C": "Swathi Thirunal", "D": "3:01", "R": "Sankarabharanam", "T": "Navarathri", "U": "408 views", "V": "wlVejBDlTug"}]}, {"A": "S. Saketharaman", "songs": [{"C": "Swathi Thirunal", "D": "21:56", "R": "Sankarabharanam", "T": "Navarathri", "U": "146 views", "V": "qGEhkG3yg6M"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Swathi Thirunal", "D": "36:11", "R": "Sankarabharanam", "T": "Navarathri", "U": "952 views", "V": "qOrPLaQlHys"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Swathi Thirunal", "D": "55:31", "R": "Sankarabharanam", "T": "Navarathri", "U": "441 views", "V": "LfOu0EAtwMU"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Swathi Thirunal", "D": "27:06", "R": "Sankarabharanam", "T": "Navarathri", "U": "190 views", "V": "F3aCuJJxFUQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>4</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>3</td></tr>
-<tr><td><em>Concert</em></td><td>3</td></tr>
+<tr><td><em>Concert</em></td><td>4</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Gayathri Girish", "songs": [{"N": "0146", "T": "", "H": "Pazhani Shanmugavela", "S": "Pazhani shanmuga velundu namakkennalum :  Adi", "R": "Chenchurutti", "C": "Arunagirinathar", "A": "Gayathri Girish", "V": "drhFmpk54k8"}, {"N": "0147", "T": "", "H": "Pazhani Shanmugavela", "S": "Pazhani shanmuga velundu namakkennalum :  Adi", "R": "Chenchurutti", "C": "Arunagirinathar", "A": "Gayathri Girish", "V": "i3Q-ieixWjQ"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0620", "T": "", "H": "Pazhani Shanmugavela", "S": "Pazhani shanmuga velundu namakkennalum :  Adi", "R": "Chenchurutti", "C": "Arunagirinathar", "A": "M. L. Vasanthakumari", "V": "sqvQCGyF1qg"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0466", "T": "", "H": "Pazhani Shanmugavela", "S": "Pazhani shanmuga velundu namakkennalum :  Adi", "R": "Chenchurutti", "C": "Arunagirinathar", "A": "Sudha Ragunathan", "V": "QL2ZhFHuwKw"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Gayathri Girish", "songs": [{"C": "Arunagirinathar", "D": "4:51", "R": "Chenchurutti", "T": "", "U": "207 views", "V": "i3Q-ieixWjQ"}, {"C": "Arunagirinathar", "D": "4:50", "R": "Chenchurutti", "T": "", "U": "25 views", "V": "drhFmpk54k8"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Arunagirinathar", "D": "4:30", "R": "Chenchurutti", "T": "", "U": "90 views", "V": "sqvQCGyF1qg"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Arunagirinathar", "D": "5:24", "R": "Chenchurutti", "T": "", "U": "13,013 views", "V": "QL2ZhFHuwKw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

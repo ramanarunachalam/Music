@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bangalore S. Shankar", "songs": [{"N": "0061", "T": "", "H": "Vandi Suvudhiyali", "S": "vandisuvadAdiyali gaNanAthana  :  Ata", "R": "Nata", "C": "Purandara Dasa", "A": "Bangalore S. Shankar", "V": "OUAs-80_LVk"}]}, {"name": "Vocal - Gayathri Venkataraghavan", "songs": [{"N": "0198", "T": "", "H": "Vandi Suvudhiyali", "S": "vandisuvadAdiyali gaNanAthana  :  Ata", "R": "Nata", "C": "Purandara Dasa", "A": "Gayathri Venkataraghavan", "V": "nu8FItKmXPI"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1504", "T": "", "H": "Vandi Suvudhiyali", "S": "vandisuvadAdiyali gaNanAthana  :  Ata", "R": "Nata", "C": "Purandara Dasa", "A": "M. Balamuralikrishna", "V": "sQroR0LOOGo"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0185", "T": "", "H": "Vandi Suvudhiyali", "S": "vandisuvadAdiyali gaNanAthana  :  Ata", "R": "Nata", "C": "Purandara Dasa", "A": "Sankaran Namboothiri", "V": "Uy6TEzPZH_E"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0659", "T": "", "H": "Vandi Suvudhiyali", "S": "vandisuvadAdiyali gaNanAthana  :  Ata", "R": "Nata", "C": "Purandara Dasa", "A": "Sudha Ragunathan", "V": "BvMi92XRYx4"}]}, {"name": "Vocal - Trichur V. Ramachandran", "songs": [{"N": "0118", "T": "", "H": "Vandi Suvudhiyali", "S": "vandisuvadAdiyali gaNanAthana  :  Ata", "R": "Nata", "C": "Purandara Dasa", "A": "Trichur V. Ramachandran", "V": "FkGg2IgcSHs"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bangalore S. Shankar", "songs": [{"C": "Purandara Dasa", "D": "8:29", "R": "Nata", "T": "", "U": "2,647 views", "V": "OUAs-80_LVk"}]}, {"A": "Gayathri Venkataraghavan", "songs": [{"C": "Purandara Dasa", "D": "7:51", "R": "Nata", "T": "", "U": "3,100 views", "V": "nu8FItKmXPI"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Purandara Dasa", "D": "6:23", "R": "Nata", "T": "", "U": "2,601 views", "V": "sQroR0LOOGo"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Purandara Dasa", "D": "9:36", "R": "Nata", "T": "", "U": "5,205 views", "V": "Uy6TEzPZH_E"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Purandara Dasa", "D": "9:40", "R": "Nata", "T": "", "U": "248 views", "V": "BvMi92XRYx4"}]}, {"A": "Trichur V. Ramachandran", "songs": [{"C": "Purandara Dasa", "D": "7:56", "R": "Nata", "T": "", "U": "147 views", "V": "FkGg2IgcSHs"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

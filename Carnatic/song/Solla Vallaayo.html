@@ -27,7 +27,7 @@
 <tr><td><em>Audio</em></td><td>14</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>12</td></tr>
-<tr><td><em>Concert</em></td><td>12</td></tr>
+<tr><td><em>Concert</em></td><td>13</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -138,57 +138,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0332", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Bombay Jayashri", "V": "NrzIGnWR-2g"}]}, {"name": "Vocal - Bushani Kalyanaraman", "songs": [{"N": "0018", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Bushani Kalyanaraman", "V": "1yPKqdhw0HE"}]}, {"name": "Vocal - Gayathri Girish", "songs": [{"N": "0169", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Gayathri Girish", "V": "1fXe7tfYETI"}]}, {"name": "Vocal - O. S. Arun", "songs": [{"N": "0106", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "O. S. Arun", "V": "JDenOxPKQjg"}]}, {"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0182", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "P. Unnikrishnan", "V": "pMOVLnumtKs"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0215", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "S. Sowmya", "V": "C-3bwfR4mEM"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0740", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Semmangudi Srinivasa Iyer", "V": "3_o7fNGYFtA"}, {"N": "0741", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Semmangudi Srinivasa Iyer", "V": "e6keSDayUjQ"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0561", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Sudha Ragunathan", "V": "4BBQhLxVfUc"}, {"N": "0562", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Sudha Ragunathan", "V": "7tDtQFs42cQ"}]}, {"name": "Flute - V. K. Raman", "songs": [{"N": "0052", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "V. K. Raman", "V": "pFgJ3KR8mFw"}]}, {"name": "Violin - Lalgudi Jayaraman", "songs": [{"N": "0423", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Lalgudi Jayaraman", "V": "ebmC8ASkAEI"}]}, {"name": "Mridangam - T. V. Gopalakrishnan", "songs": [{"N": "0109", "T": "", "H": "Solla Vallaayo", "S": "Solla vallayo kiliye   : Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "T. V. Gopalakrishnan", "V": "wsduh4m3HPE"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Subramanya Bharathiyar", "D": "6:11", "R": "Ragamalika", "T": "", "U": "2,272 views", "V": "NrzIGnWR-2g"}]}, {"A": "Bushani Kalyanaraman", "songs": [{"C": "Subramanya Bharathiyar", "D": "5:42", "R": "Ragamalika", "T": "", "U": "406 views", "V": "1yPKqdhw0HE"}]}, {"A": "Gayathri Girish", "songs": [{"C": "Subramanya Bharathiyar", "D": "5:43", "R": "Ragamalika", "T": "", "U": "1,328 views", "V": "1fXe7tfYETI"}]}, {"A": "O. S. Arun", "songs": [{"C": "Subramanya Bharathiyar", "D": "8:17", "R": "Ragamalika", "T": "", "U": "376 views", "V": "JDenOxPKQjg"}]}, {"A": "P. Unnikrishnan", "songs": [{"C": "Subramanya Bharathiyar", "D": "4:49", "R": "Ragamalika", "T": "", "U": "0 views", "V": "pMOVLnumtKs"}]}, {"A": "S. Sowmya", "songs": [{"C": "Subramanya Bharathiyar", "D": "5:56", "R": "Ragamalika", "T": "", "U": "6,355 views", "V": "C-3bwfR4mEM"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Subramanya Bharathiyar", "D": "4:20", "R": "Ragamalika", "T": "", "U": "309 views", "V": "3_o7fNGYFtA"}, {"C": "Subramanya Bharathiyar", "D": "4:29", "R": "Ragamalika", "T": "", "U": "89 views", "V": "e6keSDayUjQ"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Subramanya Bharathiyar", "D": "5:47", "R": "Ragamalika", "T": "", "U": "286 views", "V": "4BBQhLxVfUc"}, {"C": "Subramanya Bharathiyar", "D": "3:01", "R": "Ragamalika", "T": "", "U": "1,841 views", "V": "7tDtQFs42cQ"}]}, {"A": "V. K. Raman", "songs": [{"C": "Subramanya Bharathiyar", "D": "3:15", "R": "Ragamalika", "T": "", "U": "50 views", "V": "pFgJ3KR8mFw"}]}, {"A": "Lalgudi Jayaraman", "songs": [{"C": "Subramanya Bharathiyar", "D": "9:32", "R": "Ragamalika", "T": "", "U": "0 views", "V": "ebmC8ASkAEI"}]}, {"A": "T. V. Gopalakrishnan", "songs": [{"C": "Subramanya Bharathiyar", "D": "3:47", "R": "Ragamalika", "T": "", "U": "0 views", "V": "wsduh4m3HPE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

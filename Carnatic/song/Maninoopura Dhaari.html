@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>10</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>7</td></tr>
-<tr><td><em>Concert</em></td><td>7</td></tr>
+<tr><td><em>Concert</em></td><td>10</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -130,57 +130,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aruna Sairam", "songs": [{"N": "0193", "T": "", "H": "Maninoopura Dhaari", "S": "maNI nUpura dhAri rAjagOpAla kankaNa kinkiNa :  Adi", "R": "Neelambari", "C": "Oothukkadu Venkata Kavi", "A": "Aruna Sairam", "V": "d4aMYTSlyQo"}, {"N": "0194", "T": "", "H": "Maninoopura Dhaari", "S": "maNI nUpura dhAri rAjagOpAla kankaNa kinkiNa :  Adi", "R": "Neelambari", "C": "Oothukkadu Venkata Kavi", "A": "Aruna Sairam", "V": "eayYLSS3qgk"}]}, {"name": "Vocal - Gayathri Venkataraghavan", "songs": [{"N": "0126", "T": "", "H": "Maninoopura Dhaari", "S": "maNI nUpura dhAri rAjagOpAla kankaNa kinkiNa :  Adi", "R": "Neelambari", "C": "Oothukkadu Venkata Kavi", "A": "Gayathri Venkataraghavan", "V": "4yHXfJ0uSZM"}, {"N": "0127", "T": "", "H": "Maninoopura Dhaari", "S": "maNI nUpura dhAri rAjagOpAla kankaNa kinkiNa :  Adi", "R": "Neelambari", "C": "Oothukkadu Venkata Kavi", "A": "Gayathri Venkataraghavan", "V": "cZ5HdelUrTw"}]}, {"name": "Vocal - Nisha Rajagopal", "songs": [{"N": "0077", "T": "", "H": "Maninoopura Dhaari", "S": "maNI nUpura dhAri rAjagOpAla kankaNa kinkiNa :  Adi", "R": "Neelambari", "C": "Oothukkadu Venkata Kavi", "A": "Nisha Rajagopal", "V": "DrYLSk6nkZo"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0111", "T": "", "H": "Maninoopura Dhaari", "S": "maNI nUpura dhAri rAjagOpAla kankaNa kinkiNa :  Adi", "R": "Neelambari", "C": "Oothukkadu Venkata Kavi", "A": "Sikkil Gurucharan", "V": "1Cz1zi1tgiw"}, {"N": "0112", "T": "", "H": "Maninoopura Dhaari", "S": "maNI nUpura dhAri rAjagOpAla kankaNa kinkiNa :  Adi", "R": "Neelambari", "C": "Oothukkadu Venkata Kavi", "A": "Sikkil Gurucharan", "V": "EsC2n4dYCeM"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0317", "T": "", "H": "Maninoopura Dhaari", "S": "maNI nUpura dhAri rAjagOpAla kankaNa kinkiNa :  Adi", "R": "Neelambari", "C": "Oothukkadu Venkata Kavi", "A": "Sudha Ragunathan", "V": "hbAPpcyJaq8"}]}, {"name": "Chitra Veena - Chitravina Ravi Kiran", "songs": [{"N": "0094", "T": "", "H": "Maninoopura Dhaari", "S": "maNI nUpura dhAri rAjagOpAla kankaNa kinkiNa :  Adi", "R": "Neelambari", "C": "Oothukkadu Venkata Kavi", "A": "Chitravina Ravi Kiran", "V": "ndEi5FktDRM"}]}, {"name": "Flute - K. Bhaskaran", "songs": [{"N": "0010", "T": "", "H": "Maninoopura Dhaari", "S": "maNI nUpura dhAri rAjagOpAla kankaNa kinkiNa :  Adi", "R": "Neelambari", "C": "Oothukkadu Venkata Kavi", "A": "K. Bhaskaran", "V": "DLXnpJtN7S8"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aruna Sairam", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "7:48", "R": "Neelambari", "T": "", "U": "2,256 views", "V": "d4aMYTSlyQo"}, {"C": "Oothukkadu Venkata Kavi", "D": "7:48", "R": "Neelambari", "T": "", "U": "0 views", "V": "eayYLSS3qgk"}]}, {"A": "Gayathri Venkataraghavan", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "5:47", "R": "Neelambari", "T": "", "U": "381 views", "V": "4yHXfJ0uSZM"}, {"C": "Oothukkadu Venkata Kavi", "D": "6:43", "R": "Neelambari", "T": "", "U": "710 views", "V": "cZ5HdelUrTw"}]}, {"A": "Nisha Rajagopal", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "6:06", "R": "Neelambari", "T": "", "U": "620 views", "V": "DrYLSk6nkZo"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "5:01", "R": "Neelambari", "T": "", "U": "2,171 views", "V": "EsC2n4dYCeM"}, {"C": "Oothukkadu Venkata Kavi", "D": "3:01", "R": "Neelambari", "T": "", "U": "5,530 views", "V": "1Cz1zi1tgiw"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "9:08", "R": "Neelambari", "T": "", "U": "8,014 views", "V": "hbAPpcyJaq8"}]}, {"A": "Chitravina Ravi Kiran", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "3:06", "R": "Neelambari", "T": "", "U": "148 views", "V": "ndEi5FktDRM"}]}, {"A": "K. Bhaskaran", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "5:54", "R": "Neelambari", "T": "", "U": "1,974 views", "V": "DLXnpJtN7S8"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

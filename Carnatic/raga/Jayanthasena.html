@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>49</td></tr>
 <tr><td><em>Song</em></td><td>5</td></tr>
 <tr><td><em>Composer</em></td><td>3</td></tr>
-<tr><td><em>Song Type</em></td><td>3</td></tr>
+<tr><td><em>Type</em></td><td>3</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Alapana", "songs": [{"N": "0002", "T": "", "H": "Alapana", "S": "Alapana", "R": "Jayanthasena", "C": "UnknownComposer", "A": "Abhishek Raghuram", "V": "zop2s1fOQ44"}]}, {"name": "pAdasannidhi nAku yenADu galgunO budhajanAvanA", "songs": [{"N": "0022", "T": "", "H": "Padasannidhi Naaku", "S": "pAdasannidhi nAku yenADu galgunO budhajanAvanA :  Adi", "R": "Jayanthasena", "C": "Mysore Sadasiva Rao", "A": "Maruthi Prasad", "V": "OoG2SdMNULU"}, {"N": "0063", "T": "", "H": "Padasannidhi Naaku", "S": "pAdasannidhi nAku yenADu galgunO budhajanAvanA :  Adi", "R": "Jayanthasena", "C": "Mysore Sadasiva Rao", "A": "Neela Ramgopal", "V": "RclLjjQR8iI"}]}, {"name": "Unknownsong", "songs": [{"N": "0306", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jayanthasena", "C": "UnknownComposer", "A": "Abhishek Raghuram", "V": "ViO4HBH0ZOg"}, {"N": "0088", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jayanthasena", "C": "UnknownComposer", "A": "M. Dandapani Desikar", "V": "GhTs5AX9KnA"}, {"N": "0020", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jayanthasena", "C": "UnknownComposer", "A": "Shrikantam Nagendra Shastri", "V": "TuGhoOlRBJk"}, {"N": "0296", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Jayanthasena", "C": "UnknownComposer", "A": "Sikkil Gurucharan", "V": "NWf3kefuHcQ"}]}, {"name": "vinatA suta vAhana SrI ramaNa", "songs": [{"N": "0161", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Bharat Sundar", "V": "-QwOOxMO_XM"}, {"N": "0266", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Chembai Vaidyanatha Bhagavathar", "V": "23po-xOTxuc"}, {"N": "0565", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "3U9wkhEDoQM"}, {"N": "0567", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "SlYZJ1Jr20Y"}, {"N": "0568", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "YJNKyhqK7PE"}, {"N": "0569", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "YMMyhYAlo5c"}, {"N": "0570", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "bNF4h2GjD3g"}, {"N": "0571", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "oQ59vAEaVSM"}, {"N": "0572", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "wAuR7dXnWF4"}, {"N": "0528", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "cLTjOh8oCko"}, {"N": "0529", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "fCBKup81eik"}, {"N": "0530", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "vTjWUtPAw4k"}, {"N": "0188", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Hyderabad Brothers", "V": "0QAIcFbbAL8"}, {"N": "0409", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "4litqmggwAA"}, {"N": "0410", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "saLreJRz-jk"}, {"N": "1531", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "8wfDI6_abUk"}, {"N": "0479", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "0y6sqmOv1fw"}, {"N": "0480", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "9WX802rsUSk"}, {"N": "0481", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "PEzbRd2g9Ls"}, {"N": "0482", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "Rgy83EjWNn0"}, {"N": "0483", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "f888h54KV8Q"}, {"N": "0484", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "fSg_3PsfzIk"}, {"N": "0082", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Neela Ramgopal", "V": "9mBFT90SI44"}, {"N": "0050", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Neyyattinkara Vasudevan", "V": "cD0cwBhlpoI"}, {"N": "0665", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "T. M. Krishna", "V": "LFLJOqYNgjg"}, {"N": "0024", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Vechoor Harihara Subramania Iyer", "V": "12t6Eh-uD2s"}, {"N": "0025", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Vechoor Harihara Subramania Iyer", "V": "4D0b7P6xkmc"}, {"N": "0080", "T": "", "H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "R": "Jayanthasena", "C": "Thyagaraja", "A": "Kamalakiran Vinjamuri", "V": "KPtYhmK7E94"}]}, {"name": "thillana unknowncomposer jayanthasena", "songs": [{"N": "0041", "T": "Thillana", "H": "thillana_unknowncomposer_jayanthasena", "S": "thillana unknowncomposer jayanthasena", "R": "Jayanthasena", "C": "UnknownComposer", "A": "T. K. Rangachari", "V": "OeIad9zgy6M"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Alapana", "S": "Alapana", "songs": [{"A": "Abhishek Raghuram", "C": "UnknownComposer", "D": "12:56", "T": "", "U": "1,746 views", "V": "zop2s1fOQ44"}]}, {"H": "Padasannidhi Naaku", "S": "pAdasannidhi nAku yenADu galgunO budhajanAvanA :  Adi", "songs": [{"A": "Maruthi Prasad", "C": "Mysore Sadasiva Rao", "D": "8:04", "T": "", "U": "86 views", "V": "OoG2SdMNULU"}, {"A": "Neela Ramgopal", "C": "Mysore Sadasiva Rao", "D": "16:56", "T": "", "U": "134 views", "V": "RclLjjQR8iI"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Abhishek Raghuram", "C": "UnknownComposer", "D": "6:57", "T": "", "U": "186 views", "V": "ViO4HBH0ZOg"}, {"A": "M. Dandapani Desikar", "C": "UnknownComposer", "D": "4:18", "T": "", "U": "1,576 views", "V": "GhTs5AX9KnA"}, {"A": "Shrikantam Nagendra Shastri", "C": "UnknownComposer", "D": "5:10", "T": "", "U": "88 views", "V": "TuGhoOlRBJk"}, {"A": "Sikkil Gurucharan", "C": "UnknownComposer", "D": "8:31", "T": "", "U": "349 views", "V": "NWf3kefuHcQ"}]}, {"H": "Vinatha Suta Vahana", "S": "vinatA suta vAhana SrI ramaNa  :  Adi", "songs": [{"A": "Bharat Sundar", "C": "Thyagaraja", "D": "11:47", "T": "", "U": "0 views", "V": "-QwOOxMO_XM"}, {"A": "Chembai Vaidyanatha Bhagavathar", "C": "Thyagaraja", "D": "5:10", "T": "", "U": "1,134 views", "V": "23po-xOTxuc"}, {"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "5:57", "T": "", "U": "0 views", "V": "bNF4h2GjD3g"}, {"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "9:25", "T": "", "U": "171 views", "V": "YJNKyhqK7PE"}, {"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "7:17", "T": "", "U": "1,397 views", "V": "wAuR7dXnWF4"}, {"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "4:33", "T": "", "U": "473 views", "V": "oQ59vAEaVSM"}, {"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "6:06", "T": "", "U": "52 views", "V": "YMMyhYAlo5c"}, {"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "6:50", "T": "", "U": "53 views", "V": "3U9wkhEDoQM"}, {"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "7:49", "T": "", "U": "1,053 views", "V": "SlYZJ1Jr20Y"}, {"A": "D. K. Pattammal", "C": "Thyagaraja", "D": "4:15", "T": "", "U": "479 views", "V": "fCBKup81eik"}, {"A": "D. K. Pattammal", "C": "Thyagaraja", "D": "3:58", "T": "", "U": "443 views", "V": "cLTjOh8oCko"}, {"A": "D. K. Pattammal", "C": "Thyagaraja", "D": "4:23", "T": "", "U": "262 views", "V": "vTjWUtPAw4k"}, {"A": "Hyderabad Brothers", "C": "Thyagaraja", "D": "21:01", "T": "", "U": "194 views", "V": "0QAIcFbbAL8"}, {"A": "K. J. Yesudas", "C": "Thyagaraja", "D": "7:32", "T": "", "U": "4,626 views", "V": "4litqmggwAA"}, {"A": "K. J. Yesudas", "C": "Thyagaraja", "D": "9:34", "T": "", "U": "443 views", "V": "saLreJRz-jk"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "52:10", "T": "", "U": "0 views", "V": "8wfDI6_abUk"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "4:16", "T": "", "U": "437 views", "V": "C-btF9-nF4Q"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "20:10", "T": "", "U": "0 views", "V": "FkPUSwFj_ow"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "11:45", "T": "", "U": "0 views", "V": "BKoImahJMbw"}, {"A": "Madurai Mani Iyer", "C": "Thyagaraja", "D": "", "T": "", "U": "621 views", "V": "Rgy83EjWNn0"}, {"A": "Madurai Mani Iyer", "C": "Thyagaraja", "D": "22:41", "T": "", "U": "601 views", "V": "9WX802rsUSk"}, {"A": "Madurai Mani Iyer", "C": "Thyagaraja", "D": "14:01", "T": "", "U": "468 views", "V": "f888h54KV8Q"}, {"A": "Madurai Mani Iyer", "C": "Thyagaraja", "D": "14:01", "T": "", "U": "291 views", "V": "0y6sqmOv1fw"}, {"A": "Madurai Mani Iyer", "C": "Thyagaraja", "D": "14:17", "T": "", "U": "0 views", "V": "fSg_3PsfzIk"}, {"A": "Madurai Mani Iyer", "C": "Thyagaraja", "D": "4:54", "T": "", "U": "18 views", "V": "PEzbRd2g9Ls"}, {"A": "Neela Ramgopal", "C": "Thyagaraja", "D": "17:16", "T": "", "U": "244 views", "V": "9mBFT90SI44"}, {"A": "Neyyattinkara Vasudevan", "C": "Thyagaraja", "D": "7:11", "T": "", "U": "30 views", "V": "cD0cwBhlpoI"}, {"A": "Sikkil Gurucharan", "C": "Thyagaraja", "D": "6:31", "T": "", "U": "0 views", "V": "fD_-KYQ3WD4"}, {"A": "T. M. Krishna", "C": "Thyagaraja", "D": "12:39", "T": "", "U": "903 views", "V": "LFLJOqYNgjg"}, {"A": "Vechoor Harihara Subramania Iyer", "C": "Thyagaraja", "D": "7:49", "T": "", "U": "344 views", "V": "12t6Eh-uD2s"}, {"A": "Vechoor Harihara Subramania Iyer", "C": "Thyagaraja", "D": "10:31", "T": "", "U": "731 views", "V": "4D0b7P6xkmc"}, {"A": "Kamalakiran Vinjamuri", "C": "Thyagaraja", "D": "4:03", "T": "", "U": "55 views", "V": "KPtYhmK7E94"}]}, {"H": "thillana_unknowncomposer_jayanthasena", "S": "thillana unknowncomposer jayanthasena", "songs": [{"A": "T. K. Rangachari", "C": "UnknownComposer", "D": "3:31", "T": "Thillana", "U": "111 views", "V": "OeIad9zgy6M"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -129,57 +129,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0281", "T": "", "H": "Ni Arul Tharadhirandha", "S": "nI aruL tarAdirundAl ulagil nAyinum kaDayEn :  Adi", "R": "Shuddha dhanyasi", "C": "T. R. Subramaniam", "A": "D. K. Pattammal", "V": "ffoCPe7y67Y"}]}, {"name": "Vocal - Sriranjani Santhanagopalan", "songs": [{"N": "0058", "T": "", "H": "Ni Arul Tharadhirandha", "S": "nI aruL tarAdirundAl ulagil nAyinum kaDayEn :  Adi", "R": "Shuddha dhanyasi", "C": "T. R. Subramaniam", "A": "Sriranjani Santhanagopalan", "V": "zMudWnFP-Ag"}]}, {"name": "Vocal - T. R. Subramaniam", "songs": [{"N": "0064", "T": "", "H": "Ni Arul Tharadhirandha", "S": "nI aruL tarAdirundAl ulagil nAyinum kaDayEn :  Adi", "R": "Shuddha dhanyasi", "C": "T. R. Subramaniam", "A": "T. R. Subramaniam", "V": "Ebcrg6GnfUc"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. K. Pattammal", "songs": [{"C": "T. R. Subramaniam", "D": "30:31", "R": "Shuddha dhanyasi", "T": "", "U": "73 views", "V": "ffoCPe7y67Y"}]}, {"A": "Sriranjani Santhanagopalan", "songs": [{"C": "T. R. Subramaniam", "D": "7:22", "R": "Shuddha dhanyasi", "T": "", "U": "4,278 views", "V": "zMudWnFP-Ag"}]}, {"A": "T. R. Subramaniam", "songs": [{"C": "T. R. Subramaniam", "D": "24:36", "R": "Shuddha dhanyasi", "T": "", "U": "259 views", "V": "Ebcrg6GnfUc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

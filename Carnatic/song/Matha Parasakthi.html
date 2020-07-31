@@ -28,7 +28,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -133,57 +133,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bharat Sundar", "songs": [{"N": "0100", "T": "", "H": "Matha Parasakthi", "S": "mAtA parAshakti vaiyam ellAm nI niraindAi :  Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Bharat Sundar", "V": "nty0WMhLKkY"}, {"N": "0101", "T": "", "H": "Matha Parasakthi", "S": "mAtA parAshakti vaiyam ellAm nI niraindAi :  Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Bharat Sundar", "V": "ploO0qOYchE"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0134", "T": "", "H": "Matha Parasakthi", "S": "mAtA parAshakti vaiyam ellAm nI niraindAi :  Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Bombay Sisters", "V": "RUxpXrRT4z0"}]}, {"name": "Vocal - Gayathri Venkataraghavan", "songs": [{"N": "0130", "T": "", "H": "Matha Parasakthi", "S": "mAtA parAshakti vaiyam ellAm nI niraindAi :  Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Gayathri Venkataraghavan", "V": "VsZsvYTPIvU"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0330", "T": "", "H": "Matha Parasakthi", "S": "mAtA parAshakti vaiyam ellAm nI niraindAi :  Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Sudha Ragunathan", "V": "Zcnv8ZqjDMg"}, {"N": "0328", "T": "", "H": "Matha Parasakthi", "S": "mAtA parAshakti vaiyam ellAm nI niraindAi :  Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Sudha Ragunathan", "V": "LCJjiN9gTlI"}, {"N": "0329", "T": "", "H": "Matha Parasakthi", "S": "mAtA parAshakti vaiyam ellAm nI niraindAi :  Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Sudha Ragunathan", "V": "Op-ts3brSSw"}]}, {"name": "Vocal - Sumithra Vasudev", "songs": [{"N": "0053", "T": "", "H": "Matha Parasakthi", "S": "mAtA parAshakti vaiyam ellAm nI niraindAi :  Adi", "R": "Ragamalika", "C": "Subramanya Bharathiyar", "A": "Sumithra Vasudev", "V": "lkqvlf7_eOs"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bharat Sundar", "songs": [{"C": "Subramanya Bharathiyar", "D": "5:15", "R": "Ragamalika", "T": "", "U": "1,927 views", "V": "nty0WMhLKkY"}, {"C": "Subramanya Bharathiyar", "D": "6:22", "R": "Ragamalika", "T": "", "U": "513 views", "V": "ploO0qOYchE"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Subramanya Bharathiyar", "D": "4:29", "R": "Ragamalika", "T": "", "U": "0 views", "V": "RUxpXrRT4z0"}]}, {"A": "Gayathri Venkataraghavan", "songs": [{"C": "Subramanya Bharathiyar", "D": "4:16", "R": "Ragamalika", "T": "", "U": "906 views", "V": "VsZsvYTPIvU"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Subramanya Bharathiyar", "D": "9:36", "R": "Ragamalika", "T": "", "U": "2,331 views", "V": "LCJjiN9gTlI"}, {"C": "Subramanya Bharathiyar", "D": "4:44", "R": "Ragamalika", "T": "", "U": "3,459 views", "V": "Zcnv8ZqjDMg"}, {"C": "Subramanya Bharathiyar", "D": "3:01", "R": "Ragamalika", "T": "", "U": "4,289 views", "V": "Op-ts3brSSw"}]}, {"A": "Sumithra Vasudev", "songs": [{"C": "Subramanya Bharathiyar", "D": "4:30", "R": "Ragamalika", "T": "", "U": "0 views", "V": "lkqvlf7_eOs"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

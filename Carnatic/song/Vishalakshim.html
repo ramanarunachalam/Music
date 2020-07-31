@@ -15,10 +15,10 @@
 <tbody>
 <tr><td><em>Type</em></td><td>Krithi</td></tr>
 <tr><td><em>Composer</em></td><td>Muthuswami Dikshitar</td></tr>
-<tr><td><em>Raga</em></td><td>Kashiramakriya</td></tr>
+<tr><td><em>Raga</em></td><td>Panthuvarali</td></tr>
 <tr><td><em>Melakartha</em></td><td>51 Panthuvarali</td></tr>
-<tr><td><em>Arohana</em></td><td>S G3 R1 G3 M2 P D1 N3 S</td></tr>
-<tr><td><em>Avarohana</em></td><td>S N3 D1 P M1 G3 R1 S</td></tr>
+<tr><td><em>Arohana</em></td><td>S R1 G3 M2 P D1 N3 S</td></tr>
+<tr><td><em>Avarohana</em></td><td>S N3 D1 P M2 G3 R1 S</td></tr>
 <tr><td><em>Tala</em></td><td>Caapu</td></tr>
 <tr><td><em>Tala name</em></td><td>Misra Caapu</td></tr>
 <tr><td><em>Tala count</em></td><td>3 + 2 + 2 = 7</td></tr>
@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>46</td></tr>
 <tr><td><em>Raga</em></td><td>4</td></tr>
 <tr><td><em>Artist</em></td><td>19</td></tr>
-<tr><td><em>Concert</em></td><td>19</td></tr>
+<tr><td><em>Concert</em></td><td>36</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -133,57 +133,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0576", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Kashiramakriya", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "Ss5D0Qn8kNk"}, {"N": "0577", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Kashiramakriya", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "d4e3KYxTLEQ"}, {"N": "0579", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Kashiramakriya,Panthuvarali", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "CWeol0trY8w"}, {"N": "0580", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Kashiramakriya,Panthuvarali", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "N3Fn6_RHn-E"}, {"N": "0581", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "-ZP2u76AvZc"}, {"N": "0582", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "0YiVu9t77Mg"}, {"N": "0583", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "JFQ5szZl3qo"}, {"N": "0584", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "xpFCI6ATs_o"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0532", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Kashiramakriya", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "hqlt7f0I67Y"}, {"N": "0533", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Kashiramakriya", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "uGO1Y38nmLU"}, {"N": "0536", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "1ajO8mfWtAo"}, {"N": "0537", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "z65GkUIgHew"}, {"N": "0538", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "zDJkj3WlhJw"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1270", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "0KrwU8OthIo"}, {"N": "1271", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "Gp5kjxLOo2k"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0366", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "Nithyasree Mahadevan", "V": "Ql9ElZqzvdg"}]}, {"name": "Vocal - Rajkumar Bharathi", "songs": [{"N": "0036", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Kashiramakriya", "C": "Muthuswami Dikshitar", "A": "Rajkumar Bharathi", "V": "zbV275q15X4"}]}, {"name": "Vocal - S. Rajam", "songs": [{"N": "0124", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Kashiramakriya,Panthuvarali", "C": "Muthuswami Dikshitar", "A": "S. Rajam", "V": "0SkO5889FNc"}, {"N": "0123", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Kashiramakriya", "C": "Muthuswami Dikshitar", "A": "S. Rajam", "V": "hA2M4eoLbTM"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0678", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "Sudha Ragunathan", "V": "luwvuxNL8rw"}, {"N": "0679", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Sudha Ragunathan", "V": "XsPVHMS6uLg"}]}, {"name": "Vocal - T. V. Sankaranarayanan", "songs": [{"N": "0255", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Kashiramakriya", "C": "Muthuswami Dikshitar", "A": "T. V. Sankaranarayanan", "V": "z0rTJB5NvbA"}, {"N": "0256", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "T. V. Sankaranarayanan", "V": "Mc1zfMTrcFI"}, {"N": "0257", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "T. V. Sankaranarayanan", "V": "zfBZXjBfCCs"}]}, {"name": "Vocal - Visalakshi Nityanand", "songs": [{"N": "0028", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "Visalakshi Nityanand", "V": "SfU5ir1wBZQ"}, {"N": "0029", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Visalakshi Nityanand", "V": "UCvR8tWSGJyxuDh8_br8Z7tQ"}, {"N": "0031", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Visalakshi Nityanand", "V": "0tgZ7fmFd1Y"}, {"N": "0032", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Visalakshi Nityanand", "V": "1awS3Mf_xUM"}, {"N": "0034", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Visalakshi Nityanand", "V": "_eY11n07mH0"}, {"N": "0035", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "Visalakshi Nityanand", "V": "vfW3m5jK1Vo"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0544", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Kashiramakriya", "C": "Muthuswami Dikshitar", "A": "U. Srinivas", "V": "XGGEbxGkfR4"}]}, {"name": "Keyboard - Keyboard Sathya", "songs": [{"N": "0087", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Panthuvarali", "C": "Muthuswami Dikshitar", "A": "Keyboard Sathya", "V": "E3HaQRVyjb4"}]}, {"name": "Violin - A. Kanyakumari", "songs": [{"N": "0167", "T": "", "H": "Vishalakshim", "S": "vIshAlAkSIm vishvEshIm bhajarE rE mAnasa sadA :  Caapu", "R": "Unknownraga", "C": "Muthuswami Dikshitar", "A": "A. Kanyakumari", "V": "gw1yyPMS1BY"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. K. Jayaraman", "songs": [{"C": "Muthuswami Dikshitar", "D": "29:00", "R": "Panthuvarali", "T": "", "U": "1,500 views", "V": "0YiVu9t77Mg"}, {"C": "Muthuswami Dikshitar", "D": "1:31:48", "R": "Kashiramakriya", "T": "", "U": "2,300 views", "V": "ywjyaZqrl-k"}, {"C": "Muthuswami Dikshitar", "D": "20:51", "R": "Kashiramakriya", "T": "", "U": "167 views", "V": "d4e3KYxTLEQ"}, {"C": "Muthuswami Dikshitar", "D": "18:16", "R": "Panthuvarali", "T": "", "U": "15 views", "V": "xpFCI6ATs_o"}, {"C": "Muthuswami Dikshitar", "D": "19:26", "R": "Kashiramakriya,Panthuvarali", "T": "", "U": "238 views", "V": "N3Fn6_RHn-E"}, {"C": "Muthuswami Dikshitar", "D": "20:40", "R": "Panthuvarali", "T": "", "U": "20 views", "V": "JFQ5szZl3qo"}, {"C": "Muthuswami Dikshitar", "D": "15:26", "R": "Kashiramakriya,Panthuvarali", "T": "", "U": "286 views", "V": "CWeol0trY8w"}, {"C": "Muthuswami Dikshitar", "D": "18:14", "R": "Panthuvarali", "T": "", "U": "3 views", "V": "-ZP2u76AvZc"}, {"C": "Muthuswami Dikshitar", "D": "33:23", "R": "Kashiramakriya", "T": "", "U": "26 views", "V": "Ss5D0Qn8kNk"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Muthuswami Dikshitar", "D": "17:18", "R": "Kashiramakriya", "T": "", "U": "233 views", "V": "hqlt7f0I67Y"}, {"C": "Muthuswami Dikshitar", "D": "17:57", "R": "Panthuvarali", "T": "", "U": "3,800 views", "V": "zDJkj3WlhJw"}, {"C": "Muthuswami Dikshitar", "D": "15:10", "R": "Panthuvarali", "T": "", "U": "358 views", "V": "z65GkUIgHew"}, {"C": "Muthuswami Dikshitar", "D": "16:00", "R": "Panthuvarali", "T": "", "U": "75 views", "V": "1ajO8mfWtAo"}, {"C": "Muthuswami Dikshitar", "D": "17:25", "R": "Kashiramakriya", "T": "", "U": "75 views", "V": "uGO1Y38nmLU"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Muthuswami Dikshitar", "D": "1:00", "R": "Unknownraga", "T": "", "U": "16 views", "V": "0KrwU8OthIo"}, {"C": "Muthuswami Dikshitar", "D": "1:25", "R": "Unknownraga", "T": "", "U": "16 views", "V": "Gp5kjxLOo2k"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Muthuswami Dikshitar", "D": "17:37", "R": "Panthuvarali", "T": "", "U": "1,384 views", "V": "Ql9ElZqzvdg"}]}, {"A": "Rajkumar Bharathi", "songs": [{"C": "Muthuswami Dikshitar", "D": "15:31", "R": "Kashiramakriya", "T": "", "U": "1,000 views", "V": "zbV275q15X4"}]}, {"A": "S. Rajam", "songs": [{"C": "Muthuswami Dikshitar", "D": "15:31", "R": "Kashiramakriya", "T": "", "U": "168 views", "V": "hA2M4eoLbTM"}, {"C": "Muthuswami Dikshitar", "D": "15:11", "R": "Kashiramakriya,Panthuvarali", "T": "", "U": "92 views", "V": "0SkO5889FNc"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Muthuswami Dikshitar", "D": "17:57", "R": "Panthuvarali", "T": "", "U": "83 views", "V": "luwvuxNL8rw"}, {"C": "Muthuswami Dikshitar", "D": "10:41", "R": "Unknownraga", "T": "", "U": "0 views", "V": "XsPVHMS6uLg"}]}, {"A": "T. V. Sankaranarayanan", "songs": [{"C": "Muthuswami Dikshitar", "D": "27:21", "R": "Panthuvarali", "T": "", "U": "210 views", "V": "Mc1zfMTrcFI"}, {"C": "Muthuswami Dikshitar", "D": "13:45", "R": "Kashiramakriya", "T": "", "U": "43 views", "V": "z0rTJB5NvbA"}, {"C": "Muthuswami Dikshitar", "D": "27:21", "R": "Panthuvarali", "T": "", "U": "80 views", "V": "zfBZXjBfCCs"}]}, {"A": "Visalakshi Nityanand", "songs": [{"C": "Muthuswami Dikshitar", "D": "50:26", "R": "Unknownraga", "T": "", "U": "0 views", "V": "vfW3m5jK1Vo"}, {"C": "Muthuswami Dikshitar", "D": "- Channel", "R": "Unknownraga", "T": "", "U": "0 views", "V": "/channel/UCvR8tWSGJyxuDh8_br8Z7tQ"}, {"C": "Muthuswami Dikshitar", "D": "7:43", "R": "Unknownraga", "T": "", "U": "270 views", "V": "1awS3Mf_xUM"}, {"C": "Muthuswami Dikshitar", "D": "30:46", "R": "Unknownraga", "T": "", "U": "0 views", "V": "0tgZ7fmFd1Y"}, {"C": "Muthuswami Dikshitar", "D": "5:18", "R": "Panthuvarali", "T": "", "U": "0 views", "V": "SfU5ir1wBZQ"}, {"C": "Muthuswami Dikshitar", "D": "12:00", "R": "Unknownraga", "T": "", "U": "276 views", "V": "_eY11n07mH0"}]}, {"A": "U. Srinivas", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:50", "R": "Kashiramakriya", "T": "", "U": "54 views", "V": "XGGEbxGkfR4"}]}, {"A": "Keyboard Sathya", "songs": [{"C": "Muthuswami Dikshitar", "D": "12:56", "R": "Panthuvarali", "T": "", "U": "1,129 views", "V": "E3HaQRVyjb4"}]}, {"A": "A. Kanyakumari", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:05", "R": "Unknownraga", "T": "", "U": "372 views", "V": "gw1yyPMS1BY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

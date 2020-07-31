@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>9</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Sisters", "songs": [{"N": "0125", "T": "", "H": "Kuzhaloodhi Manamellam", "S": "kuzhalUdi manamellAm koLLi koNDa pinnum kurai :  Adi", "R": "Kambhoji", "C": "Oothukkadu Venkata Kavi", "A": "Bombay Sisters", "V": "GMY_KJcBn44"}]}, {"name": "Vocal - K. Krishnakumar", "songs": [{"N": "0013", "T": "", "H": "Kuzhaloodhi Manamellam", "S": "kuzhalUdi manamellAm koLLi koNDa pinnum kurai :  Adi", "R": "Kambhoji", "C": "Oothukkadu Venkata Kavi", "A": "K. Krishnakumar", "V": "lg_zSsIxtFY"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0242", "T": "", "H": "Kuzhaloodhi Manamellam", "S": "kuzhalUdi manamellAm koLLi koNDa pinnum kurai :  Adi", "R": "Kambhoji", "C": "Oothukkadu Venkata Kavi", "A": "Maharajapuram Santhanam", "V": "A2yVRtvK0BU"}, {"N": "0243", "T": "", "H": "Kuzhaloodhi Manamellam", "S": "kuzhalUdi manamellAm koLLi koNDa pinnum kurai :  Adi", "R": "Kambhoji", "C": "Oothukkadu Venkata Kavi", "A": "Maharajapuram Santhanam", "V": "BdCWZkSMmhY"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0121", "T": "", "H": "Kuzhaloodhi Manamellam", "S": "kuzhalUdi manamellAm koLLi koNDa pinnum kurai :  Adi", "R": "Kambhoji", "C": "Oothukkadu Venkata Kavi", "A": "S. Sowmya", "V": "k0Ug9UD5r-4"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0086", "T": "", "H": "Kuzhaloodhi Manamellam", "S": "kuzhalUdi manamellAm koLLi koNDa pinnum kurai :  Adi", "R": "Kambhoji", "C": "Oothukkadu Venkata Kavi", "A": "Sankaran Namboothiri", "V": "1l8vLi_vof4"}, {"N": "0087", "T": "", "H": "Kuzhaloodhi Manamellam", "S": "kuzhalUdi manamellAm koLLi koNDa pinnum kurai :  Adi", "R": "Kambhoji", "C": "Oothukkadu Venkata Kavi", "A": "Sankaran Namboothiri", "V": "EckMnT6jwZY"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0286", "T": "", "H": "Kuzhaloodhi Manamellam", "S": "kuzhalUdi manamellAm koLLi koNDa pinnum kurai :  Adi", "R": "Kambhoji", "C": "Oothukkadu Venkata Kavi", "A": "Sudha Ragunathan", "V": "kC3IXMEF6xM"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Sisters", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "5:29", "R": "Kambhoji", "T": "", "U": "0 views", "V": "GMY_KJcBn44"}]}, {"A": "K. Krishnakumar", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "4:50", "R": "Kambhoji", "T": "", "U": "39,483 views", "V": "lg_zSsIxtFY"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "28:51", "R": "Kambhoji", "T": "", "U": "1,000 views", "V": "A2yVRtvK0BU"}, {"C": "Oothukkadu Venkata Kavi", "D": "13:05", "R": "Kambhoji", "T": "", "U": "0 views", "V": "BdCWZkSMmhY"}]}, {"A": "S. Sowmya", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "6:49", "R": "Kambhoji", "T": "", "U": "5,836 views", "V": "k0Ug9UD5r-4"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "21:51", "R": "Kambhoji", "T": "", "U": "292 views", "V": "EckMnT6jwZY"}, {"C": "Oothukkadu Venkata Kavi", "D": "6:42", "R": "Kambhoji", "T": "", "U": "357 views", "V": "1l8vLi_vof4"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Oothukkadu Venkata Kavi", "D": "6:21", "R": "Kambhoji", "T": "", "U": "508,012 views", "V": "kC3IXMEF6xM"}, {"C": "Oothukkadu Venkata Kavi", "D": "6:20", "R": "Kambhoji", "T": "", "U": "5,659 views", "V": "cgITO4885J8"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

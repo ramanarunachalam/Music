@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>10</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "guru purandara dAsarE nimma caraNa", "songs": [{"N": "0094", "T": "", "H": "Guru Purandara", "S": "guru purandara dAsarE nimma caraNa kamalava :  Rupaka", "R": "Hamirkalyani", "C": "Vijaya Vittala Dasa", "A": "Bombay Sisters", "V": "R3bwehu11vc"}, {"N": "0077", "T": "", "H": "Guru Purandara", "S": "guru purandara dAsarE nimma caraNa kamalava :  Rupaka", "R": "Hamirkalyani", "C": "Vijaya Vittala Dasa", "A": "Priya Sisters", "V": "rVCQ5CE6Ae4"}, {"N": "0032", "T": "", "H": "Guru Purandara", "S": "guru purandara dAsarE nimma caraNa kamalava :  Rupaka", "R": "Hamirkalyani", "C": "Vijaya Vittala Dasa", "A": "T. R. Subramaniam", "V": "544lExqCkpM"}, {"N": "0044", "T": "", "H": "Guru Purandara", "S": "guru purandara dAsarE nimma caraNa kamalava :  Rupaka", "R": "Hamirkalyani", "C": "Vijaya Vittala Dasa", "A": "Vidyabhushana", "V": "fhPXYuuzxL8"}, {"N": "0026", "T": "", "H": "Guru Purandara", "S": "guru purandara dAsarE nimma caraNa kamalava :  Rupaka", "R": "Hamirkalyani", "C": "Vijaya Vittala Dasa", "A": "V. V. Ravi", "V": "hXB_HiArvMY"}]}, {"name": "sadA enna hrdayadalli vAsamADO shrI", "songs": [{"N": "0428", "T": "", "H": "Sada Enna Hrudayadalli", "S": "sadA enna hrdayadalli vAsamADO shrI hari :  Adi", "R": "Panthuvarali", "C": "Vijaya Vittala Dasa", "A": "Maharajapuram Santhanam", "V": "7b2LqmbiXME"}, {"N": "0429", "T": "", "H": "Sada Enna Hrudayadalli", "S": "sadA enna hrdayadalli vAsamADO shrI hari :  Adi", "R": "Panthuvarali", "C": "Vijaya Vittala Dasa", "A": "Maharajapuram Santhanam", "V": "UeHHZQ50gTE"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Guru Purandara", "S": "guru purandara dAsarE nimma caraNa kamalava :  Rupaka", "songs": [{"A": "Bombay Sisters", "D": "1:31", "R": "Hamirkalyani", "T": "", "U": "2,327 views", "V": "R3bwehu11vc"}, {"A": "Priya Sisters", "D": "4:41", "R": "Hamirkalyani", "T": "", "U": "15,681 views", "V": "rVCQ5CE6Ae4"}, {"A": "T. R. Subramaniam", "D": "8:21", "R": "Hamirkalyani", "T": "", "U": "1,200 views", "V": "544lExqCkpM"}, {"A": "Vidyabhushana", "D": "7:00", "R": "Hamirkalyani", "T": "", "U": "0 views", "V": "fhPXYuuzxL8"}, {"A": "V. V. Ravi", "D": "2:05", "R": "Hamirkalyani", "T": "", "U": "520 views", "V": "hXB_HiArvMY"}]}, {"H": "Sada Enna Hrudayadalli", "S": "sadA enna hrdayadalli vAsamADO shrI hari :  Adi", "songs": [{"A": "Maharajapuram Santhanam", "D": "9:15", "R": "Panthuvarali", "T": "", "U": "50 views", "V": "7b2LqmbiXME"}, {"A": "Maharajapuram Santhanam", "D": "12:03", "R": "Panthuvarali", "T": "", "U": "6,619 views", "V": "UeHHZQ50gTE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

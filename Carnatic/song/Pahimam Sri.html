@@ -157,57 +157,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ambujam Vishwanathan", "songs": [{"N": "0004", "T": "", "H": "Pahimam Sri", "S": "pAhi mAM SrI rAja rAj E Svari amba :  Rupaka", "R": "Nata", "C": "Shyama Shastri", "A": "Ambujam Vishwanathan", "V": "Gh3A3OxwNZc"}]}, {"name": "Vocal - Gayathri Venkataraghavan", "songs": [{"N": "0148", "T": "", "H": "Pahimam Sri", "S": "pAhi mAM SrI rAja rAj E Svari amba :  Rupaka", "R": "Nata", "C": "Shyama Shastri", "A": "Gayathri Venkataraghavan", "V": "LDg7dyDx3nI"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0180", "T": "", "H": "Pahimam Sri", "S": "pAhi mAM SrI rAja rAj E Svari amba :  Rupaka", "R": "Nata", "C": "Shyama Shastri", "A": "Malladi Brothers", "V": "h7ck1mmry7Y"}]}, {"name": "Vocal - Salem Gayathri Venkatesan", "songs": [{"N": "0011", "T": "", "H": "Pahimam Sri", "S": "pAhi mAM SrI rAja rAj E Svari amba :  Rupaka", "R": "Nata", "C": "Shyama Shastri", "A": "Salem Gayathri Venkatesan", "V": "2Q79XF7Nv88"}]}, {"name": "Violin - C N Chandrashekar", "songs": [{"N": "0006", "T": "", "H": "Pahimam Sri", "S": "pAhi mAM SrI rAja rAj E Svari amba :  Rupaka", "R": "Nata", "C": "Shyama Shastri", "A": "C N Chandrashekar", "V": "ox6_bNAJTJE"}]}, {"name": "Violin - Kamalakiran Vinjamuri", "songs": [{"N": "0065", "T": "", "H": "Pahimam Sri", "S": "pAhi mAM SrI rAja rAj E Svari amba :  Rupaka", "R": "Nata", "C": "Shyama Shastri", "A": "Kamalakiran Vinjamuri", "V": "9EDMXPOzzUQ"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Ambujam Vishwanathan", "songs": [{"C": "Shyama Shastri", "D": "5:45", "R": "Nata", "T": "", "U": "2,700 views", "V": "Gh3A3OxwNZc"}]}, {"A": "Gayathri Venkataraghavan", "songs": [{"C": "Shyama Shastri", "D": "10:51", "R": "Nata", "T": "", "U": "646 views", "V": "LDg7dyDx3nI"}]}, {"A": "Salem Gayathri Venkatesan", "songs": [{"C": "Shyama Shastri", "D": "8:16", "R": "Nata", "T": "", "U": "456 views", "V": "2Q79XF7Nv88"}]}, {"A": "C N Chandrashekar", "songs": [{"C": "Shyama Shastri", "D": "8:35", "R": "Nata", "T": "", "U": "112 views", "V": "ox6_bNAJTJE"}]}, {"A": "Kamalakiran Vinjamuri", "songs": [{"C": "Shyama Shastri", "D": "10:11", "R": "Nata", "T": "", "U": "1,206 views", "V": "9EDMXPOzzUQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

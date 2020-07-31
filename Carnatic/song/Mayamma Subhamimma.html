@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -130,57 +130,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0132", "T": "", "H": "Mayamma Subhamimma", "S": "mAyamma Subhamimma marakatAngi mAtangi :  Rupaka", "R": "Ranjani", "C": "M. D. Ramanathan", "A": "Amrutha Venkatesh", "V": "hsYtswATmsQ"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0346", "T": "", "H": "Mayamma Subhamimma", "S": "mAyamma Subhamimma marakatAngi mAtangi :  Rupaka", "R": "Ranjani", "C": "M. D. Ramanathan", "A": "M. D. Ramanathan", "V": "-e21bDH1WaE"}, {"N": "0347", "T": "", "H": "Mayamma Subhamimma", "S": "mAyamma Subhamimma marakatAngi mAtangi :  Rupaka", "R": "Ranjani", "C": "M. D. Ramanathan", "A": "M. D. Ramanathan", "V": "19_0D6Lp0gc"}, {"N": "0348", "T": "", "H": "Mayamma Subhamimma", "S": "mAyamma Subhamimma marakatAngi mAtangi :  Rupaka", "R": "Ranjani", "C": "M. D. Ramanathan", "A": "M. D. Ramanathan", "V": "9ACIiZ70NL8"}, {"N": "0349", "T": "", "H": "Mayamma Subhamimma", "S": "mAyamma Subhamimma marakatAngi mAtangi :  Rupaka", "R": "Ranjani", "C": "M. D. Ramanathan", "A": "M. D. Ramanathan", "V": "9UQG1MAa-v0"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0301", "T": "", "H": "Mayamma Subhamimma", "S": "mAyamma Subhamimma marakatAngi mAtangi :  Rupaka", "R": "Ranjani", "C": "M. D. Ramanathan", "A": "T. N. Seshagopalan", "V": "nCjO6sfZvEE"}]}, {"name": "Violin - M. S. Gopalakrishnan", "songs": [{"N": "0227", "T": "", "H": "Mayamma Subhamimma", "S": "mAyamma Subhamimma marakatAngi mAtangi :  Rupaka", "R": "Ranjani", "C": "M. D. Ramanathan", "A": "M. S. Gopalakrishnan", "V": "GkNv8WRsFEU"}]}, {"name": "Mridangam - K. U. Jayachandra Rao", "songs": [{"N": "0012", "T": "", "H": "Mayamma Subhamimma", "S": "mAyamma Subhamimma marakatAngi mAtangi :  Rupaka", "R": "Ranjani", "C": "M. D. Ramanathan", "A": "K. U. Jayachandra Rao", "V": "VubFEMVDvKU"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amrutha Venkatesh", "songs": [{"C": "M. D. Ramanathan", "D": "14:38", "R": "Ranjani", "T": "", "U": "2,700 views", "V": "hsYtswATmsQ"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "M. D. Ramanathan", "D": "6:26", "R": "Ranjani", "T": "", "U": "999 views", "V": "19_0D6Lp0gc"}, {"C": "M. D. Ramanathan", "D": "", "R": "Ranjani", "T": "", "U": "1,900 views", "V": "-e21bDH1WaE"}, {"C": "M. D. Ramanathan", "D": "4:43", "R": "Ranjani", "T": "", "U": "168 views", "V": "9ACIiZ70NL8"}, {"C": "M. D. Ramanathan", "D": "5:39", "R": "Ranjani", "T": "", "U": "3,156 views", "V": "9UQG1MAa-v0"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "M. D. Ramanathan", "D": "13:02", "R": "Ranjani", "T": "", "U": "0 views", "V": "nCjO6sfZvEE"}]}, {"A": "M. S. Gopalakrishnan", "songs": [{"C": "M. D. Ramanathan", "D": "15:21", "R": "Ranjani", "T": "", "U": "538 views", "V": "GkNv8WRsFEU"}]}, {"A": "K. U. Jayachandra Rao", "songs": [{"C": "M. D. Ramanathan", "D": "16:26", "R": "Ranjani", "T": "", "U": "1,665 views", "V": "VubFEMVDvKU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

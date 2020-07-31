@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>4</td></tr>
-<tr><td><em>Concert</em></td><td>4</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Nisha Rajagopal", "songs": [{"N": "0001", "T": "Abhayamba vibhakthi", "H": "Sadashreya Abhayambike", "S": "sadAshrayE abhayAmbikE sannidhEhi :  Rupaka", "R": "Shanmukapriya", "C": "Muthuswami Dikshitar", "A": "Nisha Rajagopal", "V": "b6z0Qa0PPNI"}, {"N": "0002", "T": "Abhayamba vibhakthi", "H": "Sadashreya Abhayambike", "S": "sadAshrayE abhayAmbikE sannidhEhi :  Rupaka", "R": "Shanmukapriya", "C": "Muthuswami Dikshitar", "A": "Nisha Rajagopal", "V": "sxlTEb7lVNI"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0001", "T": "Abhayamba vibhakthi", "H": "Sadashreya Abhayambike", "S": "sadAshrayE abhayAmbikE sannidhEhi :  Rupaka", "R": "Shanmukapriya", "C": "Muthuswami Dikshitar", "A": "Sankaran Namboothiri", "V": "UoPPTGe8fR0"}, {"N": "0002", "T": "Abhayamba vibhakthi", "H": "Sadashreya Abhayambike", "S": "sadAshrayE abhayAmbikE sannidhEhi :  Rupaka", "R": "Shanmukapriya", "C": "Muthuswami Dikshitar", "A": "Sankaran Namboothiri", "V": "jWdujWEYbx8"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0001", "T": "Abhayamba vibhakthi", "H": "Sadashreya Abhayambike", "S": "sadAshrayE abhayAmbikE sannidhEhi :  Rupaka", "R": "Shanmukapriya", "C": "Muthuswami Dikshitar", "A": "Sudha Ragunathan", "V": "_29uhiOLqeg"}, {"N": "0002", "T": "Abhayamba vibhakthi", "H": "Sadashreya Abhayambike", "S": "sadAshrayE abhayAmbikE sannidhEhi :  Rupaka", "R": "Shanmukapriya", "C": "Muthuswami Dikshitar", "A": "Sudha Ragunathan", "V": "hu13qQZpTck"}]}, {"name": "Vocal - Uma Radhika", "songs": [{"N": "0017", "T": "Abhayamba vibhakthi", "H": "Sadashreya Abhayambike", "S": "sadAshrayE abhayAmbikE sannidhEhi :  Rupaka", "R": "Shanmukapriya", "C": "Muthuswami Dikshitar", "A": "Uma Radhika", "V": "JYtH4eBHKv4"}, {"N": "0018", "T": "Abhayamba vibhakthi", "H": "Sadashreya Abhayambike", "S": "sadAshrayE abhayAmbikE sannidhEhi :  Rupaka", "R": "Shanmukapriya", "C": "Muthuswami Dikshitar", "A": "Uma Radhika", "V": "TFb0W_-Wasw"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Nisha Rajagopal", "songs": [{"C": "Muthuswami Dikshitar", "D": "19:36", "R": "Shanmukapriya", "T": "Abhayamba vibhakthi", "U": "0 views", "V": "sxlTEb7lVNI"}, {"C": "Muthuswami Dikshitar", "D": "19:31", "R": "Shanmukapriya", "T": "Abhayamba vibhakthi", "U": "14 views", "V": "b6z0Qa0PPNI"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Muthuswami Dikshitar", "D": "27:26", "R": "Shanmukapriya", "T": "Abhayamba vibhakthi", "U": "273 views", "V": "jWdujWEYbx8"}, {"C": "Muthuswami Dikshitar", "D": "27:01", "R": "Shanmukapriya", "T": "Abhayamba vibhakthi", "U": "176 views", "V": "UoPPTGe8fR0"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Muthuswami Dikshitar", "D": "19:55", "R": "Shanmukapriya", "T": "Abhayamba vibhakthi", "U": "404 views", "V": "hu13qQZpTck"}, {"C": "Muthuswami Dikshitar", "D": "21:28", "R": "Shanmukapriya", "T": "Abhayamba vibhakthi", "U": "1,172 views", "V": "_29uhiOLqeg"}]}, {"A": "Uma Radhika", "songs": [{"C": "Muthuswami Dikshitar", "D": "9:11", "R": "Shanmukapriya", "T": "Abhayamba vibhakthi", "U": "844 views", "V": "JYtH4eBHKv4"}, {"C": "Muthuswami Dikshitar", "D": "7:23", "R": "Shanmukapriya", "T": "Abhayamba vibhakthi", "U": "76 views", "V": "TFb0W_-Wasw"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

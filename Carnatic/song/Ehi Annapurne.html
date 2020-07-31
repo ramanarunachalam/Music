@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>18</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>8</td></tr>
-<tr><td><em>Concert</em></td><td>8</td></tr>
+<tr><td><em>Concert</em></td><td>18</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aruna Sairam", "songs": [{"N": "0092", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "Aruna Sairam", "V": "k-gE86cPh9M"}, {"N": "0093", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "Aruna Sairam", "V": "qepzXmlMUkQ"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0117", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "H0p6lGezWAg"}, {"N": "0118", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "fXV1H6M-nrg"}, {"N": "0119", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "wWwsNP7Cfek"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "0340", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "pkHMlA-H-tI"}, {"N": "0341", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "xOvnzZSkRTM"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0130", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Santhanam", "V": "9WMwHzEQQfc"}, {"N": "0131", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Santhanam", "V": "brmboFGrwVA"}, {"N": "0132", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Santhanam", "V": "clh2uoR54mA"}]}, {"name": "Vocal - Maharajapuram Viswanatha Iyer", "songs": [{"N": "0012", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Viswanatha Iyer", "V": "DFw2VwsjFAI"}, {"N": "0013", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "Maharajapuram Viswanatha Iyer", "V": "oSaGwGca-Wk"}]}, {"name": "Vocal - Parassala B. Ponnammal", "songs": [{"N": "0012", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "Parassala B. Ponnammal", "V": "QkWBqcgKxqU"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0206", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "bVnMp-23m3g"}, {"N": "0207", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "vOiEtLOfMpI"}]}, {"name": "Veena - Padma Varadhan", "songs": [{"N": "0003", "T": "", "H": "Ehi Annapurne", "S": "Ehi annapUrNE sanni dhEhi sadApUrNE suvarNE :  Adi", "R": "Punnagavarali", "C": "Muthuswami Dikshitar", "A": "Padma Varadhan", "V": "dEQbb0SDiT4"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aruna Sairam", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:56", "R": "Punnagavarali", "T": "", "U": "3,532 views", "V": "k-gE86cPh9M"}, {"C": "Muthuswami Dikshitar", "D": "9:15", "R": "Punnagavarali", "T": "", "U": "4,500 views", "V": "qepzXmlMUkQ"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:05", "R": "Punnagavarali", "T": "", "U": "1,700 views", "V": "H0p6lGezWAg"}, {"C": "Muthuswami Dikshitar", "D": "7:16", "R": "Punnagavarali", "T": "", "U": "299 views", "V": "wWwsNP7Cfek"}, {"C": "Muthuswami Dikshitar", "D": "7:26", "R": "Punnagavarali", "T": "", "U": "13 views", "V": "fXV1H6M-nrg"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:13", "R": "Punnagavarali", "T": "", "U": "11,786 views", "V": "pkHMlA-H-tI"}, {"C": "Muthuswami Dikshitar", "D": "5:15", "R": "Punnagavarali", "T": "", "U": "436 views", "V": "xOvnzZSkRTM"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:15", "R": "Punnagavarali", "T": "", "U": "2,300 views", "V": "clh2uoR54mA"}, {"C": "Muthuswami Dikshitar", "D": "7:41", "R": "Punnagavarali", "T": "", "U": "199 views", "V": "brmboFGrwVA"}, {"C": "Muthuswami Dikshitar", "D": "7:40", "R": "Punnagavarali", "T": "", "U": "380 views", "V": "9WMwHzEQQfc"}]}, {"A": "Maharajapuram Viswanatha Iyer", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:55", "R": "Punnagavarali", "T": "", "U": "511 views", "V": "oSaGwGca-Wk"}, {"C": "Muthuswami Dikshitar", "D": "5:51", "R": "Punnagavarali", "T": "", "U": "100 views", "V": "DFw2VwsjFAI"}]}, {"A": "Parassala B. Ponnammal", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:51", "R": "Punnagavarali", "T": "", "U": "199 views", "V": "QkWBqcgKxqU"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:11", "R": "Punnagavarali", "T": "", "U": "173 views", "V": "vOiEtLOfMpI"}, {"C": "Muthuswami Dikshitar", "D": "11:06", "R": "Punnagavarali", "T": "", "U": "109 views", "V": "bVnMp-23m3g"}]}, {"A": "Padma Varadhan", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:56", "R": "Punnagavarali", "T": "", "U": "124 views", "V": "dEQbb0SDiT4"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

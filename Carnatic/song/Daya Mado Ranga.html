@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>12</td></tr>
-<tr><td><em>Concert</em></td><td>12</td></tr>
+<tr><td><em>Concert</em></td><td>15</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -136,57 +136,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Hyderabad Sisters", "songs": [{"N": "0012", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Sumanesaranjani", "C": "Purandara Dasa", "A": "Hyderabad Sisters", "V": "Tbh7CA4Mh4k"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0170", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Kalyani", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "JbUf9qzSDwY"}, {"N": "0171", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Unknownraga", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "TUXWGGVcqo4"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0056", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Sumanesaranjani", "C": "Purandara Dasa", "A": "Priya Sisters", "V": "J0SJcbBELys"}]}, {"name": "Vocal - Radha Jayalakshmi", "songs": [{"N": "0019", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Kalyani", "C": "Purandara Dasa", "A": "Radha Jayalakshmi", "V": "TWZym-7GtnI"}, {"N": "0020", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Kalyani", "C": "Purandara Dasa", "A": "Radha Jayalakshmi", "V": "vQJFpE-8aes"}]}, {"name": "Vocal - Raji Gopalakrishnan", "songs": [{"N": "0017", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Raji Gopalakrishnan", "V": "Vg0UJs7O4sU"}]}, {"name": "Vocal - S. Rajam", "songs": [{"N": "0024", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Unknownraga", "C": "Purandara Dasa", "A": "S. Rajam", "V": "kXVUHYXFUPI"}]}, {"name": "Vocal - S. Saketharaman", "songs": [{"N": "0041", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Sumanesaranjani", "C": "Purandara Dasa", "A": "S. Saketharaman", "V": "j18foF5BJzQ"}]}, {"name": "Vocal - Vidyabhushana", "songs": [{"N": "0030", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vidyabhushana", "V": "6--ELS63YUo"}, {"N": "0031", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Vidyabhushana", "V": "M994vSk_mVk"}]}, {"name": "Veena - Veena E. Gayathri", "songs": [{"N": "0033", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Kalyani", "C": "Purandara Dasa", "A": "Veena E. Gayathri", "V": "zp7jZZVNKx8"}]}, {"name": "Violin - M. S. Gopalakrishnan", "songs": [{"N": "0106", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Unknownraga", "C": "Purandara Dasa", "A": "M. S. Gopalakrishnan", "V": "3ObXXHstzaA"}, {"N": "0107", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Unknownraga", "C": "Purandara Dasa", "A": "M. S. Gopalakrishnan", "V": "4jYGuo1znVo"}]}, {"name": "Mridangam - K. U. Jayachandra Rao", "songs": [{"N": "0005", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Kalyani", "C": "Purandara Dasa", "A": "K. U. Jayachandra Rao", "V": "JFYTl3q3ysY"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Hyderabad Sisters", "songs": [{"C": "Purandara Dasa", "D": "4:01", "R": "Sumanesaranjani", "T": "", "U": "7 views", "V": "Tbh7CA4Mh4k"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Purandara Dasa", "D": "9:50", "R": "Kalyani", "T": "", "U": "3,000 views", "V": "JbUf9qzSDwY"}, {"C": "Purandara Dasa", "D": "7:40", "R": "Unknownraga", "T": "", "U": "0 views", "V": "TUXWGGVcqo4"}]}, {"A": "Priya Sisters", "songs": [{"C": "Purandara Dasa", "D": "2:49", "R": "Sumanesaranjani", "T": "", "U": "0 views", "V": "J0SJcbBELys"}]}, {"A": "Radha Jayalakshmi", "songs": [{"C": "Purandara Dasa", "D": "24:06", "R": "Kalyani", "T": "", "U": "466 views", "V": "vQJFpE-8aes"}, {"C": "Purandara Dasa", "D": "5:15", "R": "Kalyani", "T": "", "U": "4,819 views", "V": "TWZym-7GtnI"}]}, {"A": "Raji Gopalakrishnan", "songs": [{"C": "Purandara Dasa", "D": "4:20", "R": "Unknownraga", "T": "", "U": "24,574 views", "V": "Vg0UJs7O4sU"}]}, {"A": "S. Rajam", "songs": [{"C": "Purandara Dasa", "D": "8:46", "R": "Unknownraga", "T": "", "U": "255 views", "V": "kXVUHYXFUPI"}]}, {"A": "S. Saketharaman", "songs": [{"C": "Purandara Dasa", "D": "5:06", "R": "Sumanesaranjani", "T": "", "U": "261 views", "V": "j18foF5BJzQ"}]}, {"A": "Vidyabhushana", "songs": [{"C": "Purandara Dasa", "D": "3:53", "R": "Unknownraga", "T": "", "U": "0 views", "V": "6--ELS63YUo"}, {"C": "Purandara Dasa", "D": "4:12", "R": "Unknownraga", "T": "", "U": "0 views", "V": "M994vSk_mVk"}]}, {"A": "Veena E. Gayathri", "songs": [{"C": "Purandara Dasa", "D": "32:03", "R": "Kalyani", "T": "", "U": "250 views", "V": "zp7jZZVNKx8"}]}, {"A": "M. S. Gopalakrishnan", "songs": [{"C": "Purandara Dasa", "D": "18:57", "R": "Unknownraga", "T": "", "U": "0 views", "V": "3ObXXHstzaA"}, {"C": "Purandara Dasa", "D": "19:28", "R": "Unknownraga", "T": "", "U": "58 views", "V": "4jYGuo1znVo"}]}, {"A": "K. U. Jayachandra Rao", "songs": [{"C": "Purandara Dasa", "D": "30:49", "R": "Kalyani", "T": "", "U": "396 views", "V": "JFYTl3q3ysY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

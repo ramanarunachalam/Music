@@ -17,7 +17,7 @@
 <tr><td><em>Song</em></td><td>3</td></tr>
 <tr><td><em>Raga</em></td><td>5</td></tr>
 <tr><td><em>Composer</em></td><td>3</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>6</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "BELLARY01", "songs": [{"N": "0001", "T": "", "H": "Shree Purandara Gurum", "S": "ShrI purandara gurUm namAmI  :  Adi", "R": "Hradini", "C": "Bellary M. Sheshagiri Achar", "A": "Bellary Brothers", "V": "wt0tQAW70K0"}, {"N": "0002", "T": "Varnam", "H": "Intha Chalamu", "S": "Intha Chalamu Jesithe emani thaladura :  Adi", "R": "Begada", "C": "Veena Kuppaiyer", "A": "Bellary Brothers", "V": "3MdtAT3aC4g"}, {"N": "0003", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Dhivyamani", "C": "UnknownComposer", "A": "Bellary Brothers", "V": "uFA5q-YkYgA"}, {"N": "0004", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Vasanthi", "C": "UnknownComposer", "A": "Bellary Brothers", "V": "3KNeEKCZ50A"}, {"N": "0005", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Bellary Brothers", "V": "4yQ3lYu6Kvs"}, {"N": "0006", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Bellary Brothers", "V": "Yoe61_cOylI"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Intha Chalamu", "S": "Intha Chalamu Jesithe emani thaladura :  Adi", "songs": [{"C": "Veena Kuppaiyer", "D": "6:04", "R": "Begada", "T": "Varnam", "U": "1,930 views", "V": "3MdtAT3aC4g"}]}, {"H": "Shree Purandara Gurum", "S": "ShrI purandara gurUm namAmI  :  Adi", "songs": [{"C": "Bellary M. Sheshagiri Achar", "D": "5:07", "R": "Hradini", "T": "", "U": "2,988 views", "V": "wt0tQAW70K0"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "17:41", "R": "Dhivyamani", "T": "", "U": "383 views", "V": "uFA5q-YkYgA"}, {"C": "UnknownComposer", "D": "8:26", "R": "Unknownraga", "T": "", "U": "2,693 views", "V": "4yQ3lYu6Kvs"}, {"C": "UnknownComposer", "D": "3:47", "R": "Unknownraga", "T": "", "U": "11,959 views", "V": "Yoe61_cOylI"}, {"C": "UnknownComposer", "D": "5:23", "R": "Vasanthi", "T": "", "U": "3,923 views", "V": "3KNeEKCZ50A"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

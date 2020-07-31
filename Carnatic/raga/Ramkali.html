@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>15</td></tr>
 <tr><td><em>Song</em></td><td>1</td></tr>
 <tr><td><em>Composer</em></td><td>1</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "rAma rAma kalikaluSa virAma dharAbhRl", "songs": [{"N": "0064", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "Aishwarya Vidhya Raghunath", "V": "RUKMDbZJJeo"}, {"N": "0150", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "Amritha Murali", "V": "84CqFy0vu60"}, {"N": "0159", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "Cherthala K. N. Renganatha Sharma", "V": "WOClfKYo25g"}, {"N": "0158", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "Cherthala K. N. Renganatha Sharma", "V": "Qhj2o55KFlA"}, {"N": "0394", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "Nithyasree Mahadevan", "V": "T0_FWcZPy3I"}, {"N": "0108", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "Prema Rangarajan", "V": "S2PPPT_vtjE"}, {"N": "0259", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "Ramakrishnan Murthy", "V": "9xeFmVicMoU"}, {"N": "0260", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "Ramakrishnan Murthy", "V": "rfV6BnorqiI"}, {"N": "0810", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "0FzYOti8-Oc"}, {"N": "0811", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "9zdIPKAct2o"}, {"N": "0812", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "TkE_Urbxqgk"}, {"N": "0813", "T": "Rama vibhakti", "H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "R": "Ramkali", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "mfvxF-3MCcM"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Rama Rama Kali", "S": "rAma rAma kalikaluSa virAma dharAbhRl lalAma :  Rupaka", "songs": [{"A": "Aishwarya Vidhya Raghunath", "C": "Muthuswami Dikshitar", "D": "6:36", "T": "Rama vibhakti", "U": "406 views", "V": "RUKMDbZJJeo"}, {"A": "Amritha Murali", "C": "Muthuswami Dikshitar", "D": "8:06", "T": "Rama vibhakti", "U": "584 views", "V": "84CqFy0vu60"}, {"A": "Cherthala K. N. Renganatha Sharma", "C": "Muthuswami Dikshitar", "D": "4:26", "T": "Rama vibhakti", "U": "99 views", "V": "WOClfKYo25g"}, {"A": "Cherthala K. N. Renganatha Sharma", "C": "Muthuswami Dikshitar", "D": "4:21", "T": "Rama vibhakti", "U": "192 views", "V": "Qhj2o55KFlA"}, {"A": "Nithyasree Mahadevan", "C": "Muthuswami Dikshitar", "D": "3:46", "T": "Rama vibhakti", "U": "173 views", "V": "T0_FWcZPy3I"}, {"A": "Prema Rangarajan", "C": "Muthuswami Dikshitar", "D": "2:51", "T": "Rama vibhakti", "U": "48 views", "V": "S2PPPT_vtjE"}, {"A": "Ramakrishnan Murthy", "C": "Muthuswami Dikshitar", "D": "13:21", "T": "Rama vibhakti", "U": "371 views", "V": "9xeFmVicMoU"}, {"A": "Ramakrishnan Murthy", "C": "Muthuswami Dikshitar", "D": "7:28", "T": "Rama vibhakti", "U": "997 views", "V": "rfV6BnorqiI"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "26:01", "T": "Rama vibhakti", "U": "649 views", "V": "TkE_Urbxqgk"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "6:41", "T": "Rama vibhakti", "U": "257 views", "V": "mfvxF-3MCcM"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "6:42", "T": "Rama vibhakti", "U": "1,251 views", "V": "0FzYOti8-Oc"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "3:01", "T": "Rama vibhakti", "U": "1,745 views", "V": "9zdIPKAct2o"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

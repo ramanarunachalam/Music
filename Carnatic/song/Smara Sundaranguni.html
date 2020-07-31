@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>22</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>14</td></tr>
-<tr><td><em>Concert</em></td><td>14</td></tr>
+<tr><td><em>Concert</em></td><td>16</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -135,57 +135,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Anahita Apoorva", "songs": [{"N": "0037", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Anahita Apoorva", "V": "CH4K0aIY7Lc"}, {"N": "0038", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Anahita Apoorva", "V": "IAKuiP2_QzI"}, {"N": "0039", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Anahita Apoorva", "V": "jGuhEezJYfE"}]}, {"name": "Vocal - Geetha Raja", "songs": [{"N": "0014", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Geetha Raja", "V": "keVHk3DlygQ"}]}, {"name": "Vocal - Girijashankar Sundaresan", "songs": [{"N": "0006", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Girijashankar Sundaresan", "V": "hvz_JSLg0Mk"}]}, {"name": "Vocal - Nirmala Sundarajan", "songs": [{"N": "0005", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Nirmala Sundarajan", "V": "_ruvcm94mH4"}]}, {"name": "Vocal - Ramnad Krishnan", "songs": [{"N": "0029", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Ramnad Krishnan", "V": "sj5Sju0VQHI"}]}, {"name": "Vocal - Sandeep Narayan", "songs": [{"N": "0022", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Sandeep Narayan", "V": "H-4Tp51phdg"}, {"N": "0023", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Sandeep Narayan", "V": "gGz2CCvy9OQ"}, {"N": "0024", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Sandeep Narayan", "V": "jzNv7fjWJSs"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0060", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "FRWP43B0djc"}, {"N": "0061", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "M9qCdzKORf8"}, {"N": "0062", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "N5mboYTldC4"}, {"N": "0063", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "bba5yud7q7Q"}, {"N": "0064", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "uT7Y97zf1JE"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0124", "T": "Javali", "H": "Smara Sundaranguni", "S": "smara sundarAnguni sari evvarE sarasa kOTilOna :  Adi", "R": "Paras", "C": "Dharmapuri Subbarayar", "A": "T. M. Krishna", "V": "qApxgRW9RZE"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Anahita Apoorva", "songs": [{"C": "Dharmapuri Subbarayar", "D": "4:37", "R": "Paras", "T": "Javali", "U": "0 views", "V": "IAKuiP2_QzI"}, {"C": "Dharmapuri Subbarayar", "D": "4:38", "R": "Paras", "T": "Javali", "U": "759 views", "V": "jGuhEezJYfE"}, {"C": "Dharmapuri Subbarayar", "D": "4:48", "R": "Paras", "T": "Javali", "U": "2,137 views", "V": "CH4K0aIY7Lc"}]}, {"A": "Geetha Raja", "songs": [{"C": "Dharmapuri Subbarayar", "D": "3:01", "R": "Paras", "T": "Javali", "U": "541 views", "V": "keVHk3DlygQ"}]}, {"A": "Girijashankar Sundaresan", "songs": [{"C": "Dharmapuri Subbarayar", "D": "5:51", "R": "Paras", "T": "Javali", "U": "3,828 views", "V": "hvz_JSLg0Mk"}]}, {"A": "Nirmala Sundarajan", "songs": [{"C": "Dharmapuri Subbarayar", "D": "3:05", "R": "Paras", "T": "Javali", "U": "0 views", "V": "_ruvcm94mH4"}]}, {"A": "Ramnad Krishnan", "songs": [{"C": "Dharmapuri Subbarayar", "D": "", "R": "Paras", "T": "Javali", "U": "360 views", "V": "sj5Sju0VQHI"}]}, {"A": "Sandeep Narayan", "songs": [{"C": "Dharmapuri Subbarayar", "D": "3:36", "R": "Paras", "T": "Javali", "U": "287 views", "V": "H-4Tp51phdg"}, {"C": "Dharmapuri Subbarayar", "D": "4:45", "R": "Paras", "T": "Javali", "U": "808 views", "V": "gGz2CCvy9OQ"}, {"C": "Dharmapuri Subbarayar", "D": "3:25", "R": "Paras", "T": "Javali", "U": "0 views", "V": "jzNv7fjWJSs"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Dharmapuri Subbarayar", "D": "3:01", "R": "Paras", "T": "Javali", "U": "685 views", "V": "uT7Y97zf1JE"}, {"C": "Dharmapuri Subbarayar", "D": "2:41", "R": "Paras", "T": "Javali", "U": "18 views", "V": "N5mboYTldC4"}, {"C": "Dharmapuri Subbarayar", "D": "2:58", "R": "Paras", "T": "Javali", "U": "377 views", "V": "bba5yud7q7Q"}, {"C": "Dharmapuri Subbarayar", "D": "2:51", "R": "Paras", "T": "Javali", "U": "197 views", "V": "M9qCdzKORf8"}, {"C": "Dharmapuri Subbarayar", "D": "2:54", "R": "Paras", "T": "Javali", "U": "849 views", "V": "FRWP43B0djc"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Dharmapuri Subbarayar", "D": "11:39", "R": "Paras", "T": "Javali", "U": "1,300 views", "V": "qApxgRW9RZE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

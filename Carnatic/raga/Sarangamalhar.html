@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>7</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "shrI mahAbalagiri nivAsini shrtajana", "songs": [{"N": "0486", "T": "", "H": "Sri Mahabala", "S": "shrI mahAbalagiri nivAsini shrtajana paripAlini :  Adi", "R": "Sarangamalhar", "C": "Muthiah Bhagavathar", "A": "D. K. Jayaraman", "V": "UuMoBkU8QJ4"}, {"N": "0487", "T": "", "H": "Sri Mahabala", "S": "shrI mahAbalagiri nivAsini shrtajana paripAlini :  Adi", "R": "Sarangamalhar", "C": "Muthiah Bhagavathar", "A": "D. K. Jayaraman", "V": "f-fz9PvJJdY"}, {"N": "0003", "T": "", "H": "Sri Mahabala", "S": "shrI mahAbalagiri nivAsini shrtajana paripAlini :  Adi", "R": "Sarangamalhar", "C": "Muthiah Bhagavathar", "A": "Prof K. Venkataramanan", "V": "7jS0qjJ4CSM"}, {"N": "0138", "T": "", "H": "Sri Mahabala", "S": "shrI mahAbalagiri nivAsini shrtajana paripAlini :  Adi", "R": "Sarangamalhar", "C": "Muthiah Bhagavathar", "A": "A. Kanyakumari", "V": "RHFkIZLopa8"}]}, {"name": "Unknownsong", "songs": [{"N": "0015", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sarangamalhar", "C": "UnknownComposer", "A": "Prof K. Venkataramanan", "V": "qi9Ml5xgV0I"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Sri Mahabala", "S": "shrI mahAbalagiri nivAsini shrtajana paripAlini :  Adi", "songs": [{"A": "D. K. Jayaraman", "C": "Muthiah Bhagavathar", "D": "17:36", "T": "", "U": "279 views", "V": "UuMoBkU8QJ4"}, {"A": "D. K. Jayaraman", "C": "Muthiah Bhagavathar", "D": "19:16", "T": "", "U": "1,423 views", "V": "f-fz9PvJJdY"}, {"A": "Prof K. Venkataramanan", "C": "Muthiah Bhagavathar", "D": "13:31", "T": "", "U": "237 views", "V": "7jS0qjJ4CSM"}, {"A": "A. Kanyakumari", "C": "Muthiah Bhagavathar", "D": "6:01", "T": "", "U": "73 views", "V": "RHFkIZLopa8"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Prof K. Venkataramanan", "C": "UnknownComposer", "D": "14:41", "T": "", "U": "2,237 views", "V": "qi9Ml5xgV0I"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

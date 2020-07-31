@@ -25,7 +25,7 @@
 <tr><td><em>Audio</em></td><td>12</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>10</td></tr>
-<tr><td><em>Concert</em></td><td>10</td></tr>
+<tr><td><em>Concert</em></td><td>9</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -45,57 +45,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Anuradha Krishnamoorthy", "songs": [{"N": "0016", "T": "", "H": "Mohana Muralidhara", "S": "Mohana Muralidhara", "R": "Mohanam", "C": "C. S. Krishnaswamy Iyer", "A": "Anuradha Krishnamoorthy", "V": "PEokIpVFDoQ"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0225", "T": "", "H": "Mohana Muralidhara", "S": "Mohana Muralidhara", "R": "Mohanam", "C": "C. S. Krishnaswamy Iyer", "A": "Bombay Jayashri", "V": "wJTD-md2kTg"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0313", "T": "", "H": "Mohana Muralidhara", "S": "Mohana Muralidhara", "R": "Mohanam", "C": "C. S. Krishnaswamy Iyer", "A": "K. V. Narayanaswamy", "V": "BCoWHYBYiNI"}, {"N": "0314", "T": "", "H": "Mohana Muralidhara", "S": "Mohana Muralidhara", "R": "Mohanam", "C": "C. S. Krishnaswamy Iyer", "A": "K. V. Narayanaswamy", "V": "uGww_Undkc0"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0842", "T": "", "H": "Mohana Muralidhara", "S": "Mohana Muralidhara", "R": "Mohanam", "C": "C. S. Krishnaswamy Iyer", "A": "M. Balamuralikrishna", "V": "iJDh0OmASVA"}, {"N": "0843", "T": "", "H": "Mohana Muralidhara", "S": "Mohana Muralidhara", "R": "Mohanam", "C": "C. S. Krishnaswamy Iyer", "A": "M. Balamuralikrishna", "V": "tgcGUbWR7nc"}]}, {"name": "Flute - B. V. Balasai", "songs": [{"N": "0011", "T": "", "H": "Mohana Muralidhara", "S": "Mohana Muralidhara", "R": "Mohanam", "C": "C. S. Krishnaswamy Iyer", "A": "B. V. Balasai", "V": "dOk7ex6zJaA"}]}, {"name": "Flute - Kudamaloor Janardanan", "songs": [{"N": "0027", "T": "", "H": "Mohana Muralidhara", "S": "Mohana Muralidhara", "R": "Mohanam", "C": "C. S. Krishnaswamy Iyer", "A": "Kudamaloor Janardanan", "V": "H6Bv-JvegOg"}]}, {"name": "Flute - N. Ramani", "songs": [{"N": "0111", "T": "", "H": "Mohana Muralidhara", "S": "Mohana Muralidhara", "R": "Mohanam", "C": "C. S. Krishnaswamy Iyer", "A": "N. Ramani", "V": "e2e_ASlf4dc"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Anuradha Krishnamoorthy", "songs": [{"C": "C. S. Krishnaswamy Iyer", "D": "11:53", "R": "Mohanam", "T": "", "U": "224 views", "V": "PEokIpVFDoQ"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "C. S. Krishnaswamy Iyer", "D": "38:51", "R": "Mohanam", "T": "", "U": "0 views", "V": "wJTD-md2kTg"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "C. S. Krishnaswamy Iyer", "D": "5:08", "R": "Mohanam", "T": "", "U": "458 views", "V": "BCoWHYBYiNI"}, {"C": "C. S. Krishnaswamy Iyer", "D": "4:46", "R": "Mohanam", "T": "", "U": "296 views", "V": "uGww_Undkc0"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "C. S. Krishnaswamy Iyer", "D": "40:11", "R": "Mohanam", "T": "", "U": "140 views", "V": "tgcGUbWR7nc"}, {"C": "C. S. Krishnaswamy Iyer", "D": "37:24", "R": "Mohanam", "T": "", "U": "0 views", "V": "iJDh0OmASVA"}]}, {"A": "B. V. Balasai", "songs": [{"C": "C. S. Krishnaswamy Iyer", "D": "59:20", "R": "Mohanam", "T": "", "U": "3,195 views", "V": "dOk7ex6zJaA"}]}, {"A": "Kudamaloor Janardanan", "songs": [{"C": "C. S. Krishnaswamy Iyer", "D": "18:42", "R": "Mohanam", "T": "", "U": "86,325 views", "V": "H6Bv-JvegOg"}]}, {"A": "N. Ramani", "songs": [{"C": "C. S. Krishnaswamy Iyer", "D": "59:36", "R": "Mohanam", "T": "", "U": "40,792 views", "V": "e2e_ASlf4dc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

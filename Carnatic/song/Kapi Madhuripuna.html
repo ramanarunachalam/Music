@@ -118,57 +118,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0013", "T": "Ashtapadi", "H": "Kapi Madhuripuna", "S": "smara samarOchitha virachitha vEshA galitha :  Adi", "R": "Kapi", "C": "Jayadeva", "A": "M. Balamuralikrishna", "V": "7_qZMvL4Auw"}]}, {"name": "Vocal - Nookala Chinna Satyanarayana", "songs": [{"N": "0001", "T": "Ashtapadi", "H": "Kapi Madhuripuna", "S": "smara samarOchitha virachitha vEshA galitha :  Adi", "R": "Kapi", "C": "Jayadeva", "A": "Nookala Chinna Satyanarayana", "V": "vnSEuZ8GaI8"}]}, {"name": "Vocal - O. S. Arun", "songs": [{"N": "0009", "T": "Ashtapadi", "H": "Kapi Madhuripuna", "S": "smara samarOchitha virachitha vEshA galitha :  Adi", "R": "Kapi", "C": "Jayadeva", "A": "O. S. Arun", "V": "0OGaJM0qesU"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0002", "T": "Ashtapadi", "H": "Kapi Madhuripuna", "S": "smara samarOchitha virachitha vEshA galitha :  Adi", "R": "Kapi", "C": "Jayadeva", "A": "Sikkil Gurucharan", "V": "gQ4ixQPDMSg"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0021", "T": "Ashtapadi", "H": "Kapi Madhuripuna", "S": "smara samarOchitha virachitha vEshA galitha :  Adi", "R": "Kapi", "C": "Jayadeva", "A": "T. N. Seshagopalan", "V": "Q2WiC821xXk"}]}, {"name": "Violin - Kamalakiran Vinjamuri", "songs": [{"N": "0003", "T": "Ashtapadi", "H": "Kapi Madhuripuna", "S": "smara samarOchitha virachitha vEshA galitha :  Adi", "R": "Kapi", "C": "Jayadeva", "A": "Kamalakiran Vinjamuri", "V": "UJtPDEiVW2s"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "M. Balamuralikrishna", "songs": [{"C": "Jayadeva", "D": "7:22", "R": "Kapi", "T": "Ashtapadi", "U": "0 views", "V": "7_qZMvL4Auw"}]}, {"A": "Nookala Chinna Satyanarayana", "songs": [{"C": "Jayadeva", "D": "5:23", "R": "Kapi", "T": "Ashtapadi", "U": "0 views", "V": "vnSEuZ8GaI8"}]}, {"A": "O. S. Arun", "songs": [{"C": "Jayadeva", "D": "8:04", "R": "Kapi", "T": "Ashtapadi", "U": "0 views", "V": "0OGaJM0qesU"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Jayadeva", "D": "3:01", "R": "Kapi", "T": "Ashtapadi", "U": "469 views", "V": "gQ4ixQPDMSg"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Jayadeva", "D": "3:01", "R": "Kapi", "T": "Ashtapadi", "U": "409 views", "V": "Q2WiC821xXk"}]}, {"A": "Kamalakiran Vinjamuri", "songs": [{"C": "Jayadeva", "D": "4:43", "R": "Kapi", "T": "Ashtapadi", "U": "125 views", "V": "UJtPDEiVW2s"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

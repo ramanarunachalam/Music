@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>19</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>12</td></tr>
-<tr><td><em>Concert</em></td><td>12</td></tr>
+<tr><td><em>Concert</em></td><td>16</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0153", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Hyderabad Brothers", "V": "HTOry2LGe-g"}, {"N": "0154", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Hyderabad Brothers", "V": "pQwfEEYxvE0"}, {"N": "0155", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Hyderabad Brothers", "V": "tBjIoVzSR74"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0423", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Maharajapuram Santhanam", "V": "E0vXQlUVaRc"}, {"N": "0424", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Maharajapuram Santhanam", "V": "NmkHPmX3h6w"}, {"N": "0425", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Maharajapuram Santhanam", "V": "RHzMHdVaYHY"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0202", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Malladi Brothers", "V": "c5LH_3VcbjI"}]}, {"name": "Vocal - Malladi Suribabu", "songs": [{"N": "0045", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Malladi Suribabu", "V": "FXk_4ni0WLw"}, {"N": "0046", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Malladi Suribabu", "V": "LkQBBI2Aka8"}]}, {"name": "Vocal - Manasi Prasad", "songs": [{"N": "0017", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Manasi Prasad", "V": "Jwtm2zvHMso"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0201", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Priya Sisters", "V": "_d-BunR3YOI"}]}, {"name": "Vocal - Vani Sateesh", "songs": [{"N": "0016", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Vani Sateesh", "V": "vY6-gFsxKLY"}]}, {"name": "Vocal - Voleti Venkateswarlu", "songs": [{"N": "0202", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Voleti Venkateswarlu", "V": "4f0u20yDS64"}, {"N": "0203", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Voleti Venkateswarlu", "V": "MDIDzqWt3RQ"}, {"N": "0204", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Voleti Venkateswarlu", "V": "vurgYXHYM9Q"}]}, {"name": "Violin - Avaneeswaram S. R. Vinu", "songs": [{"N": "0131", "T": "", "H": "Ranganathude", "S": "ranganAthuDE antaranga nAthuDE :  Rupaka", "R": "Sowrashtram", "C": "Ponniah Pillai", "A": "Avaneeswaram S. R. Vinu", "V": "phzrp-LKGLI"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Hyderabad Brothers", "songs": [{"C": "Ponniah Pillai", "D": "3:39", "R": "Sowrashtram", "T": "", "U": "900 views", "V": "tBjIoVzSR74"}, {"C": "Ponniah Pillai", "D": "7:16", "R": "Sowrashtram", "T": "", "U": "640 views", "V": "HTOry2LGe-g"}, {"C": "Ponniah Pillai", "D": "6:25", "R": "Sowrashtram", "T": "", "U": "319 views", "V": "pQwfEEYxvE0"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Ponniah Pillai", "D": "5:06", "R": "Sowrashtram", "T": "", "U": "239 views", "V": "E0vXQlUVaRc"}, {"C": "Ponniah Pillai", "D": "5:58", "R": "Sowrashtram", "T": "", "U": "4,100 views", "V": "NmkHPmX3h6w"}, {"C": "Ponniah Pillai", "D": "5:20", "R": "Sowrashtram", "T": "", "U": "86 views", "V": "RHzMHdVaYHY"}]}, {"A": "Malladi Brothers", "songs": [{"C": "Ponniah Pillai", "D": "7:28", "R": "Sowrashtram", "T": "", "U": "770 views", "V": "c5LH_3VcbjI"}]}, {"A": "Malladi Suribabu", "songs": [{"C": "Ponniah Pillai", "D": "5:46", "R": "Sowrashtram", "T": "", "U": "636 views", "V": "FXk_4ni0WLw"}, {"C": "Ponniah Pillai", "D": "8:19", "R": "Sowrashtram", "T": "", "U": "3,651 views", "V": "LkQBBI2Aka8"}]}, {"A": "Manasi Prasad", "songs": [{"C": "Ponniah Pillai", "D": "5:42", "R": "Sowrashtram", "T": "", "U": "353 views", "V": "Jwtm2zvHMso"}]}, {"A": "Priya Sisters", "songs": [{"C": "Ponniah Pillai", "D": "5:42", "R": "Sowrashtram", "T": "", "U": "996 views", "V": "_d-BunR3YOI"}]}, {"A": "Vani Sateesh", "songs": [{"C": "Ponniah Pillai", "D": "4:15", "R": "Sowrashtram", "T": "", "U": "761 views", "V": "vY6-gFsxKLY"}]}, {"A": "Voleti Venkateswarlu", "songs": [{"C": "Ponniah Pillai", "D": "7:15", "R": "Sowrashtram", "T": "", "U": "141 views", "V": "vurgYXHYM9Q"}, {"C": "Ponniah Pillai", "D": "9:35", "R": "Sowrashtram", "T": "", "U": "0 views", "V": "MDIDzqWt3RQ"}, {"C": "Ponniah Pillai", "D": "9:35", "R": "Sowrashtram", "T": "", "U": "185 views", "V": "4f0u20yDS64"}]}, {"A": "Avaneeswaram S. R. Vinu", "songs": [{"C": "Ponniah Pillai", "D": "5:39", "R": "Sowrashtram", "T": "", "U": "281 views", "V": "phzrp-LKGLI"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

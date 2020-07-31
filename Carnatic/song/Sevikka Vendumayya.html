@@ -28,7 +28,7 @@
 <tr><td><em>Audio</em></td><td>30</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>20</td></tr>
-<tr><td><em>Concert</em></td><td>20</td></tr>
+<tr><td><em>Concert</em></td><td>25</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -145,57 +145,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0217", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Unknownraga", "C": "Muthu Thandavar", "A": "Amrutha Venkatesh", "V": "OBufF5vulx4"}]}, {"name": "Vocal - G. N. Balasubramaniam", "songs": [{"N": "0467", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "G. N. Balasubramaniam", "V": "2hCK-yEmdiY"}, {"N": "0468", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "G. N. Balasubramaniam", "V": "7cncCWy3Jq0"}, {"N": "0469", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "G. N. Balasubramaniam", "V": "s22lumwoQVE"}]}, {"name": "Vocal - Kuzhikkarai S. P. Viswalingam", "songs": [{"N": "0015", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Kalyani", "C": "Muthu Thandavar", "A": "Kuzhikkarai S. P. Viswalingam", "V": "Ok5B62Wd1x8"}]}, {"name": "Vocal - Madurai Mani Iyer", "songs": [{"N": "0390", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "Madurai Mani Iyer", "V": "-rVTRx3P6S8"}, {"N": "0391", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "Madurai Mani Iyer", "V": "91c9Mv9bOeE"}, {"N": "0392", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "Madurai Mani Iyer", "V": "RpLSfORWpYQ"}, {"N": "0393", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "Madurai Mani Iyer", "V": "RrQD3Qpsgnw"}, {"N": "0394", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Kalyani", "C": "Muthu Thandavar", "A": "Madurai Mani Iyer", "V": "J5m_uo8t9hE"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0476", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "Maharajapuram Santhanam", "V": "CUVfhFAsrmk"}]}, {"name": "Vocal - Nandita Ravi", "songs": [{"N": "0025", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "Nandita Ravi", "V": "auoD6iec4eo"}, {"N": "0026", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Unknownraga", "C": "Muthu Thandavar", "A": "Nandita Ravi", "V": "mPyQMPyhRZo"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0714", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Kalyani", "C": "Muthu Thandavar", "A": "Semmangudi Srinivasa Iyer", "V": "trAOy29FBSs"}]}, {"name": "Vocal - Shankari Krishnan", "songs": [{"N": "0047", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "Shankari Krishnan", "V": "3M9LpkRgLXY"}]}, {"name": "Vocal - Sirkazhi Govindarajan", "songs": [{"N": "0031", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "Sirkazhi Govindarajan", "V": "pKtWKNuM3Eo"}, {"N": "0032", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Unknownraga", "C": "Muthu Thandavar", "A": "Sirkazhi Govindarajan", "V": "gW7DBVoAKQ4"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0539", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "Sudha Ragunathan", "V": "IAsHOzM4IkI"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0531", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "T. M. Krishna", "V": "t1ZpusQ6cSs"}, {"N": "0532", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Unknownraga", "C": "Muthu Thandavar", "A": "T. M. Krishna", "V": "MTVNaf-0cOY"}]}, {"name": "Vocal - T. V. Sankaranarayanan", "songs": [{"N": "0198", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "T. V. Sankaranarayanan", "V": "0LpoK9n11Ys"}, {"N": "0199", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "T. V. Sankaranarayanan", "V": "w2tElj9XuNc"}]}, {"name": "Flute - N. Ramani", "songs": [{"N": "0165", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Unknownraga", "C": "Muthu Thandavar", "A": "N. Ramani", "V": "dqrCs5qNsTg"}]}, {"name": "Nadaswaram - Namagiripettai Krishnan", "songs": [{"N": "0031", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "Namagiripettai Krishnan", "V": "zG0xAQkDw9I"}]}, {"name": "Violin - Nagai Muralidharan", "songs": [{"N": "0086", "T": "", "H": "Sevikka Vendumayya", "S": "sEvikka vENDumayyA cidambaram sEvikka vENDumayyA :  Adi", "R": "Andolika", "C": "Muthu Thandavar", "A": "Nagai Muralidharan", "V": "5Kn0TTuOzfI"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amrutha Venkatesh", "songs": [{"C": "Muthu Thandavar", "D": "4:20", "R": "Unknownraga", "T": "", "U": "367 views", "V": "OBufF5vulx4"}]}, {"A": "G. N. Balasubramaniam", "songs": [{"C": "Muthu Thandavar", "D": "2:55", "R": "Andolika", "T": "", "U": "545 views", "V": "2hCK-yEmdiY"}, {"C": "Muthu Thandavar", "D": "6:13", "R": "Andolika", "T": "", "U": "6,200 views", "V": "s22lumwoQVE"}, {"C": "Muthu Thandavar", "D": "6:16", "R": "Andolika", "T": "", "U": "25 views", "V": "7cncCWy3Jq0"}]}, {"A": "Kuzhikkarai S. P. Viswalingam", "songs": [{"C": "Muthu Thandavar", "D": "51:55", "R": "Kalyani", "T": "", "U": "341 views", "V": "Ok5B62Wd1x8"}]}, {"A": "Madurai Mani Iyer", "songs": [{"C": "Muthu Thandavar", "D": "7:31", "R": "Andolika", "T": "", "U": "385 views", "V": "91c9Mv9bOeE"}, {"C": "Muthu Thandavar", "D": "8:53", "R": "Andolika", "T": "", "U": "5,900 views", "V": "RrQD3Qpsgnw"}, {"C": "Muthu Thandavar", "D": "1:02:14", "R": "Kalyani", "T": "", "U": "3,100 views", "V": "J5m_uo8t9hE"}, {"C": "Muthu Thandavar", "D": "8:13", "R": "Andolika", "T": "", "U": "180 views", "V": "RpLSfORWpYQ"}, {"C": "Muthu Thandavar", "D": "6:16", "R": "Andolika", "T": "", "U": "185 views", "V": "-rVTRx3P6S8"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Muthu Thandavar", "D": "2:56", "R": "Andolika", "T": "", "U": "2,500 views", "V": "CUVfhFAsrmk"}]}, {"A": "Nandita Ravi", "songs": [{"C": "Muthu Thandavar", "D": "2:22", "R": "Unknownraga", "T": "", "U": "327 views", "V": "mPyQMPyhRZo"}, {"C": "Muthu Thandavar", "D": "2:28", "R": "Andolika", "T": "", "U": "198 views", "V": "auoD6iec4eo"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Muthu Thandavar", "D": "18:01", "R": "Kalyani", "T": "", "U": "164 views", "V": "trAOy29FBSs"}]}, {"A": "Shankari Krishnan", "songs": [{"C": "Muthu Thandavar", "D": "3:40", "R": "Andolika", "T": "", "U": "55 views", "V": "3M9LpkRgLXY"}]}, {"A": "Sirkazhi Govindarajan", "songs": [{"C": "Muthu Thandavar", "D": "8:46", "R": "Andolika", "T": "", "U": "10,602 views", "V": "pKtWKNuM3Eo"}, {"C": "Muthu Thandavar", "D": "8:37", "R": "Unknownraga", "T": "", "U": "0 views", "V": "gW7DBVoAKQ4"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Muthu Thandavar", "D": "2:40", "R": "Andolika", "T": "", "U": "472 views", "V": "IAsHOzM4IkI"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Muthu Thandavar", "D": "3:25", "R": "Unknownraga", "T": "", "U": "5,184 views", "V": "MTVNaf-0cOY"}, {"C": "Muthu Thandavar", "D": "3:26", "R": "Andolika", "T": "", "U": "778 views", "V": "t1ZpusQ6cSs"}]}, {"A": "T. V. Sankaranarayanan", "songs": [{"C": "Muthu Thandavar", "D": "6:06", "R": "Andolika", "T": "", "U": "19 views", "V": "0LpoK9n11Ys"}, {"C": "Muthu Thandavar", "D": "5:56", "R": "Andolika", "T": "", "U": "0 views", "V": "w2tElj9XuNc"}]}, {"A": "N. Ramani", "songs": [{"C": "Muthu Thandavar", "D": "5:00", "R": "Unknownraga", "T": "", "U": "0 views", "V": "dqrCs5qNsTg"}]}, {"A": "Namagiripettai Krishnan", "songs": [{"C": "Muthu Thandavar", "D": "8:40", "R": "Andolika", "T": "", "U": "754 views", "V": "zG0xAQkDw9I"}]}, {"A": "Nagai Muralidharan", "songs": [{"C": "Muthu Thandavar", "D": "4:33", "R": "Andolika", "T": "", "U": "125 views", "V": "5Kn0TTuOzfI"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

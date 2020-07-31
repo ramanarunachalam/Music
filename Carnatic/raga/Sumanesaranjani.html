@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>22</td></tr>
 <tr><td><em>Song</em></td><td>12</td></tr>
 <tr><td><em>Composer</em></td><td>8</td></tr>
-<tr><td><em>Song Type</em></td><td>3</td></tr>
+<tr><td><em>Type</em></td><td>3</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Alapana", "songs": [{"N": "0011", "T": "", "H": "Alapana", "S": "Alapana", "R": "Sumanesaranjani", "C": "UnknownComposer", "A": "Keyboard Sathya", "V": "1XKCctnitE4"}, {"N": "0003", "T": "", "H": "Alapana", "S": "Alapana", "R": "Sumanesaranjani", "C": "UnknownComposer", "A": "Sriram Parasuram", "V": "_YaSLprEa4w"}]}, {"name": "chandana chartchitha neelakaLEbara peethavasana", "songs": [{"N": "0012", "T": "Ashtapadi", "H": "Chandana Charchita", "S": "chandana chartchitha neelakaLEbara peethavasana :  Adi", "R": "Sumanesaranjani", "C": "Jayadeva", "A": "M. L. Vasanthakumari", "V": "jXxkK0c6p3o"}, {"N": "0013", "T": "Ashtapadi", "H": "Chandana Charchita", "S": "chandana chartchitha neelakaLEbara peethavasana :  Adi", "R": "Sumanesaranjani", "C": "Jayadeva", "A": "M. L. Vasanthakumari", "V": "qpbUGdXlJ0E"}, {"N": "0008", "T": "Ashtapadi", "H": "Chandana Charchita", "S": "chandana chartchitha neelakaLEbara peethavasana :  Adi", "R": "Sumanesaranjani", "C": "Jayadeva", "A": "Sudha Ragunathan", "V": "iTIegZLaiUA"}]}, {"name": "dayamADO dayamADO dayamADO ranga dayamADO", "songs": [{"N": "0012", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Sumanesaranjani", "C": "Purandara Dasa", "A": "Hyderabad Sisters", "V": "Tbh7CA4Mh4k"}, {"N": "0056", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Sumanesaranjani", "C": "Purandara Dasa", "A": "Priya Sisters", "V": "J0SJcbBELys"}, {"N": "0041", "T": "", "H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "R": "Sumanesaranjani", "C": "Purandara Dasa", "A": "S. Saketharaman", "V": "j18foF5BJzQ"}]}, {"name": "Nee Manam", "songs": [{"N": "0041", "T": "", "H": "Nee Manam", "S": "Nee Manam", "R": "Sumanesaranjani", "C": "K. Ramaraj", "A": "Raji Gopalakrishnan", "V": "QQDOr26RW4Y"}]}, {"name": "ninnai charaNadainthEn  kaNNammA", "songs": [{"N": "0165", "T": "", "H": "Ninnai Charan", "S": "ninnai charaNadainthEn  kaNNammA :  Adi", "R": "Sumanesaranjani", "C": "Subramanya Bharathiyar", "A": "Priya Sisters", "V": "-TWIw4WTEhE"}]}, {"name": "pachchaimA malaipOl mEnip pavaLavAik kamalach", "songs": [{"N": "0075", "T": "", "H": "Pachchai Mamalai Pol", "S": "pachchaimA malaipOl mEnip pavaLavAik kamalach :  Adi", "R": "Sumanesaranjani", "C": "Thondaradipodi Azhwar", "A": "Kunnakudi M. Balamuralikrishna", "V": "eP8-KrWIm8E"}]}, {"name": "parAku mADade parAmbarisi enna aparAdhangaLa", "songs": [{"N": "0054", "T": "", "H": "Paraku Madada", "S": "parAku mADade parAmbarisi enna aparAdhangaLa :  Adi", "R": "Sumanesaranjani", "C": "Purandara Dasa", "A": "N. C. Bharadwaj", "V": "o2LtRkAYsCw"}]}, {"name": "pArthasArathi tiruvallikkENiyil nAn pArta sArathi", "songs": [{"N": "0012", "T": "", "H": "Parthasarathi Tiruvallikkeniyil", "S": "pArthasArathi tiruvallikkENiyil nAn pArta sArathi :  Adi", "R": "Sumanesaranjani", "C": "Rukmani Ramani", "A": "Sangeetha Swaminathan", "V": "n9z4htBRbv8"}, {"N": "0460", "T": "", "H": "Parthasarathi Tiruvallikkeniyil", "S": "pArthasArathi tiruvallikkENiyil nAn pArta sArathi :  Adi", "R": "Sumanesaranjani", "C": "Rukmani Ramani", "A": "Sudha Ragunathan", "V": "-Tmn2hvp78s"}]}, {"name": "shAnta durgA dEvi shyAmaLAngI sAdhu", "songs": [{"N": "0036", "T": "", "H": "Santa Durga Devi", "S": "shAnta durgA dEvi shyAmaLAngI sAdhu pAlini :  Caapu", "R": "Sumanesaranjani", "C": "Kalyani Varadarajan", "A": "Hyderabad Sisters", "V": "P1HLt39VpZo"}]}, {"name": "tAmadam EnO ammA dayApari tAmarai", "songs": [{"N": "0182", "T": "", "H": "Thamadam Eano Amma", "S": "tAmadam EnO ammA dayApari tAmarai vizhigaLil :  Adi", "R": "Sumanesaranjani", "C": "Rukmani Ramani", "A": "Gayathri Girish", "V": "AzdIScHaKeA"}]}, {"name": "Unknownsong", "songs": [{"N": "0131", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sumanesaranjani", "C": "UnknownComposer", "A": "M. S. Sheela", "V": "ccRghcKmhl8"}, {"N": "0307", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sumanesaranjani", "C": "UnknownComposer", "A": "Priya Sisters", "V": "DxkavVKCIZI"}]}, {"name": "uNmai arindavar unnaik kaLippArO mAyaiyE", "songs": [{"N": "0022", "T": "", "H": "Unmai Arindavar", "S": "uNmai arindavar unnaik kaLippArO mAyaiyE :  Adi", "R": "Sumanesaranjani", "C": "Subramanya Bharathiyar", "A": "Bushani Kalyanaraman", "V": "g6JD-WEQvXk"}, {"N": "0269", "T": "", "H": "Unmai Arindavar", "S": "uNmai arindavar unnaik kaLippArO mAyaiyE :  Adi", "R": "Sumanesaranjani", "C": "Subramanya Bharathiyar", "A": "S. Kalyanaraman", "V": "wpTuMF-wC3k"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Alapana", "S": "Alapana", "songs": [{"A": "Keyboard Sathya", "C": "UnknownComposer", "D": "9:25", "T": "", "U": "6,518 views", "V": "1XKCctnitE4"}, {"A": "Sriram Parasuram", "C": "UnknownComposer", "D": "5:18", "T": "", "U": "4,848 views", "V": "_YaSLprEa4w"}]}, {"H": "Chandana Charchita", "S": "chandana chartchitha neelakaLEbara peethavasana :  Adi", "songs": [{"A": "M. L. Vasanthakumari", "C": "Jayadeva", "D": "5:16", "T": "Ashtapadi", "U": "309 views", "V": "qpbUGdXlJ0E"}, {"A": "M. L. Vasanthakumari", "C": "Jayadeva", "D": "5:07", "T": "Ashtapadi", "U": "511 views", "V": "jXxkK0c6p3o"}, {"A": "Sudha Ragunathan", "C": "Jayadeva", "D": "8:50", "T": "Ashtapadi", "U": "0 views", "V": "iTIegZLaiUA"}]}, {"H": "Daya Mado Ranga", "S": "dayamADO dayamADO dayamADO ranga dayamADO nAninna :  Caapu", "songs": [{"A": "Hyderabad Sisters", "C": "Purandara Dasa", "D": "4:01", "T": "", "U": "7 views", "V": "Tbh7CA4Mh4k"}, {"A": "Priya Sisters", "C": "Purandara Dasa", "D": "2:49", "T": "", "U": "0 views", "V": "J0SJcbBELys"}, {"A": "S. Saketharaman", "C": "Purandara Dasa", "D": "5:06", "T": "", "U": "261 views", "V": "j18foF5BJzQ"}]}, {"H": "Nee Manam", "S": "Nee Manam", "songs": [{"A": "Raji Gopalakrishnan", "C": "K. Ramaraj", "D": "5:04", "T": "", "U": "122 views", "V": "QQDOr26RW4Y"}]}, {"H": "Ninnai Charan", "S": "ninnai charaNadainthEn  kaNNammA :  Adi", "songs": [{"A": "Priya Sisters", "C": "Subramanya Bharathiyar", "D": "6:07", "T": "", "U": "71 views", "V": "-TWIw4WTEhE"}]}, {"H": "Pachchai Mamalai Pol", "S": "pachchaimA malaipOl mEnip pavaLavAik kamalach :  Adi", "songs": [{"A": "Kunnakudi M. Balamuralikrishna", "C": "Thondaradipodi Azhwar", "D": "14:29", "T": "", "U": "2,900 views", "V": "eP8-KrWIm8E"}]}, {"H": "Paraku Madada", "S": "parAku mADade parAmbarisi enna aparAdhangaLa :  Adi", "songs": [{"A": "N. C. Bharadwaj", "C": "Purandara Dasa", "D": "4:25", "T": "", "U": "4,643 views", "V": "o2LtRkAYsCw"}]}, {"H": "Parthasarathi Tiruvallikkeniyil", "S": "pArthasArathi tiruvallikkENiyil nAn pArta sArathi :  Adi", "songs": [{"A": "Sangeetha Swaminathan", "C": "Rukmani Ramani", "D": "5:06", "T": "", "U": "423 views", "V": "n9z4htBRbv8"}, {"A": "Sudha Ragunathan", "C": "Rukmani Ramani", "D": "7:26", "T": "", "U": "1,200 views", "V": "-Tmn2hvp78s"}]}, {"H": "Santa Durga Devi", "S": "shAnta durgA dEvi shyAmaLAngI sAdhu pAlini :  Caapu", "songs": [{"A": "Hyderabad Sisters", "C": "Kalyani Varadarajan", "D": "19:51", "T": "", "U": "0 views", "V": "P1HLt39VpZo"}]}, {"H": "Thamadam Eano Amma", "S": "tAmadam EnO ammA dayApari tAmarai vizhigaLil :  Adi", "songs": [{"A": "Gayathri Girish", "C": "Rukmani Ramani", "D": "4:49", "T": "", "U": "8 views", "V": "AzdIScHaKeA"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "M. S. Sheela", "C": "UnknownComposer", "D": "6:34", "T": "", "U": "0 views", "V": "ccRghcKmhl8"}, {"A": "Priya Sisters", "C": "UnknownComposer", "D": "8:26", "T": "", "U": "0 views", "V": "DxkavVKCIZI"}]}, {"H": "Unmai Arindavar", "S": "uNmai arindavar unnaik kaLippArO mAyaiyE :  Adi", "songs": [{"A": "Bushani Kalyanaraman", "C": "Subramanya Bharathiyar", "D": "6:12", "T": "", "U": "4,259 views", "V": "g6JD-WEQvXk"}, {"A": "S. Kalyanaraman", "C": "Subramanya Bharathiyar", "D": "3:58", "T": "", "U": "8,431 views", "V": "wpTuMF-wC3k"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

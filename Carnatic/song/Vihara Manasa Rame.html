@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>31</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>22</td></tr>
-<tr><td><em>Concert</em></td><td>22</td></tr>
+<tr><td><em>Concert</em></td><td>23</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -148,57 +148,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Alathur Brothers", "songs": [{"N": "0128", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Alathur Brothers", "V": "VdZr0yacLhM"}]}, {"name": "Vocal - Bangalore Brothers", "songs": [{"N": "0090", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Bangalore Brothers", "V": "357zeZnbilM"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0758", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "M. D. Ramanathan", "V": "n8kUgNQFQfE"}, {"N": "0756", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "M. D. Ramanathan", "V": "YzvnLErSaP0"}, {"N": "0757", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "M. D. Ramanathan", "V": "fz-pIMrSFdE"}, {"N": "0759", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "M. D. Ramanathan", "V": "wgUBZA3C5LQ"}]}, {"name": "Vocal - P. S. Narayanaswamy", "songs": [{"N": "0024", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "P. S. Narayanaswamy", "V": "W-81si6_VRA"}]}, {"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0217", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "P. Unnikrishnan", "V": "TPPEvyV-FIg"}]}, {"name": "Vocal - Padma Krishnan", "songs": [{"N": "0081", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Padma Krishnan", "V": "VsvyJIrrJfI"}]}, {"name": "Vocal - Prince Rama Varma", "songs": [{"N": "0408", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "9-l1LPRqroY"}, {"N": "0411", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "ne7d3otgApA"}, {"N": "0409", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "9KLfzWjhGXE"}, {"N": "0410", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "Whx3g0MOJPo"}, {"N": "0412", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "r-7-2Ez86bY"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0959", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "8igobsQfQU4"}, {"N": "0960", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "933X-GreiSU"}]}, {"name": "Vocal - Suguna Purushothaman", "songs": [{"N": "0036", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Suguna Purushothaman", "V": "gA8q3xK-CLo"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0588", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "T. N. Seshagopalan", "V": "F4fCI1QPWHo"}]}, {"name": "Vocal - T. S. Sathyavathi", "songs": [{"N": "0044", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "T. S. Sathyavathi", "V": "BOdeDVyjJyU"}]}, {"name": "Veena - Doraiswamy Iyengar", "songs": [{"N": "0043", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Doraiswamy Iyengar", "V": "B-2mCt4w2UE"}]}, {"name": "Veena - K. S. Narayanaswamy", "songs": [{"N": "0029", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "K. S. Narayanaswamy", "V": "DiOqHPp_JQ0"}]}, {"name": "Violin - Mysore Nagaraj", "songs": [{"N": "0073", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Mysore Nagaraj", "V": "OeNYqAruRSU"}]}, {"name": "Mridangam - Arjun Kumar", "songs": [{"N": "0026", "T": "", "H": "Vihara Manasa Rame", "S": "vihAra mAnasa ramE saccidAnanda ghana shyAmE :  Caapu", "R": "Kapi", "C": "Swathi Thirunal", "A": "Arjun Kumar", "V": "CaQizC3-Qio"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Alathur Brothers", "songs": [{"C": "Swathi Thirunal", "D": "4:05", "R": "Kapi", "T": "", "U": "180 views", "V": "VdZr0yacLhM"}]}, {"A": "Bangalore Brothers", "songs": [{"C": "Swathi Thirunal", "D": "16:01", "R": "Kapi", "T": "", "U": "490 views", "V": "357zeZnbilM"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Swathi Thirunal", "D": "5:31", "R": "Kapi", "T": "", "U": "605 views", "V": "YzvnLErSaP0"}, {"C": "Swathi Thirunal", "D": "4:25", "R": "Kapi", "T": "", "U": "163 views", "V": "n8kUgNQFQfE"}, {"C": "Swathi Thirunal", "D": "4:08", "R": "Kapi", "T": "", "U": "74 views", "V": "fz-pIMrSFdE"}, {"C": "Swathi Thirunal", "D": "4:31", "R": "Kapi", "T": "", "U": "187 views", "V": "wgUBZA3C5LQ"}]}, {"A": "P. S. Narayanaswamy", "songs": [{"C": "Swathi Thirunal", "D": "18:51", "R": "Kapi", "T": "", "U": "245 views", "V": "W-81si6_VRA"}]}, {"A": "P. Unnikrishnan", "songs": [{"C": "Swathi Thirunal", "D": "5:13", "R": "Kapi", "T": "", "U": "0 views", "V": "TPPEvyV-FIg"}]}, {"A": "Padma Krishnan", "songs": [{"C": "Swathi Thirunal", "D": "11:44", "R": "Kapi", "T": "", "U": "63 views", "V": "VsvyJIrrJfI"}]}, {"A": "Prince Rama Varma", "songs": [{"C": "Swathi Thirunal", "D": "3:32", "R": "Kapi", "T": "", "U": "3,736 views", "V": "9KLfzWjhGXE"}, {"C": "Swathi Thirunal", "D": "23:01", "R": "Kapi", "T": "", "U": "42 views", "V": "9-l1LPRqroY"}, {"C": "Swathi Thirunal", "D": "9:38", "R": "Kapi", "T": "", "U": "2,230 views", "V": "ne7d3otgApA"}, {"C": "Swathi Thirunal", "D": "9:00", "R": "Kapi", "T": "", "U": "760 views", "V": "Whx3g0MOJPo"}, {"C": "Swathi Thirunal", "D": "16:13", "R": "Kapi", "T": "", "U": "2,059 views", "V": "r-7-2Ez86bY"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Swathi Thirunal", "D": "25:31", "R": "Kapi", "T": "", "U": "1,800 views", "V": "8igobsQfQU4"}, {"C": "Swathi Thirunal", "D": "25:31", "R": "Kapi", "T": "", "U": "186 views", "V": "933X-GreiSU"}]}, {"A": "Suguna Purushothaman", "songs": [{"C": "Swathi Thirunal", "D": "5:31", "R": "Kapi", "T": "", "U": "110 views", "V": "gA8q3xK-CLo"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Swathi Thirunal", "D": "5:31", "R": "Kapi", "T": "", "U": "64 views", "V": "F4fCI1QPWHo"}]}, {"A": "T. S. Sathyavathi", "songs": [{"C": "Swathi Thirunal", "D": "10:09", "R": "Kapi", "T": "", "U": "2,519 views", "V": "BOdeDVyjJyU"}]}, {"A": "Doraiswamy Iyengar", "songs": [{"C": "Swathi Thirunal", "D": "6:36", "R": "Kapi", "T": "", "U": "0 views", "V": "B-2mCt4w2UE"}]}, {"A": "K. S. Narayanaswamy", "songs": [{"C": "Swathi Thirunal", "D": "6:51", "R": "Kapi", "T": "", "U": "205 views", "V": "DiOqHPp_JQ0"}]}, {"A": "Mysore Brothers", "songs": [{"C": "Swathi Thirunal", "D": "18:01", "R": "Kapi", "T": "", "U": "148 views", "V": "OeNYqAruRSU"}]}, {"A": "Arjun Kumar", "songs": [{"C": "Swathi Thirunal", "D": "5:26", "R": "Kapi", "T": "", "U": "0 views", "V": "CaQizC3-Qio"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

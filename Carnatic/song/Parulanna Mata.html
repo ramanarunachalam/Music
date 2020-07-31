@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>36</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>21</td></tr>
-<tr><td><em>Concert</em></td><td>21</td></tr>
+<tr><td><em>Concert</em></td><td>30</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -135,57 +135,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Sisters", "songs": [{"N": "0048", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Bombay Sisters", "V": "WcYMtRqFLc0"}]}, {"name": "Vocal - Charulatha Mani", "songs": [{"N": "0002", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Charulatha Mani", "V": "bjFgCT5l3Tg"}]}, {"name": "Vocal - Hyderabad Brothers", "songs": [{"N": "0022", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Hyderabad Brothers", "V": "bQAs8c1PaTs"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0045", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "M. L. Vasanthakumari", "V": "NHl-pTR47eM"}]}, {"name": "Vocal - Neela Ramgopal", "songs": [{"N": "0016", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Neela Ramgopal", "V": "CFXrrP4cyG8"}]}, {"name": "Vocal - Ramnad Krishnan", "songs": [{"N": "0025", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Ramnad Krishnan", "V": "tc-SWEh8-qU"}, {"N": "0022", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Ramnad Krishnan", "V": "5Y3NEFkFuyo"}, {"N": "0023", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Ramnad Krishnan", "V": "_LhqDSGXxqs"}, {"N": "0024", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Ramnad Krishnan", "V": "r5d0uArTotk"}]}, {"name": "Vocal - Rithvik Raja", "songs": [{"N": "0011", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Rithvik Raja", "V": "Rin9YTzAPws"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0048", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "0nU_PkGb_jM"}, {"N": "0049", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "3sVWqRm_gI4"}, {"N": "0050", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "6eaSPFoFRG8"}, {"N": "0051", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "PK7UNyuKhWM"}, {"N": "0052", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "WMs8QxYFtVA"}, {"N": "0053", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "XBRhofFsdVA"}, {"N": "0054", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "lh7wvBcw2l4"}, {"N": "0055", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "mKiTrr2CGBA"}, {"N": "0056", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "xqMX6q7oNLE"}, {"N": "0057", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "Semmangudi Srinivasa Iyer", "V": "z4m5QRzNS0c"}]}, {"name": "Vocal - T. Brinda", "songs": [{"N": "0002", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "T. Brinda", "V": "dvn5HqC6qzM"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0122", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "T. M. Krishna", "V": "44TjZeIxSpU"}, {"N": "0123", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "T. M. Krishna", "V": "IvMM0s6FJG8"}]}, {"name": "Veena - P. Vasanth Kumar", "songs": [{"N": "0001", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "P. Vasanth Kumar", "V": "nlXxLfkIVpI"}]}, {"name": "Chitra Veena - A. Narayana Iyer", "songs": [{"N": "0001", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "A. Narayana Iyer", "V": "-TkXYz4aFvM"}]}, {"name": "Flute - N. Ramani", "songs": [{"N": "0028", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "N. Ramani", "V": "fWhWbPa5a10"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0040", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "U. Srinivas", "V": "5x1ubDKAmNk"}]}, {"name": "Violin - M. A. Krishnaswamy", "songs": [{"N": "0016", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "M. A. Krishnaswamy", "V": "fzdbXGwZCzs"}]}, {"name": "Violin - T. N. Krishnan", "songs": [{"N": "0050", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "T. N. Krishnan", "V": "IWkuZFR5y9A"}, {"N": "0051", "T": "Javali", "H": "Parulanna Mata", "S": "parulenna mATa namma vaddu prANa nAyaka :  Rupaka", "R": "Kapi", "C": "Dharmapuri Subbarayar", "A": "T. N. Krishnan", "V": "thO8yHL_N0I"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Sisters", "songs": [{"C": "Dharmapuri Subbarayar", "D": "4:44", "R": "Kapi", "T": "Javali", "U": "0 views", "V": "WcYMtRqFLc0"}]}, {"A": "Brinda Muktha", "songs": [{"C": "Dharmapuri Subbarayar", "D": "5:31", "R": "Kapi", "T": "Javali", "U": "1,335 views", "V": "dvn5HqC6qzM"}]}, {"A": "Charulatha Mani", "songs": [{"C": "Dharmapuri Subbarayar", "D": "3:01", "R": "Kapi", "T": "Javali", "U": "1,850 views", "V": "bjFgCT5l3Tg"}]}, {"A": "Hyderabad Brothers", "songs": [{"C": "Dharmapuri Subbarayar", "D": "4:35", "R": "Kapi", "T": "Javali", "U": "352 views", "V": "bQAs8c1PaTs"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Dharmapuri Subbarayar", "D": "8:43", "R": "Kapi", "T": "Javali", "U": "287 views", "V": "NHl-pTR47eM"}]}, {"A": "Neela Ramgopal", "songs": [{"C": "Dharmapuri Subbarayar", "D": "4:09", "R": "Kapi", "T": "Javali", "U": "289 views", "V": "CFXrrP4cyG8"}]}, {"A": "Ramnad Krishnan", "songs": [{"C": "Dharmapuri Subbarayar", "D": "3:16", "R": "Kapi", "T": "Javali", "U": "227 views", "V": "tc-SWEh8-qU"}, {"C": "Dharmapuri Subbarayar", "D": "6:25", "R": "Kapi", "T": "Javali", "U": "142 views", "V": "r5d0uArTotk"}, {"C": "Dharmapuri Subbarayar", "D": "6:31", "R": "Kapi", "T": "Javali", "U": "11,000 views", "V": "5Y3NEFkFuyo"}, {"C": "Dharmapuri Subbarayar", "D": "3:11", "R": "Kapi", "T": "Javali", "U": "797 views", "V": "_LhqDSGXxqs"}]}, {"A": "Rithvik Raja", "songs": [{"C": "Dharmapuri Subbarayar", "D": "4:35", "R": "Kapi", "T": "Javali", "U": "0 views", "V": "Rin9YTzAPws"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Dharmapuri Subbarayar", "D": "3:25", "R": "Kapi", "T": "Javali", "U": "102 views", "V": "PK7UNyuKhWM"}, {"C": "Dharmapuri Subbarayar", "D": "4:45", "R": "Kapi", "T": "Javali", "U": "5,400 views", "V": "WMs8QxYFtVA"}, {"C": "Dharmapuri Subbarayar", "D": "8:27", "R": "Kapi", "T": "Javali", "U": "45 views", "V": "z4m5QRzNS0c"}, {"C": "Dharmapuri Subbarayar", "D": "4:09", "R": "Kapi", "T": "Javali", "U": "22 views", "V": "3sVWqRm_gI4"}, {"C": "Dharmapuri Subbarayar", "D": "11:41", "R": "Kapi", "T": "Javali", "U": "238 views", "V": "XBRhofFsdVA"}, {"C": "Dharmapuri Subbarayar", "D": "3:36", "R": "Kapi", "T": "Javali", "U": "233 views", "V": "0nU_PkGb_jM"}, {"C": "Dharmapuri Subbarayar", "D": "4:50", "R": "Kapi", "T": "Javali", "U": "869 views", "V": "xqMX6q7oNLE"}, {"C": "Dharmapuri Subbarayar", "D": "4:15", "R": "Kapi", "T": "Javali", "U": "117 views", "V": "lh7wvBcw2l4"}, {"C": "Dharmapuri Subbarayar", "D": "4:17", "R": "Kapi", "T": "Javali", "U": "8 views", "V": "mKiTrr2CGBA"}, {"C": "Dharmapuri Subbarayar", "D": "2:58", "R": "Kapi", "T": "Javali", "U": "240 views", "V": "6eaSPFoFRG8"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Dharmapuri Subbarayar", "D": "5:03", "R": "Kapi", "T": "Javali", "U": "5,637 views", "V": "IvMM0s6FJG8"}, {"C": "Dharmapuri Subbarayar", "D": "5:03", "R": "Kapi", "T": "Javali", "U": "0 views", "V": "44TjZeIxSpU"}]}, {"A": "P. Vasanth Kumar", "songs": [{"C": "Dharmapuri Subbarayar", "D": "3:01", "R": "Kapi", "T": "Javali", "U": "56 views", "V": "nlXxLfkIVpI"}]}, {"A": "A. Narayana Iyer", "songs": [{"C": "Dharmapuri Subbarayar", "D": "5:48", "R": "Kapi", "T": "Javali", "U": "118 views", "V": "-TkXYz4aFvM"}]}, {"A": "N. Ramani", "songs": [{"C": "Dharmapuri Subbarayar", "D": "4:00", "R": "Kapi", "T": "Javali", "U": "154 views", "V": "fWhWbPa5a10"}]}, {"A": "U. Srinivas", "songs": [{"C": "Dharmapuri Subbarayar", "D": "1:05", "R": "Kapi", "T": "Javali", "U": "86 views", "V": "5x1ubDKAmNk"}]}, {"A": "M. A. Krishnaswamy", "songs": [{"C": "Dharmapuri Subbarayar", "D": "4:38", "R": "Kapi", "T": "Javali", "U": "1,691 views", "V": "fzdbXGwZCzs"}]}, {"A": "T. N. Krishnan", "songs": [{"C": "Dharmapuri Subbarayar", "D": "5:44", "R": "Kapi", "T": "Javali", "U": "339 views", "V": "thO8yHL_N0I"}, {"C": "Dharmapuri Subbarayar", "D": "5:48", "R": "Kapi", "T": "Javali", "U": "254 views", "V": "IWkuZFR5y9A"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

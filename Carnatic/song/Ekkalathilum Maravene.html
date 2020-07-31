@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>24</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>16</td></tr>
-<tr><td><em>Concert</em></td><td>16</td></tr>
+<tr><td><em>Concert</em></td><td>18</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Charumathi Ramachandran", "songs": [{"N": "0006", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "Charumathi Ramachandran", "V": "WkiyDLKPs5E"}]}, {"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0127", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "D. K. Jayaraman", "V": "FB0Mns7fnrw"}, {"N": "0128", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "D. K. Jayaraman", "V": "udobLEBCYmg"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0121", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "D. K. Pattammal", "V": "CE3C-Nqs9iA"}, {"N": "0122", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "D. K. Pattammal", "V": "UvZ7L9pGliI"}, {"N": "0123", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "D. K. Pattammal", "V": "evOB3px_Ddk"}, {"N": "0124", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "D. K. Pattammal", "V": "nOK6wC7C97o"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0122", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "K. V. Narayanaswamy", "V": "Y5C-RazTRj8"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0150", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "M. D. Ramanathan", "V": "aDIPZVjLo04"}, {"N": "0151", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "M. D. Ramanathan", "V": "oj4WsvlEFr0"}, {"N": "0148", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "M. D. Ramanathan", "V": "-VYV1n7qddQ"}, {"N": "0149", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "M. D. Ramanathan", "V": "5GAYQSostaQ"}, {"N": "0152", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "M. D. Ramanathan", "V": "u4kk-rQbnN0"}]}, {"name": "Vocal - Neyveli Santhanagopalan", "songs": [{"N": "0060", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "Neyveli Santhanagopalan", "V": "lBTVoboWrWs"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0074", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "Ramakrishnan Murthy", "V": "iQvRs1kUmLQ"}]}, {"name": "Vocal - Sumithra Vasudev", "songs": [{"N": "0037", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "Sumithra Vasudev", "V": "riWwqXhSXqg"}]}, {"name": "Vocal - T. Brinda", "songs": [{"N": "0022", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "T. Brinda", "V": "lFD1gMpAoUg"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0210", "T": "", "H": "Ekkalathilum Maravene", "S": "ekkAlattilum maravEne ini nAnE  ekkAlattilum  :  Rupaka", "R": "Natakurinji", "C": "Ramaswamy Sivan", "A": "T. M. Krishna", "V": "DMqH71JG2Z0"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Charumathi Ramachandran", "songs": [{"C": "Ramaswamy Sivan", "D": "15:44", "R": "Natakurinji", "T": "", "U": "1,925 views", "V": "WkiyDLKPs5E"}]}, {"A": "D. K. Jayaraman", "songs": [{"C": "Ramaswamy Sivan", "D": "6:21", "R": "Natakurinji", "T": "", "U": "882 views", "V": "FB0Mns7fnrw"}, {"C": "Ramaswamy Sivan", "D": "6:00", "R": "Natakurinji", "T": "", "U": "120 views", "V": "udobLEBCYmg"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Ramaswamy Sivan", "D": "5:20", "R": "Natakurinji", "T": "", "U": "81 views", "V": "nOK6wC7C97o"}, {"C": "Ramaswamy Sivan", "D": "5:21", "R": "Natakurinji", "T": "", "U": "420 views", "V": "evOB3px_Ddk"}, {"C": "Ramaswamy Sivan", "D": "6:20", "R": "Natakurinji", "T": "", "U": "0 views", "V": "UvZ7L9pGliI"}, {"C": "Ramaswamy Sivan", "D": "6:01", "R": "Natakurinji", "T": "", "U": "515 views", "V": "CE3C-Nqs9iA"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Ramaswamy Sivan", "D": "14:56", "R": "Natakurinji", "T": "", "U": "599 views", "V": "Y5C-RazTRj8"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Ramaswamy Sivan", "D": "11:33", "R": "Natakurinji", "T": "", "U": "214 views", "V": "oj4WsvlEFr0"}, {"C": "Ramaswamy Sivan", "D": "4:55", "R": "Natakurinji", "T": "", "U": "422 views", "V": "u4kk-rQbnN0"}, {"C": "Ramaswamy Sivan", "D": "3:00", "R": "Natakurinji", "T": "", "U": "22 views", "V": "-VYV1n7qddQ"}, {"C": "Ramaswamy Sivan", "D": "9:36", "R": "Natakurinji", "T": "", "U": "120 views", "V": "aDIPZVjLo04"}, {"C": "Ramaswamy Sivan", "D": "3:04", "R": "Natakurinji", "T": "", "U": "31 views", "V": "5GAYQSostaQ"}]}, {"A": "Neyveli Santhanagopalan", "songs": [{"C": "Ramaswamy Sivan", "D": "18:41", "R": "Natakurinji", "T": "", "U": "47 views", "V": "lBTVoboWrWs"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Ramaswamy Sivan", "D": "9:46", "R": "Natakurinji", "T": "", "U": "500 views", "V": "iQvRs1kUmLQ"}]}, {"A": "Sumithra Vasudev", "songs": [{"C": "Ramaswamy Sivan", "D": "17:01", "R": "Natakurinji", "T": "", "U": "1,100 views", "V": "riWwqXhSXqg"}]}, {"A": "T. Brinda", "songs": [{"C": "Ramaswamy Sivan", "D": "8:20", "R": "Natakurinji", "T": "", "U": "12 views", "V": "lFD1gMpAoUg"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Ramaswamy Sivan", "D": "1:03:02", "R": "Natakurinji", "T": "", "U": "458 views", "V": "DMqH71JG2Z0"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

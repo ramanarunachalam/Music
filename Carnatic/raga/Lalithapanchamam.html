@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>40</td></tr>
 <tr><td><em>Song</em></td><td>4</td></tr>
 <tr><td><em>Composer</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "bRhadIshvarIm bhajarE citta brahmEndrAdinuta", "songs": [{"N": "0023", "T": "", "H": "Brhadisvarim", "S": "bRhadIshvarIm bhajarE citta brahmEndrAdinuta :  Adi", "R": "Lalithapanchamam", "C": "Muthuswami Dikshitar", "A": "Neela Ramgopal", "V": "Lh6woLCLjns"}, {"N": "0019", "T": "", "H": "Brhadisvarim", "S": "bRhadIshvarIm bhajarE citta brahmEndrAdinuta :  Adi", "R": "Lalithapanchamam", "C": "Muthuswami Dikshitar", "A": "Rama Ravi", "V": "9TMU-Ff1cNU"}, {"N": "0020", "T": "", "H": "Brhadisvarim", "S": "bRhadIshvarIm bhajarE citta brahmEndrAdinuta :  Adi", "R": "Lalithapanchamam", "C": "Muthuswami Dikshitar", "A": "Rama Ravi", "V": "QfRJvk4Z1yE"}, {"N": "0186", "T": "", "H": "Brhadisvarim", "S": "bRhadIshvarIm bhajarE citta brahmEndrAdinuta :  Adi", "R": "Lalithapanchamam", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "AftIevWyJyo"}]}, {"name": "Jagadeesha Pahimam", "songs": [{"N": "0612", "T": "", "H": "Jagadeesha Pahimam", "S": "Jagadeesha Pahimam", "R": "Lalithapanchamam", "C": "Ramaswamy Dikshitar", "A": "M. Balamuralikrishna", "V": "HGyDQOLu3AE"}, {"N": "0613", "T": "", "H": "Jagadeesha Pahimam", "S": "Jagadeesha Pahimam", "R": "Lalithapanchamam", "C": "Ramaswamy Dikshitar", "A": "M. Balamuralikrishna", "V": "ZCjXNbVsm7Y"}]}, {"name": "parama puruSam hrdaya bhAvaya tam", "songs": [{"N": "0168", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "W7WOc1WdBgo"}, {"N": "0169", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "ks544QbSFbk"}, {"N": "0270", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Bombay Jayashri", "V": "rbPzBfdM9ts"}, {"N": "0146", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Chembai Vaidyanatha Bhagavathar", "V": "PeD6J3dkykA"}, {"N": "0105", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Cherthala K. N. Renganatha Sharma", "V": "DelrO8SQddM"}, {"N": "0602", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "M. L. Vasanthakumari", "V": "jyqzYj8DwfA"}, {"N": "0866", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "1at8lxThABc"}, {"N": "0285", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "EiH_u3IKmnw"}, {"N": "0286", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "TfQvhAnGhyw"}, {"N": "0288", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "m6LqpAQQCaA"}, {"N": "0287", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "YmE6l-AiL5w"}, {"N": "0013", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Puducode Krishnamoorthy", "V": "I5DfDQZn1rU"}, {"N": "0103", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Sandeep Narayan", "V": "QdWPZ0OuEGo"}, {"N": "0450", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Sudha Ragunathan", "V": "2avW4In5xO4"}, {"N": "0451", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Sudha Ragunathan", "V": "DQyxu3gDmtI"}, {"N": "0054", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Trichur V. Ramachandran", "V": "2OIXavFAoVg"}, {"N": "0048", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "K. S. Gopalakrishnan", "V": "U5tp424KbhQ"}, {"N": "0047", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "K. S. Gopalakrishnan", "V": "KHRywAIA2c8"}, {"N": "0020", "T": "", "H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "R": "Lalithapanchamam", "C": "Swathi Thirunal", "A": "Trivandrum Sampath", "V": "C1iZpUMuK-I"}]}, {"name": "Unknownsong", "songs": [{"N": "0374", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Lalithapanchamam", "C": "UnknownComposer", "A": "Madurai Somu", "V": "PvrMQMU8_v8"}, {"N": "0162", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Lalithapanchamam", "C": "UnknownComposer", "A": "Sandeep Narayan", "V": "baEe1X8xFbc"}, {"N": "0723", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Lalithapanchamam", "C": "UnknownComposer", "A": "U. Srinivas", "V": "Zlb4BOstoho"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Brhadisvarim", "S": "bRhadIshvarIm bhajarE citta brahmEndrAdinuta :  Adi", "songs": [{"A": "Nandita Ravi", "C": "Muthuswami Dikshitar", "D": "6:06", "T": "", "U": "201 views", "V": "9TMU-Ff1cNU"}, {"A": "Neela Ramgopal", "C": "Muthuswami Dikshitar", "D": "8:31", "T": "", "U": "256 views", "V": "Lh6woLCLjns"}, {"A": "Rama Ravi", "C": "Muthuswami Dikshitar", "D": "6:06", "T": "", "U": "69 views", "V": "QfRJvk4Z1yE"}, {"A": "Sanjay Subrahmanyan", "C": "Muthuswami Dikshitar", "D": "5:00", "T": "", "U": "352 views", "V": "AftIevWyJyo"}]}, {"H": "Jagadeesha Pahimam", "S": "Jagadeesha Pahimam", "songs": [{"A": "M. Balamuralikrishna", "C": "Ramaswamy Dikshitar", "D": "1:02:50", "T": "", "U": "1,624 views", "V": "ZCjXNbVsm7Y"}]}, {"H": "Parama Purusham", "S": "parama puruSam hrdaya bhAvaya tam :  Jhampa", "songs": [{"A": "Amrutha Venkatesh", "C": "Swathi Thirunal", "D": "3:47", "T": "", "U": "814 views", "V": "ks544QbSFbk"}, {"A": "Amrutha Venkatesh", "C": "Swathi Thirunal", "D": "4:37", "T": "", "U": "8 views", "V": "W7WOc1WdBgo"}, {"A": "Bombay Jayashri", "C": "Swathi Thirunal", "D": "4:34", "T": "", "U": "3,733 views", "V": "rbPzBfdM9ts"}, {"A": "Chembai Vaidyanatha Bhagavathar", "C": "Swathi Thirunal", "D": "5:40", "T": "", "U": "97 views", "V": "PeD6J3dkykA"}, {"A": "Cherthala K. N. Renganatha Sharma", "C": "Swathi Thirunal", "D": "2:54", "T": "", "U": "347 views", "V": "DelrO8SQddM"}, {"A": "M. L. Vasanthakumari", "C": "Swathi Thirunal", "D": "3:55", "T": "", "U": "988 views", "V": "jyqzYj8DwfA"}, {"A": "M. S. Subbulakshmi", "C": "Swathi Thirunal", "D": "14:58", "T": "", "U": "0 views", "V": "1at8lxThABc"}, {"A": "Prince Rama Varma", "C": "Swathi Thirunal", "D": "17:39", "T": "", "U": "0 views", "V": "TfQvhAnGhyw"}, {"A": "Prince Rama Varma", "C": "Swathi Thirunal", "D": "17:26", "T": "", "U": "0 views", "V": "m6LqpAQQCaA"}, {"A": "Prince Rama Varma", "C": "Swathi Thirunal", "D": "1:03:16", "T": "", "U": "34,022 views", "V": "YmE6l-AiL5w"}, {"A": "Prince Rama Varma", "C": "Swathi Thirunal", "D": "18:53", "T": "", "U": "5,718 views", "V": "EiH_u3IKmnw"}, {"A": "Puducode Krishnamoorthy", "C": "Swathi Thirunal", "D": "7:15", "T": "", "U": "38 views", "V": "I5DfDQZn1rU"}, {"A": "Sandeep Narayan", "C": "Swathi Thirunal", "D": "4:58", "T": "", "U": "287 views", "V": "QdWPZ0OuEGo"}, {"A": "Sudha Ragunathan", "C": "Swathi Thirunal", "D": "3:01", "T": "", "U": "786 views", "V": "2avW4In5xO4"}, {"A": "Sudha Ragunathan", "C": "Swathi Thirunal", "D": "11:47", "T": "", "U": "254 views", "V": "DQyxu3gDmtI"}, {"A": "Trichur V. Ramachandran", "C": "Swathi Thirunal", "D": "3:29", "T": "", "U": "236 views", "V": "2OIXavFAoVg"}, {"A": "K. S. Gopalakrishnan", "C": "Swathi Thirunal", "D": "5:25", "T": "", "U": "23 views", "V": "KHRywAIA2c8"}, {"A": "K. S. Gopalakrishnan", "C": "Swathi Thirunal", "D": "4:10", "T": "", "U": "35 views", "V": "U5tp424KbhQ"}, {"A": "Trivandrum Sampath", "C": "Swathi Thirunal", "D": "5:18", "T": "", "U": "626 views", "V": "C1iZpUMuK-I"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Madurai Somu", "C": "UnknownComposer", "D": "15:05", "T": "", "U": "50 views", "V": "PvrMQMU8_v8"}, {"A": "Sandeep Narayan", "C": "UnknownComposer", "D": "4:43", "T": "", "U": "738 views", "V": "baEe1X8xFbc"}, {"A": "U. Srinivas", "C": "UnknownComposer", "D": "5:40", "T": "", "U": "40 views", "V": "Zlb4BOstoho"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

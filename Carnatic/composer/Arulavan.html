@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>11</td></tr>
 <tr><td><em>Song</em></td><td>1</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "kANa Ayiram kaN vENDum  unaik", "songs": [{"N": "0111", "T": "", "H": "Kaana Ayiram Kan", "S": "kANa Ayiram kaN vENDum  unaik  muruganaik kANa :  Adi", "R": "Abheri", "C": "Arulavan", "A": "K. J. Yesudas", "V": "WEuK0CXLORk"}, {"N": "0112", "T": "", "H": "Kaana Ayiram Kan", "S": "kANa Ayiram kaN vENDum  unaik  muruganaik kANa :  Adi", "R": "Unknownraga", "C": "Arulavan", "A": "K. J. Yesudas", "V": "5wqezbwszBU"}, {"N": "0113", "T": "", "H": "Kaana Ayiram Kan", "S": "kANa Ayiram kaN vENDum  unaik  muruganaik kANa :  Adi", "R": "Unknownraga", "C": "Arulavan", "A": "K. J. Yesudas", "V": "W7O7pj5NIcw"}, {"N": "0114", "T": "", "H": "Kaana Ayiram Kan", "S": "kANa Ayiram kaN vENDum  unaik  muruganaik kANa :  Adi", "R": "Unknownraga", "C": "Arulavan", "A": "K. J. Yesudas", "V": "c-AfmfmM8AU"}, {"N": "0115", "T": "", "H": "Kaana Ayiram Kan", "S": "kANa Ayiram kaN vENDum  unaik  muruganaik kANa :  Adi", "R": "Unknownraga", "C": "Arulavan", "A": "K. J. Yesudas", "V": "uhMAuGZpTCI"}, {"N": "0149", "T": "", "H": "Kaana Ayiram Kan", "S": "kANa Ayiram kaN vENDum  unaik  muruganaik kANa :  Adi", "R": "Abheri", "C": "Arulavan", "A": "Nithyasree Mahadevan", "V": "VUlWIAfo9j4"}, {"N": "0150", "T": "", "H": "Kaana Ayiram Kan", "S": "kANa Ayiram kaN vENDum  unaik  muruganaik kANa :  Adi", "R": "Abheri", "C": "Arulavan", "A": "Nithyasree Mahadevan", "V": "aMlEv-S-4yI"}, {"N": "0151", "T": "", "H": "Kaana Ayiram Kan", "S": "kANa Ayiram kaN vENDum  unaik  muruganaik kANa :  Adi", "R": "Karnataka devagandhari", "C": "Arulavan", "A": "Nithyasree Mahadevan", "V": "SDIMFmyMB8A"}, {"N": "0152", "T": "", "H": "Kaana Ayiram Kan", "S": "kANa Ayiram kaN vENDum  unaik  muruganaik kANa :  Adi", "R": "Unknownraga", "C": "Arulavan", "A": "Nithyasree Mahadevan", "V": "WySki8raAhI"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Kaana Ayiram Kan", "S": "kANa Ayiram kaN vENDum  unaik  muruganaik kANa :  Adi", "songs": [{"A": "K. J. Yesudas", "D": "2:37", "R": "Abheri", "T": "", "U": "35,000 views", "V": "WEuK0CXLORk"}, {"A": "K. J. Yesudas", "D": "3:01", "R": "Unknownraga", "T": "", "U": "43,708 views", "V": "uhMAuGZpTCI"}, {"A": "K. J. Yesudas", "D": "3:25", "R": "Unknownraga", "T": "", "U": "1,157 views", "V": "c-AfmfmM8AU"}, {"A": "K. J. Yesudas", "D": "2:44", "R": "Unknownraga", "T": "", "U": "20,762 views", "V": "5wqezbwszBU"}, {"A": "K. J. Yesudas", "D": "3:11", "R": "Unknownraga", "T": "", "U": "584 views", "V": "W7O7pj5NIcw"}, {"A": "Nithyasree Mahadevan", "D": "7:18", "R": "Unknownraga", "T": "", "U": "224,570 views", "V": "WySki8raAhI"}, {"A": "Nithyasree Mahadevan", "D": "6:14", "R": "Karnataka devagandhari", "T": "", "U": "3,570 views", "V": "SDIMFmyMB8A"}, {"A": "Nithyasree Mahadevan", "D": "4:51", "R": "Abheri", "T": "", "U": "1,062 views", "V": "aMlEv-S-4yI"}, {"A": "Nithyasree Mahadevan", "D": "4:56", "R": "Abheri", "T": "", "U": "23 views", "V": "VUlWIAfo9j4"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

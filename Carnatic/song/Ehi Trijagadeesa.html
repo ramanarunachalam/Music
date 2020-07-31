@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>17</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>13</td></tr>
-<tr><td><em>Concert</em></td><td>13</td></tr>
+<tr><td><em>Concert</em></td><td>10</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -151,57 +151,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amritha Murali", "songs": [{"N": "0053", "T": "", "H": "Ehi Trijagadeesa", "S": "Ehi tri jagad ISa SambhO mAM  :  Caapu", "R": "Saranga", "C": "Thyagaraja", "A": "Amritha Murali", "V": "Uvgs_mNHIZ4"}]}, {"name": "Vocal - Bangalore Brothers", "songs": [{"N": "0021", "T": "", "H": "Ehi Trijagadeesa", "S": "Ehi tri jagad ISa SambhO mAM  :  Caapu", "R": "Saranga", "C": "Thyagaraja", "A": "Bangalore Brothers", "V": "cpxdS0NIUy0"}]}, {"name": "Vocal - Gayathri Girish", "songs": [{"N": "0070", "T": "", "H": "Ehi Trijagadeesa", "S": "Ehi tri jagad ISa SambhO mAM  :  Caapu", "R": "Saranga", "C": "Thyagaraja", "A": "Gayathri Girish", "V": "2zlSacd9nlE"}, {"N": "0071", "T": "", "H": "Ehi Trijagadeesa", "S": "Ehi tri jagad ISa SambhO mAM  :  Caapu", "R": "Unknownraga", "C": "Thyagaraja", "A": "Gayathri Girish", "V": "Owxga9cAYgs"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0436", "T": "", "H": "Ehi Trijagadeesa", "S": "Ehi tri jagad ISa SambhO mAM  :  Caapu", "R": "Saranga", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "5_MrRAIVmcE"}, {"N": "0437", "T": "", "H": "Ehi Trijagadeesa", "S": "Ehi tri jagad ISa SambhO mAM  :  Caapu", "R": "Saranga", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "yf9BuieJ4CQ"}, {"N": "0438", "T": "", "H": "Ehi Trijagadeesa", "S": "Ehi tri jagad ISa SambhO mAM  :  Caapu", "R": "Saranga,Shuddha saranga", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "enULT3Q556g"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0072", "T": "", "H": "Ehi Trijagadeesa", "S": "Ehi tri jagad ISa SambhO mAM  :  Caapu", "R": "Saranga", "C": "Thyagaraja", "A": "Ramakrishnan Murthy", "V": "bdHo9zL-rLI"}, {"N": "0073", "T": "", "H": "Ehi Trijagadeesa", "S": "Ehi tri jagad ISa SambhO mAM  :  Caapu", "R": "Saranga", "C": "Thyagaraja", "A": "Ramakrishnan Murthy", "V": "f5h-wXuKtYo"}]}, {"name": "Veena - Padma Varadhan", "songs": [{"N": "0004", "T": "", "H": "Ehi Trijagadeesa", "S": "Ehi tri jagad ISa SambhO mAM  :  Caapu", "R": "Saranga", "C": "Thyagaraja", "A": "Padma Varadhan", "V": "gWTwokXRaRg"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amritha Murali", "songs": [{"C": "Thyagaraja", "D": "11:16", "R": "Saranga", "T": "", "U": "260 views", "V": "Uvgs_mNHIZ4"}]}, {"A": "Bangalore Brothers", "songs": [{"C": "Thyagaraja", "D": "6:41", "R": "Saranga", "T": "", "U": "234 views", "V": "cpxdS0NIUy0"}]}, {"A": "Gayathri Girish", "songs": [{"C": "Thyagaraja", "D": "5:28", "R": "Unknownraga", "T": "", "U": "527 views", "V": "Owxga9cAYgs"}, {"C": "Thyagaraja", "D": "5:29", "R": "Saranga", "T": "", "U": "174 views", "V": "2zlSacd9nlE"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Thyagaraja", "D": "6:26", "R": "Saranga", "T": "", "U": "305 views", "V": "5_MrRAIVmcE"}, {"C": "Thyagaraja", "D": "6:15", "R": "Saranga", "T": "", "U": "501 views", "V": "yf9BuieJ4CQ"}, {"C": "Thyagaraja", "D": "7:49", "R": "Saranga,Shuddha saranga", "T": "", "U": "27 views", "V": "enULT3Q556g"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Thyagaraja", "D": "17:31", "R": "Saranga", "T": "", "U": "189 views", "V": "bdHo9zL-rLI"}, {"C": "Thyagaraja", "D": "17:31", "R": "Saranga", "T": "", "U": "0 views", "V": "f5h-wXuKtYo"}]}, {"A": "Padma Varadhan", "songs": [{"C": "Thyagaraja", "D": "11:00", "R": "Saranga", "T": "", "U": "110 views", "V": "gWTwokXRaRg"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

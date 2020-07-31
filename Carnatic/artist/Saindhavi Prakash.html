@@ -17,7 +17,7 @@
 <tr><td><em>Song</em></td><td>24</td></tr>
 <tr><td><em>Raga</em></td><td>22</td></tr>
 <tr><td><em>Composer</em></td><td>3</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>23</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "SAINDHAVI01", "songs": [{"N": "0002", "T": "", "H": "Karunai Deivame Karpagame", "S": "karuNai theyvamE kaRpagamE  :  Adi", "R": "Sindhubhairavi", "C": "Madurai N. Srinivasan", "A": "Saindhavi Prakash", "V": "W9wGDLKDKQc"}, {"N": "0003", "T": "", "H": "Piravi", "S": "Piravi", "R": "Sankarabharanam", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "zSq8RDBeWJU"}, {"N": "0004", "T": "Thiruvempavai", "H": "Aadhiyum Andhamum", "S": "Aadhiyum Andhamum", "R": "Bowli", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "Q0-8L5aBK_A"}, {"N": "0006", "T": "Thiruvempavai", "H": "Annamalayaan Adikamalm", "S": "Annamalayaan Adikamalm", "R": "Sama", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "jjroQeYWRhs"}, {"N": "0007", "T": "Thiruvempavai", "H": "Anne Ivaiyum Silavo", "S": "Anne Ivaiyum Silavo", "R": "Reethigowla", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "0aefRZTMR2o"}, {"N": "0008", "T": "Thiruvempavai", "H": "Kaadhaar Kuzhai", "S": "Kaadhaar Kuzhai", "R": "Bhimplas", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "OhkteDYIin4"}, {"N": "0009", "T": "Thiruvempavai", "H": "Kozhi Chilamba", "S": "Kozhi Chilamba", "R": "Dhanyasi", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "VFgEN3JhwHA"}, {"N": "0010", "T": "Thiruvempavai", "H": "Maalariya Naanmuganum", "S": "Maalariya Naanmuganum", "R": "Yadukulakambhoji", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "JjzwD_S0pxU"}, {"N": "0011", "T": "Thiruvempavai", "H": "Maane Nee", "S": "Maane Nee", "R": "Khamas", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "aSMX1x90lyc"}, {"N": "0012", "T": "Thiruvempavai", "H": "Moyyar Thadam", "S": "moyyAr thaDam poygai pukku mugErennak :  Adi", "R": "Poorvikalyani", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "yGWR5QPYAAw"}, {"N": "0013", "T": "Thiruvempavai", "H": "Munnai Pazhamporutku", "S": "Munnai Pazhamporutku", "R": "Natakurinji", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "vN68VBlCndg"}, {"N": "0014", "T": "Thiruvempavai", "H": "Munnikkadalai Churukki", "S": "Munnikkadalai Churukki", "R": "Amrithavarshini", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "jV9Js0cWyyQ"}, {"N": "0015", "T": "Thiruvempavai", "H": "Muthanna Vennagaiyaai", "S": "Muthanna Vennagaiyaai", "R": "Bilahari", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "W1x4yPjjfwY"}, {"N": "0016", "T": "Thiruvempavai", "H": "Onni Thila Nagaiyaai", "S": "Onni Thila Nagaiyaai", "R": "Devagandhari", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "ti8MCBE85AY"}, {"N": "0017", "T": "Thiruvempavai", "H": "Ororu Kaal Emperumaan", "S": "Ororu Kaal Emperumaan", "R": "Huseni", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "KkDMp303f6Y"}, {"N": "0018", "T": "Thiruvempavai", "H": "Paadhaalam Ezhinum", "S": "Paadhaalam Ezhinum", "R": "Shuddha saveri", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "aVWW-YNLjz8"}, {"N": "0019", "T": "Thiruvempavai", "H": "Paasam Paranjothi", "S": "Paasam Paranjothi", "R": "Kedaram", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "IX9GVHsOie4"}, {"N": "0020", "T": "Thiruvempavai", "H": "Painguvalai Kaar", "S": "Painguvalai Kaar", "R": "Saveri", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "T9aQAMTSVFQ"}, {"N": "0021", "T": "Thiruvempavai", "H": "Potri Aruluga Nin", "S": "Potri Aruluga Nin", "R": "Manirangu", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "-GD5OkVHZ6g"}, {"N": "0022", "T": "Thiruvempavai", "H": "Senganavan Dhisai Muganpaal", "S": "Senganavan Dhisai Muganpaal", "R": "Vasanthabhairavi", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "Szoayi331lo"}, {"N": "0023", "T": "Thiruvempavai", "H": "Unkaiyir Pillai", "S": "Unkaiyir Pillai", "R": "Hindolam", "C": "Manikavachagar", "A": "Saindhavi Prakash", "V": "9BF3Xpc5lL0"}, {"N": "0024", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "Saindhavi Prakash", "V": "twqDWSlYn2I"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Aadhiyum Andhamum", "S": "Aadhiyum Andhamum", "songs": [{"C": "Manikavachagar", "D": "2:14", "R": "Bowli", "T": "Thiruvempavai", "U": "14,569 views", "V": "Q0-8L5aBK_A"}]}, {"H": "Aartha Piravai", "S": "Aartha Piravai", "songs": [{"C": "Manikavachagar", "D": "2:03", "R": "Sankarabharanam", "T": "Thiruvempavai", "U": "3,237 views", "V": "zSq8RDBeWJU"}]}, {"H": "Annamalayaan Adikamalm", "S": "Annamalayaan Adikamalm", "songs": [{"C": "Manikavachagar", "D": "1:56", "R": "Sama", "T": "Thiruvempavai", "U": "2,910 views", "V": "jjroQeYWRhs"}]}, {"H": "Anne Ivaiyum Silavo", "S": "Anne Ivaiyum Silavo", "songs": [{"C": "Manikavachagar", "D": "2:00", "R": "Reethigowla", "T": "Thiruvempavai", "U": "4,941 views", "V": "0aefRZTMR2o"}]}, {"H": "Kaadhaar Kuzhai", "S": "Kaadhaar Kuzhai", "songs": [{"C": "Manikavachagar", "D": "2:11", "R": "Bhimplas", "T": "Thiruvempavai", "U": "4,997 views", "V": "OhkteDYIin4"}]}, {"H": "Karunai Deivame Karpagame", "S": "karuNai theyvamE kaRpagamE  :  Adi", "songs": [{"C": "Madurai N. Srinivasan", "D": "4:55", "R": "Sindhubhairavi", "T": "", "U": "2,177 views", "V": "W9wGDLKDKQc"}]}, {"H": "Kozhi Chilamba", "S": "Kozhi Chilamba", "songs": [{"C": "Manikavachagar", "D": "2:04", "R": "Dhanyasi", "T": "Thiruvempavai", "U": "4,231 views", "V": "VFgEN3JhwHA"}]}, {"H": "Maalariya Naanmuganum", "S": "Maalariya Naanmuganum", "songs": [{"C": "Manikavachagar", "D": "2:25", "R": "Yadukulakambhoji", "T": "Thiruvempavai", "U": "5,994 views", "V": "JjzwD_S0pxU"}]}, {"H": "Maane Nee", "S": "Maane Nee", "songs": [{"C": "Manikavachagar", "D": "2:09", "R": "Khamas", "T": "Thiruvempavai", "U": "5,352 views", "V": "aSMX1x90lyc"}]}, {"H": "Moyyar Thadam", "S": "moyyAr thaDam poygai pukku mugErennak :  Adi", "songs": [{"C": "Manikavachagar", "D": "2:33", "R": "Poorvikalyani", "T": "Thiruvempavai", "U": "3,738 views", "V": "yGWR5QPYAAw"}]}, {"H": "Munnai Pazhamporutku", "S": "Munnai Pazhamporutku", "songs": [{"C": "Manikavachagar", "D": "1:58", "R": "Natakurinji", "T": "Thiruvempavai", "U": "3,569 views", "V": "vN68VBlCndg"}]}, {"H": "Munnikkadalai Churukki", "S": "Munnikkadalai Churukki", "songs": [{"C": "Manikavachagar", "D": "2:33", "R": "Amrithavarshini", "T": "Thiruvempavai", "U": "3,404 views", "V": "jV9Js0cWyyQ"}]}, {"H": "Muthanna Vennagaiyaai", "S": "Muthanna Vennagaiyaai", "songs": [{"C": "Manikavachagar", "D": "2:13", "R": "Bilahari", "T": "Thiruvempavai", "U": "7,611 views", "V": "W1x4yPjjfwY"}]}, {"H": "Onni Thila Nagaiyaai", "S": "Onni Thila Nagaiyaai", "songs": [{"C": "Manikavachagar", "D": "2:02", "R": "Devagandhari", "T": "Thiruvempavai", "U": "6,273 views", "V": "ti8MCBE85AY"}]}, {"H": "Ororu Kaal Emperumaan", "S": "Ororu Kaal Emperumaan", "songs": [{"C": "Manikavachagar", "D": "2:27", "R": "Huseni", "T": "Thiruvempavai", "U": "3,570 views", "V": "KkDMp303f6Y"}]}, {"H": "Paadhaalam Ezhinum", "S": "Paadhaalam Ezhinum", "songs": [{"C": "Manikavachagar", "D": "1:51", "R": "Shuddha saveri", "T": "Thiruvempavai", "U": "3,892 views", "V": "aVWW-YNLjz8"}]}, {"H": "Paasam Paranjothi", "S": "Paasam Paranjothi", "songs": [{"C": "Manikavachagar", "D": "2:42", "R": "Kedaram", "T": "Thiruvempavai", "U": "10,223 views", "V": "IX9GVHsOie4"}]}, {"H": "Painguvalai Kaar", "S": "Painguvalai Kaar", "songs": [{"C": "Manikavachagar", "D": "2:18", "R": "Saveri", "T": "Thiruvempavai", "U": "3,258 views", "V": "T9aQAMTSVFQ"}]}, {"H": "Potri Aruluga Nin", "S": "Potri Aruluga Nin", "songs": [{"C": "Manikavachagar", "D": "1:56", "R": "Manirangu", "T": "Thiruvempavai", "U": "3,020 views", "V": "-GD5OkVHZ6g"}]}, {"H": "Senganavan Dhisai Muganpaal", "S": "Senganavan Dhisai Muganpaal", "songs": [{"C": "Manikavachagar", "D": "2:03", "R": "Vasanthabhairavi", "T": "Thiruvempavai", "U": "2,965 views", "V": "Szoayi331lo"}]}, {"H": "Unkaiyir Pillai", "S": "Unkaiyir Pillai", "songs": [{"C": "Manikavachagar", "D": "2:10", "R": "Hindolam", "T": "Thiruvempavai", "U": "3,089 views", "V": "9BF3Xpc5lL0"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "47:09", "R": "Unknownraga", "T": "", "U": "191,955 views", "V": "twqDWSlYn2I"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

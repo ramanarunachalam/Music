@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -148,57 +148,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0411", "T": "", "H": "Ramanai Tharuvoy", "S": "rAmanait taruvAi jagat rakSaka rAmanait taruvAi :  Adi", "R": "Sindhubhairavi", "C": "Arunachala Kavi", "A": "K. V. Narayanaswamy", "V": "jMtmW1KR2d8"}]}, {"name": "Vocal - Neyveli Santhanagopalan", "songs": [{"N": "0113", "T": "", "H": "Ramanai Tharuvoy", "S": "rAmanait taruvAi jagat rakSaka rAmanait taruvAi :  Adi", "R": "Sindhubhairavi", "C": "Arunachala Kavi", "A": "Neyveli Santhanagopalan", "V": "EXTNWqUhB0c"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0277", "T": "", "H": "Ramanai Tharuvoy", "S": "rAmanait taruvAi jagat rakSaka rAmanait taruvAi :  Adi", "R": "Mohanam", "C": "Arunachala Kavi", "A": "Nithyasree Mahadevan", "V": "9YXFDupf3IU"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0178", "T": "", "H": "Ramanai Tharuvoy", "S": "rAmanait taruvAi jagat rakSaka rAmanait taruvAi :  Adi", "R": "Unknownraga", "C": "Arunachala Kavi", "A": "Ramakrishnan Murthy", "V": "4cH0YzJrn3Y"}]}, {"name": "Chitra Veena - A. Narayana Iyer", "songs": [{"N": "0003", "T": "", "H": "Ramanai Tharuvoy", "S": "rAmanait taruvAi jagat rakSaka rAmanait taruvAi :  Adi", "R": "Sindhubhairavi", "C": "Arunachala Kavi", "A": "A. Narayana Iyer", "V": "a3WoMeBepjY"}]}, {"name": "Violin - T. N. Krishnan", "songs": [{"N": "0313", "T": "", "H": "Ramanai Tharuvoy", "S": "rAmanait taruvAi jagat rakSaka rAmanait taruvAi :  Adi", "R": "Sindhubhairavi", "C": "Arunachala Kavi", "A": "T. N. Krishnan", "V": "HfEvflYXDOs"}, {"N": "0314", "T": "", "H": "Ramanai Tharuvoy", "S": "rAmanait taruvAi jagat rakSaka rAmanait taruvAi :  Adi", "R": "Sindhubhairavi", "C": "Arunachala Kavi", "A": "T. N. Krishnan", "V": "_l7CYMnFlCI"}, {"N": "0316", "T": "", "H": "Ramanai Tharuvoy", "S": "rAmanait taruvAi jagat rakSaka rAmanait taruvAi :  Adi", "R": "Sindhubhairavi", "C": "Arunachala Kavi", "A": "T. N. Krishnan", "V": "vw_PWim8M9o"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "K. V. Narayanaswamy", "songs": [{"C": "Arunachala Kavi", "D": "10:51", "R": "Sindhubhairavi", "T": "", "U": "732 views", "V": "jMtmW1KR2d8"}]}, {"A": "Neyveli Santhanagopalan", "songs": [{"C": "Arunachala Kavi", "D": "3:01", "R": "Sindhubhairavi", "T": "", "U": "1,202 views", "V": "EXTNWqUhB0c"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Arunachala Kavi", "D": "6:05", "R": "Mohanam", "T": "", "U": "478 views", "V": "9YXFDupf3IU"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Arunachala Kavi", "D": "3:32", "R": "Unknownraga", "T": "", "U": "462 views", "V": "4cH0YzJrn3Y"}]}, {"A": "A. Narayana Iyer", "songs": [{"C": "Arunachala Kavi", "D": "5:52", "R": "Sindhubhairavi", "T": "", "U": "219 views", "V": "a3WoMeBepjY"}]}, {"A": "T. N. Krishnan", "songs": [{"C": "Arunachala Kavi", "D": "5:52", "R": "Sindhubhairavi", "T": "", "U": "763 views", "V": "vw_PWim8M9o"}, {"C": "Arunachala Kavi", "D": "5:52", "R": "Sindhubhairavi", "T": "", "U": "0 views", "V": "HfEvflYXDOs"}, {"C": "Arunachala Kavi", "D": "5:54", "R": "Sindhubhairavi", "T": "", "U": "117 views", "V": "_l7CYMnFlCI"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

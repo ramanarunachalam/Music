@@ -29,7 +29,7 @@
 <tr><td><em>Audio</em></td><td>35</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>16</td></tr>
-<tr><td><em>Concert</em></td><td>16</td></tr>
+<tr><td><em>Concert</em></td><td>25</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -134,57 +134,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0038", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "0J5btzUfnrU"}, {"N": "0039", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "Amrutha Venkatesh", "V": "l-9kjQgfD3A"}]}, {"name": "Vocal - Cherthala K. N. Renganatha Sharma", "songs": [{"N": "0023", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "Cherthala K. N. Renganatha Sharma", "V": "8Zf0zIRlM1s"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0039", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "H_HuA5tNMD4"}, {"N": "0040", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "Nh6ydYUQR4w"}, {"N": "0041", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "hO0q9J5LJJU"}, {"N": "0042", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "nWYZhR0JBaw"}, {"N": "0043", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "K. V. Narayanaswamy", "V": "xhphtMT0oZw"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "0131", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "lGiqKyQK7c8"}, {"N": "0124", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "7aubOult9GU"}, {"N": "0125", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "8k7ILfvTJPw"}, {"N": "0126", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "8vR5LGMXlVM"}, {"N": "0127", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "Cz47BL0pfw0"}, {"N": "0128", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "Qpl8e4uLE5w"}, {"N": "0129", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "R9B9TI2S-rA"}, {"N": "0130", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "M. S. Subbulakshmi", "V": "YjeMUrp_0S0"}]}, {"name": "Vocal - N. J. Nandini", "songs": [{"N": "0011", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "N. J. Nandini", "V": "mQrAiSYpE4s"}, {"N": "0012", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "N. J. Nandini", "V": "nmL-5DJJ87g"}]}, {"name": "Vocal - Prince Rama Varma", "songs": [{"N": "0058", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "G8FqeWYuZBc"}, {"N": "0059", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "GW34M5w4qUA"}, {"N": "0060", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "Prince Rama Varma", "V": "XYAHcmJ5eoE"}]}, {"name": "Vocal - Radha Viswanathan", "songs": [{"N": "0016", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "Radha Viswanathan", "V": "vA9vPz_jbII"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0138", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "T. M. Krishna", "V": "k2onA3223vE"}, {"N": "0139", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "T. M. Krishna", "V": "lZXPnIanw5c"}]}, {"name": "Flute - Shashank Subramanyam", "songs": [{"N": "0010", "T": "", "H": "Aliveni", "S": "alivEni endhu chaivu hantha gnyAnini mAnini :  Caapu", "R": "Kurinji", "C": "Swathi Thirunal", "A": "Shashank Subramanyam", "V": "mTcYOhsXVnY"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amrutha Venkatesh", "songs": [{"C": "Swathi Thirunal", "D": "8:59", "R": "Kurinji", "T": "", "U": "0 views", "V": "0J5btzUfnrU"}, {"C": "Swathi Thirunal", "D": "7:29", "R": "Kurinji", "T": "", "U": "0 views", "V": "l-9kjQgfD3A"}]}, {"A": "Cherthala K. N. Renganatha Sharma", "songs": [{"C": "Swathi Thirunal", "D": "7:13", "R": "Kurinji", "T": "", "U": "737 views", "V": "8Zf0zIRlM1s"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Swathi Thirunal", "D": "8:15", "R": "Kurinji", "T": "", "U": "956 views", "V": "xhphtMT0oZw"}, {"C": "Swathi Thirunal", "D": "2:10", "R": "Kurinji", "T": "", "U": "31 views", "V": "nWYZhR0JBaw"}, {"C": "Swathi Thirunal", "D": "10:06", "R": "Kurinji", "T": "", "U": "261 views", "V": "hO0q9J5LJJU"}, {"C": "Swathi Thirunal", "D": "8:15", "R": "Kurinji", "T": "", "U": "2,854 views", "V": "Nh6ydYUQR4w"}, {"C": "Swathi Thirunal", "D": "8:23", "R": "Kurinji", "T": "", "U": "0 views", "V": "H_HuA5tNMD4"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Swathi Thirunal", "D": "6:36", "R": "Kurinji", "T": "", "U": "310 views", "V": "8k7ILfvTJPw"}, {"C": "Swathi Thirunal", "D": "5:30", "R": "Kurinji", "T": "", "U": "8,500 views", "V": "Qpl8e4uLE5w"}, {"C": "Swathi Thirunal", "D": "4:59", "R": "Kurinji", "T": "", "U": "72 views", "V": "lGiqKyQK7c8"}, {"C": "Swathi Thirunal", "D": "4:59", "R": "Kurinji", "T": "", "U": "0 views", "V": "R9B9TI2S-rA"}, {"C": "Swathi Thirunal", "D": "6:38", "R": "Kurinji", "T": "", "U": "11 views", "V": "YjeMUrp_0S0"}, {"C": "Swathi Thirunal", "D": "6:51", "R": "Kurinji", "T": "", "U": "38 views", "V": "Cz47BL0pfw0"}, {"C": "Swathi Thirunal", "D": "4:58", "R": "Kurinji", "T": "", "U": "4,760 views", "V": "7aubOult9GU"}, {"C": "Swathi Thirunal", "D": "4:49", "R": "Kurinji", "T": "", "U": "636 views", "V": "8vR5LGMXlVM"}]}, {"A": "N. J. Nandini", "songs": [{"C": "Swathi Thirunal", "D": "7:02", "R": "Kurinji", "T": "", "U": "0 views", "V": "mQrAiSYpE4s"}, {"C": "Swathi Thirunal", "D": "7:02", "R": "Kurinji", "T": "", "U": "8,330 views", "V": "nmL-5DJJ87g"}]}, {"A": "Prince Rama Varma", "songs": [{"C": "Swathi Thirunal", "D": "8:22", "R": "Kurinji", "T": "", "U": "0 views", "V": "G8FqeWYuZBc"}, {"C": "Swathi Thirunal", "D": "6:11", "R": "Kurinji", "T": "", "U": "191,997 views", "V": "GW34M5w4qUA"}, {"C": "Swathi Thirunal", "D": "10:10", "R": "Kurinji", "T": "", "U": "7,740 views", "V": "XYAHcmJ5eoE"}]}, {"A": "Radha Viswanathan", "songs": [{"C": "Swathi Thirunal", "D": "3:46", "R": "Kurinji", "T": "", "U": "2,332 views", "V": "vA9vPz_jbII"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Swathi Thirunal", "D": "6:26", "R": "Kurinji", "T": "", "U": "103 views", "V": "k2onA3223vE"}, {"C": "Swathi Thirunal", "D": "5:55", "R": "Kurinji", "T": "", "U": "0 views", "V": "lZXPnIanw5c"}]}, {"A": "Shashank Subramanyam", "songs": [{"C": "Swathi Thirunal", "D": "4:59", "R": "Kurinji", "T": "", "U": "67 views", "V": "mTcYOhsXVnY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

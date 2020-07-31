@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>7</td></tr>
-<tr><td><em>Concert</em></td><td>7</td></tr>
+<tr><td><em>Concert</em></td><td>6</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -143,57 +143,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ananya Ashok", "songs": [{"N": "0018", "T": "", "H": "Govinda Govinda", "S": "gOviMda gOviMdayani koluvarE  :  Adi", "R": "Brindavana saranga", "C": "Annamacharya", "A": "Ananya Ashok", "V": "NxQiTf-SAew"}]}, {"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0081", "T": "", "H": "Govinda Govinda", "S": "gOviMda gOviMdayani koluvarE  :  Adi", "R": "Brindavana saranga", "C": "Annamacharya", "A": "P. Unnikrishnan", "V": "6LUkp0B8fuo"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0071", "T": "", "H": "Govinda Govinda", "S": "gOviMda gOviMdayani koluvarE  :  Adi", "R": "Brindavana saranga", "C": "Annamacharya", "A": "Priya Sisters", "V": "DGpgfMq3FFw"}, {"N": "0072", "T": "", "H": "Govinda Govinda", "S": "gOviMda gOviMdayani koluvarE  :  Adi", "R": "Brindavana saranga", "C": "Annamacharya", "A": "Priya Sisters", "V": "hYjoxw3aqRs"}, {"N": "0073", "T": "", "H": "Govinda Govinda", "S": "gOviMda gOviMdayani koluvarE  :  Adi", "R": "Brindavana saranga", "C": "Annamacharya", "A": "Priya Sisters", "V": "qfxbE7fu0fw"}]}, {"name": "Vocal - Savita Sreeram", "songs": [{"N": "0009", "T": "", "H": "Govinda Govinda", "S": "gOviMda gOviMdayani koluvarE  :  Adi", "R": "Brindavana saranga", "C": "Annamacharya", "A": "Savita Sreeram", "V": "kEjIgtG19pQ"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Ananya Ashok", "songs": [{"C": "Annamacharya", "D": "4:21", "R": "Brindavana saranga", "T": "", "U": "0 views", "V": "NxQiTf-SAew"}]}, {"A": "P. Unnikrishnan", "songs": [{"C": "Annamacharya", "D": "6:47", "R": "Brindavana saranga", "T": "", "U": "149,713 views", "V": "6LUkp0B8fuo"}]}, {"A": "Priya Sisters", "songs": [{"C": "Annamacharya", "D": "5:25", "R": "Brindavana saranga", "T": "", "U": "0 views", "V": "hYjoxw3aqRs"}, {"C": "Annamacharya", "D": "5:25", "R": "Brindavana saranga", "T": "", "U": "328,131 views", "V": "DGpgfMq3FFw"}, {"C": "Annamacharya", "D": "5:25", "R": "Brindavana saranga", "T": "", "U": "29,254 views", "V": "qfxbE7fu0fw"}]}, {"A": "Savita Sreeram", "songs": [{"C": "Annamacharya", "D": "5:33", "R": "Brindavana saranga", "T": "", "U": "21,723 views", "V": "kEjIgtG19pQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

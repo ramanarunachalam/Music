@@ -147,57 +147,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bangalore Brothers", "songs": [{"N": "0028", "T": "", "H": "Irabeku Illadirabeku", "S": "irabEku illadirabEku : Caapu", "R": "Anandabhairavi", "C": "Purandara Dasa", "A": "Bangalore Brothers", "V": "EzKWTxicgzs"}]}, {"name": "Vocal - Manasi Prasad", "songs": [{"N": "0010", "T": "", "H": "Irabeku Illadirabeku", "S": "irabEku illadirabEku : Caapu", "R": "Bahudhari", "C": "Purandara Dasa", "A": "Manasi Prasad", "V": "sR6IXgev_WM"}]}, {"name": "Vocal - Rajkumar Bharathi", "songs": [{"N": "0015", "T": "", "H": "Irabeku Illadirabeku", "S": "irabEku illadirabEku : Caapu", "R": "Unknownraga", "C": "Purandara Dasa", "A": "Rajkumar Bharathi", "V": "YQouVM03ya0"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0102", "T": "", "H": "Irabeku Illadirabeku", "S": "irabEku illadirabEku : Caapu", "R": "Bahudhari", "C": "Purandara Dasa", "A": "Ranjani Gayatri", "V": "pnlIiGSpqHc"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bangalore Brothers", "songs": [{"C": "Purandara Dasa", "D": "4:31", "R": "Anandabhairavi", "T": "", "U": "1,105 views", "V": "EzKWTxicgzs"}]}, {"A": "Manasi Prasad", "songs": [{"C": "Purandara Dasa", "D": "13:37", "R": "Bahudhari", "T": "", "U": "4,350 views", "V": "sR6IXgev_WM"}]}, {"A": "Rajkumar Bharathi", "songs": [{"C": "Purandara Dasa", "D": "5:10", "R": "Unknownraga", "T": "", "U": "0 views", "V": "YQouVM03ya0"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Purandara Dasa", "D": "7:51", "R": "Bahudhari", "T": "", "U": "40,608 views", "V": "pnlIiGSpqHc"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

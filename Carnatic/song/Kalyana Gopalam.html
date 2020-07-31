@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>20</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>15</td></tr>
-<tr><td><em>Concert</em></td><td>15</td></tr>
+<tr><td><em>Concert</em></td><td>18</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -118,57 +118,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Abhishek Raghuram", "songs": [{"N": "0089", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Sindhubhairavi", "C": "Narayana Theertha", "A": "Abhishek Raghuram", "V": "WbpsnGHqveY"}]}, {"name": "Vocal - Charumathi Ramachandran", "songs": [{"N": "0008", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Sindhubhairavi", "C": "Narayana Theertha", "A": "Charumathi Ramachandran", "V": "rjV3nZlDUtM"}]}, {"name": "Vocal - Cherthala K. N. Renganatha Sharma", "songs": [{"N": "0064", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Sindhubhairavi", "C": "Narayana Theertha", "A": "Cherthala K. N. Renganatha Sharma", "V": "qORrfLnrSHs"}]}, {"name": "Vocal - Kunnakudi M. Balamuralikrishna", "songs": [{"N": "0048", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Unknownraga", "C": "Narayana Theertha", "A": "Kunnakudi M. Balamuralikrishna", "V": "ElCmFe1LDyY"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0654", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Unknownraga", "C": "Narayana Theertha", "A": "M. Balamuralikrishna", "V": "Nu83Z8T2B48"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0298", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Sindhubhairavi", "C": "Narayana Theertha", "A": "M. L. Vasanthakumari", "V": "34qVY4fx4Ms"}, {"N": "0299", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Sindhubhairavi", "C": "Narayana Theertha", "A": "M. L. Vasanthakumari", "V": "oNhSbrCRW_c"}, {"N": "0300", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Sindhubhairavi", "C": "Narayana Theertha", "A": "M. L. Vasanthakumari", "V": "tNX59-EOfMY"}, {"N": "0301", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Unknownraga", "C": "Narayana Theertha", "A": "M. L. Vasanthakumari", "V": "OV4_w2udn7g"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0097", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Sindhubhairavi", "C": "Narayana Theertha", "A": "Priya Sisters", "V": "EKwIWxsAHa4"}]}, {"name": "Vocal - Raji Gopalakrishnan", "songs": [{"N": "0027", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Unknownraga", "C": "Narayana Theertha", "A": "Raji Gopalakrishnan", "V": "UyR7TCQAuXQ"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0113", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Unknownraga", "C": "Narayana Theertha", "A": "Ranjani Gayatri", "V": "nZQwxpzXpuE"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0408", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Kamavardhini", "C": "Narayana Theertha", "A": "Sanjay Subrahmanyan", "V": "56ARZEo6FFY"}, {"N": "0409", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Kamavardhini", "C": "Narayana Theertha", "A": "Sanjay Subrahmanyan", "V": "n9OHfcMYU_E"}, {"N": "0410", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Kamavardhini", "C": "Narayana Theertha", "A": "Sanjay Subrahmanyan", "V": "vYA8HNcbojc"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0234", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Sindhubhairavi", "C": "Narayana Theertha", "A": "Sudha Ragunathan", "V": "LnPU-3vKSVo"}]}, {"name": "Veena - Veena E. Gayathri", "songs": [{"N": "0048", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Sindhubhairavi", "C": "Narayana Theertha", "A": "Veena E. Gayathri", "V": "uM70raF7VEU"}]}, {"name": "Flute - V. K. Raman", "songs": [{"N": "0025", "T": "", "H": "Kalyana Gopalam", "S": "kalyANa gOpAlam karuNAlavAlam mAlyAlankrta mITE :  Adi", "R": "Unknownraga", "C": "Narayana Theertha", "A": "V. K. Raman", "V": "WRXBU5VpVSs"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Abhishek Raghuram", "songs": [{"C": "Narayana Theertha", "D": "6:38", "R": "Sindhubhairavi", "T": "", "U": "208 views", "V": "WbpsnGHqveY"}]}, {"A": "Charumathi Ramachandran", "songs": [{"C": "Narayana Theertha", "D": "7:22", "R": "Sindhubhairavi", "T": "", "U": "1,456 views", "V": "rjV3nZlDUtM"}]}, {"A": "Cherthala K. N. Renganatha Sharma", "songs": [{"C": "Narayana Theertha", "D": "5:39", "R": "Sindhubhairavi", "T": "", "U": "1,492 views", "V": "qORrfLnrSHs"}]}, {"A": "Kunnakudi M. Balamuralikrishna", "songs": [{"C": "Narayana Theertha", "D": "6:42", "R": "Unknownraga", "T": "", "U": "0 views", "V": "ElCmFe1LDyY"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Narayana Theertha", "D": "3:57", "R": "Unknownraga", "T": "", "U": "0 views", "V": "Nu83Z8T2B48"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Narayana Theertha", "D": "11:45", "R": "Sindhubhairavi", "T": "", "U": "0 views", "V": "34qVY4fx4Ms"}, {"C": "Narayana Theertha", "D": "8:02", "R": "Sindhubhairavi", "T": "", "U": "1,014 views", "V": "tNX59-EOfMY"}, {"C": "Narayana Theertha", "D": "7:04", "R": "Sindhubhairavi", "T": "", "U": "7 views", "V": "oNhSbrCRW_c"}, {"C": "Narayana Theertha", "D": "10:32", "R": "Unknownraga", "T": "", "U": "0 views", "V": "OV4_w2udn7g"}]}, {"A": "Priya Sisters", "songs": [{"C": "Narayana Theertha", "D": "5:26", "R": "Sindhubhairavi", "T": "", "U": "0 views", "V": "EKwIWxsAHa4"}]}, {"A": "Raji Gopalakrishnan", "songs": [{"C": "Narayana Theertha", "D": "4:49", "R": "Unknownraga", "T": "", "U": "4,756 views", "V": "UyR7TCQAuXQ"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Narayana Theertha", "D": "6:06", "R": "Unknownraga", "T": "", "U": "0 views", "V": "nZQwxpzXpuE"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Narayana Theertha", "D": "12:31", "R": "Kamavardhini", "T": "", "U": "288 views", "V": "vYA8HNcbojc"}, {"C": "Narayana Theertha", "D": "12:31", "R": "Kamavardhini", "T": "", "U": "169 views", "V": "n9OHfcMYU_E"}, {"C": "Narayana Theertha", "D": "21:06", "R": "Kamavardhini", "T": "", "U": "168 views", "V": "56ARZEo6FFY"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Narayana Theertha", "D": "6:24", "R": "Sindhubhairavi", "T": "", "U": "0 views", "V": "LnPU-3vKSVo"}]}, {"A": "Veena E. Gayathri", "songs": [{"C": "Narayana Theertha", "D": "5:34", "R": "Sindhubhairavi", "T": "", "U": "157 views", "V": "uM70raF7VEU"}]}, {"A": "V. K. Raman", "songs": [{"C": "Narayana Theertha", "D": "3:03", "R": "Unknownraga", "T": "", "U": "154 views", "V": "WRXBU5VpVSs"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

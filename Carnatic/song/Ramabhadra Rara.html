@@ -28,7 +28,7 @@
 <tr><td><em>Audio</em></td><td>11</td></tr>
 <tr><td><em>Raga</em></td><td>4</td></tr>
 <tr><td><em>Artist</em></td><td>10</td></tr>
-<tr><td><em>Concert</em></td><td>10</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -169,57 +169,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Hyderabad Sisters", "songs": [{"N": "0033", "T": "", "H": "Ramabhadra Rara", "S": "rAmabhadra rArA shrI rmacandra rArA tAmrasa :  Tisra Adi", "R": "Unknownraga", "C": "Bhadrachala Ramadasu", "A": "Hyderabad Sisters", "V": "b5aEpMGPaEI"}]}, {"name": "Vocal - J. B. Keerthana", "songs": [{"N": "0062", "T": "", "H": "Ramabhadra Rara", "S": "rAmabhadra rArA shrI rmacandra rArA tAmrasa :  Tisra Adi", "R": "Sankarabharanam", "C": "Bhadrachala Ramadasu", "A": "J. B. Keerthana", "V": "PlmRXPG0f_0"}]}, {"name": "Vocal - Madurai Somu", "songs": [{"N": "0209", "T": "", "H": "Ramabhadra Rara", "S": "rAmabhadra rArA shrI rmacandra rArA tAmrasa :  Tisra Adi", "R": "Thodi", "C": "Bhadrachala Ramadasu", "A": "Madurai Somu", "V": "bvcV5Cy1veU"}]}, {"name": "Vocal - Mambalam Sisters", "songs": [{"N": "0089", "T": "", "H": "Ramabhadra Rara", "S": "rAmabhadra rArA shrI rmacandra rArA tAmrasa :  Tisra Adi", "R": "Anandabhairavi", "C": "Bhadrachala Ramadasu", "A": "Mambalam Sisters", "V": "UhhAly3YGTY"}]}, {"name": "Vocal - Nedunuri Krishnamurthy", "songs": [{"N": "0338", "T": "", "H": "Ramabhadra Rara", "S": "rAmabhadra rArA shrI rmacandra rArA tAmrasa :  Tisra Adi", "R": "Unknownraga", "C": "Bhadrachala Ramadasu", "A": "Nedunuri Krishnamurthy", "V": "ZW86ioR0H64"}]}, {"name": "Vocal - Neyveli Santhanagopalan", "songs": [{"N": "0112", "T": "", "H": "Ramabhadra Rara", "S": "rAmabhadra rArA shrI rmacandra rArA tAmrasa :  Tisra Adi", "R": "Unknownraga", "C": "Bhadrachala Ramadasu", "A": "Neyveli Santhanagopalan", "V": "ECDkjT9Ny6E"}]}, {"name": "Vocal - O. S. Thyagarajan", "songs": [{"N": "0142", "T": "", "H": "Ramabhadra Rara", "S": "rAmabhadra rArA shrI rmacandra rArA tAmrasa :  Tisra Adi", "R": "Anandabhairavi", "C": "Bhadrachala Ramadasu", "A": "O. S. Thyagarajan", "V": "JHRm2ulYMCU"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0414", "T": "", "H": "Ramabhadra Rara", "S": "rAmabhadra rArA shrI rmacandra rArA tAmrasa :  Tisra Adi", "R": "Anandabhairavi", "C": "Bhadrachala Ramadasu", "A": "T. N. Seshagopalan", "V": "Esb96jRONgU"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Hyderabad Sisters", "songs": [{"C": "Bhadrachala Ramadasu", "D": "6:17", "R": "Unknownraga", "T": "", "U": "0 views", "V": "b5aEpMGPaEI"}]}, {"A": "J. B. Keerthana", "songs": [{"C": "Bhadrachala Ramadasu", "D": "7:15", "R": "Sankarabharanam", "T": "", "U": "1,474 views", "V": "PlmRXPG0f_0"}]}, {"A": "Madurai Somu", "songs": [{"C": "Bhadrachala Ramadasu", "D": "39:46", "R": "Thodi", "T": "", "U": "226 views", "V": "bvcV5Cy1veU"}]}, {"A": "Mambalam Sisters", "songs": [{"C": "Bhadrachala Ramadasu", "D": "5:00", "R": "Anandabhairavi", "T": "", "U": "27,903 views", "V": "UhhAly3YGTY"}]}, {"A": "Nedunuri Krishnamurthy", "songs": [{"C": "Bhadrachala Ramadasu", "D": "6:30", "R": "Unknownraga", "T": "", "U": "3,205 views", "V": "ZW86ioR0H64"}]}, {"A": "Neyveli Santhanagopalan", "songs": [{"C": "Bhadrachala Ramadasu", "D": "3:21", "R": "Unknownraga", "T": "", "U": "12,488 views", "V": "ECDkjT9Ny6E"}]}, {"A": "O. S. Thyagarajan", "songs": [{"C": "Bhadrachala Ramadasu", "D": "3:55", "R": "Anandabhairavi", "T": "", "U": "155 views", "V": "JHRm2ulYMCU"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Bhadrachala Ramadasu", "D": "10:48", "R": "Anandabhairavi", "T": "", "U": "149 views", "V": "Esb96jRONgU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

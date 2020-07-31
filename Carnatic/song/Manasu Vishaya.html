@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>10</td></tr>
-<tr><td><em>Concert</em></td><td>10</td></tr>
+<tr><td><em>Concert</em></td><td>12</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -139,57 +139,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - K. J. Yesudas", "songs": [{"N": "0165", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "QCUP5tHdoHA"}, {"N": "0166", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "K. J. Yesudas", "V": "duczLnodpSc"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0335", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "H3Lk_K9NKqU"}, {"N": "0336", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "_s97Bc5NiyY"}, {"N": "0334", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "AepDAu6Txjg"}]}, {"name": "Vocal - Mambalam Sisters", "songs": [{"N": "0066", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "Mambalam Sisters", "V": "iwfG6ZwczsE"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0428", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "Ifr2Tsm5gIk"}, {"N": "0429", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "nZPZNJdXZmg"}, {"N": "0430", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "zZXWl7_tEwQ"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0262", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "U. Srinivas", "V": "3qRNBhunFHQ"}, {"N": "0263", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "U. Srinivas", "V": "rT4dXcj50pE"}]}, {"name": "Violin - Lalgudi Jayaraman", "songs": [{"N": "0245", "T": "", "H": "Manasu Vishaya", "S": "manasu vishaya naTa viTulak o sangitE :  Adi", "R": "Natakurinji", "C": "Thyagaraja", "A": "Lalgudi Jayaraman", "V": "vU_Fv_cb67s"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "K. J. Yesudas", "songs": [{"C": "Thyagaraja", "D": "25:11", "R": "Natakurinji", "T": "", "U": "1,300 views", "V": "duczLnodpSc"}, {"C": "Thyagaraja", "D": "25:11", "R": "Natakurinji", "T": "", "U": "94 views", "V": "QCUP5tHdoHA"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Thyagaraja", "D": "33:51", "R": "Natakurinji", "T": "", "U": "911 views", "V": "H3Lk_K9NKqU"}, {"C": "Thyagaraja", "D": "20:55", "R": "Natakurinji", "T": "", "U": "4,600 views", "V": "_s97Bc5NiyY"}, {"C": "Thyagaraja", "D": "28:12", "R": "Natakurinji", "T": "", "U": "217 views", "V": "AepDAu6Txjg"}]}, {"A": "Mambalam Sisters", "songs": [{"C": "Thyagaraja", "D": "30:56", "R": "Natakurinji", "T": "", "U": "445 views", "V": "iwfG6ZwczsE"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Thyagaraja", "D": "10:10", "R": "Natakurinji", "T": "", "U": "2,700 views", "V": "zZXWl7_tEwQ"}, {"C": "Thyagaraja", "D": "10:10", "R": "Natakurinji", "T": "", "U": "201 views", "V": "Ifr2Tsm5gIk"}, {"C": "Thyagaraja", "D": "10:17", "R": "Natakurinji", "T": "", "U": "1,893 views", "V": "nZPZNJdXZmg"}]}, {"A": "U. Srinivas", "songs": [{"C": "Thyagaraja", "D": "21:45", "R": "Natakurinji", "T": "", "U": "337 views", "V": "rT4dXcj50pE"}, {"C": "Thyagaraja", "D": "8:21", "R": "Natakurinji", "T": "", "U": "164 views", "V": "3qRNBhunFHQ"}]}, {"A": "Lalgudi Jayaraman", "songs": [{"C": "Thyagaraja", "D": "22:06", "R": "Natakurinji", "T": "", "U": "2,600 views", "V": "vU_Fv_cb67s"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

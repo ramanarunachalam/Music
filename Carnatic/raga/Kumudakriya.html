@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>38</td></tr>
 <tr><td><em>Song</em></td><td>3</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu", "songs": [{"N": "0053", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Aruna Sairam", "V": "E1HA1XPFT-M"}, {"N": "0054", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Aruna Sairam", "V": "a-89x3dWU5c"}, {"N": "0017", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Geetha Raja", "V": "C07S6LOyAjc"}, {"N": "0006", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Manasi Prasad", "V": "VVFHJvdxDws"}, {"N": "0033", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Nisha Rajagopal", "V": "aYRfOsqGRzA"}, {"N": "0072", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Nithyasree Mahadevan", "V": "23cyXvipnrU"}, {"N": "0018", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Palghat R Ramprasad", "V": "t4JqXuyfCMg"}, {"N": "0041", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Priya Sisters", "V": "FCwxOywK1lM"}, {"N": "0037", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Ramakrishnan Murthy", "V": "5EJi2TIJDuU"}, {"N": "0007", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Savita Narasimhan", "V": "pPa-RDPauFU"}, {"N": "0008", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Savita Narasimhan", "V": "tNBQbIjYc0w"}, {"N": "0112", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "1RhWuBWXOzE"}, {"N": "0113", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "CC4L_jC2ZxI"}, {"N": "0114", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "Haec1JMlJdU"}, {"N": "0036", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Sikkil Gurucharan", "V": "GRKcdUhOggc"}, {"N": "0037", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Sikkil Gurucharan", "V": "PH_OGmoqsRo"}, {"N": "0026", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Sriram Parthasarathy", "V": "-8-P16-eKY0"}, {"N": "0009", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "T. K. Govindarao", "V": "AuxAjEJYSyA"}, {"N": "0127", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "T. N. Seshagopalan", "V": "q0j1HLqiwFI"}, {"N": "0128", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "T. N. Seshagopalan", "V": "vwX0GYl6lTQ"}, {"N": "0033", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "T. V. Sankaranarayanan", "V": "3qD9w89Q1Mc"}, {"N": "0011", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "V. Pradeep Kumar", "V": "Q72HDsfxua4"}, {"N": "0027", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Akkarai Sisters", "V": "Zj_TZiD6gzE"}, {"N": "0049", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "B. Ananthakrishnan", "V": "b5yuBGJugFw"}, {"N": "0015", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Charumathi Raghuraman", "V": "DPBbO7qd1C4"}, {"N": "0084", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "M. S. Gopalakrishnan", "V": "F-I1cUIFqFI"}, {"N": "0085", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "M. S. Gopalakrishnan", "V": "aOcj4eBiMSA"}, {"N": "0086", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "M. S. Gopalakrishnan", "V": "t3Gi7BCEywc"}, {"N": "0019", "T": "", "H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "R": "Kumudakriya", "C": "Muthuswami Dikshitar", "A": "Sayee Rakshit", "V": "CeP-y84LFdM"}]}, {"name": "Ragam Thanam Pallavi", "songs": [{"N": "0175", "T": "", "H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "R": "Kumudakriya", "C": "UnknownComposer", "A": "S. Saketharaman", "V": "CRiS2IDL2o0"}]}, {"name": "Unknownsong", "songs": [{"N": "0430", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kumudakriya", "C": "UnknownComposer", "A": "Aruna Sairam", "V": "Za3RUte2xZY"}, {"N": "0103", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kumudakriya", "C": "UnknownComposer", "A": "R. Suryaprakash", "V": "fkWty4opiQg"}, {"N": "0078", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kumudakriya", "C": "UnknownComposer", "A": "Sriram Parthasarathy", "V": "JoFU5L0drLs"}, {"N": "0027", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Kumudakriya", "C": "UnknownComposer", "A": "Mudikondan S N Ramesh", "V": "QQbpsbn2FZQ"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Ardhanareeswaram", "S": "arddhanArIshvaraM ArAdhayAmi satatam atri bhRgu :  Rupaka", "songs": [{"A": "Aruna Sairam", "C": "Muthuswami Dikshitar", "D": "7:26", "T": "", "U": "549 views", "V": "a-89x3dWU5c"}, {"A": "Aruna Sairam", "C": "Muthuswami Dikshitar", "D": "8:23", "T": "", "U": "28,403 views", "V": "E1HA1XPFT-M"}, {"A": "Geetha Raja", "C": "Muthuswami Dikshitar", "D": "9:41", "T": "", "U": "376 views", "V": "C07S6LOyAjc"}, {"A": "Manasi Prasad", "C": "Muthuswami Dikshitar", "D": "4:17", "T": "", "U": "1,894 views", "V": "VVFHJvdxDws"}, {"A": "Nisha Rajagopal", "C": "Muthuswami Dikshitar", "D": "5:17", "T": "", "U": "59 views", "V": "aYRfOsqGRzA"}, {"A": "Nithyasree Mahadevan", "C": "Muthuswami Dikshitar", "D": "5:58", "T": "", "U": "0 views", "V": "23cyXvipnrU"}, {"A": "Palghat R Ramprasad", "C": "Muthuswami Dikshitar", "D": "4:46", "T": "", "U": "249 views", "V": "t4JqXuyfCMg"}, {"A": "Priya Sisters", "C": "Muthuswami Dikshitar", "D": "4:20", "T": "", "U": "0 views", "V": "FCwxOywK1lM"}, {"A": "Ramakrishnan Murthy", "C": "Muthuswami Dikshitar", "D": "21:13", "T": "", "U": "3,000 views", "V": "5EJi2TIJDuU"}, {"A": "Savita Narasimhan", "C": "Muthuswami Dikshitar", "D": "17:04", "T": "", "U": "139 views", "V": "pPa-RDPauFU"}, {"A": "Savita Narasimhan", "C": "Muthuswami Dikshitar", "D": "3:01", "T": "", "U": "276 views", "V": "tNBQbIjYc0w"}, {"A": "Semmangudi Srinivasa Iyer", "C": "Muthuswami Dikshitar", "D": "5:46", "T": "", "U": "2,900 views", "V": "1RhWuBWXOzE"}, {"A": "Semmangudi Srinivasa Iyer", "C": "Muthuswami Dikshitar", "D": "", "T": "", "U": "131 views", "V": "CC4L_jC2ZxI"}, {"A": "Semmangudi Srinivasa Iyer", "C": "Muthuswami Dikshitar", "D": "7:13", "T": "", "U": "100 views", "V": "Haec1JMlJdU"}, {"A": "Sikkil Gurucharan", "C": "Muthuswami Dikshitar", "D": "6:50", "T": "", "U": "0 views", "V": "PH_OGmoqsRo"}, {"A": "Sikkil Gurucharan", "C": "Muthuswami Dikshitar", "D": "5:48", "T": "", "U": "3,319 views", "V": "GRKcdUhOggc"}, {"A": "Sriram Parthasarathy", "C": "Muthuswami Dikshitar", "D": "13:12", "T": "", "U": "7,189 views", "V": "-8-P16-eKY0"}, {"A": "T. K. Govindarao", "C": "Muthuswami Dikshitar", "D": "6:36", "T": "", "U": "1,208 views", "V": "AuxAjEJYSyA"}, {"A": "T. N. Seshagopalan", "C": "Muthuswami Dikshitar", "D": "32:35", "T": "", "U": "1,400 views", "V": "vwX0GYl6lTQ"}, {"A": "T. N. Seshagopalan", "C": "Muthuswami Dikshitar", "D": "17:51", "T": "", "U": "73 views", "V": "q0j1HLqiwFI"}, {"A": "T. V. Sankaranarayanan", "C": "Muthuswami Dikshitar", "D": "3:46", "T": "", "U": "7 views", "V": "3qD9w89Q1Mc"}, {"A": "V. Pradeep Kumar", "C": "Muthuswami Dikshitar", "D": "10:14", "T": "", "U": "1,857 views", "V": "Q72HDsfxua4"}, {"A": "Akkarai Sisters", "C": "Muthuswami Dikshitar", "D": "5:38", "T": "", "U": "3,266 views", "V": "Zj_TZiD6gzE"}, {"A": "B. Ananthakrishnan", "C": "Muthuswami Dikshitar", "D": "7:28", "T": "", "U": "253,998 views", "V": "b5yuBGJugFw"}, {"A": "Charumathi Raghuraman", "C": "Muthuswami Dikshitar", "D": "12:06", "T": "", "U": "57,000 views", "V": "DPBbO7qd1C4"}, {"A": "M. S. Gopalakrishnan", "C": "Muthuswami Dikshitar", "D": "8:26", "T": "", "U": "0 views", "V": "t3Gi7BCEywc"}, {"A": "M. S. Gopalakrishnan", "C": "Muthuswami Dikshitar", "D": "18:38", "T": "", "U": "2,426 views", "V": "F-I1cUIFqFI"}, {"A": "M. S. Gopalakrishnan", "C": "Muthuswami Dikshitar", "D": "18:28", "T": "", "U": "262 views", "V": "aOcj4eBiMSA"}, {"A": "Sayee Rakshit", "C": "Muthuswami Dikshitar", "D": "16:23", "T": "", "U": "635 views", "V": "CeP-y84LFdM"}]}, {"H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "songs": [{"A": "S. Saketharaman", "C": "UnknownComposer", "D": "43:01", "T": "", "U": "513 views", "V": "CRiS2IDL2o0"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Aruna Sairam", "C": "UnknownComposer", "D": "14:24", "T": "", "U": "1,400 views", "V": "Za3RUte2xZY"}, {"A": "R. Suryaprakash", "C": "UnknownComposer", "D": "4:51", "T": "", "U": "480 views", "V": "fkWty4opiQg"}, {"A": "Sriram Parthasarathy", "C": "UnknownComposer", "D": "8:36", "T": "", "U": "6,966 views", "V": "JoFU5L0drLs"}, {"A": "Mudikondan S N Ramesh", "C": "UnknownComposer", "D": "15:02", "T": "", "U": "139 views", "V": "QQbpsbn2FZQ"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

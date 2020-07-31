@@ -27,7 +27,7 @@
 <tr><td><em>Audio</em></td><td>27</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>20</td></tr>
-<tr><td><em>Concert</em></td><td>20</td></tr>
+<tr><td><em>Concert</em></td><td>24</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -139,57 +139,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ashwath Narayanan", "songs": [{"N": "0029", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Ashwath Narayanan", "V": "1uNgjCIF4Uw"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0103", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Bombay Sisters", "V": "SwVCqAa10Cc"}]}, {"name": "Vocal - G. N. Balasubramaniam", "songs": [{"N": "0138", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "G. N. Balasubramaniam", "V": "fX7imLmwkiY"}, {"N": "0139", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "G. N. Balasubramaniam", "V": "vG7VHf07lYw"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0205", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "K. V. Narayanaswamy", "V": "-QsWYCo8U6c"}, {"N": "0206", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "K. V. Narayanaswamy", "V": "WmbfADYXzrI"}, {"N": "0207", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "K. V. Narayanaswamy", "V": "ZN0cWL-voKA"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0278", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "A5Ilda-nGoo"}, {"N": "0279", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "GvNOyelfcu0"}, {"N": "0280", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "e73687d078U"}, {"N": "0281", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "M. L. Vasanthakumari", "V": "wTEv0UCQwKc"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0206", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Maharajapuram Santhanam", "V": "7PFpqhvO9NE"}, {"N": "0207", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Maharajapuram Santhanam", "V": "gNcCpOkx7ZM"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0103", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Ramakrishnan Murthy", "V": "dXKiq2Ekq8A"}]}, {"name": "Vocal - Sandeep Narayan", "songs": [{"N": "0062", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Sandeep Narayan", "V": "RkZXz-1qkiM"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0370", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Sanjay Subrahmanyan", "V": "AnwOII47Sk8"}]}, {"name": "Vocal - T. V. Sankaranarayanan", "songs": [{"N": "0099", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "T. V. Sankaranarayanan", "V": "1i27R3MxFW4"}]}, {"name": "Vocal - Vidya Kalyanaraman", "songs": [{"N": "0028", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Vidya Kalyanaraman", "V": "tcCH5sv9TFk"}]}, {"name": "Vocal - Visakha Hari", "songs": [{"N": "0010", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Visakha Hari", "V": "7xuJDrALV4Y"}]}, {"name": "Veena - D. Balakrishna", "songs": [{"N": "0016", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "D. Balakrishna", "V": "s3T-NgEEwFQ"}]}, {"name": "Veena - Jayanthi Kumaresh", "songs": [{"N": "0037", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Jayanthi Kumaresh", "V": "YttwsYMh12Y"}]}, {"name": "Veena - Nirmala Rajasekar", "songs": [{"N": "0013", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Nirmala Rajasekar", "V": "Qi9fN9wKoF4"}]}, {"name": "Flute - J. A. Jayanth", "songs": [{"N": "0042", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "J. A. Jayanth", "V": "1_kfKByIZrk"}]}, {"name": "Mridangam - Archana Aarathi", "songs": [{"N": "0011", "T": "", "H": "Jaya Jaya Jaya", "S": "Jaya jaya jaya jaanakikaantaa jaya", "R": "Nata", "C": "Purandara Dasa", "A": "Archana Aarathi", "V": "vgDDrHQDO60"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Ashwath Narayanan", "songs": [{"C": "Purandara Dasa", "D": "9:06", "R": "Nata", "T": "", "U": "0 views", "V": "1uNgjCIF4Uw"}]}, {"A": "G. N. Balasubramaniam", "songs": [{"C": "Purandara Dasa", "D": "6:36", "R": "Nata", "T": "", "U": "1,900 views", "V": "fX7imLmwkiY"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Purandara Dasa", "D": "5:20", "R": "Nata", "T": "", "U": "21 views", "V": "WmbfADYXzrI"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Purandara Dasa", "D": "7:11", "R": "Nata", "T": "", "U": "530 views", "V": "wTEv0UCQwKc"}, {"C": "Purandara Dasa", "D": "5:32", "R": "Nata", "T": "", "U": "542 views", "V": "e73687d078U"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Purandara Dasa", "D": "4:46", "R": "Nata", "T": "", "U": "1,900 views", "V": "7PFpqhvO9NE"}, {"C": "Purandara Dasa", "D": "9:55", "R": "Nata", "T": "", "U": "147 views", "V": "gNcCpOkx7ZM"}]}, {"A": "Sandeep Narayan", "songs": [{"C": "Purandara Dasa", "D": "10:48", "R": "Nata", "T": "", "U": "5,951 views", "V": "RkZXz-1qkiM"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Purandara Dasa", "D": "10:17", "R": "Nata", "T": "", "U": "1,835 views", "V": "AnwOII47Sk8"}]}, {"A": "Vidya Kalyanaraman", "songs": [{"C": "Purandara Dasa", "D": "9:20", "R": "Nata", "T": "", "U": "5,434 views", "V": "tcCH5sv9TFk"}]}, {"A": "D. Balakrishna", "songs": [{"C": "Purandara Dasa", "D": "9:08", "R": "Nata", "T": "", "U": "42 views", "V": "s3T-NgEEwFQ"}]}, {"A": "Archana Aarathi", "songs": [{"C": "Purandara Dasa", "D": "5:14", "R": "Nata", "T": "", "U": "891 views", "V": "vgDDrHQDO60"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

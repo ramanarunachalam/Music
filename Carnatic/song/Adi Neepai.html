@@ -29,7 +29,7 @@
 <tr><td><em>Audio</em></td><td>10</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>10</td></tr>
-<tr><td><em>Concert</em></td><td>10</td></tr>
+<tr><td><em>Concert</em></td><td>6</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -128,57 +128,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0029", "T": "Javali", "H": "Adi Neepai", "S": "adi nIpai marulu konnadirA adi  :  Deshadi", "R": "Yamunakalyani", "C": "Dharmapuri Subbarayar", "A": "K. V. Narayanaswamy", "V": "akBphVVJxmI"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0035", "T": "Javali", "H": "Adi Neepai", "S": "adi nIpai marulu konnadirA adi  :  Deshadi", "R": "Yamunakalyani", "C": "Dharmapuri Subbarayar", "A": "Maharajapuram Santhanam", "V": "M0Xi3AfRvaU"}]}, {"name": "Vocal - Padma Sugavanam", "songs": [{"N": "0008", "T": "Javali", "H": "Adi Neepai", "S": "adi nIpai marulu konnadirA adi  :  Deshadi", "R": "Yamunakalyani", "C": "Dharmapuri Subbarayar", "A": "Padma Sugavanam", "V": "K68FXuzMqfk"}]}, {"name": "Vocal - R. Vedavalli", "songs": [{"N": "0071", "T": "Javali", "H": "Adi Neepai", "S": "adi nIpai marulu konnadirA adi  :  Deshadi", "R": "Yamunakalyani", "C": "Dharmapuri Subbarayar", "A": "R. Vedavalli", "V": "YJwOgZXmHDo"}]}, {"name": "Vocal - Subhashini Parthasarathy", "songs": [{"N": "0015", "T": "Javali", "H": "Adi Neepai", "S": "adi nIpai marulu konnadirA adi  :  Deshadi", "R": "Yamunakalyani", "C": "Dharmapuri Subbarayar", "A": "Subhashini Parthasarathy", "V": "Eb4MBljxnZE"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0116", "T": "Javali", "H": "Adi Neepai", "S": "adi nIpai marulu konnadirA adi  :  Deshadi", "R": "Yamunakalyani", "C": "Dharmapuri Subbarayar", "A": "T. M. Krishna", "V": "RKq-Ej1WtFY"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "K. V. Narayanaswamy", "songs": [{"C": "Dharmapuri Subbarayar", "D": "2:50", "R": "Yamunakalyani", "T": "Javali", "U": "21 views", "V": "akBphVVJxmI"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Dharmapuri Subbarayar", "D": "6:33", "R": "Yamunakalyani", "T": "Javali", "U": "0 views", "V": "M0Xi3AfRvaU"}]}, {"A": "Padma Sugavanam", "songs": [{"C": "Dharmapuri Subbarayar", "D": "4:12", "R": "Yamunakalyani", "T": "Javali", "U": "92 views", "V": "K68FXuzMqfk"}]}, {"A": "R. Vedavalli", "songs": [{"C": "Dharmapuri Subbarayar", "D": "3:14", "R": "Yamunakalyani", "T": "Javali", "U": "0 views", "V": "YJwOgZXmHDo"}]}, {"A": "Subhashini Parthasarathy", "songs": [{"C": "Dharmapuri Subbarayar", "D": "3:32", "R": "Yamunakalyani", "T": "Javali", "U": "169 views", "V": "Eb4MBljxnZE"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Dharmapuri Subbarayar", "D": "9:06", "R": "Yamunakalyani", "T": "Javali", "U": "38 views", "V": "RKq-Ej1WtFY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

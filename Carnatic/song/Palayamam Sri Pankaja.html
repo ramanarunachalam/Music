@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>8</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>6</td></tr>
-<tr><td><em>Concert</em></td><td>6</td></tr>
+<tr><td><em>Concert</em></td><td>8</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -130,57 +130,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0343", "T": "", "H": "Palayamam Sri Pankaja", "S": "pAlaya mAm shrI pankajanAbha dayAsudhanidhE :  Rupaka", "R": "Nayaki", "C": "Swathi Thirunal", "A": "D. K. Jayaraman", "V": "Va1AhsLjXlc"}]}, {"name": "Vocal - Omanakutty", "songs": [{"N": "0011", "T": "", "H": "Palayamam Sri Pankaja", "S": "pAlaya mAm shrI pankajanAbha dayAsudhanidhE :  Rupaka", "R": "Nayaki", "C": "Swathi Thirunal", "A": "Omanakutty", "V": "95q6Q-nb3Cg"}, {"N": "0012", "T": "", "H": "Palayamam Sri Pankaja", "S": "pAlaya mAm shrI pankajanAbha dayAsudhanidhE :  Rupaka", "R": "Nayaki", "C": "Swathi Thirunal", "A": "Omanakutty", "V": "RFcmW-4h6JM"}]}, {"name": "Vocal - R. K. Srikantan", "songs": [{"N": "0142", "T": "", "H": "Palayamam Sri Pankaja", "S": "pAlaya mAm shrI pankajanAbha dayAsudhanidhE :  Rupaka", "R": "Nayaki", "C": "Swathi Thirunal", "A": "R. K. Srikantan", "V": "-23Z-7__7v8"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0637", "T": "", "H": "Palayamam Sri Pankaja", "S": "pAlaya mAm shrI pankajanAbha dayAsudhanidhE :  Rupaka", "R": "Nayaki", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "KBuuBL83-TQ"}, {"N": "0638", "T": "", "H": "Palayamam Sri Pankaja", "S": "pAlaya mAm shrI pankajanAbha dayAsudhanidhE :  Rupaka", "R": "Nayaki", "C": "Swathi Thirunal", "A": "Sanjay Subrahmanyan", "V": "qAkicyFiZnY"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0381", "T": "", "H": "Palayamam Sri Pankaja", "S": "pAlaya mAm shrI pankajanAbha dayAsudhanidhE :  Rupaka", "R": "Nayaki", "C": "Swathi Thirunal", "A": "T. N. Seshagopalan", "V": "62czH1rk8bU"}]}, {"name": "Vocal - Vijay Siva", "songs": [{"N": "0071", "T": "", "H": "Palayamam Sri Pankaja", "S": "pAlaya mAm shrI pankajanAbha dayAsudhanidhE :  Rupaka", "R": "Nayaki", "C": "Swathi Thirunal", "A": "Vijay Siva", "V": "xnQEr2ser54"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. K. Jayaraman", "songs": [{"C": "Swathi Thirunal", "D": "6:40", "R": "Nayaki", "T": "", "U": "163 views", "V": "Va1AhsLjXlc"}]}, {"A": "Omanakutty", "songs": [{"C": "Swathi Thirunal", "D": "3:01", "R": "Nayaki", "T": "", "U": "408 views", "V": "RFcmW-4h6JM"}, {"C": "Swathi Thirunal", "D": "4:04", "R": "Nayaki", "T": "", "U": "195 views", "V": "95q6Q-nb3Cg"}]}, {"A": "R. K. Srikantan", "songs": [{"C": "Swathi Thirunal", "D": "14:11", "R": "Nayaki", "T": "", "U": "123 views", "V": "-23Z-7__7v8"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Swathi Thirunal", "D": "13:41", "R": "Nayaki", "T": "", "U": "181 views", "V": "qAkicyFiZnY"}, {"C": "Swathi Thirunal", "D": "12:56", "R": "Nayaki", "T": "", "U": "319 views", "V": "KBuuBL83-TQ"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Swathi Thirunal", "D": "4:21", "R": "Nayaki", "T": "", "U": "100 views", "V": "62czH1rk8bU"}]}, {"A": "Vijay Siva", "songs": [{"C": "Swathi Thirunal", "D": "5:48", "R": "Nayaki", "T": "", "U": "0 views", "V": "xnQEr2ser54"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

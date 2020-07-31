@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "bAlakRSNam bhAvayAmi balarAmAnujam", "songs": [{"N": "0002", "T": "", "H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "R": "Gopikavasantham", "C": "Muthuswami Dikshitar", "A": "Ambikapuram Sivaraman", "V": "V4g91f7YPn0"}, {"N": "0013", "T": "", "H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "R": "Gopikavasantham", "C": "Muthuswami Dikshitar", "A": "Ananya Ashok", "V": "l-FIiiW9V80"}, {"N": "0005", "T": "", "H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "R": "Gopikavasantham", "C": "Muthuswami Dikshitar", "A": "Bharathi Ramasubban", "V": "khgNy_S-hFo"}, {"N": "0032", "T": "", "H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "R": "Gopikavasantham", "C": "Muthuswami Dikshitar", "A": "Chembai Vaidyanatha Bhagavathar", "V": "QvOZiCdPVEY"}, {"N": "0076", "T": "", "H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "R": "Gopikavasantham", "C": "Muthuswami Dikshitar", "A": "Nithyasree Mahadevan", "V": "q0pGRsGUd2Y"}, {"N": "0041", "T": "", "H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "R": "Gopikavasantham", "C": "Muthuswami Dikshitar", "A": "Ramakrishnan Murthy", "V": "QW3DOwt6HWs"}, {"N": "0116", "T": "", "H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "R": "Gopikavasantham", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "1nJu-tMTACw"}, {"N": "0117", "T": "", "H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "R": "Gopikavasantham", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "3WZOz9tNFmc"}, {"N": "0118", "T": "", "H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "R": "Gopikavasantham", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "_lVSCrWVMRE"}, {"N": "0156", "T": "", "H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "R": "Gopikavasantham", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "9fZxoV9JxY0"}, {"N": "0010", "T": "", "H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "R": "Gopikavasantham", "C": "Muthuswami Dikshitar", "A": "D. Balakrishna", "V": "PDsVFvvgLIw"}]}, {"name": "Unknownsong", "songs": [{"N": "0494", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gopikavasantham", "C": "UnknownComposer", "A": "K. J. Yesudas", "V": "-ZUDwxJhwqk"}, {"N": "0495", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gopikavasantham", "C": "UnknownComposer", "A": "K. J. Yesudas", "V": "at0-AOhqoFM"}, {"N": "0496", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Gopikavasantham", "C": "UnknownComposer", "A": "K. J. Yesudas", "V": "oVPMglqYKaA"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Balakrishnam", "S": "bAlakRSNam bhAvayAmi balarAmAnujam vasudEvajam :  Adi", "songs": [{"A": "Ambikapuram Sivaraman", "C": "Muthuswami Dikshitar", "D": "3:17", "T": "", "U": "447 views", "V": "V4g91f7YPn0"}, {"A": "Ananya Ashok", "C": "Muthuswami Dikshitar", "D": "5:40", "T": "", "U": "0 views", "V": "l-FIiiW9V80"}, {"A": "Bharathi Ramasubban", "C": "Muthuswami Dikshitar", "D": "4:10", "T": "", "U": "223 views", "V": "khgNy_S-hFo"}, {"A": "Chembai Vaidyanatha Bhagavathar", "C": "Muthuswami Dikshitar", "D": "4:18", "T": "", "U": "1,036 views", "V": "QvOZiCdPVEY"}, {"A": "Nithyasree Mahadevan", "C": "Muthuswami Dikshitar", "D": "6:00", "T": "", "U": "1,755 views", "V": "q0pGRsGUd2Y"}, {"A": "Ramakrishnan Murthy", "C": "Muthuswami Dikshitar", "D": "4:16", "T": "", "U": "253 views", "V": "QW3DOwt6HWs"}, {"A": "Semmangudi Srinivasa Iyer", "C": "Muthuswami Dikshitar", "D": "4:51", "T": "", "U": "216 views", "V": "1nJu-tMTACw"}, {"A": "Semmangudi Srinivasa Iyer", "C": "Muthuswami Dikshitar", "D": "", "T": "", "U": "181 views", "V": "_lVSCrWVMRE"}, {"A": "Semmangudi Srinivasa Iyer", "C": "Muthuswami Dikshitar", "D": "4:47", "T": "", "U": "225 views", "V": "3WZOz9tNFmc"}, {"A": "T. M. Krishna", "C": "Muthuswami Dikshitar", "D": "4:33", "T": "", "U": "2,507 views", "V": "9fZxoV9JxY0"}, {"A": "D. Balakrishna", "C": "Muthuswami Dikshitar", "D": "55:44", "T": "", "U": "0 views", "V": "PDsVFvvgLIw"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "K. J. Yesudas", "C": "UnknownComposer", "D": "6:21", "T": "", "U": "29,454 views", "V": "oVPMglqYKaA"}, {"A": "K. J. Yesudas", "C": "UnknownComposer", "D": "4:58", "T": "", "U": "0 views", "V": "at0-AOhqoFM"}, {"A": "K. J. Yesudas", "C": "UnknownComposer", "D": "1:56", "T": "", "U": "32 views", "V": "-ZUDwxJhwqk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

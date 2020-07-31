@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>35</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>22</td></tr>
-<tr><td><em>Concert</em></td><td>22</td></tr>
+<tr><td><em>Concert</em></td><td>29</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ariyakudi Ramanuja Iyengar", "songs": [{"N": "0040", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "Ariyakudi Ramanuja Iyengar", "V": "m_DJ2m6MSDA"}, {"N": "0041", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "Ariyakudi Ramanuja Iyengar", "V": "qx8LCwRJSio"}]}, {"name": "Vocal - Bharat Sundar", "songs": [{"N": "0036", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "Bharat Sundar", "V": "w_uS7Ke0f7o"}]}, {"name": "Vocal - G. S. Mani", "songs": [{"N": "0014", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "G. S. Mani", "V": "uEtQzyDTfcU"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0060", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "M. D. Ramanathan", "V": "0-_hpHewBWQ"}, {"N": "0061", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "M. D. Ramanathan", "V": "UXQzGbK84qM"}, {"N": "0062", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "M. D. Ramanathan", "V": "pQUUH-cv1QA"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "0151", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "M. S. Subbulakshmi", "V": "4X6CnHgkPdU"}, {"N": "0152", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "M. S. Subbulakshmi", "V": "I9Oc5CrfYPs"}, {"N": "0153", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "M. S. Subbulakshmi", "V": "ST0VROUx_AI"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0067", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "Maharajapuram Santhanam", "V": "30y1mfseNLY"}, {"N": "0068", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "Maharajapuram Santhanam", "V": "TzDNxYwuW30"}]}, {"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0044", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "P. Unnikrishnan", "V": "4Y2BTS4aUcQ"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0034", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "Ramakrishnan Murthy", "V": "ouYsUfVy0mg"}]}, {"name": "Vocal - S. Aishwarya", "songs": [{"N": "0021", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "S. Aishwarya", "V": "orknAP3QV4o"}]}, {"name": "Vocal - S. R. Janakiraman", "songs": [{"N": "0010", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "S. R. Janakiraman", "V": "zzxPO8ReAys"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0103", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "Sudha Ragunathan", "V": "wPCGp_IQVJk"}]}, {"name": "Vocal - T. Brinda", "songs": [{"N": "0004", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "T. Brinda", "V": "7PRCRXAGcoI"}, {"N": "0005", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "T. Brinda", "V": "Z6qIhQVzYYc"}, {"N": "0006", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "T. Brinda", "V": "cObodpuxalM"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0117", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "T. N. Seshagopalan", "V": "1YsxzzA2qks"}, {"N": "0118", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "T. N. Seshagopalan", "V": "aN8bT2LjHTs"}, {"N": "0119", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "T. N. Seshagopalan", "V": "h7v1yZJJ7eQ"}, {"N": "0120", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "T. N. Seshagopalan", "V": "inbjE4ib6b4"}]}, {"name": "Vocal - Vani Sateesh", "songs": [{"N": "0003", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "Vani Sateesh", "V": "Jf1qSvzBw8s"}]}, {"name": "Flute - T. R. Mahalingam", "songs": [{"N": "0027", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "T. R. Mahalingam", "V": "WyItStjwFL0"}, {"N": "0028", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "T. R. Mahalingam", "V": "bb-tc-pCVuQ"}]}, {"name": "Violin - A. Kanyakumari", "songs": [{"N": "0031", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "A. Kanyakumari", "V": "WCqXWy_tD-M"}]}, {"name": "Violin - Lalgudi Jayaraman", "songs": [{"N": "0106", "T": "", "H": "Aparadhamulu", "S": "aparAdhamulanniyu manninci AdarincumayyA nE :  Adi", "R": "Lathangi", "C": "Patnam Subramanya Iyer", "A": "Lalgudi Jayaraman", "V": "w7-ki7j9cF8"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Ariyakudi Ramanuja Iyengar", "songs": [{"C": "Patnam Subramanya Iyer", "D": "8:30", "R": "Lathangi", "T": "", "U": "440 views", "V": "qx8LCwRJSio"}, {"C": "Patnam Subramanya Iyer", "D": "5:50", "R": "Lathangi", "T": "", "U": "228 views", "V": "m_DJ2m6MSDA"}]}, {"A": "Bharat Sundar", "songs": [{"C": "Patnam Subramanya Iyer", "D": "29:51", "R": "Lathangi", "T": "", "U": "2,699 views", "V": "w_uS7Ke0f7o"}]}, {"A": "Brinda Muktha", "songs": [{"C": "Patnam Subramanya Iyer", "D": "11:31", "R": "Lathangi", "T": "", "U": "704 views", "V": "cObodpuxalM"}]}, {"A": "G. S. Mani", "songs": [{"C": "Patnam Subramanya Iyer", "D": "42:09", "R": "Lathangi", "T": "", "U": "369 views", "V": "uEtQzyDTfcU"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Patnam Subramanya Iyer", "D": "", "R": "Lathangi", "T": "", "U": "1,100 views", "V": "0-_hpHewBWQ"}, {"C": "Patnam Subramanya Iyer", "D": "3:52", "R": "Lathangi", "T": "", "U": "278 views", "V": "pQUUH-cv1QA"}, {"C": "Patnam Subramanya Iyer", "D": "12:23", "R": "Lathangi", "T": "", "U": "12 views", "V": "UXQzGbK84qM"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Patnam Subramanya Iyer", "D": "10:26", "R": "Lathangi", "T": "", "U": "183 views", "V": "4X6CnHgkPdU"}, {"C": "Patnam Subramanya Iyer", "D": "10:36", "R": "Lathangi", "T": "", "U": "10,000 views", "V": "I9Oc5CrfYPs"}, {"C": "Patnam Subramanya Iyer", "D": "10:15", "R": "Lathangi", "T": "", "U": "231 views", "V": "ST0VROUx_AI"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Patnam Subramanya Iyer", "D": "17:10", "R": "Lathangi", "T": "", "U": "3,400 views", "V": "30y1mfseNLY"}, {"C": "Patnam Subramanya Iyer", "D": "16:50", "R": "Lathangi", "T": "", "U": "838 views", "V": "TzDNxYwuW30"}]}, {"A": "P. Unnikrishnan", "songs": [{"C": "Patnam Subramanya Iyer", "D": "15:38", "R": "Lathangi", "T": "", "U": "0 views", "V": "4Y2BTS4aUcQ"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Patnam Subramanya Iyer", "D": "23:16", "R": "Lathangi", "T": "", "U": "1,700 views", "V": "ouYsUfVy0mg"}]}, {"A": "S. Aishwarya", "songs": [{"C": "Patnam Subramanya Iyer", "D": "28:05", "R": "Lathangi", "T": "", "U": "6,620 views", "V": "orknAP3QV4o"}]}, {"A": "S. R. Janakiraman", "songs": [{"C": "Patnam Subramanya Iyer", "D": "22:09", "R": "Lathangi", "T": "", "U": "127 views", "V": "zzxPO8ReAys"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Patnam Subramanya Iyer", "D": "26:56", "R": "Lathangi", "T": "", "U": "0 views", "V": "wPCGp_IQVJk"}]}, {"A": "T. Brinda", "songs": [{"C": "Patnam Subramanya Iyer", "D": "11:51", "R": "Lathangi", "T": "", "U": "508 views", "V": "Z6qIhQVzYYc"}, {"C": "Patnam Subramanya Iyer", "D": "16:31", "R": "Lathangi", "T": "", "U": "275 views", "V": "7PRCRXAGcoI"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Patnam Subramanya Iyer", "D": "10:55", "R": "Lathangi", "T": "", "U": "437 views", "V": "h7v1yZJJ7eQ"}, {"C": "Patnam Subramanya Iyer", "D": "5:55", "R": "Lathangi", "T": "", "U": "120 views", "V": "1YsxzzA2qks"}, {"C": "Patnam Subramanya Iyer", "D": "15:05", "R": "Lathangi", "T": "", "U": "56 views", "V": "aN8bT2LjHTs"}, {"C": "Patnam Subramanya Iyer", "D": "10:08", "R": "Lathangi", "T": "", "U": "13,047 views", "V": "inbjE4ib6b4"}]}, {"A": "Vani Sateesh", "songs": [{"C": "Patnam Subramanya Iyer", "D": "10:37", "R": "Lathangi", "T": "", "U": "326 views", "V": "Jf1qSvzBw8s"}]}, {"A": "T. R. Mahalingam", "songs": [{"C": "Patnam Subramanya Iyer", "D": "15:40", "R": "Lathangi", "T": "", "U": "73 views", "V": "bb-tc-pCVuQ"}, {"C": "Patnam Subramanya Iyer", "D": "35:25", "R": "Lathangi", "T": "", "U": "172 views", "V": "WyItStjwFL0"}]}, {"A": "A. Kanyakumari", "songs": [{"C": "Patnam Subramanya Iyer", "D": "8:35", "R": "Lathangi", "T": "", "U": "424 views", "V": "WCqXWy_tD-M"}]}, {"A": "Lalgudi Jayaraman", "songs": [{"C": "Patnam Subramanya Iyer", "D": "15:36", "R": "Lathangi", "T": "", "U": "0 views", "V": "w7-ki7j9cF8"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>25</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>19</td></tr>
-<tr><td><em>Concert</em></td><td>19</td></tr>
+<tr><td><em>Concert</em></td><td>25</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amritha Murali", "songs": [{"N": "0096", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Amritha Murali", "V": "aZm9AL4QQiU"}]}, {"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0167", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Amrutha Venkatesh", "V": "JZCvKxHXMJw"}]}, {"name": "Vocal - Cherthala K. N. Renganatha Sharma", "songs": [{"N": "0102", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Cherthala K. N. Renganatha Sharma", "V": "Dn7Im1z8968"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0308", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "D. K. Pattammal", "V": "2p4U2L-vf2w"}, {"N": "0309", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "D. K. Pattammal", "V": "xLMge_9fQTU"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1081", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "M. Balamuralikrishna", "V": "XSIhWQJ46oQ"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0585", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "M. L. Vasanthakumari", "V": "ebYZv-pULUc"}, {"N": "0586", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "M. L. Vasanthakumari", "V": "s4r_1FDpg-c"}]}, {"name": "Vocal - Mysore Nagamani Srinath", "songs": [{"N": "0029", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Mysore Nagamani Srinath", "V": "6B8rpaK63n0"}, {"N": "0030", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Mysore Nagamani Srinath", "V": "Q8T7ywP5SE8"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0242", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Nithyasree Mahadevan", "V": "pPLEhiF4BYo"}]}, {"name": "Vocal - Pantula Rama", "songs": [{"N": "0099", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Pantula Rama", "V": "ebXZWaLap4Y"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0161", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Ramakrishnan Murthy", "V": "IkueV4HKZcA"}]}, {"name": "Vocal - Rithvik Raja", "songs": [{"N": "0029", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Rithvik Raja", "V": "Ud02MafjMIE"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0441", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Sudha Ragunathan", "V": "4aFNpG6j3xQ"}, {"N": "0442", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Sudha Ragunathan", "V": "XQycfXv1kl8"}, {"N": "0443", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Sudha Ragunathan", "V": "mUwvQElq4H4"}]}, {"name": "Vocal - Vignesh Ishwar", "songs": [{"N": "0042", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Vignesh Ishwar", "V": "4EHlXAZUhEk"}]}, {"name": "Vocal - Vijay Siva", "songs": [{"N": "0076", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Vijay Siva", "V": "QuU5DKfhJSA"}, {"N": "0077", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Vijay Siva", "V": "r4RSOnKd6B4"}]}, {"name": "Veena - Jayanthi Kumaresh", "songs": [{"N": "0059", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Jayanthi Kumaresh", "V": "DYs5sJZXH8E"}]}, {"name": "Chitra Veena - Chitravina Ravi Kiran", "songs": [{"N": "0119", "T": "", "H": "Parakela", "S": "parAk E la nannu paripAlimpa  :  Adi", "R": "Kedaragowla", "C": "Shyama Shastri", "A": "Chitravina Ravi Kiran", "V": "RI-qL156bBA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amritha Murali", "songs": [{"C": "Shyama Shastri", "D": "5:02", "R": "Kedaragowla", "T": "", "U": "2,983 views", "V": "aZm9AL4QQiU"}]}, {"A": "Amrutha Venkatesh", "songs": [{"C": "Shyama Shastri", "D": "13:46", "R": "Kedaragowla", "T": "", "U": "377 views", "V": "JZCvKxHXMJw"}]}, {"A": "Cherthala K. N. Renganatha Sharma", "songs": [{"C": "Shyama Shastri", "D": "13:56", "R": "Kedaragowla", "T": "", "U": "275 views", "V": "Dn7Im1z8968"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Shyama Shastri", "D": "4:01", "R": "Kedaragowla", "T": "", "U": "1,410 views", "V": "xLMge_9fQTU"}, {"C": "Shyama Shastri", "D": "5:15", "R": "Kedaragowla", "T": "", "U": "219 views", "V": "2p4U2L-vf2w"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Shyama Shastri", "D": "10:13", "R": "Kedaragowla", "T": "", "U": "0 views", "V": "XSIhWQJ46oQ"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Shyama Shastri", "D": "5:20", "R": "Kedaragowla", "T": "", "U": "132 views", "V": "s4r_1FDpg-c"}, {"C": "Shyama Shastri", "D": "15:01", "R": "Kedaragowla", "T": "", "U": "684 views", "V": "ebYZv-pULUc"}]}, {"A": "Mysore Nagamani Srinath", "songs": [{"C": "Shyama Shastri", "D": "13:44", "R": "Kedaragowla", "T": "", "U": "0 views", "V": "Q8T7ywP5SE8"}, {"C": "Shyama Shastri", "D": "4:02", "R": "Kedaragowla", "T": "", "U": "0 views", "V": "6B8rpaK63n0"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Shyama Shastri", "D": "4:41", "R": "Kedaragowla", "T": "", "U": "0 views", "V": "pPLEhiF4BYo"}]}, {"A": "Pantula Rama", "songs": [{"C": "Shyama Shastri", "D": "5:50", "R": "Kedaragowla", "T": "", "U": "4,700 views", "V": "ebXZWaLap4Y"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Shyama Shastri", "D": "4:12", "R": "Kedaragowla", "T": "", "U": "698 views", "V": "IkueV4HKZcA"}]}, {"A": "Rithvik Raja", "songs": [{"C": "Shyama Shastri", "D": "4:44", "R": "Kedaragowla", "T": "", "U": "0 views", "V": "Ud02MafjMIE"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Shyama Shastri", "D": "6:16", "R": "Kedaragowla", "T": "", "U": "556 views", "V": "4aFNpG6j3xQ"}, {"C": "Shyama Shastri", "D": "6:07", "R": "Kedaragowla", "T": "", "U": "3,628 views", "V": "mUwvQElq4H4"}, {"C": "Shyama Shastri", "D": "4:29", "R": "Kedaragowla", "T": "", "U": "0 views", "V": "XQycfXv1kl8"}]}, {"A": "Vignesh Ishwar", "songs": [{"C": "Shyama Shastri", "D": "4:44", "R": "Kedaragowla", "T": "", "U": "45 views", "V": "4EHlXAZUhEk"}]}, {"A": "Vijay Siva", "songs": [{"C": "Shyama Shastri", "D": "4:31", "R": "Kedaragowla", "T": "", "U": "0 views", "V": "QuU5DKfhJSA"}, {"C": "Shyama Shastri", "D": "4:31", "R": "Kedaragowla", "T": "", "U": "0 views", "V": "r4RSOnKd6B4"}]}, {"A": "Jayanthi Kumaresh", "songs": [{"C": "Shyama Shastri", "D": "10:45", "R": "Kedaragowla", "T": "", "U": "955 views", "V": "DYs5sJZXH8E"}]}, {"A": "Chitravina Ravi Kiran", "songs": [{"C": "Shyama Shastri", "D": "2:12", "R": "Kedaragowla", "T": "", "U": "19 views", "V": "RI-qL156bBA"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

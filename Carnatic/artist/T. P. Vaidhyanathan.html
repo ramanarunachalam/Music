@@ -17,7 +17,7 @@
 <tr><td><em>Song</em></td><td>10</td></tr>
 <tr><td><em>Raga</em></td><td>10</td></tr>
 <tr><td><em>Composer</em></td><td>5</td></tr>
-<tr><td><em>Concert</em></td><td>1</td></tr>
+<tr><td><em>Concert</em></td><td>12</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -37,57 +37,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "TPV01", "songs": [{"N": "0001", "T": "Kamalamba navavaranam", "H": "Sri Kamalambike Sive", "S": "SrI kamalAmbikE SivE pAhi mAM lalitE :  Khanda Eka", "R": "Sri", "C": "Muthuswami Dikshitar", "A": "T. P. Vaidhyanathan", "V": "Pdn80XeSfAc"}, {"N": "0002", "T": "", "H": "Devadi Deva Nannu", "S": "dEvAdi dEva nannu kAva samayamura :  Rupaka", "R": "Mayamalavagowla", "C": "Mysore Sadasiva Rao", "A": "T. P. Vaidhyanathan", "V": "_LuVswAaQ2o"}, {"N": "0003", "T": "", "H": "Kaluguna Padha", "S": "kalugunA pada nIraja sEva  :  Adi", "R": "Poornalalitha", "C": "Thyagaraja", "A": "T. P. Vaidhyanathan", "V": "P8W77F90uiw"}, {"N": "0004", "T": "", "H": "Kaluguna Padha", "S": "kalugunA pada nIraja sEva  :  Adi", "R": "Poornalalitha", "C": "Thyagaraja", "A": "T. P. Vaidhyanathan", "V": "UvSScRAHhNo"}, {"N": "0005", "T": "", "H": "Kaluguna Padha", "S": "kalugunA pada nIraja sEva  :  Adi", "R": "Poornalalitha", "C": "Thyagaraja", "A": "T. P. Vaidhyanathan", "V": "XUEG9TCw5Jw"}, {"N": "0006", "T": "", "H": "Kanugoni Dhanyudaitini", "S": "kanugoni dhanyuDaitini shrI kanci kAmAkSi nIdu :  Adi", "R": "Kalyani", "C": "Mysore Sadasiva Rao", "A": "T. P. Vaidhyanathan", "V": "GQpTxNFdTck"}, {"N": "0007", "T": "", "H": "Matha Sadha", "S": "mAtA sadA avatu mAm madashAlini jagan :  Rupaka", "R": "Abhogi", "C": "Mayavaram Viswanatha Sastry", "A": "T. P. Vaidhyanathan", "V": "X8VEenO6r3E"}, {"N": "0008", "T": "", "H": "Neekela Manasu", "S": "nIkEla manasu rAdurA sAkEtAdhipa nIrAmayE :  Adi", "R": "Kambhoji", "C": "Mysore Sadasiva Rao", "A": "T. P. Vaidhyanathan", "V": "QDJyjVDQ6GY"}, {"N": "0009", "T": "", "H": "Nenaruncharaa", "S": "nenar u ncarA nApaini cAla  :  Deshadi", "R": "Simhavahini", "C": "Thyagaraja", "A": "T. P. Vaidhyanathan", "V": "3NFpInTmidw"}, {"N": "0010", "T": "", "H": "Paramadbuthamaina", "S": "paramAdbhutamaina nI sEva nEDu dorikenuga nE :  Khanda Triputa", "R": "Khamas", "C": "Mysore Sadasiva Rao", "A": "T. P. Vaidhyanathan", "V": "cvs27TwyQyU"}, {"N": "0011", "T": "", "H": "Viraja Turaga", "S": "virAja turaga rAja rAj E Svara :  Adi", "R": "Balahamsa", "C": "Thyagaraja", "A": "T. P. Vaidhyanathan", "V": "BFNE3qDSqTM"}, {"N": "0012", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Unknownraga", "C": "UnknownComposer", "A": "T. P. Vaidhyanathan", "V": "0ayw60O6e6c"}]}]};
-    frame_data_init(video_data, 'song', 'artist');
+    var video_data = {"folder": [{"H": "Devadi Deva Nannu", "S": "dEvAdi dEva nannu kAva samayamura :  Rupaka", "songs": [{"C": "Mysore Sadasiva Rao", "D": "6:24", "R": "Mayamalavagowla", "T": "", "U": "572 views", "V": "_LuVswAaQ2o"}]}, {"H": "Kaluguna Padha", "S": "kalugunA pada nIraja sEva  :  Adi", "songs": [{"C": "Thyagaraja", "D": "5:05", "R": "Poornalalitha", "T": "", "U": "692 views", "V": "XUEG9TCw5Jw"}, {"C": "Thyagaraja", "D": "5:11", "R": "Poornalalitha", "T": "", "U": "129 views", "V": "UvSScRAHhNo"}, {"C": "Thyagaraja", "D": "1:38", "R": "Poornalalitha", "T": "", "U": "39 views", "V": "P8W77F90uiw"}]}, {"H": "Kanugoni Dhanyudaitini", "S": "kanugoni dhanyuDaitini shrI kanci kAmAkSi nIdu :  Adi", "songs": [{"C": "Mysore Sadasiva Rao", "D": "6:01", "R": "Kalyani", "T": "", "U": "90 views", "V": "GQpTxNFdTck"}]}, {"H": "Matha Sadha", "S": "mAtA sadA avatu mAm madashAlini jagan :  Rupaka", "songs": [{"C": "Mayavaram Viswanatha Sastry", "D": "1:38", "R": "Abhogi", "T": "", "U": "47 views", "V": "X8VEenO6r3E"}]}, {"H": "Neekela Manasu", "S": "nIkEla manasu rAdurA sAkEtAdhipa nIrAmayE :  Adi", "songs": [{"C": "Mysore Sadasiva Rao", "D": "8:49", "R": "Kambhoji", "T": "", "U": "264 views", "V": "QDJyjVDQ6GY"}]}, {"H": "Nenaruncharaa", "S": "nenar u ncarA nApaini cAla  :  Deshadi", "songs": [{"C": "Thyagaraja", "D": "1:38", "R": "Simhavahini", "T": "", "U": "27 views", "V": "3NFpInTmidw"}]}, {"H": "Paramadbuthamaina", "S": "paramAdbhutamaina nI sEva nEDu dorikenuga nE :  Khanda Triputa", "songs": [{"C": "Mysore Sadasiva Rao", "D": "5:48", "R": "Khamas", "T": "", "U": "472 views", "V": "cvs27TwyQyU"}]}, {"H": "Sri Kamalambike Sive", "S": "SrI kamalAmbikE SivE pAhi mAM lalitE :  Khanda Eka", "songs": [{"C": "Muthuswami Dikshitar", "D": "3:06", "R": "Sri", "T": "Kamalamba Navavaranam", "U": "66 views", "V": "Pdn80XeSfAc"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"C": "UnknownComposer", "D": "10:43", "R": "Unknownraga", "T": "", "U": "96 views", "V": "0ayw60O6e6c"}]}, {"H": "Viraja Turaga", "S": "virAja turaga rAja rAj E Svara :  Adi", "songs": [{"C": "Thyagaraja", "D": "3:35", "R": "Balahamsa", "T": "", "U": "511 views", "V": "BFNE3qDSqTM"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

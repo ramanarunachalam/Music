@@ -28,10 +28,10 @@
 </tbody>
 </table></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>33</td></tr>
+<tr><td><em>Audio</em></td><td>32</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>19</td></tr>
-<tr><td><em>Concert</em></td><td>19</td></tr>
+<tr><td><em>Concert</em></td><td>23</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -144,57 +144,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Dr. Nagavalli Nagaraj", "songs": [{"N": "0097", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "Dr. Nagavalli Nagaraj", "V": "8fLPSbmFeJw"}]}, {"name": "Vocal - Gayathri Venkataraghavan", "songs": [{"N": "0181", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "Gayathri Venkataraghavan", "V": "ZhTAAfd5Vdc"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0490", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "K. V. Narayanaswamy", "V": "4bZLwPSW4VQ"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0660", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. D. Ramanathan", "V": "gln7P9wteQQ"}, {"N": "0659", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. D. Ramanathan", "V": "0OLCJTatGjM"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1057", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. S. Subbulakshmi", "V": "0aHpQZuT4Jk"}, {"N": "1058", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. S. Subbulakshmi", "V": "3MBH22utkNw"}, {"N": "1059", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. S. Subbulakshmi", "V": "BsvKJitIzW0"}, {"N": "1060", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. S. Subbulakshmi", "V": "HlSO-DqvQdI"}, {"N": "1061", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. S. Subbulakshmi", "V": "IxpoMcWFM0U"}, {"N": "1062", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. S. Subbulakshmi", "V": "Rs3MxTH5ODQ"}, {"N": "1063", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. S. Subbulakshmi", "V": "UF8tVNzGTJY"}, {"N": "1064", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. S. Subbulakshmi", "V": "VcDBwQZvgSk"}, {"N": "1065", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. S. Subbulakshmi", "V": "ZFbLP2ugrC8"}, {"N": "1066", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. S. Subbulakshmi", "V": "gaxRXY9PgeA"}, {"N": "1067", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. S. Subbulakshmi", "V": "rvZw70p4XPY"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0296", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "Ranjani Gayatri", "V": "rNqdQwYQ6_M"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0817", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "Sanjay Subrahmanyan", "V": "FXIzhfdOqKo"}, {"N": "0818", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "Sanjay Subrahmanyan", "V": "Lun__BKd1mY"}, {"N": "0819", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "Sanjay Subrahmanyan", "V": "Ly8UDTV4E88"}]}, {"name": "Vocal - Sriranjani Santhanagopalan", "songs": [{"N": "0082", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "Sriranjani Santhanagopalan", "V": "g7NPwYJX11s"}]}, {"name": "Saxaphone - Kadri Gopalnath", "songs": [{"N": "0107", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "Kadri Gopalnath", "V": "doVGD0jVYss"}]}, {"name": "Violin - M. A. Krishnaswamy", "songs": [{"N": "0081", "T": "", "H": "Sri Chamundeswari", "S": "shrI cAmuNDEshvari pAlayamAm krpAkari shankari :  Adi", "R": "Bilahari", "C": "Mysore Vasudevachar", "A": "M. A. Krishnaswamy", "V": "Bl5q5iVvJBY"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Dr. Nagavalli Nagaraj", "songs": [{"C": "Mysore Vasudevachar", "D": "7:56", "R": "Bilahari", "T": "", "U": "12,008 views", "V": "8fLPSbmFeJw"}]}, {"A": "Gayathri Venkataraghavan", "songs": [{"C": "Mysore Vasudevachar", "D": "5:31", "R": "Bilahari", "T": "", "U": "79 views", "V": "ZhTAAfd5Vdc"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Mysore Vasudevachar", "D": "28:26", "R": "Bilahari", "T": "", "U": "6,608 views", "V": "4bZLwPSW4VQ"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Mysore Vasudevachar", "D": "20:26", "R": "Bilahari", "T": "", "U": "383 views", "V": "0OLCJTatGjM"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Mysore Vasudevachar", "D": "19:16", "R": "Bilahari", "T": "", "U": "441 views", "V": "VcDBwQZvgSk"}, {"C": "Mysore Vasudevachar", "D": "18:01", "R": "Bilahari", "T": "", "U": "434 views", "V": "ZFbLP2ugrC8"}, {"C": "Mysore Vasudevachar", "D": "18:10", "R": "Bilahari", "T": "", "U": "79 views", "V": "0aHpQZuT4Jk"}, {"C": "Mysore Vasudevachar", "D": "18:10", "R": "Bilahari", "T": "", "U": "76 views", "V": "IxpoMcWFM0U"}, {"C": "Mysore Vasudevachar", "D": "17:45", "R": "Bilahari", "T": "", "U": "869 views", "V": "HlSO-DqvQdI"}, {"C": "Mysore Vasudevachar", "D": "7:54", "R": "Bilahari", "T": "", "U": "174,000 views", "V": "rvZw70p4XPY"}, {"C": "Mysore Vasudevachar", "D": "19:05", "R": "Bilahari", "T": "", "U": "0 views", "V": "UF8tVNzGTJY"}, {"C": "Mysore Vasudevachar", "D": "19:42", "R": "Bilahari", "T": "", "U": "3,323 views", "V": "BsvKJitIzW0"}, {"C": "Mysore Vasudevachar", "D": "7:56", "R": "Bilahari", "T": "", "U": "9,756 views", "V": "3MBH22utkNw"}, {"C": "Mysore Vasudevachar", "D": "7:54", "R": "Bilahari", "T": "", "U": "209 views", "V": "gaxRXY9PgeA"}, {"C": "Mysore Vasudevachar", "D": "19:13", "R": "Bilahari", "T": "", "U": "51 views", "V": "Rs3MxTH5ODQ"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Mysore Vasudevachar", "D": "31:46", "R": "Bilahari", "T": "", "U": "31,000 views", "V": "rNqdQwYQ6_M"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Mysore Vasudevachar", "D": "27:36", "R": "Bilahari", "T": "", "U": "4,300 views", "V": "Ly8UDTV4E88"}, {"C": "Mysore Vasudevachar", "D": "22:46", "R": "Bilahari", "T": "", "U": "119 views", "V": "FXIzhfdOqKo"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

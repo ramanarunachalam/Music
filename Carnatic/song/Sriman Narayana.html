@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>45</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>26</td></tr>
-<tr><td><em>Concert</em></td><td>26</td></tr>
+<tr><td><em>Concert</em></td><td>35</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Aruna Sairam", "songs": [{"N": "0286", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Aruna Sairam", "V": "A3PikgplJWU"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0364", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Bombay Jayashri", "V": "yRNdyjqZ3ME"}, {"N": "0365", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Bombay Jayashri", "V": "yXtl-JIdanw"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0215", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Bombay Sisters", "V": "5i_gZEr67R4"}]}, {"name": "Vocal - Charulatha Mani", "songs": [{"N": "0081", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Charulatha Mani", "V": "vIzrZeZ7MUA"}]}, {"name": "Vocal - Chembai Vaidyanatha Bhagavathar", "songs": [{"N": "0234", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Chembai Vaidyanatha Bhagavathar", "V": "fxDXAkldI7o"}]}, {"name": "Vocal - Jayashree Rajeev", "songs": [{"N": "0063", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Jayashree Rajeev", "V": "fFxxpsMECUM"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1412", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "M. Balamuralikrishna", "V": "TRdHGCFisp0"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1118", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "-_B7mjw5bV8"}, {"N": "1119", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "LJFrXFdxP_E"}, {"N": "1120", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "QrZGTcwp_I4"}, {"N": "1121", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "a7XOZK_Rvj0"}, {"N": "1122", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "l3ussaSYV7Y"}, {"N": "1123", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "lRo-YkX9Y94"}, {"N": "1124", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "M. S. Subbulakshmi", "V": "x5mIT-OYlhM"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0325", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Nithyasree Mahadevan", "V": "BIUQnMncazQ"}, {"N": "0326", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Nithyasree Mahadevan", "V": "J8QCip-CHxc"}, {"N": "0328", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Nithyasree Mahadevan", "V": "gxyavUGl8uU"}]}, {"name": "Vocal - Padma Krishnan", "songs": [{"N": "0075", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Padma Krishnan", "V": "_5Ns5DDDwGo"}, {"N": "0076", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Padma Krishnan", "V": "ja2iCxv7dQU"}]}, {"name": "Vocal - Radha Viswanathan", "songs": [{"N": "0067", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Radha Viswanathan", "V": "0g0LnP0h_SI"}]}, {"name": "Vocal - S. Aishwarya", "songs": [{"N": "0101", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "S. Aishwarya", "V": "s2MT2Y5aYbc"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0171", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Sankaran Namboothiri", "V": "_-VBxN9VPgY"}]}, {"name": "Vocal - Shreyas Narayanan", "songs": [{"N": "0012", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Shreyas Narayanan", "V": "IjnzXbhHVyw"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0600", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Sudha Ragunathan", "V": "-MtfrsB2xKQ"}, {"N": "0601", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Sudha Ragunathan", "V": "2hugQgDLysQ"}, {"N": "0602", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Sudha Ragunathan", "V": "QIcHp3lqvlg"}, {"N": "0603", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Sudha Ragunathan", "V": "axKcabQxjSs"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0589", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "T. M. Krishna", "V": "OLFvj1JbMwY"}, {"N": "0590", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "T. M. Krishna", "V": "mEhvS0hZkQo"}]}, {"name": "Veena - P. Ganesh", "songs": [{"N": "0010", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "P. Ganesh", "V": "KJD9NZBlxwE"}]}, {"name": "Flute - Kudamaloor Janardanan", "songs": [{"N": "0044", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Kudamaloor Janardanan", "V": "iv8FlqP-UsA"}]}, {"name": "Flute - Thiruvarur S. Swaminathan", "songs": [{"N": "0003", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Thiruvarur S. Swaminathan", "V": "NTwwdZpFEXE"}]}, {"name": "Thavil - Valayapatti A. R. Subramaniam", "songs": [{"N": "0029", "T": "", "H": "Sriman Narayana", "S": "shrIman nArAyaNa shrIman nArAyaNa :  Adi", "R": "Bowli", "C": "Annamacharya", "A": "Valayapatti A. R. Subramaniam", "V": "hjTWVGM2ArE"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Aruna Sairam", "songs": [{"C": "Annamacharya", "D": "2:37", "R": "Bowli", "T": "", "U": "5,306 views", "V": "A3PikgplJWU"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Annamacharya", "D": "5:11", "R": "Bowli", "T": "", "U": "166,387 views", "V": "yRNdyjqZ3ME"}, {"C": "Annamacharya", "D": "4:36", "R": "Bowli", "T": "", "U": "46,002 views", "V": "yXtl-JIdanw"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Annamacharya", "D": "4:28", "R": "Bowli", "T": "", "U": "58,661 views", "V": "5i_gZEr67R4"}]}, {"A": "Charulatha Mani", "songs": [{"C": "Annamacharya", "D": "5:40", "R": "Bowli", "T": "", "U": "5,394 views", "V": "vIzrZeZ7MUA"}]}, {"A": "Chembai Vaidyanatha Bhagavathar", "songs": [{"C": "Annamacharya", "D": "5:29", "R": "Bowli", "T": "", "U": "0 views", "V": "fxDXAkldI7o"}]}, {"A": "Jayashree Rajeev", "songs": [{"C": "Annamacharya", "D": "8:04", "R": "Bowli", "T": "", "U": "50 views", "V": "fFxxpsMECUM"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Annamacharya", "D": "11:12", "R": "Bowli", "T": "", "U": "226 views", "V": "TRdHGCFisp0"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Annamacharya", "D": "5:51", "R": "Bowli", "T": "", "U": "0 views", "V": "a7XOZK_Rvj0"}, {"C": "Annamacharya", "D": "9:32", "R": "Bowli", "T": "", "U": "11,739 views", "V": "l3ussaSYV7Y"}, {"C": "Annamacharya", "D": "4:45", "R": "Bowli", "T": "", "U": "2,888,426 views", "V": "LJFrXFdxP_E"}, {"C": "Annamacharya", "D": "4:37", "R": "Bowli", "T": "", "U": "112,904 views", "V": "lRo-YkX9Y94"}, {"C": "Annamacharya", "D": "6:32", "R": "Bowli", "T": "", "U": "15,773 views", "V": "QrZGTcwp_I4"}, {"C": "Annamacharya", "D": "4:45", "R": "Bowli", "T": "", "U": "38,544 views", "V": "x5mIT-OYlhM"}, {"C": "Annamacharya", "D": "4:47", "R": "Bowli", "T": "", "U": "4,440 views", "V": "-_B7mjw5bV8"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Annamacharya", "D": "8:06", "R": "Bowli", "T": "", "U": "2,072,768 views", "V": "J8QCip-CHxc"}, {"C": "Annamacharya", "D": "8:07", "R": "Bowli", "T": "", "U": "1,742,642 views", "V": "gxyavUGl8uU"}, {"C": "Annamacharya", "D": "6:27", "R": "Bowli", "T": "", "U": "19,103 views", "V": "BIUQnMncazQ"}]}, {"A": "Padma Krishnan", "songs": [{"C": "Annamacharya", "D": "52:56", "R": "Bowli", "T": "", "U": "781 views", "V": "_5Ns5DDDwGo"}, {"C": "Annamacharya", "D": "9:25", "R": "Bowli", "T": "", "U": "3,732 views", "V": "ja2iCxv7dQU"}]}, {"A": "Radha Viswanathan", "songs": [{"C": "Annamacharya", "D": "5:18", "R": "Bowli", "T": "", "U": "413,620 views", "V": "s2MT2Y5aYbc"}, {"C": "Annamacharya", "D": "3:49", "R": "Bowli", "T": "", "U": "3,520 views", "V": "0g0LnP0h_SI"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Annamacharya", "D": "8:00", "R": "Bowli", "T": "", "U": "598 views", "V": "_-VBxN9VPgY"}]}, {"A": "Shreyas Narayanan", "songs": [{"C": "Annamacharya", "D": "4:18", "R": "Bowli", "T": "", "U": "43 views", "V": "IjnzXbhHVyw"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Annamacharya", "D": "6:51", "R": "Bowli", "T": "", "U": "0 views", "V": "axKcabQxjSs"}, {"C": "Annamacharya", "D": "6:11", "R": "Bowli", "T": "", "U": "53,443 views", "V": "QIcHp3lqvlg"}, {"C": "Annamacharya", "D": "6:11", "R": "Bowli", "T": "", "U": "0 views", "V": "2hugQgDLysQ"}, {"C": "Annamacharya", "D": "3:08", "R": "Bowli", "T": "", "U": "5,088 views", "V": "-MtfrsB2xKQ"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Annamacharya", "D": "3:01", "R": "Bowli", "T": "", "U": "1,918 views", "V": "mEhvS0hZkQo"}, {"C": "Annamacharya", "D": "6:48", "R": "Bowli", "T": "", "U": "1,282 views", "V": "OLFvj1JbMwY"}]}, {"A": "P. Ganesh", "songs": [{"C": "Annamacharya", "D": "8:11", "R": "Bowli", "T": "", "U": "173 views", "V": "KJD9NZBlxwE"}]}, {"A": "Kudamaloor Janardanan", "songs": [{"C": "Annamacharya", "D": "7:49", "R": "Bowli", "T": "", "U": "502 views", "V": "iv8FlqP-UsA"}]}, {"A": "Thiruvarur S. Swaminathan", "songs": [{"C": "Annamacharya", "D": "6:07", "R": "Bowli", "T": "", "U": "1,600 views", "V": "NTwwdZpFEXE"}]}, {"A": "Valayapatti A. R. Subramaniam", "songs": [{"C": "Annamacharya", "D": "9:24", "R": "Bowli", "T": "", "U": "9,044 views", "V": "hjTWVGM2ArE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>33</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>20</td></tr>
-<tr><td><em>Concert</em></td><td>20</td></tr>
+<tr><td><em>Concert</em></td><td>27</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Ariyakudi Ramanuja Iyengar", "songs": [{"N": "0088", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "Ariyakudi Ramanuja Iyengar", "V": "o7Rfpd7xQxQ"}]}, {"name": "Vocal - Aruna Sairam", "songs": [{"N": "0158", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "Aruna Sairam", "V": "j_NGwgLMasU"}]}, {"name": "Vocal - Ashwath Narayanan", "songs": [{"N": "0031", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "Ashwath Narayanan", "V": "KazCxCS-1M0"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0260", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "K. V. Narayanaswamy", "V": "U3T3xQpziLk"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0701", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "SpDblR5HwI8"}, {"N": "0702", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "b4s-AfCvVKQ"}, {"N": "0703", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "enmC1x-is18"}, {"N": "0705", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "op1nnzVSvKU"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "0584", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "M. S. Subbulakshmi", "V": "9QFEjPbFrlw"}, {"N": "0585", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "M. S. Subbulakshmi", "V": "CJHPLr03zHk"}]}, {"name": "Vocal - Madurai Mani Iyer", "songs": [{"N": "0225", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "jSDetm-V3CY"}, {"N": "0224", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "ROVf6hdsZW0"}, {"N": "0226", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "Madurai Mani Iyer", "V": "xR8p8ardZSE"}]}, {"name": "Vocal - R. K. Srikantan", "songs": [{"N": "0087", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "R. K. Srikantan", "V": "5M8DVrF2EMU"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0137", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "Ranjani Gayatri", "V": "6K-26X04TAo"}]}, {"name": "Vocal - S. Aishwarya", "songs": [{"N": "0051", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "S. Aishwarya", "V": "BKOqXCagwKA"}, {"N": "0052", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "S. Aishwarya", "V": "QWmzd7GG4W8"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0318", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "T. M. Krishna", "V": "BKBs4ioY4tg"}, {"N": "0319", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "T. M. Krishna", "V": "EkPiEuc6lmc"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0263", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "T. N. Seshagopalan", "V": "e2u86qx1cj8"}, {"N": "0264", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "T. N. Seshagopalan", "V": "ndIczn8HPeA"}]}, {"name": "Vocal - T. V. Sankaranarayanan", "songs": [{"N": "0111", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "T. V. Sankaranarayanan", "V": "ShFaiIkL--4"}, {"N": "0112", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "T. V. Sankaranarayanan", "V": "mFiOxQeXSoo"}]}, {"name": "Veena - Jayanthi Kumaresh", "songs": [{"N": "0043", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "Jayanthi Kumaresh", "V": "_CgVfzVqY1c"}]}, {"name": "Nadaswaram - T. N. Rajarathnam Pillai", "songs": [{"N": "0016", "T": "", "H": "Koluvai Unnade", "S": "koluvai y unnADE kOdaNDa pANi  :  Adi", "R": "Bhairavi", "C": "Thyagaraja", "A": "T. N. Rajarathnam Pillai", "V": "12FvAbeV46Q"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Ariyakudi Ramanuja Iyengar", "songs": [{"C": "Thyagaraja", "D": "", "R": "Bhairavi", "T": "", "U": "1,200 views", "V": "o7Rfpd7xQxQ"}]}, {"A": "Aruna Sairam", "songs": [{"C": "Thyagaraja", "D": "36:01", "R": "Bhairavi", "T": "", "U": "986 views", "V": "j_NGwgLMasU"}]}, {"A": "Ashwath Narayanan", "songs": [{"C": "Thyagaraja", "D": "24:11", "R": "Bhairavi", "T": "", "U": "643 views", "V": "KazCxCS-1M0"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Thyagaraja", "D": "11:35", "R": "Bhairavi", "T": "", "U": "389 views", "V": "U3T3xQpziLk"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Thyagaraja", "D": "16:25", "R": "Bhairavi", "T": "", "U": "676 views", "V": "CJHPLr03zHk"}, {"C": "Thyagaraja", "D": "16:25", "R": "Bhairavi", "T": "", "U": "1,400 views", "V": "9QFEjPbFrlw"}]}, {"A": "Madurai Mani Iyer", "songs": [{"C": "Thyagaraja", "D": "", "R": "Bhairavi", "T": "", "U": "1,400 views", "V": "jSDetm-V3CY"}, {"C": "Thyagaraja", "D": "21:06", "R": "Bhairavi", "T": "", "U": "504 views", "V": "xR8p8ardZSE"}, {"C": "Thyagaraja", "D": "31:41", "R": "Bhairavi", "T": "", "U": "27 views", "V": "ROVf6hdsZW0"}]}, {"A": "R. K. Srikantan", "songs": [{"C": "Thyagaraja", "D": "28:56", "R": "Bhairavi", "T": "", "U": "18 views", "V": "5M8DVrF2EMU"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Thyagaraja", "D": "37:31", "R": "Bhairavi", "T": "", "U": "7,800 views", "V": "6K-26X04TAo"}]}, {"A": "S. Aishwarya", "songs": [{"C": "Thyagaraja", "D": "13:57", "R": "Bhairavi", "T": "", "U": "30,000 views", "V": "BKOqXCagwKA"}, {"C": "Thyagaraja", "D": "9:45", "R": "Bhairavi", "T": "", "U": "23,020 views", "V": "QWmzd7GG4W8"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Thyagaraja", "D": "4:09", "R": "Bhairavi", "T": "", "U": "597 views", "V": "BKBs4ioY4tg"}, {"C": "Thyagaraja", "D": "5:21", "R": "Bhairavi", "T": "", "U": "20 views", "V": "EkPiEuc6lmc"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Thyagaraja", "D": "14:50", "R": "Bhairavi", "T": "", "U": "35 views", "V": "ndIczn8HPeA"}, {"C": "Thyagaraja", "D": "12:41", "R": "Bhairavi", "T": "", "U": "1,146 views", "V": "e2u86qx1cj8"}]}, {"A": "T. V. Sankaranarayanan", "songs": [{"C": "Thyagaraja", "D": "33:40", "R": "Bhairavi", "T": "", "U": "93 views", "V": "mFiOxQeXSoo"}, {"C": "Thyagaraja", "D": "26:25", "R": "Bhairavi", "T": "", "U": "32 views", "V": "ShFaiIkL--4"}]}, {"A": "Jayanthi Kumaresh", "songs": [{"C": "Thyagaraja", "D": "3:22", "R": "Bhairavi", "T": "", "U": "563 views", "V": "_CgVfzVqY1c"}]}, {"A": "T. N. Rajarathnam Pillai", "songs": [{"C": "Thyagaraja", "D": "25:40", "R": "Bhairavi", "T": "", "U": "8,700 views", "V": "12FvAbeV46Q"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

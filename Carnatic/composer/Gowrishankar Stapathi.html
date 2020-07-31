@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>12</td></tr>
 <tr><td><em>Song</em></td><td>3</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "AnjanEyam namAmyaham Aditya putram kali", "songs": [{"N": "0059", "T": "", "H": "Anjaneyam Namamyaham", "S": "AnjanEyam namAmyaham Aditya putram kali dOSa :  Adi", "R": "Darbar", "C": "Gowrishankar Stapathi", "A": "D. K. Pattammal", "V": "YWpYiDSDi2s"}, {"N": "0060", "T": "", "H": "Anjaneyam Namamyaham", "S": "AnjanEyam namAmyaham Aditya putram kali dOSa :  Adi", "R": "Darbar", "C": "Gowrishankar Stapathi", "A": "D. K. Pattammal", "V": "yrVjIMt7p-I"}, {"N": "0069", "T": "", "H": "Anjaneyam Namamyaham", "S": "AnjanEyam namAmyaham Aditya putram kali dOSa :  Adi", "R": "Darbar", "C": "Gowrishankar Stapathi", "A": "Nithyasree Mahadevan", "V": "Qp_oc12eB-0"}]}, {"name": "guruvaruLum tiruvaruLum enakkaruLum gaNapatiyE", "songs": [{"N": "0163", "T": "", "H": "Guru Arulum", "S": "guruvaruLum tiruvaruLum enakkaruLum gaNapatiyE :  Khanda Caapu", "R": "Abhogi", "C": "Gowrishankar Stapathi", "A": "D. K. Jayaraman", "V": "mNQuc3JZhEA"}, {"N": "0164", "T": "", "H": "Guru Arulum", "S": "guruvaruLum tiruvaruLum enakkaruLum gaNapatiyE :  Khanda Caapu", "R": "Abhogi", "C": "Gowrishankar Stapathi", "A": "D. K. Jayaraman", "V": "yMJElIk_Xv0"}, {"N": "0172", "T": "", "H": "Guru Arulum", "S": "guruvaruLum tiruvaruLum enakkaruLum gaNapatiyE :  Khanda Caapu", "R": "Abhogi", "C": "Gowrishankar Stapathi", "A": "D. K. Pattammal", "V": "M2Fe-OtZPPU"}, {"N": "0244", "T": "", "H": "Guru Arulum", "S": "guruvaruLum tiruvaruLum enakkaruLum gaNapatiyE :  Khanda Caapu", "R": "Abhogi", "C": "Gowrishankar Stapathi", "A": "M. L. Vasanthakumari", "V": "mR1cjtqFebI"}, {"N": "0140", "T": "", "H": "Guru Arulum", "S": "guruvaruLum tiruvaruLum enakkaruLum gaNapatiyE :  Khanda Caapu", "R": "Abhogi", "C": "Gowrishankar Stapathi", "A": "Nithyasree Mahadevan", "V": "34PS_g9NiQY"}]}, {"name": "venkaTEshanAtham jagadjAla pAlam vandE", "songs": [{"N": "0470", "T": "", "H": "Sri Venkatesha Natham", "S": "venkaTEshanAtham jagadjAla pAlam vandE shrI :  Triputa Adi", "R": "Brindavana saranga", "C": "Gowrishankar Stapathi", "A": "D. K. Pattammal", "V": "2etTof_BaAU"}, {"N": "0471", "T": "", "H": "Sri Venkatesha Natham", "S": "venkaTEshanAtham jagadjAla pAlam vandE shrI :  Triputa Adi", "R": "Brindavana saranga", "C": "Gowrishankar Stapathi", "A": "D. K. Pattammal", "V": "VIJpn3Zdj30"}, {"N": "0472", "T": "", "H": "Sri Venkatesha Natham", "S": "venkaTEshanAtham jagadjAla pAlam vandE shrI :  Triputa Adi", "R": "Brindavana saranga", "C": "Gowrishankar Stapathi", "A": "D. K. Pattammal", "V": "WyRhjSBW2hY"}, {"N": "0473", "T": "", "H": "Sri Venkatesha Natham", "S": "venkaTEshanAtham jagadjAla pAlam vandE shrI :  Triputa Adi", "R": "Brindavana saranga", "C": "Gowrishankar Stapathi", "A": "D. K. Pattammal", "V": "nTaZdMnY08Q"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Anjaneyam Namamyaham", "S": "AnjanEyam namAmyaham Aditya putram kali dOSa :  Adi", "songs": [{"A": "D. K. Pattammal", "D": "4:31", "R": "Darbar", "T": "", "U": "0 views", "V": "YWpYiDSDi2s"}, {"A": "D. K. Pattammal", "D": "6:32", "R": "Darbar", "T": "", "U": "139 views", "V": "yrVjIMt7p-I"}, {"A": "Nithyasree Mahadevan", "D": "6:02", "R": "Darbar", "T": "", "U": "0 views", "V": "Qp_oc12eB-0"}]}, {"H": "Guru Arulum", "S": "guruvaruLum tiruvaruLum enakkaruLum gaNapatiyE :  Khanda Caapu", "songs": [{"A": "D. K. Jayaraman", "D": "7:56", "R": "Abhogi", "T": "", "U": "871 views", "V": "yMJElIk_Xv0"}, {"A": "D. K. Jayaraman", "D": "8:35", "R": "Abhogi", "T": "", "U": "0 views", "V": "mNQuc3JZhEA"}, {"A": "D. K. Pattammal", "D": "5:16", "R": "Abhogi", "T": "", "U": "1,132 views", "V": "M2Fe-OtZPPU"}, {"A": "M. L. Vasanthakumari", "D": "6:41", "R": "Abhogi", "T": "", "U": "10 views", "V": "mR1cjtqFebI"}, {"A": "Nithyasree Mahadevan", "D": "6:25", "R": "Abhogi", "T": "", "U": "0 views", "V": "34PS_g9NiQY"}]}, {"H": "Sri Venkatesha Natham", "S": "venkaTEshanAtham jagadjAla pAlam vandE shrI :  Triputa Adi", "songs": [{"A": "D. K. Pattammal", "D": "4:41", "R": "Brindavana saranga", "T": "", "U": "393 views", "V": "WyRhjSBW2hY"}, {"A": "D. K. Pattammal", "D": "5:26", "R": "Brindavana saranga", "T": "", "U": "0 views", "V": "VIJpn3Zdj30"}, {"A": "D. K. Pattammal", "D": "5:07", "R": "Brindavana saranga", "T": "", "U": "22 views", "V": "2etTof_BaAU"}, {"A": "D. K. Pattammal", "D": "3:56", "R": "Brindavana saranga", "T": "", "U": "977 views", "V": "nTaZdMnY08Q"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>28</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>19</td></tr>
-<tr><td><em>Concert</em></td><td>19</td></tr>
+<tr><td><em>Concert</em></td><td>23</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0048", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "Bombay Jayashri", "V": "GMHWLyInxC0"}, {"N": "0049", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "Bombay Jayashri", "V": "iNrgufOfcpk"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0067", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "Bombay Sisters", "V": "CO_vrynSjQQ"}]}, {"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0057", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "D. K. Jayaraman", "V": "2r2TiSouETM"}, {"N": "0058", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "D. K. Jayaraman", "V": "BlSEzMrOyPI"}, {"N": "0059", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "D. K. Jayaraman", "V": "VXgkC36tqSI"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0057", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "D. K. Pattammal", "V": "Buju0kX0Wo8"}]}, {"name": "Vocal - M. S. Sheela", "songs": [{"N": "0016", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "M. S. Sheela", "V": "LR44PyUpAEo"}]}, {"name": "Vocal - Malladi Suribabu", "songs": [{"N": "0013", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "Malladi Suribabu", "V": "alVS9smsvTg"}]}, {"name": "Vocal - O. S. Thyagarajan", "songs": [{"N": "0021", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "O. S. Thyagarajan", "V": "MUyUUJw4_XA"}]}, {"name": "Vocal - Ram Kaushik", "songs": [{"N": "0006", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "Ram Kaushik", "V": "XWVHfnYfFb0"}]}, {"name": "Vocal - S. Aishwarya", "songs": [{"N": "0019", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "S. Aishwarya", "V": "6Ud3nR70U4Y"}, {"N": "0020", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "S. Aishwarya", "V": "dZx45PVg-eU"}]}, {"name": "Vocal - S. P. Ramh", "songs": [{"N": "0005", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "S. P. Ramh", "V": "37zfd0zf4cc"}, {"N": "0006", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "S. P. Ramh", "V": "cg-bsH_V-sw"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0093", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "Sudha Ragunathan", "V": "iWdI3SRGgGk"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0102", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "DSXB_KgZm2c"}, {"N": "0103", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "PZwsuLgvzKs"}, {"N": "0104", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "ScTsFUeUnVU"}, {"N": "0105", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "zk-Sq0qYW6w"}]}, {"name": "Vocal - Uma Radhika", "songs": [{"N": "0028", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "Uma Radhika", "V": "PRWCWTAEYUs"}]}, {"name": "Vocal - Vijay Siva", "songs": [{"N": "0017", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "Vijay Siva", "V": "nlsOI2CZX44"}]}, {"name": "Mridangam - Delhi Sairam", "songs": [{"N": "0015", "T": "", "H": "Amba Vani", "S": "ambA vANi nannAdarincavE  :  Adi", "R": "Keeravani", "C": "Muthiah Bhagavathar", "A": "Delhi Sairam", "V": "tcSq0x5zJDU"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Muthiah Bhagavathar", "D": "5:40", "R": "Keeravani", "T": "", "U": "26,629 views", "V": "GMHWLyInxC0"}, {"C": "Muthiah Bhagavathar", "D": "5:44", "R": "Keeravani", "T": "", "U": "0 views", "V": "iNrgufOfcpk"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Muthiah Bhagavathar", "D": "4:20", "R": "Keeravani", "T": "", "U": "0 views", "V": "CO_vrynSjQQ"}]}, {"A": "D. K. Jayaraman", "songs": [{"C": "Muthiah Bhagavathar", "D": "15:11", "R": "Keeravani", "T": "", "U": "386 views", "V": "2r2TiSouETM"}, {"C": "Muthiah Bhagavathar", "D": "5:15", "R": "Keeravani", "T": "", "U": "195 views", "V": "BlSEzMrOyPI"}, {"C": "Muthiah Bhagavathar", "D": "22:21", "R": "Keeravani", "T": "", "U": "2,620 views", "V": "VXgkC36tqSI"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Muthiah Bhagavathar", "D": "4:01", "R": "Keeravani", "T": "", "U": "873 views", "V": "Buju0kX0Wo8"}]}, {"A": "M. S. Sheela", "songs": [{"C": "Muthiah Bhagavathar", "D": "13:26", "R": "Keeravani", "T": "", "U": "37 views", "V": "LR44PyUpAEo"}]}, {"A": "Malladi Suribabu", "songs": [{"C": "Muthiah Bhagavathar", "D": "11:51", "R": "Keeravani", "T": "", "U": "591 views", "V": "alVS9smsvTg"}]}, {"A": "O. S. Thyagarajan", "songs": [{"C": "Muthiah Bhagavathar", "D": "14:39", "R": "Keeravani", "T": "", "U": "30 views", "V": "MUyUUJw4_XA"}]}, {"A": "Ram Kaushik", "songs": [{"C": "Muthiah Bhagavathar", "D": "7:23", "R": "Keeravani", "T": "", "U": "2,240 views", "V": "XWVHfnYfFb0"}]}, {"A": "S. Aishwarya", "songs": [{"C": "Muthiah Bhagavathar", "D": "43:59", "R": "Keeravani", "T": "", "U": "25,000 views", "V": "dZx45PVg-eU"}, {"C": "Muthiah Bhagavathar", "D": "15:21", "R": "Keeravani", "T": "", "U": "991 views", "V": "6Ud3nR70U4Y"}]}, {"A": "S. P. Ramh", "songs": [{"C": "Muthiah Bhagavathar", "D": "1:09:20", "R": "Keeravani", "T": "", "U": "7,388 views", "V": "37zfd0zf4cc"}, {"C": "Muthiah Bhagavathar", "D": "18:06", "R": "Keeravani", "T": "", "U": "0 views", "V": "cg-bsH_V-sw"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Muthiah Bhagavathar", "D": "27:21", "R": "Keeravani", "T": "", "U": "3,153 views", "V": "iWdI3SRGgGk"}]}, {"A": "T. N. S. Krishna", "songs": [{"C": "Muthiah Bhagavathar", "D": "10:19", "R": "Keeravani", "T": "", "U": "44,367 views", "V": "zk-Sq0qYW6w"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Muthiah Bhagavathar", "D": "12:55", "R": "Keeravani", "T": "", "U": "558 views", "V": "DSXB_KgZm2c"}, {"C": "Muthiah Bhagavathar", "D": "10:34", "R": "Keeravani", "T": "", "U": "0 views", "V": "ScTsFUeUnVU"}, {"C": "Muthiah Bhagavathar", "D": "43:09", "R": "Keeravani", "T": "", "U": "2,893 views", "V": "PZwsuLgvzKs"}]}, {"A": "Uma Radhika", "songs": [{"C": "Muthiah Bhagavathar", "D": "19:01", "R": "Keeravani", "T": "", "U": "987 views", "V": "PRWCWTAEYUs"}]}, {"A": "Vijay Siva", "songs": [{"C": "Muthiah Bhagavathar", "D": "3:26", "R": "Keeravani", "T": "", "U": "415 views", "V": "nlsOI2CZX44"}]}, {"A": "Delhi Sairam", "songs": [{"C": "Muthiah Bhagavathar", "D": "14:01", "R": "Keeravani", "T": "", "U": "626 views", "V": "tcSq0x5zJDU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

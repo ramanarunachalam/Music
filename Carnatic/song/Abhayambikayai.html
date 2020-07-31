@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>3</td></tr>
-<tr><td><em>Concert</em></td><td>3</td></tr>
+<tr><td><em>Concert</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - BV Raman BV Lakshmanan", "songs": [{"N": "0001", "T": "Abhayamba vibhakthi", "H": "Abhayambikayai", "S": "abhayAmbikAyai ashvArUDhAyai  :  Rupaka", "R": "Yadukulakambhoji", "C": "Muthuswami Dikshitar", "A": "BV Raman BV Lakshmanan", "V": "S1OLfnjZCqI"}, {"N": "0002", "T": "Abhayamba vibhakthi", "H": "Abhayambikayai", "S": "abhayAmbikAyai ashvArUDhAyai  :  Rupaka", "R": "Yadukulakambhoji", "C": "Muthuswami Dikshitar", "A": "BV Raman BV Lakshmanan", "V": "V87zNf7VW2g"}]}, {"name": "Vocal - T. N. Bala", "songs": [{"N": "0002", "T": "Abhayamba vibhakthi", "H": "Abhayambikayai", "S": "abhayAmbikAyai ashvArUDhAyai  :  Rupaka", "R": "Yadukulakambhoji", "C": "Muthuswami Dikshitar", "A": "T. N. Bala", "V": "0YVGwGgBX_E"}]}, {"name": "Vocal - Uma Radhika", "songs": [{"N": "0006", "T": "Abhayamba vibhakthi", "H": "Abhayambikayai", "S": "abhayAmbikAyai ashvArUDhAyai  :  Rupaka", "R": "Yadukulakambhoji", "C": "Muthuswami Dikshitar", "A": "Uma Radhika", "V": "7dRDXvqtCE0"}, {"N": "0007", "T": "Abhayamba vibhakthi", "H": "Abhayambikayai", "S": "abhayAmbikAyai ashvArUDhAyai  :  Rupaka", "R": "Yadukulakambhoji", "C": "Muthuswami Dikshitar", "A": "Uma Radhika", "V": "kXd2_zgo9Lk"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "BV Raman BV Lakshmanan", "songs": [{"C": "Muthuswami Dikshitar", "D": "14:01", "R": "Yadukulakambhoji", "T": "Abhayamba vibhakthi", "U": "106 views", "V": "V87zNf7VW2g"}, {"C": "Muthuswami Dikshitar", "D": "5:30", "R": "Yadukulakambhoji", "T": "Abhayamba vibhakthi", "U": "190 views", "V": "S1OLfnjZCqI"}]}, {"A": "T. N. Bala", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:20", "R": "Yadukulakambhoji", "T": "Abhayamba vibhakthi", "U": "1,100 views", "V": "0YVGwGgBX_E"}]}, {"A": "Uma Radhika", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:56", "R": "Yadukulakambhoji", "T": "Abhayamba vibhakthi", "U": "578 views", "V": "kXd2_zgo9Lk"}, {"C": "Muthuswami Dikshitar", "D": "4:33", "R": "Yadukulakambhoji", "T": "Abhayamba vibhakthi", "U": "27 views", "V": "7dRDXvqtCE0"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>27</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>19</td></tr>
-<tr><td><em>Concert</em></td><td>19</td></tr>
+<tr><td><em>Concert</em></td><td>20</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -141,57 +141,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0258", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "Maharajapuram Santhanam", "V": "F6Q-P9ASiuA"}, {"N": "0259", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "Maharajapuram Santhanam", "V": "FjtuzwZ28Ss"}]}, {"name": "Vocal - Maharajapuram Viswanatha Iyer", "songs": [{"N": "0028", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "Maharajapuram Viswanatha Iyer", "V": "GdvBG9K6sWs"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0129", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "Priya Sisters", "V": "isaU7TPsfKk"}]}, {"name": "Vocal - S. Saketharaman", "songs": [{"N": "0074", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "S. Saketharaman", "V": "rvyoNffCwIo"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0505", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "rqSEWXP_1kg"}, {"N": "0506", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "Sanjay Subrahmanyan", "V": "zhLuev0BebE"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0093", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "Sankaran Namboothiri", "V": "J1HGI_eSdAc"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0423", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "-qgoQhSxlkk"}, {"N": "0424", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "ARKGR8-NRWE"}, {"N": "0425", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "pDlvqCTIoe0"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0284", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "T. N. Seshagopalan", "V": "-TxTkhbqUUo"}]}, {"name": "Vocal - V. K. Arun Kumar", "songs": [{"N": "0006", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "V. K. Arun Kumar", "V": "LYHrd1FTirE"}]}, {"name": "Flute - Shashank Subramanyam", "songs": [{"N": "0017", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "Shashank Subramanyam", "V": "kzU0QMlvnbU"}]}, {"name": "Clarinet - A. K. C. Natarajan", "songs": [{"N": "0019", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "A. K. C. Natarajan", "V": "oSS9ElIDvq8"}]}, {"name": "Violin - M. S. Gopalakrishnan", "songs": [{"N": "0209", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "M. S. Gopalakrishnan", "V": "1J3Rld5x0uA"}, {"N": "0210", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "M. S. Gopalakrishnan", "V": "IRCU0peJEMg"}, {"N": "0211", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "M. S. Gopalakrishnan", "V": "LVLi-PF4160"}, {"N": "0212", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "M. S. Gopalakrishnan", "V": "PSqVJ72hWjQ"}, {"N": "0213", "T": "", "H": "Manamu Leda", "S": "mAnamu lEdA tanavAD a ni abhi mAnamu  :  Adi", "R": "Hamirkalyani", "C": "Thyagaraja", "A": "M. S. Gopalakrishnan", "V": "vHcuT9pVlrQ"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Maharajapuram Santhanam", "songs": [{"C": "Thyagaraja", "D": "19:31", "R": "Hamirkalyani", "T": "", "U": "3,200 views", "V": "F6Q-P9ASiuA"}, {"C": "Thyagaraja", "D": "11:16", "R": "Hamirkalyani", "T": "", "U": "712 views", "V": "FjtuzwZ28Ss"}]}, {"A": "Maharajapuram Viswanatha Iyer", "songs": [{"C": "Thyagaraja", "D": "15:05", "R": "Hamirkalyani", "T": "", "U": "523 views", "V": "GdvBG9K6sWs"}]}, {"A": "Priya Sisters", "songs": [{"C": "Thyagaraja", "D": "16:20", "R": "Hamirkalyani", "T": "", "U": "381 views", "V": "isaU7TPsfKk"}]}, {"A": "S. Saketharaman", "songs": [{"C": "Thyagaraja", "D": "25:11", "R": "Hamirkalyani", "T": "", "U": "252 views", "V": "rvyoNffCwIo"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Thyagaraja", "D": "22:50", "R": "Hamirkalyani", "T": "", "U": "19,000 views", "V": "zhLuev0BebE"}, {"C": "Thyagaraja", "D": "5:51", "R": "Hamirkalyani", "T": "", "U": "2,300 views", "V": "rqSEWXP_1kg"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Thyagaraja", "D": "24:31", "R": "Hamirkalyani", "T": "", "U": "183 views", "V": "J1HGI_eSdAc"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Thyagaraja", "D": "", "R": "Hamirkalyani", "T": "", "U": "247 views", "V": "pDlvqCTIoe0"}, {"C": "Thyagaraja", "D": "9:11", "R": "Hamirkalyani", "T": "", "U": "90 views", "V": "ARKGR8-NRWE"}, {"C": "Thyagaraja", "D": "9:06", "R": "Hamirkalyani", "T": "", "U": "822 views", "V": "-qgoQhSxlkk"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Thyagaraja", "D": "1:04:54", "R": "Hamirkalyani", "T": "", "U": "361 views", "V": "-TxTkhbqUUo"}]}, {"A": "V. K. Arun Kumar", "songs": [{"C": "Thyagaraja", "D": "10:41", "R": "Hamirkalyani", "T": "", "U": "28 views", "V": "LYHrd1FTirE"}]}, {"A": "Shashank Subramanyam", "songs": [{"C": "Thyagaraja", "D": "35:04", "R": "Hamirkalyani", "T": "", "U": "147 views", "V": "kzU0QMlvnbU"}]}, {"A": "A. K. C. Natarajan", "songs": [{"C": "Thyagaraja", "D": "4:25", "R": "Hamirkalyani", "T": "", "U": "65 views", "V": "oSS9ElIDvq8"}]}, {"A": "M. S. Gopalakrishnan", "songs": [{"C": "Thyagaraja", "D": "32:51", "R": "Hamirkalyani", "T": "", "U": "801 views", "V": "vHcuT9pVlrQ"}, {"C": "Thyagaraja", "D": "19:31", "R": "Hamirkalyani", "T": "", "U": "204 views", "V": "PSqVJ72hWjQ"}, {"C": "Thyagaraja", "D": "29:11", "R": "Hamirkalyani", "T": "", "U": "1,302 views", "V": "1J3Rld5x0uA"}, {"C": "Thyagaraja", "D": "13:31", "R": "Hamirkalyani", "T": "", "U": "176 views", "V": "IRCU0peJEMg"}, {"C": "Thyagaraja", "D": "13:33", "R": "Hamirkalyani", "T": "", "U": "0 views", "V": "LVLi-PF4160"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

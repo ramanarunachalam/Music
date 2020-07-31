@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>34</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>22</td></tr>
-<tr><td><em>Concert</em></td><td>22</td></tr>
+<tr><td><em>Concert</em></td><td>33</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -195,57 +195,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Alathur Brothers", "songs": [{"N": "0136", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Alathur Brothers", "V": "gvMR8uSO15U"}, {"N": "0137", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Alathur Brothers", "V": "u4cBAk3wkOg"}]}, {"name": "Vocal - Aruna Sairam", "songs": [{"N": "0354", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Aruna Sairam", "V": "lwzqZqij39M"}, {"N": "0355", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Aruna Sairam", "V": "uhm1y72kLQA"}]}, {"name": "Vocal - Bombay Sisters", "songs": [{"N": "0256", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Bombay Sisters", "V": "h5sr0jgKrJA"}]}, {"name": "Vocal - Lalitha Seshadri", "songs": [{"N": "0003", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Lalitha Seshadri", "V": "jA-gXLMs1eg"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1600", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "987mYPYmnG0"}, {"N": "1602", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "OQkBIVx0kkI"}, {"N": "1603", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "Vzyt4GrFd1M"}, {"N": "1604", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "cQzLWqvNTSM"}, {"N": "1605", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "fgyldyDaoSM"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0602", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Maharajapuram Santhanam", "V": "ZjMTYcW2d3A"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0281", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Malladi Brothers", "V": "VBCiMQawgrU"}, {"N": "0282", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Malladi Brothers", "V": "lFYOJfvgf28"}]}, {"name": "Vocal - Neyveli Santhanagopalan", "songs": [{"N": "0159", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Neyveli Santhanagopalan", "V": "vu5TE2DPX14"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0384", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Nithyasree Mahadevan", "V": "BjhmEjpUcvk"}]}, {"name": "Vocal - R. Vedavalli", "songs": [{"N": "0317", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "R. Vedavalli", "V": "IgBi_ql7jGA"}, {"N": "0318", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "R. Vedavalli", "V": "JM-NdI8vDNA"}]}, {"name": "Vocal - Radha Jayalakshmi", "songs": [{"N": "0141", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Radha Jayalakshmi", "V": "m55WmY9-xbM"}]}, {"name": "Vocal - Ramakrishnan Murthy", "songs": [{"N": "0248", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Ramakrishnan Murthy", "V": "j9i7eWqlDKU"}, {"N": "0249", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Ramakrishnan Murthy", "V": "jn1KwAnz6fg"}, {"N": "0250", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Ramakrishnan Murthy", "V": "w3ZdrYaio9g"}]}, {"name": "Vocal - Sandhyavandanam Srinivasa Rao", "songs": [{"N": "0020", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Sandhyavandanam Srinivasa Rao", "V": "JcOWUo9bIWY"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0909", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "Lj1-g3tKTNY"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0229", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Sikkil Gurucharan", "V": "Exj554wj1Ek"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0772", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "T. M. Krishna", "V": "LnlIwhYG7cY"}, {"N": "0773", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "T. M. Krishna", "V": "qXZQtyNI6AA"}]}, {"name": "Vocal - Trichur V. Ramachandran", "songs": [{"N": "0129", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Trichur V. Ramachandran", "V": "kd0FPOPnPoI"}]}, {"name": "Chitra Veena - Chitravina Ravi Kiran", "songs": [{"N": "0170", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "Chitravina Ravi Kiran", "V": "3l32r0hFk9s"}]}, {"name": "Flute - K. S. Gopalakrishnan", "songs": [{"N": "0076", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "K. S. Gopalakrishnan", "V": "xHiTREUBExc"}]}, {"name": "Flute - N. Ramani", "songs": [{"N": "0210", "T": "Pancharathnam", "H": "Duduku Gala", "S": "duDuku gala nann E  dora  :  Adi", "R": "Gowla", "C": "Thyagaraja", "A": "N. Ramani", "V": "LawGunzPLzA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Alathur Brothers", "songs": [{"C": "Thyagaraja", "D": "8:45", "R": "Gowla", "T": "Pancharathnam", "U": "291 views", "V": "u4cBAk3wkOg"}, {"C": "Thyagaraja", "D": "8:30", "R": "Gowla", "T": "Pancharathnam", "U": "359 views", "V": "gvMR8uSO15U"}]}, {"A": "Aruna Sairam", "songs": [{"C": "Thyagaraja", "D": "10:49", "R": "Gowla", "T": "Pancharathnam", "U": "262 views", "V": "lwzqZqij39M"}, {"C": "Thyagaraja", "D": "10:49", "R": "Gowla", "T": "Pancharathnam", "U": "228 views", "V": "uhm1y72kLQA"}]}, {"A": "Bombay Sisters", "songs": [{"C": "Thyagaraja", "D": "10:24", "R": "Gowla", "T": "Pancharathnam", "U": "0 views", "V": "h5sr0jgKrJA"}]}, {"A": "Lalitha Seshadri", "songs": [{"C": "Thyagaraja", "D": "9:44", "R": "Gowla", "T": "Pancharathnam", "U": "349 views", "V": "jA-gXLMs1eg"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Thyagaraja", "D": "12:31", "R": "Gowla", "T": "Pancharathnam", "U": "806 views", "V": "cQzLWqvNTSM"}, {"C": "Thyagaraja", "D": "13:06", "R": "Gowla", "T": "Pancharathnam", "U": "6,767 views", "V": "987mYPYmnG0"}, {"C": "Thyagaraja", "D": "12:47", "R": "Gowla", "T": "Pancharathnam", "U": "0 views", "V": "fgyldyDaoSM"}, {"C": "Thyagaraja", "D": "12:47", "R": "Gowla", "T": "Pancharathnam", "U": "0 views", "V": "OQkBIVx0kkI"}, {"C": "Thyagaraja", "D": "13:02", "R": "Gowla", "T": "Pancharathnam", "U": "0 views", "V": "Vzyt4GrFd1M"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Thyagaraja", "D": "11:45", "R": "Gowla", "T": "Pancharathnam", "U": "0 views", "V": "ZjMTYcW2d3A"}]}, {"A": "Malladi Brothers", "songs": [{"C": "Thyagaraja", "D": "13:44", "R": "Gowla", "T": "Pancharathnam", "U": "40,452 views", "V": "lFYOJfvgf28"}, {"C": "Thyagaraja", "D": "14:57", "R": "Gowla", "T": "Pancharathnam", "U": "1,010 views", "V": "VBCiMQawgrU"}]}, {"A": "Neyveli Santhanagopalan", "songs": [{"C": "Thyagaraja", "D": "14:13", "R": "Gowla", "T": "Pancharathnam", "U": "48,268 views", "V": "vu5TE2DPX14"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Thyagaraja", "D": "13:21", "R": "Gowla", "T": "Pancharathnam", "U": "0 views", "V": "BjhmEjpUcvk"}]}, {"A": "R. Vedavalli", "songs": [{"C": "Thyagaraja", "D": "51:18", "R": "Gowla", "T": "Pancharathnam", "U": "0 views", "V": "JM-NdI8vDNA"}, {"C": "Thyagaraja", "D": "9:17", "R": "Gowla", "T": "Pancharathnam", "U": "0 views", "V": "IgBi_ql7jGA"}]}, {"A": "Radha Jayalakshmi", "songs": [{"C": "Thyagaraja", "D": "10:35", "R": "Gowla", "T": "Pancharathnam", "U": "0 views", "V": "m55WmY9-xbM"}]}, {"A": "Ramakrishnan Murthy", "songs": [{"C": "Thyagaraja", "D": "2:05:35", "R": "Gowla", "T": "Pancharathnam", "U": "884 views", "V": "jn1KwAnz6fg"}, {"C": "Thyagaraja", "D": "12:46", "R": "Gowla", "T": "Pancharathnam", "U": "335 views", "V": "w3ZdrYaio9g"}, {"C": "Thyagaraja", "D": "12:46", "R": "Gowla", "T": "Pancharathnam", "U": "1,600 views", "V": "j9i7eWqlDKU"}]}, {"A": "Sandhyavandanam Srinivasa Rao", "songs": [{"C": "Thyagaraja", "D": "3:11", "R": "Gowla", "T": "Pancharathnam", "U": "35 views", "V": "JcOWUo9bIWY"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Thyagaraja", "D": "11:31", "R": "Gowla", "T": "Pancharathnam", "U": "249 views", "V": "Lj1-g3tKTNY"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Thyagaraja", "D": "17:24", "R": "Gowla", "T": "Pancharathnam", "U": "0 views", "V": "Exj554wj1Ek"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Thyagaraja", "D": "11:16", "R": "Gowla", "T": "Pancharathnam", "U": "2,397 views", "V": "LnlIwhYG7cY"}, {"C": "Thyagaraja", "D": "11:16", "R": "Gowla", "T": "Pancharathnam", "U": "306 views", "V": "qXZQtyNI6AA"}]}, {"A": "Trichur V. Ramachandran", "songs": [{"C": "Thyagaraja", "D": "10:06", "R": "Gowla", "T": "Pancharathnam", "U": "111 views", "V": "kd0FPOPnPoI"}]}, {"A": "Chitravina Ravi Kiran", "songs": [{"C": "Thyagaraja", "D": "2:01", "R": "Gowla", "T": "Pancharathnam", "U": "52 views", "V": "3l32r0hFk9s"}]}, {"A": "K. S. Gopalakrishnan", "songs": [{"C": "Thyagaraja", "D": "14:31", "R": "Gowla", "T": "Pancharathnam", "U": "7 views", "V": "xHiTREUBExc"}]}, {"A": "N. Ramani", "songs": [{"C": "Thyagaraja", "D": "9:18", "R": "Gowla", "T": "Pancharathnam", "U": "908 views", "V": "LawGunzPLzA"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

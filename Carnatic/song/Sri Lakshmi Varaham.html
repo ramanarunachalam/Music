@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>23</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>15</td></tr>
-<tr><td><em>Concert</em></td><td>15</td></tr>
+<tr><td><em>Concert</em></td><td>22</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -142,57 +142,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Sisters", "songs": [{"N": "0206", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Bombay Sisters", "V": "GthHP3NDCZo"}]}, {"name": "Vocal - Charulatha Mani", "songs": [{"N": "0078", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Charulatha Mani", "V": "ym4QQr1KMPc"}]}, {"name": "Vocal - Chembai Vaidyanatha Bhagavathar", "songs": [{"N": "0227", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Chembai Vaidyanatha Bhagavathar", "V": "aj-dSYQ2p-4"}]}, {"name": "Vocal - Dr. Nagavalli Nagaraj", "songs": [{"N": "0099", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Dr. Nagavalli Nagaraj", "V": "96EUDNKrJ7Q"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1094", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "Lx6sUubx3uE"}, {"N": "1095", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "Mi3K5NzJLb0"}, {"N": "1096", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "jzGe65CIEFk"}, {"N": "1097", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "oWSHRGLsjPI"}, {"N": "1098", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "oqDzG7Ccss0"}]}, {"name": "Vocal - Palghat R Ramprasad", "songs": [{"N": "0054", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Palghat R Ramprasad", "V": "71ugvdGj_Tw"}]}, {"name": "Vocal - Prema Rangarajan", "songs": [{"N": "0084", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Prema Rangarajan", "V": "6ipQHzT4aqw"}]}, {"name": "Vocal - R. Vedavalli", "songs": [{"N": "0233", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "cqbLEVo0g9I"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0827", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "V7kl5TU3WDY"}, {"N": "0828", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "kYp9Bt_98yE"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0164", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Sankaran Namboothiri", "V": "yVNrLG8npmw"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0773", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "I1hDQBDmpA4"}, {"N": "0775", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Semmangudi Srinivasa Iyer", "V": "zKCcFs8Ef1E"}]}, {"name": "Vocal - Trichur Brothers", "songs": [{"N": "0098", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Trichur Brothers", "V": "Ch0AAmoH40U"}]}, {"name": "Vocal - V. R. Dileep Kumar", "songs": [{"N": "0039", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "V. R. Dileep Kumar", "V": "fi2UcmjB5-w"}]}, {"name": "Nadaswaram - Karukurichi Arunachalam", "songs": [{"N": "0052", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Karukurichi Arunachalam", "V": "ROmcJOajWVk"}, {"N": "0053", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "Karukurichi Arunachalam", "V": "qBc1Of8qlv8"}]}, {"name": "Violin - M. S. Gopalakrishnan", "songs": [{"N": "0370", "T": "", "H": "Sri Lakshmi Varaham", "S": "shrI lakSmI varAham bhajEham shrI lakSmI :  Adi", "R": "Abhogi", "C": "Muthuswami Dikshitar", "A": "M. S. Gopalakrishnan", "V": "XDDEb-gQH30"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Sisters", "songs": [{"C": "Muthuswami Dikshitar", "D": "1:04:09", "R": "Abhogi", "T": "", "U": "414,694 views", "V": "GthHP3NDCZo"}]}, {"A": "Chembai Vaidyanatha Bhagavathar", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:30", "R": "Abhogi", "T": "", "U": "89 views", "V": "aj-dSYQ2p-4"}]}, {"A": "Dr. Nagavalli Nagaraj", "songs": [{"C": "Muthuswami Dikshitar", "D": "3:58", "R": "Abhogi", "T": "", "U": "2,064 views", "V": "96EUDNKrJ7Q"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:31", "R": "Abhogi", "T": "", "U": "10,000 views", "V": "jzGe65CIEFk"}, {"C": "Muthuswami Dikshitar", "D": "6:41", "R": "Abhogi", "T": "", "U": "7,800 views", "V": "oqDzG7Ccss0"}, {"C": "Muthuswami Dikshitar", "D": "54:31", "R": "Abhogi", "T": "", "U": "323,751 views", "V": "oWSHRGLsjPI"}, {"C": "Muthuswami Dikshitar", "D": "5:55", "R": "Abhogi", "T": "", "U": "1,603,138 views", "V": "Lx6sUubx3uE"}, {"C": "Muthuswami Dikshitar", "D": "8:23", "R": "Abhogi", "T": "", "U": "0 views", "V": "Mi3K5NzJLb0"}]}, {"A": "Palghat R Ramprasad", "songs": [{"C": "Muthuswami Dikshitar", "D": "2:50:04", "R": "Abhogi", "T": "", "U": "1,362 views", "V": "71ugvdGj_Tw"}]}, {"A": "Prema Rangarajan", "songs": [{"C": "Muthuswami Dikshitar", "D": "16:21", "R": "Abhogi", "T": "", "U": "21,520 views", "V": "6ipQHzT4aqw"}]}, {"A": "R. Vedavalli", "songs": [{"C": "Muthuswami Dikshitar", "D": "20:20", "R": "Abhogi", "T": "", "U": "0 views", "V": "cqbLEVo0g9I"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Muthuswami Dikshitar", "D": "15:11", "R": "Abhogi", "T": "", "U": "714 views", "V": "kYp9Bt_98yE"}, {"C": "Muthuswami Dikshitar", "D": "15:07", "R": "Abhogi", "T": "", "U": "318 views", "V": "V7kl5TU3WDY"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:26", "R": "Abhogi", "T": "", "U": "12,208 views", "V": "yVNrLG8npmw"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:43", "R": "Abhogi", "T": "", "U": "2,000 views", "V": "I1hDQBDmpA4"}, {"C": "Muthuswami Dikshitar", "D": "6:45", "R": "Abhogi", "T": "", "U": "81 views", "V": "zKCcFs8Ef1E"}]}, {"A": "Trichur Brothers", "songs": [{"C": "Muthuswami Dikshitar", "D": "24:56", "R": "Abhogi", "T": "", "U": "21,000 views", "V": "Ch0AAmoH40U"}]}, {"A": "V. R. Dileep Kumar", "songs": [{"C": "Muthuswami Dikshitar", "D": "9:20", "R": "Abhogi", "T": "", "U": "283 views", "V": "fi2UcmjB5-w"}]}, {"A": "Karukurichi Arunachalam", "songs": [{"C": "Muthuswami Dikshitar", "D": "8:40", "R": "Abhogi", "T": "", "U": "415 views", "V": "qBc1Of8qlv8"}, {"C": "Muthuswami Dikshitar", "D": "8:35", "R": "Abhogi", "T": "", "U": "348 views", "V": "ROmcJOajWVk"}]}, {"A": "M. S. Gopalakrishnan", "songs": [{"C": "Muthuswami Dikshitar", "D": "18:50", "R": "Abhogi", "T": "", "U": "1,900 views", "V": "XDDEb-gQH30"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

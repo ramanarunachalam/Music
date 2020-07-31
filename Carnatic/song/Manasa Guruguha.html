@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>36</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>22</td></tr>
-<tr><td><em>Concert</em></td><td>22</td></tr>
+<tr><td><em>Concert</em></td><td>27</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -141,57 +141,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0031", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "Amrutha Venkatesh", "V": "WtBew4vcIPQ"}]}, {"name": "Vocal - Ariyakudi Ramanuja Iyengar", "songs": [{"N": "0029", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "Ariyakudi Ramanuja Iyengar", "V": "4NcwZF_Xu_g"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0033", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "Bombay Jayashri", "V": "D7hHHJg4XkQ"}, {"N": "0034", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "Bombay Jayashri", "V": "c3pNDtXoJ1o"}, {"N": "0035", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "Bombay Jayashri", "V": "qfuXONquF5k"}, {"N": "0036", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "Bombay Jayashri", "V": "vGEiS_DhkCw"}]}, {"name": "Vocal - D. K. Jayaraman", "songs": [{"N": "0020", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "D. K. Jayaraman", "V": "qMP0G6Yu_F4"}]}, {"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0027", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "WXfG6a5FsEI"}, {"N": "0028", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "D. K. Pattammal", "V": "_ya2b-5INaU"}]}, {"name": "Vocal - G. S. Mani", "songs": [{"N": "0011", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "G. S. Mani", "V": "fNX0aq3y6To"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0026", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "K. V. Narayanaswamy", "V": "BB63MI0xkNM"}, {"N": "0027", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "K. V. Narayanaswamy", "V": "cnZkyJQT1pw"}, {"N": "0028", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "K. V. Narayanaswamy", "V": "hixx9hQIxeI"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0188", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "Hz8czP3_NRk"}, {"N": "0189", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "WokgoyVsXOQ"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0034", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "M. D. Ramanathan", "V": "rnByus_Vs8g"}, {"N": "0029", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "M. D. Ramanathan", "V": "4TO_2VaMU1E"}, {"N": "0031", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "M. D. Ramanathan", "V": "IkvKJgY1gsA"}, {"N": "0032", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "M. D. Ramanathan", "V": "miEAZ1JMXI8"}, {"N": "0033", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "M. D. Ramanathan", "V": "nbKKUsqf0QM"}]}, {"name": "Vocal - R. Vedavalli", "songs": [{"N": "0062", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "10pNpEMGlHo"}, {"N": "0063", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "Mz-AFZDBABM"}]}, {"name": "Vocal - S. Ramanathan", "songs": [{"N": "0011", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "S. Ramanathan", "V": "ZJXm0yE4wzA"}]}, {"name": "Vocal - S. Sowmya", "songs": [{"N": "0034", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "S. Sowmya", "V": "sOmLsk8GY-4"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0016", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "Sankaran Namboothiri", "V": "HF-ZHPQ2JgQ"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0105", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "7kIbudHkt-c"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0077", "T": "Guruguha vibhakti", "H": "Manasa Guruguha", "S": "mAnasa guruguharUpam bhajarE rE mAyAmayahRt tApam :  Rupaka", "R": "Anandabhairavi", "C": "Muthuswami Dikshitar", "A": "T. N. Seshagopalan", "V": "QjxMjyW80-0"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amrutha Venkatesh", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:18", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "997 views", "V": "WtBew4vcIPQ"}]}, {"A": "Ariyakudi Ramanuja Iyengar", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:16", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "19 views", "V": "4NcwZF_Xu_g"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Muthuswami Dikshitar", "D": "26:00", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "1,745 views", "V": "c3pNDtXoJ1o"}, {"C": "Muthuswami Dikshitar", "D": "26:00", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "0 views", "V": "vGEiS_DhkCw"}, {"C": "Muthuswami Dikshitar", "D": "3:01", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "1,082 views", "V": "qfuXONquF5k"}, {"C": "Muthuswami Dikshitar", "D": "3:01", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "640 views", "V": "D7hHHJg4XkQ"}]}, {"A": "D. K. Jayaraman", "songs": [{"C": "Muthuswami Dikshitar", "D": "17:10", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "1,400 views", "V": "qMP0G6Yu_F4"}]}, {"A": "D. K. Pattammal", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:46", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "9,800 views", "V": "WXfG6a5FsEI"}, {"C": "Muthuswami Dikshitar", "D": "5:06", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "389 views", "V": "_ya2b-5INaU"}]}, {"A": "G. S. Mani", "songs": [{"C": "Muthuswami Dikshitar", "D": "13:40", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "501 views", "V": "fNX0aq3y6To"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Muthuswami Dikshitar", "D": "10:35", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "570 views", "V": "cnZkyJQT1pw"}, {"C": "Muthuswami Dikshitar", "D": "15:41", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "1,288 views", "V": "BB63MI0xkNM"}, {"C": "Muthuswami Dikshitar", "D": "15:47", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "14 views", "V": "hixx9hQIxeI"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:51", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "0 views", "V": "WokgoyVsXOQ"}, {"C": "Muthuswami Dikshitar", "D": "7:51", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "0 views", "V": "Hz8czP3_NRk"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Muthuswami Dikshitar", "D": "30:01", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "284 views", "V": "miEAZ1JMXI8"}, {"C": "Muthuswami Dikshitar", "D": "23:55", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "1,400 views", "V": "rnByus_Vs8g"}, {"C": "Muthuswami Dikshitar", "D": "19:14", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "2,500 views", "V": "IkvKJgY1gsA"}, {"C": "Muthuswami Dikshitar", "D": "18:34", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "208 views", "V": "nbKKUsqf0QM"}, {"C": "Muthuswami Dikshitar", "D": "27:28", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "81 views", "V": "4TO_2VaMU1E"}]}, {"A": "R. Vedavalli", "songs": [{"C": "Muthuswami Dikshitar", "D": "29:31", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "0 views", "V": "10pNpEMGlHo"}, {"C": "Muthuswami Dikshitar", "D": "3:01", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "383 views", "V": "Mz-AFZDBABM"}]}, {"A": "S. Ramanathan", "songs": [{"C": "Muthuswami Dikshitar", "D": "25:11", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "437 views", "V": "ZJXm0yE4wzA"}]}, {"A": "S. Sowmya", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:09", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "100 views", "V": "sOmLsk8GY-4"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Muthuswami Dikshitar", "D": "12:25", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "396 views", "V": "HF-ZHPQ2JgQ"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Muthuswami Dikshitar", "D": "9:11", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "586 views", "V": "7kIbudHkt-c"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Muthuswami Dikshitar", "D": "1:10:51", "R": "Anandabhairavi", "T": "Guruguha vibhakti", "U": "1,000 views", "V": "QjxMjyW80-0"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>13</td></tr>
 <tr><td><em>Song</em></td><td>5</td></tr>
 <tr><td><em>Composer</em></td><td>2</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "kAmAkSi kAmakOTi pIThavAsini mAmava", "songs": [{"N": "0040", "T": "", "H": "Kamakshi Kamakoti", "S": "kAmAkSi kAmakOTi pIThavAsini mAmava :  Rupaka", "R": "Sumadyuthi", "C": "Muthuswami Dikshitar", "A": "Charulatha Mani", "V": "YEYQaDvilVs"}, {"N": "0068", "T": "", "H": "Kamakshi Kamakoti", "S": "kAmAkSi kAmakOTi pIThavAsini mAmava :  Rupaka", "R": "Sumadyuthi", "C": "Muthuswami Dikshitar", "A": "Nisha Rajagopal", "V": "oEqoy0lLOJA"}, {"N": "0235", "T": "", "H": "Kamakshi Kamakoti", "S": "kAmAkSi kAmakOTi pIThavAsini mAmava :  Rupaka", "R": "Sumadyuthi", "C": "Muthuswami Dikshitar", "A": "Sudha Ragunathan", "V": "Wyo-MDH60yU"}]}, {"name": "nIlAcalanAtham bhajEham nikhilalOka", "songs": [{"N": "0048", "T": "", "H": "Nilacalanatham", "S": "nIlAcalanAtham bhajEham nikhilalOka :  Adi", "R": "Sumadyuthi", "C": "Muthuswami Dikshitar", "A": "K. Gayathri", "V": "5ZpP4g5lftk"}]}, {"name": "pAmarajana pAlinI pAhi bRhannAyaki", "songs": [{"N": "0134", "T": "", "H": "Pamarajanapalini", "S": "pAmarajana pAlinI pAhi bRhannAyaki :  Rupaka", "R": "Sumadyuthi", "C": "Muthuswami Dikshitar", "A": "Hyderabad Brothers", "V": "V9qwpAkZC90"}, {"N": "0135", "T": "", "H": "Pamarajanapalini", "S": "pAmarajana pAlinI pAhi bRhannAyaki :  Rupaka", "R": "Sumadyuthi", "C": "Muthuswami Dikshitar", "A": "Hyderabad Brothers", "V": "nV9GZBnvkic"}, {"N": "0645", "T": "", "H": "Pamarajanapalini", "S": "pAmarajana pAlinI pAhi bRhannAyaki :  Rupaka", "R": "Sumadyuthi", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "yoC-pY4fJJY"}]}, {"name": "shailEshvaram bhajarE rE citta shrI", "songs": [{"N": "0071", "T": "", "H": "Shailesvaram", "S": "shailEshvaram bhajarE rE citta shrI varada :  Adi", "R": "Sumadyuthi", "C": "Muthuswami Dikshitar", "A": "Prema Rangarajan", "V": "5HA8gbydi50"}, {"N": "0072", "T": "", "H": "Shailesvaram", "S": "shailEshvaram bhajarE rE citta shrI varada :  Adi", "R": "Sumadyuthi", "C": "Muthuswami Dikshitar", "A": "Prema Rangarajan", "V": "FK19oO2EB0c"}]}, {"name": "Unknownsong", "songs": [{"N": "0147", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sumadyuthi", "C": "UnknownComposer", "A": "Prema Rangarajan", "V": "aIhdHAS1WxQ"}, {"N": "0108", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Sumadyuthi", "C": "UnknownComposer", "A": "K. V. Prasad", "V": "96MD497VXfE"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Kamakshi Kamakoti", "S": "kAmAkSi kAmakOTi pIThavAsini mAmava :  Rupaka", "songs": [{"A": "Charulatha Mani", "C": "Muthuswami Dikshitar", "D": "12:08", "T": "", "U": "11,101 views", "V": "YEYQaDvilVs"}, {"A": "Nisha Rajagopal", "C": "Muthuswami Dikshitar", "D": "31:51", "T": "", "U": "1,000 views", "V": "oEqoy0lLOJA"}, {"A": "Sudha Ragunathan", "C": "Muthuswami Dikshitar", "D": "19:36", "T": "", "U": "16,000 views", "V": "Wyo-MDH60yU"}]}, {"H": "Nilacalanatham", "S": "nIlAcalanAtham bhajEham nikhilalOka :  Adi", "songs": [{"A": "K. Gayathri", "C": "Muthuswami Dikshitar", "D": "20:36", "T": "", "U": "147 views", "V": "5ZpP4g5lftk"}]}, {"H": "Pamarajanapalini", "S": "pAmarajana pAlinI pAhi bRhannAyaki :  Rupaka", "songs": [{"A": "Hyderabad Brothers", "C": "Muthuswami Dikshitar", "D": "17:12", "T": "", "U": "3,341 views", "V": "nV9GZBnvkic"}, {"A": "Hyderabad Brothers", "C": "Muthuswami Dikshitar", "D": "17:12", "T": "", "U": "0 views", "V": "V9qwpAkZC90"}, {"A": "Sanjay Subrahmanyan", "C": "Muthuswami Dikshitar", "D": "20:51", "T": "", "U": "2,200 views", "V": "yoC-pY4fJJY"}]}, {"H": "Shailesvaram", "S": "shailEshvaram bhajarE rE citta shrI varada :  Adi", "songs": [{"A": "Prema Rangarajan", "C": "Muthuswami Dikshitar", "D": "27:11", "T": "", "U": "130 views", "V": "5HA8gbydi50"}, {"A": "Prema Rangarajan", "C": "Muthuswami Dikshitar", "D": "27:11", "T": "", "U": "144 views", "V": "FK19oO2EB0c"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "Prema Rangarajan", "C": "UnknownComposer", "D": "27:15", "T": "", "U": "20 views", "V": "aIhdHAS1WxQ"}, {"A": "K. V. Prasad", "C": "UnknownComposer", "D": "18:48", "T": "", "U": "111 views", "V": "96MD497VXfE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

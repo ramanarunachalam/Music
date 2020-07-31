@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>42</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>30</td></tr>
-<tr><td><em>Concert</em></td><td>30</td></tr>
+<tr><td><em>Concert</em></td><td>32</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -151,57 +151,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0419", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Bombay Jayashri", "V": "FwSLC1tjBmc"}]}, {"name": "Vocal - K. V. Narayanaswamy", "songs": [{"N": "0587", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "K. V. Narayanaswamy", "V": "xBpvz-k3-IA"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1560", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "M. Balamuralikrishna", "V": "cmc4e3jOIqc"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0776", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "M. D. Ramanathan", "V": "PeF3wsNLP10"}, {"N": "0777", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "M. D. Ramanathan", "V": "ducxIDkewVg"}, {"N": "0778", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "M. D. Ramanathan", "V": "jczVudlLIEM"}, {"N": "0779", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "M. D. Ramanathan", "V": "tdpWaz5yfAk"}]}, {"name": "Vocal - M. L. Vasanthakumari", "songs": [{"N": "0980", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "M. L. Vasanthakumari", "V": "2CaX5JuR0QU"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1284", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "M. S. Subbulakshmi", "V": "DcfVQ-rDhrU"}]}, {"name": "Vocal - Madurai Mani Iyer", "songs": [{"N": "0501", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "6HM46BgcD_A"}, {"N": "0503", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "ZWGai8Ll3RA"}, {"N": "0504", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Madurai Mani Iyer", "V": "kY2SqYh6aEA"}]}, {"name": "Vocal - R. Vedavalli", "songs": [{"N": "0289", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "62FBlcLUfgE"}, {"N": "0290", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "R. Vedavalli", "V": "xlJ9XGPdzoo"}]}, {"name": "Vocal - S. Kalyanaraman", "songs": [{"N": "0297", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "S. Kalyanaraman", "V": "dcBuN1iDW90"}]}, {"name": "Vocal - Sandeep Narayan", "songs": [{"N": "0135", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Sandeep Narayan", "V": "JzYL5a6zb6c"}]}, {"name": "Vocal - Sanjay Subrahmanyan", "songs": [{"N": "0980", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Sanjay Subrahmanyan", "V": "LnbSNy0l1Xk"}]}, {"name": "Vocal - Sankaran Namboothiri", "songs": [{"N": "0192", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Sankaran Namboothiri", "V": "JF-jjAylqL0"}]}, {"name": "Vocal - Savita Sreeram", "songs": [{"N": "0015", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Savita Sreeram", "V": "j19Lnj9WfVQ"}]}, {"name": "Vocal - Sirkazhi Govindarajan", "songs": [{"N": "0046", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Sirkazhi Govindarajan", "V": "AofOdXIUusk"}, {"N": "0047", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Sirkazhi Govindarajan", "V": "S8E36LYzXi8"}]}, {"name": "Vocal - T. M. Krishna", "songs": [{"N": "0691", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "T. M. Krishna", "V": "kKHYlCPE7K0"}]}, {"name": "Vocal - T. N. Seshagopalan", "songs": [{"N": "0602", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "T. N. Seshagopalan", "V": "7Puy5qO3y7I"}, {"N": "0603", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "T. N. Seshagopalan", "V": "86AzSjKBUXc"}, {"N": "0604", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "T. N. Seshagopalan", "V": "Dct4QapUPlI"}]}, {"name": "Vocal - Vivek Sadasivam", "songs": [{"N": "0036", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Vivek Sadasivam", "V": "VSUrOk5b4qE"}]}, {"name": "Veena - Kalpakam Swaminathan", "songs": [{"N": "0045", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Kalpakam Swaminathan", "V": "z0vN0O4XC_c"}]}, {"name": "Veena - Veena E. Gayathri", "songs": [{"N": "0105", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "Veena E. Gayathri", "V": "axQ-02aYkn0"}]}, {"name": "Violin - T. K. V. Ramanujacharyalu", "songs": [{"N": "0035", "T": "Navagraha", "H": "Angarakam", "S": "angArakaM ASrayAmyahaM  :  Rupaka", "R": "Suruti", "C": "Muthuswami Dikshitar", "A": "T. K. V. Ramanujacharyalu", "V": "g1X2vLUJr28"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Bombay Jayashri", "songs": [{"C": "Muthuswami Dikshitar", "D": "6:01", "R": "Suruti", "T": "Navagraha", "U": "2,584 views", "V": "FwSLC1tjBmc"}]}, {"A": "K. V. Narayanaswamy", "songs": [{"C": "Muthuswami Dikshitar", "D": "9:26", "R": "Suruti", "T": "Navagraha", "U": "2,400 views", "V": "xBpvz-k3-IA"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:15", "R": "Suruti", "T": "Navagraha", "U": "401 views", "V": "cmc4e3jOIqc"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:31", "R": "Suruti", "T": "Navagraha", "U": "1,000 views", "V": "jczVudlLIEM"}, {"C": "Muthuswami Dikshitar", "D": "23:11", "R": "Suruti", "T": "Navagraha", "U": "976 views", "V": "ducxIDkewVg"}, {"C": "Muthuswami Dikshitar", "D": "6:38", "R": "Suruti", "T": "Navagraha", "U": "67 views", "V": "PeF3wsNLP10"}, {"C": "Muthuswami Dikshitar", "D": "7:41", "R": "Suruti", "T": "Navagraha", "U": "112 views", "V": "tdpWaz5yfAk"}]}, {"A": "M. L. Vasanthakumari", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:51", "R": "Suruti", "T": "Navagraha", "U": "7,700 views", "V": "2CaX5JuR0QU"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:13", "R": "Suruti", "T": "Navagraha", "U": "17,420 views", "V": "DcfVQ-rDhrU"}]}, {"A": "Madurai Mani Iyer", "songs": [{"C": "Muthuswami Dikshitar", "D": "8:50", "R": "Suruti", "T": "Navagraha", "U": "1,600 views", "V": "6HM46BgcD_A"}, {"C": "Muthuswami Dikshitar", "D": "4:31", "R": "Suruti", "T": "Navagraha", "U": "462 views", "V": "ZWGai8Ll3RA"}, {"C": "Muthuswami Dikshitar", "D": "18:36", "R": "Suruti", "T": "Navagraha", "U": "291 views", "V": "kY2SqYh6aEA"}]}, {"A": "R. Vedavalli", "songs": [{"C": "Muthuswami Dikshitar", "D": "4:26", "R": "Suruti", "T": "Navagraha", "U": "807 views", "V": "62FBlcLUfgE"}, {"C": "Muthuswami Dikshitar", "D": "6:31", "R": "Suruti", "T": "Navagraha", "U": "0 views", "V": "xlJ9XGPdzoo"}]}, {"A": "S. Kalyanaraman", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:49", "R": "Suruti", "T": "Navagraha", "U": "3,101 views", "V": "dcBuN1iDW90"}]}, {"A": "Sandeep Narayan", "songs": [{"C": "Muthuswami Dikshitar", "D": "13:00", "R": "Suruti", "T": "Navagraha", "U": "13,360 views", "V": "JzYL5a6zb6c"}]}, {"A": "Sanjay Subrahmanyan", "songs": [{"C": "Muthuswami Dikshitar", "D": "13:09", "R": "Suruti", "T": "Navagraha", "U": "2,787 views", "V": "LnbSNy0l1Xk"}]}, {"A": "Sankaran Namboothiri", "songs": [{"C": "Muthuswami Dikshitar", "D": "8:23", "R": "Suruti", "T": "Navagraha", "U": "621 views", "V": "JF-jjAylqL0"}]}, {"A": "Savita Sreeram", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:01", "R": "Suruti", "T": "Navagraha", "U": "53 views", "V": "j19Lnj9WfVQ"}]}, {"A": "Sirkazhi Govindarajan", "songs": [{"C": "Muthuswami Dikshitar", "D": "10:15", "R": "Suruti", "T": "Navagraha", "U": "1,200 views", "V": "AofOdXIUusk"}, {"C": "Muthuswami Dikshitar", "D": "10:15", "R": "Suruti", "T": "Navagraha", "U": "335 views", "V": "S8E36LYzXi8"}]}, {"A": "T. M. Krishna", "songs": [{"C": "Muthuswami Dikshitar", "D": "30:16", "R": "Suruti", "T": "Navagraha", "U": "370 views", "V": "kKHYlCPE7K0"}]}, {"A": "T. N. Seshagopalan", "songs": [{"C": "Muthuswami Dikshitar", "D": "13:10", "R": "Suruti", "T": "Navagraha", "U": "686 views", "V": "Dct4QapUPlI"}, {"C": "Muthuswami Dikshitar", "D": "20:50", "R": "Suruti", "T": "Navagraha", "U": "3,600 views", "V": "7Puy5qO3y7I"}, {"C": "Muthuswami Dikshitar", "D": "21:01", "R": "Suruti", "T": "Navagraha", "U": "279 views", "V": "86AzSjKBUXc"}]}, {"A": "Vivek Sadasivam", "songs": [{"C": "Muthuswami Dikshitar", "D": "13:41", "R": "Suruti", "T": "Navagraha", "U": "217 views", "V": "VSUrOk5b4qE"}]}, {"A": "Kalpakam Swaminathan", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:51", "R": "Suruti", "T": "Navagraha", "U": "6,811 views", "V": "z0vN0O4XC_c"}]}, {"A": "Veena E. Gayathri", "songs": [{"C": "Muthuswami Dikshitar", "D": "5:36", "R": "Suruti", "T": "Navagraha", "U": "152 views", "V": "axQ-02aYkn0"}]}, {"A": "T. K. V. Ramanujacharyalu", "songs": [{"C": "Muthuswami Dikshitar", "D": "7:05", "R": "Suruti", "T": "Navagraha", "U": "174 views", "V": "g1X2vLUJr28"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

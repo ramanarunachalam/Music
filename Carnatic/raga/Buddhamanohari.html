@@ -22,7 +22,7 @@
 <tr><td><em>Audio</em></td><td>9</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Composer</em></td><td>1</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "kAmEsha baddha mAngalyE karakata", "songs": [{"N": "0005", "T": "", "H": "Kameshavbaddha Mangalye", "S": "kAmEsha baddha mAngalyE karakata kaivalyE :  Adi", "R": "Buddhamanohari", "C": "Muthiah Bhagavathar", "A": "Kasturi Rangan", "V": "zVrwF6CbtUM"}]}, {"name": "samayamidE nannu brOcuTaku sanakAdinuta", "songs": [{"N": "0413", "T": "", "H": "Samayamithe Nannu", "S": "samayamidE nannu brOcuTaku sanakAdinuta :  Adi", "R": "Buddhamanohari", "C": "Muthiah Bhagavathar", "A": "D. K. Jayaraman", "V": "dOKHKYd98Cg"}, {"N": "0067", "T": "", "H": "Samayamithe Nannu", "S": "samayamidE nannu brOcuTaku sanakAdinuta :  Adi", "R": "Buddhamanohari", "C": "Muthiah Bhagavathar", "A": "M. S. Sheela", "V": "NJlGLFJ3De0"}, {"N": "0068", "T": "", "H": "Samayamithe Nannu", "S": "samayamidE nannu brOcuTaku sanakAdinuta :  Adi", "R": "Buddhamanohari", "C": "Muthiah Bhagavathar", "A": "M. S. Sheela", "V": "cSXSRFC6-D4"}, {"N": "0069", "T": "", "H": "Samayamithe Nannu", "S": "samayamidE nannu brOcuTaku sanakAdinuta :  Adi", "R": "Buddhamanohari", "C": "Muthiah Bhagavathar", "A": "M. S. Sheela", "V": "eDIX8jj7PDk"}, {"N": "0070", "T": "", "H": "Samayamithe Nannu", "S": "samayamidE nannu brOcuTaku sanakAdinuta :  Adi", "R": "Buddhamanohari", "C": "Muthiah Bhagavathar", "A": "M. S. Sheela", "V": "mtKrxpBKNfE"}, {"N": "0441", "T": "", "H": "Samayamithe Nannu", "S": "samayamidE nannu brOcuTaku sanakAdinuta :  Adi", "R": "Buddhamanohari", "C": "Muthiah Bhagavathar", "A": "T. N. Seshagopalan", "V": "Pp2z9mTdRm4"}, {"N": "0427", "T": "", "H": "Samayamithe Nannu", "S": "samayamidE nannu brOcuTaku sanakAdinuta :  Adi", "R": "Buddhamanohari", "C": "Muthiah Bhagavathar", "A": "U. Srinivas", "V": "Sm1JlB8A4o0"}, {"N": "0046", "T": "", "H": "Samayamithe Nannu", "S": "samayamidE nannu brOcuTaku sanakAdinuta :  Adi", "R": "Buddhamanohari", "C": "Muthiah Bhagavathar", "A": "L. Subramaniam", "V": "VACmRCtghGE"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Kameshavbaddha Mangalye", "S": "kAmEsha baddha mAngalyE karakata kaivalyE :  Adi", "songs": [{"A": "Kasturi Rangan", "C": "Muthiah Bhagavathar", "D": "4:56", "T": "", "U": "132 views", "V": "zVrwF6CbtUM"}]}, {"H": "Samayamithe Nannu", "S": "samayamidE nannu brOcuTaku sanakAdinuta :  Adi", "songs": [{"A": "D. K. Jayaraman", "C": "Muthiah Bhagavathar", "D": "4:42", "T": "", "U": "60 views", "V": "dOKHKYd98Cg"}, {"A": "M. S. Sheela", "C": "Muthiah Bhagavathar", "D": "4:36", "T": "", "U": "87 views", "V": "NJlGLFJ3De0"}, {"A": "M. S. Sheela", "C": "Muthiah Bhagavathar", "D": "4:26", "T": "", "U": "22 views", "V": "mtKrxpBKNfE"}, {"A": "M. S. Sheela", "C": "Muthiah Bhagavathar", "D": "4:25", "T": "", "U": "0 views", "V": "eDIX8jj7PDk"}, {"A": "M. S. Sheela", "C": "Muthiah Bhagavathar", "D": "4:36", "T": "", "U": "61 views", "V": "cSXSRFC6-D4"}, {"A": "T. N. Seshagopalan", "C": "Muthiah Bhagavathar", "D": "13:10", "T": "", "U": "487 views", "V": "Pp2z9mTdRm4"}, {"A": "U. Srinivas", "C": "Muthiah Bhagavathar", "D": "8:46", "T": "", "U": "86 views", "V": "Sm1JlB8A4o0"}, {"A": "L. Subramaniam", "C": "Muthiah Bhagavathar", "D": "5:10", "T": "", "U": "1,411 views", "V": "VACmRCtghGE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

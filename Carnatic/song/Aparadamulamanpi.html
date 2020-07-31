@@ -30,7 +30,7 @@
 <tr><td><em>Audio</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>3</td></tr>
-<tr><td><em>Concert</em></td><td>3</td></tr>
+<tr><td><em>Concert</em></td><td>5</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -156,57 +156,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0063", "T": "", "H": "Aparadamulamanpi", "S": "aparAdhamula mAnpi y AdukO v ayya :  Caapu", "R": "Darbar", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "U-CJo0G_dAI"}, {"N": "0064", "T": "", "H": "Aparadamulamanpi", "S": "aparAdhamula mAnpi y AdukO v ayya :  Caapu", "R": "Darbar", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "XBmLRfWXujY"}, {"N": "0065", "T": "", "H": "Aparadamulamanpi", "S": "aparAdhamula mAnpi y AdukO v ayya :  Caapu", "R": "Darbar", "C": "Thyagaraja", "A": "D. K. Pattammal", "V": "fkClW--s1bE"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0066", "T": "", "H": "Aparadamulamanpi", "S": "aparAdhamula mAnpi y AdukO v ayya :  Caapu", "R": "Darbar", "C": "Thyagaraja", "A": "Maharajapuram Santhanam", "V": "qHkMCxM4y3k"}]}, {"name": "Vocal - Nedunuri Krishnamurthy", "songs": [{"N": "0046", "T": "", "H": "Aparadamulamanpi", "S": "aparAdhamula mAnpi y AdukO v ayya :  Caapu", "R": "Darbar", "C": "Thyagaraja", "A": "Nedunuri Krishnamurthy", "V": "WdX6QhEo-gM"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. K. Pattammal", "songs": [{"C": "Thyagaraja", "D": "10:30", "R": "Darbar", "T": "", "U": "2,600 views", "V": "XBmLRfWXujY"}, {"C": "Thyagaraja", "D": "11:05", "R": "Darbar", "T": "", "U": "401 views", "V": "fkClW--s1bE"}, {"C": "Thyagaraja", "D": "10:37", "R": "Darbar", "T": "", "U": "294 views", "V": "U-CJo0G_dAI"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Thyagaraja", "D": "13:35", "R": "Darbar", "T": "", "U": "398 views", "V": "qHkMCxM4y3k"}]}, {"A": "Nedunuri Krishnamurthy", "songs": [{"C": "Thyagaraja", "D": "3:15", "R": "Darbar", "T": "", "U": "55 views", "V": "WdX6QhEo-gM"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

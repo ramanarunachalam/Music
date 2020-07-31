@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>4</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>2</td></tr>
-<tr><td><em>Concert</em></td><td>2</td></tr>
+<tr><td><em>Concert</em></td><td>4</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -137,57 +137,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "0581", "T": "", "H": "Karunai Puriya", "S": "karuNai puriya nalla taruNam iduvE marakata :  Adi", "R": "Sriranjani", "C": "Ambujam Krishna", "A": "M. S. Subbulakshmi", "V": "ClK1c3QxCrA"}, {"N": "0582", "T": "", "H": "Karunai Puriya", "S": "karuNai puriya nalla taruNam iduvE marakata :  Adi", "R": "Sriranjani", "C": "Ambujam Krishna", "A": "M. S. Subbulakshmi", "V": "jAT-tJi5pr0"}]}, {"name": "Vocal - Ranjani Gayatri", "songs": [{"N": "0131", "T": "", "H": "Karunai Puriya", "S": "karuNai puriya nalla taruNam iduvE marakata :  Adi", "R": "Sriranjani", "C": "Ambujam Krishna", "A": "Ranjani Gayatri", "V": "tD6k1gwismU"}, {"N": "0132", "T": "", "H": "Karunai Puriya", "S": "karuNai puriya nalla taruNam iduvE marakata :  Adi", "R": "Sriranjani", "C": "Ambujam Krishna", "A": "Ranjani Gayatri", "V": "u5CsKFFDzxw"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "M. S. Subbulakshmi", "songs": [{"C": "Ambujam Krishna", "D": "9:25", "R": "Sriranjani", "T": "", "U": "5,046 views", "V": "ClK1c3QxCrA"}, {"C": "Ambujam Krishna", "D": "9:36", "R": "Sriranjani", "T": "", "U": "2,263 views", "V": "jAT-tJi5pr0"}]}, {"A": "Ranjani Gayatri", "songs": [{"C": "Ambujam Krishna", "D": "12:49", "R": "Sriranjani", "T": "", "U": "323 views", "V": "u5CsKFFDzxw"}, {"C": "Ambujam Krishna", "D": "3:01", "R": "Sriranjani", "T": "", "U": "1,157 views", "V": "tD6k1gwismU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

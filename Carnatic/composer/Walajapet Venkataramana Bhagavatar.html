@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>35</td></tr>
 <tr><td><em>Song</em></td><td>13</td></tr>
 <tr><td><em>Raga</em></td><td>12</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Anandamaya manavE O manasA", "songs": [{"N": "0017", "T": "", "H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "R": "Jyothiswaroopini", "C": "Walajapet Venkataramana Bhagavatar", "A": "S. Ramanathan", "V": "9IZfzCFFtyI"}, {"N": "0018", "T": "", "H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "R": "Jyothiswaroopini", "C": "Walajapet Venkataramana Bhagavatar", "A": "S. Ramanathan", "V": "KWUu6aU3uBg"}, {"N": "0019", "T": "", "H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "R": "Jyothiswaroopini", "C": "Walajapet Venkataramana Bhagavatar", "A": "S. Ramanathan", "V": "jh8UJGBAW0o"}, {"N": "0020", "T": "", "H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "R": "Jyothiswaroopini", "C": "Walajapet Venkataramana Bhagavatar", "A": "S. Ramanathan", "V": "rOIa535wjsk"}, {"N": "0009", "T": "", "H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "R": "Jyothiswaroopini", "C": "Walajapet Venkataramana Bhagavatar", "A": "V. R. Dileep Kumar", "V": "1Pj6DP61Qz8"}]}, {"name": "guruvara mahimala nEmani bhuvilO", "songs": [{"N": "0056", "T": "", "H": "Guruvara Mahimala", "S": "guruvara mahimala nEmani bhuvilO koniyADudurA :  Adi", "R": "Anandabhairavi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Sandeep Narayan", "V": "HasT_pK7338"}]}, {"name": "hari hari hariyani smaraNa jEsitE", "songs": [{"N": "0014", "T": "", "H": "Hari Hari Hariyani", "S": "hari hari hariyani smaraNa jEsitE duritamu :  Adi", "R": "Saraswathi", "C": "Walajapet Venkataramana Bhagavatar", "A": "B. Rajam Iyer", "V": "GdAKQS96RXc"}, {"N": "0018", "T": "", "H": "Hari Hari Hariyani", "S": "hari hari hariyani smaraNa jEsitE duritamu :  Adi", "R": "Saraswathi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Hyderabad Sisters", "V": "iuoLxiABLUg"}, {"N": "0019", "T": "", "H": "Hari Hari Hariyani", "S": "hari hari hariyani smaraNa jEsitE duritamu :  Adi", "R": "Saraswathi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Hyderabad Sisters", "V": "rS-Ej2xCLh0"}, {"N": "0017", "T": "", "H": "Hari Hari Hariyani", "S": "hari hari hariyani smaraNa jEsitE duritamu :  Adi", "R": "Saraswathi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Maruthi Prasad", "V": "XTplkjlwHn4"}, {"N": "0036", "T": "", "H": "Hari Hari Hariyani", "S": "hari hari hariyani smaraNa jEsitE duritamu :  Adi", "R": "Saraswathi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Prema Rangarajan", "V": "ID6cnMNXdjY"}]}, {"name": "kannulAra kaNtinipuDu kAnci varaduni", "songs": [{"N": "0070", "T": "", "H": "Kannulara Kantini", "S": "kannulAra kaNtinipuDu kAnci varaduni nE :  Rupaka", "R": "Dhanyasi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Alathur Brothers", "V": "geQ-TT__QSs"}, {"N": "0114", "T": "", "H": "Kannulara Kantini", "S": "kannulAra kaNtinipuDu kAnci varaduni nE :  Rupaka", "R": "Dhanyasi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Ramakrishnan Murthy", "V": "VLuCZUayo5E"}, {"N": "0115", "T": "", "H": "Kannulara Kantini", "S": "kannulAra kaNtinipuDu kAnci varaduni nE :  Rupaka", "R": "Dhanyasi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Ramakrishnan Murthy", "V": "b6z21K85xTc"}]}, {"name": "manasA rAmuni marakavE O", "songs": [{"N": "0127", "T": "", "H": "Manasa Ramuni", "S": "manasA rAmuni marakavE O  :  Adi", "R": "Khamas", "C": "Walajapet Venkataramana Bhagavatar", "A": "Bombay Sisters", "V": "FKbXWbw9DKk"}]}, {"name": "nIvE nannu brOvavalenamma kadambavana nilayuniki", "songs": [{"N": "0157", "T": "", "H": "Nive Nannu Brova", "S": "nIvE nannu brOvavalenamma kadambavana nilayuniki :  Khanda Caapu", "R": "Darbar", "C": "Walajapet Venkataramana Bhagavatar", "A": "T. V. Sankaranarayanan", "V": "3aqXWyP4CLo"}, {"N": "0158", "T": "", "H": "Nive Nannu Brova", "S": "nIvE nannu brOvavalenamma kadambavana nilayuniki :  Khanda Caapu", "R": "Darbar", "C": "Walajapet Venkataramana Bhagavatar", "A": "T. V. Sankaranarayanan", "V": "a11NHZgZjZk"}, {"N": "0159", "T": "", "H": "Nive Nannu Brova", "S": "nIvE nannu brOvavalenamma kadambavana nilayuniki :  Khanda Caapu", "R": "Darbar", "C": "Walajapet Venkataramana Bhagavatar", "A": "T. V. Sankaranarayanan", "V": "e0nCoq-esNc"}, {"N": "0160", "T": "", "H": "Nive Nannu Brova", "S": "nIvE nannu brOvavalenamma kadambavana nilayuniki :  Khanda Caapu", "R": "Darbar", "C": "Walajapet Venkataramana Bhagavatar", "A": "T. V. Sankaranarayanan", "V": "uVx9T85zuxk"}]}, {"name": "pagasEya tagunA iTu pagasEya tagunA", "songs": [{"N": "0156", "T": "", "H": "Pagaseya Daguna", "S": "pagasEya tagunA iTu pagasEya tagunA nAyeDanitu :  Adi", "R": "Namanarayani", "C": "Walajapet Venkataramana Bhagavatar", "A": "Bombay Sisters", "V": "IDhxtrrxWmQ"}, {"N": "0157", "T": "", "H": "Pagaseya Daguna", "S": "pagasEya tagunA iTu pagasEya tagunA nAyeDanitu :  Adi", "R": "Namanarayani", "C": "Walajapet Venkataramana Bhagavatar", "A": "Bombay Sisters", "V": "p-rVkDqMIYU"}, {"N": "0049", "T": "", "H": "Pagaseya Daguna", "S": "pagasEya tagunA iTu pagasEya tagunA nAyeDanitu :  Adi", "R": "Namanarayani", "C": "Walajapet Venkataramana Bhagavatar", "A": "M. R. Gopinath", "V": "S51cT7d9y2w"}]}, {"name": "rArA vAsudEva vara kumAranavanIta", "songs": [{"N": "0022", "T": "", "H": "Ra Ra Vasudeva", "S": "rArA vAsudEva vara kumAranavanIta cOra :  Rupaka", "R": "Thodi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Madurai R. Sundar", "V": "-crVbw95bpY"}]}, {"name": "rAdhA ramaNa rakSamAm anisham", "songs": [{"N": "0109", "T": "", "H": "Radha Ramana", "S": "rAdhA ramaNa rakSamAm anisham  :  Adi", "R": "Mohanam", "C": "Walajapet Venkataramana Bhagavatar", "A": "Sandeep Narayan", "V": "BsEHlUbon3Y"}]}, {"name": "rArA dasharatha rAjakumArA raghuvIra", "songs": [{"N": "0054", "T": "", "H": "Rara Dasharatha Rajakumara", "S": "rArA dasharatha rAjakumArA raghuvIra dhIra :  Rupaka", "R": "Bhairavi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Seetha Rajan", "V": "00ycZNnRTYc"}, {"N": "0087", "T": "", "H": "Rara Dasharatha Rajakumara", "S": "rArA dasharatha rAjakumArA raghuvIra dhIra :  Rupaka", "R": "Bhairavi", "C": "Walajapet Venkataramana Bhagavatar", "A": "Suguna Varadachari", "V": "z8T8tTs0pok"}]}, {"name": "Sri Narasimha Nannu", "songs": [{"N": "0242", "T": "", "H": "Sri Narasimha Nannu", "S": "Sri Narasimha Nannu : Adi", "R": "Kaanada", "C": "Walajapet Venkataramana Bhagavatar", "A": "Madurai Somu", "V": "8j7zXi6N0yo"}]}, {"name": "vadarasanE shrI guru prabhAvam vAncita", "songs": [{"N": "0563", "T": "", "H": "Vadarasane Sri", "S": "vadarasanE shrI guru prabhAvam vAncita phalam :  Adi", "R": "Poorvikalyani", "C": "Walajapet Venkataramana Bhagavatar", "A": "T. N. Seshagopalan", "V": "21028wL4ne0"}, {"N": "0240", "T": "", "H": "Vadarasane Sri", "S": "vadarasanE shrI guru prabhAvam vAncita phalam :  Adi", "R": "Poorvikalyani", "C": "Walajapet Venkataramana Bhagavatar", "A": "T. V. Sankaranarayanan", "V": "S55MUZ0VJL0"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Aanandamaya", "S": "Anandamaya manavE O manasA  :  Adi", "songs": [{"A": "S. Ramanathan", "D": "21:51", "R": "Jyothiswaroopini", "T": "", "U": "72 views", "V": "KWUu6aU3uBg"}, {"A": "S. Ramanathan", "D": "35:10", "R": "Jyothiswaroopini", "T": "", "U": "561 views", "V": "rOIa535wjsk"}, {"A": "S. Ramanathan", "D": "3:01", "R": "Jyothiswaroopini", "T": "", "U": "900 views", "V": "jh8UJGBAW0o"}, {"A": "V. R. Dileep Kumar", "D": "13:04", "R": "Jyothiswaroopini", "T": "", "U": "260 views", "V": "1Pj6DP61Qz8"}]}, {"H": "Guruvara Mahimala", "S": "guruvara mahimala nEmani bhuvilO koniyADudurA :  Adi", "songs": [{"A": "Sandeep Narayan", "D": "13:21", "R": "Anandabhairavi", "T": "", "U": "859 views", "V": "HasT_pK7338"}]}, {"H": "Hari Hari Hariyani", "S": "hari hari hariyani smaraNa jEsitE duritamu :  Adi", "songs": [{"A": "B. Rajam Iyer", "D": "5:26", "R": "Saraswathi", "T": "", "U": "330 views", "V": "GdAKQS96RXc"}, {"A": "Hyderabad Sisters", "D": "21:21", "R": "Saraswathi", "T": "", "U": "228 views", "V": "iuoLxiABLUg"}, {"A": "Hyderabad Sisters", "D": "21:41", "R": "Saraswathi", "T": "", "U": "228 views", "V": "rS-Ej2xCLh0"}, {"A": "Maruthi Prasad", "D": "7:01", "R": "Saraswathi", "T": "", "U": "18 views", "V": "XTplkjlwHn4"}, {"A": "Prema Rangarajan", "D": "4:26", "R": "Saraswathi", "T": "", "U": "32 views", "V": "ID6cnMNXdjY"}]}, {"H": "Kannulara Kantini", "S": "kannulAra kaNtinipuDu kAnci varaduni nE :  Rupaka", "songs": [{"A": "Alathur Brothers", "D": "12:40", "R": "Dhanyasi", "T": "", "U": "187 views", "V": "geQ-TT__QSs"}, {"A": "Ramakrishnan Murthy", "D": "20:11", "R": "Dhanyasi", "T": "", "U": "183 views", "V": "b6z21K85xTc"}, {"A": "Ramakrishnan Murthy", "D": "20:16", "R": "Dhanyasi", "T": "", "U": "0 views", "V": "VLuCZUayo5E"}]}, {"H": "Manasa Ramuni", "S": "manasA rAmuni marakavE O  :  Adi", "songs": [{"A": "Bombay Sisters", "D": "10:42", "R": "Khamas", "T": "", "U": "335 views", "V": "FKbXWbw9DKk"}]}, {"H": "Nive Nannu Brova", "S": "nIvE nannu brOvavalenamma kadambavana nilayuniki :  Khanda Caapu", "songs": [{"A": "T. V. Sankaranarayanan", "D": "7:45", "R": "Darbar", "T": "", "U": "61 views", "V": "3aqXWyP4CLo"}, {"A": "T. V. Sankaranarayanan", "D": "7:41", "R": "Darbar", "T": "", "U": "288 views", "V": "a11NHZgZjZk"}, {"A": "T. V. Sankaranarayanan", "D": "6:15", "R": "Darbar", "T": "", "U": "24 views", "V": "uVx9T85zuxk"}, {"A": "T. V. Sankaranarayanan", "D": "19:26", "R": "Darbar", "T": "", "U": "156 views", "V": "e0nCoq-esNc"}]}, {"H": "Pagaseya Daguna", "S": "pagasEya tagunA iTu pagasEya tagunA nAyeDanitu :  Adi", "songs": [{"A": "Bombay Sisters", "D": "5:56", "R": "Namanarayani", "T": "", "U": "91 views", "V": "IDhxtrrxWmQ"}, {"A": "Bombay Sisters", "D": "5:20", "R": "Namanarayani", "T": "", "U": "14 views", "V": "p-rVkDqMIYU"}, {"A": "M. R. Gopinath", "D": "11:17", "R": "Namanarayani", "T": "", "U": "25 views", "V": "S51cT7d9y2w"}]}, {"H": "Ra Ra Vasudeva", "S": "rArA vAsudEva vara kumAranavanIta cOra :  Rupaka", "songs": [{"A": "Madurai R. Sundar", "D": "6:11", "R": "Thodi", "T": "", "U": "178 views", "V": "-crVbw95bpY"}]}, {"H": "Radha Ramana", "S": "rAdhA ramaNa rakSamAm anisham  :  Adi", "songs": [{"A": "Sandeep Narayan", "D": "30:11", "R": "Mohanam", "T": "", "U": "986 views", "V": "BsEHlUbon3Y"}]}, {"H": "Rara Dasharatha Rajakumara", "S": "rArA dasharatha rAjakumArA raghuvIra dhIra :  Rupaka", "songs": [{"A": "Seetha Rajan", "D": "18:26", "R": "Bhairavi", "T": "", "U": "373 views", "V": "00ycZNnRTYc"}, {"A": "Suguna Varadachari", "D": "8:21", "R": "Bhairavi", "T": "", "U": "575 views", "V": "z8T8tTs0pok"}]}, {"H": "Sri Narasimha Nannu", "S": "Sri Narasimha Nannu : Adi", "songs": [{"A": "Madurai Somu", "D": "2:21", "R": "Kaanada", "T": "", "U": "638 views", "V": "8j7zXi6N0yo"}]}, {"H": "Vadarasane Sri", "S": "vadarasanE shrI guru prabhAvam vAncita phalam :  Adi", "songs": [{"A": "T. N. S. Krishna", "D": "17:41", "R": "Poorvikalyani", "T": "", "U": "66 views", "V": "21028wL4ne0"}, {"A": "T. V. Sankaranarayanan", "D": "31:36", "R": "Poorvikalyani", "T": "", "U": "274 views", "V": "S55MUZ0VJL0"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>29</td></tr>
 <tr><td><em>Song</em></td><td>4</td></tr>
 <tr><td><em>Raga</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>2</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "bhaj man rAma caran sukhadAyI", "songs": [{"N": "0016", "T": "Bhajan", "H": "Bhajamana Rama", "S": "bhaj man rAma caran sukhadAyI  :  Adi", "R": "Unknownraga", "C": "Tulsidas", "A": "M. S. Subbulakshmi", "V": "GuI2OHalMJs"}, {"N": "0017", "T": "Bhajan", "H": "Bhajamana Rama", "S": "bhaj man rAma caran sukhadAyI  :  Adi", "R": "Unknownraga", "C": "Tulsidas", "A": "M. S. Subbulakshmi", "V": "TF4X9om3XCY"}, {"N": "0002", "T": "Bhajan", "H": "Bhajamana Rama", "S": "bhaj man rAma caran sukhadAyI  :  Adi", "R": "Unknownraga", "C": "Tulsidas", "A": "Kadri Gopalnath", "V": "Lx-Y6NOFYdI"}]}, {"name": "gOpAla gOkula vallabhI priya gOpa", "songs": [{"N": "0112", "T": "", "H": "Gopalagokula", "S": "gOpAla gOkula vallabhI priya gOpa gOsuta :  Adi", "R": "Vallabhi", "C": "Tulsidas", "A": "Bombay Jayashri", "V": "25D0YabgW3c"}, {"N": "0113", "T": "", "H": "Gopalagokula", "S": "gOpAla gOkula vallabhI priya gOpa gOsuta :  Adi", "R": "Vallabhi", "C": "Tulsidas", "A": "Bombay Jayashri", "V": "8owCKX60JnI"}, {"N": "0550", "T": "", "H": "Gopalagokula", "S": "gOpAla gOkula vallabhI priya gOpa gOsuta :  Adi", "R": "Vallabhi", "C": "Tulsidas", "A": "M. Balamuralikrishna", "V": "7GQcUAfkKKU"}, {"N": "0551", "T": "", "H": "Gopalagokula", "S": "gOpAla gOkula vallabhI priya gOpa gOsuta :  Adi", "R": "Vallabhi", "C": "Tulsidas", "A": "M. Balamuralikrishna", "V": "B0zDNk0omGY"}, {"N": "0552", "T": "", "H": "Gopalagokula", "S": "gOpAla gOkula vallabhI priya gOpa gOsuta :  Adi", "R": "Vallabhi", "C": "Tulsidas", "A": "M. Balamuralikrishna", "V": "THzRx7n0NFs"}, {"N": "0553", "T": "", "H": "Gopalagokula", "S": "gOpAla gOkula vallabhI priya gOpa gOsuta :  Adi", "R": "Vallabhi", "C": "Tulsidas", "A": "M. Balamuralikrishna", "V": "iXhGW298A84"}, {"N": "0554", "T": "", "H": "Gopalagokula", "S": "gOpAla gOkula vallabhI priya gOpa gOsuta :  Adi", "R": "Vallabhi", "C": "Tulsidas", "A": "M. Balamuralikrishna", "V": "vct0bVYn8NI"}, {"N": "0123", "T": "", "H": "Gopalagokula", "S": "gOpAla gOkula vallabhI priya gOpa gOsuta :  Adi", "R": "Vallabhi", "C": "Tulsidas", "A": "Prince Rama Varma", "V": "5R-gM99vmVc"}, {"N": "0055", "T": "", "H": "Gopalagokula", "S": "gOpAla gOkula vallabhI priya gOpa gOsuta :  Adi", "R": "Vallabhi", "C": "Tulsidas", "A": "Sandeep Narayan", "V": "tDrqS9or3oA"}]}, {"name": "Jaya Jayathi", "songs": [{"N": "0023", "T": "Bhajan", "H": "Jaya Jayathi", "S": "Jaya Jayathi", "R": "Hamsadhwani", "C": "Tulsidas", "A": "T. M. Krishna", "V": "49w4xNHD7WU"}, {"N": "0024", "T": "Bhajan", "H": "Jaya Jayathi", "S": "Jaya Jayathi", "R": "Hamsadhwani", "C": "Tulsidas", "A": "T. M. Krishna", "V": "nUmkfLMrSjs"}, {"N": "0025", "T": "Bhajan", "H": "Jaya Jayathi", "S": "Jaya Jayathi", "R": "Hamsadhwani", "C": "Tulsidas", "A": "T. M. Krishna", "V": "nUyRv76qZdY"}, {"N": "0026", "T": "Bhajan", "H": "Jaya Jayathi", "S": "Jaya Jayathi", "R": "Hamsadhwani", "C": "Tulsidas", "A": "T. M. Krishna", "V": "tG851khxWG4"}]}, {"name": "Sri Ramachandra Kripala", "songs": [{"N": "0202", "T": "", "H": "Sri Ramachandra Kripala", "S": "Sri Ramachandra Kripala", "R": "Yamunakalyani", "C": "Tulsidas", "A": "Abhishek Raghuram", "V": "lGQleZmsTXQ"}, {"N": "0353", "T": "", "H": "Sri Ramachandra Kripala", "S": "Sri Ramachandra Kripala", "R": "Yamunakalyani", "C": "Tulsidas", "A": "Bombay Jayashri", "V": "-G7RKm4kLZY"}, {"N": "0376", "T": "", "H": "Sri Ramachandra Kripala", "S": "Sri Ramachandra Kripala", "R": "Yamunakalyani", "C": "Tulsidas", "A": "Prince Rama Varma", "V": "c9a7pS3yqwI"}, {"N": "0210", "T": "", "H": "Sri Ramachandra Kripala", "S": "Sri Ramachandra Kripala", "R": "Yamunakalyani", "C": "Tulsidas", "A": "Ramakrishnan Murthy", "V": "N4b98EjPinQ"}, {"N": "0571", "T": "", "H": "Sri Ramachandra Kripala", "S": "Sri Ramachandra Kripala", "R": "Yamunakalyani", "C": "Tulsidas", "A": "T. M. Krishna", "V": "GpbP4LyEEWU"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Bhajamana Rama", "S": "bhaj man rAma caran sukhadAyI  :  Adi", "songs": [{"A": "M. S. Subbulakshmi", "D": "5:50", "R": "Unknownraga", "T": "Bhajan", "U": "266 views", "V": "GuI2OHalMJs"}, {"A": "M. S. Subbulakshmi", "D": "9:35", "R": "Unknownraga", "T": "Bhajan", "U": "26 views", "V": "TF4X9om3XCY"}, {"A": "Kadri Gopalnath", "D": "10:30", "R": "Unknownraga", "T": "Bhajan", "U": "2,785 views", "V": "Lx-Y6NOFYdI"}]}, {"H": "Gopalagokula", "S": "gOpAla gOkula vallabhI priya gOpa gOsuta :  Adi", "songs": [{"A": "Bombay Jayashri", "D": "6:10", "R": "Vallabhi", "T": "", "U": "6,774 views", "V": "25D0YabgW3c"}, {"A": "Bombay Jayashri", "D": "5:41", "R": "Vallabhi", "T": "", "U": "2,906 views", "V": "8owCKX60JnI"}, {"A": "M. Balamuralikrishna", "D": "6:21", "R": "Vallabhi", "T": "", "U": "4,500 views", "V": "vct0bVYn8NI"}, {"A": "M. Balamuralikrishna", "D": "6:55", "R": "Vallabhi", "T": "", "U": "0 views", "V": "B0zDNk0omGY"}, {"A": "M. Balamuralikrishna", "D": "4:14", "R": "Vallabhi", "T": "", "U": "0 views", "V": "iXhGW298A84"}, {"A": "M. Balamuralikrishna", "D": "3:28", "R": "Vallabhi", "T": "", "U": "276 views", "V": "THzRx7n0NFs"}, {"A": "M. Balamuralikrishna", "D": "4:55", "R": "Vallabhi", "T": "", "U": "0 views", "V": "7GQcUAfkKKU"}, {"A": "Prince Rama Varma", "D": "5:02", "R": "Vallabhi", "T": "", "U": "42 views", "V": "5R-gM99vmVc"}, {"A": "Sandeep Narayan", "D": "5:44", "R": "Vallabhi", "T": "", "U": "0 views", "V": "tDrqS9or3oA"}]}, {"H": "Jaya Jayathi", "S": "Jaya Jayathi", "songs": [{"A": "T. M. Krishna", "D": "4:49", "R": "Hamsadhwani", "T": "Bhajan", "U": "311 views", "V": "49w4xNHD7WU"}, {"A": "T. M. Krishna", "D": "3:01", "R": "Hamsadhwani", "T": "Bhajan", "U": "1,943 views", "V": "tG851khxWG4"}, {"A": "T. M. Krishna", "D": "4:51", "R": "Hamsadhwani", "T": "Bhajan", "U": "52,993 views", "V": "nUmkfLMrSjs"}, {"A": "T. M. Krishna", "D": "3:03", "R": "Hamsadhwani", "T": "Bhajan", "U": "5,529 views", "V": "nUyRv76qZdY"}]}, {"H": "Sri Ramachandra Kripala", "S": "Sri Ramachandra Kripala", "songs": [{"A": "Abhishek Raghuram", "D": "10:04", "R": "Yamunakalyani", "T": "", "U": "3,365 views", "V": "lGQleZmsTXQ"}, {"A": "Bombay Jayashri", "D": "7:29", "R": "Yamunakalyani", "T": "", "U": "2,015 views", "V": "-G7RKm4kLZY"}, {"A": "Prince Rama Varma", "D": "10:38", "R": "Yamunakalyani", "T": "", "U": "0 views", "V": "c9a7pS3yqwI"}, {"A": "Ramakrishnan Murthy", "D": "4:01", "R": "Yamunakalyani", "T": "", "U": "59 views", "V": "N4b98EjPinQ"}, {"A": "T. M. Krishna", "D": "7:41", "R": "Yamunakalyani", "T": "", "U": "151 views", "V": "GpbP4LyEEWU"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

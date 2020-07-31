@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>14</td></tr>
 <tr><td><em>Song</em></td><td>2</td></tr>
 <tr><td><em>Raga</em></td><td>4</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "manavE mantralayA  nanna  nelesilli guruvE", "songs": [{"N": "0022", "T": "", "H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "R": "Unknownraga", "C": "A. V. Krishnammachar", "A": "Bangalore S. Shankar", "V": "J0LIEq5jtXA"}, {"N": "0009", "T": "", "H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "R": "Unknownraga", "C": "A. V. Krishnammachar", "A": "M. S. Balasubramanya Sharma", "V": "3a7BeefX8vE"}, {"N": "0010", "T": "", "H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "R": "Unknownraga", "C": "A. V. Krishnammachar", "A": "Maharajapuram S. Srinivasan", "V": "4giwE44dXz4"}, {"N": "0256", "T": "", "H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "R": "Ragamalika", "C": "A. V. Krishnammachar", "A": "Maharajapuram Santhanam", "V": "HbtYlwSm8J8"}, {"N": "0257", "T": "", "H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "R": "Unknownraga", "C": "A. V. Krishnammachar", "A": "Maharajapuram Santhanam", "V": "vullyEK-HPI"}, {"N": "0015", "T": "", "H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "R": "Unknownraga", "C": "A. V. Krishnammachar", "A": "R. K. Padmanabha", "V": "PKH2CVfZzLE"}, {"N": "0008", "T": "", "H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "R": "Unknownraga", "C": "A. V. Krishnammachar", "A": "Vani Sateesh", "V": "62dgdp75_Tg"}, {"N": "0081", "T": "", "H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "R": "Shuddha sarang", "C": "A. V. Krishnammachar", "A": "Avaneeswaram S. R. Vinu", "V": "bz--b_kOd1k"}, {"N": "0015", "T": "", "H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "R": "Unknownraga", "C": "A. V. Krishnammachar", "A": "Mysore Brothers", "V": "wIlIT6SJyqc"}]}, {"name": "shrngapurAdhIshvarI shAradE shubha mangaLE", "songs": [{"N": "0055", "T": "", "H": "Sringapuradheeswari", "S": "shrngapurAdhIshvarI shAradE shubha mangaLE :  Adi", "R": "Kalyani", "C": "A. V. Krishnammachar", "A": "Bangalore S. Shankar", "V": "SXyIvySzc7Y"}, {"N": "0056", "T": "", "H": "Sringapuradheeswari", "S": "shrngapurAdhIshvarI shAradE shubha mangaLE :  Adi", "R": "Kalyani", "C": "A. V. Krishnammachar", "A": "Bangalore S. Shankar", "V": "YKqU12byDhg"}, {"N": "0028", "T": "", "H": "Sringapuradheeswari", "S": "shrngapurAdhIshvarI shAradE shubha mangaLE :  Adi", "R": "Kalyani", "C": "A. V. Krishnammachar", "A": "T. N. Rajarathnam Pillai", "V": "GSEUNlSBrnY"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Maname Manthralaya", "S": "manavE mantralayA  nanna  nelesilli guruvE :  Adi", "songs": [{"A": "Bangalore S. Shankar", "D": "5:02", "R": "Unknownraga", "T": "", "U": "5,141 views", "V": "J0LIEq5jtXA"}, {"A": "M. S. Balasubramanya Sharma", "D": "6:21", "R": "Unknownraga", "T": "", "U": "194 views", "V": "3a7BeefX8vE"}, {"A": "Maharajapuram S. Srinivasan", "D": "6:30", "R": "Unknownraga", "T": "", "U": "0 views", "V": "4giwE44dXz4"}, {"A": "Maharajapuram Santhanam", "D": "4:56", "R": "Ragamalika", "T": "", "U": "935 views", "V": "HbtYlwSm8J8"}, {"A": "Maharajapuram Santhanam", "D": "9:55", "R": "Unknownraga", "T": "", "U": "0 views", "V": "vullyEK-HPI"}, {"A": "R. K. Padmanabha", "D": "5:49", "R": "Unknownraga", "T": "", "U": "4,084 views", "V": "PKH2CVfZzLE"}, {"A": "Vani Sateesh", "D": "6:15", "R": "Unknownraga", "T": "", "U": "24,393 views", "V": "62dgdp75_Tg"}, {"A": "Avaneeswaram S. R. Vinu", "D": "6:21", "R": "Shuddha sarang", "T": "", "U": "6,630 views", "V": "bz--b_kOd1k"}, {"A": "Mysore Brothers", "D": "14:23", "R": "Unknownraga", "T": "", "U": "1,812 views", "V": "wIlIT6SJyqc"}]}, {"H": "Sringapuradheeswari", "S": "shrngapurAdhIshvarI shAradE shubha mangaLE :  Adi", "songs": [{"A": "Bangalore S. Shankar", "D": "5:21", "R": "Kalyani", "T": "", "U": "9,933 views", "V": "SXyIvySzc7Y"}, {"A": "Bangalore S. Shankar", "D": "12:08", "R": "Kalyani", "T": "", "U": "3,988 views", "V": "YKqU12byDhg"}, {"A": "T. N. Rajarathnam Pillai", "D": "6:19", "R": "Kalyani", "T": "", "U": "19,195 views", "V": "GSEUNlSBrnY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

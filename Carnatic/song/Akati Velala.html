@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>16</td></tr>
 <tr><td><em>Raga</em></td><td>4</td></tr>
 <tr><td><em>Artist</em></td><td>10</td></tr>
-<tr><td><em>Concert</em></td><td>10</td></tr>
+<tr><td><em>Concert</em></td><td>15</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -143,57 +143,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Abhishek Raghuram", "songs": [{"N": "0029", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Revathi", "C": "Annamacharya", "A": "Abhishek Raghuram", "V": "NaI1Oq4kHZE"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0045", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Unknownraga", "C": "Annamacharya", "A": "Bombay Jayashri", "V": "M0coh6jMWBw"}]}, {"name": "Vocal - Hyderabad Sisters", "songs": [{"N": "0007", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Unknownraga", "C": "Annamacharya", "A": "Hyderabad Sisters", "V": "prhm8NEzfMQ"}]}, {"name": "Vocal - Malladi Brothers", "songs": [{"N": "0032", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Revathi", "C": "Annamacharya", "A": "Malladi Brothers", "V": "2mOe04jrqII"}, {"N": "0033", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Revathi", "C": "Annamacharya", "A": "Malladi Brothers", "V": "knqubcEf6Ew"}, {"N": "0034", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Revathi", "C": "Annamacharya", "A": "Malladi Brothers", "V": "lNNtrzXJIaw"}]}, {"name": "Vocal - Nedunuri Krishnamurthy", "songs": [{"N": "0025", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Unknownraga", "C": "Annamacharya", "A": "Nedunuri Krishnamurthy", "V": "DGZIwW3-eaM"}]}, {"name": "Vocal - P. Unnikrishnan", "songs": [{"N": "0037", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Chakravakam", "C": "Annamacharya", "A": "P. Unnikrishnan", "V": "2ZYBSF7FWWA"}, {"N": "0038", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Chakravakam", "C": "Annamacharya", "A": "P. Unnikrishnan", "V": "qMwMziBxvJw"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0031", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Mishra jog", "C": "Annamacharya", "A": "Priya Sisters", "V": "XwZJvKzq_48"}]}, {"name": "Vocal - Sikkil Gurucharan", "songs": [{"N": "0029", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Unknownraga", "C": "Annamacharya", "A": "Sikkil Gurucharan", "V": "AU5g_fgrtNU"}]}, {"name": "Vocal - Vidya Kalyanaraman", "songs": [{"N": "0020", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Unknownraga", "C": "Annamacharya", "A": "Vidya Kalyanaraman", "V": "7vmYbDMGBn0"}]}, {"name": "Vocal - Voleti Venkateswarlu", "songs": [{"N": "0038", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Revathi", "C": "Annamacharya", "A": "Voleti Venkateswarlu", "V": "VaH4cWSZzuY"}, {"N": "0039", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Revathi", "C": "Annamacharya", "A": "Voleti Venkateswarlu", "V": "uh_tVXSNKOk"}, {"N": "0040", "T": "", "H": "Akati Velala", "S": "aakaTi vELala alapaina vELalanu :  Tisra Eka", "R": "Unknownraga", "C": "Annamacharya", "A": "Voleti Venkateswarlu", "V": "j2ErQvXniXA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Abhishek Raghuram", "songs": [{"C": "Annamacharya", "D": "6:29", "R": "Revathi", "T": "", "U": "0 views", "V": "NaI1Oq4kHZE"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Annamacharya", "D": "3:01", "R": "Unknownraga", "T": "", "U": "1,579 views", "V": "M0coh6jMWBw"}]}, {"A": "Hyderabad Sisters", "songs": [{"C": "Annamacharya", "D": "4:20", "R": "Unknownraga", "T": "", "U": "0 views", "V": "prhm8NEzfMQ"}]}, {"A": "Malladi Brothers", "songs": [{"C": "Annamacharya", "D": "5:38", "R": "Revathi", "T": "", "U": "355 views", "V": "knqubcEf6Ew"}, {"C": "Annamacharya", "D": "3:14", "R": "Revathi", "T": "", "U": "15,131 views", "V": "lNNtrzXJIaw"}, {"C": "Annamacharya", "D": "3:01", "R": "Revathi", "T": "", "U": "1,449 views", "V": "2mOe04jrqII"}]}, {"A": "Nedunuri Krishnamurthy", "songs": [{"C": "Annamacharya", "D": "7:46", "R": "Unknownraga", "T": "", "U": "28 views", "V": "DGZIwW3-eaM"}]}, {"A": "P. Unnikrishnan", "songs": [{"C": "Annamacharya", "D": "5:38", "R": "Chakravakam", "T": "", "U": "3,141 views", "V": "qMwMziBxvJw"}, {"C": "Annamacharya", "D": "2:57", "R": "Chakravakam", "T": "", "U": "2,748 views", "V": "2ZYBSF7FWWA"}]}, {"A": "Priya Sisters", "songs": [{"C": "Annamacharya", "D": "7:22", "R": "Mishra jog", "T": "", "U": "35,732 views", "V": "XwZJvKzq_48"}]}, {"A": "Sikkil Gurucharan", "songs": [{"C": "Annamacharya", "D": "9:11", "R": "Unknownraga", "T": "", "U": "428 views", "V": "AU5g_fgrtNU"}]}, {"A": "Vidya Kalyanaraman", "songs": [{"C": "Annamacharya", "D": "5:12", "R": "Unknownraga", "T": "", "U": "178 views", "V": "7vmYbDMGBn0"}]}, {"A": "Voleti Venkateswarlu", "songs": [{"C": "Annamacharya", "D": "8:55", "R": "Revathi", "T": "", "U": "734 views", "V": "VaH4cWSZzuY"}, {"C": "Annamacharya", "D": "4:07", "R": "Unknownraga", "T": "", "U": "0 views", "V": "j2ErQvXniXA"}, {"C": "Annamacharya", "D": "3:01", "R": "Revathi", "T": "", "U": "558 views", "V": "uh_tVXSNKOk"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

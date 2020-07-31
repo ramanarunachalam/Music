@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>13</td></tr>
 <tr><td><em>Song</em></td><td>10</td></tr>
 <tr><td><em>Raga</em></td><td>10</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "enna pizhai seidEnO annaiyE innamum", "songs": [{"N": "0220", "T": "", "H": "Enna Pizhai Seideno", "S": "enna pizhai seidEnO annaiyE innamum varAdirukka :  Caapu", "R": "Rasikapriya", "C": "D. Pattammal", "A": "T. M. Krishna", "V": "OM1m3nN5Seg"}]}, {"name": "ettanai ettanai vidam tAn cittattil", "songs": [{"N": "0051", "T": "", "H": "Ettanai Ettanai Vidam", "S": "ettanai ettanai vidam tAn cittattil vaittanai :  Caapu", "R": "Gavambodhi", "C": "D. Pattammal", "A": "S. Kalyanaraman", "V": "5yoHAq1skCo"}]}, {"name": "gajamukhanaiyE anudinamumE nijabhakti sheidE", "songs": [{"N": "0026", "T": "", "H": "Gajamukhanaiye Anudinamume", "S": "gajamukhanaiyE anudinamumE nijabhakti sheidE :  Caapu", "R": "Shuddha dhanyasi", "C": "D. Pattammal", "A": "T. R. Subramaniam", "V": "l0UA6AwWtJ8"}]}, {"name": "kamalat tirumukhattil kastUri tilakamum karuNai", "songs": [{"N": "0098", "T": "", "H": "Kamala Tirumukhattil", "S": "kamalat tirumukhattil kastUri tilakamum karuNai :  Caapu", "R": "Saveri", "C": "D. Pattammal", "A": "Gayathri Venkataraghavan", "V": "tB-xrxI9vAQ"}]}, {"name": "kanavilum unnai marandariyEn kandA gangAdharan", "songs": [{"N": "0093", "T": "", "H": "Kanavilum Unnai", "S": "kanavilum unnai marandariyEn kandA gangAdharan :  Adi", "R": "Nasikabhushani", "C": "D. Pattammal", "A": "Sikkil Gurucharan", "V": "6vES3zlmrK0"}]}, {"name": "kanindaruL purindiDa manam illaiyA kadir", "songs": [{"N": "0042", "T": "", "H": "Kanindarul Purindida", "S": "kanindaruL purindiDa manam illaiyA kadir kAma :  Adi", "R": "Kunthalavarali", "C": "D. Pattammal", "A": "T. R. Subramaniam", "V": "cIhle1urpHI"}]}, {"name": "panniru kaiyanE padam taru meyyanE", "songs": [{"N": "0021", "T": "", "H": "Panniru Kaiyyane", "S": "panniru kaiyanE padam taru meyyanE bhaktar :  Adi", "R": "Rishabhapriya", "C": "D. Pattammal", "A": "Deekshita Venkataraman", "V": "XtcMNx5CP0M"}, {"N": "0070", "T": "", "H": "Panniru Kaiyyane", "S": "panniru kaiyanE padam taru meyyanE bhaktar :  Adi", "R": "Rishabhapriya", "C": "D. Pattammal", "A": "T. R. Subramaniam", "V": "4pAJpqld4tE"}, {"N": "0071", "T": "", "H": "Panniru Kaiyyane", "S": "panniru kaiyanE padam taru meyyanE bhaktar :  Adi", "R": "Rishabhapriya", "C": "D. Pattammal", "A": "T. R. Subramaniam", "V": "uuhGyaFG2n8"}]}, {"name": "rAmakrSNanai paNI manamE dinamE", "songs": [{"N": "0466", "T": "", "H": "Rama Krishnanai", "S": "rAmakrSNanai paNI manamE dinamE :  Adi", "R": "Khamas", "C": "D. Pattammal", "A": "T. M. Krishna", "V": "DJFK_NrPIMQ"}]}, {"name": "samayapurattu mAri inda jagattinil", "songs": [{"N": "0093", "T": "", "H": "Samayapurattu Mari", "S": "samayapurattu mAri inda jagattinil pErupakAri :  Adi", "R": "Sahana", "C": "D. Pattammal", "A": "T. R. Subramaniam", "V": "C6xs9DgFx3w"}, {"N": "0094", "T": "", "H": "Samayapurattu Mari", "S": "samayapurattu mAri inda jagattinil pErupakAri :  Adi", "R": "Sahana", "C": "D. Pattammal", "A": "T. R. Subramaniam", "V": "RcnfdkLFoh4"}]}, {"name": "tunga nadikkaraiyil tangi emakkaruLum shrngagiri", "songs": [{"N": "0627", "T": "", "H": "Tunga Nadikarayil", "S": "tunga nadikkaraiyil tangi emakkaruLum shrngagiri :  Adi", "R": "Begada", "C": "D. Pattammal", "A": "T. M. Krishna", "V": "w_9EmlN7NYE"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Enna Pizhai Seideno", "S": "enna pizhai seidEnO annaiyE innamum varAdirukka :  Caapu", "songs": [{"A": "T. M. Krishna", "D": "5:11", "R": "Rasikapriya", "T": "", "U": "321 views", "V": "OM1m3nN5Seg"}]}, {"H": "Ettanai Ettanai Vidam", "S": "ettanai ettanai vidam tAn cittattil vaittanai :  Caapu", "songs": [{"A": "S. Kalyanaraman", "D": "6:06", "R": "Gavambodhi", "T": "", "U": "330 views", "V": "5yoHAq1skCo"}]}, {"H": "Gajamukhanaiye Anudinamume", "S": "gajamukhanaiyE anudinamumE nijabhakti sheidE :  Caapu", "songs": [{"A": "T. R. Subramaniam", "D": "17:01", "R": "Shuddha dhanyasi", "T": "", "U": "269 views", "V": "l0UA6AwWtJ8"}]}, {"H": "Kamala Tirumukhattil", "S": "kamalat tirumukhattil kastUri tilakamum karuNai :  Caapu", "songs": [{"A": "Gayathri Venkataraghavan", "D": "23:36", "R": "Saveri", "T": "", "U": "382 views", "V": "tB-xrxI9vAQ"}]}, {"H": "Kanavilum Unnai", "S": "kanavilum unnai marandariyEn kandA gangAdharan :  Adi", "songs": [{"A": "Sikkil Gurucharan", "D": "18:01", "R": "Nasikabhushani", "T": "", "U": "0 views", "V": "6vES3zlmrK0"}]}, {"H": "Kanindarul Purindida", "S": "kanindaruL purindiDa manam illaiyA kadir kAma :  Adi", "songs": [{"A": "T. R. Subramaniam", "D": "13:21", "R": "Kunthalavarali", "T": "", "U": "237 views", "V": "cIhle1urpHI"}]}, {"H": "Panniru Kaiyyane", "S": "panniru kaiyanE padam taru meyyanE bhaktar :  Adi", "songs": [{"A": "Deekshita Venkataraman", "D": "21:25", "R": "Rishabhapriya", "T": "", "U": "2,025 views", "V": "XtcMNx5CP0M"}, {"A": "T. R. Subramaniam", "D": "31:26", "R": "Rishabhapriya", "T": "", "U": "411 views", "V": "4pAJpqld4tE"}, {"A": "T. R. Subramaniam", "D": "31:26", "R": "Rishabhapriya", "T": "", "U": "14 views", "V": "uuhGyaFG2n8"}]}, {"H": "Rama Krishnanai", "S": "rAmakrSNanai paNI manamE dinamE :  Adi", "songs": [{"A": "T. M. Krishna", "D": "7:36", "R": "Khamas", "T": "", "U": "287 views", "V": "DJFK_NrPIMQ"}]}, {"H": "Samayapurattu Mari", "S": "samayapurattu mAri inda jagattinil pErupakAri :  Adi", "songs": [{"A": "T. R. Subramaniam", "D": "12:11", "R": "Sahana", "T": "", "U": "255 views", "V": "RcnfdkLFoh4"}, {"A": "T. R. Subramaniam", "D": "11:55", "R": "Sahana", "T": "", "U": "632 views", "V": "C6xs9DgFx3w"}]}, {"H": "Tunga Nadikarayil", "S": "tunga nadikkaraiyil tangi emakkaruLum shrngagiri :  Adi", "songs": [{"A": "T. M. Krishna", "D": "21:56", "R": "Begada", "T": "", "U": "387 views", "V": "w_9EmlN7NYE"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

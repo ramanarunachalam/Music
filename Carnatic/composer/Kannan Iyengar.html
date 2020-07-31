@@ -16,7 +16,7 @@
 <tr><td><em>Audio</em></td><td>22</td></tr>
 <tr><td><em>Song</em></td><td>1</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
-<tr><td><em>Song Type</em></td><td>1</td></tr>
+<tr><td><em>Type</em></td><td>1</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -36,57 +36,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Arumo Aval Arumuganai nEril kANAdu", "songs": [{"N": "0006", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "Charulatha Mani", "V": "mFIgE1lLSQg"}, {"N": "0049", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "M. L. Vasanthakumari", "V": "HP-jhHsohXE"}, {"N": "0050", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "M. L. Vasanthakumari", "V": "QJWo5A8DkLg"}, {"N": "0051", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "M. L. Vasanthakumari", "V": "VRqAY83W5so"}, {"N": "0052", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "M. L. Vasanthakumari", "V": "f_5c-arrUh4"}, {"N": "0053", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "M. L. Vasanthakumari", "V": "myz28sror8k"}, {"N": "0054", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "M. L. Vasanthakumari", "V": "rKx9HCvPkbY"}, {"N": "0055", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "M. L. Vasanthakumari", "V": "rta2Fe-VUXI"}, {"N": "0024", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "Nisha Rajagopal", "V": "01nriglxiFA"}, {"N": "0025", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "Sandeep Narayan", "V": "XronAIbkKEQ"}, {"N": "0026", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "Sandeep Narayan", "V": "mIT0D3L6C1g"}, {"N": "0011", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "Sangeetha Sivakumar", "V": "LypLvhRyWKw"}, {"N": "0066", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "Sudha Ragunathan", "V": "2Q0tfRGRedk"}, {"N": "0067", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "Sudha Ragunathan", "V": "f9SUMU8FoV0"}, {"N": "0068", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "Sudha Ragunathan", "V": "hd7RHhfOeUM"}, {"N": "0133", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "T. M. Krishna", "V": "KnPPfpmBXtI"}, {"N": "0134", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "T. M. Krishna", "V": "LGv1b2oYIg4"}, {"N": "0135", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "T. M. Krishna", "V": "RuwyfwLCJh0"}, {"N": "0007", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "Kunnakudi Vaidyanathan", "V": "Quoi9LXh0So"}, {"N": "0008", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "Kunnakudi Vaidyanathan", "V": "W73fGKQmD1k"}, {"N": "0037", "T": "", "H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "R": "Maand", "C": "Kannan Iyengar", "A": "M. Chandrasekaran", "V": "JkUQoGokuB4"}]}]};
-    frame_data_init(video_data, 'song', 'composer');
+    var video_data = {"folder": [{"H": "Aarumo Aaval", "S": "Arumo Aval Arumuganai nEril kANAdu  Arumo  :  Adi", "songs": [{"A": "Charulatha Mani", "D": "2:54", "R": "Maand", "T": "", "U": "385 views", "V": "mFIgE1lLSQg"}, {"A": "M. L. Vasanthakumari", "D": "2:30", "R": "Maand", "T": "", "U": "672 views", "V": "rta2Fe-VUXI"}, {"A": "M. L. Vasanthakumari", "D": "3:48", "R": "Maand", "T": "", "U": "348 views", "V": "rKx9HCvPkbY"}, {"A": "M. L. Vasanthakumari", "D": "3:19", "R": "Maand", "T": "", "U": "10,189 views", "V": "QJWo5A8DkLg"}, {"A": "M. L. Vasanthakumari", "D": "3:07", "R": "Maand", "T": "", "U": "0 views", "V": "myz28sror8k"}, {"A": "M. L. Vasanthakumari", "D": "2:21", "R": "Maand", "T": "", "U": "2,798 views", "V": "HP-jhHsohXE"}, {"A": "M. L. Vasanthakumari", "D": "3:11", "R": "Maand", "T": "", "U": "182 views", "V": "f_5c-arrUh4"}, {"A": "M. L. Vasanthakumari", "D": "5:36", "R": "Maand", "T": "", "U": "0 views", "V": "VRqAY83W5so"}, {"A": "Nisha Rajagopal", "D": "3:59", "R": "Maand", "T": "", "U": "16,079 views", "V": "01nriglxiFA"}, {"A": "Sandeep Narayan", "D": "3:56", "R": "Maand", "T": "", "U": "424 views", "V": "mIT0D3L6C1g"}, {"A": "Sandeep Narayan", "D": "3:44", "R": "Maand", "T": "", "U": "0 views", "V": "XronAIbkKEQ"}, {"A": "Sangeetha Sivakumar", "D": "3:37", "R": "Maand", "T": "", "U": "0 views", "V": "LypLvhRyWKw"}, {"A": "Sudha Ragunathan", "D": "3:01", "R": "Maand", "T": "", "U": "2,323 views", "V": "f9SUMU8FoV0"}, {"A": "Sudha Ragunathan", "D": "4:18", "R": "Maand", "T": "", "U": "367 views", "V": "hd7RHhfOeUM"}, {"A": "Sudha Ragunathan", "D": "1:51", "R": "Maand", "T": "", "U": "243 views", "V": "2Q0tfRGRedk"}, {"A": "T. M. Krishna", "D": "3:06", "R": "Maand", "T": "", "U": "2,643 views", "V": "RuwyfwLCJh0"}, {"A": "T. M. Krishna", "D": "4:09", "R": "Maand", "T": "", "U": "1,595 views", "V": "KnPPfpmBXtI"}, {"A": "T. M. Krishna", "D": "3:01", "R": "Maand", "T": "", "U": "3,353 views", "V": "LGv1b2oYIg4"}, {"A": "Kunnakudi Vaidyanathan", "D": "5:24", "R": "Maand", "T": "", "U": "0 views", "V": "Quoi9LXh0So"}, {"A": "Kunnakudi Vaidyanathan", "D": "3:34", "R": "Maand", "T": "", "U": "520 views", "V": "W73fGKQmD1k"}, {"A": "M. Chandrasekaran", "D": "3:48", "R": "Maand", "T": "", "U": "12 views", "V": "JkUQoGokuB4"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

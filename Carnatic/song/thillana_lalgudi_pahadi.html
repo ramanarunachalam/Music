@@ -29,7 +29,7 @@
 <tr><td><em>Audio</em></td><td>17</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>14</td></tr>
-<tr><td><em>Concert</em></td><td>14</td></tr>
+<tr><td><em>Concert</em></td><td>12</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -128,57 +128,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Amrutha Venkatesh", "songs": [{"N": "0354", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "Amrutha Venkatesh", "V": "6u6xxoalLeo"}]}, {"name": "Vocal - Bombay Jayashri", "songs": [{"N": "0464", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "Bombay Jayashri", "V": "h3x6hKsuHZ8"}]}, {"name": "Vocal - Cherthala K. N. Renganatha Sharma", "songs": [{"N": "0161", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "Cherthala K. N. Renganatha Sharma", "V": "rriFCX-6EOM"}]}, {"name": "Vocal - Nithyasree Mahadevan", "songs": [{"N": "0398", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "Nithyasree Mahadevan", "V": "H6_OHQhw8u0"}]}, {"name": "Vocal - Srividya Sriram", "songs": [{"N": "0037", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "Srividya Sriram", "V": "C3Q9Az419J0"}]}, {"name": "Vocal - Voleti Venkateswarlu", "songs": [{"N": "0278", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "Voleti Venkateswarlu", "V": "bfVkFzCQzVA"}]}, {"name": "Mandolin - U. Srinivas", "songs": [{"N": "0644", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "U. Srinivas", "V": "sc2ssDGcW4k"}]}, {"name": "Violin - Lalgudi Jayaraman", "songs": [{"N": "0690", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "68YFe4yZuoM"}, {"N": "0691", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "UVkUu5bSfEo"}, {"N": "0692", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Jayaraman", "V": "ioyfZ2Fuw8I"}]}, {"name": "Violin - Lalgudi Vijayalakshmi", "songs": [{"N": "0041", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "Lalgudi Vijayalakshmi", "V": "xOWxJB15FIM"}]}, {"name": "Violin - Shreya Devnath", "songs": [{"N": "0025", "T": "Thillana", "H": "thillana_lalgudi_pahadi", "S": "dhIm tanata dhIm tanatana dhiranA dhiranA :  Caapu", "R": "Pahadi", "C": "Lalgudi Jayaraman", "A": "Shreya Devnath", "V": "eAguUH92rxA"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Amrutha Venkatesh", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:34", "R": "Pahadi", "T": "Thillana", "U": "0 views", "V": "6u6xxoalLeo"}]}, {"A": "Bombay Jayashri", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:22", "R": "Pahadi", "T": "Thillana", "U": "2,400 views", "V": "h3x6hKsuHZ8"}]}, {"A": "Cherthala K. N. Renganatha Sharma", "songs": [{"C": "Lalgudi Jayaraman", "D": "5:23", "R": "Pahadi", "T": "Thillana", "U": "534 views", "V": "rriFCX-6EOM"}]}, {"A": "Nithyasree Mahadevan", "songs": [{"C": "Lalgudi Jayaraman", "D": "7:08", "R": "Pahadi", "T": "Thillana", "U": "0 views", "V": "H6_OHQhw8u0"}]}, {"A": "Srividya Sriram", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:11", "R": "Pahadi", "T": "Thillana", "U": "469 views", "V": "C3Q9Az419J0"}]}, {"A": "Voleti Venkateswarlu", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:31", "R": "Pahadi", "T": "Thillana", "U": "743 views", "V": "bfVkFzCQzVA"}]}, {"A": "U. Srinivas", "songs": [{"C": "Lalgudi Jayaraman", "D": "4:38", "R": "Pahadi", "T": "Thillana", "U": "1,670 views", "V": "sc2ssDGcW4k"}]}, {"A": "Lalgudi Jayaraman", "songs": [{"C": "Lalgudi Jayaraman", "D": "7:56", "R": "Pahadi", "T": "Thillana", "U": "164 views", "V": "ioyfZ2Fuw8I"}, {"C": "Lalgudi Jayaraman", "D": "6:43", "R": "Pahadi", "T": "Thillana", "U": "234 views", "V": "UVkUu5bSfEo"}, {"C": "Lalgudi Jayaraman", "D": "6:17", "R": "Pahadi", "T": "Thillana", "U": "61 views", "V": "68YFe4yZuoM"}]}, {"A": "Lalgudi Vijayalakshmi", "songs": [{"C": "Lalgudi Jayaraman", "D": "6:12", "R": "Pahadi", "T": "Thillana", "U": "10,120 views", "V": "xOWxJB15FIM"}]}, {"A": "Shreya Devnath", "songs": [{"C": "Lalgudi Jayaraman", "D": "5:03", "R": "Pahadi", "T": "Thillana", "U": "3,497 views", "V": "eAguUH92rxA"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

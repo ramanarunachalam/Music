@@ -19,10 +19,10 @@
 </tbody>
 </table></div></div><div class="col-5"><table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
 <tbody>
-<tr><td><em>Audio</em></td><td>48</td></tr>
-<tr><td><em>Song</em></td><td>8</td></tr>
+<tr><td><em>Audio</em></td><td>46</td></tr>
+<tr><td><em>Song</em></td><td>7</td></tr>
 <tr><td><em>Composer</em></td><td>5</td></tr>
-<tr><td><em>Song Type</em></td><td>3</td></tr>
+<tr><td><em>Type</em></td><td>2</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -42,57 +42,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="song/{{H}}.html">{{S}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#A}}<a href="artist/{{A}}.html">{{A}}</a> - {{/A}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Concert", "songs": [{"N": "0057", "T": "", "H": "Concert", "S": "Concert", "R": "Suryakantam", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "o7ax2dA4Wm8"}]}, {"name": "kanjam konjam shen sharaN nin tanjam", "songs": [{"N": "0053", "T": "", "H": "Kanjam Konjum", "S": "kanjam konjam shen sharaN nin tanjam :  Adi", "R": "Suryakantam", "C": "Koteeswara Iyer", "A": "S. Rajam", "V": "GSQNlLIbGk4"}]}, {"name": "karuNincarA karivaradA niratambu ninnE", "songs": [{"N": "0687", "T": "", "H": "Karuninchara", "S": "karuNincarA karivaradA niratambu ninnE :  Adi", "R": "Suryakantam", "C": "M. Balamuralikrishna", "A": "M. Balamuralikrishna", "V": "yEOSZ00RBto"}]}, {"name": "Mooladharam", "songs": [{"N": "0026", "T": "", "H": "Mooladharam", "S": "Mooladharam", "R": "Suryakantam", "C": "UnknownComposer", "A": "Chittoor Subramaniam Pillai", "V": "BxheuSSBzNQ"}, {"N": "0147", "T": "", "H": "Mooladharam", "S": "Mooladharam", "R": "Suryakantam", "C": "UnknownComposer", "A": "Madurai Somu", "V": "5uP1vv41nXY"}]}, {"name": "muddu mOmu ElAgu celangenO", "songs": [{"N": "0267", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "D. K. Jayaraman", "V": "ZpdgZQrNAI0"}, {"N": "0030", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "G. S. Mani", "V": "z0mXyJFDR2g"}, {"N": "0851", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "eiIcmzdfYRk"}, {"N": "0850", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "43JlXGo0LQY"}, {"N": "0852", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "navtVlzWzZA"}, {"N": "0853", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "oODqmJCdBj4"}, {"N": "0854", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "qpWKK-kvz0Q"}, {"N": "0030", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "Rama Ravi", "V": "B_SVI_5Mk6s"}, {"N": "0031", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "Rama Ravi", "V": "iV0cXfIanzM"}, {"N": "0010", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "Shrikantam Nagendra Shastri", "V": "1O5CgO7ao9M"}, {"N": "0348", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "Sudha Ragunathan", "V": "z4HWjoS4z48"}, {"N": "0013", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "Tiger Varadachariar", "V": "8PfvBuZwLGA"}, {"N": "0014", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "Tiger Varadachariar", "V": "sPsHebonv2U"}, {"N": "0062", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "Vijay Siva", "V": "v4amCstaHcI"}, {"N": "0113", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "N. Ramani", "V": "aCJzKPM1YyA"}, {"N": "0029", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "Sikkil Mala Chandrasekhar", "V": "6MQkYoWmjMc"}, {"N": "0266", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "Lalgudi Jayaraman", "V": "8Kdn9VqFYa4"}, {"N": "0267", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "Lalgudi Jayaraman", "V": "MXxS64dR_oU"}, {"N": "0047", "T": "", "H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "R": "Suryakantam", "C": "Thyagaraja", "A": "Mysore Srikanth", "V": "dVYwGBLXovs"}]}, {"name": "Ragam Thanam Pallavi", "songs": [{"N": "1091", "T": "", "H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "R": "Suryakantam", "C": "UnknownComposer", "A": "Sanjay Subrahmanyan", "V": "WcZ7nr7a6UM"}, {"N": "0045", "T": "", "H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "R": "Suryakantam", "C": "UnknownComposer", "A": "Ganesh Kumaresh", "V": "-pb79cau60s"}]}, {"name": "takkuvEmi manaku rAmunDokkaDunDuvaraku", "songs": [{"N": "0021", "T": "", "H": "Thakkuvemi", "S": "takkuvEmi manaku rAmunDokkaDunDuvaraku :  Adi", "R": "Suryakantam", "C": "Bhadrachala Ramadasu", "A": "D. Seshachari", "V": "syinSnAubw8"}, {"N": "1443", "T": "", "H": "Thakkuvemi", "S": "takkuvEmi manaku rAmunDokkaDunDuvaraku :  Adi", "R": "Suryakantam", "C": "Bhadrachala Ramadasu", "A": "M. Balamuralikrishna", "V": "4SktPTh7oPQ"}, {"N": "1444", "T": "", "H": "Thakkuvemi", "S": "takkuvEmi manaku rAmunDokkaDunDuvaraku :  Adi", "R": "Suryakantam", "C": "Bhadrachala Ramadasu", "A": "M. Balamuralikrishna", "V": "rFRSLc4GInE"}]}, {"name": "Unknownsong", "songs": [{"N": "2236", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Suryakantam", "C": "UnknownComposer", "A": "M. Balamuralikrishna", "V": "v-u-_bm-vKQ"}, {"N": "0035", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Suryakantam", "C": "UnknownComposer", "A": "Madurai R. Sundar", "V": "R5hLmFPnflo"}, {"N": "0071", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Suryakantam", "C": "UnknownComposer", "A": "Nookala Chinna Satyanarayana", "V": "YgPOxYQwoVc"}, {"N": "0023", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Suryakantam", "C": "UnknownComposer", "A": "T. V. Sundaravalli", "V": "dUdQnC6MKKU"}, {"N": "0012", "T": "", "H": "Unknownsong", "S": "Unknownsong", "R": "Suryakantam", "C": "UnknownComposer", "A": "Atul Kumar", "V": "LOBhapTBxA4"}]}]};
-    frame_data_init(video_data, 'song', 'raga');
+    var video_data = {"folder": [{"H": "Kanjam Konjum", "S": "kanjam konjam shen sharaN nin tanjam :  Adi", "songs": [{"A": "S. Rajam", "C": "Koteeswara Iyer", "D": "13:01", "T": "", "U": "249 views", "V": "GSQNlLIbGk4"}]}, {"H": "Karuninchara", "S": "karuNincarA karivaradA niratambu ninnE :  Adi", "songs": [{"A": "M. Balamuralikrishna", "C": "M. Balamuralikrishna", "D": "6:53", "T": "", "U": "0 views", "V": "yEOSZ00RBto"}]}, {"H": "Mooladharam", "S": "Mooladharam", "songs": [{"A": "Chittoor Subramaniam Pillai", "C": "UnknownComposer", "D": "2:30:44", "T": "", "U": "10,000 views", "V": "BxheuSSBzNQ"}, {"A": "Madurai Somu", "C": "UnknownComposer", "D": "", "T": "", "U": "183 views", "V": "5uP1vv41nXY"}]}, {"H": "Muddu Momu", "S": "muddu mOmu ElAgu celangenO  :  Adi", "songs": [{"A": "D. K. Jayaraman", "C": "Thyagaraja", "D": "4:51", "T": "", "U": "157 views", "V": "ZpdgZQrNAI0"}, {"A": "G. S. Mani", "C": "Thyagaraja", "D": "6:32", "T": "", "U": "796 views", "V": "z0mXyJFDR2g"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "6:31", "T": "", "U": "8 views", "V": "navtVlzWzZA"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "20:00", "T": "", "U": "0 views", "V": "eiIcmzdfYRk"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "29:16", "T": "", "U": "885 views", "V": "43JlXGo0LQY"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "21:16", "T": "", "U": "324 views", "V": "qpWKK-kvz0Q"}, {"A": "M. Balamuralikrishna", "C": "Thyagaraja", "D": "30:30", "T": "", "U": "0 views", "V": "oODqmJCdBj4"}, {"A": "Rama Ravi", "C": "Thyagaraja", "D": "8:07", "T": "", "U": "69 views", "V": "B_SVI_5Mk6s"}, {"A": "Rama Ravi", "C": "Thyagaraja", "D": "3:01", "T": "", "U": "543 views", "V": "iV0cXfIanzM"}, {"A": "Shrikantam Nagendra Shastri", "C": "Thyagaraja", "D": "13:03", "T": "", "U": "143 views", "V": "1O5CgO7ao9M"}, {"A": "Sudha Ragunathan", "C": "Thyagaraja", "D": "5:24", "T": "", "U": "0 views", "V": "z4HWjoS4z48"}, {"A": "Tiger Varadachariar", "C": "Thyagaraja", "D": "3:40", "T": "", "U": "4,800 views", "V": "sPsHebonv2U"}, {"A": "Tiger Varadachariar", "C": "Thyagaraja", "D": "3:40", "T": "", "U": "3,000 views", "V": "8PfvBuZwLGA"}, {"A": "Vijay Siva", "C": "Thyagaraja", "D": "6:53", "T": "", "U": "0 views", "V": "v4amCstaHcI"}, {"A": "N. Ramani", "C": "Thyagaraja", "D": "6:10", "T": "", "U": "16 views", "V": "aCJzKPM1YyA"}, {"A": "Sikkil Mala Chandrasekhar", "C": "Thyagaraja", "D": "6:47", "T": "", "U": "1,815 views", "V": "6MQkYoWmjMc"}, {"A": "Lalgudi Jayaraman", "C": "Thyagaraja", "D": "6:56", "T": "", "U": "383 views", "V": "8Kdn9VqFYa4"}, {"A": "Lalgudi Jayaraman", "C": "Thyagaraja", "D": "5:46", "T": "", "U": "837 views", "V": "MXxS64dR_oU"}, {"A": "Mysore Srikanth", "C": "Thyagaraja", "D": "8:38", "T": "", "U": "52 views", "V": "dVYwGBLXovs"}]}, {"H": "Ragam Thanam Pallavi", "S": "Ragam Thanam Pallavi", "songs": [{"A": "Sanjay Subrahmanyan", "C": "UnknownComposer", "D": "49:10", "T": "", "U": "0 views", "V": "WcZ7nr7a6UM"}, {"A": "Ganesh Kumaresh", "C": "UnknownComposer", "D": "46:12", "T": "", "U": "905 views", "V": "-pb79cau60s"}]}, {"H": "Thakkuvemi", "S": "takkuvEmi manaku rAmunDokkaDunDuvaraku :  Adi", "songs": [{"A": "D. Seshachari", "C": "Bhadrachala Ramadasu", "D": "13:43", "T": "", "U": "2,621 views", "V": "syinSnAubw8"}, {"A": "M. Balamuralikrishna", "C": "Bhadrachala Ramadasu", "D": "2:52", "T": "", "U": "0 views", "V": "rFRSLc4GInE"}, {"A": "M. Balamuralikrishna", "C": "Bhadrachala Ramadasu", "D": "2:52", "T": "", "U": "13,227 views", "V": "4SktPTh7oPQ"}]}, {"H": "Unknownsong", "S": "Unknownsong", "songs": [{"A": "M. Balamuralikrishna", "C": "UnknownComposer", "D": "15:33", "T": "", "U": "4,280 views", "V": "v-u-_bm-vKQ"}, {"A": "Madurai R. Sundar", "C": "UnknownComposer", "D": "10:34", "T": "", "U": "4,044 views", "V": "R5hLmFPnflo"}, {"A": "Nookala Chinna Satyanarayana", "C": "UnknownComposer", "D": "5:04", "T": "", "U": "0 views", "V": "YgPOxYQwoVc"}, {"A": "T. V. Sundaravalli", "C": "UnknownComposer", "D": "6:16", "T": "", "U": "290 views", "V": "dUdQnC6MKKU"}, {"A": "Atul Kumar", "C": "UnknownComposer", "D": "4:22", "T": "", "U": "675 views", "V": "LOBhapTBxA4"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

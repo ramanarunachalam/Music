@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>38</td></tr>
 <tr><td><em>Raga</em></td><td>1</td></tr>
 <tr><td><em>Artist</em></td><td>27</td></tr>
-<tr><td><em>Concert</em></td><td>27</td></tr>
+<tr><td><em>Concert</em></td><td>30</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -140,57 +140,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - A. S. Murali", "songs": [{"N": "0048", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "A. S. Murali", "V": "cT2vUQYFpPU"}]}, {"name": "Vocal - Abhishek Raghuram", "songs": [{"N": "0229", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Abhishek Raghuram", "V": "uLd4QFE92TQ"}]}, {"name": "Vocal - Chittoor Subramaniam Pillai", "songs": [{"N": "0043", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Chittoor Subramaniam Pillai", "V": "twCGRGwejA8"}]}, {"name": "Vocal - Gayathri Venkataraghavan", "songs": [{"N": "0194", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Gayathri Venkataraghavan", "V": "EVaMfJWaEoA"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "1475", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "IhBzJMoN1AA"}, {"N": "1477", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "jg79VVUcOKo"}, {"N": "1478", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "kcUt5ZMcbE0"}, {"N": "1480", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "M. Balamuralikrishna", "V": "xfC-Gv3sNko"}]}, {"name": "Vocal - M. D. Ramanathan", "songs": [{"N": "0720", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "Ko4mIky46To"}, {"N": "0721", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "M. D. Ramanathan", "V": "pPrd10_E420"}]}, {"name": "Vocal - M. S. Subbulakshmi", "songs": [{"N": "1184", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "M. S. Subbulakshmi", "V": "nTKQoe9Oh3s"}, {"N": "1185", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "M. S. Subbulakshmi", "V": "qY5vFJtTWl8"}]}, {"name": "Vocal - Maruthi Prasad", "songs": [{"N": "0038", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Maruthi Prasad", "V": "sb2dlsJBgtw"}]}, {"name": "Vocal - R. Vedavalli", "songs": [{"N": "0264", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "R. Vedavalli", "V": "3OesXg1ines"}]}, {"name": "Vocal - Raja Iyengar", "songs": [{"N": "0012", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Raja Iyengar", "V": "dArzLut0uHI"}]}, {"name": "Vocal - S. Saketharaman", "songs": [{"N": "0153", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "S. Saketharaman", "V": "ZNzIHaYXHbw"}]}, {"name": "Vocal - Semmangudi Srinivasa Iyer", "songs": [{"N": "0841", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "IGkHLYfqB1A"}, {"N": "0842", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "PmBONp6KLjY"}, {"N": "0843", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "REoplXz8mq8"}, {"N": "0844", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Semmangudi Srinivasa Iyer", "V": "du_9_D-6xDo"}]}, {"name": "Vocal - Sumithra Vasudev", "songs": [{"N": "0082", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Sumithra Vasudev", "V": "MFj1iZp7UFE"}]}, {"name": "Vocal - Vidya Kalyanaraman", "songs": [{"N": "0059", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Vidya Kalyanaraman", "V": "5dATwWluE1g"}]}, {"name": "Nadaswaram - Injikudi E. M. Subramaniam", "songs": [{"N": "0030", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Injikudi E. M. Subramaniam", "V": "MW4W1gMNY3E"}]}, {"name": "Violin - Annavarapu Ramaswamy", "songs": [{"N": "0079", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Annavarapu Ramaswamy", "V": "ac_ETolto2Q"}]}, {"name": "Mridangam - Ganapathyraman", "songs": [{"N": "0074", "T": "", "H": "Tulasi Jagajjanani", "S": "tulasi jagaj janani durit A pahAriNI :  Rupaka", "R": "Saveri", "C": "Thyagaraja", "A": "Ganapathyraman", "V": "ChWByPYJ9wI"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "A. S. Murali", "songs": [{"C": "Thyagaraja", "D": "23:01", "R": "Saveri", "T": "", "U": "215 views", "V": "cT2vUQYFpPU"}]}, {"A": "Abhishek Raghuram", "songs": [{"C": "Thyagaraja", "D": "4:22", "R": "Saveri", "T": "", "U": "1,145 views", "V": "uLd4QFE92TQ"}]}, {"A": "Chittoor Subramaniam Pillai", "songs": [{"C": "Thyagaraja", "D": "4:18", "R": "Saveri", "T": "", "U": "282 views", "V": "twCGRGwejA8"}]}, {"A": "Gayathri Venkataraghavan", "songs": [{"C": "Thyagaraja", "D": "4:38", "R": "Saveri", "T": "", "U": "0 views", "V": "EVaMfJWaEoA"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Thyagaraja", "D": "26:36", "R": "Saveri", "T": "", "U": "432 views", "V": "IhBzJMoN1AA"}, {"C": "Thyagaraja", "D": "18:17", "R": "Saveri", "T": "", "U": "0 views", "V": "jg79VVUcOKo"}, {"C": "Thyagaraja", "D": "11:41", "R": "Saveri", "T": "", "U": "0 views", "V": "dIcWPDW4Jno"}, {"C": "Thyagaraja", "D": "5:16", "R": "Saveri", "T": "", "U": "4,368 views", "V": "kcUt5ZMcbE0"}, {"C": "Thyagaraja", "D": "7:39", "R": "Saveri", "T": "", "U": "0 views", "V": "xfC-Gv3sNko"}]}, {"A": "M. D. Ramanathan", "songs": [{"C": "Thyagaraja", "D": "20:51", "R": "Saveri", "T": "", "U": "711 views", "V": "pPrd10_E420"}, {"C": "Thyagaraja", "D": "20:56", "R": "Saveri", "T": "", "U": "381 views", "V": "Ko4mIky46To"}]}, {"A": "M. S. Subbulakshmi", "songs": [{"C": "Thyagaraja", "D": "4:51", "R": "Saveri", "T": "", "U": "168 views", "V": "qY5vFJtTWl8"}, {"C": "Thyagaraja", "D": "5:43", "R": "Saveri", "T": "", "U": "51,038 views", "V": "nTKQoe9Oh3s"}]}, {"A": "Maruthi Prasad", "songs": [{"C": "Thyagaraja", "D": "13:53", "R": "Saveri", "T": "", "U": "39 views", "V": "sb2dlsJBgtw"}]}, {"A": "R. Vedavalli", "songs": [{"C": "Thyagaraja", "D": "12:31", "R": "Saveri", "T": "", "U": "561 views", "V": "3OesXg1ines"}]}, {"A": "Raja Iyengar", "songs": [{"C": "Thyagaraja", "D": "2:43", "R": "Saveri", "T": "", "U": "395 views", "V": "dArzLut0uHI"}]}, {"A": "S. Saketharaman", "songs": [{"C": "Thyagaraja", "D": "16:28", "R": "Saveri", "T": "", "U": "441 views", "V": "ZNzIHaYXHbw"}]}, {"A": "Semmangudi Srinivasa Iyer", "songs": [{"C": "Thyagaraja", "D": "8:45", "R": "Saveri", "T": "", "U": "497 views", "V": "du_9_D-6xDo"}, {"C": "Thyagaraja", "D": "41:05", "R": "Saveri", "T": "", "U": "1,900 views", "V": "PmBONp6KLjY"}, {"C": "Thyagaraja", "D": "8:45", "R": "Saveri", "T": "", "U": "414 views", "V": "IGkHLYfqB1A"}, {"C": "Thyagaraja", "D": "38:36", "R": "Saveri", "T": "", "U": "30 views", "V": "REoplXz8mq8"}]}, {"A": "Sumithra Vasudev", "songs": [{"C": "Thyagaraja", "D": "15:15", "R": "Saveri", "T": "", "U": "0 views", "V": "MFj1iZp7UFE"}]}, {"A": "Trichur V. Ramachandran", "songs": [{"C": "Thyagaraja", "D": "4:15", "R": "Saveri", "T": "", "U": "0 views", "V": "MibXoJjEt0k"}]}, {"A": "Vidya Kalyanaraman", "songs": [{"C": "Thyagaraja", "D": "12:36", "R": "Saveri", "T": "", "U": "291 views", "V": "5dATwWluE1g"}]}, {"A": "U. Rajesh", "songs": [{"C": "Thyagaraja", "D": "12:59", "R": "Saveri", "T": "", "U": "0 views", "V": "y7Ih_1Bqtug"}]}, {"A": "Injikudi E. M. Subramaniam", "songs": [{"C": "Thyagaraja", "D": "13:06", "R": "Saveri", "T": "", "U": "201 views", "V": "MW4W1gMNY3E"}]}, {"A": "Annavarapu Ramaswamy", "songs": [{"C": "Thyagaraja", "D": "2:24:15", "R": "Saveri", "T": "", "U": "577 views", "V": "ac_ETolto2Q"}]}, {"A": "Ganapathyraman", "songs": [{"C": "Thyagaraja", "D": "5:05", "R": "Saveri", "T": "", "U": "209 views", "V": "ChWByPYJ9wI"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

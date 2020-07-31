@@ -118,57 +118,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - D. K. Pattammal", "songs": [{"N": "0007", "T": "Ashtapadi", "H": "Raadhika Krishna", "S": "sthanavinihithamapi hAram udhAramsA manuthE :  Adi", "R": "Janasammodhini", "C": "Jayadeva", "A": "D. K. Pattammal", "V": "DlFgYOHaM7k"}]}, {"name": "Vocal - Dr. Nagavalli Nagaraj", "songs": [{"N": "0001", "T": "Ashtapadi", "H": "Raadhika Krishna", "S": "sthanavinihithamapi hAram udhAramsA manuthE :  Adi", "R": "Janasammodhini", "C": "Jayadeva", "A": "Dr. Nagavalli Nagaraj", "V": "4cV3UA95668"}]}, {"name": "Vocal - Jayashree Rajeev", "songs": [{"N": "0001", "T": "Ashtapadi", "H": "Raadhika Krishna", "S": "sthanavinihithamapi hAram udhAramsA manuthE :  Adi", "R": "Janasammodhini", "C": "Jayadeva", "A": "Jayashree Rajeev", "V": "-wFsrqLmbWI"}]}, {"name": "Vocal - M. Balamuralikrishna", "songs": [{"N": "0021", "T": "Ashtapadi", "H": "Raadhika Krishna", "S": "sthanavinihithamapi hAram udhAramsA manuthE :  Adi", "R": "Janasammodhini", "C": "Jayadeva", "A": "M. Balamuralikrishna", "V": "HRbayjYF9As"}, {"N": "0022", "T": "Ashtapadi", "H": "Raadhika Krishna", "S": "sthanavinihithamapi hAram udhAramsA manuthE :  Adi", "R": "Janasammodhini", "C": "Jayadeva", "A": "M. Balamuralikrishna", "V": "TqrF-31zkos"}]}, {"name": "Vocal - Priya Sisters", "songs": [{"N": "0002", "T": "Ashtapadi", "H": "Raadhika Krishna", "S": "sthanavinihithamapi hAram udhAramsA manuthE :  Adi", "R": "Janasammodhini", "C": "Jayadeva", "A": "Priya Sisters", "V": "Krw6BfFtJI0"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "D. K. Pattammal", "songs": [{"C": "Jayadeva", "D": "2:48", "R": "Janasammodhini", "T": "Ashtapadi", "U": "70 views", "V": "DlFgYOHaM7k"}]}, {"A": "Dr. Nagavalli Nagaraj", "songs": [{"C": "Jayadeva", "D": "6:00", "R": "Janasammodhini", "T": "Ashtapadi", "U": "16,303 views", "V": "4cV3UA95668"}]}, {"A": "Jayashree Rajeev", "songs": [{"C": "Jayadeva", "D": "1:03:22", "R": "Janasammodhini", "T": "Ashtapadi", "U": "7,611 views", "V": "-wFsrqLmbWI"}]}, {"A": "M. Balamuralikrishna", "songs": [{"C": "Jayadeva", "D": "6:15", "R": "Janasammodhini", "T": "Ashtapadi", "U": "192 views", "V": "TqrF-31zkos"}, {"C": "Jayadeva", "D": "4:55", "R": "Janasammodhini", "T": "Ashtapadi", "U": "251 views", "V": "HRbayjYF9As"}]}, {"A": "Priya Sisters", "songs": [{"C": "Jayadeva", "D": "4:59", "R": "Janasammodhini", "T": "Ashtapadi", "U": "44,943 views", "V": "Krw6BfFtJI0"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

@@ -31,7 +31,7 @@
 <tr><td><em>Audio</em></td><td>5</td></tr>
 <tr><td><em>Raga</em></td><td>3</td></tr>
 <tr><td><em>Artist</em></td><td>5</td></tr>
-<tr><td><em>Concert</em></td><td>5</td></tr>
+<tr><td><em>Concert</em></td><td>4</td></tr>
 </tbody>
 </table></div></div>
 </div>
@@ -118,57 +118,31 @@
         <ol start="1">
             <li>
                 <span>
-                    <img src="icons/folder.svg" width="24" height="24">&nbsp; {{name}}
+                    <img src="icons/folder.svg" width="24" height="24">&nbsp;
+                    <a href="artist/{{A}}.html">{{A}}</a>
                 </span>
             </li>
             <ul class="UL_LIST">
                 {{#songs}}
                 <li>
-                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{N}}-{{H}}-{{R}}-{{C}}.{{V}}');">
+                    <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{V}}-{{H}}-{{R}}-{{C}}.{{V}}');">
                         <span>
-                         <img src="icons/play.svg" width="24" height="24">&nbsp;  
+                             <img src="icons/play.svg" width="24" height="24">&nbsp;  
                         </span>
-                    </a> {{N}}   - 
-                    {{> song}}
+                    </a> {{D}} -
+                    {{#T}}<a href="type/{{T}}.html">{{T}}</a> - {{/T}}
+                    {{#R}}<a href="raga/{{R}}.html">{{R}}</a> - {{/R}}
+                    {{#C}}<a href="composer/{{C}}.html">{{C}}</a> - {{/C}}
+                    {{U}}
                 </li>
                 {{/songs}}
             </ul>
         </ol>
     {{/folder}}
 </script>
-<script type="text/html" id="artist-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a>{{/C}}
-</script>
-<script type="text/html" id="composer-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="raga-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-li-template">
-        {{#T}}<a href="song_type/{{T}}.html" >{{T}}</a> - {{/T}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
-<script type="text/html" id="song-type-li-template">
-        {{#S}}<a href="song/{{H}}.html" >{{S}}</a> - {{/S}}
-        {{#R}}<a href="raga/{{R}}.html" >{{R}}</a> - {{/R}}
-        {{#C}}<a href="composer/{{C}}.html" >{{C}}</a> - {{/C}}
-        {{#A}}<a href="artist/{{A}}.html" >{{A}}</a>{{/A}}
-</script>
 <script>
-    var video_data = {"folder": [{"name": "Vocal - Madurai Mani Iyer", "songs": [{"N": "0595", "T": "Thiruppugazh", "H": "Eru Mayil Eri", "S": "ERu mayil ERi viLaiyaadu mukam ondrE :  Adi", "R": "Mohanam", "C": "Arunagirinathar", "A": "Madurai Mani Iyer", "V": "r7bZ7BWfZmc"}]}, {"name": "Vocal - Maharajapuram Santhanam", "songs": [{"N": "0667", "T": "Thiruppugazh", "H": "Eru Mayil Eri", "S": "ERu mayil ERi viLaiyaadu mukam ondrE :  Adi", "R": "Ragamalika", "C": "Arunagirinathar", "A": "Maharajapuram Santhanam", "V": "JNpHY73Lcmo"}]}, {"name": "Vocal - Neyveli Santhanagopalan", "songs": [{"N": "0168", "T": "Thiruppugazh", "H": "Eru Mayil Eri", "S": "ERu mayil ERi viLaiyaadu mukam ondrE :  Adi", "R": "Unknownraga", "C": "Arunagirinathar", "A": "Neyveli Santhanagopalan", "V": "Vdue7vaOufE"}]}, {"name": "Vocal - Sudha Ragunathan", "songs": [{"N": "0743", "T": "Thiruppugazh", "H": "Eru Mayil Eri", "S": "ERu mayil ERi viLaiyaadu mukam ondrE :  Adi", "R": "Unknownraga", "C": "Arunagirinathar", "A": "Sudha Ragunathan", "V": "ITpraX1ABnY"}]}]};
-    frame_data_init(video_data, 'song', 'song');
+    var video_data = {"folder": [{"A": "Madurai Mani Iyer", "songs": [{"C": "Arunagirinathar", "D": "2:51", "R": "Mohanam", "T": "Thiruppugazh", "U": "287 views", "V": "r7bZ7BWfZmc"}]}, {"A": "Maharajapuram Santhanam", "songs": [{"C": "Arunagirinathar", "D": "18:11", "R": "Ragamalika", "T": "Thiruppugazh", "U": "0 views", "V": "JNpHY73Lcmo"}]}, {"A": "Neyveli Santhanagopalan", "songs": [{"C": "Arunagirinathar", "D": "5:20", "R": "Unknownraga", "T": "Thiruppugazh", "U": "9,717 views", "V": "Vdue7vaOufE"}]}, {"A": "Sudha Ragunathan", "songs": [{"C": "Arunagirinathar", "D": "1:45", "R": "Unknownraga", "T": "Thiruppugazh", "U": "65,285 views", "V": "ITpraX1ABnY"}]}]};
+    frame_data_init(video_data);
 </script>
 
 </body>

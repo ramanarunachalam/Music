@@ -8,39 +8,35 @@
 <link media="all" rel="stylesheet" href="css/carnatic.min.css" type="text/css" />
 <title>Carnatic Youtube Collection</title>
 </head>
-<body style="padding-top:80px;">
+<body>
+    <header class="navbar navbar-expand fixed-top navbar-light bg-light nav-fill w-100">
+        <div class="navbar-nav col-4">
+            <form method="GET" action="javascript:load_search_data();" class="navbar-form" role="search">
+                <div class="input-group">
+                    <button class="btn" type="submit"><img class="ICON" src="icons/search.svg" ></span></button>
+                    <input class="form-control" id="SEARCH_WORD" results=5 autosave=5 autofocus name="word" placeholder="Search" type="text">
+                </div>
+            </form>
+        </div>
+
+        <ul class="navbar-nav col-6">
+          <li class="nav-item active"><a class="nav-link" href="javascript:load_nav_data('raga');" ><img class="ICON" src="icons/music-note-list.svg" >&nbsp; Raga</a></li>
+          <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('artist');" ><img class="ICON" src="icons/person-fill.svg" >&nbsp; Artist</a></li>
+          <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('composer');" ><img class="ICON" src="icons/person-lines-fill.svg" >&nbsp; Composer</a></li>
+          <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('type');" ><img class="ICON" src="icons/tag.svg" >&nbsp; Type</a></li>
+          <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('song');" ><img class="ICON" src="icons/music-note-beamed.svg" >&nbsp; Song</a></li>
+          <li class="nav-item"><a class="nav-link" href="javascript:load_about_data('info');" ><img class="ICON" src="icons/info-circle.svg" >&nbsp; About</a></li>
+        </ul>
+
+        <div class="col-2">
+        <button class="input-group-text" onclick='handle_playlist_command("show", "");'>
+            <img class="ICON" src="icons/card-list.svg" > &nbsp;Play List
+        </button>
+        </div>
+    </header>
     <div class="container-fluid">
       <div class="row">
-        <nav class="navbar navbar-expand fixed-top navbar-light bg-light nav-fill w-100">
-            <div class="navbar-nav col-4">
-                <form method="GET" action="javascript:load_search_data();" class="navbar-form" role="search">
-                    <div class="input-group">
-                        <button class="btn" type="submit"><img class="ICON" src="icons/search.svg" ></span></button>
-                        <input class="form-control" id="SEARCH_WORD" results=5 autosave=5 autofocus name="word" placeholder="Search" type="text">
-                    </div>
-                </form>
-            </div>
-
-            <ul class="navbar-nav col-6">
-              <li class="nav-item active"><a class="nav-link" href="javascript:load_nav_data('raga');" ><img class="ICON" src="icons/music-note-list.svg" >&nbsp; Raga</a></li>
-              <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('artist');" ><img class="ICON" src="icons/person-fill.svg" >&nbsp; Artist</a></li>
-              <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('composer');" ><img class="ICON" src="icons/person-lines-fill.svg" >&nbsp; Composer</a></li>
-              <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('type');" ><img class="ICON" src="icons/tag.svg" >&nbsp; Type</a></li>
-              <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('song');" ><img class="ICON" src="icons/music-note-beamed.svg" >&nbsp; Song</a></li>
-              <li class="nav-item"><a class="nav-link" href="javascript:load_about_data('info');" ><img class="ICON" src="icons/info-circle.svg" >&nbsp; About</a></li>
-            </ul>
-
-            <div class="col-2">
-            <button class="input-group-text" onclick='handle_playlist_command("show", "");'>
-                <img class="ICON" src="icons/card-list.svg" > &nbsp;Play List
-            </button>
-            </div>
-        </nav>
-      </div>
-    </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-4 sticky-top" id="LIST">
+        <div class="col-4" id="LIST">
           <div id="PLAYER">  
               <iframe id="FRAME_PLAYER" name="FRAME_PLAYER" frameBorder="0" allowTransparency="true"; background="transparent"; src="https://www.youtube.com/embed/KcFKReOW9yM?enablejsapi=1" style="visibility:hidden;" onload="this.style.visibility = 'visible';" allow="autoplay" loading="lazy" scrolling="no"; ></iframe>
           </div>

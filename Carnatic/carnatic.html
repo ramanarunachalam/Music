@@ -2,37 +2,43 @@
 
 <html lang="en">
 <head>
-<link rel="shortcut icon" href="">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="">
 <link media="all" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" type="text/css" />
-<link media="all" rel="stylesheet" href="css/carnatic.min.css" type="text/css" />
+<link media="all" rel="stylesheet" href="css/carnatic.css" type="text/css" />
 <title>Carnatic Youtube Collection</title>
 </head>
 <body>
     <header class="navbar navbar-expand sticky-top navbar-light bg-light nav-fill w-100">
-        <div class="navbar-nav col-4">
+        <ul class="navbar-nav col-6">
+          <li class="nav-item">
+            <select class="form-control" id="LANG_DATA" onchange="set_language(this)">
+              <option style="font-size: 12px">English</option>
+              <option style="font-size: 12px">Tamil</option>
+              <option style="font-size: 12px">Telugu</option>
+              <option style="font-size: 12px">Kannada</option>
+              <option style="font-size: 12px">Malayalam</option>
+              <option style="font-size: 12px">Sanskrit</option>
+            </select>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href='javascript:handle_playlist_command("show", "");'>
+                <img class="ICON" src="icons/card-list.svg" > &nbsp;Playlist
+            </a>
+          </li>
+          <li class="nav-item">
             <form method="GET" action="javascript:load_search_data();" class="navbar-form" role="search">
                 <div class="input-group">
                     <button class="btn" type="submit"><img class="ICON" src="icons/search.svg" ></button>
                     <input class="form-control" id="SEARCH_WORD" results=5 autosave=5 autofocus name="word" placeholder="Search" type="text">
                 </div>
             </form>
-        </div>
-
-        <ul class="navbar-nav col-6">
-          <li class="nav-item active"><a class="nav-link" href="javascript:load_nav_data('raga');" ><img class="ICON" src="icons/music-note-list.svg" >&nbsp; Raga</a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('artist');" ><img class="ICON" src="icons/person-fill.svg" >&nbsp; Artist</a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('composer');" ><img class="ICON" src="icons/person-lines-fill.svg" >&nbsp; Composer</a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('type');" ><img class="ICON" src="icons/tag.svg" >&nbsp; Type</a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:load_nav_data('song');" ><img class="ICON" src="icons/music-note-beamed.svg" >&nbsp; Song</a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:load_about_data('info');" ><img class="ICON" src="icons/info-circle.svg" >&nbsp; About</a></li>
+          </li>
         </ul>
 
-        <div class="navbar-nav col-2">
-        <button class="input-group-text" onclick='handle_playlist_command("show", "");'>
-            <img class="ICON" src="icons/card-list.svg" > &nbsp;Play List
-        </button>
-        </div>
+        <ul class="navbar-nav col-6" id="MENU_DATA">
+        </ul>
     </header>
     <div class="container-fluid">
       <div class="d-flex flex-row">
@@ -112,6 +118,16 @@
         </div>
       </div>
     </div>
+
+    <script type="text/html" id="page-menu-template">
+        {{#items}}
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:load_nav_data('{{C}}');" >
+                    <img class="ICON" src="icons/{{I}}.svg" >&nbsp; {{N}}
+                </a>
+            </li>
+        {{/items}}
+    </script>
 
     <script type="text/html" id="nav-ul-template">
         <div id="slider"><div class="slider-content">
@@ -207,7 +223,7 @@
                         <li>
                             <span>
                                 <img class="ICON" src="icons/folder.svg" />&nbsp;
-                                <a href="javascript:load_content_data('{{HT}}', '{{HH}}');">{{HS}}</a> <font color="brown">({{HC}})</font>
+                                <a href="javascript:load_content_data('{{HT}}', '{{HD}}');">{{HN}}</a> <font color="brown">({{HC}})</font>
                             </span>
                         </li>
                         <ul class="UL_LIST">
@@ -218,9 +234,9 @@
                                          <img class="ICON" src="icons/play.svg" />&nbsp;
                                     </span>
                                 </a> {{D}} -
-                                {{#FD}}<a href="javascript:load_content_data('{{FT}}', '{{FD}}');">{{FD}}</a> - {{/FD}}
-                                {{#SD}}<a href="javascript:load_content_data('{{ST}}', '{{SD}}');">{{SD}}</a> - {{/SD}}
-                                {{#TD}}<a href="javascript:load_content_data('{{TT}}', '{{TD}}');">{{TD}}</a> - {{/TD}}
+                                {{#FD}}<a href="javascript:load_content_data('{{FT}}', '{{FD}}');">{{FN}}</a> - {{/FD}}
+                                {{#SD}}<a href="javascript:load_content_data('{{ST}}', '{{SD}}');">{{SN}}</a> - {{/SD}}
+                                {{#TD}}<a href="javascript:load_content_data('{{TT}}', '{{TD}}');">{{TN}}</a> - {{/TD}}
                                 {{V}} views
                             </li>
                             {{/songs}}
@@ -289,7 +305,8 @@
     <script src="https://cdn.jsdelivr.net/npm/mustache@3.1.0/mustache.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/minisearch@2.6.0/dist/umd/index.min.js" defer></script>
     <script src="js/slidernav.js"></script>
-    <script src="js/carnatic.min.js"></script>
+    <script src="js/transliterate.js"></script>
+    <script src="js/carnatic.js"></script>
     <script type="text/javascript">
         carnatic_init();
     </script>

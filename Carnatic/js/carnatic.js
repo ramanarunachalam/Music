@@ -82,10 +82,25 @@ function on_storage_event(storageEvent) {
     play_first();
 }
 
+function set_language(obj) {
+   window.parent.RENDER_LANGUAGE = obj.value;
+}
+
+var menu_list = { 'items' : [ { 'C' : 'raga',     'I' : 'music-note-list',   'N' : 'Raga'     },
+                              { 'C' : 'artist',   'I' : 'person-fill',       'N' : 'Artist'   },
+                              { 'C' : 'composer', 'I' : 'person-lines-fill', 'N' : 'Composer' },
+                              { 'C' : 'type',     'I' : 'tag',               'N' : 'Type'     },
+                              { 'C' : 'song',     'I' : 'music-note-beamed', 'N' : 'Song'     },
+                              { 'C' : 'about',    'I' : 'info-circle',       'N' : 'About'    },
+                            ]
+                }
+
 function carnatic_init() {
+    window.parent.RENDER_LANGUAGE = 'English';
     sessionStorage.clear();
     window.addEventListener('storage', on_storage_event, false);
     window.onload = load_content;
+    render_card_template('#page-menu-template', '#MENU_DATA', menu_list);
     load_about_data();
 }
 
@@ -193,19 +208,27 @@ function handle_playlist_command(cmd, arg) {
     return true;
 }
 
-function render_nav_template(data) {
+function render_nav_template(category, data) {
     var letter_list = data['alphabet']
     var l_list = [];
+    var need_trans = window.parent.RENDER_LANGUAGE == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
     for (var k = 0; k < letter_list.length; k++) {
         var l_item = letter_list[k];
         l_list.push(l_item['LL']);
         var item_list = l_item['items'] 
         for (var i = 0; i < item_list.length; i++) {
             var obj = item_list[i];
+            var h = obj['H'];
+            h_value = window.ID_DATA[h][0][1];
             var n = obj['N'];
-            obj['N'] = window.ID_DATA[n][0][1];
-            var n = obj['H'];
-            obj['H'] = window.ID_DATA[n][0][1];
+            var f_value = window.ID_DATA[n][0][1];
+            if (need_trans) {
+                var f_value = h_value;
+            } else {
+                var f_value = get_transliterator_text(category, f_value);
+            }
+            obj['H'] = h_value;
+            obj['N'] = f_value
         }
     }
     var ul_template = $('#nav-ul-template').html();
@@ -217,7 +240,7 @@ function render_nav_template(data) {
 function load_nav_data(category) {
     var url = category + '.json';
     $.getJSON(url, function(video_data) {
-        render_nav_template(video_data);
+        render_nav_template(category, video_data);
     });
 }
 
@@ -225,6 +248,23 @@ function render_card_template(template_name, id, data) {
     var ul_template = $(template_name).html();
     var template_html = Mustache.to_html(ul_template, data);
     $(id).html(template_html);
+}
+
+function get_folder_value(category, info, prefix, v) {
+    var id_data = window.ID_DATA;
+    var h_name = prefix + 'D';
+    var h_id = info[v][1];
+    var h_text = id_data[h_id][0][1];
+    info[h_name] = h_text;
+    var f_name = prefix + 'N';
+    var f_text = id_data[info[v][0]][0][1]
+    if (window.parent.RENDER_LANGUAGE != 'English' && (h_id == '1000' || h_id == '5000' || h_id == '7000')) {
+        info[f_name] = '?';
+    } else if (window.parent.RENDER_LANGUAGE == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
+        info[f_name] = h_text;
+    } else {
+        info[f_name] = get_transliterator_text(category, f_text);
+    }
 }
 
 function render_data_template(category, id, data) {
@@ -235,19 +275,20 @@ function render_data_template(category, id, data) {
         return;
     }
 
-    var CC = [ 'I', 'H', 'R', 'D', 'V' ]
-    var FF = { 'artist'   : [ 'song',   'H', 'S', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ],
-               'composer' : [ 'song',   'H', 'S', [ 'T', 'R', 'A' ], [ 'type', 'raga',   'artist'   ] ],
-               'raga'     : [ 'song',   'H', 'S', [ 'T', 'A', 'C' ], [ 'type', 'artist', 'composer' ] ],
-               'type'     : [ 'song',   'H', 'S', [ 'R', 'A', 'C' ], [ 'raga', 'artist', 'composer' ] ],
-               'song'     : [ 'artist', 'A', 'A', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ]
+    var CC = [ 'I', 'R', 'D', 'V' ]
+    var OF = [ 'F', 'S', 'T' ]
+    var FF = { 'artist'   : [ 'song',   'S', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ],
+               'composer' : [ 'song',   'S', [ 'T', 'R', 'A' ], [ 'type', 'raga',   'artist'   ] ],
+               'raga'     : [ 'song',   'S', [ 'T', 'A', 'C' ], [ 'type', 'artist', 'composer' ] ],
+               'type'     : [ 'song',   'S', [ 'R', 'A', 'C' ], [ 'raga', 'artist', 'composer' ] ],
+               'song'     : [ 'artist', 'A', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ]
              }
     var template_name = '#page-videos-template'
     var ul_template = $(template_name).html();
     var new_folder_list = [];
     var ff = FF[category];
-    var sd = ff[3];
-    var st = ff[4];
+    var sd = ff[2];
+    var st = ff[3];
     var video_list = data['videos']
     for (var k = 0; k < video_list.length; k++) {
         var folder_list = video_list[k]['folder'] 
@@ -255,17 +296,15 @@ function render_data_template(category, id, data) {
             var folder = folder_list[i];
             var song_list = folder['songs'];
             folder['HT'] = ff[0];
-            folder['HH'] = window.ID_DATA[folder[ff[1]]][0][1];
-            folder['HS'] = window.ID_DATA[folder[ff[2]]][0][1];
             folder['HC'] = song_list.length
+            get_folder_value(ff[0], folder, 'H', ff[1]);
             for (var j = 0; j < song_list.length; j++) {
                 var song = song_list[j];
-                song['FT'] = st[0];
-                song['FD'] = window.ID_DATA[song[sd[0]]][0][1];
-                song['ST'] = st[1];
-                song['SD'] = window.ID_DATA[song[sd[1]]][0][1];
-                song['TT'] = st[2];
-                song['TD'] = window.ID_DATA[song[sd[2]]][0][1];
+                for (var m = 0; m < OF.length; m++) {
+                    var c = OF[m] + 'T';
+                    song[c] = st[m];
+                    get_folder_value(st[m], song, OF[m], sd[m]);
+                }
             }
         }
     }
@@ -273,16 +312,26 @@ function render_data_template(category, id, data) {
     $(id).html(template_html);
 }
 
+function render_content_data(category, name, video_data) {
+    if (window.parent.RENDER_LANGUAGE != 'English') {
+        var title = video_data['title']['N'];
+        var title = get_transliterator_text(category, title);
+        video_data['title']['N'] = title;
+    }
+
+    $('#PAGE_INFO').html('');
+    render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
+    render_card_template('#page-info-template', '#PAGE_INFO', video_data);
+    render_data_template(category, '#PAGE_VIDEOS', video_data);
+    render_card_template('#page-lyrics-text-template', '#PAGE_LYRICS', video_data);
+    render_card_template('#page-lyrics-ref-template', '#PAGE_REFS', video_data);
+    window.scrollTo(0, 0);
+}
+
 function load_content_data(category, name) {
-    var url = category + '/' + name + '.json';
+    var url = `${category}/${name}.json`;
     $.getJSON(url, function(video_data) {
-        $('#PAGE_INFO').html('');
-        render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
-        render_card_template('#page-info-template', '#PAGE_INFO', video_data);
-        render_data_template(category, '#PAGE_VIDEOS', video_data);
-        render_card_template('#page-lyrics-text-template', '#PAGE_LYRICS', video_data);
-        render_card_template('#page-lyrics-ref-template', '#PAGE_REFS', video_data);
-        window.scrollTo(0, 0);
+        render_content_data(category, name, video_data);
     });
 }
 
@@ -334,9 +383,10 @@ function get_search_results(search_word, search_options, item_list, id_list) {
                 } else {
                     var pop = result_item.pop;
                 }
-                var title = window.ID_DATA[result_item.title][0][1];
-                var href = window.ID_DATA[result_item.href][0][1];
                 var category = result_item.category
+                var title = window.ID_DATA[result_item.title][0][1];
+                var title = get_transliterator_text(category, title);
+                var href = window.ID_DATA[result_item.href][0][1];
                 var item = { 'T' : category, 'C' : category.toUpperCase(), 'I' : icon_dict[category], 'H' : href, 'N' : title, 'P' : pop };
                 item_list.push(item);
                 id_list.add(result_item.id);

@@ -702,11 +702,18 @@ ha hA hi hI hu hU h.R hl.R he hE hai ho hO hau h.R.R hl.R.R
 `).split(/\s+/);
 
 
-let menu_dict = { 'Tamil' : { 'Raga' : 'ராகம்', 'Artist' : 'கலைஞர்', 'Composer' : 'கவிஞர்', 'Type' : 'வகை', 'Song' : 'பாடல்', 'About' : 'பற்றி' },
+let MENU_DICT = { 'Tamil' : { 'Raga' : 'ராகம்', 'Artist' : 'கலைஞர்', 'Composer' : 'கவிஞர்', 'Type' : 'வகை', 'Song' : 'பாடல்', 'About' : 'பற்றி' },
                   'Telugu' : { 'Raga' : 'రాగం', 'Artist' : 'కళాకారుడు', 'Composer' : 'కవి', 'Type' : 'రకము', 'Song' : 'పాట', 'About' : 'గురించి' },
                   'Kannada' : { 'Raga' : 'ರಾಗ', 'Artist' : 'ಕಲಾವಿದ', 'Composer' : 'ಕವಿ', 'Type' : 'ವಿಧ', 'Song' : 'ಹಾಡು', 'About' : 'ಬಗ್ಗೆ' },
                   'Malayalam' : { 'Raga' : 'രാഗം', 'Artist' : 'കലാകാരി', 'Composer' : 'കവി', 'Type' : 'പകാരം', 'Song' : 'ഗാനം', 'About' : 'കുറിച്ച് ' },
                   'Sanskrit' : { 'Raga' : 'राग', 'Artist' : 'कलाकार', 'Composer' : 'कवि', 'Type' : 'प्रकार', 'Song' : 'गीत', 'About' : 'बारे' },
+                };
+
+let STAT_DICT = { 'Tamil' : { 'Videos' : 'வீடியோக்கள்', 'Ragas' : 'ராகங்கள்', 'Artists' : 'கலைஞர்கள்', 'Composers' : 'கவிஞர்கள்', 'Types' : 'வகைகள்', 'Songs' : 'பாடல்கள்', 'Duration' : 'காலம்', 'Views' : 'பார்வைகள்', 'Updated' : 'புதுப்பிக்கப்பட்டது' },
+                  'Telugu' : { 'Videos' : 'Videos', 'Ragas' : 'Ragas', 'Artists' : 'Artists', 'Composers' : 'Composers', 'Types' : 'Types', 'Songs' : 'Songs', 'Duration' : 'వ్యవధి', 'Views' : 'Views', 'Updated' : 'Updated' },
+                  'Kannada' : { 'Videos' : 'Videos', 'Ragas' : 'Ragas', 'Artists' : 'Artists', 'Composers' : 'Composers', 'Types' : 'Types', 'Songs' : 'Songs', 'Duration' : 'ಅವಧಿ', 'Views' : 'Views', 'Updated' : 'Updated' },
+                  'Malayalam' : { 'Videos' : 'Videos', 'Ragas' : 'Ragas', 'Artists' : 'Artists', 'Composers' : 'Composers', 'Types' : 'Types', 'Songs' : 'Songs', 'Duration' : 'കാലാവധി', 'Views' : 'Views', 'Updated' : 'Updated' },
+                  'Sanskrit' : { 'Videos' : 'Videos', 'Ragas' : 'Ragas', 'Artists' : 'Artists', 'Composers' : 'Composers', 'Types' : 'Types', 'Songs' : 'Songs', 'Duration' : 'अवधि', 'Views' : 'Views', 'Updated' : 'Updated' },
                 };
 
 

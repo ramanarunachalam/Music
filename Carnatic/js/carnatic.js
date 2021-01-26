@@ -100,11 +100,24 @@ function menu_transliteration(lang) {
         if ( lang == 'English' ) {
             obj['N'] = name;
         } else {
-            obj['N'] = menu_dict[lang][name];
-            console.log(lang + ' ' + name + ' ' + obj['N']);
+            obj['N'] = MENU_DICT[lang][name];
         }
     }
     render_card_template('#page-menu-template', '#MENU_DATA', menu_list);
+}
+
+function info_transliteration(data_list) {
+    var lang = window.parent.RENDER_LANGUAGE;
+    var item_list = data_list['stats'] 
+    for (var i = 0; i < item_list.length; i++) {
+        var obj = item_list[i];
+        var name = obj['H'];
+        if ( lang == 'English' ) {
+            obj['N'] = name;
+        } else {
+            obj['N'] = STAT_DICT[lang][name];
+        }
+    }
 }
 
 function set_language(obj) {
@@ -256,7 +269,22 @@ function render_nav_template(category, data) {
     $('#slider').sliderNav({ 'items' : l_list });
 }
 
+function load_about_data() {
+    var url = 'about.json';
+    $.getJSON(url, function(video_data) {
+        info_transliteration(video_data);
+        render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
+        render_card_template('#page-info-template', '#PAGE_INFO', video_data);
+        render_data_template('', '', video_data);
+    });
+}
+
 function load_nav_data(category) {
+    if (category == 'about') {
+        load_about_data();
+        return;
+    }
+
     var url = category + '.json';
     $.getJSON(url, function(video_data) {
         render_nav_template(category, video_data);
@@ -339,6 +367,7 @@ function render_content_data(category, name, video_data) {
     }
 
     $('#PAGE_INFO').html('');
+    info_transliteration(video_data);
     render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
     render_card_template('#page-info-template', '#PAGE_INFO', video_data);
     render_data_template(category, '#PAGE_VIDEOS', video_data);
@@ -490,15 +519,6 @@ function load_search_data() {
     render_card_template('#page-search-template', '#PAGE_INFO', item_data);
     render_data_template('', '', item_data);
     window.scrollTo(0, 0);
-}
-
-function load_about_data() {
-    var url = 'about.json';
-    $.getJSON(url, function(video_data) {
-        render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
-        render_card_template('#page-info-template', '#PAGE_INFO', video_data);
-        render_data_template('', '', video_data);
-    });
 }
 
 const old_note_map = { 'S' : 'c3', 'S1' : 'c3', 'R1' : 'c-3', 'R2' : 'd3', 'G1' : 'd3', 'R3' : 'd-3', 'G2' : 'd-3', 'G3' : 'e3', 'M1' : 'f3', 'M2' : 'f-3', 'P' : 'g3', 'D1' : 'g-3', 'D2' : 'a3', 'N1' : 'a3', 'D3' : 'a-3', 'N2' : 'a-3', 'N3' : 'b3', 'S2' : 'c4' };

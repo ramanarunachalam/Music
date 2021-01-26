@@ -74,7 +74,7 @@ function on_storage_event(storageEvent) {
     if (play_list.length == 0) {
         return;
     } else if (play_list.length > 1) {
-        $('#PLAYLIST_QUEUE').modal('show'); 
+        $('#PLAYLIST_QUEUE').modal('show');
         setTimeout(function() { $('#PLAYLIST_QUEUE').modal('hide'); }, 3000);
         return;
     }
@@ -92,7 +92,7 @@ var menu_list = { 'items' : [ { 'C' : 'raga',     'I' : 'music-note-list',   'N'
                 };
 
 function menu_transliteration(lang) {
-    var item_list = menu_list['items'] 
+    var item_list = menu_list['items']
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['C'];
@@ -108,7 +108,7 @@ function menu_transliteration(lang) {
 
 function info_transliteration(data_list) {
     var lang = window.parent.RENDER_LANGUAGE;
-    var item_list = data_list['stats'] 
+    var item_list = data_list['stats']
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
@@ -138,7 +138,7 @@ function carnatic_init() {
 
 function load_content() {
     if (window.innerWidth < 992) {
-        $('#DEVICE_PROPERTY').modal('show'); 
+        $('#DEVICE_PROPERTY').modal('show');
         setTimeout(function() { $('#DEVICE_PROPERTY').modal('hide'); }, 3000);
     }
 
@@ -190,7 +190,7 @@ function add_song(audio_file) {
     if (play_list.length == 1) {
         play_first();
     } else {
-        $('#PLAYLIST_QUEUE').modal('show'); 
+        $('#PLAYLIST_QUEUE').modal('show');
         setTimeout(function() { $('#PLAYLIST_QUEUE').modal('hide'); }, 3000);
     }
 }
@@ -243,17 +243,19 @@ function handle_playlist_command(cmd, arg) {
 function render_nav_template(category, data) {
     var letter_list = data['alphabet']
     var l_list = [];
-    var need_trans = window.parent.RENDER_LANGUAGE == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
+    // var need_trans = window.parent.RENDER_LANGUAGE == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
+    var need_trans = (category == 'artist' || category == 'composer' || category == 'type')
+    var id_data = window.ID_DATA;
     for (var k = 0; k < letter_list.length; k++) {
         var l_item = letter_list[k];
         l_list.push(l_item['LL']);
-        var item_list = l_item['items'] 
+        var item_list = l_item['items']
         for (var i = 0; i < item_list.length; i++) {
             var obj = item_list[i];
             var h = obj['H'];
-            h_value = window.ID_DATA[h][0][1];
+            h_value = id_data[h][0][1];
             var n = obj['N'];
-            var f_value = window.ID_DATA[n][0][1];
+            var f_value = id_data[n][0][1];
             if (need_trans) {
                 var f_value = h_value;
             } else {
@@ -338,7 +340,7 @@ function render_data_template(category, id, data) {
     var st = ff[3];
     var video_list = data['videos']
     for (var k = 0; k < video_list.length; k++) {
-        var folder_list = video_list[k]['folder'] 
+        var folder_list = video_list[k]['folder']
         for (var i = 0; i < folder_list.length; i++) {
             var folder = folder_list[i];
             var song_list = folder['songs'];
@@ -361,10 +363,10 @@ function render_data_template(category, id, data) {
 
 function render_content_data(category, name, video_data) {
     if (window.parent.RENDER_LANGUAGE != 'English') {
+    }
         var title = video_data['title']['N'];
         var title = get_transliterator_text(category, title);
         video_data['title']['N'] = title;
-    }
 
     $('#PAGE_INFO').html('');
     info_transliteration(video_data);

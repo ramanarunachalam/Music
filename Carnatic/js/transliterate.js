@@ -702,6 +702,13 @@ ha hA hi hI hu hU h.R hl.R he hE hai ho hO hau h.R.R hl.R.R
 `).split(/\s+/);
 
 
+let menu_dict = { 'Tamil' : { 'Raga' : 'ராகம்', 'Artist' : 'கலைஞர்', 'Composer' : 'கவிஞர்', 'Type' : 'வகை', 'Song' : 'பாடல்', 'About' : 'பற்றி' },
+                  'Telugu' : { 'Raga' : 'రాగం', 'Artist' : 'కళాకారుడు', 'Composer' : 'కవి', 'Type' : 'రకము', 'Song' : 'పాట', 'About' : 'గురించి' },
+                  'Kannada' : { 'Raga' : 'ರಾಗ', 'Artist' : 'ಕಲಾವಿದ', 'Composer' : 'ಕವಿ', 'Type' : 'ವಿಧ', 'Song' : 'ಹಾಡು', 'About' : 'ಬಗ್ಗೆ' },
+                  'Malayalam' : { 'Raga' : 'രാഗം', 'Artist' : 'കലാകാരി', 'Composer' : 'കവി', 'Type' : 'പകാരം', 'Song' : 'ഗാനം', 'About' : 'കുറിച്ച് ' },
+                  'Sanskrit' : { 'Raga' : 'राग', 'Artist' : 'कलाकार', 'Composer' : 'कवि', 'Type' : 'प्रकार', 'Song' : 'गीत', 'About' : 'बारे' },
+                };
+
 
 let script_input_map = new Map([['sanskrit', sanskrit_extended_expanded_list],
                           ['telugu', telugu_extended_expanded_list],

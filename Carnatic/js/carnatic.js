@@ -82,10 +82,6 @@ function on_storage_event(storageEvent) {
     play_first();
 }
 
-function set_language(obj) {
-   window.parent.RENDER_LANGUAGE = obj.value;
-}
-
 var menu_list = { 'items' : [ { 'C' : 'raga',     'I' : 'music-note-list',   'N' : 'Raga'     },
                               { 'C' : 'artist',   'I' : 'person-fill',       'N' : 'Artist'   },
                               { 'C' : 'composer', 'I' : 'person-lines-fill', 'N' : 'Composer' },
@@ -93,14 +89,37 @@ var menu_list = { 'items' : [ { 'C' : 'raga',     'I' : 'music-note-list',   'N'
                               { 'C' : 'song',     'I' : 'music-note-beamed', 'N' : 'Song'     },
                               { 'C' : 'about',    'I' : 'info-circle',       'N' : 'About'    },
                             ]
-                }
+                };
+
+function menu_transliteration(lang) {
+    var item_list = menu_list['items'] 
+    for (var i = 0; i < item_list.length; i++) {
+        var obj = item_list[i];
+        var name = obj['C'];
+        name = name.charAt(0).toUpperCase() + name.slice(1);
+        if ( lang == 'English' ) {
+            obj['N'] = name;
+        } else {
+            obj['N'] = menu_dict[lang][name];
+            console.log(lang + ' ' + name + ' ' + obj['N']);
+        }
+    }
+    render_card_template('#page-menu-template', '#MENU_DATA', menu_list);
+}
+
+function set_language(obj) {
+    var lang = obj.value;
+    window.parent.RENDER_LANGUAGE = lang;
+    menu_transliteration(lang);
+}
 
 function carnatic_init() {
-    window.parent.RENDER_LANGUAGE = 'English';
+    var lang = 'English';
+    window.parent.RENDER_LANGUAGE = lang;
     sessionStorage.clear();
     window.addEventListener('storage', on_storage_event, false);
     window.onload = load_content;
-    render_card_template('#page-menu-template', '#MENU_DATA', menu_list);
+    menu_transliteration(lang);
     load_about_data();
 }
 

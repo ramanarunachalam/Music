@@ -243,8 +243,7 @@ function handle_playlist_command(cmd, arg) {
 function render_nav_template(category, data) {
     var letter_list = data['alphabet']
     var l_list = [];
-    // var need_trans = window.parent.RENDER_LANGUAGE == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
-    var need_trans = (category == 'artist' || category == 'composer' || category == 'type')
+    var need_trans = window.parent.RENDER_LANGUAGE == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
     var id_data = window.ID_DATA;
     for (var k = 0; k < letter_list.length; k++) {
         var l_item = letter_list[k];

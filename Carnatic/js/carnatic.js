@@ -91,6 +91,21 @@ var menu_list = { 'items' : [ { 'C' : 'raga',     'I' : 'music-note-list',   'N'
                             ]
                 };
 
+var KEYBOARD_LIST = [ { 'I' : 'c4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'sa1' ] },
+                      { 'I' : 'c-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ri1' ] },
+                      { 'I' : 'd4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ri2', 'ga1' ] },
+                      { 'I' : 'd-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ri3', 'ga2' ] },
+                      { 'I' : 'e4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ga3' ] },
+                      { 'I' : 'f4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ma1' ] },
+                      { 'I' : 'f-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ma2' ] },
+                      { 'I' : 'g4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'pa' ] },
+                      { 'I' : 'g-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'da1' ] },
+                      { 'I' : 'a4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'da2', 'ni1' ] },
+                      { 'I' : 'a-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'da3', 'ni2' ] },
+                      { 'I' : 'b4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ni3' ] },
+                      { 'I' : 'c5',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'sa2' ] },
+                    ]
+
 function menu_transliteration(lang) {
     var item_list = menu_list['items']
     for (var i = 0; i < item_list.length; i++) {
@@ -129,6 +144,7 @@ function info_transliteration(category, data_list) {
             obj['N'] = STAT_DICT[lang][name];
         }
     }
+    var note_list = new Set();
     var item_list = data_list['info']
     if (item_list == undefined) {
         item_list = [];
@@ -148,6 +164,10 @@ function info_transliteration(category, data_list) {
         } else if (name == 'Arohanam' || name == 'Avarohanam') {
             var value_list = obj['V'];
             var swara_str = value_list[0];
+            var s_list = swara_str.split(' ');
+            for (var k = 0; k < s_list.length; k++) {
+                note_list.add(s_list[k]);
+            }
             swara_str = get_transliterator_text(category, swara_str);
             swara_str = swara_str.replace(/1/g, '<sub>1</sub>');
             swara_str = swara_str.replace(/2/g, '<sub>2</sub>');
@@ -158,6 +178,26 @@ function info_transliteration(category, data_list) {
         } else if (lang != 'English' && name in MENU_DICT[lang]) {
             obj['V'] = get_transliterator_text(category, obj['P']);
         }
+    }
+    var item = data_list['keyboard']
+    if (item != undefined) {
+        for (var i = 0; i < KEYBOARD_LIST.length; i++) {
+            var obj = KEYBOARD_LIST[i];
+            var swara_list = obj['V'];
+            var new_swara_list = [];
+            for (var j = 0; j < swara_list.length; j++) {
+                var swara_str = swara_list[j];
+                if (note_list.has(swara_str)) {
+                    swara_str = get_transliterator_text(category, swara_str);
+                    swara_str = swara_str.replace(/1/g, '<sub>1</sub>');
+                    swara_str = swara_str.replace(/2/g, '<sub>2</sub>');
+                    swara_str = swara_str.replace(/3/g, '<sub>3</sub>');
+                    new_swara_list.push(swara_str);
+                }
+            }
+            obj['N'] = '&nbsp;' + new_swara_list.join('<br>&nbsp;');
+        }
+        data_list['keyboard'] = { 'keys' : KEYBOARD_LIST };
     }
 }
 

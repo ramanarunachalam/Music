@@ -111,7 +111,7 @@ function info_transliteration(category, data_list) {
     var item = data_list['title']
     if (category == 'about') {
         item['N'] = item['N'];
-    } else if (category == 'artist' || category == 'composer' || category == 'type') {
+    } else if (lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
         item['N'] = item['H'];
     } else {
         item['N'] = get_transliterator_text(category, item['V']);
@@ -264,9 +264,10 @@ function handle_playlist_command(cmd, arg) {
 }
 
 function render_nav_template(category, data) {
+    var lang = window.parent.RENDER_LANGUAGE;
     var letter_list = data['alphabet']
     var l_list = [];
-    var need_trans = window.parent.RENDER_LANGUAGE == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
+    var need_trans = lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
     var id_data = window.ID_DATA;
     for (var k = 0; k < letter_list.length; k++) {
         var l_item = letter_list[k];
@@ -315,6 +316,7 @@ function render_card_template(template_name, id, data) {
 }
 
 function get_folder_value(category, info, prefix, v) {
+    var lang = window.parent.RENDER_LANGUAGE;
     var id_data = window.ID_DATA;
     var h_name = prefix + 'D';
     var h_id = info[v][1];
@@ -322,9 +324,9 @@ function get_folder_value(category, info, prefix, v) {
     info[h_name] = h_text;
     var f_name = prefix + 'N';
     var f_text = id_data[info[v][0]][0][1]
-    if (window.parent.RENDER_LANGUAGE != 'English' && (h_id == '1000' || h_id == '5000' || h_id == '7000')) {
+    if (lang != 'English' && (h_id == '1000' || h_id == '5000' || h_id == '7000')) {
         info[f_name] = '?';
-    } else if (window.parent.RENDER_LANGUAGE == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
+    } else if (lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
         info[f_name] = h_text;
     } else {
         info[f_name] = get_transliterator_text(category, f_text);

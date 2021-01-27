@@ -106,8 +106,16 @@ function menu_transliteration(lang) {
     render_card_template('#page-menu-template', '#MENU_DATA', menu_list);
 }
 
-function info_transliteration(data_list) {
+function info_transliteration(category, data_list) {
     var lang = window.parent.RENDER_LANGUAGE;
+    var item = data_list['title']
+    if (category == 'about') {
+        item['N'] = item['N'];
+    } else if (category == 'artist' || category == 'composer' || category == 'type') {
+        item['N'] = item['H'];
+    } else {
+        item['N'] = get_transliterator_text(category, item['V']);
+    }
     var item_list = data_list['stats']
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
@@ -290,7 +298,7 @@ function load_nav_data(category) {
     var url = category + '.json';
     $.getJSON(url, function(video_data) {
         if (category == 'about') {
-            info_transliteration(video_data);
+            info_transliteration(category, video_data);
             render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
             render_card_template('#page-info-template', '#PAGE_INFO', video_data);
             render_data_template('', '', video_data);
@@ -369,14 +377,9 @@ function render_data_template(category, id, data) {
 }
 
 function render_content_data(category, name, video_data) {
-    if (window.parent.RENDER_LANGUAGE != 'English') {
-    }
-        var title = video_data['title']['N'];
-        var title = get_transliterator_text(category, title);
-        video_data['title']['N'] = title;
+    info_transliteration(category, video_data);
 
     $('#PAGE_INFO').html('');
-    info_transliteration(video_data);
     render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
     render_card_template('#page-info-template', '#PAGE_INFO', video_data);
     render_data_template(category, '#PAGE_VIDEOS', video_data);

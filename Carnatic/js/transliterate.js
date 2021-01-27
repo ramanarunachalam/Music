@@ -716,10 +716,10 @@ let STAT_DICT = { 'Tamil' : { 'Videos' : 'வீடியோக்கள்', 'R
                   'Sanskrit' : { 'Videos' : 'Videos', 'Ragas' : 'Ragas', 'Artists' : 'Artists', 'Composers' : 'Composers', 'Types' : 'Types', 'Songs' : 'Songs', 'Duration' : 'अवधि', 'Views' : 'Views', 'Updated' : 'Updated' },
                 };
 
-let INFO_DICT = { 'Tamil' : { 'Born' : 'பிறப்பு', 'Died' : 'இறப்பு' },
-                  'Telugu' : { 'Born' : 'Born', 'Died' : 'Died' },
-                  'Kannada' : { 'Born' : 'Born', 'Died' : 'Died' },
-                  'Malayalam' : { 'Born' : 'Born', 'Died' : 'Died' },
+let INFO_DICT = { 'Tamil' : { 'Born' : 'பிறப்பு', 'Died' : 'இறப்பு', 'Melakartha' : 'மேளகர்த்தா', 'Arohanam' : 'ஆரோகணம்', 'Avarohanam' : 'அவரோகணம்' },
+                  'Telugu' : { 'Born' : 'Born', 'Died' : 'Died', 'Melakartha' : 'మేళకర్త', 'Arohanam' : 'ఆరోహణ', 'Avarohanam' : 'అవరోహణ' },
+                  'Kannada' : { 'Born' : 'Born', 'Died' : 'Died', 'Arohanam' : 'ಆರೋಹಣ', 'Avarohanam' : 'ಅವರೋಹಣ'},
+                  'Malayalam' : { 'Born' : 'Born', 'Died' : 'Died', 'Melakartha' : 'മേളകർത്താ', 'Arohanam' : 'ആരോഹണം', 'Avarohanam' : 'അവരോഹണം' },
                   'Sanskrit' : { 'Born' : 'Born', 'Died' : 'Died' },
                 };
 

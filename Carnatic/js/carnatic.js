@@ -117,10 +117,13 @@ function info_transliteration(category, data_list) {
         item['N'] = get_transliterator_text(category, item['V']);
     }
     var item_list = data_list['stats']
+    if (item_list == undefined) {
+        item_list = [];
+    }
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
-        if ( lang == 'English' ) {
+        if (lang == 'English') {
             obj['N'] = name;
         } else {
             obj['N'] = STAT_DICT[lang][name];
@@ -133,10 +136,22 @@ function info_transliteration(category, data_list) {
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
-        if ( lang != 'English' && name in INFO_DICT[lang]) {
+        if (lang != 'English' && name in INFO_DICT[lang]) {
             obj['N'] = INFO_DICT[lang][name];
         } else {
             obj['N'] = name;
+        }
+        if (name == 'Melakartha') {
+            obj['V'] = get_transliterator_text(category, obj['V']);
+        } else if (name == 'Arohanam' || name == 'Avarohanam') {
+            var value_list = obj['V'];
+            var swara_str = value_list[0];
+            swara_str = get_transliterator_text(category, swara_str);
+            swara_str = swara_str.replace(/1/g, '<sub>1</sub>');
+            swara_str = swara_str.replace(/2/g, '<sub>2</sub>');
+            var note_str = value_list[1];
+            var image_str = `<a href="javascript:play_notes('${note_str}');" ><img class="ICON" src="icons/soundwave.svg" ></a>`;
+            obj['V'] = swara_str + ' ' + image_str;
         }
     }
 }
@@ -379,9 +394,8 @@ function render_data_template(category, id, data) {
 }
 
 function render_content_data(category, name, video_data) {
-    info_transliteration(category, video_data);
-
     $('#PAGE_INFO').html('');
+    info_transliteration(category, video_data);
     render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
     render_card_template('#page-info-template', '#PAGE_INFO', video_data);
     render_data_template(category, '#PAGE_VIDEOS', video_data);

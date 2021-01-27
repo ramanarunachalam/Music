@@ -865,7 +865,7 @@ function preprocess_harvardkyoto_tamil_to_tamil(input_txt){
 }
 
 ENG_INP_MAP = [' jJ', '\tjJ', '\njJ', 'jJ', 'Jc', 'Jj', 'Mc', 'Mj', 'Mk', 'Mg', '.N', '.R', 'G', '_r', '_n', 'R', 'RR', 'lR', 'lRR', 'M' ];
-ENG_OUT_MAP = [' jn', '\tjn', '\njn', 'gy', 'nc', 'nj', 'nc', 'nj', 'nk', 'ng', 'n', 'R', 'n', 'R',  'n', 'ru', 'rU', 'lu', 'lU', 'm'];
+ENG_OUT_MAP = [' jn', '\tjn', '\njn', 'gy', 'nc', 'nj', 'nc', 'nj', 'nk', 'ng', 'n', 'ru', 'n', 'R',  'n', 'ru', 'rU', 'lu', 'lU', 'm'];
 
 function get_transliterator_text(category, data) {
     var scriptInput = 'harvardkyoto_tamil';

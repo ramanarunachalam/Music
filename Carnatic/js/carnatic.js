@@ -119,6 +119,9 @@ function info_transliteration(data_list) {
         }
     }
     var item_list = data_list['info']
+    if (item_list == undefined) {
+        item_list = [];
+    }
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];

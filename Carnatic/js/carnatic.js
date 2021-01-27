@@ -125,10 +125,10 @@ function info_transliteration(data_list) {
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
-        if ( lang != 'English' ) {
-            if (name in INFO_DICT[lang]) {
-                obj['N'] = INFO_DICT[lang][name];
-            }
+        if ( lang != 'English' && name in INFO_DICT[lang]) {
+            obj['N'] = INFO_DICT[lang][name];
+        } else {
+            obj['N'] = name;
         }
     }
 }
@@ -137,6 +137,8 @@ function set_language(obj) {
     var lang = obj.value;
     window.parent.RENDER_LANGUAGE = lang;
     menu_transliteration(lang);
+    load_nav_data(window.parent.NAV_CATEGORY);
+    load_content_data(window.parent.CONTENT_CATGEGORY, window.parent.CONTENT_NAME);
 }
 
 function carnatic_init() {
@@ -146,7 +148,7 @@ function carnatic_init() {
     window.addEventListener('storage', on_storage_event, false);
     window.onload = load_content;
     menu_transliteration(lang);
-    load_about_data();
+    load_nav_data('about');
 }
 
 function load_content() {
@@ -156,13 +158,13 @@ function load_content() {
     }
 
     $(document).ready(function() {
-        $('.nav li').bind('click', function() {
+        $('#MENU_DATA li').bind('click', function() {
             $(this).addClass('active').siblings().removeClass('active');
         });
     });
 
-    $(".navbar a").on("click", function() {
-        $(".navbar").find(".active").removeClass("active");
+    $("#MENU_DATA li a").on("click", function() {
+        $("#MENU_DATA li").find(".active").removeClass("active");
         $(this).parent().addClass("active");
     });
 
@@ -283,25 +285,18 @@ function render_nav_template(category, data) {
     $('#slider').sliderNav({ 'items' : l_list });
 }
 
-function load_about_data() {
-    var url = 'about.json';
-    $.getJSON(url, function(video_data) {
-        info_transliteration(video_data);
-        render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
-        render_card_template('#page-info-template', '#PAGE_INFO', video_data);
-        render_data_template('', '', video_data);
-    });
-}
-
 function load_nav_data(category) {
-    if (category == 'about') {
-        load_about_data();
-        return;
-    }
-
+    window.parent.NAV_CATEGORY = category;
     var url = category + '.json';
     $.getJSON(url, function(video_data) {
-        render_nav_template(category, video_data);
+        if (category == 'about') {
+            info_transliteration(video_data);
+            render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
+            render_card_template('#page-info-template', '#PAGE_INFO', video_data);
+            render_data_template('', '', video_data);
+        } else {
+            render_nav_template(category, video_data);
+        }
     });
 }
 
@@ -391,6 +386,8 @@ function render_content_data(category, name, video_data) {
 }
 
 function load_content_data(category, name) {
+    window.parent.CONTENT_CATGEGORY = category;
+    window.parent.CONTENT_NAME = name;
     var url = `${category}/${name}.json`;
     $.getJSON(url, function(video_data) {
         render_content_data(category, name, video_data);

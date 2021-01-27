@@ -138,6 +138,8 @@ function info_transliteration(category, data_list) {
         var name = obj['H'];
         if (lang != 'English' && name in INFO_DICT[lang]) {
             obj['N'] = INFO_DICT[lang][name];
+        } else if (lang != 'English' && name in MENU_DICT[lang]) {
+            obj['N'] = MENU_DICT[lang][name];
         } else {
             obj['N'] = name;
         }
@@ -149,9 +151,12 @@ function info_transliteration(category, data_list) {
             swara_str = get_transliterator_text(category, swara_str);
             swara_str = swara_str.replace(/1/g, '<sub>1</sub>');
             swara_str = swara_str.replace(/2/g, '<sub>2</sub>');
+            swara_str = swara_str.replace(/3/g, '<sub>3</sub>');
             var note_str = value_list[1];
             var image_str = `<a href="javascript:play_notes('${note_str}');" ><img class="ICON" src="icons/soundwave.svg" ></a>`;
             obj['V'] = swara_str + ' ' + image_str;
+        } else if (lang != 'English' && name in MENU_DICT[lang]) {
+            obj['V'] = get_transliterator_text(category, obj['P']);
         }
     }
 }
@@ -349,6 +354,7 @@ function get_folder_value(category, info, prefix, v) {
 }
 
 function render_data_template(category, id, data) {
+    var lang = window.parent.RENDER_LANGUAGE;
     if (category == '') {
         $('#PAGE_VIDEOS').html('');
         $('#PAGE_LYRICS').html('');
@@ -366,6 +372,10 @@ function render_data_template(category, id, data) {
              }
     var template_name = '#page-videos-template'
     var ul_template = $(template_name).html();
+    if (lang != 'English') {
+        ul_template = ul_template.replace('Videos', STAT_DICT[lang]['Videos']);
+        ul_template = ul_template.replace('Views', STAT_DICT[lang]['Views']);
+    }
     var new_folder_list = [];
     var ff = FF[category];
     var sd = ff[2];

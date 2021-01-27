@@ -118,6 +118,16 @@ function info_transliteration(data_list) {
             obj['N'] = STAT_DICT[lang][name];
         }
     }
+    var item_list = data_list['info']
+    for (var i = 0; i < item_list.length; i++) {
+        var obj = item_list[i];
+        var name = obj['H'];
+        if ( lang != 'English' ) {
+            if (name in INFO_DICT[lang]) {
+                obj['N'] = INFO_DICT[lang][name];
+            }
+        }
+    }
 }
 
 function set_language(obj) {

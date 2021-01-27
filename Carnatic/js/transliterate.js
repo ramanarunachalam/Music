@@ -716,6 +716,12 @@ let STAT_DICT = { 'Tamil' : { 'Videos' : 'வீடியோக்கள்', 'R
                   'Sanskrit' : { 'Videos' : 'Videos', 'Ragas' : 'Ragas', 'Artists' : 'Artists', 'Composers' : 'Composers', 'Types' : 'Types', 'Songs' : 'Songs', 'Duration' : 'अवधि', 'Views' : 'Views', 'Updated' : 'Updated' },
                 };
 
+let INFO_DICT = { 'Tamil' : { 'Born' : 'பிறப்பு', 'Died' : 'இறப்பு' },
+                  'Telugu' : { 'Born' : 'Born', 'Died' : 'Died' },
+                  'Kannada' : { 'Born' : 'Born', 'Died' : 'Died' },
+                  'Malayalam' : { 'Born' : 'Born', 'Died' : 'Died' },
+                  'Sanskrit' : { 'Born' : 'Born', 'Died' : 'Died' },
+                };
 
 let script_input_map = new Map([['sanskrit', sanskrit_extended_expanded_list],
                           ['telugu', telugu_extended_expanded_list],

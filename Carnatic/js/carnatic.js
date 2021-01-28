@@ -179,6 +179,8 @@ function info_transliteration(category, data_list) {
             var note_str = value_list[1];
             var image_str = `<a href="javascript:play_notes('${note_str}');" ><img class="ICON" src="icons/soundwave.svg" ></a>`;
             obj['V'] = swara_str + ' ' + image_str;
+        } else if (name == 'Raga' || name == 'Tala') {
+            obj['V'] = get_transliterator_text(category, obj['P']);
         } else if (lang != 'English' && name in menu_dict) {
             obj['V'] = get_transliterator_text(category, obj['P']);
         }
@@ -206,7 +208,7 @@ function info_transliteration(category, data_list) {
 }
 
 function set_language(obj) {
-    var lang = obj.value;
+    var lang = LANG_DICT[obj.value];
     window.parent.RENDER_LANGUAGE = lang;
     menu_transliteration(lang);
     load_nav_data(window.parent.NAV_CATEGORY);

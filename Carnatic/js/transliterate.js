@@ -10,6 +10,7 @@ zh v S sh s h
 ~ M H ' oM K
 `).split(/\s+/);
 
+
 let harvardkyoto_expanded_text = (`
 
 a A i I u U R lR e E ai o O au RR lRR
@@ -60,6 +61,7 @@ ha hA hi hI hu hU hR hlR he hE hai ho hO hau hRR hlRR
 
 let harvardkyoto_expanded_list = harvardkyoto_expanded_text.split(/\s+/);
 
+
 let sanskrit_extended_expanded_list = (`
 
 अ आ इ ई उ ऊ ऋ लृ ऎ ए ऐ ऒ ओ औ ॠ लॄ
@@ -106,10 +108,7 @@ let sanskrit_extended_expanded_list = (`
 
 ँ ं ः ऽ ॐ ग्¹
 
-
 `).split(/\s+/);
-
-
 
 
 let sanskrit_expanded_list = (`
@@ -156,6 +155,7 @@ let sanskrit_expanded_list = (`
 ह हा हि ही हु हू हृ हॢ हे हे है हो हो हौ हॄ हॣ
 
 ँ ं ः ऽ ॐ ग्
+
 `).split(/\s+/);
 
 let telugu_extended_expanded_list = (`
@@ -203,7 +203,6 @@ let telugu_extended_expanded_list = (`
 హ హా హి హీ హు హూ హృ హౢ హె హే హై హొ హో హౌ హౄ హౣ
 
 ఁ  ం  ః ఽ ఓమ్¹ గ్¹
-
 
 `).split(/\s+/);
 
@@ -256,8 +255,6 @@ let telugu_expanded_list = (`
 
 let kannada_extended_expanded_list = (`
 
-
-
 ಅ ಆ ಇ ಈ ಉ ಊ ಋ ಌ ಎ ಏ ಐ ಒ ಓ ಔ ೠ ೡ
 
 ಕ್ ಖ್ ಗ್ ಘ್ ಙ್ ಚ್ ಛ್ ಜ್ ಝ್ ಞ್ ಟ್ ಠ್ ಡ್ ಢ್ ಣ್ ತ್ ಥ್ ದ್ ಧ್ ನ್ ನ್¹ ಪ್ ಫ್ ಬ್ ಭ್ ಮ್ ಯ್ ರ್ ಱ್ ಲ್ ಳ್ ಳ್¹ ವ್ ಶ್ ಷ್ ಸ್ ಹ್
@@ -302,9 +299,8 @@ let kannada_extended_expanded_list = (`
 
 ಂ²  ಂ  ಃ ಽ ಓಮ್¹ ಗ್¹
 
-
-
 `).split(/\s+/);
+
 
 let kannada_expanded_list = (`
 ಅ ಆ ಇ ಈ ಉ ಊ ಋ ಌ ಎ ಏ ಐ ಒ ಓ ಔ ೠ ೡ
@@ -702,6 +698,8 @@ ha hA hi hI hu hU h.R hl.R he hE hai ho hO hau h.R.R hl.R.R
 `).split(/\s+/);
 
 
+let LANG_DICT = { 'English' : 'English', 'தமிழ்' : 'Tamil', 'తెలుగు' : 'Kannada', 'ಕನ್ನಡ' : 'Telugu', 'മലയാളം' : 'Malayalam', 'संस्कृत' : 'Sanskrit' }
+
 let MENU_DICT = { 'Tamil' : { 'Raga' : 'ராகம்', 'Artist' : 'கலைஞர்', 'Composer' : 'கவிஞர்', 'Type' : 'வகை', 'Song' : 'பாடல்', 'About' : 'பற்றி' },
                   'Telugu' : { 'Raga' : 'రాగం', 'Artist' : 'కళాకారుడు', 'Composer' : 'కవి', 'Type' : 'రకము', 'Song' : 'పాట', 'About' : 'గురించి' },
                   'Kannada' : { 'Raga' : 'ರಾಗ', 'Artist' : 'ಕಲಾವಿದ', 'Composer' : 'ಕವಿ', 'Type' : 'ವಿಧ', 'Song' : 'ಹಾಡು', 'About' : 'ಬಗ್ಗೆ' },
@@ -716,7 +714,7 @@ let STAT_DICT = { 'Tamil' : { 'Videos' : 'வீடியோக்கள்', 'R
                   'Sanskrit' : { 'Videos' : 'Videos', 'Ragas' : 'Ragas', 'Artists' : 'Artists', 'Composers' : 'Composers', 'Types' : 'Types', 'Songs' : 'Songs', 'Duration' : 'अवधि', 'Views' : 'Views', 'Updated' : 'Updated' },
                 };
 
-let INFO_DICT = { 'Tamil' : { 'Born' : 'பிறப்பு', 'Died' : 'இறப்பு', 'Melakartha' : 'மேளகர்த்தா', 'Arohanam' : 'ஆரோகணம்', 'Avarohanam' : 'அவரோகணம்' },
+let INFO_DICT = { 'Tamil' : { 'Born' : 'பிறப்பு', 'Died' : 'இறப்பு', 'Melakartha' : 'மேளகர்த்தா', 'Arohanam' : 'ஆரோகணம்', 'Avarohanam' : 'அவரோகணம்', 'Tala' : 'தாளம்', 'Tala name' : 'தாள பெயர்', 'Tala angas' : 'தாள அங்கங்கள்', 'Tala count' : 'தாள எண்ணிக்கை' },
                   'Telugu' : { 'Born' : 'పుట్టిన', 'Died' : 'మరణం', 'Melakartha' : 'మేళకర్త', 'Arohanam' : 'ఆరోహణ', 'Avarohanam' : 'అవరోహణ' },
                   'Kannada' : { 'Born' : 'ಜನನ', 'Died' : 'ಮರಣ', 'Melakartha' : 'ಮೇಳಕರ್ತ', 'Arohanam' : 'ಆರೋಹಣ', 'Avarohanam' : 'ಅವರೋಹಣ'},
                   'Malayalam' : { 'Born' : 'ജനനം ', 'Died' : 'മരണം', 'Melakartha' : 'മേളകർത്താ', 'Arohanam' : 'ആരോഹണം', 'Avarohanam' : 'അവരോഹണം' },
@@ -870,18 +868,14 @@ function preprocess_harvardkyoto_tamil_to_tamil(input_txt){
     return txt;
 }
 
-ENG_INP_MAP = [' jJ', '\tjJ', '\njJ', 'jJ', 'Jc', 'Jj', 'Mc', 'Mj', 'Mk', 'Mg', '.N', '.R', 'G', '_r', '_n', 'R', 'RR', 'lR', 'lRR', 'M' ];
-ENG_OUT_MAP = [' jn', '\tjn', '\njn', 'gy', 'nc', 'nj', 'nc', 'nj', 'nk', 'ng', 'n', 'ru', 'n', 'R',  'n', 'ru', 'rU', 'lu', 'lU', 'm'];
+ENG_INP_MAP = [' jJ', '\tjJ', '\njJ', 'jJ', 'Jc', 'Jj', 'Mc', 'Mj', 'Mk', 'Mg', 'G', '_r', '_n', 'R', 'RR', 'lR', 'lRR', 'M' ];
+ENG_OUT_MAP = [' jn', '\tjn', '\njn', 'gy', 'nc', 'nj', 'nc', 'nj', 'nk', 'ng', 'n', 'R',  'n', 'ru', 'rU', 'lu', 'lU', 'm'];
 
 function get_transliterator_text(category, data) {
     var scriptInput = 'harvardkyoto_tamil';
     var scriptOutput = window.parent.RENDER_LANGUAGE;
     let result = '';
     var scriptOutput = scriptOutput.toLowerCase();
-    if (scriptOutput == 'english') {
-        result = transliterate_map_text(lists_to_map(ENG_INP_MAP, ENG_OUT_MAP), data);
-        return result;
-    }
     let inlist = script_input_map.get(scriptInput);
     if (scriptInput == 'harvardkyoto_tamil') {
         if (scriptOutput == 'tamil') {

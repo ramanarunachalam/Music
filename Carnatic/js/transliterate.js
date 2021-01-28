@@ -717,10 +717,10 @@ let STAT_DICT = { 'Tamil' : { 'Videos' : 'வீடியோக்கள்', 'R
                 };
 
 let INFO_DICT = { 'Tamil' : { 'Born' : 'பிறப்பு', 'Died' : 'இறப்பு', 'Melakartha' : 'மேளகர்த்தா', 'Arohanam' : 'ஆரோகணம்', 'Avarohanam' : 'அவரோகணம்' },
-                  'Telugu' : { 'Born' : 'Born', 'Died' : 'Died', 'Melakartha' : 'మేళకర్త', 'Arohanam' : 'ఆరోహణ', 'Avarohanam' : 'అవరోహణ' },
-                  'Kannada' : { 'Born' : 'Born', 'Died' : 'Died', 'Arohanam' : 'ಆರೋಹಣ', 'Avarohanam' : 'ಅವರೋಹಣ'},
-                  'Malayalam' : { 'Born' : 'Born', 'Died' : 'Died', 'Melakartha' : 'മേളകർത്താ', 'Arohanam' : 'ആരോഹണം', 'Avarohanam' : 'അവരോഹണം' },
-                  'Sanskrit' : { 'Born' : 'Born', 'Died' : 'Died' },
+                  'Telugu' : { 'Born' : 'పుట్టిన', 'Died' : 'మరణం', 'Melakartha' : 'మేళకర్త', 'Arohanam' : 'ఆరోహణ', 'Avarohanam' : 'అవరోహణ' },
+                  'Kannada' : { 'Born' : 'ಜನನ', 'Died' : 'ಮರಣ', 'Melakartha' : 'ಮೇಳಕರ್ತ', 'Arohanam' : 'ಆರೋಹಣ', 'Avarohanam' : 'ಅವರೋಹಣ'},
+                  'Malayalam' : { 'Born' : 'ജനനം ', 'Died' : 'മരണം', 'Melakartha' : 'മേളകർത്താ', 'Arohanam' : 'ആരോഹണം', 'Avarohanam' : 'അവരോഹണം' },
+                  'Sanskrit' : { 'Born' : 'जन्म', 'Died' : 'मरण', 'Melakartha' : 'मेलकर्ता', 'Arohanam' : 'आरोहण', 'Avarohanam' : 'अवरोही' },
                 };
 
 let script_input_map = new Map([['sanskrit', sanskrit_extended_expanded_list],

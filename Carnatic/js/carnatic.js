@@ -108,6 +108,7 @@ var KEYBOARD_LIST = [ { 'I' : 'c4',  'C' : 'white', 'S' : 'position:absolute; bo
 
 function menu_transliteration(lang) {
     var item_list = menu_list['items']
+    var menu_dict = MENU_DICT[lang];
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['C'];
@@ -115,7 +116,7 @@ function menu_transliteration(lang) {
         if ( lang == 'English' ) {
             obj['N'] = name;
         } else {
-            obj['N'] = MENU_DICT[lang][name];
+            obj['N'] = menu_dict[name];
         }
     }
     render_card_template('#page-menu-template', '#MENU_DATA', menu_list);
@@ -135,13 +136,14 @@ function info_transliteration(category, data_list) {
     if (item_list == undefined) {
         item_list = [];
     }
+    var stat_dict = STAT_DICT[lang];
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
         if (lang == 'English') {
             obj['N'] = name;
         } else {
-            obj['N'] = STAT_DICT[lang][name];
+            obj['N'] = stat_dict[name];
         }
     }
     var note_list = new Set();
@@ -149,13 +151,15 @@ function info_transliteration(category, data_list) {
     if (item_list == undefined) {
         item_list = [];
     }
+    var info_dict = INFO_DICT[lang];
+    var menu_dict = MENU_DICT[lang];
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
-        if (lang != 'English' && name in INFO_DICT[lang]) {
-            obj['N'] = INFO_DICT[lang][name];
-        } else if (lang != 'English' && name in MENU_DICT[lang]) {
-            obj['N'] = MENU_DICT[lang][name];
+        if (lang != 'English' && name in info_dict) {
+            obj['N'] = info_dict[name];
+        } else if (lang != 'English' && name in menu_dict) {
+            obj['N'] = menu_dict[name];
         } else {
             obj['N'] = name;
         }
@@ -175,7 +179,7 @@ function info_transliteration(category, data_list) {
             var note_str = value_list[1];
             var image_str = `<a href="javascript:play_notes('${note_str}');" ><img class="ICON" src="icons/soundwave.svg" ></a>`;
             obj['V'] = swara_str + ' ' + image_str;
-        } else if (lang != 'English' && name in MENU_DICT[lang]) {
+        } else if (lang != 'English' && name in menu_dict) {
             obj['V'] = get_transliterator_text(category, obj['P']);
         }
     }

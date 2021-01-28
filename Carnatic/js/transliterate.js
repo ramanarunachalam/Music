@@ -714,11 +714,11 @@ let STAT_DICT = { 'Tamil' : { 'Videos' : 'வீடியோக்கள்', 'R
                   'Sanskrit' : { 'Videos' : 'Videos', 'Ragas' : 'Ragas', 'Artists' : 'Artists', 'Composers' : 'Composers', 'Types' : 'Types', 'Songs' : 'Songs', 'Duration' : 'अवधि', 'Views' : 'Views', 'Updated' : 'Updated' },
                 };
 
-let INFO_DICT = { 'Tamil' : { 'Born' : 'பிறப்பு', 'Died' : 'இறப்பு', 'Melakartha' : 'மேளகர்த்தா', 'Arohanam' : 'ஆரோகணம்', 'Avarohanam' : 'அவரோகணம்', 'Tala' : 'தாளம்', 'Tala name' : 'தாள பெயர்', 'Tala angas' : 'தாள அங்கங்கள்', 'Tala count' : 'தாள எண்ணிக்கை' },
-                  'Telugu' : { 'Born' : 'పుట్టిన', 'Died' : 'మరణం', 'Melakartha' : 'మేళకర్త', 'Arohanam' : 'ఆరోహణ', 'Avarohanam' : 'అవరోహణ' },
-                  'Kannada' : { 'Born' : 'ಜನನ', 'Died' : 'ಮರಣ', 'Melakartha' : 'ಮೇಳಕರ್ತ', 'Arohanam' : 'ಆರೋಹಣ', 'Avarohanam' : 'ಅವರೋಹಣ'},
-                  'Malayalam' : { 'Born' : 'ജനനം ', 'Died' : 'മരണം', 'Melakartha' : 'മേളകർത്താ', 'Arohanam' : 'ആരോഹണം', 'Avarohanam' : 'അവരോഹണം' },
-                  'Sanskrit' : { 'Born' : 'जन्म', 'Died' : 'मरण', 'Melakartha' : 'मेलकर्ता', 'Arohanam' : 'आरोहण', 'Avarohanam' : 'अवरोही' },
+let INFO_DICT = { 'Tamil' : { 'Born' : 'பிறப்பு', 'Died' : 'இறப்பு', 'Melakartha' : 'மேளகர்த்தா', 'Arohanam' : 'ஆரோகணம்', 'Avarohanam' : 'அவரோகணம்', 'Tala' : 'தாளம்', 'Tala name' : 'தாள பெயர்', 'Tala angas' : 'தாள அங்கங்கள்', 'Tala count' : 'தாள எண்ணிக்கை', 'Language' :'மொழி', 'God' : 'இறைவன்' },
+                  'Telugu' : { 'Born' : 'పుట్టిన', 'Died' : 'మరణం', 'Melakartha' : 'మేళకర్త', 'Arohanam' : 'ఆరోహణ', 'Avarohanam' : 'అవరోహణ', 'Tala' : 'తాలా' },
+                  'Kannada' : { 'Born' : 'ಜನನ', 'Died' : 'ಮರಣ', 'Melakartha' : 'ಮೇಳಕರ್ತ', 'Arohanam' : 'ಆರೋಹಣ', 'Avarohanam' : 'ಅವರೋಹಣ', 'Tala' : 'ತಲಾ'},
+                  'Malayalam' : { 'Born' : 'ജനനം ', 'Died' : 'മരണം', 'Melakartha' : 'മേളകർത്താ', 'Arohanam' : 'ആരോഹണം', 'Avarohanam' : 'അവരോഹണം', 'Tala' : 'തലം' },
+                  'Sanskrit' : { 'Born' : 'जन्म', 'Died' : 'मरण', 'Melakartha' : 'मेलकर्ता', 'Arohanam' : 'आरोहण', 'Avarohanam' : 'अवरोही', 'Tala' : 'ताल' },
                 };
 
 let script_input_map = new Map([['sanskrit', sanskrit_extended_expanded_list],

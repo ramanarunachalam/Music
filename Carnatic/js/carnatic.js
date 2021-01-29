@@ -168,7 +168,11 @@ function info_transliteration(category, data_list) {
         } else {
             obj['N'] = name;
         }
-        if (name == 'Melakartha') {
+        if (name == 'Language') {
+            if (lang != 'English' && name in info_dict) {
+                obj['V'] = info_dict[obj['V']];
+            }
+        } else if (name == 'Melakartha') {
             obj['V'] = get_transliterator_text(in_lang, lang, obj['V']);
         } else if (name == 'Arohanam' || name == 'Avarohanam') {
             var value_list = obj['V'];

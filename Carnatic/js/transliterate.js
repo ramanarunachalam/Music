@@ -835,9 +835,10 @@ function preprocess_harvardkyoto_to_tamil(input_txt){
     let txt = input_txt;
     txt = txt.replace(/M([cj])/gm, 'J$1');
     txt = txt.replace(/M([kg])/gm, 'G$1');
+    txt = txt.replace(/M([TD])/gm, 'N$1');
+    txt = txt.replace(/M([td])/gm, 'n$1');        
     txt = txt.replace(/\bjJ/gm, 'J');
     txt = txt.replace(/jJ/gm, 'JJ');
-    txt = txt.replace(/_n/gm, 'qqqq');
     txt = txt.replace(/Jj/gm, 'Jc');
     txt = txt.replace(/_n/gm, 'qqqq');
     txt = txt.replace(/\bn/gm, "QQQQ");
@@ -853,6 +854,8 @@ function preprocess_harvardkyoto_tamil_to_tamil(input_txt){
     let txt = input_txt;
     txt = txt.replace(/M([cj])/gm, 'J$1');
     txt = txt.replace(/M([kg])/gm, 'G$1');
+    txt = txt.replace(/M([TD])/gm, 'N$1');
+    txt = txt.replace(/M([td])/gm, 'n$1');        
     txt = txt.replace(/\bjJ/gm, 'J');
     txt = txt.replace(/jJ/gm, 'JJ');
     txt = txt.replace(/Jj/gm, 'Jc');
@@ -868,8 +871,15 @@ function preprocess_harvardkyoto_tamil_to_tamil(input_txt){
     return txt;
 }
 
-ENG_INP_MAP = [' jJ', '\tjJ', '\njJ', 'jJ', 'Jc', 'Jj', 'Mc', 'Mj', 'Mk', 'Mg', 'G', '_r', '_n', 'R', 'RR', 'lR', 'lRR', 'M' ];
-ENG_OUT_MAP = [' jn', '\tjn', '\njn', 'gy', 'nc', 'nj', 'nc', 'nj', 'nk', 'ng', 'n', 'R',  'n', 'ru', 'rU', 'lu', 'lU', 'm'];
+let ENG_INP_MAP = [ ' jJ', '\tjJ', '\njJ', 'jJ', 'Jc', 'Jj', 'Mc',
+                    'Mj', 'Mk', 'Mg',  'MT', 'MD', 'Mt', 'Md',
+                    'G', '_r', '_n', 'R', 'RR', 'lR', 'lRR', 'M'
+                  ];
+
+let ENG_OUT_MAP = [ ' jn', '\tjn', '\njn', 'gy', 'nc', 'nj', 'nc',
+                    'nj', 'nk', 'ng', 'NT', 'ND', 'nt', 'nd',
+                    'n', 'R',  'n', 'ru', 'rU', 'lu', 'lU', 'm'
+                  ];
 
 function get_transliterator_text(category, data) {
     var scriptInput = 'harvardkyoto_tamil';

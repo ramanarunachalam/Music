@@ -179,7 +179,7 @@ function info_transliteration(category, data_list) {
             var note_str = value_list[1];
             var image_str = `<a href="javascript:play_notes('${note_str}');" ><img class="ICON" src="icons/soundwave.svg" ></a>`;
             obj['V'] = swara_str + ' ' + image_str;
-        } else if (name == 'Raga' || name == 'Tala' || name == 'Tala name') {
+        } else if (name == 'Raga' || name == 'Tala' || name == 'Tala name' || name == 'Tala angas') {
             obj['V'] = get_transliterator_text(category, obj['P']);
         } else if (lang != 'English' && name in menu_dict) {
             obj['V'] = get_transliterator_text(category, obj['P']);

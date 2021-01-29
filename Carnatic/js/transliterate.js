@@ -698,7 +698,7 @@ ha hA hi hI hu hU h.R hl.R he hE hai ho hO hau h.R.R hl.R.R
 `).split(/\s+/);
 
 
-let LANG_DICT = { 'English' : 'English', 'தமிழ்' : 'Tamil', 'తెలుగు' : 'Kannada', 'ಕನ್ನಡ' : 'Telugu', 'മലയാളം' : 'Malayalam', 'संस्कृत' : 'Sanskrit' }
+let LANG_DICT = { 'English' : 'English', 'தமிழ்' : 'Tamil', 'తెలుగు' : 'Telugu', 'ಕನ್ನಡ' : 'Kannada', 'മലയാളം' : 'Malayalam', 'संस्कृत' : 'Sanskrit' }
 
 let MENU_DICT = { 'Tamil' : { 'Raga' : 'ராகம்', 'Artist' : 'கலைஞர்', 'Composer' : 'கவிஞர்', 'Type' : 'வகை', 'Song' : 'பாடல்', 'About' : 'பற்றி' },
                   'Telugu' : { 'Raga' : 'రాగం', 'Artist' : 'కళాకారుడు', 'Composer' : 'కవి', 'Type' : 'రకము', 'Song' : 'పాట', 'About' : 'గురించి' },
@@ -881,9 +881,7 @@ let ENG_OUT_MAP = [ ' jn', '\tjn', '\njn', 'gy', 'nc', 'nj', 'nc',
                     'n', 'R',  'n', 'ru', 'rU', 'lu', 'lU', 'm'
                   ];
 
-function get_transliterator_text(category, data) {
-    var scriptInput = 'harvardkyoto_tamil';
-    var scriptOutput = window.parent.RENDER_LANGUAGE;
+function get_transliterator_text(scriptInput, scriptOutput, data) {
     let result = '';
     var scriptOutput = scriptOutput.toLowerCase();
     let inlist = script_input_map.get(scriptInput);

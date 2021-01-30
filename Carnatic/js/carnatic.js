@@ -125,9 +125,6 @@ function menu_transliteration(lang) {
 function info_transliteration(category, data_list) {
     var lang = window.parent.RENDER_LANGUAGE;
     var in_lang = 'harvardkyoto_tamil';
-    if (category == 'song') {
-        in_lang = 'harvardkyoto';
-    }
     var item = data_list['title']
     if (category == 'about') {
         item['N'] = item['N'];
@@ -136,7 +133,6 @@ function info_transliteration(category, data_list) {
     } else {
         item['N'] = get_transliterator_text(in_lang, lang, item['V']);
     }
-    var in_lang = 'harvardkyoto_tamil';
     var item_list = data_list['stats']
     if (item_list == undefined) {
         item_list = [];
@@ -341,9 +337,6 @@ function handle_playlist_command(cmd, arg) {
 function render_nav_template(category, data) {
     var lang = window.parent.RENDER_LANGUAGE;
     var in_lang = 'harvardkyoto_tamil';
-    if (category == 'song') {
-        in_lang = 'harvardkyoto';
-    }
     var letter_list = data['alphabet']
     var l_list = [];
     var need_trans = lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
@@ -397,9 +390,6 @@ function render_card_template(template_name, id, data) {
 function get_folder_value(category, info, prefix, v) {
     var lang = window.parent.RENDER_LANGUAGE;
     var in_lang = 'harvardkyoto_tamil';
-    if (category == 'song') {
-        in_lang = 'harvardkyoto';
-    }
     var id_data = window.ID_DATA;
     var h_name = prefix + 'D';
     var h_id = info[v][1];
@@ -523,6 +513,7 @@ function search_init() {
 
 function get_search_results(search_word, search_options, item_list, id_list) {
     var lang = window.parent.RENDER_LANGUAGE;
+    var in_lang = 'harvardkyoto_tamil';
     var icon_dict = window.CARNATIC_ICON_DICT;
     var search_engine = window.carnatic_search_engine;
     var results = search_engine.search(search_word, search_options);
@@ -536,10 +527,6 @@ function get_search_results(search_word, search_options, item_list, id_list) {
                     var pop = result_item.pop;
                 }
                 var category = result_item.category
-                var in_lang = 'harvardkyoto_tamil';
-                if (category == 'song') {
-                    in_lang = 'harvardkyoto';
-                }
                 var title = window.ID_DATA[result_item.title][0][1];
                 var title = get_transliterator_text(in_lang, lang, title);
                 var href = window.ID_DATA[result_item.href][0][1];

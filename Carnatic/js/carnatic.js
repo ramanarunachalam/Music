@@ -82,14 +82,14 @@ function on_storage_event(storageEvent) {
     play_first();
 }
 
-var menu_list = { 'items' : [ { 'C' : 'raga',     'I' : 'music-note-list',   'N' : 'Raga'     },
-                              { 'C' : 'artist',   'I' : 'person-fill',       'N' : 'Artist'   },
-                              { 'C' : 'composer', 'I' : 'person-lines-fill', 'N' : 'Composer' },
-                              { 'C' : 'type',     'I' : 'tag',               'N' : 'Type'     },
-                              { 'C' : 'song',     'I' : 'music-note-beamed', 'N' : 'Song'     },
-                              { 'C' : 'about',    'I' : 'info-circle',       'N' : 'About'    },
-                            ]
-                };
+var CATEGORY_DICT = { 'categories' : [ { 'C' : 'raga',     'I' : 'music-note-list',   'N' : 'Raga'     },
+                                  { 'C' : 'artist',   'I' : 'person-fill',       'N' : 'Artist'   },
+                                  { 'C' : 'composer', 'I' : 'person-lines-fill', 'N' : 'Composer' },
+                                  { 'C' : 'type',     'I' : 'tag',               'N' : 'Type'     },
+                                  { 'C' : 'song',     'I' : 'music-note-beamed', 'N' : 'Song'     },
+                                  { 'C' : 'about',    'I' : 'info-circle',       'N' : 'About'    },
+                                ]
+                    };
 
 var KEYBOARD_LIST = [ { 'I' : 'c4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'sa1' ] },
                       { 'I' : 'c-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ri1' ] },
@@ -107,8 +107,10 @@ var KEYBOARD_LIST = [ { 'I' : 'c4',  'C' : 'white', 'S' : 'position:absolute; bo
                     ]
 
 function menu_transliteration(lang) {
-    var item_list = menu_list['items']
-    var menu_dict = MENU_DICT[lang];
+    var in_lang = 'harvardkyoto_tamil';
+    var item_list = CATEGORY_DICT['categories']
+    var menu_dict = MAP_MENU_DICT[lang];
+    var info_dict = MAP_INFO_DICT[lang];
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['C'];
@@ -119,7 +121,23 @@ function menu_transliteration(lang) {
             obj['N'] = menu_dict[name];
         }
     }
-    render_card_template('#page-menu-template', '#MENU_DATA', menu_list);
+    var playlist = 'Playlist';
+    var search = 'Search';
+    if (lang != 'English') {
+        playlist = get_transliterator_text(in_lang, lang, 'pLElisT');
+        search = info_dict[search];
+    }
+    let lang_list = [];
+    for (var l in MAP_LANG_DICT) {
+        if (l == window.parent.GOT_LANGUAGE) {
+            lang_list.push({ 'N' : l, 'O' : 'selected' });
+        } else {
+            lang_list.push({ 'N' : l });
+        }
+    }
+    var other_dict = { 'P' : playlist, 'S' : search };
+    var menu_dict = { 'menus' : { 'languages' : lang_list, 'others' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
+    render_card_template('#page-menu-template', '#MENU_DATA', menu_dict);
 }
 
 function info_transliteration(category, data_list) {
@@ -137,7 +155,7 @@ function info_transliteration(category, data_list) {
     if (item_list == undefined) {
         item_list = [];
     }
-    var stat_dict = STAT_DICT[lang];
+    var stat_dict = MAP_STAT_DICT[lang];
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
@@ -152,8 +170,8 @@ function info_transliteration(category, data_list) {
     if (item_list == undefined) {
         item_list = [];
     }
-    var info_dict = INFO_DICT[lang];
-    var menu_dict = MENU_DICT[lang];
+    var info_dict = MAP_INFO_DICT[lang];
+    var menu_dict = MAP_MENU_DICT[lang];
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
@@ -225,11 +243,24 @@ function info_transliteration(category, data_list) {
             obj['L'] = prefix + ' - ' + lyric_lang;
         }
     }
+    var references = 'References';
+    if (lang != 'English') {
+        references = info_dict[references];
+    }
+    var item_list = data_list['lyricsref']
+    if (item_list == undefined) {
+        item_list = [];
+    }
+    for (var i = 0; i < item_list.length; i++) {
+        var obj = item_list[i];
+        obj['R'] = references;
+    }
 }
 
 function set_language(obj) {
-    var lang = LANG_DICT[obj.value];
+    var lang = MAP_LANG_DICT[obj.value];
     window.parent.RENDER_LANGUAGE = lang;
+    window.parent.GOT_LANGUAGE = obj.value;
     menu_transliteration(lang);
     load_nav_data(window.parent.NAV_CATEGORY);
     load_content_data(window.parent.CONTENT_CATGEGORY, window.parent.CONTENT_NAME);
@@ -238,6 +269,7 @@ function set_language(obj) {
 function carnatic_init() {
     var lang = 'English';
     window.parent.RENDER_LANGUAGE = lang;
+    window.parent.GOT_LANGUAGE = lang;
     sessionStorage.clear();
     window.addEventListener('storage', on_storage_event, false);
     window.onload = load_content;
@@ -441,8 +473,9 @@ function render_data_template(category, id, data) {
     var template_name = '#page-videos-template'
     var ul_template = $(template_name).html();
     if (lang != 'English') {
-        ul_template = ul_template.replace('Videos', STAT_DICT[lang]['Videos']);
-        ul_template = ul_template.replace('Views', STAT_DICT[lang]['Views']);
+        var stat_dict = MAP_STAT_DICT[lang];
+        ul_template = ul_template.replace('Videos', stat_dict['Videos']);
+        ul_template = ul_template.replace('Views', stat_dict['Views']);
     }
     var new_folder_list = [];
     var ff = FF[category];
@@ -624,7 +657,7 @@ function load_search_data() {
     }
     item_list.sort(function (a, b) { return b.P - a.P; });
     var new_item_list = item_list.slice(0, 25);
-    var item_data = { "title" : {"N": "Search Results", "I": "search"}, "items" : new_item_list };
+    var item_data = { 'title' : { 'N': 'Search Results', 'I': 'search' }, 'items' : new_item_list };
     render_card_template('#page-title-template', '#PAGE_TITLE', item_data);
     render_card_template('#page-search-template', '#PAGE_INFO', item_data);
     render_data_template('', '', item_data);

@@ -10,34 +10,7 @@
 <title>Carnatic Youtube Collection</title>
 </head>
 <body>
-    <header class="navbar navbar-expand sticky-top navbar-light bg-light nav-fill w-100">
-        <ul class="navbar-nav col-6">
-          <li class="nav-item">
-            <select class="form-control" id="LANG_DATA" onchange="set_language(this)">
-              <option style="font-size: 12px">English</option>
-              <option style="font-size: 12px">தமிழ்</option>
-              <option style="font-size: 12px">తెలుగు</option>
-              <option style="font-size: 12px">ಕನ್ನಡ</option>
-              <option style="font-size: 12px">മലയാളം</option>
-              <option style="font-size: 12px">संस्कृत</option>
-            </select>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href='javascript:handle_playlist_command("show", "");'>
-                <img class="ICON" src="icons/card-list.svg" > &nbsp;Playlist
-            </a>
-          </li>
-          <li class="nav-item">
-            <form method="GET" action="javascript:load_search_data();" class="navbar-form" role="search">
-                <div class="input-group">
-                    <button class="btn" type="submit"><img class="ICON" src="icons/search.svg" ></button>
-                    <input class="form-control" id="SEARCH_WORD" results=5 autosave=5 autofocus name="word" placeholder="Search" type="text">
-                </div>
-            </form>
-          </li>
-        </ul>
-        <ul class="navbar-nav col-6" id="MENU_DATA">
-        </ul>
+    <header class="navbar navbar-expand sticky-top navbar-light bg-light nav-fill w-100" id="MENU_DATA">
     </header>
     <div class="container-fluid">
       <div class="d-flex flex-row">
@@ -119,13 +92,41 @@
     </div>
 
     <script type="text/html" id="page-menu-template">
-        {{#items}}
+      {{#menus}}
+        <ul class="navbar-nav col-6">
+          <li class="nav-item">
+            <select class="form-control" id="LANG_DATA" onchange="set_language(this)">
+              {{#languages}}
+              <option style="font-size: 12px" {{O}}>{{N}}</option>
+              {{/languages}}
+            </select>
+          </li>
+          {{#others}}
+          <li class="nav-item">
+            <a class="nav-link" href='javascript:handle_playlist_command("show", "");'>
+                <img class="ICON" src="icons/card-list.svg" > &nbsp;{{P}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <form method="GET" action="javascript:load_search_data();" class="navbar-form" role="search">
+                <div class="input-group">
+                    <button class="btn" type="submit"><img class="ICON" src="icons/search.svg" ></button>
+                    <input class="form-control" id="SEARCH_WORD" results=5 autosave=5 autofocus name="word" placeholder="{{S}}" type="text">
+                </div>
+            </form>
+          </li>
+          {{/others}}
+        </ul>
+        <ul class="navbar-nav col-6">
+            {{#categories}}
             <li class="nav-item">
                 <a class="nav-link" href="javascript:load_nav_data('{{C}}');" >
                     <img class="ICON" src="icons/{{I}}.svg" >&nbsp; {{{N}}}
                 </a>
             </li>
-        {{/items}}
+            {{/categories}}
+        </ul>
+      {{/menus}}
     </script>
 
     <script type="text/html" id="nav-ul-template">
@@ -269,7 +270,7 @@
             <div class="card-header ">
                 <h4 class="SONG_HEADER">
                     <span>
-                        <img class="ICON" src="icons/book.svg" />&nbsp; References:
+                        <img class="ICON" src="icons/book.svg" />&nbsp; {{R}}:
                     </span>
                 </h4>
             </div>

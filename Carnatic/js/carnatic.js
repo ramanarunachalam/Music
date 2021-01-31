@@ -210,6 +210,21 @@ function info_transliteration(category, data_list) {
         }
         data_list['keyboard'] = { 'keys' : KEYBOARD_LIST };
     }
+    var item_list = data_list['lyricstext']
+    if (item_list == undefined) {
+        item_list = [];
+    }
+    var lyric_prefix = 'SAhityA';
+    var prefix = get_transliterator_text(in_lang, lang, lyric_prefix);
+    for (var i = 0; i < item_list.length; i++) {
+        var obj = item_list[i];
+        var lyric_lang = obj['L'];
+        if (lang != 'English' && lyric_lang in info_dict) {
+            obj['L'] = prefix + ' - ' + info_dict[lyric_lang];
+        } else {
+            obj['L'] = prefix + ' - ' + lyric_lang;
+        }
+    }
 }
 
 function set_language(obj) {

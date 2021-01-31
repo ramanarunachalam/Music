@@ -562,6 +562,7 @@ function search_init() {
 function get_search_results(search_word, search_options, item_list, id_list) {
     var lang = window.parent.RENDER_LANGUAGE;
     var in_lang = 'harvardkyoto_tamil';
+    var menu_dict = MAP_MENU_DICT[lang];
     var icon_dict = window.CARNATIC_ICON_DICT;
     var search_engine = window.carnatic_search_engine;
     var results = search_engine.search(search_word, search_options);
@@ -575,10 +576,16 @@ function get_search_results(search_word, search_options, item_list, id_list) {
                     var pop = result_item.pop;
                 }
                 var category = result_item.category
+                if ( lang == 'English' ) {
+                    var n_category = category.toUpperCase();
+                } else {
+                    var c_name = category.charAt(0).toUpperCase() + category.slice(1);
+                    var n_category = menu_dict[c_name];
+                }
                 var title = window.ID_DATA[result_item.title][0][1];
                 var title = get_transliterator_text(in_lang, lang, title);
                 var href = window.ID_DATA[result_item.href][0][1];
-                var item = { 'T' : category, 'C' : category.toUpperCase(), 'I' : icon_dict[category], 'H' : href, 'N' : title, 'P' : pop };
+                var item = { 'T' : category, 'C' : n_category, 'I' : icon_dict[category], 'H' : href, 'N' : title, 'P' : pop };
                 item_list.push(item);
                 id_list.add(result_item.id);
             }

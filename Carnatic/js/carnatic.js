@@ -124,7 +124,7 @@ function menu_transliteration(lang) {
     var playlist = 'Playlist';
     var search = 'Search';
     if (lang != 'English') {
-        playlist = get_transliterator_text(in_lang, lang, 'pLElisT');
+        playlist = info_dict[playlist];
         search = info_dict[search];
     }
     let lang_list = [];

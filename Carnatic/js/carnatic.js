@@ -140,6 +140,14 @@ function menu_transliteration(lang) {
     render_card_template('#page-menu-template', '#MENU_DATA', menu_dict);
 }
 
+function get_swara_transliterate(in_lang, lang, swara_str) {
+    swara_str = get_transliterator_text(in_lang, lang, swara_str);
+    swara_str = swara_str.replace(/1/g, '<sub>1</sub>');
+    swara_str = swara_str.replace(/2/g, '<sub>2</sub>');
+    swara_str = swara_str.replace(/3/g, '<sub>3</sub>');
+    return swara_str;
+}
+
 function info_transliteration(category, data_list) {
     var lang = window.parent.RENDER_LANGUAGE;
     var in_lang = 'harvardkyoto_tamil';
@@ -195,10 +203,7 @@ function info_transliteration(category, data_list) {
             for (var k = 0; k < s_list.length; k++) {
                 note_list.add(s_list[k]);
             }
-            swara_str = get_transliterator_text(in_lang, lang, swara_str);
-            swara_str = swara_str.replace(/1/g, '<sub>1</sub>');
-            swara_str = swara_str.replace(/2/g, '<sub>2</sub>');
-            swara_str = swara_str.replace(/3/g, '<sub>3</sub>');
+            swara_str = get_swara_transliterate(in_lang, lang, swara_str);
             var note_str = value_list[1];
             var image_str = `<a href="javascript:play_notes('${note_str}');" ><img class="ICON" src="icons/soundwave.svg" ></a>`;
             obj['V'] = swara_str + ' ' + image_str;
@@ -217,10 +222,7 @@ function info_transliteration(category, data_list) {
             for (var j = 0; j < swara_list.length; j++) {
                 var swara_str = swara_list[j];
                 if (note_list.has(swara_str)) {
-                    swara_str = get_transliterator_text(in_lang, lang, swara_str);
-                    swara_str = swara_str.replace(/1/g, '<sub>1</sub>');
-                    swara_str = swara_str.replace(/2/g, '<sub>2</sub>');
-                    swara_str = swara_str.replace(/3/g, '<sub>3</sub>');
+                    swara_str = get_swara_transliterate(in_lang, lang, swara_str);
                     new_swara_list.push(swara_str);
                 }
             }

@@ -141,6 +141,9 @@ function menu_transliteration(lang) {
 }
 
 function get_swara_transliterate(in_lang, lang, swara_str) {
+    if (lang != 'English') {
+        swara_str = swara_str.replace(/da/g, 'dha');
+    }
     swara_str = get_transliterator_text(in_lang, lang, swara_str);
     swara_str = swara_str.replace(/1/g, '<sub>1</sub>');
     swara_str = swara_str.replace(/2/g, '<sub>2</sub>');

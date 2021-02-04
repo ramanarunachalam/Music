@@ -611,9 +611,6 @@ function transliterator_init() {
 }
 
 function transliterate_text(word) {
-    if (word.charCodeAt(0) <= 127) {
-        return word;
-    }
     var char_map = window.parent.CARNATIC_CHAR_MAP;
     var tokenset = window.parent.CHAR_MAP_KEY_LIST;
     var maxlen = window.parent.CHAR_MAP_MAX_LENGTH;
@@ -649,9 +646,16 @@ function transliterate_text(word) {
     return new_word;
 }
 
+const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b', 'k' : 'g', 't' : 'd' };
+
 function load_search_data() {
     var search_word = document.getElementById('SEARCH_WORD').value;
-    search_word = transliterate_text(search_word);
+    if (search_word.charCodeAt(0) <= 127) {
+        non_english = false;
+    } else {
+        search_word = transliterate_text(search_word);
+        non_english = true;
+    }
     const s_search_word = search_word.replace(/\s/g, '');
     var item_list = [];
     var id_list = new Set();
@@ -659,6 +663,20 @@ function load_search_data() {
     get_search_results(search_word, search_options, item_list, id_list);
     if (search_word != s_search_word) {
         get_search_results(s_search_word, search_options, item_list, id_list);
+    }
+    if (item_list.length <= 0 && non_english) {
+        var w_list = [];
+        var new_word = search_word.toLowerCase();
+        for (var i = 0; i < new_word.length; i++) {
+            var c = new_word[i]; 
+            if (c in SEARCH_MAP_DICT) {
+                w_list.push(SEARCH_MAP_DICT[c])
+            } else {
+                w_list.push(c)
+            }
+        }
+        var n_search_word = w_list.join('');
+        get_search_results(n_search_word, search_options, item_list, id_list);
     }
     if (search_word.length > 2) {
         var search_options = { prefix: true, combineWith: 'AND', fuzzy: term => term.length > 3 ? 0.3 : null };

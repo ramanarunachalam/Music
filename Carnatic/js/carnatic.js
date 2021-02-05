@@ -210,6 +210,17 @@ function info_transliteration(category, data_list) {
             obj['V'] = get_transliterator_text(in_lang, lang, value);
         } else if (name == 'Arohanam' || name == 'Avarohanam') {
             obj['V'] = get_swara_text(in_lang, lang, note_list, value)
+        } else if (name == 'Born' || name == 'Died') {
+            if (value != undefined && typeof value === 'string') {
+                var m_list = [];
+                console.log(`VALUE: ${value}`);
+                if (value.includes(' ')) {
+                    m_list = value.split(' ');
+                }
+                if (m_list.length > 1 && lang in MAP_MONTH_DICT && m_list[1] in MAP_MONTH_DICT[lang]) {
+                    obj['V'] = m_list[0] + ' ' + MAP_MONTH_DICT[lang][m_list[1]] + ' ' + m_list[2];
+                }
+            }
         } else if (lang != 'English' && name in map_dict) {
             value = obj['P'];
             if (value != undefined) {
@@ -362,15 +373,27 @@ function delete_row(row) {
 
 function show_playlist() {
     var play_list = get_playlist();
-    var html_str = '';
-    html_str += '<table id="PLAYLIST_TABLE" class="table table-striped table-condensed">';
-    html_str += '<tr><th>No.</th><th>ID</th><th>Song</th><th>Raga</th><th></th></tr>';
+    var info_list = [];
     for (var i = 0; i < play_list.length; i++) {
         var parts = play_list[i].split(':');
-        html_str += '<tr><td>' + (i + 1) + '</td><td>' + parts[0] + '</td><td>' + parts[1] + '</td><td>' + parts[2] + '</td><td><a href="#" onclick="delete_row(this);"><img src="icons/x.svg" width="24" height="24"></a></td></tr>';
+        info_dict = { 'N' : i + 1, 'I' : parts[0], 'S' : parts[1].split(','), 'R' : parts[2].split(',') };
+        get_folder_value('song', info_dict, 'S', 'S');
+        get_folder_value('raga', info_dict, 'R', 'R');
+        info_list.push(info_dict);
     }
-    html_str += '</table>';
-    document.getElementById('PLAYLIST_BODY').innerHTML = html_str;
+    var lang = window.parent.RENDER_LANGUAGE;
+    var map_dict = MAP_INFO_DICT[lang];
+    var header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : 'Song', 'RN' : 'Raga' };
+    var playlist = 'Playlist';
+    if (lang != 'English') {
+        var map_dict = MAP_INFO_DICT[lang];
+        playlist = map_dict[playlist];
+        header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : map_dict['Song'], 'RN' : map_dict['Raga'] };
+    }
+    var header_list = [ header_dict ];
+    var list_data = { 'playlist' : { 'header' : header_list, 'videos' : info_list } };
+    $('#playlistModalLabel').html(playlist);
+    render_card_template('#modal-playlist-template', '#PLAYLIST_BODY', list_data);
     $('#PLAYLIST_MODAL').modal();
 }
 
@@ -485,6 +508,8 @@ function render_data_template(category, id, data) {
     }
     var new_folder_list = [];
     var ff = FF[category];
+    var f_category = ff[0];
+    var f_type = ff[1];
     var sd = ff[2];
     var st = ff[3];
     var video_list = data['videos']
@@ -493,9 +518,13 @@ function render_data_template(category, id, data) {
         for (var i = 0; i < folder_list.length; i++) {
             var folder = folder_list[i];
             var song_list = folder['songs'];
-            folder['HT'] = ff[0];
+            var song_ids = '';
+            if (category != 'song') {
+                song_ids = folder['S'];
+            }
+            folder['HT'] = f_category;
             folder['HC'] = song_list.length
-            get_folder_value(ff[0], folder, 'H', ff[1]);
+            get_folder_value(ff[0], folder, 'H', f_type);
             for (var j = 0; j < song_list.length; j++) {
                 var song = song_list[j];
                 for (var m = 0; m < OF.length; m++) {
@@ -503,6 +532,11 @@ function render_data_template(category, id, data) {
                     song[c] = st[m];
                     get_folder_value(st[m], song, OF[m], sd[m]);
                 }
+                if (category == 'song') {
+                    song_ids = song['S']; 
+                }
+                song['PS'] = song_ids;
+                song['PR'] = song['R'];
             }
         }
     }

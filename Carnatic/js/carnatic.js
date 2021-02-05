@@ -109,8 +109,7 @@ var KEYBOARD_LIST = [ { 'I' : 'c4',  'C' : 'white', 'S' : 'position:absolute; bo
 function menu_transliteration(lang) {
     var in_lang = 'harvardkyoto_tamil';
     var item_list = CATEGORY_DICT['categories']
-    var menu_dict = MAP_MENU_DICT[lang];
-    var info_dict = MAP_INFO_DICT[lang];
+    var map_dict = MAP_INFO_DICT[lang];
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['C'];
@@ -118,14 +117,14 @@ function menu_transliteration(lang) {
         if ( lang == 'English' ) {
             obj['N'] = name;
         } else {
-            obj['N'] = menu_dict[name];
+            obj['N'] = map_dict[name];
         }
     }
     var playlist = 'Playlist';
     var search = 'Search';
     if (lang != 'English') {
-        playlist = info_dict[playlist];
-        search = info_dict[search];
+        playlist = map_dict[playlist];
+        search = map_dict[search];
     }
     let lang_list = [];
     for (var l in MAP_LANG_DICT) {
@@ -151,9 +150,23 @@ function get_swara_transliterate(in_lang, lang, swara_str) {
     return swara_str;
 }
 
+function get_swara_text(in_lang, lang, note_list, value_list) {
+    var swara_str = value_list[0];
+    var s_list = swara_str.split(' ');
+    for (var k = 0; k < s_list.length; k++) {
+        note_list.add(s_list[k]);
+    }
+    swara_str = get_swara_transliterate(in_lang, lang, swara_str);
+    var note_str = value_list[1];
+    var image_str = `<a href="javascript:play_notes('${note_str}');" ><img class="ICON" src="icons/soundwave.svg" ></a>`;
+    return swara_str + ' ' + image_str;
+}
+
 function info_transliteration(category, data_list) {
     var lang = window.parent.RENDER_LANGUAGE;
     var in_lang = 'harvardkyoto_tamil';
+    var map_dict = MAP_INFO_DICT[lang];
+
     var item = data_list['title']
     if (category == 'about') {
         item['N'] = item['N'];
@@ -166,14 +179,13 @@ function info_transliteration(category, data_list) {
     if (item_list == undefined) {
         item_list = [];
     }
-    var stat_dict = MAP_STAT_DICT[lang];
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
         if (lang == 'English') {
             obj['N'] = name;
         } else {
-            obj['N'] = stat_dict[name];
+            obj['N'] = map_dict[name];
         }
     }
     var note_list = new Set();
@@ -181,39 +193,28 @@ function info_transliteration(category, data_list) {
     if (item_list == undefined) {
         item_list = [];
     }
-    var info_dict = MAP_INFO_DICT[lang];
-    var menu_dict = MAP_MENU_DICT[lang];
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
-        if (lang != 'English' && name in info_dict) {
-            obj['N'] = info_dict[name];
-        } else if (lang != 'English' && name in menu_dict) {
-            obj['N'] = menu_dict[name];
+        if (lang != 'English' && name in map_dict) {
+            obj['N'] = map_dict[name];
         } else {
             obj['N'] = name;
         }
+        var value = obj['V'];
         if (name == 'Language') {
-            if (lang != 'English' && name in info_dict) {
-                obj['V'] = info_dict[obj['V']];
+            if (lang != 'English' && name in map_dict) {
+                obj['V'] = map_dict[value];
             }
         } else if (name == 'Melakartha') {
-            obj['V'] = get_transliterator_text(in_lang, lang, obj['V']);
+            obj['V'] = get_transliterator_text(in_lang, lang, value);
         } else if (name == 'Arohanam' || name == 'Avarohanam') {
-            var value_list = obj['V'];
-            var swara_str = value_list[0];
-            var s_list = swara_str.split(' ');
-            for (var k = 0; k < s_list.length; k++) {
-                note_list.add(s_list[k]);
+            obj['V'] = get_swara_text(in_lang, lang, note_list, value)
+        } else if (lang != 'English' && name in map_dict) {
+            value = obj['P'];
+            if (value != undefined) {
+                obj['V'] = get_transliterator_text(in_lang, lang, value);
             }
-            swara_str = get_swara_transliterate(in_lang, lang, swara_str);
-            var note_str = value_list[1];
-            var image_str = `<a href="javascript:play_notes('${note_str}');" ><img class="ICON" src="icons/soundwave.svg" ></a>`;
-            obj['V'] = swara_str + ' ' + image_str;
-        } else if (name == 'Raga' || name == 'Tala' || name == 'Tala name' || name == 'Tala angas' || name == 'God') {
-            obj['V'] = get_transliterator_text(in_lang, lang, obj['P']);
-        } else if (lang != 'English' && name in menu_dict) {
-            obj['V'] = get_transliterator_text(in_lang, lang, obj['P']);
         }
     }
     var item = data_list['keyboard']
@@ -242,15 +243,15 @@ function info_transliteration(category, data_list) {
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var lyric_lang = obj['L'];
-        if (lang != 'English' && lyric_lang in info_dict) {
-            obj['L'] = prefix + ' - ' + info_dict[lyric_lang];
+        if (lang != 'English' && lyric_lang in map_dict) {
+            obj['L'] = prefix + ' - ' + map_dict[lyric_lang];
         } else {
             obj['L'] = prefix + ' - ' + lyric_lang;
         }
     }
     var references = 'References';
     if (lang != 'English') {
-        references = info_dict[references];
+        references = map_dict[references];
     }
     var item_list = data_list['lyricsref']
     if (item_list == undefined) {
@@ -478,9 +479,9 @@ function render_data_template(category, id, data) {
     var template_name = '#page-videos-template'
     var ul_template = $(template_name).html();
     if (lang != 'English') {
-        var stat_dict = MAP_STAT_DICT[lang];
-        ul_template = ul_template.replace('Videos', stat_dict['Videos']);
-        ul_template = ul_template.replace('Views', stat_dict['Views']);
+        var map_dict = MAP_INFO_DICT[lang];
+        ul_template = ul_template.replace('Videos', map_dict['Videos']);
+        ul_template = ul_template.replace('Views', map_dict['Views']);
     }
     var new_folder_list = [];
     var ff = FF[category];
@@ -567,12 +568,13 @@ function search_init() {
 function get_search_results(search_word, search_options, item_list, id_list) {
     var lang = window.parent.RENDER_LANGUAGE;
     var in_lang = 'harvardkyoto_tamil';
-    var menu_dict = MAP_MENU_DICT[lang];
+    var map_dict = MAP_INFO_DICT[lang];
     var icon_dict = window.CARNATIC_ICON_DICT;
     var search_engine = window.carnatic_search_engine;
     var results = search_engine.search(search_word, search_options);
     if (results.length > 0) {
         var max_score = results[0].score;
+        var id_data = window.ID_DATA;
         results.forEach(function (result_item, result_index) {
             if (!id_list.has(result_item.id)) {
                 if (search_word.length > 2) {
@@ -581,15 +583,19 @@ function get_search_results(search_word, search_options, item_list, id_list) {
                     var pop = result_item.pop;
                 }
                 var category = result_item.category
-                if ( lang == 'English' ) {
+                var c_name = category.charAt(0).toUpperCase() + category.slice(1);
+                if (lang == 'English') {
                     var n_category = category.toUpperCase();
                 } else {
-                    var c_name = category.charAt(0).toUpperCase() + category.slice(1);
-                    var n_category = menu_dict[c_name];
+                    var n_category = map_dict[c_name];
                 }
-                var title = window.ID_DATA[result_item.title][0][1];
-                var title = get_transliterator_text(in_lang, lang, title);
-                var href = window.ID_DATA[result_item.href][0][1];
+                var title = id_data[result_item.title][0][1];
+                var href = id_data[result_item.href][0][1];
+                if (lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
+                    title = href;
+                } else {
+                    title = get_transliterator_text(in_lang, lang, title);
+                }
                 var item = { 'T' : category, 'C' : n_category, 'I' : icon_dict[category], 'H' : href, 'N' : title, 'P' : pop };
                 item_list.push(item);
                 id_list.add(result_item.id);

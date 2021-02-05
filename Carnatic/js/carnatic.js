@@ -652,16 +652,34 @@ function transliterate_text(word) {
     return new_word;
 }
 
-const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b', 'k' : 'g', 't' : 'd' };
+// const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b', 'k' : 'g', 't' : 'd' };
+const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b' };
+
+function get_tamil_phonetic_word(word) {
+    var w_list = [];
+    var new_word = word.toLowerCase();
+    for (var i = 0; i < new_word.length; i++) {
+        var c = new_word[i]; 
+        if (c in SEARCH_MAP_DICT) {
+            w_list.push(SEARCH_MAP_DICT[c])
+        } else {
+            w_list.push(c)
+        }
+    }
+    return w_list.join('');
+}
 
 function load_search_data() {
     var lang = window.parent.RENDER_LANGUAGE;
     var search_word = document.getElementById('SEARCH_WORD').value;
-    if (search_word.charCodeAt(0) <= 127) {
-        non_english = false;
-    } else {
+    var c = search_word.charCodeAt(0);
+    if (search_word.charCodeAt(0) > 127) {
         search_word = transliterate_text(search_word);
+    }
+    if (0x0B80 <= c && c <= 0x0BFF) {
         non_english = true;
+    } else {
+        non_english = false;
     }
     const s_search_word = search_word.replace(/\s/g, '');
     var item_list = [];
@@ -671,23 +689,17 @@ function load_search_data() {
     if (search_word != s_search_word) {
         get_search_results(s_search_word, search_options, item_list, id_list);
     }
-    if (item_list.length <= 0 && non_english) {
-        var w_list = [];
-        var new_word = search_word.toLowerCase();
-        for (var i = 0; i < new_word.length; i++) {
-            var c = new_word[i]; 
-            if (c in SEARCH_MAP_DICT) {
-                w_list.push(SEARCH_MAP_DICT[c])
-            } else {
-                w_list.push(c)
-            }
-        }
-        var n_search_word = w_list.join('');
+    var n_search_word = '';
+    if (non_english) {
+        n_search_word = get_tamil_phonetic_word(search_word);
         get_search_results(n_search_word, search_options, item_list, id_list);
     }
     if (search_word.length > 2) {
         var search_options = { prefix: true, combineWith: 'AND', fuzzy: term => term.length > 3 ? 0.3 : null };
         get_search_results(search_word, search_options, item_list, id_list);
+        if (non_english && n_search_word) {
+            get_search_results(n_search_word, search_options, item_list, id_list);
+        }
         if (search_word != s_search_word) {
             get_search_results(s_search_word, search_options, item_list, id_list);
         }

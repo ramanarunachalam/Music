@@ -655,6 +655,7 @@ function transliterate_text(word) {
 const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b', 'k' : 'g', 't' : 'd' };
 
 function load_search_data() {
+    var lang = window.parent.RENDER_LANGUAGE;
     var search_word = document.getElementById('SEARCH_WORD').value;
     if (search_word.charCodeAt(0) <= 127) {
         non_english = false;
@@ -693,7 +694,12 @@ function load_search_data() {
     }
     item_list.sort(function (a, b) { return b.P - a.P; });
     var new_item_list = item_list.slice(0, 25);
-    var item_data = { 'title' : { 'N': 'Search Results', 'I': 'search' }, 'items' : new_item_list };
+    var result_header = 'Search Results';
+    if (lang != 'English') {
+        var map_dict = MAP_INFO_DICT[lang];
+        result_header = map_dict[result_header];
+    }
+    var item_data = { 'title' : { 'N': result_header, 'I': 'search' }, 'items' : new_item_list };
     render_card_template('#page-title-template', '#PAGE_TITLE', item_data);
     render_card_template('#page-search-template', '#PAGE_INFO', item_data);
     render_data_template('', '', item_data);

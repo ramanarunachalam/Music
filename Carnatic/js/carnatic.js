@@ -45,11 +45,7 @@ function youtube_player_init() {
 
 function get_play_list() {
     var new_play_list = sessionStorage['playlist'];
-    if (new_play_list == undefined) {
-        new_play_list = new Array();
-    } else {
-        new_play_list = JSON.parse(new_play_list);
-    }
+    new_play_list = (new_play_list == undefined) ? new Array() : JSON.parse(new_play_list);
     return new_play_list;
 }
 
@@ -73,12 +69,12 @@ function on_storage_event(storageEvent) {
     var play_list = get_play_list();
     if (play_list.length == 0) {
         return;
-    } else if (play_list.length > 1) {
+    }
+    if (play_list.length > 1) {
         $('#PLAYLIST_QUEUE').modal('show');
         setTimeout(function() { $('#PLAYLIST_QUEUE').modal('hide'); }, 3000);
         return;
     }
-
     play_first();
 }
 
@@ -114,11 +110,7 @@ function menu_transliteration(lang) {
         var obj = item_list[i];
         var name = obj['C'];
         name = name.charAt(0).toUpperCase() + name.slice(1);
-        if ( lang == 'English' ) {
-            obj['N'] = name;
-        } else {
-            obj['N'] = map_dict[name];
-        }
+        obj['N'] = (lang == 'English') ? name : map_dict[name];
     }
     var playlist = 'Playlist';
     var search = 'Search';
@@ -128,11 +120,8 @@ function menu_transliteration(lang) {
     }
     let lang_list = [];
     for (var l in MAP_LANG_DICT) {
-        if (l == window.parent.GOT_LANGUAGE) {
-            lang_list.push({ 'N' : l, 'O' : 'selected' });
-        } else {
-            lang_list.push({ 'N' : l });
-        }
+        var d = (l == window.parent.GOT_LANGUAGE) ? { 'N' : l, 'O' : 'selected' } : { 'N' : l };
+        lang_list.push(d);
     }
     var other_dict = { 'P' : playlist, 'S' : search };
     var menu_dict = { 'menus' : { 'languages' : lang_list, 'others' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
@@ -182,11 +171,7 @@ function info_transliteration(category, data_list) {
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
-        if (lang == 'English') {
-            obj['N'] = name;
-        } else {
-            obj['N'] = map_dict[name];
-        }
+        obj['N'] = (lang == 'English') ? name : map_dict[name];
     }
     var note_list = new Set();
     var item_list = data_list['info']
@@ -196,11 +181,7 @@ function info_transliteration(category, data_list) {
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['H'];
-        if (lang != 'English' && name in map_dict) {
-            obj['N'] = map_dict[name];
-        } else {
-            obj['N'] = name;
-        }
+        obj['N'] = (lang != 'English' && name in map_dict) ? map_dict[name] : name;
         var value = obj['V'];
         if (name == 'Language') {
             if (lang != 'English' && name in map_dict) {
@@ -254,11 +235,8 @@ function info_transliteration(category, data_list) {
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var lyric_lang = obj['L'];
-        if (lang != 'English' && lyric_lang in map_dict) {
-            obj['L'] = prefix + ' - ' + map_dict[lyric_lang];
-        } else {
-            obj['L'] = prefix + ' - ' + lyric_lang;
-        }
+        lyric_lang = (lang != 'English' && lyric_lang in map_dict) ? map_dict[lyric_lang] : lyric_lang;
+        obj['L'] = prefix + ' - ' + lyric_lang;
     }
     var references = 'References';
     if (lang != 'English') {
@@ -325,18 +303,8 @@ function load_id_data(category) {
     });
 }
 
-function get_playlist() {
-    var new_play_list = sessionStorage["playlist"];
-    if (new_play_list == undefined) {
-        new_play_list = new Array();
-    } else {
-        new_play_list = JSON.parse(new_play_list);
-    }
-    return new_play_list;
-}
-
 function add_song(audio_file) {
-    var play_list = get_playlist();
+    var play_list = get_play_list();
     if (play_list.length <= 0) {
         if (audio_file != '') {
             play_list[0] = audio_file;
@@ -354,7 +322,7 @@ function add_song(audio_file) {
 }
 
 function delete_song(song_id) {
-    var play_list = get_playlist();
+    var play_list = get_play_list();
     if (play_list.length > 0) {
         song_id = parseInt(song_id);
         play_list.splice(song_id, 1);
@@ -372,7 +340,7 @@ function delete_row(row) {
 }
 
 function show_playlist() {
-    var play_list = get_playlist();
+    var play_list = get_play_list();
     var info_list = [];
     for (var i = 0; i < play_list.length; i++) {
         var parts = play_list[i].split(':');
@@ -427,13 +395,8 @@ function render_nav_template(category, data) {
             h_value = id_data[h][0][1];
             var n = obj['N'];
             var f_value = id_data[n][0][1];
-            if (need_trans) {
-                var f_value = h_value;
-            } else {
-                var f_value = get_transliterator_text(in_lang, lang, f_value);
-            }
             obj['H'] = h_value;
-            obj['N'] = f_value
+            obj['N'] = (need_trans) ? h_value : get_transliterator_text(in_lang, lang, f_value);
         }
     }
     var ul_template = $('#nav-ul-template').html();
@@ -611,18 +574,13 @@ function get_search_results(search_word, search_options, item_list, id_list) {
         var id_data = window.ID_DATA;
         results.forEach(function (result_item, result_index) {
             if (!id_list.has(result_item.id)) {
+                var pop = result_item.pop;
                 if (search_word.length > 2) {
-                    var pop = ((400 * result_item.score) / max_score) + (0.6 * result_item.pop);
-                } else {
-                    var pop = result_item.pop;
+                    pop = ((400 * result_item.score) / max_score) + (0.6 * pop);
                 }
                 var category = result_item.category
                 var c_name = category.charAt(0).toUpperCase() + category.slice(1);
-                if (lang == 'English') {
-                    var n_category = category.toUpperCase();
-                } else {
-                    var n_category = map_dict[c_name];
-                }
+                var n_category = (lang == 'English') ? category.toUpperCase() : map_dict[c_name];
                 var title = id_data[result_item.title][0][1];
                 var href = id_data[result_item.href][0][1];
                 if (lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
@@ -693,12 +651,8 @@ function get_tamil_phonetic_word(word) {
     var w_list = [];
     var new_word = word.toLowerCase();
     for (var i = 0; i < new_word.length; i++) {
-        var c = new_word[i]; 
-        if (c in SEARCH_MAP_DICT) {
-            w_list.push(SEARCH_MAP_DICT[c])
-        } else {
-            w_list.push(c)
-        }
+        var c = new_word[i];
+        w_list.push((c in SEARCH_MAP_DICT) ? SEARCH_MAP_DICT[c] : c);
     }
     return w_list.join('');
 }
@@ -707,14 +661,10 @@ function load_search_data() {
     var lang = window.parent.RENDER_LANGUAGE;
     var search_word = document.getElementById('SEARCH_WORD').value;
     var c = search_word.charCodeAt(0);
-    if (search_word.charCodeAt(0) > 127) {
+    if (c > 127) {
         search_word = transliterate_text(search_word);
     }
-    if (0x0B80 <= c && c <= 0x0BFF) {
-        non_english = true;
-    } else {
-        non_english = false;
-    }
+    var non_english = (0x0B80 <= c && c <= 0x0BFF) ? true : false;
     const s_search_word = search_word.replace(/\s/g, '');
     var item_list = [];
     var id_list = new Set();

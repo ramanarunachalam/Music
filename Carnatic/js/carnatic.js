@@ -79,12 +79,12 @@ function on_storage_event(storageEvent) {
 }
 
 var CATEGORY_DICT = { 'categories' : [ { 'C' : 'raga',     'I' : 'music-note-list',   'N' : 'Raga'     },
-                                  { 'C' : 'artist',   'I' : 'person-fill',       'N' : 'Artist'   },
-                                  { 'C' : 'composer', 'I' : 'person-lines-fill', 'N' : 'Composer' },
-                                  { 'C' : 'type',     'I' : 'tag',               'N' : 'Type'     },
-                                  { 'C' : 'song',     'I' : 'music-note-beamed', 'N' : 'Song'     },
-                                  { 'C' : 'about',    'I' : 'info-circle',       'N' : 'About'    },
-                                ]
+                                       { 'C' : 'artist',   'I' : 'person-fill',       'N' : 'Artist'   },
+                                       { 'C' : 'composer', 'I' : 'person-lines-fill', 'N' : 'Composer' },
+                                       { 'C' : 'type',     'I' : 'tag',               'N' : 'Type'     },
+                                       { 'C' : 'song',     'I' : 'music-note-beamed', 'N' : 'Song'     },
+                                       { 'C' : 'about',    'I' : 'info-circle',       'N' : 'About'    },
+                                     ]
                     };
 
 var KEYBOARD_LIST = [ { 'I' : 'c4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'sa1' ] },
@@ -162,7 +162,11 @@ function info_transliteration(category, data_list) {
     } else if (lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
         item['N'] = item['H'];
     } else {
-        item['N'] = get_transliterator_text(in_lang, lang, item['V']);
+        var value = item['V'];
+        if (lang != 'English' && value.includes('unknowncomposer')) {
+            value = value.replace('unknowncomposer', '?');
+        }
+        item['N'] = get_transliterator_text(in_lang, lang, value);
     }
     var item_list = data_list['stats']
     if (item_list == undefined) {
@@ -396,6 +400,9 @@ function render_nav_template(category, data) {
             var n = obj['N'];
             var f_value = id_data[n][0][1];
             obj['H'] = h_value;
+            if (lang != 'English' && f_value.includes('unknowncomposer')) {
+                f_value = f_value.replace('unknowncomposer', '?');
+            }
             obj['N'] = (need_trans) ? h_value : get_transliterator_text(in_lang, lang, f_value);
         }
     }
@@ -487,7 +494,7 @@ function render_data_template(category, id, data) {
             }
             folder['HT'] = f_category;
             folder['HC'] = song_list.length
-            get_folder_value(ff[0], folder, 'H', f_type);
+            get_folder_value(f_category, folder, 'H', f_type);
             for (var j = 0; j < song_list.length; j++) {
                 var song = song_list[j];
                 for (var m = 0; m < OF.length; m++) {

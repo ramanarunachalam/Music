@@ -157,10 +157,13 @@ function info_transliteration(category, data_list) {
     var map_dict = MAP_INFO_DICT[lang];
 
     var item = data_list['title']
+    var h_text = item['H'];
     if (category == 'about') {
         item['N'] = item['N'];
     } else if (lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
-        item['N'] = item['H'];
+        item['N'] = h_text;
+    } else if (lang == 'English' && category == 'song' && h_text.includes(' - ')) {
+        item['N'] = h_text;
     } else {
         var value = item['V'];
         if (lang != 'English' && value.includes('unknowncomposer')) {
@@ -348,7 +351,7 @@ function show_playlist() {
     var info_list = [];
     for (var i = 0; i < play_list.length; i++) {
         var parts = play_list[i].split(':');
-        info_dict = { 'N' : i + 1, 'I' : parts[0], 'S' : parts[1].split(','), 'R' : parts[2].split(',') };
+        info_dict = { 'N' : i + 1, 'I' : parts[0], 'S' : parseInt(parts[1]), 'R' : parseInt(parts[2]) };
         get_folder_value('song', info_dict, 'S', 'S');
         get_folder_value('raga', info_dict, 'R', 'R');
         info_list.push(info_dict);
@@ -387,7 +390,7 @@ function render_nav_template(category, data) {
     var in_lang = 'harvardkyoto_tamil';
     var letter_list = data['alphabet']
     var l_list = [];
-    var need_trans = lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
+    var no_transliterate = lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
     var id_data = window.ID_DATA;
     for (var k = 0; k < letter_list.length; k++) {
         var l_item = letter_list[k];
@@ -395,15 +398,19 @@ function render_nav_template(category, data) {
         var item_list = l_item['items']
         for (var i = 0; i < item_list.length; i++) {
             var obj = item_list[i];
-            var h = obj['H'];
-            h_value = id_data[h][0][1];
-            var n = obj['N'];
-            var f_value = id_data[n][0][1];
-            obj['H'] = h_value;
-            if (lang != 'English' && f_value.includes('unknowncomposer')) {
-                f_value = f_value.replace('unknowncomposer', '?');
+            var h_id = obj['H'];
+            var n_id = h_id + 1;
+            var h_text = id_data[h_id];
+            var f_text = id_data[n_id];
+            obj['H'] = h_text;
+            if (lang != 'English' && f_text.includes('unknowncomposer')) {
+                f_text = f_text.replace('unknowncomposer', '?');
             }
-            obj['N'] = (need_trans) ? h_value : get_transliterator_text(in_lang, lang, f_value);
+            if (lang == 'English' && category == 'song' && (h_id < 200 || f_text.includes(' - '))) {
+                obj['N'] = h_text;
+            } else {
+                obj['N'] = (no_transliterate) ? h_text : get_transliterator_text(in_lang, lang, f_text);
+            }
         }
     }
     var ul_template = $('#nav-ul-template').html();
@@ -438,17 +445,22 @@ function get_folder_value(category, info, prefix, v) {
     var in_lang = 'harvardkyoto_tamil';
     var id_data = window.ID_DATA;
     var h_name = prefix + 'D';
-    var h_id = info[v][1];
-    var h_text = id_data[h_id][0][1];
+    var h_id = info[v];
+    var p_id = h_id + 1;
+    var h_text = id_data[h_id];
+    var f_text = id_data[p_id];
     info[h_name] = h_text;
     var f_name = prefix + 'N';
-    var f_text = id_data[info[v][0]][0][1]
     if (lang != 'English' && (h_id == '1000' || h_id == '5000' || h_id == '7000')) {
         info[f_name] = '?';
     } else if (lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
         info[f_name] = h_text;
     } else {
-        info[f_name] = get_transliterator_text(in_lang, lang, f_text);
+        if (lang == 'English' && category == 'song' && (h_id < 200 || f_text.includes(' - '))) {
+            info[f_name] = h_text;
+        } else {
+            info[f_name] = get_transliterator_text(in_lang, lang, f_text);
+        }
     }
 }
 
@@ -547,7 +559,8 @@ function search_load() {
         for (var category in search_obj) {
             var data_list = search_obj[category];
             data_list.forEach(function (data_item, data_index) {
-                var data_doc = { "id" : data_id, "title" : data_item.N, "aka" : data_item.A, "href" : data_item.H, "category" : category, "pop" : data_item.P };
+                var h_id = data_item.H;
+                var data_doc = { "id" : data_id, "href" : h_id, "title" : h_id + 1, "aka" : data_item.A, "category" : category, "pop" : data_item.P };
                 search_engine.add(data_doc);
                 data_id += 1;
             });
@@ -588,8 +601,8 @@ function get_search_results(search_word, search_options, item_list, id_list) {
                 var category = result_item.category
                 var c_name = category.charAt(0).toUpperCase() + category.slice(1);
                 var n_category = (lang == 'English') ? category.toUpperCase() : map_dict[c_name];
-                var title = id_data[result_item.title][0][1];
-                var href = id_data[result_item.href][0][1];
+                var title = id_data[result_item.title];
+                var href = id_data[result_item.href];
                 if (lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
                     title = href;
                 } else {

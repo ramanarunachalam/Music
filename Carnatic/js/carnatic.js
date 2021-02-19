@@ -151,6 +151,25 @@ function get_swara_text(in_lang, lang, note_list, value_list) {
     return swara_str + ' ' + image_str;
 }
 
+function check_for_english_text(lang, category, h_id, h_text) {
+    if (lang != 'English') {
+        return false;
+    }
+    if (category == 'artist' || category == 'composer' || category == 'type') {
+        return true;
+    }
+    if (category != 'song') {
+        return false;
+    }
+    if (h_id < 200) {
+        return true;
+    }
+    if (h_text.includes(' - ')) {
+        return true;
+    }
+    return false;
+}
+
 function info_transliteration(category, data_list) {
     var lang = window.parent.RENDER_LANGUAGE;
     var in_lang = 'harvardkyoto_tamil';
@@ -160,9 +179,7 @@ function info_transliteration(category, data_list) {
     var h_text = item['H'];
     if (category == 'about') {
         item['N'] = item['N'];
-    } else if (lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
-        item['N'] = h_text;
-    } else if (lang == 'English' && category == 'song' && h_text.includes(' - ')) {
+    } else if (check_for_english_text(lang, category, 200, h_text)) {
         item['N'] = h_text;
     } else {
         var value = item['V'];
@@ -406,7 +423,7 @@ function render_nav_template(category, data) {
             if (lang != 'English' && f_text.includes('unknowncomposer')) {
                 f_text = f_text.replace('unknowncomposer', '?');
             }
-            if (lang == 'English' && category == 'song' && (h_id < 200 || f_text.includes(' - '))) {
+            if (check_for_english_text(lang, category, h_id, f_text)) {
                 obj['N'] = h_text;
             } else {
                 obj['N'] = (no_transliterate) ? h_text : get_transliterator_text(in_lang, lang, f_text);
@@ -453,14 +470,10 @@ function get_folder_value(category, info, prefix, v) {
     var f_name = prefix + 'N';
     if (lang != 'English' && (h_id == '1000' || h_id == '5000' || h_id == '7000')) {
         info[f_name] = '?';
-    } else if (lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
+    } else if (check_for_english_text(lang, category, h_id, f_text)) {
         info[f_name] = h_text;
     } else {
-        if (lang == 'English' && category == 'song' && (h_id < 200 || f_text.includes(' - '))) {
-            info[f_name] = h_text;
-        } else {
-            info[f_name] = get_transliterator_text(in_lang, lang, f_text);
-        }
+        info[f_name] = get_transliterator_text(in_lang, lang, f_text);
     }
 }
 
@@ -603,7 +616,7 @@ function get_search_results(search_word, search_options, item_list, id_list) {
                 var n_category = (lang == 'English') ? category.toUpperCase() : map_dict[c_name];
                 var title = id_data[result_item.title];
                 var href = id_data[result_item.href];
-                if (lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')) {
+                if (check_for_english_text(lang, category, result_item.href, href)) {
                     title = href;
                 } else {
                     title = get_transliterator_text(in_lang, lang, title);
@@ -677,14 +690,7 @@ function get_tamil_phonetic_word(word) {
     return w_list.join('');
 }
 
-function load_search_data() {
-    var lang = window.parent.RENDER_LANGUAGE;
-    var search_word = document.getElementById('SEARCH_WORD').value;
-    var c = search_word.charCodeAt(0);
-    if (c > 127) {
-        search_word = transliterate_text(search_word);
-    }
-    var non_english = (0x0B80 <= c && c <= 0x0BFF) ? true : false;
+function load_search_part(search_word, non_english) {
     const s_search_word = search_word.replace(/\s/g, '');
     var item_list = [];
     var id_list = new Set();
@@ -710,6 +716,20 @@ function load_search_data() {
     }
     item_list.sort(function (a, b) { return b.P - a.P; });
     var new_item_list = item_list.slice(0, 25);
+    return new_item_list;
+}
+
+function load_search_data() {
+    var lang = window.parent.RENDER_LANGUAGE;
+    var search_word = document.getElementById('SEARCH_WORD').value;
+    var c = search_word.charCodeAt(0);
+    if (c > 127) {
+        search_word = transliterate_text(search_word);
+    }
+    var non_english = (0x0B80 <= c && c <= 0x0BFF) ? true : false;
+
+    var new_item_list = load_search_part(search_word, non_english);
+
     var result_header = 'Search Results';
     if (lang != 'English') {
         var map_dict = MAP_INFO_DICT[lang];

@@ -873,3 +873,21 @@ function play_notes(notes) {
     play_note();
 }
 
+const VIDEO_INFO_KEY_LIST = new Set([ 'title', 'author_name' ]);
+
+function get_youtube_video_info(id) {
+    var url = `https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=${id}&format=json`
+    $.getJSON(url, function(video_data) {
+        $('#videoinfoModalLabel').html(id);
+        var info_list = [];
+        for (var key in video_data) {
+            if (VIDEO_INFO_KEY_LIST.has(key)) {
+                var value = video_data[key];
+                info_list.push({ 'N' : key, 'C' : value });
+            }
+        }
+        var info_data = { 'videoinfo' : info_list };
+        render_card_template('#modal-videoinfo-template', '#VIDEOINFO_BODY', info_data);
+        $('#VIDEO_INFO').modal();
+    });
+}

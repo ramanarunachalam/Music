@@ -21,10 +21,7 @@ function onPlayerStateChange(event) {
     var player_status = event.data;
     last_player_status = 0;
     play_status = 0;
-    /*
-        playerStatus: -1 : unstarted, 0 - ended, 1 - playing, 2 - paused, 3 - buffering, 5 - video cued
-        console.log('Last Player Status: ' + last_player_status + ' Player Status: ' + player_status + ' Play Status: ' + play_status);
-    */
+    // playerStatus: -1 : unstarted, 0 - ended, 1 - playing, 2 - paused, 3 - buffering, 5 - video cued
     if (player_status == 0 || (last_player_status == 3 && player_status == -1)) {
         play_status = 0;
         play_next();
@@ -218,7 +215,6 @@ function info_transliteration(category, data_list) {
         } else if (name == 'Born' || name == 'Died') {
             if (value != undefined && typeof value === 'string') {
                 var m_list = [];
-                console.log(`VALUE: ${value}`);
                 if (value.includes(' ')) {
                     m_list = value.split(' ');
                 }
@@ -477,7 +473,7 @@ function get_folder_value(category, info, prefix, v) {
     }
 }
 
-function render_data_template(category, id, data) {
+function render_data_template(category, id, data, context_list) {
     var lang = window.parent.RENDER_LANGUAGE;
     if (category == '') {
         $('#PAGE_VIDEOS').html('');
@@ -535,16 +531,56 @@ function render_data_template(category, id, data) {
             }
         }
     }
+
+    if (context_list != undefined) {
+        var video_list = data['videos']
+        var c_len = context_list.length;
+        for (var k = 0; k < video_list.length; k++) {
+            var folder_list = video_list[k]['folder']
+            var new_folder_list = [];
+            for (var i = 0; i < folder_list.length; i++) {
+                var folder = folder_list[i];
+                var f_category = folder['HT'];
+                var f_value = folder['HN'];
+                var song_list = folder['songs'];
+                var new_song_list = [];
+                for (var j = 0; j < song_list.length; j++) {
+                    var song = song_list[j];
+                    var found = 0;
+                    for (var m = 0; m < OF.length; m++) {
+                        var c = OF[m] + 'T';
+                        var s_category = song[c];
+                        var c = OF[m] + 'N';
+                        var s_value = song[c];
+                        for (var c = 1; c < c_len; c++) {
+                            if (context_list[c][0] == s_category && context_list[c][1] == s_value) {
+                                 found += 1;
+                            }
+                        }
+                    }
+                    if (found >= (c_len - 1)) {
+                        new_song_list.push(song);
+                    }
+                }
+                folder['songs'] = new_song_list;
+                if (new_song_list.length > 0) {
+                    new_folder_list.push(folder);
+                }
+            }
+            video_list[k]['folder'] = new_folder_list;
+        }
+    }
+
     var template_html = Mustache.to_html(ul_template, data);
     $(id).html(template_html);
 }
 
-function render_content_data(category, name, video_data) {
+function render_content_data(category, name, video_data, context_list) {
     $('#PAGE_INFO').html('');
     info_transliteration(category, video_data);
     render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
     render_card_template('#page-info-template', '#PAGE_INFO', video_data);
-    render_data_template(category, '#PAGE_VIDEOS', video_data);
+    render_data_template(category, '#PAGE_VIDEOS', video_data, context_list);
     render_card_template('#page-lyrics-text-template', '#PAGE_LYRICS', video_data);
     render_card_template('#page-lyrics-ref-template', '#PAGE_REFS', video_data);
     window.scrollTo(0, 0);
@@ -556,6 +592,22 @@ function load_content_data(category, name) {
     var url = `${category}/${name}.json`;
     $.getJSON(url, function(video_data) {
         render_content_data(category, name, video_data);
+    });
+}
+
+function load_context_search_data(context_list) {
+    var option_list = context_list[0].split(':');
+    var category = option_list[0];
+    var name = option_list[1];
+    var new_context_list = [];
+    for (var i = 0; i < context_list.length; i++) {
+        new_context_list.push(context_list[i].split(':'));
+    }
+    window.parent.CONTENT_CATGEGORY = category;
+    window.parent.CONTENT_NAME = name;
+    var url = `${category}/${name}.json`;
+    $.getJSON(url, function(video_data) {
+        render_content_data(category, name, video_data, new_context_list);
     });
 }
 
@@ -728,8 +780,13 @@ function load_search_data() {
     }
     var non_english = (0x0B80 <= c && c <= 0x0BFF) ? true : false;
 
-    var new_item_list = load_search_part(search_word, non_english);
-
+    var context_dict = {};
+    var context_list = search_word.split(':');
+    for (var i = 0; i < context_list.length; i++) {
+        var word = context_list[i];
+        var new_item_list = load_search_part(word, non_english);
+        context_dict[word] = new_item_list;
+    }
     var result_header = 'Search Results';
     if (lang != 'English') {
         var map_dict = MAP_INFO_DICT[lang];
@@ -737,9 +794,38 @@ function load_search_data() {
     }
     var item_data = { 'title' : { 'N': result_header, 'I': 'search' }, 'items' : new_item_list };
     render_card_template('#page-title-template', '#PAGE_TITLE', item_data);
-    render_card_template('#page-search-template', '#PAGE_INFO', item_data);
+    if (context_list.length <= 1) {
+        render_card_template('#page-search-template', '#PAGE_INFO', item_data);
+    } else {
+        var row_list = [];
+        for (var i = 0; i < context_list.length; i++) {
+            var w = context_list[i];
+            row_list.push({ 'I' : i, 'col' : context_dict[w] });
+        }
+        var row_data = { 'items' : row_list };
+        render_card_template('#page-context-search-template', '#PAGE_INFO', row_data);
+    }
     render_data_template('', '', item_data);
     window.scrollTo(0, 0);
+}
+
+function handle_context_search() {
+    var select_list = $("select[id^=COL_]");
+    var cols = select_list.length;
+    var context_list = [];
+    for (var i = 0; i < select_list.length; i++) {
+        var e = select_list[i];
+        var option = $('option:selected', e).attr('value');
+        if (option == '' || option == undefined) {
+            continue;
+        }
+        var new_option = option.replace(/\s/g, '');
+        if (new_option == '' || new_option == undefined) {
+            continue;
+        }
+        context_list.push(option);
+    }
+    load_context_search_data(context_list);
 }
 
 const old_note_map = { 'S' : 'c3', 'S1' : 'c3', 'R1' : 'c-3', 'R2' : 'd3', 'G1' : 'd3', 'R3' : 'd-3', 'G2' : 'd-3', 'G3' : 'e3', 'M1' : 'f3', 'M2' : 'f-3', 'P' : 'g3', 'D1' : 'g-3', 'D2' : 'a3', 'N1' : 'a3', 'D3' : 'a-3', 'N2' : 'a-3', 'N3' : 'b3', 'S2' : 'c4' };

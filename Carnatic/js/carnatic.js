@@ -473,6 +473,16 @@ function get_folder_value(category, info, prefix, v) {
     }
 }
 
+function get_match_count(f_category, f_value, context_list, c_len) {
+    var found = 0;
+    for (var c = 1; c < c_len; c++) {
+        if (context_list[c][0] == f_category && context_list[c][2] == f_value) {
+            found += 1;
+        }
+    }
+    return found;
+}
+
 function render_data_template(category, id, data, context_list) {
     var lang = window.parent.RENDER_LANGUAGE;
     if (category == '') {
@@ -542,12 +552,7 @@ function render_data_template(category, id, data, context_list) {
                 var folder = folder_list[i];
                 var f_category = folder['HT'];
                 var f_value = folder['HN'];
-                var s_found = 0;
-                for (var c = 1; c < c_len; c++) {
-                    if (context_list[c][0] == f_category && context_list[c][2] == f_value) {
-                        s_found += 1;
-                    }
-                }
+                var s_found = get_match_count(f_category, f_value, context_list, c_len);
                 var song_list = folder['songs'];
                 var new_song_list = [];
                 for (var j = 0; j < song_list.length; j++) {
@@ -555,14 +560,10 @@ function render_data_template(category, id, data, context_list) {
                     var found = s_found;
                     for (var m = 0; m < OF.length; m++) {
                         var c = OF[m] + 'T';
-                        var s_category = song[c];
+                        var f_category = song[c];
                         var c = OF[m] + 'N';
-                        var s_value = song[c];
-                        for (var c = 1; c < c_len; c++) {
-                            if (context_list[c][0] == s_category && context_list[c][2] == s_value) {
-                                found += 1;
-                            }
-                        }
+                        var f_value = song[c];
+                        found += get_match_count(f_category, f_value, context_list, c_len);
                     }
                     if (found >= (c_len - 1)) {
                         new_song_list.push(song);

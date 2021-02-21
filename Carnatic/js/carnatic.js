@@ -120,7 +120,7 @@ function menu_transliteration(lang) {
         var d = (l == window.parent.GOT_LANGUAGE) ? { 'N' : l, 'O' : 'selected' } : { 'N' : l };
         lang_list.push(d);
     }
-    var tooltip = 'Context Search <br/> Use : Colon <br/> mdr : kalyani : dikshitar';
+    var tooltip = 'Prefix Search <br/> e.g. radu daya <br/> Phonetic Search <br/> e.g. goula <br/> Language Search <br/> e.g. கல்யாணி <br/> Context Search <br/> e.g. mdr : kalyani : dikshitar';
     var other_dict = { 'P' : playlist, 'S' : search, 'TP' : tooltip };
     var menu_dict = { 'menus' : { 'languages' : lang_list, 'others' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
     render_card_template('#page-menu-template', '#MENU_DATA', menu_dict);
@@ -916,69 +916,76 @@ function speech_to_text_init() {
     if (!('webkitSpeechRecognition' in window)) {
         console.log('Speech not working:');
     } else {
-      window.speech_recognition = new webkitSpeechRecognition();
-      window.speech_recognition.continuous = true;
-      window.speech_recognition.interimResults = true;
+        window.speech_recognition = new webkitSpeechRecognition();
+        window.speech_recognition.continuous = true;
+        window.speech_recognition.interimResults = true;
 
-      window.speech_recognition.onstart = function() {
-          window.speech_recognizing = true;
-          console.log('Speech Starting:');
-      };
+        window.speech_recognition.onstart = function() {
+            window.speech_recognizing = true;
+            console.log('Speech Starting:');
+        };
 
-      window.speech_recognition.onerror = function(event) {
-        if (event.error == 'no-speech') {
-          console.log('Speech Error: No Speech');
-          window.speech_ignore_onend = true;
-        }
-        if (event.error == 'audio-capture') {
-          console.log('Speech Error: Audio Capture');
-          window.speech_ignore_onend = true;
-        }
-        if (event.error == 'not-allowed') {
-          if (event.timeStamp - window.speech_start_timestamp < 100) {
-            console.log('Speech Error: Info Blocked');
-          } else {
-            console.log('Speech Error: Info Denied');
-          }
-          window.speech_ignore_onend = true;
-        }
-      };
+        window.speech_recognition.onerror = function(event) {
+            if (event.error == 'no-speech') {
+                console.log('Speech Error: No Speech');
+                window.speech_ignore_onend = true;
+            }
+            if (event.error == 'audio-capture') {
+                console.log('Speech Error: Audio Capture');
+              window.speech_ignore_onend = true;
+            }
+            if (event.error == 'not-allowed') {
+                if (event.timeStamp - window.speech_start_timestamp < 100) {
+                    console.log('Speech Error: Info Blocked');
+                } else {
+                    console.log('Speech Error: Info Denied');
+                }
+                window.speech_ignore_onend = true;
+            }
+        };
 
-      window.speech_recognition.onend = function() {
-        window.speech_recognizing = false;
-        if (window.speech_ignore_onend) {
-          return;
-        }
-        if (!window.speech_final_transcript) {
-            console.log('Speech Start:');
-            return;
-        }
-      };
+        window.speech_recognition.onend = function() {
+            window.speech_recognizing = false;
+            if (window.speech_ignore_onend) {
+                return;
+            }
+            if (!window.speech_final_transcript) {
+                console.log('Speech End:');
+                return;
+            }
+        };
 
-      window.speech_recognition.onresult = function(event) {
-        var interim_transcript = '';
-        for (var i = event.resultIndex; i < event.results.length; ++i) {
-          if (event.results[i].isFinal) {
-            window.speech_final_transcript += event.results[i][0].transcript;
-          } else {
-            interim_transcript += event.results[i][0].transcript;
-          }
-        }
-        if (window.speech_final_transcript || interim_transcript) {
-            document.getElementById('SEARCH_WORD').value = window.speech_final_transcript;
-            load_search_data();
-        }
-      };
+        window.speech_recognition.onresult = function(event) {
+            var interim_transcript = '';
+            /*
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    window.speech_final_transcript += event.results[i][0].transcript;
+                } else {
+                    interim_transcript += event.results[i][0].transcript;
+                }
+            }
+            */
+            if (event.results.length > 0) {
+                window.speech_final_transcript = event.results[0][0].transcript;
+            } else {
+                window.speech_final_transcript = '';
+            }
+            if (window.speech_final_transcript || interim_transcript) {
+                document.getElementById('SEARCH_WORD').value = window.speech_final_transcript;
+                load_search_data();
+            }
+        };
     }
 }
 
 function speech_start(event) {
   if (!('webkitSpeechRecognition' in window)) {
-    return;
+      return;
   }
   if (window.speech_recognizing) {
-    window.speech_recognition.stop();
-    return;
+      window.speech_recognition.stop();
+      return;
   }
   window.speech_final_transcript = '';
   window.speech_recognition.lang = 'en.US';

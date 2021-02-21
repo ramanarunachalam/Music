@@ -432,15 +432,21 @@ function render_nav_template(category, data) {
     $('#slider').sliderNav({ 'items' : l_list });
 }
 
+function load_about_data(category, video_data) {
+    info_transliteration(category, video_data);
+    render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
+    render_card_template('#page-info-template', '#PAGE_INFO', video_data);
+    render_data_template('', '', video_data);
+}
+
 function load_nav_data(category) {
-    window.parent.NAV_CATEGORY = category;
+    if (category != 'about') {
+        window.parent.NAV_CATEGORY = category;
+    }
     var url = category + '.json';
     $.getJSON(url, function(video_data) {
         if (category == 'about') {
-            info_transliteration(category, video_data);
-            render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
-            render_card_template('#page-info-template', '#PAGE_INFO', video_data);
-            render_data_template('', '', video_data);
+            load_about_data(category, video_data);
         } else {
             render_nav_template(category, video_data);
         }
@@ -534,7 +540,7 @@ function render_data_template(category, id, data, context_list) {
                     get_folder_value(st[m], song, OF[m], sd[m]);
                 }
                 if (category == 'song') {
-                    song_ids = song['S']; 
+                    song_ids = song['S'];
                 }
                 song['PS'] = song_ids;
                 song['PR'] = song['R'];

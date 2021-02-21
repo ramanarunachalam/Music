@@ -988,7 +988,7 @@ function speech_start(event) {
       return;
   }
   window.speech_final_transcript = '';
-  window.speech_recognition.lang = 'en.US';
+  window.speech_recognition.lang = 'hi.IN';
   window.speech_recognition.start();
   window.speech_ignore_onend = false;
   window.speech_start_timestamp = event.timeStamp;

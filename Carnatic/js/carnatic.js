@@ -987,8 +987,9 @@ function speech_start(event) {
       window.speech_recognition.stop();
       return;
   }
+  var lang = window.parent.RENDER_LANGUAGE;
   window.speech_final_transcript = '';
-  window.speech_recognition.lang = 'hi.IN';
+  window.speech_recognition.lang = MAP_ISO_DICT[lang];
   window.speech_recognition.start();
   window.speech_ignore_onend = false;
   window.speech_start_timestamp = event.timeStamp;

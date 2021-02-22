@@ -972,6 +972,8 @@ function speech_to_text_init() {
                 window.speech_final_transcript = '';
             }
             if (window.speech_final_transcript || interim_transcript) {
+                window.speech_recognition.stop();
+                $('#MIC_IMAGE').attr('src', 'icons/mic-mute.svg');
                 document.getElementById('SEARCH_WORD').value = window.speech_final_transcript;
                 load_search_data();
             }
@@ -980,17 +982,18 @@ function speech_to_text_init() {
 }
 
 function speech_start(event) {
-  if (!('webkitSpeechRecognition' in window)) {
-      return;
-  }
-  if (window.speech_recognizing) {
-      window.speech_recognition.stop();
-      return;
-  }
-  var lang = window.parent.RENDER_LANGUAGE;
-  window.speech_final_transcript = '';
-  window.speech_recognition.lang = MAP_ISO_DICT[lang];
-  window.speech_recognition.start();
-  window.speech_ignore_onend = false;
-  window.speech_start_timestamp = event.timeStamp;
+    if (!('webkitSpeechRecognition' in window)) {
+        return;
+    }
+    if (window.speech_recognizing) {
+        window.speech_recognition.stop();
+        return;
+    }
+    var lang = window.parent.RENDER_LANGUAGE;
+    window.speech_final_transcript = '';
+    window.speech_recognition.lang = MAP_ISO_DICT[lang];
+    window.speech_recognition.start();
+    window.speech_ignore_onend = false;
+    window.speech_start_timestamp = event.timeStamp;
+    $('#MIC_IMAGE').attr('src', 'icons/mic.svg');
 }

@@ -122,7 +122,7 @@ function menu_transliteration(lang) {
     }
     var tooltip = 'Prefix Search <br/> e.g. radu daya <br/> Phonetic Search <br/> e.g. goula <br/> Language Search <br/> e.g. கல்யாணி <br/> Context Search <br/> e.g. mdr : kalyani : dikshitar';
     var other_dict = { 'P' : playlist, 'S' : search, 'TP' : tooltip };
-    var menu_dict = { 'menus' : { 'languages' : lang_list, 'others' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
+    var menu_dict = { 'menus' : { 'languages' : lang_list, 'search' : other_dict, 'playlist' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
     render_card_template('#page-menu-template', '#MENU_DATA', menu_dict);
 
     $('#SEARCH_INFO').tooltip();
@@ -996,4 +996,11 @@ function speech_start(event) {
     window.speech_ignore_onend = false;
     window.speech_start_timestamp = event.timeStamp;
     $('#MIC_IMAGE').attr('src', 'icons/mic.svg');
+}
+
+function load_keyboard(event) {
+    var lang = window.parent.RENDER_LANGUAGE;
+    set_input_keyboard(lang.toLowerCase());
+    $('#LANG_KBD').modal();
+    return;
 }

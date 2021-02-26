@@ -909,3 +909,184 @@ function get_transliterator_text(scriptInput, scriptOutput, data) {
     let p = `${result}`;
     return(p);
 }
+
+/*
+     Language Keyboards
+*/
+
+function render_keys(basic_list, combo_list) {
+    var basic_len = basic_list.length
+    var row_list = [];
+    var row = [];
+    var col_id = 1;
+    var row_size = 9;
+    var info_list = [];
+    for (var i = 0; i < basic_len; i++) {
+        if (i > 0 && (i % row_size) == 0) {
+            row_list.push({ 'col' : row });
+            row = []
+        }
+        var c = basic_list[i];
+        var info = { 'N' : c, 'K' : c, 'T' : 'key', 'I' : col_id };
+        row.push(info);
+        info_list.push(info);
+        col_id += 1;
+    }
+    var icon_list = [ 'chevron-expand', 'backspace', 'arrow-return-left' ];
+    if (row.length > 0) {
+        for (var i = 0; i < icon_list.length; i++) {
+            var icon = icon_list[i];
+            var img_str = `<img class="ICON" src="icons/${icon}.svg">`
+            var info = { 'N' : img_str, 'K' : icon, 'T' : 'icon', 'I' : col_id };
+            row.push(info);
+            info_list.push(info);
+            col_id += 1;
+        }
+        row_list.push({ 'col' : row });
+    }
+    var key_dict = { 'row' : row_list };
+    render_card_template('#lang-key-template', '#GENKBD', key_dict);
+    return info_list;
+}
+
+function replace_keys(key_dict, vowel_size, key) {
+    for (var i = 0; i < vowel_size; i++) {
+        var col_id = '#key_' + (i + 1);
+        if (key == '') {
+            var c = key_dict[i]['N'];
+        } else {
+            var c = key + window.parent.script_combo_list[i];
+            var p = key.length - 1;
+            var l = key.charCodeAt(p);
+            if (superscript_code_list.has(l)) {
+                var c;
+                var q;
+                let l1 = window.parent.script_combo_list[i].length;
+                if (l1 > 1){
+                    if (window.parent.script_combo_list[i].slice(0,1) == String.fromCharCode(0x0BCD)){
+                        c = key.slice(0,1) + String.fromCharCode(0x0BCD)+key.slice(1,key.length)+
+                           window.parent.script_combo_list[i].slice(1, l1);                         
+                    } else {
+                        c = key + window.parent.script_combo_list[i]; 
+                    }                   
+                } else {
+                    c = key.slice(0, p) + (window.parent.script_combo_list[i]) + key[p];
+                }
+            } else {
+                var c = key + (window.parent.script_combo_list[i]);
+            }
+        }
+        $(col_id).html(c);
+    }
+}
+
+function sanskrit_to_indic(base) {
+    let basic_list = []
+    for (var i = 0; i < sanskrit_basic_list.length; i++) {
+        var c = sanskrit_basic_list[i];
+        if (c != '.') {
+            var k = sanskrit_basic_list[i].charCodeAt(0);
+            var l = k + (base - 0x0900);
+            c = String.fromCharCode(l);
+        }
+        basic_list.push(c);
+    }
+    let combo_code_list = [];
+    for (var i = 0; i < sanskrit_basic_list.length; i++) {
+        var c = sanskrit_combo_code_list[i] + (base - 0x0900);
+        combo_code_list.push(c);
+    }
+    let combo_list = combo_code_list.map(i => String.fromCharCode(i));
+    return [ basic_list, combo_list ];
+}
+
+function on_key_click() {
+   var lang_dict = window.parent.script_lang_dict;
+   var text = $('#SEARCH_WORD').val();
+   var element = event.srcElement;
+   var id = element.getAttribute('id');
+   var c = element.innerHTML;
+   var f = c.charCodeAt(0);
+   if (id == lang_dict['vowel reset']) {
+       replace_keys(window.parent.input_key_dict, window.parent.script_vowel_size, '');
+   } else if (id == lang_dict['backspace']) {
+       if (text.length > 0) {
+           text = text.slice(0, text.length - 1);
+       }
+   } else if (id == lang_dict['enter']) {
+       text += '\n';
+   } else if (window.parent.script_consonent_start <= f && f <= window.parent.script_consonent_end) {
+       var pos = c.length - 1;
+       var l = (text != undefined && text != '') ? text[text.length - pos] : '';
+       l = (l != undefined) ? l : '';
+       var key = c;
+       if (l != '' && l.charCodeAt(0) == f) {
+           var p = text.length - 1;
+           var q = text[p];
+           var t = text.charCodeAt(p);
+           if (superscript_code_list.has(t)) {
+               text = text.slice(0, p);
+               text += c[pos - 1];
+               text += c[pos];
+           } else {
+               text += c[pos];
+           }
+           key = '';
+       } else {
+           if (c.length > 3) {
+               key = '';
+           }
+           text += c;
+       }
+       replace_keys(window.parent.input_key_dict, window.parent.script_vowel_size, key);
+   } else {
+       text += c;
+   }
+   $('#SEARCH_WORD').val(text);
+};
+
+function set_input_keyboard(lang) {
+    var lang_dict = lang_key_dict[lang];
+    window.parent.script_lang_dict = lang_dict;
+    window.parent.script_basic_list = lang_dict['basic'];
+    window.parent.script_combo_list = lang_dict['combo'];
+    window.parent.script_vowel_size = lang_dict['vowels'];
+    window.parent.script_consonent_base = (lang_dict['base'] != 0) ? (lang_dict['base'] + 0x0015) : 0;
+    window.parent.script_consonent_start = window.parent.script_consonent_base;
+    window.parent.script_consonent_end = window.parent.script_consonent_base + 36;
+    window.parent.input_key_dict = render_keys(window.parent.script_basic_list, window.parent.script_combo_list);
+}
+
+const superscript_code_list = new Set([ 0x00B2, 0x00B3, 0x2074 ]);
+
+let tamil_basic_keys = (`அ ஆ இ  ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஜ ஷ ஸ ஶ க்ஷ ஹ க ங ச ஞ ட ண த ந ப ம ய ர ல வ ழ ள ற ன  ஃ ௐ ஸ்ரீ`);
+let tamil_basic_list = tamil_basic_keys.split(/\s+/);
+let tamil_combo_code_list = [ 0x0BCD, 0x0BBE, 0x0BBF, 0x0BC0, 0x0BC1, 0x0BC2, 0x0BC6, 0x0BC7, 0x0BC8, 0x0BCA, 0x0BCB, 0x0BCC ];
+let tamil_combo_list = tamil_combo_code_list.map(i => String.fromCharCode(i));
+
+let tamil_extended_basic_keys = (`அ ஆ இ ஈ உ ஊ ரு² லு² எ ஏ ஐ ஒ ஓ ஔ ரூ³ லூ³ ம்² ம்¹ ஹ¹ ' ௐ ஃ . . . . . க க² க³ க⁴ ங ச ச² ஜ ச⁴ ஞ ட ட² ட³ ட⁴ ண த த² த³ த⁴ ந ன ப ப² ப³ ப⁴ ம ய ர ற ல ள ழ வ ஶ ஷ ஸ ஹ`);
+let tamil_extended_basic_list = tamil_extended_basic_keys.split(/\s+/);
+let tamil_extended_combo_template =  'க் கா கி கீ கு கூ க்ரு² க்லு² கெ கே கை கொ கோ கௌ க்ரூ³ க்லூ³  கம்² கம்¹ கஹ¹'.split(/\s+/);
+let tamil_extended_combo_list = tamil_extended_combo_template.map(i=>i.slice(1, i.length));
+let sanskrit_basic_keys = (`अ आ इ ई उ ऊ ऋ लृ ऎ ए ऐ ऒ ओ औ ॠ लॄ  ँ ं ः ऽ ॐ ग्¹ . . . . . क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न ऩ प फ ब भ म य र ऱ ल ळ ऴ व श ष स ह`);
+let sanskrit_basic_list = sanskrit_basic_keys.split(/\s+/);
+let sanskrit_combo_code_list = [ 0x094D, 0x093E, 0x093F, 0x0940, 0x0941, 0x0942, 0x0943, 0x0962, 0x0946, 0x0947, 0x0948, 0x094A, 0x094B, 0x094C, 0x0944, 0x0963, 0x0901, 0x0902, 0x903 ];
+let sanskrit_combo_list = sanskrit_combo_code_list.map(i => String.fromCharCode(i));
+
+const [telugu_basic_list, telugu_combo_list] = sanskrit_to_indic(0x0C00);
+const [kannada_basic_list, kannada_combo_list] = sanskrit_to_indic(0x0C80);
+const [malayalam_basic_list, malayalam_combo_list] = sanskrit_to_indic(0x0D00);
+
+let dummy_combo_list = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+let english_basic_keys = (`a A i I u U R lR e E ai o O au RR lRR ~ M H ' oM K . . . . . k kh g gh n c ch j jh n T Th D Dh N t th d dh n n p ph b bh m y r r l L zh v S sh s h`);
+let english_basic_list = english_basic_keys.split(/\s+/);
+let english_combo_list = dummy_combo_list;
+
+var lang_key_dict = { 'tamil' : { 'basic' : tamil_basic_list, 'combo' : tamil_combo_list, 'vowels' : 12, 'base' : 0x0B80, 'vowel reset' : 'key_40', 'backspace' : 'key_41', 'enter' : 'key_42' },
+                      'sanskrit' : { 'basic' : sanskrit_basic_list, 'combo' : sanskrit_combo_list,  'vowels' : 19, 'base' : 0x0900, 'vowel reset' : 'key_65', 'backspace' : 'key_66', 'enter' : 'key_67' },
+                      'telugu' : { 'basic' : telugu_basic_list, 'combo' : telugu_combo_list,  'vowels' : 19, 'base' : 0x0C00, 'vowel reset' : 'key_65', 'backspace' : 'key_66', 'enter' : 'key_67' },
+                      'kannada' : { 'basic' : kannada_basic_list, 'combo' : kannada_combo_list,  'vowels' : 19, 'base' : 0x0C80, 'vowel reset' : 'key_65', 'backspace' : 'key_66', 'enter' : 'key_67' },
+                      'malayalam' : { 'basic' : malayalam_basic_list, 'combo' : malayalam_combo_list,  'vowels' : 19, 'base' : 0x0D00, 'vowel reset' : 'key_65', 'backspace' : 'key_66', 'enter' : 'key_67' },
+                      'english' : { 'basic' : english_basic_list, 'combo' : english_combo_list,  'vowels' : 19, 'base' : 0, 'vowel reset' : 'key_65', 'backspace' : 'key_66', 'enter' : 'key_67' }
+                    }
+

@@ -1014,7 +1014,8 @@ function on_key_click() {
            text = text.slice(0, text.length - 1);
        }
    } else if (id == lang_dict['enter']) {
-       text += '\n';
+       // text += '\n';
+       load_search_data();
    } else if (window.parent.script_consonent_start <= f && f <= window.parent.script_consonent_end) {
        var pos = c.length - 1;
        var l = (text != undefined && text != '') ? text[text.length - pos] : '';

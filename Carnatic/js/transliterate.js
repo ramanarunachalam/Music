@@ -936,7 +936,7 @@ function render_keys(basic_list, combo_list) {
     if (row.length > 0) {
         for (var i = 0; i < icon_list.length; i++) {
             var icon = icon_list[i];
-            var img_str = `<img class="ICON" src="icons/${icon}.svg">`
+            var img_str = `<img class="ICON" src="icons/${icon}.svg" onclick="on_key_click()">`
             var info = { 'N' : img_str, 'K' : icon, 'T' : 'icon', 'I' : col_id };
             row.push(info);
             info_list.push(info);
@@ -1008,6 +1008,10 @@ function on_key_click() {
    var lang_dict = window.parent.script_lang_dict;
    var text = $('#SEARCH_WORD').val();
    var element = event.srcElement;
+   if (element.tagName == 'IMG') {
+       event.stopPropagation();
+       element = element.parentElement;
+   }
    var id = element.getAttribute('id');
    var c = element.innerHTML;
    var f = c.charCodeAt(0);

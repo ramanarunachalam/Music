@@ -942,6 +942,10 @@ function render_keys(basic_list, combo_list) {
             info_list.push(info);
             col_id += 1;
         }
+        var col_span = (col_id % row_size) + 1;
+        if (col_span > 1) {
+            row[row.length - 1]['C'] = `colspan="${col_span}"`;
+        }
         row_list.push({ 'col' : row });
     }
     var key_dict = { 'row' : row_list };

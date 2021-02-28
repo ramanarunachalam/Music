@@ -927,30 +927,37 @@ function render_keys(basic_list, combo_list) {
             row = []
         }
         var c = basic_list[i];
+        c = c != '.' ? c : ' ';
+        var info = { 'N' : c, 'K' : c, 'T' : 'key', 'I' : col_id };
+        row.push(info);
+        info_list.push(info);
+        col_id += 1;
+    }
+    var punctuation_list = [ ':', ' ' ];
+    for (var i = 0; i < punctuation_list.length; i++) {
+        var c = punctuation_list[i];
         var info = { 'N' : c, 'K' : c, 'T' : 'key', 'I' : col_id };
         row.push(info);
         info_list.push(info);
         col_id += 1;
     }
     var icon_list = [ 'chevron-expand', 'backspace', 'arrow-return-left' ];
-    if (row.length > 0) {
-        for (var i = 0; i < icon_list.length; i++) {
-            var icon = icon_list[i];
-            var img_str = `<img class="ICON" src="icons/${icon}.svg" onclick="on_key_click()">`
-            var info = { 'N' : img_str, 'K' : icon, 'T' : 'icon', 'I' : col_id };
-            row.push(info);
-            info_list.push(info);
-            col_id += 1;
-        }
-        var col_span = (col_id % row_size) + 1;
-        if (col_span > 1) {
-            row[row.length - 1]['C'] = `colspan="${col_span}"`;
-        }
-        row_list.push({ 'col' : row });
+    var key_name_list = [ 'vowel reset', 'backspace', 'enter' ];
+    for (var i = 0; i < icon_list.length; i++) {
+        var icon = icon_list[i];
+        var img_str = `<img class="ICON" src="icons/${icon}.svg" onclick="on_key_click()">`;
+        var info = { 'N' : img_str, 'A' : key_name_list[i], 'K' : icon, 'T' : 'icon', 'I' : col_id };
+        row.push(info);
+        info_list.push(info);
+        col_id += 1;
     }
+    var col_span = ((col_id - 1) % row_size) + 1;
+    if (col_span > 1) {
+        row[row.length - 1]['C'] = `colspan="${col_span}"`;
+    }
+    row_list.push({ 'col' : row });
     var key_dict = { 'row' : row_list };
-    render_card_template('#lang-key-template', '#GENKBD', key_dict);
-    return info_list;
+    return [info_list, key_dict];
 }
 
 function replace_keys(key_dict, vowel_size, key) {
@@ -1024,7 +1031,7 @@ function on_key_click() {
    } else if (id == lang_dict['enter']) {
        // text += '\n';
        load_search_data();
-   } else if (window.parent.script_consonent_start <= f && f <= window.parent.script_consonent_end) {
+   } else if (window.parent.script_consonant_start <= f && f <= window.parent.script_consonant_end) {
        var pos = c.length - 1;
        var l = (text != undefined && text != '') ? text[text.length - pos] : '';
        l = (l != undefined) ? l : '';
@@ -1057,13 +1064,21 @@ function on_key_click() {
 function set_input_keyboard(lang) {
     var lang_dict = lang_key_dict[lang];
     window.parent.script_lang_dict = lang_dict;
-    window.parent.script_basic_list = lang_dict['basic'];
     window.parent.script_combo_list = lang_dict['combo'];
     window.parent.script_vowel_size = lang_dict['vowels'];
-    window.parent.script_consonent_base = (lang_dict['base'] != 0) ? (lang_dict['base'] + 0x0015) : 0;
-    window.parent.script_consonent_start = window.parent.script_consonent_base;
-    window.parent.script_consonent_end = window.parent.script_consonent_base + 36;
-    window.parent.input_key_dict = render_keys(window.parent.script_basic_list, window.parent.script_combo_list);
+    var script_consonant_base = (lang_dict['base'] != 0) ? (lang_dict['base'] + 0x0015) : 0;
+    window.parent.script_consonant_start = script_consonant_base;
+    window.parent.script_consonant_end = script_consonant_base + 36;
+    const [info_list, key_dict] = render_keys(lang_dict['basic'], window.parent.script_combo_list);
+    for (var i = 0; i < info_list.length; i++) {
+        var info_dict = info_list[i];
+        var key_name = info_dict['A'];
+        if (key_name != undefined) {
+            lang_dict[key_name] = 'key_' + info_dict['I'];
+        }
+    } 
+    window.parent.input_key_dict = info_list;
+    render_card_template('#lang-key-template', '#GENKBD', key_dict);
 }
 
 const superscript_code_list = new Set([ 0x00B2, 0x00B3, 0x2074 ]);
@@ -1091,11 +1106,11 @@ let english_basic_keys = (`a A i I u U R lR e E ai o O au RR lRR ~ M H ' oM K . 
 let english_basic_list = english_basic_keys.split(/\s+/);
 let english_combo_list = dummy_combo_list;
 
-var lang_key_dict = { 'tamil' : { 'basic' : tamil_basic_list, 'combo' : tamil_combo_list, 'vowels' : 12, 'base' : 0x0B80, 'vowel reset' : 'key_40', 'backspace' : 'key_41', 'enter' : 'key_42' },
-                      'sanskrit' : { 'basic' : sanskrit_basic_list, 'combo' : sanskrit_combo_list,  'vowels' : 19, 'base' : 0x0900, 'vowel reset' : 'key_65', 'backspace' : 'key_66', 'enter' : 'key_67' },
-                      'telugu' : { 'basic' : telugu_basic_list, 'combo' : telugu_combo_list,  'vowels' : 19, 'base' : 0x0C00, 'vowel reset' : 'key_65', 'backspace' : 'key_66', 'enter' : 'key_67' },
-                      'kannada' : { 'basic' : kannada_basic_list, 'combo' : kannada_combo_list,  'vowels' : 19, 'base' : 0x0C80, 'vowel reset' : 'key_65', 'backspace' : 'key_66', 'enter' : 'key_67' },
-                      'malayalam' : { 'basic' : malayalam_basic_list, 'combo' : malayalam_combo_list,  'vowels' : 19, 'base' : 0x0D00, 'vowel reset' : 'key_65', 'backspace' : 'key_66', 'enter' : 'key_67' },
-                      'english' : { 'basic' : english_basic_list, 'combo' : english_combo_list,  'vowels' : 19, 'base' : 0, 'vowel reset' : 'key_65', 'backspace' : 'key_66', 'enter' : 'key_67' }
+var lang_key_dict = { 'tamil' : { 'basic' : tamil_basic_list, 'combo' : tamil_combo_list, 'vowels' : 12, 'base' : 0x0B80 },
+                      'sanskrit' : { 'basic' : sanskrit_basic_list, 'combo' : sanskrit_combo_list,  'vowels' : 19, 'base' : 0x0900 },
+                      'telugu' : { 'basic' : telugu_basic_list, 'combo' : telugu_combo_list,  'vowels' : 19, 'base' : 0x0C00 },
+                      'kannada' : { 'basic' : kannada_basic_list, 'combo' : kannada_combo_list,  'vowels' : 19, 'base' : 0x0C80 },
+                      'malayalam' : { 'basic' : malayalam_basic_list, 'combo' : malayalam_combo_list,  'vowels' : 19, 'base' : 0x0D00 },
+                      'english' : { 'basic' : english_basic_list, 'combo' : english_combo_list,  'vowels' : 19, 'base' : 0 }
                     }
 

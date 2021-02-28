@@ -947,6 +947,7 @@ function speech_to_text_init() {
         window.speech_recognition.onend = function() {
             window.speech_recognizing = false;
             if (window.speech_ignore_onend) {
+                console.log('Speech Error: Ignore End');
                 return;
             }
             if (!window.speech_final_transcript) {
@@ -964,7 +965,9 @@ function speech_to_text_init() {
                 } else {
                     interim_transcript += event.results[i][0].transcript;
                 }
+                console.log('Speech Interim: ' + event.resultIndex + ' ' + event.results.length + ' ' + event.results[i][0].transcript);
             }
+            console.log('Speech Result: ' + event.resultIndex + ' ' + event.results.length + ' ' + interim_transcript);
             */
             if (event.results.length > 0) {
                 window.speech_final_transcript = event.results[0][0].transcript;
@@ -975,6 +978,7 @@ function speech_to_text_init() {
                 window.speech_recognition.stop();
                 $('#MIC_IMAGE').attr('src', 'icons/mic-mute.svg');
                 document.getElementById('SEARCH_WORD').value = window.speech_final_transcript;
+                // console.log('Speech Final: ' + window.speech_final_transcript);
                 load_search_data();
             }
         };

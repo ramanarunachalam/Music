@@ -120,12 +120,16 @@ function menu_transliteration(lang) {
         var d = (l == window.parent.GOT_LANGUAGE) ? { 'N' : l, 'O' : 'selected' } : { 'N' : l };
         lang_list.push(d);
     }
-    var tooltip = 'Prefix Search <br/> e.g. radu daya <br/> Phonetic Search <br/> e.g. goula <br/> Language Search <br/> e.g. கல்யாணி <br/> Context Search <br/> e.g. mdr : kalyani : dikshitar';
-    var other_dict = { 'P' : playlist, 'S' : search, 'TP' : tooltip };
+    var search_tooltip = 'Prefix Search <br/> e.g. radu daya <br/> Phonetic Search <br/> e.g. goula <br/> Language Search <br/> e.g. கல்யாணி <br/> Context Search <br/> e.g. mdr : kalyani : dikshitar';
+    var mic_tooltip = 'Only in Chrome';
+    var kbd_tooltip = 'Language Keyboard';
+    var other_dict = { 'P' : playlist, 'S' : search, 'STP' : search_tooltip, 'MTP' : mic_tooltip, 'KTP' : kbd_tooltip };
     var menu_dict = { 'menus' : { 'languages' : lang_list, 'search' : other_dict, 'playlist' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
     render_card_template('#page-menu-template', '#MENU_DATA', menu_dict);
 
     $('#SEARCH_INFO').tooltip();
+    $('#MIC_IMAGE').tooltip();
+    $('#KBD_IMAGE').tooltip();
     $('.nav-link').tooltip();
     speech_to_text_init();
 }

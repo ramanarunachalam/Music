@@ -444,7 +444,7 @@ function render_nav_template(category, data) {
 function load_about_data(category, video_data) {
     info_transliteration(category, video_data);
     render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
-    render_card_template('#page-info-template', '#PAGE_INFO', video_data);
+    render_card_template('#page-about-template', '#PAGE_INFO', video_data);
     render_data_template('', '', video_data);
 }
 

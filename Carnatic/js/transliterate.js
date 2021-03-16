@@ -1074,20 +1074,26 @@ let sanskrit_basic_list = sanskrit_basic_keys.split(/\s+/);
 let sanskrit_combo_code_list = [ 0x094D, 0x093E, 0x093F, 0x0940, 0x0941, 0x0942, 0x0943, 0x0962, 0x0946, 0x0947, 0x0948, 0x094A, 0x094B, 0x094C, 0x0944, 0x0963, 0x0901, 0x0902, 0x903 ];
 let sanskrit_combo_list = sanskrit_combo_code_list.map(i => String.fromCharCode(i));
 
-const [telugu_basic_list, telugu_combo_list] = sanskrit_to_indic(0x0C00);
-const [kannada_basic_list, kannada_combo_list] = sanskrit_to_indic(0x0C80);
-const [malayalam_basic_list, malayalam_combo_list] = sanskrit_to_indic(0x0D00);
-
 let dummy_combo_list = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 let english_basic_keys = (`a A i I u U R lR e E ai o O au RR lRR ~ M H ' oM K . . . . . k kh g gh n c ch j jh n T Th D Dh N t th d dh n n p ph b bh m y r r l L zh v S sh s h`);
 let english_basic_list = english_basic_keys.split(/\s+/);
 let english_combo_list = dummy_combo_list;
 
-var lang_key_dict = { 'tamil' : { 'basic' : tamil_basic_list, 'combo' : tamil_combo_list, 'vowels' : 12, 'base' : 0x0B80 },
-                      'sanskrit' : { 'basic' : sanskrit_basic_list, 'combo' : sanskrit_combo_list,  'vowels' : 19, 'base' : 0x0900 },
-                      'telugu' : { 'basic' : telugu_basic_list, 'combo' : telugu_combo_list,  'vowels' : 19, 'base' : 0x0C00 },
-                      'kannada' : { 'basic' : kannada_basic_list, 'combo' : kannada_combo_list,  'vowels' : 19, 'base' : 0x0C80 },
-                      'malayalam' : { 'basic' : malayalam_basic_list, 'combo' : malayalam_combo_list,  'vowels' : 19, 'base' : 0x0D00 },
-                      'english' : { 'basic' : english_basic_list, 'combo' : english_combo_list,  'vowels' : 19, 'base' : 0 }
+var lang_key_dict = { 'tamil'     : { 'basic' : tamil_basic_list, 'combo' : tamil_combo_list, 'vowels' : 12, 'base' : 0x0B80 },
+                      'sanskrit'  : { 'basic' : sanskrit_basic_list, 'combo' : sanskrit_combo_list,  'vowels' : 19, 'base' : 0x0900 },
+                      'telugu'    : { 'vowels' : 19, 'base' : 0x0C00 },
+                      'kannada'   : { 'vowels' : 19, 'base' : 0x0C80 },
+                      'malayalam' : { 'vowels' : 19, 'base' : 0x0D00 },
+                      'english'   : { 'basic' : english_basic_list, 'combo' : english_combo_list,  'vowels' : 19, 'base' : 0 }
                     }
+
+for (var key in lang_key_dict) {
+    var info_dict = lang_key_dict[key];
+    if (info_dict['basic'] == undefined) {
+        var base = info_dict['base'];
+        var [basic_list, combo_list] = sanskrit_to_indic(base);
+        info_dict['basic'] = basic_list;
+        info_dict['combo'] = combo_list;
+    }
+}
 

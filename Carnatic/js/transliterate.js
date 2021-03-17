@@ -1069,7 +1069,7 @@ let tamil_basic_list = tamil_basic_keys.split(/\s+/);
 let tamil_combo_code_list = [ 0x0BCD, 0x0BBE, 0x0BBF, 0x0BC0, 0x0BC1, 0x0BC2, 0x0BC6, 0x0BC7, 0x0BC8, 0x0BCA, 0x0BCB, 0x0BCC ];
 let tamil_combo_list = tamil_combo_code_list.map(i => String.fromCharCode(i));
 
-let sanskrit_basic_keys = (`अ आ इ ई उ ऊ ऋ लृ ऎ ए ऐ ऒ ओ औ ॠ लॄ  ँ ं ः ऽ ॐ ग्¹ . . . . . क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न ऩ प फ ब भ म य र ऱ ल ळ ऴ व श ष स ह`);
+let sanskrit_basic_keys = (`अ आ इ ई उ ऊ ऋ ऌ ऎ ए ऐ ऒ ओ औ ॠ ॡ  ँ ं ः ऽ ॐ . . . . . . क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न ऩ प फ ब भ म य र ऱ ल ळ ऴ व श ष स ह`);
 let sanskrit_basic_list = sanskrit_basic_keys.split(/\s+/);
 let sanskrit_combo_code_list = [ 0x094D, 0x093E, 0x093F, 0x0940, 0x0941, 0x0942, 0x0943, 0x0962, 0x0946, 0x0947, 0x0948, 0x094A, 0x094B, 0x094C, 0x0944, 0x0963, 0x0901, 0x0902, 0x903 ];
 let sanskrit_combo_list = sanskrit_combo_code_list.map(i => String.fromCharCode(i));

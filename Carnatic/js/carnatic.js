@@ -290,38 +290,6 @@ function set_language(obj) {
     load_content_data(window.parent.CONTENT_CATGEGORY, window.parent.CONTENT_NAME);
 }
 
-function carnatic_init() {
-    var lang = 'English';
-    window.parent.RENDER_LANGUAGE = lang;
-    window.parent.GOT_LANGUAGE = lang;
-    sessionStorage.clear();
-    window.addEventListener('storage', on_storage_event, false);
-    window.onload = load_content;
-    menu_transliteration(lang);
-    load_nav_data('about');
-}
-
-function load_content() {
-    if (window.innerWidth < 992) {
-        $('#DEVICE_PROPERTY').modal('show');
-        setTimeout(function() { $('#DEVICE_PROPERTY').modal('hide'); }, 3000);
-    }
-
-    $(document).ready(function() {
-        $('#MENU_DATA li').bind('click', function() {
-            $(this).addClass('active').siblings().removeClass('active');
-        });
-    });
-
-    $("#MENU_DATA li a").on("click", function() {
-        $("#MENU_DATA li").find(".active").removeClass("active");
-        $(this).parent().addClass("active");
-    });
-
-    load_id_data();
-    youtube_player_init();
-}
-
 function load_id_data(category) {
     var url = 'id.json';
     $.getJSON(url, function(id_data) {
@@ -459,6 +427,7 @@ function load_nav_data(category) {
         } else {
             render_nav_template(category, video_data);
         }
+        add_history({ 'category' : category }, 'nav', 'carnatic.html');
     });
 }
 
@@ -614,6 +583,7 @@ function load_content_data(category, name) {
     var url = `${category}/${name}.json`;
     $.getJSON(url, function(video_data) {
         render_content_data(category, name, video_data);
+        add_history({ 'category' : category, 'name' : name }, 'content', 'carnatic.html');
     });
 }
 
@@ -1012,3 +982,62 @@ function load_keyboard(event) {
     $('#LANG_KBD').modal();
     return;
 }
+
+function handle_popstate(e) {
+    var data = e.state;
+    // console.log('POP: ', e);
+    var title = data['title'];
+    var propagate = false;
+    window.parent.carnatic_popstate = true;
+    if (title == 'content') {
+        load_content_data(data['category'], data['name']);
+    } else if (title == 'nav') {
+        load_nav_data(data['category']);
+    } else {
+        propagate = true;
+    }
+    window.parent.carnatic_popstate = false;
+}
+
+function add_history(data, title, url) {
+    if (!window.parent.carnatic_popstate) {
+        data['title'] = title;
+        // console.log('PUSH: ', data, window.parent.carnatic_popstate);
+        history.pushState(data, title, url);
+    }
+}
+
+function load_content() {
+    if (window.innerWidth < 992) {
+        $('#DEVICE_PROPERTY').modal('show');
+        setTimeout(function() { $('#DEVICE_PROPERTY').modal('hide'); }, 3000);
+    }
+    $(document).ready(function() {
+        $('#MENU_DATA li').bind('click', function() {
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+    });
+    $("#MENU_DATA li a").on("click", function() {
+        $("#MENU_DATA li").find(".active").removeClass("active");
+        $(this).parent().addClass("active");
+    });
+
+    load_id_data();
+    youtube_player_init();
+}
+
+function carnatic_init() {
+    var lang = 'English';
+    window.parent.RENDER_LANGUAGE = lang;
+    window.parent.GOT_LANGUAGE = lang;
+    window.parent.carnatic_popstate = false;
+
+    sessionStorage.clear();
+    window.addEventListener('storage', on_storage_event, false);
+    window.addEventListener('popstate', handle_popstate);
+    window.onload = load_content;
+
+    menu_transliteration(lang);
+    load_nav_data('about');
+}
+

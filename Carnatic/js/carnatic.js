@@ -985,6 +985,9 @@ function load_keyboard(event) {
 
 function handle_popstate(e) {
     var data = e.state;
+    if (data == null || data == undefined) {
+        return;
+    }
     // console.log('POP: ', e);
     var context = data['context'];
     var propagate = false;
@@ -1008,6 +1011,11 @@ function add_history(context, data, url) {
     window.parent.carnatic_popstate = false;
 }
 
+function load_youtube_frame() {
+    $('#FRAME_PLAYER').attr('src', $('#FRAME_PLAYER').attr('data-src'));
+    youtube_player_init();
+}
+
 function load_content() {
     if (window.innerWidth < 992) {
         $('#DEVICE_PROPERTY').modal('show');
@@ -1017,6 +1025,7 @@ function load_content() {
         $('#MENU_DATA li').bind('click', function() {
             $(this).addClass('active').siblings().removeClass('active');
         });
+        setTimeout(load_youtube_frame, 3000);
     });
     $("#MENU_DATA li a").on("click", function() {
         $("#MENU_DATA li").find(".active").removeClass("active");
@@ -1024,7 +1033,6 @@ function load_content() {
     });
 
     load_id_data();
-    youtube_player_init();
 }
 
 function carnatic_init() {

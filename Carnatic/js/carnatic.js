@@ -427,7 +427,7 @@ function load_nav_data(category) {
         } else {
             render_nav_template(category, video_data);
         }
-        add_history({ 'category' : category }, 'nav', 'carnatic.html');
+        add_history('nav', { 'category' : category }, 'carnatic.html');
     });
 }
 
@@ -583,7 +583,7 @@ function load_content_data(category, name) {
     var url = `${category}/${name}.json`;
     $.getJSON(url, function(video_data) {
         render_content_data(category, name, video_data);
-        add_history({ 'category' : category, 'name' : name }, 'content', 'carnatic.html');
+        add_history('content', { 'category' : category, 'name' : name }, 'carnatic.html');
     });
 }
 
@@ -986,25 +986,26 @@ function load_keyboard(event) {
 function handle_popstate(e) {
     var data = e.state;
     // console.log('POP: ', e);
-    var title = data['title'];
+    var context = data['context'];
     var propagate = false;
     window.parent.carnatic_popstate = true;
-    if (title == 'content') {
+    if (context == 'content') {
         load_content_data(data['category'], data['name']);
-    } else if (title == 'nav') {
+    } else if (context == 'nav') {
         load_nav_data(data['category']);
     } else {
         propagate = true;
     }
-    window.parent.carnatic_popstate = false;
 }
 
-function add_history(data, title, url) {
+function add_history(context, data, url) {
     if (!window.parent.carnatic_popstate) {
-        data['title'] = title;
+        data['context'] = context;
+        var title = context.toUpperCase();
         // console.log('PUSH: ', data, window.parent.carnatic_popstate);
         history.pushState(data, title, url);
     }
+    window.parent.carnatic_popstate = false;
 }
 
 function load_content() {

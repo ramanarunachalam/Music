@@ -4,6 +4,10 @@ function sleep(seconds){
     while(new Date().getTime() < waitUntil) true;
 }
 
+function capitalize_word(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 function onYouTubeIframeAPIReady() {
     window.yt_player = new YT.Player('FRAME_PLAYER', {
         events: {
@@ -1004,7 +1008,11 @@ function handle_popstate(e) {
 function add_history(context, data, url) {
     if (!window.parent.carnatic_popstate) {
         data['context'] = context;
-        var title = context.toUpperCase();
+        var title = 'Carnatic: ' + capitalize_word(data['category']);
+        var name = data['name'];
+        if (name != undefined) {
+            title += ' ' + name;
+        }
         // console.log('PUSH: ', data, window.parent.carnatic_popstate);
         history.pushState(data, title, url);
     }

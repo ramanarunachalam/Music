@@ -291,7 +291,11 @@ function set_language(obj) {
     window.parent.GOT_LANGUAGE = obj.value;
     menu_transliteration(lang);
     load_nav_data(window.parent.NAV_CATEGORY);
-    load_content_data(window.parent.CONTENT_CATGEGORY, window.parent.CONTENT_NAME);
+    if (window.parent.history_data == undefined) {
+        load_content_data(window.parent.CONTENT_CATGEGORY, window.parent.CONTENT_NAME);
+    } else  {
+        handle_history_context(window.parent.history_data);
+    }
 }
 
 function load_id_data(category) {
@@ -431,7 +435,7 @@ function load_nav_data(category) {
         } else {
             render_nav_template(category, video_data);
         }
-        add_history('nav', { 'category' : category }, 'carnatic.html');
+        add_history('nav', { 'category' : category });
     });
 }
 
@@ -587,7 +591,7 @@ function load_content_data(category, name) {
     var url = `${category}/${name}.json`;
     $.getJSON(url, function(video_data) {
         render_content_data(category, name, video_data);
-        add_history('content', { 'category' : category, 'name' : name }, 'carnatic.html');
+        add_history('content', { 'category' : category, 'name' : name });
     });
 }
 
@@ -767,9 +771,8 @@ function load_search_part(search_word, non_english) {
     return new_item_list;
 }
 
-function load_search_data() {
+function handle_search_word(search_word) {
     var lang = window.parent.RENDER_LANGUAGE;
-    var search_word = document.getElementById('SEARCH_WORD').value;
     var c = search_word.charCodeAt(0);
     if (c > 127) {
         search_word = transliterate_text(search_word);
@@ -803,6 +806,19 @@ function load_search_data() {
     }
     render_data_template('', '', item_data);
     window.scrollTo(0, 0);
+    add_history('search', { 'category' : window.parent.NAV_CATEGORY, 'search' : search_word });
+}
+
+function load_search_data() {
+    var search_word = document.getElementById('SEARCH_WORD').value;
+    var search_word = decodeURI(search_word);
+    handle_search_word(search_word);
+}
+
+function load_search_history(data) {
+    var search_word = data['search'];
+    document.getElementById('SEARCH_WORD').value = search_word;
+    handle_search_word(search_word);
 }
 
 function handle_context_search() {
@@ -987,25 +1003,29 @@ function load_keyboard(event) {
     return;
 }
 
+function handle_history_context(data) {
+    var context = data['context'];
+    if (context == 'content') {
+        load_content_data(data['category'], data['name']);
+    } else if (context == 'nav') {
+        load_nav_data(data['category']);
+    } else if (context == 'search') {
+        load_search_history(data);
+    }
+}
+
 function handle_popstate(e) {
     var data = e.state;
     if (data == null || data == undefined) {
         return;
     }
     // console.log('POP: ', e);
-    var context = data['context'];
-    var propagate = false;
     window.parent.carnatic_popstate = true;
-    if (context == 'content') {
-        load_content_data(data['category'], data['name']);
-    } else if (context == 'nav') {
-        load_nav_data(data['category']);
-    } else {
-        propagate = true;
-    }
+    handle_history_context(data);
 }
 
-function add_history(context, data, url) {
+function add_history(context, data) {
+    var url = 'carnatic.html';
     if (!window.parent.carnatic_popstate) {
         data['context'] = context;
         var title = 'Carnatic: ' + capitalize_word(data['category']);
@@ -1016,6 +1036,7 @@ function add_history(context, data, url) {
         // console.log('PUSH: ', data, window.parent.carnatic_popstate);
         history.pushState(data, title, url);
     }
+    window.parent.history_data = data;
     window.parent.carnatic_popstate = false;
 }
 
@@ -1047,6 +1068,7 @@ function carnatic_init() {
     var lang = 'English';
     window.parent.RENDER_LANGUAGE = lang;
     window.parent.GOT_LANGUAGE = lang;
+    window.parent.history_data = undefined;
     window.parent.carnatic_popstate = false;
 
     sessionStorage.clear();

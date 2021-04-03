@@ -221,6 +221,8 @@ function info_transliteration(category, data_list) {
             if (lang != 'English' && name in map_dict) {
                 obj['V'] = map_dict[value];
             }
+        } else if (name == 'God') {
+            obj['V'] = get_transliterator_text(in_lang, lang, value);
         } else if (name == 'Melakartha') {
             obj['V'] = get_transliterator_text(in_lang, lang, value);
         } else if (name == 'Arohanam' || name == 'Avarohanam') {

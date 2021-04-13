@@ -447,36 +447,26 @@ let ENG_OUT_MAP = [ ' jn', '\tjn', '\njn', 'gy', 'nc', 'nj', 'nc',
 let ENG_LIST_MAP = lists_to_map(ENG_INP_MAP, ENG_OUT_MAP);
 let HK_LIST_MAP  = lists_to_map(harvardkyoto_tamil_list, harvardkyoto_list);
 
-let hk_output_map     = new Map([['sanskrit',  lists_to_map(harvardkyoto_expanded_list, sanskrit_expanded_list)],
+let script_output_map = new Map([['sanskrit',  lists_to_map(harvardkyoto_expanded_list, sanskrit_expanded_list)],
                                  ['telugu',    lists_to_map(harvardkyoto_expanded_list, telugu_expanded_list)],
-                                 ['tamil',     lists_to_map(harvardkyoto_expanded_list, tamil_expanded_list)],
+                                 ['tamil',     lists_to_map(harvardkyoto_tamil_expanded_list, tamil_expanded_list)],
                                  ['kannada',   lists_to_map(harvardkyoto_expanded_list, kannada_expanded_list)],
                                  ['malayalam', lists_to_map(harvardkyoto_expanded_list, malayalam_expanded_list)],
                                  ['english',   lists_to_map(harvardkyoto_expanded_list, harvardkyoto_expanded_list)]
                                ]);
 
-let tamil_output_map  = new Map([['sanskrit',  lists_to_map(harvardkyoto_tamil_expanded_list, sanskrit_expanded_list)],
-                                 ['telugu',    lists_to_map(harvardkyoto_tamil_expanded_list, telugu_expanded_list)],
-                                 ['tamil',     lists_to_map(harvardkyoto_tamil_expanded_list, tamil_expanded_list)],
-                                 ['kannada',   lists_to_map(harvardkyoto_tamil_expanded_list, kannada_expanded_list)],
-                                 ['malayalam', lists_to_map(harvardkyoto_tamil_expanded_list, malayalam_expanded_list)],
-                                 ['english',   lists_to_map(harvardkyoto_tamil_expanded_list, harvardkyoto_expanded_list)]
-                               ]);
-
-function get_transliterator_text(scriptOutput, data) {
-    var scriptOutput = scriptOutput.toLowerCase();
+function get_transliterator_text(out_lang, data) {
+    var out_lang = out_lang.toLowerCase();
     let result = '';
-    if (scriptOutput == 'tamil') {
-        var out_map = tamil_output_map.get(scriptOutput);
+    if (out_lang == 'tamil') {
         result = preprocess_harvardkyoto_tamil_to_tamil(data);
-        result = transliterate_map_text(out_map, result);
     } else {
-        var out_map = hk_output_map.get(scriptOutput);
         result = transliterate_map_text(HK_LIST_MAP, data);
-        result = transliterate_map_text(out_map, result);
-        if (scriptOutput == 'english') {
-            result = transliterate_map_text(ENG_LIST_MAP, result);
-        }
+    }
+    var out_map = script_output_map.get(out_lang);
+    result = transliterate_map_text(out_map, result);
+    if (out_lang == 'english') {
+        result = transliterate_map_text(ENG_LIST_MAP, result);
     }
     return result;
 }

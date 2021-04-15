@@ -287,14 +287,16 @@ function info_transliteration(category, data_list) {
 
 function set_language(obj) {
     var lang = MAP_LANG_DICT[obj.value];
+    var history_data = window.parent.history_data;
+    // console.log(`SET LANG: ${lang} ${obj.value} ${history_data}`);
     window.parent.RENDER_LANGUAGE = lang;
     window.parent.GOT_LANGUAGE = obj.value;
     menu_transliteration(lang);
     load_nav_data(window.parent.NAV_CATEGORY);
-    if (window.parent.history_data == undefined) {
+    if (history_data == undefined) {
         load_content_data(window.parent.CONTENT_CATGEGORY, window.parent.CONTENT_NAME);
     } else  {
-        handle_history_context(window.parent.history_data);
+        handle_history_context(history_data);
     }
 }
 
@@ -1019,10 +1021,18 @@ function handle_popstate(e) {
     // console.log('POP: ', e);
     window.parent.carnatic_popstate = true;
     handle_history_context(data);
+    var lang = data['language'];
+    // set_language({ 'value' : lang });
 }
 
 function add_history(context, data) {
     var url = 'carnatic.html';
+    /*
+    if (context == 'nav') {
+        return;
+    }
+    */
+    data['language'] = window.parent.GOT_LANGUAGE;
     if (!window.parent.carnatic_popstate) {
         data['context'] = context;
         var title = 'Carnatic: ' + capitalize_word(data['category']);

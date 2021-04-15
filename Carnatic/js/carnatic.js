@@ -286,11 +286,12 @@ function info_transliteration(category, data_list) {
 }
 
 function set_language(obj) {
-    var lang = MAP_LANG_DICT[obj.value];
-    var history_data = window.parent.history_data;
-    // console.log(`SET LANG: ${lang} ${obj.value} ${history_data}`);
+    var got_lang = obj.value;
+    window.parent.GOT_LANGUAGE = got_lang;
+    var lang = MAP_LANG_DICT[got_lang];
     window.parent.RENDER_LANGUAGE = lang;
-    window.parent.GOT_LANGUAGE = obj.value;
+    var history_data = window.parent.history_data;
+    // console.log(`SET LANG: ${lang} ${got_lang} ${history_data}`);
     menu_transliteration(lang);
     load_nav_data(window.parent.NAV_CATEGORY);
     if (history_data == undefined) {

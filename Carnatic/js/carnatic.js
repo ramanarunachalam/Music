@@ -34,6 +34,7 @@ function onPlayerStateChange(event) {
     } else {
         play_status = 0;
     }
+    // console.log(`Player Status ${player_status} last: ${last_player_status}`);
     last_player_status = player_status;
 }
 

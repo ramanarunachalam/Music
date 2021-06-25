@@ -8,6 +8,23 @@ function capitalize_word(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+function call_modal_dialog(title) {
+    $('#DIALOG_TITLE').html(title);
+    var dialog_id = '#DIALOG_BOX';
+    $(dialog_id).modal('show');
+    setTimeout(function() { $(dialog_id).modal('hide'); }, 3000);
+}
+
+function show_modal_dialog(title, body) {
+    $('#DIALOG_BODY').html(body);
+    call_modal_dialog(title);
+}
+
+function render_modal_dialog(title, template, data) {
+    render_card_template(template, '#DIALOG_BODY', data);
+    call_modal_dialog(title);
+}
+
 function onYouTubeIframeAPIReady() {
     window.yt_player = new YT.Player('FRAME_PLAYER', {
         events: {
@@ -21,18 +38,15 @@ function onPlayerReady(event) {
     document.getElementById('FRAME_PLAYER').style.borderColor = '#FF6D00';
 }
 
+last_player_status = 0;
 function onPlayerStateChange(event) {
     var player_status = event.data;
-    last_player_status = 0;
-    play_status = 0;
     // playerStatus: -1 : unstarted, 0 - ended, 1 - playing, 2 - paused, 3 - buffering, 5 - video cued
-    if (player_status == 0 || (last_player_status == 3 && player_status == -1)) {
-        play_status = 0;
+    if (last_player_status == 3 && player_status == -1) {
+        show_modal_dialog('Video is not playable', 'Click Play List to Delete Song');
+    }
+    if (player_status == 0) {
         play_next();
-    } else if (player_status == 1) {
-        play_status = 1;
-    } else {
-        play_status = 0;
     }
     // console.log(`Player Status ${player_status} last: ${last_player_status}`);
     last_player_status = player_status;
@@ -73,8 +87,7 @@ function on_storage_event(storageEvent) {
         return;
     }
     if (play_list.length > 1) {
-        $('#PLAYLIST_QUEUE').modal('show');
-        setTimeout(function() { $('#PLAYLIST_QUEUE').modal('hide'); }, 3000);
+        show_modal_dialog('Song added to Play List', 'Click Play List to Add/Delete Songs');
         return;
     }
     play_first();
@@ -325,8 +338,7 @@ function add_song(audio_file) {
     if (play_list.length == 1) {
         play_first();
     } else {
-        $('#PLAYLIST_QUEUE').modal('show');
-        setTimeout(function() { $('#PLAYLIST_QUEUE').modal('hide'); }, 3000);
+        show_modal_dialog('Song added to Play List', 'Click Play List to Add/Delete Songs');
     }
 }
 
@@ -369,9 +381,7 @@ function show_playlist() {
     }
     var header_list = [ header_dict ];
     var list_data = { 'playlist' : { 'header' : header_list, 'videos' : info_list } };
-    $('#playlistModalLabel').html(playlist);
-    render_card_template('#modal-playlist-template', '#PLAYLIST_BODY', list_data);
-    $('#PLAYLIST_MODAL').modal();
+    render_modal_dialog(playlist, '#modal-playlist-template', list_data)
 }
 
 function handle_playlist_command(cmd, arg) {
@@ -893,8 +903,7 @@ function get_youtube_video_info(id) {
             }
         }
         var info_data = { 'videoinfo' : info_list };
-        render_card_template('#modal-videoinfo-template', '#VIDEOINFO_BODY', info_data);
-        $('#VIDEO_INFO').modal();
+        render_modal_dialog('Playlist', '#modal-videoinfo-template', info_data)
     });
 }
 
@@ -1056,8 +1065,7 @@ function load_youtube_frame() {
 
 function load_content() {
     if (window.innerWidth < 992) {
-        $('#DEVICE_PROPERTY').modal('show');
-        setTimeout(function() { $('#DEVICE_PROPERTY').modal('hide'); }, 3000);
+        show_modal_dialog('Best Viewed in Landscape Mode', 'Use Landscape Mode');
     }
     $(document).ready(function() {
         $('#MENU_DATA li').bind('click', function() {

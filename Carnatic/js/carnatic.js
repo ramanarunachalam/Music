@@ -10,14 +10,13 @@ function capitalize_word(s) {
 
 function call_modal_dialog(title) {
     $('#DIALOG_TITLE').html(title);
-    var dialog_id = '#DIALOG_BOX';
-    $(dialog_id).modal('show');
-    setTimeout(function() { $(dialog_id).modal('hide'); }, 3000);
+    $('#DIALOG_BOX').modal('show');
 }
 
 function show_modal_dialog(title, body) {
     $('#DIALOG_BODY').html(body);
     call_modal_dialog(title);
+    setTimeout(function() { $('#DIALOG_BOX').modal('hide'); }, 3000);
 }
 
 function render_modal_dialog(title, template, data) {
@@ -894,7 +893,6 @@ const VIDEO_INFO_KEY_LIST = new Set([ 'title', 'author_name' ]);
 function get_youtube_video_info(id) {
     var url = `https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=${id}&format=json`
     $.getJSON(url, function(video_data) {
-        $('#videoinfoModalLabel').html(id);
         var info_list = [];
         for (var key in video_data) {
             if (VIDEO_INFO_KEY_LIST.has(key)) {
@@ -903,7 +901,7 @@ function get_youtube_video_info(id) {
             }
         }
         var info_data = { 'videoinfo' : info_list };
-        render_modal_dialog('Playlist', '#modal-videoinfo-template', info_data)
+        render_modal_dialog(id, '#modal-videoinfo-template', info_data)
     });
 }
 

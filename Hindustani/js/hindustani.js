@@ -103,16 +103,16 @@ var CATEGORY_DICT = { 'categories' : [ { 'C' : 'raga',     'I' : 'music-note-lis
 
 var KEYBOARD_LIST = [ { 'I' : 'c4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'sa1' ] },
                       { 'I' : 'c-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ri1' ] },
-                      { 'I' : 'd4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ri2', 'ga1' ] },
-                      { 'I' : 'd-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ri3', 'ga2' ] },
-                      { 'I' : 'e4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ga3' ] },
+                      { 'I' : 'd4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ri2' ] },
+                      { 'I' : 'd-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ga1' ] },
+                      { 'I' : 'e4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ga2' ] },
                       { 'I' : 'f4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ma1' ] },
                       { 'I' : 'f-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ma2' ] },
                       { 'I' : 'g4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'pa' ] },
                       { 'I' : 'g-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'da1' ] },
-                      { 'I' : 'a4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'da2', 'ni1' ] },
-                      { 'I' : 'a-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'da3', 'ni2' ] },
-                      { 'I' : 'b4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ni3' ] },
+                      { 'I' : 'a4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'da2' ] },
+                      { 'I' : 'a-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ni1' ] },
+                      { 'I' : 'b4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ni2' ] },
                       { 'I' : 'c5',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'sa2' ] },
                     ]
 
@@ -236,7 +236,7 @@ function info_transliteration(category, data_list) {
             obj['V'] = get_transliterator_text(lang, value);
         } else if (name == 'Thaat') {
             obj['V'] = get_transliterator_text(lang, value);
-        } else if (name == 'Arohanam' || name == 'Avarohanam') {
+        } else if (name == 'Aroha' || name == 'Avaroha') {
             obj['V'] = get_swara_text(lang, note_list, value)
         } else if (name == 'Born' || name == 'Died') {
             if (value != undefined && typeof value === 'string') {
@@ -850,8 +850,7 @@ function handle_context_search() {
     load_context_search_data(context_list);
 }
 
-const old_note_map = { 'S' : 'c3', 'S1' : 'c3', 'R1' : 'c-3', 'R2' : 'd3', 'G1' : 'd3', 'R3' : 'd-3', 'G2' : 'd-3', 'G3' : 'e3', 'M1' : 'f3', 'M2' : 'f-3', 'P' : 'g3', 'D1' : 'g-3', 'D2' : 'a3', 'N1' : 'a3', 'D3' : 'a-3', 'N2' : 'a-3', 'N3' : 'b3', 'S2' : 'c4' };
-const note_map = { 'S' : 'c4', 'S1' : 'c4', 'R1' : 'c-4', 'R2' : 'd4', 'G1' : 'd4', 'R3' : 'd-4', 'G2' : 'd-4', 'G3' : 'e4', 'M1' : 'f4', 'M2' : 'f-4', 'P' : 'g4', 'D1' : 'g-4', 'D2' : 'a4', 'N1' : 'a4', 'D3' : 'a-4', 'N2' : 'a-4', 'N3' : 'b4', 'S2' : 'c5' };
+const note_map = { 'S' : 'c4', 'S1' : 'c4', 'R1' : 'c-4', 'R2' : 'd4', 'G1' : 'd-4', 'G2' : 'e4', 'M1' : 'f4', 'M2' : 'f-4', 'P' : 'g4', 'D1' : 'g-4', 'D2' : 'a4', 'N1' : 'a-4', 'N2' : 'b4', 'S2' : 'c5' };
 
 function play_ended() {
     var note_list = window.note_play_list;

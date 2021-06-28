@@ -234,7 +234,7 @@ function info_transliteration(category, data_list) {
             }
         } else if (name == 'God') {
             obj['V'] = get_transliterator_text(lang, value);
-        } else if (name == 'Melakartha') {
+        } else if (name == 'Thaat') {
             obj['V'] = get_transliterator_text(lang, value);
         } else if (name == 'Arohanam' || name == 'Avarohanam') {
             obj['V'] = get_swara_text(lang, note_list, value)

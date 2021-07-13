@@ -436,12 +436,14 @@ function preprocess_harvardkyoto_tamil_to_tamil(input_txt){
 
 let ENG_INP_MAP = [ ' jJ', '\tjJ', '\njJ', 'jJ', 'Jc', 'Jj',
                     'Mc', 'Mj', 'Mk', 'Mg', 'MT', 'MD', 'Mt', 'Md',
-                    'G', '_r', '_n', 'R', 'RR', 'lR', 'lRR', 'M'
+                    'G', '_r', '_n', 'R', 'RR', 'lR', 'lRR', 'M',
+                    'A~'
                   ];
 
 let ENG_OUT_MAP = [ ' jn', '\tjn', '\njn', 'gy', 'nc', 'nj',
                     'nc', 'nj', 'nk', 'ng', 'NT', 'ND', 'nt', 'nd',
-                    'n', 'R',  'n', 'ru', 'rU', 'lu', 'lU', 'm'
+                    'n', 'R',  'n', 'ru', 'rU', 'lu', 'lU', 'm',
+                    'An'
                   ];
 
 let ENG_LIST_MAP = lists_to_map(ENG_INP_MAP, ENG_OUT_MAP);

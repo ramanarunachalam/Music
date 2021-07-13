@@ -470,6 +470,10 @@ function get_transliterator_text(out_lang, data) {
     if (out_lang == 'english') {
         result = transliterate_map_text(ENG_LIST_MAP, result);
     }
+    if (out_lang == 'hindi') {
+        result = result.replace(/\u094d /gm, ' ');
+        result = result.replace(/\u094d$/gm, '');
+    }
     return result;
 }
 

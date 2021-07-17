@@ -122,6 +122,52 @@ let sanskrit_expanded_list = (`
 
 `).split(/\s+/);
 
+let bengali_expanded_list = (`
+অ আ ই ঈ উ ঊ ঋ লৃ এ এ ঐ ও ও ঔ ৠ লৄ
+
+ক্ খ্ গ্ ঘ্ ঙ্ চ্ ছ্ জ্ ঝ্ ঞ্ ট্ ঠ্ ড্ ঢ্ ণ্ ত্ থ্ দ্ ধ্ ন্ ন্ প্ ফ্ ব্ ভ্ ম্ য্ র্ র্ ল্ ল্ ল্ ব্ শ্ ষ্ স্ হ্
+
+ক কা কি কী কু কূ কৃ কৢ কে কে কৈ কো কো কৌ কৄ কৣ
+খ খা খি খী খু খূ খৃ খৢ খে খে খৈ খো খো খৌ খৄ খৣ
+গ গা গি গী গু গূ গৃ গৢ গে গে গৈ গো গো গৌ গৄ গৣ
+ঘ ঘা ঘি ঘী ঘু ঘূ ঘৃ ঘৢ ঘে ঘে ঘৈ ঘো ঘো ঘৌ ঘৄ ঘৣ
+ঙ ঙা ঙি ঙী ঙু ঙূ ঙৃ ঙৢ ঙে ঙে ঙৈ ঙো ঙো ঙৌ ঙৄ ঙৣ
+চ চা চি চী চু চূ চৃ চৢ চে চে চৈ চো চো চৌ চৄ চৣ
+ছ ছা ছি ছী ছু ছূ ছৃ ছৢ ছে ছে ছৈ ছো ছো ছৌ ছৄ ছৣ
+জ জা জি জী জু জূ জৃ জৢ জে জে জৈ জো জো জৌ জৄ জৣ
+ঝ ঝা ঝি ঝী ঝু ঝূ ঝৃ ঝৢ ঝে ঝে ঝৈ ঝো ঝো ঝৌ ঝৄ ঝৣ
+ঞ ঞা ঞি ঞী ঞু ঞূ ঞৃ ঞৢ ঞে ঞে ঞৈ ঞো ঞো ঞৌ ঞৄ ঞৣ
+ট টা টি টী টু টূ টৃ টৢ টে টে টৈ টো টো টৌ টৄ টৣ
+ঠ ঠা ঠি ঠী ঠু ঠূ ঠৃ ঠৢ ঠে ঠে ঠৈ ঠো ঠো ঠৌ ঠৄ ঠৣ
+ড ডা ডি ডী ডু ডূ ডৃ ডৢ ডে ডে ডৈ ডো ডো ডৌ ডৄ ডৣ
+ঢ ঢা ঢি ঢী ঢু ঢূ ঢৃ ঢৢ ঢে ঢে ঢৈ ঢো ঢো ঢৌ ঢৄ ঢৣ
+ণ ণা ণি ণী ণু ণূ ণৃ ণৢ ণে ণে ণৈ ণো ণো ণৌ ণৄ ণৣ
+ত তা তি তী তু তূ তৃ তৢ তে তে তৈ তো তো তৌ তৄ তৣ
+থ থা থি থী থু থূ থৃ থৢ থে থে থৈ থো থো থৌ থৄ থৣ
+দ দা দি দী দু দূ দৃ দৢ দে দে দৈ দো দো দৌ দৄ দৣ
+ধ ধা ধি ধী ধু ধূ ধৃ ধৢ ধে ধে ধৈ ধো ধো ধৌ ধৄ ধৣ
+ন না নি নী নু নূ নৃ নৢ নে নে নৈ নো নো নৌ নৄ নৣ
+ন না নি নী নু নূ নৃ নৢ নে নে নৈ নো নো নৌ নৄ নৣ
+প পা পি পী পু পূ পৃ পৢ পে পে পৈ পো পো পৌ পৄ পৣ
+ফ ফা ফি ফী ফু ফূ ফৃ ফৢ ফে ফে ফৈ ফো ফো ফৌ ফৄ ফৣ
+ব বা বি বী বু বূ বৃ বৢ বে বে বৈ বো বো বৌ বৄ বৣ
+ভ ভা ভি ভী ভু ভূ ভৃ ভৢ ভে ভে ভৈ ভো ভো ভৌ ভৄ ভৣ
+ম মা মি মী মু মূ মৃ মৢ মে মে মৈ মো মো মৌ মৄ মৣ
+য যা যি যী যু যূ যৃ যৢ যে যে যৈ যো যো যৌ যৄ যৣ
+র রা রি রী রু রূ রৃ রৢ রে রে রৈ রো রো রৌ রৄ রৣ
+র রা রি রী রু রূ রৃ রৢ রে রে রৈ রো রো রৌ রৄ রৣ
+ল লা লি লী লু লূ লৃ লৢ লে লে লৈ লো লো লৌ লৄ লৣ
+ল লা লি লী লু লূ লৃ লৢ লে লে লৈ লো লো লৌ লৄ লৣ
+ল লা লি লী লু লূ লৃ লৢ লে লে লৈ লো লো লৌ লৄ লৣ
+ল লা লি লী লু লূ লৃ লৢ লে লে লৈ লো লো লৌ লৄ লৣ
+শ শা শি শী শু শূ শৃ শৢ শে শে শৈ শো শো শৌ শৄ শৣ
+ষ ষা ষি ষী ষু ষূ ষৃ ষৢ ষে ষে ষৈ ষো ষো ষৌ ষৄ ষৣ
+স সা সি সী সু সূ সৃ সৢ সে সে সৈ সো সো সৌ সৄ সৣ
+হ হা হি হী হু হূ হৃ হৢ হে হে হৈ হো হো হৌ হৄ হৣ
+
+ঁ ং ঃ ঽ ওম গ্
+
+`).split(/\s+/);
 
 let telugu_expanded_list = (`
 అ ఆ ఇ ఈ ఉ ఊ ఋ ఌ ఎ ఏ ఐ ఒ ఓ ఔ ౠ ౡ
@@ -361,21 +407,23 @@ ha hA hi hI hu hU h.R hl.R he hE hai ho hO hau h.R.R hl.R.R
 `).split(/\s+/);
 
 
-const MAP_LANG_DICT = { 'English' : 'English', 'हिंदी' : 'Hindi', 'ಕನ್ನಡ' : 'Kannada', 'தமிழ்' : 'Tamil', 'తెలుగు' : 'Telugu', 'മലയാളം' : 'Malayalam' }
-const MAP_ISO_DICT = { 'English' : 'en-IN', 'Hindi' : 'hi-IN', 'Kannada' : 'kn-IN', 'Tamil' : 'ta-IN', 'Telugu' : 'te-IN', 'Malayalam' : 'ml-IN' }
+const MAP_LANG_DICT = { 'English' : 'English', 'हिंदी' : 'Hindi', 'বাংলা' : 'Bengali', 'ಕನ್ನಡ' : 'Kannada', 'தமிழ்' : 'Tamil', 'తెలుగు' : 'Telugu', 'മലയാളം' : 'Malayalam' }
+const MAP_ISO_DICT = { 'English' : 'en-IN', 'Hindi' : 'hi-IN', 'Bengali' : 'bn-IN', 'Kannada' : 'kn-IN', 'Tamil' : 'ta-IN', 'Telugu' : 'te-IN', 'Malayalam' : 'ml-IN' }
 
-const MAP_INFO_DICT = { 'Tamil' : { 'Raga' : 'ராகம்', 'Artist' : 'கலைஞர்', 'Composer' : 'கவிஞர்', 'Type' : 'வகை', 'Song' : 'பாடல்', 'About' : 'பற்றி', 'Search' : 'தேடு', 'Playlist' : 'பிளேலிஸ்ட்', 'References' : 'குறிப்புகள்', 'Born' : 'பிறப்பு', 'Died' : 'இறப்பு', 'Thaat' : 'தாட்', 'Arohanam' : 'ஆரோகணம்', 'Avarohanam' : 'அவரோகணம்', 'Tala' : 'தாளம்', 'Tala name' : 'தாள பெயர்', 'Tala angas' : 'தாள அங்கங்கள்', 'Tala count' : 'தாள எண்ணிக்கை', 'Language' :'மொழி', 'God' : 'இறைவன்', 'English' : 'ஆங்கிலம்', 'Tamil' : 'தமிழ்', 'Telugu' : 'தெலுங்கு', 'Kannada' : 'கன்னடா', 'Malayalam' : 'மலையாளம்', 'Hindi' : 'இந்தி', 'Videos' : 'வீடியோக்கள்', 'Ragas' : 'ராகங்கள்', 'Artists' : 'கலைஞர்கள்', 'Composers' : 'கவிஞர்கள்', 'Types' : 'வகைகள்', 'Songs' : 'பாடல்கள்', 'Duration' : 'காலம்', 'Views' : 'பார்வைகள்', 'Updated' : 'புதுப்பிக்கப்பட்டது', 'Search Results' : 'தேடல் முடிவுகள்' },
-                  'Telugu' : { 'Raga' : 'రాగం', 'Artist' : 'కళాకారుడు', 'Composer' : 'కవి', 'Type' : 'రకము', 'Song' : 'పాట', 'About' : 'గురించి', 'Search' : 'వెతకండి', 'Playlist' : 'ప్లేలిస్ట్', 'References' : 'ప్రస్తావనలు', 'Born' : 'జననం', 'Died' : 'మరణం', 'Thaat' : 'థాట్', 'Arohanam' : 'ఆరోహణ', 'Avarohanam' : 'అవరోహణ', 'Tala' : 'తాలా', 'Tala name' : 'తాలా పేరు', 'Tala angas' : 'తాలా అంగస్', 'Tala count' : 'తాలా లెక్కింపు ', 'Language' :'భాష', 'God' : 'దేవుడు', 'English' : 'ఆంగ్లం', 'Tamil' : 'తమిళం', 'Telugu' : 'తెలుగు', 'Kannada' : 'కన్నడ', 'Malayalam' : 'మలయాళం', 'Hindi' : 'సంస్కృతo', 'Videos' : 'వీడియోలు', 'Ragas' : 'రాగాలు', 'Artists' : 'కళాకారులు', 'Composers' : 'కవులు', 'Types' : 'రకాలు', 'Songs' : 'పాటలు', 'Duration' : 'వ్యవధి', 'Views' : 'వీక్షణలు', 'Updated' : 'నవీకరించబడింది', 'Search Results' : 'శోధన ఫలితాలు' },
-                  'Kannada' : { 'Raga' : 'ರಾಗ', 'Artist' : 'ಕಲಾವಿದ', 'Composer' : 'ಕವಿ', 'Type' : 'ವಿಧ', 'Song' : 'ಹಾಡು', 'About' : 'ಬಗ್ಗೆ', 'Search' : 'ಹುಡುಕಿ', 'Playlist' : 'ಪ್ಲೇಲಿಸ್ಟ್', 'References' : 'ಉಲ್ಲೇಖಗಳು', 'Born' : 'ಜನನ', 'Died' : 'ಮರಣ', 'Thaat' : 'ಥಾಟ್', 'Arohanam' : 'ಆರೋಹಣ', 'Avarohanam' : 'ಅವರೋಹಣ', 'Tala' : 'ತಾಳಾ', 'Tala name' : 'ತಾಳಾ ಹೆಸರು', 'Tala angas' : 'ತಾಳಾ ಅಂಗಗಳು', 'Tala count' : 'ತಾಳಾ ಎಣಿಕೆ', 'Language' :'ಭಾಷೆ', 'God' : 'ದೇವರು', 'English' : 'ಆಂಗ್ಲ', 'Tamil' : 'ತಮಿಳು', 'Telugu' : 'ತೆಲುಗು', 'Kannada' : 'ಕನ್ನಡ', 'Malayalam' : 'ಮಲಯಾಳಂ', 'Hindi' : 'ಹಿಂದಿ', 'Videos' : 'ವೀಡಿಯೊಗಳು', 'Ragas' : 'ರಾಗಗಳು', 'Artists' : 'ಕಲಾವಿದರು', 'Composers' : 'ಕವಿಗಳು', 'Types' : 'ವಿಧಗಳು', 'Songs' : 'ಹಾಡುಗಳು', 'Duration' : 'ಅವಧಿ', 'Views' : 'ವೀಕ್ಷಣೆಗಳು', 'Updated' : 'ನವೀಕರಿಸಲಾಗಿದೆ', 'Search Results' : 'ಹುಡುಕಾಟ ಫಲಿತಾಂಶಗಳು' },
-                  'Malayalam' : { 'Raga' : 'രാഗം', 'Artist' : 'കലാകാരി', 'Composer' : 'കവി', 'Type' : 'തരം', 'Song' : 'ഗാനം', 'About' : 'കുറിച്ച്', 'Search' : 'തിരയൽ', 'Playlist' : 'പ്പ്ളേലിസ്ട്', 'References' : 'കുറിപ്പുകൾ', 'Born' : 'ജനനം ', 'Died' : 'മരണം', 'Thaat' : 'ഥാട്', 'Arohanam' : 'ആരോഹണം', 'Avarohanam' : 'അവരോഹണം', 'Tala' : 'താളം', 'Tala name' : 'താളം പേര്', 'Tala angas' : 'താളം അംഗങ്ങൾ', 'Tala count' : 'താളം എണ്ണം', 'Language' :'ഭാഷ', 'God' : 'ദൈവം', 'English' : 'ഇംഗ്ലീഷ്', 'Tamil' : 'തമിഴ്', 'Telugu' : 'തെലുങ്ക്', 'Kannada' : 'കന്നഡ', 'Malayalam' : 'മലയാളം', 'Hindi' : 'ഹിന്ദി', 'Videos' : 'വീഡിയോകൾ', 'Ragas' : 'രാഗങ്ങൾ', 'Artists' : 'കലാകാരന്മാർ', 'Composers' : 'കവികൾ ', 'Types' : 'തരങ്ങൾ', 'Songs' : 'ഗാനങ്ങൾ', 'Duration' : 'കാലാവധി', 'Views' : 'കാഴ്‌ചകൾ', 'Updated' : 'നവീകരിക്കുക', 'Search Results' : 'തിരയൽ ഫലങ്ങൾ' },
-                  'Hindi' : { 'Raga' : 'राग', 'Artist' : 'कलाकार', 'Composer' : 'कवि', 'Type' : 'प्रकार', 'Song' : 'गीत', 'About' : 'बारे', 'Search' : 'खोज', 'Playlist' : 'प्लेलिस्ट', 'References' : 'संदर्भ', 'Born' : 'जन्म', 'Died' : 'मरण', 'Thaat' : 'ठाट', 'Arohanam' : 'आरोही', 'Avarohanam' : 'अवरोही', 'Tala' : 'ताल', 'Tala name' : 'ताल नाम', 'Tala angas' : 'ताल आगा', 'Tala count' : 'ताल गिनती', 'Language' :'भाषा', 'God' : 'भगवान', 'English' : 'अंग्रेज़ी', 'Tamil' : 'तमिल', 'Telugu' : 'तेलुगु ', 'Kannada' : 'कन्नड़', 'Malayalam' : 'मलयालम', 'Hindi' : 'हिंदी', 'Videos' : 'वीडियो', 'Ragas' : 'राग', 'Artists' : 'कलाकार', 'Composers' : 'कवि', 'Types' : 'प्रकार', 'Songs' : 'गाने', 'Duration' : 'अवधि', 'Views' : 'दृश्य', 'Updated' : 'अपडेट', 'Search Results' : 'खोज परिणाम' },
-                };
+const MAP_INFO_DICT = { 'Hindi' : { 'Raga' : 'राग', 'Artist' : 'कलाकार', 'Composer' : 'गीतकार', 'Type' : 'प्रकार', 'Song' : 'गीत', 'About' : 'बारे', 'Search' : 'खोज', 'Playlist' : 'प्लेलिस्ट', 'References' : 'संदर्भ', 'Born' : 'जन्म', 'Died' : 'मरण', 'Gharana' : 'घराना', 'Thaat' : 'ठाट', 'Aroha' : 'आरोही', 'Avaroha' : 'अवरोही', 'Tala' : 'ताल', 'Tala name' : 'ताल नाम', 'Tala angas' : 'ताल आगा', 'Tala count' : 'ताल गिनती', 'Language' :'भाषा', 'God' : 'भगवान', 'English' : 'अंग्रेज़ी', 'Tamil' : 'तमिल', 'Telugu' : 'तेलुगु ', 'Kannada' : 'कन्नड़', 'Malayalam' : 'मलयालम', 'Hindi' : 'हिंदी', 'Videos' : 'वीडियो', 'Ragas' : 'राग', 'Artists' : 'कलाकार', 'Composers' : 'कवि', 'Types' : 'प्रकार', 'Songs' : 'गाने', 'Duration' : 'अवधि', 'Views' : 'दृश्य', 'Updated' : 'अपडेट', 'Search Results' : 'खोज परिणाम' },
+                        'Bengali' : { 'Raga' : 'রাগ', 'Artist' : 'কলাভৃৎ', 'Composer' : 'গীতিকার', 'Type' : 'প্রকার', 'Song' : 'গীত', 'About' : 'সম্পর্কিত', 'Search' : 'অনুসন্ধান', 'Playlist' : 'প্লেলিস্ট', 'References' : 'তথ্যসূত্র', 'Born' : 'জন্ম', 'Died' : 'মৃত্যু', 'Gharana' : 'ঘরানা', 'Thaat' : 'যে', 'Aroha' : 'আরোহী', 'Avaroha' : 'অবতরণ', 'Tala' : 'தாளம்', 'Tala name' : 'தாள பெயர்', 'Tala angas' : 'தாள அங்கங்கள்', 'Tala count' : 'தாள எண்ணிக்கை', 'Language' :'ভাষা', 'God' : 'இறைவன்', 'English' : 'ইংরেজি', 'Tamil' : 'তামিল', 'Telugu' : 'তেলেগু', 'Kannada' : 'কান্নাডা', 'Malayalam' : 'মালায়ালাম', 'Hindi' : 'হিন্দি', 'Videos' : 'ভিডিও', 'Ragas' : 'রাগ', 'Artists' : 'কলাভৃৎ', 'Composers' : 'গীতিকার', 'Types' : 'প্রকার', 'Songs' : 'গীত', 'Duration' : 'সময়কাল', 'Views' : 'দেখুন', 'Updated' : 'Updated', 'Search Results' : 'অনুসন্ধান ফলাফল' },
+                        'Tamil' : { 'Raga' : 'ராகம்', 'Artist' : 'கலைஞர்', 'Composer' : 'கவிஞர்', 'Type' : 'வகை', 'Song' : 'பாடல்', 'About' : 'பற்றி', 'Search' : 'தேடு', 'Playlist' : 'பிளேலிஸ்ட்', 'References' : 'குறிப்புகள்', 'Born' : 'பிறப்பு', 'Died' : 'இறப்பு', 'Gharana' : 'கரானா', 'Thaat' : 'தாட்', 'Aroha' : 'ஆரோகணம்', 'Avaroha' : 'அவரோகணம்', 'Tala' : 'தாளம்', 'Tala name' : 'தாள பெயர்', 'Tala angas' : 'தாள அங்கங்கள்', 'Tala count' : 'தாள எண்ணிக்கை', 'Language' :'மொழி', 'God' : 'இறைவன்', 'English' : 'ஆங்கிலம்', 'Tamil' : 'தமிழ்', 'Telugu' : 'தெலுங்கு', 'Kannada' : 'கன்னடா', 'Malayalam' : 'மலையாளம்', 'Hindi' : 'இந்தி', 'Videos' : 'வீடியோக்கள்', 'Ragas' : 'ராகங்கள்', 'Artists' : 'கலைஞர்கள்', 'Composers' : 'கவிஞர்கள்', 'Types' : 'வகைகள்', 'Songs' : 'பாடல்கள்', 'Duration' : 'காலம்', 'Views' : 'பார்வைகள்', 'Updated' : 'புதுப்பிக்கப்பட்டது', 'Search Results' : 'தேடல் முடிவுகள்' },
+                        'Telugu' : { 'Raga' : 'రాగం', 'Artist' : 'కళాకారుడు', 'Composer' : 'కవి', 'Type' : 'రకము', 'Song' : 'పాట', 'About' : 'గురించి', 'Search' : 'వెతకండి', 'Playlist' : 'ప్లేలిస్ట్', 'References' : 'ప్రస్తావనలు', 'Born' : 'జననం', 'Died' : 'మరణం', 'Gharana' : 'ఘరానా', 'Thaat' : 'థాట్', 'Aroha' : 'ఆరోహణ', 'Avaroha' : 'అవరోహణ', 'Tala' : 'తాలా', 'Tala name' : 'తాలా పేరు', 'Tala angas' : 'తాలా అంగస్', 'Tala count' : 'తాలా లెక్కింపు ', 'Language' :'భాష', 'God' : 'దేవుడు', 'English' : 'ఆంగ్లం', 'Tamil' : 'తమిళం', 'Telugu' : 'తెలుగు', 'Kannada' : 'కన్నడ', 'Malayalam' : 'మలయాళం', 'Hindi' : 'సంస్కృతo', 'Videos' : 'వీడియోలు', 'Ragas' : 'రాగాలు', 'Artists' : 'కళాకారులు', 'Composers' : 'కవులు', 'Types' : 'రకాలు', 'Songs' : 'పాటలు', 'Duration' : 'వ్యవధి', 'Views' : 'వీక్షణలు', 'Updated' : 'నవీకరించబడింది', 'Search Results' : 'శోధన ఫలితాలు' },
+                        'Kannada' : { 'Raga' : 'ರಾಗ', 'Artist' : 'ಕಲಾವಿದ', 'Composer' : 'ಕವಿ', 'Type' : 'ವಿಧ', 'Song' : 'ಹಾಡು', 'About' : 'ಬಗ್ಗೆ', 'Search' : 'ಹುಡುಕಿ', 'Playlist' : 'ಪ್ಲೇಲಿಸ್ಟ್', 'References' : 'ಉಲ್ಲೇಖಗಳು', 'Born' : 'ಜನನ', 'Died' : 'ಮರಣ', 'Gharana' : 'ಘರಾನಾ', 'Thaat' : 'ಥಾಟ್', 'Aroha' : 'ಆರೋಹಣ', 'Avaroha' : 'ಅವರೋಹಣ', 'Tala' : 'ತಾಳಾ', 'Tala name' : 'ತಾಳಾ ಹೆಸರು', 'Tala angas' : 'ತಾಳಾ ಅಂಗಗಳು', 'Tala count' : 'ತಾಳಾ ಎಣಿಕೆ', 'Language' :'ಭಾಷೆ', 'God' : 'ದೇವರು', 'English' : 'ಆಂಗ್ಲ', 'Tamil' : 'ತಮಿಳು', 'Telugu' : 'ತೆಲುಗು', 'Kannada' : 'ಕನ್ನಡ', 'Malayalam' : 'ಮಲಯಾಳಂ', 'Hindi' : 'ಹಿಂದಿ', 'Videos' : 'ವೀಡಿಯೊಗಳು', 'Ragas' : 'ರಾಗಗಳು', 'Artists' : 'ಕಲಾವಿದರು', 'Composers' : 'ಕವಿಗಳು', 'Types' : 'ವಿಧಗಳು', 'Songs' : 'ಹಾಡುಗಳು', 'Duration' : 'ಅವಧಿ', 'Views' : 'ವೀಕ್ಷಣೆಗಳು', 'Updated' : 'ನವೀಕರಿಸಲಾಗಿದೆ', 'Search Results' : 'ಹುಡುಕಾಟ ಫಲಿತಾಂಶಗಳು' },
+                        'Malayalam' : { 'Raga' : 'രാഗം', 'Artist' : 'കലാകാരി', 'Composer' : 'കവി', 'Type' : 'തരം', 'Song' : 'ഗാനം', 'About' : 'കുറിച്ച്', 'Search' : 'തിരയൽ', 'Playlist' : 'പ്പ്ളേലിസ്ട്', 'References' : 'കുറിപ്പുകൾ', 'Born' : 'ജനനം ', 'Died' : 'മരണം', 'Gharana' : 'ഘരാന', 'Thaat' : 'ഥാട്', 'Aroha' : 'ആരോഹണം', 'Avaroha' : 'അവരോഹണം', 'Tala' : 'താളം', 'Tala name' : 'താളം പേര്', 'Tala angas' : 'താളം അംഗങ്ങൾ', 'Tala count' : 'താളം എണ്ണം', 'Language' :'ഭാഷ', 'God' : 'ദൈവം', 'English' : 'ഇംഗ്ലീഷ്', 'Tamil' : 'തമിഴ്', 'Telugu' : 'തെലുങ്ക്', 'Kannada' : 'കന്നഡ', 'Malayalam' : 'മലയാളം', 'Hindi' : 'ഹിന്ദി', 'Videos' : 'വീഡിയോകൾ', 'Ragas' : 'രാഗങ്ങൾ', 'Artists' : 'കലാകാരന്മാർ', 'Composers' : 'കവികൾ ', 'Types' : 'തരങ്ങൾ', 'Songs' : 'ഗാനങ്ങൾ', 'Duration' : 'കാലാവധി', 'Views' : 'കാഴ്‌ചകൾ', 'Updated' : 'നവീകരിക്കുക', 'Search Results' : 'തിരയൽ ഫലങ്ങൾ' }                  
+                    };
 
-const MAP_MONTH_DICT = { 'Tamil' : { 'Jan' : 'ஜனவரி', 'Feb' : 'பிப்ரவரி', 'Mar' : 'மார்ச்', 'Apr' : 'ஏப்ரல்', 'May' : 'மே', 'Jun' : 'ஜூன்', 'Jul' : 'ஜூலை', 'Aug' : 'ஆகஸ்ட்', 'Sep' : 'செப்டம்பர்', 'Oct' : 'அக்டோபர்', 'Nov' : 'நவம்பர்', 'Dec' : 'டிசம்பர்' },
+const MAP_MONTH_DICT = { 'Hindi' : { 'Jan' : 'जनवरी', 'Feb' : 'फ़रवरी', 'Mar' : 'मार्च', 'Apr' : 'अप्रैल', 'May' : 'मई', 'Jun' : 'जून', 'Jul' : 'जुलाई', 'Aug' : 'अगस्त', 'Sep' : 'सितंबर', 'Oct' : 'अक्टूबर', 'Nov' : 'नवंबर', 'Dec' : 'दिसंबर' },
+                         'Bengali' : { 'Jan' : 'জানুয়ারী', 'Feb' : 'ফেব্রুয়ারী', 'Mar' : 'মার্চ', 'Apr' : 'এপ্রিল', 'May' : 'মে', 'Jun' : 'জুন', 'Jul' : 'জুলাই', 'Aug' : 'আগস্ট', 'Sep' : 'সেপ্টেম্বর', 'Oct' : 'অক্টোবর', 'Nov' : 'নভেম্বর', 'Dec' : 'ডিসেম্বর' },
+                         'Tamil' : { 'Jan' : 'ஜனவரி', 'Feb' : 'பிப்ரவரி', 'Mar' : 'மார்ச்', 'Apr' : 'ஏப்ரல்', 'May' : 'மே', 'Jun' : 'ஜூன்', 'Jul' : 'ஜூலை', 'Aug' : 'ஆகஸ்ட்', 'Sep' : 'செப்டம்பர்', 'Oct' : 'அக்டோபர்', 'Nov' : 'நவம்பர்', 'Dec' : 'டிசம்பர்' },
                          'Telugu' : { 'Jan' : 'జనవరి', 'Feb' : 'ఫిబ్రవరి', 'Mar' : 'మార్చి', 'Apr' : 'ఏప్రిల్', 'May' : 'మే', 'Jun' : 'జూన్', 'Jul' : 'జూలై', 'Aug' : 'ఆగస్టు', 'Sep' : 'సెప్టెంబర్', 'Oct' : 'అక్టోబర్', 'Nov' : 'నవంబర్', 'Dec' : 'డిసెంబర్' },
                          'Kannada' : { 'Jan' : 'ಜನವರಿ', 'Feb' : 'ಫೆಬ್ರವರಿ', 'Mar' : 'ಮಾರ್ಚ್', 'Apr' : 'ಏಪ್ರಿಲ್', 'May' : 'ಮೇ', 'Jun' : 'ಜೂನ್', 'Jul' : 'ಜುಲೈ', 'Aug' : 'ಆಗಸ್ಟ್', 'Sep' : 'ಸೆಪ್ಟೆಂಬರ್', 'Oct' : 'ಅಕ್ಟೋಬರ್', 'Nov' : 'ನವೆಂಬರ್', 'Dec' : 'ಡಿಸೆಂಬರ್' },
-                         'Malayalam' : { 'Jan' : 'ജനുവരി', 'Feb' : 'ഫെബ്രുവരി', 'Mar' : 'മാർച്ച്', 'Apr' : 'ഏപ്രിൽ', 'May' : 'മേയ്', 'Jun' : 'ജൂൺ', 'Jul' : 'ജൂലൈ', 'Aug' : 'ആഗസ്റ്റ്', 'Sep' : 'സെപ്തംബർ', 'Oct' : 'ഒക്ടോബർ', 'Nov' : 'നവംബർ', 'Dec' : 'ഡിസംബർ' },
-                         'Hindi' : { 'Jan' : 'जनवरी', 'Feb' : 'फ़रवरी', 'Mar' : 'मार्च', 'Apr' : 'अप्रैल', 'May' : 'मई', 'Jun' : 'जून', 'Jul' : 'जुलाई', 'Aug' : 'अगस्त', 'Sep' : 'सितंबर', 'Oct' : 'अक्टूबर', 'Nov' : 'नवंबर', 'Dec' : 'दिसंबर' }
+                         'Malayalam' : { 'Jan' : 'ജനുവരി', 'Feb' : 'ഫെബ്രുവരി', 'Mar' : 'മാർച്ച്', 'Apr' : 'ഏപ്രിൽ', 'May' : 'മേയ്', 'Jun' : 'ജൂൺ', 'Jul' : 'ജൂലൈ', 'Aug' : 'ആഗസ്റ്റ്', 'Sep' : 'സെപ്തംബർ', 'Oct' : 'ഒക്ടോബർ', 'Nov' : 'നവംബർ', 'Dec' : 'ഡിസംബർ' }                         
                        } 
 
 function lists_to_map(l1, l2) {
@@ -450,6 +498,7 @@ let ENG_LIST_MAP = lists_to_map(ENG_INP_MAP, ENG_OUT_MAP);
 let HK_LIST_MAP  = lists_to_map(harvardkyoto_tamil_list, harvardkyoto_list);
 
 let script_output_map = new Map([['hindi',     lists_to_map(harvardkyoto_expanded_list, sanskrit_expanded_list)],
+                                 ['bengali',   lists_to_map(harvardkyoto_expanded_list, bengali_expanded_list)],
                                  ['telugu',    lists_to_map(harvardkyoto_expanded_list, telugu_expanded_list)],
                                  ['tamil',     lists_to_map(harvardkyoto_tamil_expanded_list, tamil_expanded_list)],
                                  ['kannada',   lists_to_map(harvardkyoto_expanded_list, kannada_expanded_list)],
@@ -475,6 +524,12 @@ function get_transliterator_text(out_lang, data) {
         result = result.replace(/\u094d,/gm, ',');
         result = result.replace(/\u094d\./gm, '.');
         result = result.replace(/\u094d$/gm, '');
+    }
+    if (out_lang == 'bengali') {
+        result = result.replace(/\u09Cd /gm, ' ');
+        result = result.replace(/\u09Cd,/gm, ',');
+        result = result.replace(/\u09Cd\./gm, '.');
+        result = result.replace(/\u09Cd$/gm, '');
     }
     return result;
 }
@@ -648,8 +703,9 @@ let english_basic_keys = (`a A i I u U R lR e E ai o O au RR lRR ~ M H ' oM K . 
 let english_basic_list = english_basic_keys.split(/\s+/);
 let english_combo_list = dummy_combo_list;
 
-var lang_key_dict = { 'tamil'     : { 'basic' : tamil_basic_list, 'combo' : tamil_combo_list, 'vowels' : 12, 'base' : 0x0B80 },
-                      'hindi'     : { 'basic' : sanskrit_basic_list, 'combo' : sanskrit_combo_list,  'vowels' : 19, 'base' : 0x0900 },
+var lang_key_dict = { 'hindi'     : { 'basic' : sanskrit_basic_list, 'combo' : sanskrit_combo_list,  'vowels' : 19, 'base' : 0x0900 },
+                      'bengali'   : { 'vowels' : 19, 'base' : 0x0980  },
+                      'tamil'     : { 'basic' : tamil_basic_list, 'combo' : tamil_combo_list, 'vowels' : 12, 'base' : 0x0B80 },
                       'telugu'    : { 'vowels' : 19, 'base' : 0x0C00 },
                       'kannada'   : { 'vowels' : 19, 'base' : 0x0C80 },
                       'malayalam' : { 'vowels' : 19, 'base' : 0x0D00 },

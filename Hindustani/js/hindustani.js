@@ -102,8 +102,8 @@ var CATEGORY_DICT = { 'categories' : [ { 'C' : 'raga',     'I' : 'music-note-lis
                     };
 
 var KEYBOARD_LIST = [ { 'I' : 'c4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'sa1' ] },
-                      { 'I' : 'c-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ri1' ] },
-                      { 'I' : 'd4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ri2' ] },
+                      { 'I' : 'c-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 're1' ] },
+                      { 'I' : 'd4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 're2' ] },
                       { 'I' : 'd-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ga1' ] },
                       { 'I' : 'e4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ga2' ] },
                       { 'I' : 'f4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ma1' ] },

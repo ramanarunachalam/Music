@@ -394,6 +394,20 @@ const MAP_MONTH_DICT = {
         'Nov': 'नवंबर',
         'Dec': 'दिसंबर'
     },
+    'Marathi': {
+        'Jan': 'जनवरी',
+        'Feb': 'फ़रवरी',
+        'Mar': 'मार्च',
+        'Apr': 'अप्रैल',
+        'May': 'मई',
+        'Jun': 'जून',
+        'Jul': 'जुलाई',
+        'Aug': 'अगस्त',
+        'Sep': 'सितंबर',
+        'Oct': 'अक्टूबर',
+        'Nov': 'नवंबर',
+        'Dec': 'दिसंबर'
+    },
     'Bengali': {
         'Jan': 'জানুয়ারী',
         'Feb': 'ফেব্রুয়ারী',
@@ -407,6 +421,34 @@ const MAP_MONTH_DICT = {
         'Oct': 'অক্টোবর',
         'Nov': 'নভেম্বর',
         'Dec': 'ডিসেম্বর'
+    },
+    'Gujarati': {
+        'Jan': 'જાન્યુઆરી',
+        'Feb': 'ફેબ્રુઆરી',
+        'Mar': 'মার্চ',
+        'Apr': 'એપ્રિલ',
+        'May': 'મે',
+        'Jun': 'જૂન',
+        'Jul': 'જુલાઈ',
+        'Aug': 'ઓગસ્ટ',
+        'Sep': 'સપ્ટેમ્બર',
+        'Oct': 'ઓક્ટોબર',
+        'Nov': 'નવેમ્બર',
+        'Dec': 'ડિસેમ્બર'
+    },
+    'Punjabi': {
+        'Jan': 'ਜਨਵਰੀ',
+        'Feb': 'ਫਰਵਰੀ',
+        'Mar': 'ਮਾਰਚ',
+        'Apr': 'ਅਪ੍ਰੈਲ',
+        'May': 'ਮਈ',
+        'Jun': 'ਜੂਨ',
+        'Jul': 'ਜੁਲਾਈ',
+        'Aug': 'ਅਗਸਤ',
+        'Sep': 'ਸਤੰਬਰ',
+        'Oct': 'ਅਕਤੂਬਰ',
+        'Nov': 'ਨਵੰਬਰ',
+        'Dec': 'ਦਸੰਬਰ'
     },
     'Tamil': {
         'Jan': 'ஜனவரி',
@@ -490,6 +532,43 @@ function transliterate_map_text(map, maxlen, data) {
     return tokenlist.join('');
 }
 
+function transliterate_map_freq_text(map, maxlen, pattern, data) {
+    let tokenlist = [];
+    let current = 0;
+    while (current < data.length) {
+        let s = data[current];
+        let q = pattern.hasOwnProperty(s) ? pattern[s] : 0;
+        let p = s;
+        let j = 1;
+        if (q > 1) {
+            for (let k = 1; k < maxlen; k += 1) {
+                if ((current + k) < data.length) {
+                    c = data[current + k];
+                    s += c;
+                    q = pattern.hasOwnProperty(s) ? pattern[s] : 0;
+                    if (q == 1) {
+                        p = s;
+                        j = k + 1;
+                        break
+                    } else if (q == 2) {
+                        p = s;
+                        j = k + 1;
+                        continue
+                    } else if (q == 3) {
+                        continue
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+        p = map.hasOwnProperty(p) ? map[p] : p
+        tokenlist.push(p);
+        current += j;
+    }
+    return tokenlist.join('');
+}
+
 function preprocess_harvardkyoto_tamil_to_tamil(input_txt){
     let txt = input_txt;
     txt = txt.replace(/M([cj])/gm, 'J$1');
@@ -533,7 +612,7 @@ function get_transliterator_text(out_lang, data) {
         // result = transliterate_map_text(map_data['hkt_to_hk], data);
         result = data;
     }
-    result = transliterate_map_text(map_data[out_lang], map_len_data[out_lang], result);
+    result = transliterate_map_freq_text(map_data[out_lang], map_len_data[out_lang], map_data['pattern'], result);
     if (out_lang == 'english') {
         result = transliterate_map_text(map_data['hk_to_eng'], map_len_data['hk_to_eng'], result);
     }

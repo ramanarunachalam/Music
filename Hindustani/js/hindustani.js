@@ -314,13 +314,22 @@ function set_language(obj) {
     }
 }
 
-function load_id_data(category) {
+function load_lang_data() {
+    var url = 'hk_lang_map.json';
+    $.getJSON(url, function(map_data) {
+        window.MAP_DATA = map_data;
+        load_nav_data('raga');
+        // load_content_data('song', 'Endaro Mahanubhavulu');
+        search_init();
+    });
+
+}
+
+function load_id_data() {
     var url = 'id.json';
     $.getJSON(url, function(id_data) {
         window.ID_DATA = id_data;
-        load_nav_data('raga');
-        load_content_data('song', 'Endaro Mahanubhavulu');
-        search_init();
+        load_lang_data()
     });
 }
 
@@ -1090,7 +1099,7 @@ function carnatic_init() {
     window.addEventListener('popstate', handle_popstate);
     window.onload = load_content;
 
-    menu_transliteration(lang);
+    menu_transliteration(window.parent.RENDER_LANGUAGE);
     load_nav_data('about');
 }
 

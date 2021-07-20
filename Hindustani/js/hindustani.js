@@ -1,4 +1,6 @@
 
+const VIDEO_INFO_KEY_LIST = new Set([ 'title', 'author_name' ]);
+
 function sleep(seconds){
     var waitUntil = new Date().getTime() + seconds*1000;
     while(new Date().getTime() < waitUntil) true;
@@ -92,30 +94,6 @@ function on_storage_event(storageEvent) {
     play_first();
 }
 
-var CATEGORY_DICT = { 'categories' : [ { 'C' : 'raga',     'I' : 'music-note-list',   'N' : 'Raga'     },
-                                       { 'C' : 'artist',   'I' : 'person-fill',       'N' : 'Artist'   },
-                                       { 'C' : 'composer', 'I' : 'person-lines-fill', 'N' : 'Composer' },
-                                       { 'C' : 'type',     'I' : 'tag',               'N' : 'Type'     },
-                                       { 'C' : 'song',     'I' : 'music-note-beamed', 'N' : 'Song'     },
-                                       { 'C' : 'about',    'I' : 'info-circle',       'N' : 'About'    },
-                                     ]
-                    };
-
-var KEYBOARD_LIST = [ { 'I' : 'c4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'sa1' ] },
-                      { 'I' : 'c-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 're1' ] },
-                      { 'I' : 'd4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 're2' ] },
-                      { 'I' : 'd-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ga1' ] },
-                      { 'I' : 'e4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ga2' ] },
-                      { 'I' : 'f4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ma1' ] },
-                      { 'I' : 'f-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ma2' ] },
-                      { 'I' : 'g4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'pa' ] },
-                      { 'I' : 'g-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'da1' ] },
-                      { 'I' : 'a4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'da2' ] },
-                      { 'I' : 'a-4', 'C' : 'black', 'S' : 'color:white;',                 'V' : [ 'ni1' ] },
-                      { 'I' : 'b4',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'ni2' ] },
-                      { 'I' : 'c5',  'C' : 'white', 'S' : 'position:absolute; bottom:0;', 'V' : [ 'sa2' ] },
-                    ]
-
 function menu_transliteration(lang) {
     var item_list = CATEGORY_DICT['categories']
     var map_dict = MAP_INFO_DICT[lang];
@@ -155,9 +133,7 @@ function get_swara_transliterate(lang, swara_str) {
         swara_str = swara_str.replace(/da/g, 'dha');
     }
     swara_str = get_transliterator_text(lang, swara_str);
-    swara_str = swara_str.replace(/1/g, '<sub>1</sub>');
-    swara_str = swara_str.replace(/2/g, '<sub>2</sub>');
-    swara_str = swara_str.replace(/3/g, '<sub>3</sub>');
+    swara_str = swara_str.replace(/([123])/g, '<sub>$1</sub>');
     return swara_str;
 }
 
@@ -305,6 +281,7 @@ function set_language(obj) {
     window.parent.RENDER_LANGUAGE = lang;
     var history_data = window.parent.history_data;
     // console.log(`SET LANG: ${lang} ${got_lang} ${history_data}`);
+    transliterator_lang_init(lang);
     menu_transliteration(lang);
     load_nav_data(window.parent.NAV_CATEGORY);
     if (history_data == undefined) {
@@ -317,7 +294,7 @@ function set_language(obj) {
 function load_lang_data() {
     var url = 'hk_lang_map.json';
     $.getJSON(url, function(map_data) {
-        window.MAP_DATA = map_data;
+        init_lang_maps(map_data);
         load_nav_data('raga');
         // load_content_data('song', 'Endaro Mahanubhavulu');
         search_init();
@@ -495,6 +472,15 @@ function get_match_count(f_category, f_value, context_list, c_len) {
     return found;
 }
 
+const CC = [ 'I', 'R', 'D', 'V' ];
+const OF = [ 'F', 'S', 'T' ];
+const FF = { 'artist'   : [ 'song',   'S', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ],
+             'composer' : [ 'song',   'S', [ 'T', 'R', 'A' ], [ 'type', 'raga',   'artist'   ] ],
+             'raga'     : [ 'song',   'S', [ 'T', 'A', 'C' ], [ 'type', 'artist', 'composer' ] ],
+             'type'     : [ 'song',   'S', [ 'R', 'A', 'C' ], [ 'raga', 'artist', 'composer' ] ],
+             'song'     : [ 'artist', 'A', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ]
+           };
+
 function render_data_template(category, id, data, context_list) {
     var lang = window.parent.RENDER_LANGUAGE;
     if (category == '') {
@@ -504,14 +490,6 @@ function render_data_template(category, id, data, context_list) {
         return;
     }
 
-    var CC = [ 'I', 'R', 'D', 'V' ]
-    var OF = [ 'F', 'S', 'T' ]
-    var FF = { 'artist'   : [ 'song',   'S', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ],
-               'composer' : [ 'song',   'S', [ 'T', 'R', 'A' ], [ 'type', 'raga',   'artist'   ] ],
-               'raga'     : [ 'song',   'S', [ 'T', 'A', 'C' ], [ 'type', 'artist', 'composer' ] ],
-               'type'     : [ 'song',   'S', [ 'R', 'A', 'C' ], [ 'raga', 'artist', 'composer' ] ],
-               'song'     : [ 'artist', 'A', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ]
-             }
     var template_name = '#page-videos-template'
     var ul_template = $(template_name).html();
     if (lang != 'English') {
@@ -657,12 +635,13 @@ function search_load() {
     window.search_initialized = true;
 }
 
+const CARNATIC_ICON_DICT = { 'song' : 'music-note-beamed', 'artist' : 'person-fill', 'composer' : 'person-lines-fill', 'raga' : 'music-note-list', 'type' : 'tag' };
+
 function search_init() {
     window.carnatic_search_engine = new MiniSearch({
         fields: ['aka'], // fields to index for full-text search
         storeFields: ['title', 'href', 'category', 'pop'] // fields to return with search results
     });
-    window.CARNATIC_ICON_DICT = { 'song' : 'music-note-beamed', 'artist' : 'person-fill', 'composer' : 'person-lines-fill', 'raga' : 'music-note-list', 'type' : 'tag' };
     window.search_initialized = false;
     search_load();
 }
@@ -670,7 +649,6 @@ function search_init() {
 function get_search_results(search_word, search_options, item_list, id_list) {
     var lang = window.parent.RENDER_LANGUAGE;
     var map_dict = MAP_INFO_DICT[lang];
-    var icon_dict = window.CARNATIC_ICON_DICT;
     var search_engine = window.carnatic_search_engine;
     var results = search_engine.search(search_word, search_options);
     if (results.length > 0) {
@@ -692,7 +670,7 @@ function get_search_results(search_word, search_options, item_list, id_list) {
                 } else {
                     title = get_transliterator_text(lang, title);
                 }
-                var item = { 'T' : category, 'C' : n_category, 'I' : icon_dict[category], 'H' : href, 'N' : title, 'P' : pop };
+                var item = { 'T' : category, 'C' : n_category, 'I' : CARNATIC_ICON_DICT[category], 'H' : href, 'N' : title, 'P' : pop };
                 item_list.push(item);
                 id_list.add(result_item.id);
             }
@@ -710,6 +688,8 @@ function transliterator_init() {
     }
     window.parent.CHAR_MAP_MAX_LENGTH = max_len;
     window.parent.CHAR_MAP_KEY_LIST = new Set(key_list);
+
+    set_tamil_regex_list();
 }
 
 function transliterate_text(word) {
@@ -859,13 +839,11 @@ function handle_context_search() {
     load_context_search_data(context_list);
 }
 
-const note_map = { 'S' : 'c4', 'S1' : 'c4', 'R1' : 'c-4', 'R2' : 'd4', 'G1' : 'd-4', 'G2' : 'e4', 'M1' : 'f4', 'M2' : 'f-4', 'P' : 'g4', 'D1' : 'g-4', 'D2' : 'a4', 'N1' : 'a-4', 'N2' : 'b4', 'S2' : 'c5' };
-
 function play_ended() {
     var note_list = window.note_play_list;
     var note_index = window.note_play_index;
     var swara = note_list[note_index];
-    var note = note_map[swara];
+    var note = NOTE_MAP[swara];
     var key_div = '#note' + note;
     var key = $(key_div).css("background-color", window.note_key_color);
     window.note_play_index += 1;
@@ -878,7 +856,7 @@ function play_note() {
     var note_list = window.note_play_list;
     var note_index = window.note_play_index;
     var swara = note_list[note_index];
-    var note = note_map[swara];
+    var note = NOTE_MAP[swara];
     var key_div = '#note' + note;
     window.note_key_color = $(key_div).css("background-color");
     var key = $(key_div).css("background-color", "cyan");
@@ -895,8 +873,6 @@ function play_notes(notes) {
     window.note_play_index = 0;
     play_note();
 }
-
-const VIDEO_INFO_KEY_LIST = new Set([ 'title', 'author_name' ]);
 
 function get_youtube_video_info(id) {
     var url = `https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=${id}&format=json`

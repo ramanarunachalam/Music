@@ -1,514 +1,68 @@
 
-const MAP_LANG_DICT = {
-    'English': 'English',
-    'हिंदी': 'Hindi',
-    'मराठी': 'Marathi',
-    'ಕನ್ನಡ': 'Kannada',
-    'বাংলা': 'Bengali',
-    'ગુજરાતી': 'Gujarati',
-    'ਪੰਜਾਬੀ': 'Punjabi',
-    'தமிழ்': 'Tamil',
-    'తెలుగు': 'Telugu',
-    'മലയാളം': 'Malayalam'
-}
+let superscript_code_list = SUPERSCRIPT_CODES.map(i => String.fromCharCode(i));
+superscript_code_list = new Set(superscript_code_list)
 
-const MAP_ISO_DICT = {
-    'English': 'en-IN',
-    'Hindi': 'hi-IN',
-    'Marathi': 'mr-IN',
-    'Kannada': 'kn-IN',
-    'Bengali': 'bn-IN',
-    'Gujarati': 'gu-IN',
-    'Punjabi': 'pa-IN',
-    'Tamil': 'ta-IN',
-    'Telugu': 'te-IN',
-    'Malayalam': 'ml-IN'
-}
+let tamil_basic_list = TAMIL_BASIC_KEYS.split(/\s+/);
+let tamil_combo_list = TAMIL_COMBO_CODE_LIST.map(i => String.fromCharCode(i));
 
-const MAP_INFO_DICT = {
-    'Hindi': {
-        'Raga': 'राग',
-        'Artist': 'कलाकार',
-        'Composer': 'गीतकार',
-        'Type': 'प्रकार',
-        'Song': 'गीत',
-        'About': 'बारे',
-        'Search': 'खोज',
-        'Playlist': 'प्लेलिस्ट',
-        'References': 'संदर्भ',
-        'Born': 'जन्म',
-        'Died': 'मरण',
-        'Gharana': 'घराना',
-        'Thaat': 'ठाट',
-        'Aroha': 'आरोही',
-        'Avaroha': 'अवरोही',
-        'Tala': 'ताल',
-        'Tala name': 'ताल नाम',
-        'Tala angas': 'ताल आगा',
-        'Tala count': 'ताल गिनती',
-        'Language': 'भाषा',
-        'God': 'भगवान',
-        'English': 'अंग्रेज़ी',
-        'Tamil': 'तमिल',
-        'Telugu': 'तेलुगु ',
-        'Kannada': 'कन्नड़',
-        'Malayalam': 'मलयालम',
-        'Hindi': 'हिंदी',
-        'Videos': 'वीडियो',
-        'Ragas': 'राग',
-        'Artists': 'कलाकार',
-        'Composers': 'गीतकार',
-        'Types': 'प्रकार',
-        'Songs': 'गाने',
-        'Duration': 'अवधि',
-        'Views': 'विचारों',
-        'Updated': 'अपडेट',
-        'Search Results': 'खोज परिणाम'
-    },
-    'Marathi': {
-        'Raga': 'राग',
-        'Artist': 'कलाकार',
-        'Composer': 'गीतकार',
-        'Type': 'प्रकार',
-        'Song': 'गीत',
-        'About': 'बद्दल',
-        'Search': 'शोधा',
-        'Playlist': 'प्लेलिस्ट',
-        'References': 'संदर्भ',
-        'Born': 'जन्म',
-        'Died': 'मरण',
-        'Gharana': 'घराना',
-        'Thaat': 'ठाट',
-        'Aroha': 'आरोही',
-        'Avaroha': 'अवरोही',
-        'Tala': 'ताल',
-        'Tala name': 'ताल नाम',
-        'Tala angas': 'ताल आगा',
-        'Tala count': 'ताल गिनती',
-        'Language': 'भाषा',
-        'God': 'भगवान',
-        'English': 'अंग्रेज़ी',
-        'Tamil': 'तमिल',
-        'Telugu': 'तेलुगु ',
-        'Kannada': 'कन्नड़',
-        'Malayalam': 'मलयालम',
-        'Hindi': 'हिंदी',
-        'Videos': 'व्हिडिओ',
-        'Ragas': 'राग',
-        'Artists': 'कलाकार',
-        'Composers': 'गीतकार',
-        'Types': 'प्रकार',
-        'Songs': 'गाणी',
-        'Duration': 'कालावधी',
-        'Views': 'दृश्ये',
-        'Updated': 'अपडेट',
-        'Search Results': 'शोध परिणाम'
-    },
-    'Bengali': {
-        'Raga': 'রাগ',
-        'Artist': 'কলাভৃৎ',
-        'Composer': 'গীতিকার',
-        'Type': 'প্রকার',
-        'Song': 'গীত',
-        'About': 'সম্পর্কিত',
-        'Search': 'অনুসন্ধান',
-        'Playlist': 'প্লেলিস্ট',
-        'References': 'তথ্যসূত্র',
-        'Born': 'জন্ম',
-        'Died': 'মৃত্যু',
-        'Gharana': 'ঘরানা',
-        'Thaat': 'যে',
-        'Aroha': 'আরোহী',
-        'Avaroha': 'অবতরণ',
-        'Tala': 'তাল',
-        'Tala name': 'তাল নাম',
-        'Tala angas': 'তাল অ্যাঙ্গাস',
-        'Tala count': 'তাল গণনা',
-        'Language': 'ভাষা',
-        'God': 'সৃষ্টিকর্তা',
-        'English': 'ইংরেজি',
-        'Tamil': 'তামিল',
-        'Telugu': 'তেলেগু',
-        'Kannada': 'কান্নাডা',
-        'Malayalam': 'মালায়ালাম',
-        'Hindi': 'হিন্দি',
-        'Videos': 'ভিডিও',
-        'Ragas': 'রাগ',
-        'Artists': 'কলাভৃৎ',
-        'Composers': 'গীতিকার',
-        'Types': 'প্রকার',
-        'Songs': 'গীত',
-        'Duration': 'সময়কাল',
-        'Views': 'দেখুন',
-        'Updated': 'আপডেট',
-        'Search Results': 'অনুসন্ধান ফলাফল'
-    },
-    'Gujarati': {
-        'Raga': 'રાગ',
-        'Artist': 'કલાકાર',
-        'Composer': 'ગીતકાર',
-        'Type': 'પ્રકાર',
-        'Song': 'ગીત',
-        'About': 'વિશે',
-        'Search': 'શોધો',
-        'Playlist': 'પ્લેલિસ્ટ',
-        'References': 'સંદર્ભ',
-        'Born': 'જન્મ',
-        'Died': 'મૃત્યુ',
-        'Gharana': 'ઘરના',
-        'Thaat': 'થાટ',
-        'Aroha': 'ચડતા',
-        'Avaroha': 'ઉતરાણ',
-        'Tala': 'તાલા',
-        'Tala name': 'તાલા નામ',
-        'Tala angas': 'તાલા અંગસ',
-        'Tala count': 'તાલા ગણતરી',
-        'Language': 'ભાષા',
-        'God': 'भगवान',
-        'English': 'अंग्रेज़ी',
-        'Tamil': 'तमिल',
-        'Telugu': 'तेलुगु ',
-        'Kannada': 'कन्नड़',
-        'Malayalam': 'मलयालम',
-        'Hindi': 'हिंदी',
-        'Videos': 'વિડિઓઝ',
-        'Ragas': 'રાગ',
-        'Artists': 'કલાકાર',
-        'Composers': 'ગીતકાર',
-        'Types': 'પ્રકાર',
-        'Songs': 'ગીત',
-        'Duration': 'અવધિ',
-        'Views': 'વિચારો',
-        'Updated': 'અપડેટ',
-        'Search Results': 'શોધ પરિણામો'
-    },
-    'Punjabi': {
-        'Raga': 'ਰਾਗ',
-        'Artist': 'ਕਲਾਕਾਰ',
-        'Composer': 'ਗੀਤਕਾਰ',
-        'Type': 'ਕਿਸਮ',
-        'Song': 'ਗਾਣਾ',
-        'About': 'ਬਾਰੇ',
-        'Search': 'ਖੋਜ',
-        'Playlist': 'ਪਲੇਲਿਸਟ',
-        'References': 'ਹਵਾਲੇ',
-        'Born': 'ਜਨਮ',
-        'Died': 'ਮੌਤ',
-        'Gharana': 'ਘਰਾਨਾ',
-        'Thaat': 'ਕਿ',
-        'Aroha': 'ਚੜ੍ਹਨਾ',
-        'Avaroha': 'ਉਤਰਾਈ',
-        'Tala': 'ਤਾਲਾ',
-        'Tala name': 'ਤਾਲਾ ਨਾਮ',
-        'Tala angas': 'ਤਾਲਾ ਅੰਗਸ',
-        'Tala count': 'ਤਾਲਾ ਗਿਣਤੀ',
-        'Language': 'ਭਾਸ਼ਾ',
-        'God': 'ਰੱਬ',
-        'English': 'अंग्रेज़ी',
-        'Tamil': 'तमिल',
-        'Telugu': 'तेलुगु ',
-        'Kannada': 'कन्नड़',
-        'Malayalam': 'मलयालम',
-        'Hindi': 'हिंदी',
-        'Videos': 'ਵੀਡੀਓ',
-        'Ragas': 'ਰਾਗ',
-        'Artists': 'ਕਲਾਕਾਰ',
-        'Composers': 'ਗੀਤਕਾਰ',
-        'Types': 'ਕਿਸਮ',
-        'Songs': 'ਗਾਣਾ',
-        'Duration': 'ਅਵਧੀ',
-        'Views': 'ਵਿਚਾਰ',
-        'Updated': 'ਅੱਪਡੇਟ',
-        'Search Results': 'ਖੋਜ ਨਤੀਜੇ'
-    },
-    'Tamil': {
-        'Raga': 'ராகம்',
-        'Artist': 'கலைஞர்',
-        'Composer': 'கவிஞர்',
-        'Type': 'வகை',
-        'Song': 'பாடல்',
-        'About': 'பற்றி',
-        'Search': 'தேடு',
-        'Playlist': 'பிளேலிஸ்ட்',
-        'References': 'குறிப்புகள்',
-        'Born': 'பிறப்பு',
-        'Died': 'இறப்பு',
-        'Gharana': 'கரானா',
-        'Thaat': 'தாட்',
-        'Aroha': 'ஆரோகணம்',
-        'Avaroha': 'அவரோகணம்',
-        'Tala': 'தாளம்',
-        'Tala name': 'தாள பெயர்',
-        'Tala angas': 'தாள அங்கங்கள்',
-        'Tala count': 'தாள எண்ணிக்கை',
-        'Language': 'மொழி',
-        'God': 'இறைவன்',
-        'English': 'ஆங்கிலம்',
-        'Tamil': 'தமிழ்',
-        'Telugu': 'தெலுங்கு',
-        'Kannada': 'கன்னடா',
-        'Malayalam': 'மலையாளம்',
-        'Hindi': 'இந்தி',
-        'Videos': 'வீடியோக்கள்',
-        'Ragas': 'ராகங்கள்',
-        'Artists': 'கலைஞர்கள்',
-        'Composers': 'கவிஞர்கள்',
-        'Types': 'வகைகள்',
-        'Songs': 'பாடல்கள்',
-        'Duration': 'காலம்',
-        'Views': 'பார்வைகள்',
-        'Updated': 'புதுப்பிக்கப்பட்டது',
-        'Search Results': 'தேடல் முடிவுகள்'
-    },
-    'Telugu': {
-        'Raga': 'రాగం',
-        'Artist': 'కళాకారుడు',
-        'Composer': 'కవి',
-        'Type': 'రకము',
-        'Song': 'పాట',
-        'About': 'గురించి',
-        'Search': 'వెతకండి',
-        'Playlist': 'ప్లేలిస్ట్',
-        'References': 'ప్రస్తావనలు',
-        'Born': 'జననం',
-        'Died': 'మరణం',
-        'Gharana': 'ఘరానా',
-        'Thaat': 'థాట్',
-        'Aroha': 'ఆరోహణ',
-        'Avaroha': 'అవరోహణ',
-        'Tala': 'తాలా',
-        'Tala name': 'తాలా పేరు',
-        'Tala angas': 'తాలా అంగస్',
-        'Tala count': 'తాలా లెక్కింపు ',
-        'Language': 'భాష',
-        'God': 'దేవుడు',
-        'English': 'ఆంగ్లం',
-        'Tamil': 'తమిళం',
-        'Telugu': 'తెలుగు',
-        'Kannada': 'కన్నడ',
-        'Malayalam': 'మలయాళం',
-        'Hindi': 'సంస్కృతo',
-        'Videos': 'వీడియోలు',
-        'Ragas': 'రాగాలు',
-        'Artists': 'కళాకారులు',
-        'Composers': 'కవులు',
-        'Types': 'రకాలు',
-        'Songs': 'పాటలు',
-        'Duration': 'వ్యవధి',
-        'Views': 'వీక్షణలు',
-        'Updated': 'నవీకరించబడింది',
-        'Search Results': 'శోధన ఫలితాలు'
-    },
-    'Kannada': {
-        'Raga': 'ರಾಗ',
-        'Artist': 'ಕಲಾವಿದ',
-        'Composer': 'ಕವಿ',
-        'Type': 'ವಿಧ',
-        'Song': 'ಹಾಡು',
-        'About': 'ಬಗ್ಗೆ',
-        'Search': 'ಹುಡುಕಿ',
-        'Playlist': 'ಪ್ಲೇಲಿಸ್ಟ್',
-        'References': 'ಉಲ್ಲೇಖಗಳು',
-        'Born': 'ಜನನ',
-        'Died': 'ಮರಣ',
-        'Gharana': 'ಘರಾನಾ',
-        'Thaat': 'ಥಾಟ್',
-        'Aroha': 'ಆರೋಹಣ',
-        'Avaroha': 'ಅವರೋಹಣ',
-        'Tala': 'ತಾಳಾ',
-        'Tala name': 'ತಾಳಾ ಹೆಸರು',
-        'Tala angas': 'ತಾಳಾ ಅಂಗಗಳು',
-        'Tala count': 'ತಾಳಾ ಎಣಿಕೆ',
-        'Language': 'ಭಾಷೆ',
-        'God': 'ದೇವರು',
-        'English': 'ಆಂಗ್ಲ',
-        'Tamil': 'ತಮಿಳು',
-        'Telugu': 'ತೆಲುಗು',
-        'Kannada': 'ಕನ್ನಡ',
-        'Malayalam': 'ಮಲಯಾಳಂ',
-        'Hindi': 'ಹಿಂದಿ',
-        'Videos': 'ವೀಡಿಯೊಗಳು',
-        'Ragas': 'ರಾಗಗಳು',
-        'Artists': 'ಕಲಾವಿದರು',
-        'Composers': 'ಕವಿಗಳು',
-        'Types': 'ವಿಧಗಳು',
-        'Songs': 'ಹಾಡುಗಳು',
-        'Duration': 'ಅವಧಿ',
-        'Views': 'ವೀಕ್ಷಣೆಗಳು',
-        'Updated': 'ನವೀಕರಿಸಲಾಗಿದೆ',
-        'Search Results': 'ಹುಡುಕಾಟ ಫಲಿತಾಂಶಗಳು'
-    },
-    'Malayalam': {
-        'Raga': 'രാഗം',
-        'Artist': 'കലാകാരി',
-        'Composer': 'കവി',
-        'Type': 'തരം',
-        'Song': 'ഗാനം',
-        'About': 'കുറിച്ച്',
-        'Search': 'തിരയൽ',
-        'Playlist': 'പ്പ്ളേലിസ്ട്',
-        'References': 'കുറിപ്പുകൾ',
-        'Born': 'ജനനം ',
-        'Died': 'മരണം',
-        'Gharana': 'ഘരാന',
-        'Thaat': 'ഥാട്',
-        'Aroha': 'ആരോഹണം',
-        'Avaroha': 'അവരോഹണം',
-        'Tala': 'താളം',
-        'Tala name': 'താളം പേര്',
-        'Tala angas': 'താളം അംഗങ്ങൾ',
-        'Tala count': 'താളം എണ്ണം',
-        'Language': 'ഭാഷ',
-        'God': 'ദൈവം',
-        'English': 'ഇംഗ്ലീഷ്',
-        'Tamil': 'തമിഴ്',
-        'Telugu': 'തെലുങ്ക്',
-        'Kannada': 'കന്നഡ',
-        'Malayalam': 'മലയാളം',
-        'Hindi': 'ഹിന്ദി',
-        'Videos': 'വീഡിയോകൾ',
-        'Ragas': 'രാഗങ്ങൾ',
-        'Artists': 'കലാകാരന്മാർ',
-        'Composers': 'കവികൾ ',
-        'Types': 'തരങ്ങൾ',
-        'Songs': 'ഗാനങ്ങൾ',
-        'Duration': 'കാലാവധി',
-        'Views': 'കാഴ്ചകൾ',
-        'Updated': 'നവീകരിക്കുക',
-        'Search Results': 'തിരയൽ ഫലങ്ങൾ'
+let sanskrit_basic_list = SANSKRIT_BASIC_KEYS.split(/\s+/);
+let sanskrit_combo_list = SANSKRIT_COMBO_CODE_LIST.map(i => String.fromCharCode(i));
+
+let english_basic_list = ENGLISH_BASIC_KEYS.split(/\s+/);
+let english_combo_list = DUMMY_COMBO_LIST;
+
+var lang_key_dict = { 'hindi'     : { 'basic' : sanskrit_basic_list, 'combo' : sanskrit_combo_list,  'vowels' : 19, 'base' : 0x0900 },
+                      'marathi'   : { 'vowels' : 19, 'base' : 0x0900 },
+                      'kannada'   : { 'vowels' : 19, 'base' : 0x0C80 },
+                      'bengali'   : { 'vowels' : 19, 'base' : 0x0980 },
+                      'gujarati'  : { 'vowels' : 19, 'base' : 0x0A80 },
+                      'punjabi'   : { 'vowels' : 19, 'base' : 0x0A00 },
+                      'tamil'     : { 'vowels' : 12, 'base' : 0x0B80, 'basic' : tamil_basic_list, 'combo' : tamil_combo_list },
+                      'telugu'    : { 'vowels' : 19, 'base' : 0x0C00 },
+                      'malayalam' : { 'vowels' : 19, 'base' : 0x0D00 },
+                      'english'   : { 'vowels' : 19, 'base' : 0, 'basic' : english_basic_list, 'combo' : english_combo_list }
+                    }
+
+const HKT_REGEX_LIST = [ [ 'M([cj])', 'J$1' ], [ 'M([kg])', 'G$1' ], [ 'M([TD])', 'N$1' ], [ 'M([td])', 'n$1' ],
+                         [ '\\bjJ', 'J' ], [ 'jJ', 'JJ' ], [ 'Jj', 'Jc' ], [ 'TR', 'RR' ], [ '[\\.]n', 'qqqq' ],
+                         [ '[\\.]N', 'QQQQ' ], [ '\\bn', 'QQQQ' ], [ 'nd', 'QQQQd' ], [ 'nt', 'QQQQt' ],
+                         [ 'n', '.n' ], [ 'QQQQ', 'n' ], [ 'qqqq', '.n' ]
+                       ];
+
+const DOT_REGEX_LIST = [ [ ' ', ' ' ], [ ',', ',' ], [ '\\.', '.' ], [ '$', '' ] ];
+
+
+function lists_to_map(l1, l2) {
+    let d = new Map();
+    for(i=0;i<l1.length;i++){
+        d.set(l1[i], l2[i]);
     }
-};
-
-const MAP_MONTH_DICT = {
-    'Hindi': {
-        'Jan': 'जनवरी',
-        'Feb': 'फ़रवरी',
-        'Mar': 'मार्च',
-        'Apr': 'अप्रैल',
-        'May': 'मई',
-        'Jun': 'जून',
-        'Jul': 'जुलाई',
-        'Aug': 'अगस्त',
-        'Sep': 'सितंबर',
-        'Oct': 'अक्टूबर',
-        'Nov': 'नवंबर',
-        'Dec': 'दिसंबर'
-    },
-    'Marathi': {
-        'Jan': 'जनवरी',
-        'Feb': 'फ़रवरी',
-        'Mar': 'मार्च',
-        'Apr': 'अप्रैल',
-        'May': 'मई',
-        'Jun': 'जून',
-        'Jul': 'जुलाई',
-        'Aug': 'अगस्त',
-        'Sep': 'सितंबर',
-        'Oct': 'अक्टूबर',
-        'Nov': 'नवंबर',
-        'Dec': 'दिसंबर'
-    },
-    'Bengali': {
-        'Jan': 'জানুয়ারী',
-        'Feb': 'ফেব্রুয়ারী',
-        'Mar': 'মার্চ',
-        'Apr': 'এপ্রিল',
-        'May': 'মে',
-        'Jun': 'জুন',
-        'Jul': 'জুলাই',
-        'Aug': 'আগস্ট',
-        'Sep': 'সেপ্টেম্বর',
-        'Oct': 'অক্টোবর',
-        'Nov': 'নভেম্বর',
-        'Dec': 'ডিসেম্বর'
-    },
-    'Gujarati': {
-        'Jan': 'જાન્યુઆરી',
-        'Feb': 'ફેબ્રુઆરી',
-        'Mar': 'মার্চ',
-        'Apr': 'એપ્રિલ',
-        'May': 'મે',
-        'Jun': 'જૂન',
-        'Jul': 'જુલાઈ',
-        'Aug': 'ઓગસ્ટ',
-        'Sep': 'સપ્ટેમ્બર',
-        'Oct': 'ઓક્ટોબર',
-        'Nov': 'નવેમ્બર',
-        'Dec': 'ડિસેમ્બર'
-    },
-    'Punjabi': {
-        'Jan': 'ਜਨਵਰੀ',
-        'Feb': 'ਫਰਵਰੀ',
-        'Mar': 'ਮਾਰਚ',
-        'Apr': 'ਅਪ੍ਰੈਲ',
-        'May': 'ਮਈ',
-        'Jun': 'ਜੂਨ',
-        'Jul': 'ਜੁਲਾਈ',
-        'Aug': 'ਅਗਸਤ',
-        'Sep': 'ਸਤੰਬਰ',
-        'Oct': 'ਅਕਤੂਬਰ',
-        'Nov': 'ਨਵੰਬਰ',
-        'Dec': 'ਦਸੰਬਰ'
-    },
-    'Tamil': {
-        'Jan': 'ஜனவரி',
-        'Feb': 'பிப்ரவரி',
-        'Mar': 'மார்ச்',
-        'Apr': 'ஏப்ரல்',
-        'May': 'மே',
-        'Jun': 'ஜூன்',
-        'Jul': 'ஜூலை',
-        'Aug': 'ஆகஸ்ட்',
-        'Sep': 'செப்டம்பர்',
-        'Oct': 'அக்டோபர்',
-        'Nov': 'நவம்பர்',
-        'Dec': 'டிசம்பர்'
-    },
-    'Telugu': {
-        'Jan': 'జనవరి',
-        'Feb': 'ఫిబ్రవరి',
-        'Mar': 'మార్చి',
-        'Apr': 'ఏప్రిల్',
-        'May': 'మే',
-        'Jun': 'జూన్',
-        'Jul': 'జూలై',
-        'Aug': 'ఆగస్టు',
-        'Sep': 'సెప్టెంబర్',
-        'Oct': 'అక్టోబర్',
-        'Nov': 'నవంబర్',
-        'Dec': 'డిసెంబర్'
-    },
-    'Kannada': {
-        'Jan': 'ಜನವರಿ',
-        'Feb': 'ಫೆಬ್ರವರಿ',
-        'Mar': 'ಮಾರ್ಚ್',
-        'Apr': 'ಏಪ್ರಿಲ್',
-        'May': 'ಮೇ',
-        'Jun': 'ಜೂನ್',
-        'Jul': 'ಜುಲೈ',
-        'Aug': 'ಆಗಸ್ಟ್',
-        'Sep': 'ಸೆಪ್ಟೆಂಬರ್',
-        'Oct': 'ಅಕ್ಟೋಬರ್',
-        'Nov': 'ನವೆಂಬರ್',
-        'Dec': 'ಡಿಸೆಂಬರ್'
-    },
-    'Malayalam': {
-        'Jan': 'ജനുവരി',
-        'Feb': 'ഫെബ്രുവരി',
-        'Mar': 'മാർച്ച്',
-        'Apr': 'ഏപ്രിൽ',
-        'May': 'മേയ്',
-        'Jun': 'ജൂൺ',
-        'Jul': 'ജൂലൈ',
-        'Aug': 'ആഗസ്റ്റ്',
-        'Sep': 'സെപ്തംബർ',
-        'Oct': 'ഒക്ടോബർ',
-        'Nov': 'നവംബർ',
-        'Dec': 'ഡിസംബർ'
-    }
+    return d;
 }
 
-function transliterate_map_text(map, maxlen, data) {
+function init_lang_maps(map_data) {
+    window.MAP_DATA = map_data;
+    var lang_maps = new Map();
+    var hk_tamil_list = map_data['hk_tamil'].split(/\s+/);
+    for (var lang in map_data) {
+         if (lang_key_dict.hasOwnProperty(lang)) {
+            var lang_list = map_data[lang].split(/\s+/);
+            var l_map = lists_to_map(hk_tamil_list, lang_list);
+            lang_maps.set(lang, l_map);
+        }
+    }
+    var freq_key_list = map_data['frequency']['key'].split(/\s+/);
+    var freq_value_list = map_data['frequency']['value'].split(/\s+/);
+    var freq_list = [];
+    for (let i = 0; i < freq_value_list.length; i += 1) {
+        freq_list.push(parseInt(freq_value_list[i]));
+    }
+    var l_map = lists_to_map(freq_key_list, freq_list);
+    lang_maps.set('frequency', l_map);
+    window.LANG_MAPS = lang_maps;
+}
+
+function transliterate_map_text(lang_map, maxlen, data) {
     let current = 0;
     let tokenlist = [];
     while (current < data.length) {
@@ -517,14 +71,14 @@ function transliterate_map_text(map, maxlen, data) {
         let j = 1;
         for (let i = maxlen; i > 1; i -= 1) {
             let s = nextstr.slice(0, i);
-            if (map.hasOwnProperty(s)) {
+            if (lang_map.hasOwnProperty(s)) {
                 p = s;
                 j = i;
                 break
             }
         }
         var old_p = p;
-        p = map[p];
+        p = lang_map[p];
         p = p == undefined ? old_p : p;
         tokenlist.push(p);
         current += j;
@@ -532,12 +86,12 @@ function transliterate_map_text(map, maxlen, data) {
     return tokenlist.join('');
 }
 
-function transliterate_map_freq_text(map, maxlen, pattern, data) {
+function transliterate_map_freq_text(lang_map, maxlen, pattern, data) {
     let tokenlist = [];
     let current = 0;
     while (current < data.length) {
         let s = data[current];
-        let q = pattern.hasOwnProperty(s) ? pattern[s] : 0;
+        let q = pattern.has(s) ? pattern.get(s) : 0;
         let p = s;
         let j = 1;
         if (q > 1) {
@@ -545,7 +99,7 @@ function transliterate_map_freq_text(map, maxlen, pattern, data) {
                 if ((current + k) < data.length) {
                     c = data[current + k];
                     s += c;
-                    q = pattern.hasOwnProperty(s) ? pattern[s] : 0;
+                    q = pattern.has(s) ? pattern.get(s) : 0;
                     if (q == 1) {
                         p = s;
                         j = k + 1;
@@ -562,40 +116,37 @@ function transliterate_map_freq_text(map, maxlen, pattern, data) {
                 }
             }
         }
-        p = map.hasOwnProperty(p) ? map[p] : p
+        p = lang_map.has(p) ? lang_map.get(p) : p
         tokenlist.push(p);
         current += j;
     }
     return tokenlist.join('');
 }
 
-function preprocess_harvardkyoto_tamil_to_tamil(input_txt){
-    let txt = input_txt;
-    txt = txt.replace(/M([cj])/gm, 'J$1');
-    txt = txt.replace(/M([kg])/gm, 'G$1');
-    txt = txt.replace(/M([TD])/gm, 'N$1');
-    txt = txt.replace(/M([td])/gm, 'n$1');        
-    txt = txt.replace(/\bjJ/gm, 'J');
-    txt = txt.replace(/jJ/gm, 'JJ');
-    txt = txt.replace(/Jj/gm, 'Jc');
-    txt = txt.replace(/TR/gm, 'RR');
-    txt = txt.replace(/[.]n/gm, 'qqqq');
-    txt = txt.replace(/[.]N/gm, "QQQQ");
-    txt = txt.replace(/\bn/gm, "QQQQ");
-    txt = txt.replace(/nd/gm, "QQQQd");
-    txt = txt.replace(/nt/gm, "QQQQt");
-    txt = txt.replace(/n/gm, '.n');
-    txt = txt.replace(/QQQQ/gm, "n");
-    txt = txt.replace(/qqqq/gm, ".n");
+function set_regex(value_list, prefix) {
+    var regex_list = [];
+    for (let i = 0; i < value_list.length; i += 1) {
+        var value = value_list[i];
+        var obj = new RegExp(prefix + value[0], 'gm');
+        regex_list.push([ obj, value[1] ]);
+    }
+    return regex_list;
+}
+
+function apply_regex(regex_list, txt) {
+    for (let i = 0; i < regex_list.length; i += 1) {
+        txt = txt.replace(regex_list[i][0], regex_list[i][1]);
+    }
     return txt;
 }
 
-const MAP_DOT_DICT = {
-    'hindi': '\\u094D',
-    'marathi': '\\u094D',
-    'bengali': '\\u09CD',
-    'gujarati': '\\u0ACD',
-    'punjabi': '\\u0A4D',
+function set_tamil_regex_list() {
+    window.HKT_REGEX_OBJ_LIST = set_regex(HKT_REGEX_LIST, '');
+}
+
+function transliterator_lang_init(lang) {
+    var out_lang = lang.toLowerCase();
+    window.DOT_REGEX_OBJ_LIST = set_regex(DOT_REGEX_LIST, MAP_DOT_DICT[out_lang]);
 }
 
 function get_transliterator_text(out_lang, data) {
@@ -603,29 +154,25 @@ function get_transliterator_text(out_lang, data) {
     if (map_data == undefined) {
         return data;
     }
+    var lang_map_data = window.LANG_MAPS;
     var map_len_data = map_data['length'];
     var out_lang = out_lang.toLowerCase();
-    let result = '';
+    let result = data;
     if (out_lang == 'tamil') {
-        result = preprocess_harvardkyoto_tamil_to_tamil(data);
+        result = apply_regex(window.HKT_REGEX_OBJ_LIST, result);
     } else {
-        // result = transliterate_map_text(map_data['hkt_to_hk], data);
-        result = data;
+        result = result.replace('.N', 'n');
     }
-    result = transliterate_map_freq_text(map_data[out_lang], map_len_data[out_lang], map_data['pattern'], result);
+    if (out_lang != 'english') {
+        var lang_map = lang_map_data.get(out_lang);
+        var lang_freq = lang_map_data.get('frequency');
+        result = transliterate_map_freq_text(lang_map, map_len_data['hk_tamil'], lang_freq, result);
+    }
     if (out_lang == 'english') {
         result = transliterate_map_text(map_data['hk_to_eng'], map_len_data['hk_to_eng'], result);
     }
     if (MAP_DOT_DICT.hasOwnProperty(out_lang)) {
-        var base = MAP_DOT_DICT[out_lang];
-        var re = new RegExp(base + ' ', 'gm');
-        result = result.replace(re, ' ');
-        var re = new RegExp(base + ',', 'gm');
-        result = result.replace(re, ',');
-        var re = new RegExp(base + '\\.', 'gm');
-        result = result.replace(re, '.');
-        var re = new RegExp(base + '$', 'gm');
-        result = result.replace(re, '');
+        result = apply_regex(window.DOT_REGEX_OBJ_LIST, result);
     }
     return result;
 }
@@ -753,7 +300,7 @@ function sanskrit_to_indic(base) {
     }
     let combo_code_list = [];
     for (var i = 0; i < sanskrit_basic_list.length; i++) {
-        var c = sanskrit_combo_code_list[i] + (base - 0x0900);
+        var c = SANSKRIT_COMBO_CODE_LIST[i] + (base - 0x0900);
         combo_code_list.push(c);
     }
     let combo_list = combo_code_list.map(i => String.fromCharCode(i));
@@ -779,37 +326,6 @@ function set_input_keyboard(lang) {
     window.parent.input_key_dict = info_list;
     render_card_template('#lang-key-template', '#GENKBD', key_dict);
 }
-
-var superscript_code_list = [ 0x00B2, 0x00B3, 0x2074 ];
-superscript_code_list = superscript_code_list.map(i => String.fromCharCode(i));
-superscript_code_list = new Set(superscript_code_list)
-
-let tamil_basic_keys = (`அ ஆ இ  ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஜ ஷ ஸ ஶ க்ஷ ஹ க ங ச ஞ ட ண த ந ப ம ய ர ல வ ழ ள ற ன  ஃ ௐ ஸ்ரீ`);
-let tamil_basic_list = tamil_basic_keys.split(/\s+/);
-let tamil_combo_code_list = [ 0x0BCD, 0x0BBE, 0x0BBF, 0x0BC0, 0x0BC1, 0x0BC2, 0x0BC6, 0x0BC7, 0x0BC8, 0x0BCA, 0x0BCB, 0x0BCC ];
-let tamil_combo_list = tamil_combo_code_list.map(i => String.fromCharCode(i));
-
-let sanskrit_basic_keys = (`अ आ इ ई उ ऊ ऋ ऌ ऎ ए ऐ ऒ ओ औ ॠ ॡ  ँ ं ः ऽ ॐ . . . . . . क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न ऩ प फ ब भ म य र ऱ ल ळ ऴ व श ष स ह`);
-let sanskrit_basic_list = sanskrit_basic_keys.split(/\s+/);
-let sanskrit_combo_code_list = [ 0x094D, 0x093E, 0x093F, 0x0940, 0x0941, 0x0942, 0x0943, 0x0962, 0x0946, 0x0947, 0x0948, 0x094A, 0x094B, 0x094C, 0x0944, 0x0963, 0x0901, 0x0902, 0x903 ];
-let sanskrit_combo_list = sanskrit_combo_code_list.map(i => String.fromCharCode(i));
-
-let dummy_combo_list = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
-let english_basic_keys = (`a A i I u U R lR e E ai o O au RR lRR ~ M H ' oM K . . . . . k kh g gh n c ch j jh n T Th D Dh N t th d dh n n p ph b bh m y r r l L zh v S sh s h`);
-let english_basic_list = english_basic_keys.split(/\s+/);
-let english_combo_list = dummy_combo_list;
-
-var lang_key_dict = { 'hindi'     : { 'basic' : sanskrit_basic_list, 'combo' : sanskrit_combo_list,  'vowels' : 19, 'base' : 0x0900 },
-                      'marathi'   : { 'vowels' : 19, 'base' : 0x0900 },
-                      'kannada'   : { 'vowels' : 19, 'base' : 0x0C80 },
-                      'bengali'   : { 'vowels' : 19, 'base' : 0x0980 },
-                      'gujarati'  : { 'vowels' : 19, 'base' : 0x0A80 },
-                      'punjabi'   : { 'vowels' : 19, 'base' : 0x0A00 },
-                      'tamil'     : { 'vowels' : 12, 'base' : 0x0B80, 'basic' : tamil_basic_list, 'combo' : tamil_combo_list },
-                      'telugu'    : { 'vowels' : 19, 'base' : 0x0C00 },
-                      'malayalam' : { 'vowels' : 19, 'base' : 0x0D00 },
-                      'english'   : { 'vowels' : 19, 'base' : 0, 'basic' : english_basic_list, 'combo' : english_combo_list }
-                    }
 
 for (var key in lang_key_dict) {
     var info_dict = lang_key_dict[key];

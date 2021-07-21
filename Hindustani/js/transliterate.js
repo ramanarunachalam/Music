@@ -322,3 +322,4 @@ function init_input_keyboard(lang) {
         info_dict['base'] = base;
     }
 }
+

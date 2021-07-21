@@ -1076,7 +1076,7 @@ function carnatic_init() {
     window.onload = load_content;
 
     init_input_keyboard()
-    menu_transliteration(window.parent.RENDER_LANGUAGE);
+    menu_transliteration(lang);
     load_nav_data('about');
 }
 

@@ -1,28 +1,4 @@
 
-let superscript_code_list = SUPERSCRIPT_CODES.map(i => String.fromCharCode(i));
-superscript_code_list = new Set(superscript_code_list)
-
-let tamil_basic_list = TAMIL_BASIC_KEYS.split(/\s+/);
-let tamil_combo_list = TAMIL_COMBO_CODE_LIST.map(i => String.fromCharCode(i));
-
-let sanskrit_basic_list = SANSKRIT_BASIC_KEYS.split(/\s+/);
-let sanskrit_combo_list = SANSKRIT_COMBO_CODE_LIST.map(i => String.fromCharCode(i));
-
-let english_basic_list = ENGLISH_BASIC_KEYS.split(/\s+/);
-let english_combo_list = DUMMY_COMBO_LIST;
-
-var lang_key_dict = { 'hindi'     : { 'basic' : sanskrit_basic_list, 'combo' : sanskrit_combo_list,  'vowels' : 19, 'base' : 0x0900 },
-                      'marathi'   : { 'vowels' : 19, 'base' : 0x0900 },
-                      'kannada'   : { 'vowels' : 19, 'base' : 0x0C80 },
-                      'bengali'   : { 'vowels' : 19, 'base' : 0x0980 },
-                      'gujarati'  : { 'vowels' : 19, 'base' : 0x0A80 },
-                      'punjabi'   : { 'vowels' : 19, 'base' : 0x0A00 },
-                      'tamil'     : { 'vowels' : 12, 'base' : 0x0B80, 'basic' : tamil_basic_list, 'combo' : tamil_combo_list },
-                      'telugu'    : { 'vowels' : 19, 'base' : 0x0C00 },
-                      'malayalam' : { 'vowels' : 19, 'base' : 0x0D00 },
-                      'english'   : { 'vowels' : 19, 'base' : 0, 'basic' : english_basic_list, 'combo' : english_combo_list }
-                    }
-
 const HKT_REGEX_LIST = [ [ 'M([cj])', 'J$1' ], [ 'M([kg])', 'G$1' ], [ 'M([TD])', 'N$1' ], [ 'M([td])', 'n$1' ],
                          [ '\\bjJ', 'J' ], [ 'jJ', 'JJ' ], [ 'Jj', 'Jc' ], [ 'TR', 'RR' ], [ '[\\.]n', 'qqqq' ],
                          [ '[\\.]N', 'QQQQ' ], [ '\\bn', 'QQQQ' ], [ 'nd', 'QQQQd' ], [ 'nt', 'QQQQt' ],
@@ -31,6 +7,7 @@ const HKT_REGEX_LIST = [ [ 'M([cj])', 'J$1' ], [ 'M([kg])', 'G$1' ], [ 'M([TD])'
 
 const DOT_REGEX_LIST = [ [ ' ', ' ' ], [ ',', ',' ], [ '\\.', '.' ], [ '$', '' ] ];
 
+let superscript_code_list = new Set(SUPERSCRIPT_CODES.map(i => String.fromCharCode(i)));
 
 function lists_to_map(l1, l2) {
     let d = new Map();
@@ -45,7 +22,7 @@ function init_lang_maps(map_data) {
     var lang_maps = new Map();
     var hk_tamil_list = map_data['hk_tamil'].split(/\s+/);
     for (var lang in map_data) {
-         if (lang_key_dict.hasOwnProperty(lang)) {
+         if (MAP_KEYBOARD_DICT.hasOwnProperty(lang)) {
             var lang_list = map_data[lang].split(/\s+/);
             var l_map = lists_to_map(hk_tamil_list, lang_list);
             lang_maps.set(lang, l_map);
@@ -184,31 +161,41 @@ function get_transliterator_text(out_lang, data) {
 const ROW_SIZE = 9;
 
 function render_keys(lang_dict) {
-    var basic_list = lang_dict['basic'];
-    var combo_list = lang_dict['combo'];
     var row_list = [];
     var row = [];
     var col_id = 1;
     var info_list = [];
-    for (var i = 0; i < basic_list.length; i++) {
-        if (i > 0 && (i % ROW_SIZE) == 0) {
-            row_list.push({ 'col' : row });
-            row = []
+    var j = 0;
+    var key_list = [ 'vowel', 'middle' ];
+    for (var k = 0; k < key_list.length; k++) {
+        var key = key_list[k];
+        basic_list = lang_dict[key];
+        for (var i = 0; i < basic_list.length; i++) {
+            if (j > 0 && (j % ROW_SIZE) == 0) {
+                row_list.push({ 'col' : row });
+                row = []
+            }
+            var c = basic_list[i];
+            c = c != '.' ? c : ' ';
+            var info = { 'N' : c, 'K' : c, 'T' : 'key', 'I' : col_id };
+            row.push(info);
+            info_list.push(info);
+            col_id += 1;
+            j += 1;
         }
-        var c = basic_list[i];
-        c = c != '.' ? c : ' ';
-        var info = { 'N' : c, 'K' : c, 'T' : 'key', 'I' : col_id };
-        row.push(info);
-        info_list.push(info);
-        col_id += 1;
     }
-    var punctuation_list = [ ':', ' ' ];
+    var punctuation_list = lang_dict['special'].concat([ ' ', ':' ]);
     for (var i = 0; i < punctuation_list.length; i++) {
         var c = punctuation_list[i];
         var info = { 'N' : c, 'K' : c, 'T' : 'key', 'I' : col_id };
+        if (j > 0 && (j % ROW_SIZE) == 0) {
+            row_list.push({ 'col' : row });
+            row = []
+        }
         row.push(info);
         info_list.push(info);
         col_id += 1;
+        j += 1;
     }
     var icon_list = [ 'chevron-expand', 'backspace', 'arrow-return-left' ];
     var key_name_list = [ 'vowel reset', 'backspace', 'enter' ];
@@ -219,10 +206,32 @@ function render_keys(lang_dict) {
         row.push(info);
         info_list.push(info);
         col_id += 1;
+        j += 1;
     }
     var col_span = ((col_id - 1) % ROW_SIZE) + 1;
     if (col_span > 1) {
         row[row.length - 1]['C'] = `colspan="${col_span}"`;
+    }
+    row_list.push({ 'col' : row });
+    row = []
+    j = 0;
+    var key_list = [ 'consonant' ];
+    for (var k = 0; k < key_list.length; k++) {
+        var key = key_list[k];
+        basic_list = lang_dict[key];
+        for (var i = 0; i < basic_list.length; i++) {
+            if (j > 0 && (j % ROW_SIZE) == 0) {
+                row_list.push({ 'col' : row });
+                row = []
+            }
+            var c = basic_list[i];
+            c = c != '.' ? c : ' ';
+            var info = { 'N' : c, 'K' : c, 'T' : 'key', 'I' : col_id };
+            row.push(info);
+            info_list.push(info);
+            col_id += 1;
+            j += 1;
+        }
     }
     row_list.push({ 'col' : row });
     var key_dict = { 'row' : row_list };
@@ -250,8 +259,10 @@ function on_key_click() {
    var id = element.getAttribute('id');
    var nid = parseInt(id.replace(/key_/, ''));
    var c = element.innerHTML;
+   var s = c[0];
    var f = c.charCodeAt(0);
    var r_key;
+   // console.log(`c ${c} f ${f} id ${id} nid ${nid}`);
    if (id == lang_dict['vowel reset']) {
        r_key = '';
    } else if (id == lang_dict['backspace']) {
@@ -260,7 +271,7 @@ function on_key_click() {
        }
    } else if (id == lang_dict['enter']) {
        load_search_data();
-   } else if (window.parent.script_consonant_start <= f && f <= window.parent.script_consonant_end) {
+   } else if (lang_dict['consonant'].includes(s) || lang_dict['middle'].includes(s)) {
        var pos = c.length - 1;
        var r_key = c;
        var l = text[text.length - pos];
@@ -287,34 +298,11 @@ function on_key_click() {
    $('#SEARCH_WORD').val(text);
 };
 
-function sanskrit_to_indic(base) {
-    let basic_list = []
-    for (var i = 0; i < sanskrit_basic_list.length; i++) {
-        var c = sanskrit_basic_list[i];
-        if (c != '.') {
-            var k = sanskrit_basic_list[i].charCodeAt(0);
-            var l = k + (base - 0x0900);
-            c = String.fromCharCode(l);
-        }
-        basic_list.push(c);
-    }
-    let combo_code_list = [];
-    for (var i = 0; i < sanskrit_basic_list.length; i++) {
-        var c = SANSKRIT_COMBO_CODE_LIST[i] + (base - 0x0900);
-        combo_code_list.push(c);
-    }
-    let combo_list = combo_code_list.map(i => String.fromCharCode(i));
-    return [ basic_list, combo_list ];
-}
-
 function set_input_keyboard(lang) {
-    var lang_dict = lang_key_dict[lang];
+    var lang_dict = MAP_KEYBOARD_DICT[lang];
     window.parent.script_lang_dict = lang_dict;
-    window.parent.script_combo_list = lang_dict['combo'];
-    window.parent.script_vowel_size = lang_dict['vowels'];
-    var script_consonant_base = (lang_dict['base'] != 0) ? (lang_dict['base'] + 0x0015) : 0;
-    window.parent.script_consonant_start = script_consonant_base;
-    window.parent.script_consonant_end = script_consonant_base + 36;
+    window.parent.script_combo_list = lang_dict['glyph'];
+    window.parent.script_vowel_size = lang_dict['glyph'].length;
     const [info_list, key_dict] = render_keys(lang_dict);
     for (var i = 0; i < info_list.length; i++) {
         var info_dict = info_list[i];
@@ -327,13 +315,10 @@ function set_input_keyboard(lang) {
     render_card_template('#lang-key-template', '#GENKBD', key_dict);
 }
 
-for (var key in lang_key_dict) {
-    var info_dict = lang_key_dict[key];
-    if (info_dict['basic'] == undefined) {
-        var base = info_dict['base'];
-        var [basic_list, combo_list] = sanskrit_to_indic(base);
-        info_dict['basic'] = basic_list;
-        info_dict['combo'] = combo_list;
+function init_input_keyboard(lang) {
+    for (var lang in MAP_KEYBOARD_DICT) {
+        var info_dict = MAP_KEYBOARD_DICT[lang];
+        var base = parseInt(info_dict['base'], 16);
+        info_dict['base'] = base;
     }
 }
-

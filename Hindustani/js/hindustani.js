@@ -1075,6 +1075,7 @@ function carnatic_init() {
     window.addEventListener('popstate', handle_popstate);
     window.onload = load_content;
 
+    init_input_keyboard()
     menu_transliteration(window.parent.RENDER_LANGUAGE);
     load_nav_data('about');
 }

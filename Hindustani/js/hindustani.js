@@ -111,7 +111,7 @@ function menu_transliteration(lang) {
     }
     let lang_list = [];
     for (var l in MAP_LANG_DICT) {
-        var d = (l == window.parent.GOT_LANGUAGE) ? { 'N' : l, 'O' : 'selected' } : { 'N' : l };
+        var d = (l == window.GOT_LANGUAGE) ? { 'N' : l, 'O' : 'selected' } : { 'N' : l };
         lang_list.push(d);
     }
     var search_tooltip = 'Prefix Search <br/> e.g. radu daya <br/> Phonetic Search <br/> e.g. goula <br/> Language Search <br/> e.g. கல்யாணி <br/> Context Search <br/> e.g. mdr : kalyani : dikshitar';
@@ -169,7 +169,7 @@ function check_for_english_text(lang, category, h_id, h_text) {
 }
 
 function info_transliteration(category, data_list) {
-    var lang = window.parent.RENDER_LANGUAGE;
+    var lang = window.RENDER_LANGUAGE;
     var map_dict = MAP_INFO_DICT[lang];
 
     var item = data_list['title']
@@ -210,9 +210,9 @@ function info_transliteration(category, data_list) {
             }
         } else if (name == 'God') {
             obj['V'] = get_transliterator_text(lang, value);
-        } else if (name == 'Thaat') {
+        } else if (name == 'Melakartha' || name == 'Thaat') {
             obj['V'] = get_transliterator_text(lang, value);
-        } else if (name == 'Aroha' || name == 'Avaroha') {
+        } else if (name == 'Arohana' || name == 'Avarohana') {
             obj['V'] = get_swara_text(lang, note_list, value)
         } else if (name == 'Born' || name == 'Died') {
             if (value != undefined && typeof value === 'string') {
@@ -276,16 +276,16 @@ function info_transliteration(category, data_list) {
 
 function set_language(obj) {
     var got_lang = obj.value;
-    window.parent.GOT_LANGUAGE = got_lang;
+    window.GOT_LANGUAGE = got_lang;
     var lang = MAP_LANG_DICT[got_lang];
-    window.parent.RENDER_LANGUAGE = lang;
-    var history_data = window.parent.history_data;
+    window.RENDER_LANGUAGE = lang;
+    var history_data = window.history_data;
     // console.log(`SET LANG: ${lang} ${got_lang} ${history_data}`);
     transliterator_lang_init(lang);
     menu_transliteration(lang);
-    load_nav_data(window.parent.NAV_CATEGORY);
+    load_nav_data(window.NAV_CATEGORY);
     if (history_data == undefined) {
-        load_content_data(window.parent.CONTENT_CATGEGORY, window.parent.CONTENT_NAME);
+        load_content_data(window.CONTENT_CATGEGORY, window.CONTENT_NAME);
     } else  {
         handle_history_context(history_data);
     }
@@ -296,7 +296,9 @@ function load_lang_data() {
     $.getJSON(url, function(map_data) {
         init_lang_maps(map_data);
         load_nav_data('raga');
-        // load_content_data('song', 'Endaro Mahanubhavulu');
+        if (window.default_song != '') {
+            load_content_data('song', window.default_song);
+        }
         search_init();
     });
 
@@ -355,7 +357,7 @@ function show_playlist() {
         get_folder_value('raga', info_dict, 'R', 'R');
         info_list.push(info_dict);
     }
-    var lang = window.parent.RENDER_LANGUAGE;
+    var lang = window.RENDER_LANGUAGE;
     var map_dict = MAP_INFO_DICT[lang];
     var header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : 'Song', 'RN' : 'Raga' };
     var playlist = 'Playlist';
@@ -383,7 +385,7 @@ function handle_playlist_command(cmd, arg) {
 }
 
 function render_nav_template(category, data) {
-    var lang = window.parent.RENDER_LANGUAGE;
+    var lang = window.RENDER_LANGUAGE;
     var letter_list = data['alphabet']
     var l_list = [];
     var no_transliterate = lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
@@ -424,7 +426,7 @@ function load_about_data(category, video_data) {
 
 function load_nav_data(category) {
     if (category != 'about') {
-        window.parent.NAV_CATEGORY = category;
+        window.NAV_CATEGORY = category;
     }
     var url = category + '.json';
     $.getJSON(url, function(video_data) {
@@ -444,7 +446,7 @@ function render_card_template(template_name, id, data) {
 }
 
 function get_folder_value(category, info, prefix, v) {
-    var lang = window.parent.RENDER_LANGUAGE;
+    var lang = window.RENDER_LANGUAGE;
     var id_data = window.ID_DATA;
     var h_name = prefix + 'D';
     var h_id = info[v];
@@ -482,7 +484,7 @@ const FF = { 'artist'   : [ 'song',   'S', [ 'T', 'R', 'C' ], [ 'type', 'raga', 
            };
 
 function render_data_template(category, id, data, context_list) {
-    var lang = window.parent.RENDER_LANGUAGE;
+    var lang = window.RENDER_LANGUAGE;
     if (category == '') {
         $('#PAGE_VIDEOS').html('');
         $('#PAGE_LYRICS').html('');
@@ -584,8 +586,8 @@ function render_content_data(category, name, video_data, context_list) {
 }
 
 function load_content_data(category, name) {
-    window.parent.CONTENT_CATGEGORY = category;
-    window.parent.CONTENT_NAME = name;
+    window.CONTENT_CATGEGORY = category;
+    window.CONTENT_NAME = name;
     var url = `${category}/${name}.json`;
     $.getJSON(url, function(video_data) {
         render_content_data(category, name, video_data);
@@ -601,8 +603,8 @@ function load_context_search_data(context_list) {
     for (var i = 0; i < context_list.length; i++) {
         new_context_list.push(context_list[i].split(':'));
     }
-    window.parent.CONTENT_CATGEGORY = category;
-    window.parent.CONTENT_NAME = name;
+    window.CONTENT_CATGEGORY = category;
+    window.CONTENT_NAME = name;
     var url = `${category}/${name}.json`;
     $.getJSON(url, function(video_data) {
         render_content_data(category, name, video_data, new_context_list);
@@ -628,7 +630,7 @@ function search_load() {
                 data_id += 1;
             });
         }
-        window.parent.CARNATIC_CHAR_MAP = search_index_obj['Charmap'];
+        window.CARNATIC_CHAR_MAP = search_index_obj['Charmap'];
         transliterator_init();
     });
 
@@ -647,7 +649,7 @@ function search_init() {
 }
 
 function get_search_results(search_word, search_options, item_list, id_list) {
-    var lang = window.parent.RENDER_LANGUAGE;
+    var lang = window.RENDER_LANGUAGE;
     var map_dict = MAP_INFO_DICT[lang];
     var search_engine = window.carnatic_search_engine;
     var results = search_engine.search(search_word, search_options);
@@ -679,23 +681,23 @@ function get_search_results(search_word, search_options, item_list, id_list) {
 }
 
 function transliterator_init() {
-    var char_map = window.parent.CARNATIC_CHAR_MAP;
+    var char_map = window.CARNATIC_CHAR_MAP;
     var key_list = [];
     var max_len = 0;
     for (var s in char_map) {
         key_list.push(s);
         max_len = Math.max(max_len, s.length);
     }
-    window.parent.CHAR_MAP_MAX_LENGTH = max_len;
-    window.parent.CHAR_MAP_KEY_LIST = new Set(key_list);
+    window.CHAR_MAP_MAX_LENGTH = max_len;
+    window.CHAR_MAP_KEY_LIST = new Set(key_list);
 
     set_tamil_regex_list();
 }
 
 function transliterate_text(word) {
-    var char_map = window.parent.CARNATIC_CHAR_MAP;
-    var tokenset = window.parent.CHAR_MAP_KEY_LIST;
-    var maxlen = window.parent.CHAR_MAP_MAX_LENGTH;
+    var char_map = window.CARNATIC_CHAR_MAP;
+    var tokenset = window.CHAR_MAP_KEY_LIST;
+    var maxlen = window.CHAR_MAP_MAX_LENGTH;
     var current = 0;
     var tokenlist = [];
     word = word.toString();
@@ -771,7 +773,7 @@ function load_search_part(search_word, non_english) {
 }
 
 function handle_search_word(search_word) {
-    var lang = window.parent.RENDER_LANGUAGE;
+    var lang = window.RENDER_LANGUAGE;
     var c = search_word.charCodeAt(0);
     if (c > 127) {
         search_word = transliterate_text(search_word);
@@ -805,7 +807,7 @@ function handle_search_word(search_word) {
     }
     render_data_template('', '', item_data);
     window.scrollTo(0, 0);
-    add_history('search', { 'category' : window.parent.NAV_CATEGORY, 'search' : search_word });
+    add_history('search', { 'category' : window.NAV_CATEGORY, 'search' : search_word });
 }
 
 function load_search_data() {
@@ -979,7 +981,7 @@ function speech_start(event) {
         window.speech_recognition.stop();
         return;
     }
-    var lang = window.parent.RENDER_LANGUAGE;
+    var lang = window.RENDER_LANGUAGE;
     window.speech_final_transcript = '';
     window.speech_recognition.lang = MAP_ISO_DICT[lang];
     window.speech_recognition.start();
@@ -989,7 +991,7 @@ function speech_start(event) {
 }
 
 function load_keyboard(event) {
-    var lang = window.parent.RENDER_LANGUAGE;
+    var lang = window.RENDER_LANGUAGE;
     set_input_keyboard(lang.toLowerCase());
     $('#LANG_KBD').modal();
     return;
@@ -1012,32 +1014,32 @@ function handle_popstate(e) {
         return;
     }
     // console.log('POP: ', e);
-    window.parent.carnatic_popstate = true;
+    window.carnatic_popstate = true;
     handle_history_context(data);
     var lang = data['language'];
     // set_language({ 'value' : lang });
 }
 
 function add_history(context, data) {
-    var url = 'hindustani.html';
+    var url = window.collection_name + '.html';
     /*
     if (context == 'nav') {
         return;
     }
     */
-    data['language'] = window.parent.GOT_LANGUAGE;
-    if (!window.parent.carnatic_popstate) {
+    data['language'] = window.GOT_LANGUAGE;
+    if (!window.carnatic_popstate) {
         data['context'] = context;
         var title = 'Carnatic: ' + capitalize_word(data['category']);
         var name = data['name'];
         if (name != undefined) {
             title += ' ' + name;
         }
-        // console.log('PUSH: ', data, window.parent.carnatic_popstate);
+        // console.log('PUSH: ', data, window.carnatic_popstate);
         history.pushState(data, title, url);
     }
-    window.parent.history_data = data;
-    window.parent.carnatic_popstate = false;
+    window.history_data = data;
+    window.carnatic_popstate = false;
 }
 
 function load_youtube_frame() {
@@ -1063,12 +1065,15 @@ function load_content() {
     load_id_data();
 }
 
-function carnatic_init() {
+function collection_init(collection, default_song) {
     var lang = 'English';
-    window.parent.RENDER_LANGUAGE = lang;
-    window.parent.GOT_LANGUAGE = lang;
-    window.parent.history_data = undefined;
-    window.parent.carnatic_popstate = false;
+    window.collection_name = collection;
+    window.default_song = default_song;
+
+    window.RENDER_LANGUAGE = lang;
+    window.GOT_LANGUAGE = lang;
+    window.history_data = undefined;
+    window.carnatic_popstate = false;
 
     sessionStorage.clear();
     window.addEventListener('storage', on_storage_event, false);

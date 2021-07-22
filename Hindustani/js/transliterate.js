@@ -239,7 +239,7 @@ function render_keys(lang_dict) {
 }
 
 function replace_keys(key_dict, vowel_size, key) {
-    var combo_list = window.parent.script_combo_list;
+    var combo_list = window.script_combo_list;
     for (var i = 0; i < vowel_size; i++) {
         var c_key = combo_list[i];
         var c = (key == '' || c_key == 0) ? key_dict[i]['N'] : key + c_key;
@@ -249,7 +249,7 @@ function replace_keys(key_dict, vowel_size, key) {
 }
 
 function on_key_click() {
-   var lang_dict = window.parent.script_lang_dict;
+   var lang_dict = window.script_lang_dict;
    var text = $('#SEARCH_WORD').val();
    var element = event.srcElement;
    if (element.tagName == 'IMG') {
@@ -293,16 +293,16 @@ function on_key_click() {
        text += c;
    }
    if (r_key != undefined) {
-       replace_keys(window.parent.input_key_dict, window.parent.script_vowel_size, r_key);
+       replace_keys(window.input_key_dict, window.script_vowel_size, r_key);
    }
    $('#SEARCH_WORD').val(text);
 };
 
 function set_input_keyboard(lang) {
     var lang_dict = MAP_KEYBOARD_DICT[lang];
-    window.parent.script_lang_dict = lang_dict;
-    window.parent.script_combo_list = lang_dict['glyph'];
-    window.parent.script_vowel_size = lang_dict['glyph'].length;
+    window.script_lang_dict = lang_dict;
+    window.script_combo_list = lang_dict['glyph'];
+    window.script_vowel_size = lang_dict['glyph'].length;
     const [info_list, key_dict] = render_keys(lang_dict);
     for (var i = 0; i < info_list.length; i++) {
         var info_dict = info_list[i];
@@ -311,7 +311,7 @@ function set_input_keyboard(lang) {
             lang_dict[key_name] = 'key_' + info_dict['I'];
         }
     } 
-    window.parent.input_key_dict = info_list;
+    window.input_key_dict = info_list;
     render_card_template('#lang-key-template', '#GENKBD', key_dict);
 }
 

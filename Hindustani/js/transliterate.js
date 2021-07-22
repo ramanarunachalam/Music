@@ -17,79 +17,59 @@ function lists_to_map(l1, l2) {
     return d;
 }
 
+function get_freq_map(hkt_freq) {
+    var freq_key_list = hkt_freq['key'];
+    var freq_value_list = hkt_freq['value'];
+    var freq_list = [];
+    for (let i = 0; i < freq_value_list.length; i += 1) {
+        freq_list.push(freq_value_list[i]);
+    }
+    var l_map = lists_to_map(freq_key_list, freq_list);
+    return l_map;
+}
+
 function init_lang_maps(map_data) {
-    window.MAP_DATA = map_data;
+    var hk_tamil_maps = map_data['hk_tamil_maps'];
     var lang_maps = new Map();
-    var hk_tamil_list = map_data['hk_tamil'].split(/\s+/);
-    for (var lang in map_data) {
+    var hk_tamil_list = hk_tamil_maps['hk_tamil'].split(/\s+/);
+    for (var lang in hk_tamil_maps) {
          if (MAP_KEYBOARD_DICT.hasOwnProperty(lang)) {
-            var lang_list = map_data[lang].split(/\s+/);
+            var lang_list = hk_tamil_maps[lang].split(/\s+/);
             var l_map = lists_to_map(hk_tamil_list, lang_list);
             lang_maps.set(lang, l_map);
         }
     }
-    var freq_key_list = map_data['frequency']['key'].split(/\s+/);
-    var freq_value_list = map_data['frequency']['value'].split(/\s+/);
-    var freq_list = [];
-    for (let i = 0; i < freq_value_list.length; i += 1) {
-        freq_list.push(parseInt(freq_value_list[i]));
-    }
-    var l_map = lists_to_map(freq_key_list, freq_list);
-    lang_maps.set('frequency', l_map);
-    window.LANG_MAPS = lang_maps;
-}
 
-function transliterate_map_text(lang_map, maxlen, data) {
-    let current = 0;
-    let tokenlist = [];
-    while (current < data.length) {
-        let nextstr = data.slice(current, current+maxlen);
-        let p = nextstr.slice(0, 1);
-        let j = 1;
-        for (let i = maxlen; i > 1; i -= 1) {
-            let s = nextstr.slice(0, i);
-            if (lang_map.hasOwnProperty(s)) {
-                p = s;
-                j = i;
-                break
-            }
-        }
-        var old_p = p;
-        p = lang_map[p];
-        p = p == undefined ? old_p : p;
-        tokenlist.push(p);
-        current += j;
-    }
-    return tokenlist.join('');
+    var hk_maps = map_data['hk_eng_maps'];
+    var e_map = lists_to_map(hk_maps['eng_input'], hk_maps['eng_output']);
+    lang_maps.set('hk_eng', e_map);
+
+    var hkt_freq = map_data['frequency']
+    lang_maps.set('hk_tamil_freq', get_freq_map(hkt_freq['hk_tamil']));
+    lang_maps.set('hk_eng_freq', get_freq_map(hkt_freq['hk_eng']));
+
+    var hk_length = map_data['length'];
+    lang_maps.set('hk_tamil_length', hk_length['hk_tamil']);
+    lang_maps.set('hk_eng_length', hk_length['hk_eng']);
+
+    window.LANG_MAPS = lang_maps;
 }
 
 function transliterate_map_freq_text(lang_map, maxlen, pattern, data) {
     let tokenlist = [];
     let current = 0;
     while (current < data.length) {
-        let s = data[current];
-        let q = pattern.has(s) ? pattern.get(s) : 0;
-        let p = s;
+        let p = data[current];
         let j = 1;
-        if (q > 1) {
-            for (let k = 1; k < maxlen; k += 1) {
-                if ((current + k) < data.length) {
-                    c = data[current + k];
-                    s += c;
-                    q = pattern.has(s) ? pattern.get(s) : 0;
-                    if (q == 1) {
-                        p = s;
-                        j = k + 1;
-                        break
-                    } else if (q == 2) {
-                        p = s;
-                        j = k + 1;
-                        continue
-                    } else if (q == 3) {
-                        continue
-                    } else {
-                        break;
-                    }
+        let m = pattern.has(p) ? pattern.get(p) : 0;
+        if (m > 1) {
+            nextstr = data.slice(current, current + maxlen)
+            for (let k = m; k > 0; k -= 1) {
+                s = nextstr.slice(0, k);
+                if (lang_map.has(s)) {
+                    p = s;
+                    j = k;
+                    break
                 }
             }
         }
@@ -127,12 +107,10 @@ function transliterator_lang_init(lang) {
 }
 
 function get_transliterator_text(out_lang, data) {
-    var map_data = window.MAP_DATA;
-    if (map_data == undefined) {
+    var lang_map_data = window.LANG_MAPS;
+    if (lang_map_data == undefined) {
         return data;
     }
-    var lang_map_data = window.LANG_MAPS;
-    var map_len_data = map_data['length'];
     var out_lang = out_lang.toLowerCase();
     let result = data;
     if (out_lang == 'tamil') {
@@ -142,11 +120,12 @@ function get_transliterator_text(out_lang, data) {
     }
     if (out_lang != 'english') {
         var lang_map = lang_map_data.get(out_lang);
-        var lang_freq = lang_map_data.get('frequency');
-        result = transliterate_map_freq_text(lang_map, map_len_data['hk_tamil'], lang_freq, result);
-    }
-    if (out_lang == 'english') {
-        result = transliterate_map_text(map_data['hk_to_eng'], map_len_data['hk_to_eng'], result);
+        var lang_freq = lang_map_data.get('hk_tamil_freq');
+        result = transliterate_map_freq_text(lang_map, lang_map_data.get('hk_tamil_length'), lang_freq, result);
+    } else {
+        var lang_map = lang_map_data.get('hk_eng');
+        var lang_freq = lang_map_data.get('hk_eng_freq');
+        result = transliterate_map_freq_text(lang_map, lang_map_data.get('hk_eng_length'), lang_freq, result);
     }
     if (MAP_DOT_DICT.hasOwnProperty(out_lang)) {
         result = apply_regex(window.DOT_REGEX_OBJ_LIST, result);

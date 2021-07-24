@@ -547,5 +547,3 @@ const KEYBOARD_LIST = [ { 'I' : 'c4',  'C' : 'white', 'S' : 'position:absolute; 
 const NOTE_MAP = { 'S' : 'c4', 'S1' : 'c4', 'R1' : 'c-4', 'R2' : 'd4', 'G1' : 'd-4', 'G2' : 'e4', 'M1' : 'f4', 
                    'M2' : 'f-4', 'P' : 'g4', 'D1' : 'g-4', 'D2' : 'a4', 'N1' : 'a-4', 'N2' : 'b4', 'S2' : 'c5'
                  };
-
-

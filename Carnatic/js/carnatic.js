@@ -1080,7 +1080,7 @@ function collection_init(collection, default_song) {
     window.addEventListener('popstate', handle_popstate);
     window.onload = load_content;
 
-    init_input_keyboard()
+    init_input_keyboard();
     menu_transliteration(lang);
     load_nav_data('about');
 }

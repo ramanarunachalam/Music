@@ -1,5 +1,23 @@
 
 const VIDEO_INFO_KEY_LIST = new Set([ 'title', 'author_name' ]);
+const ENGLISH_TYPE_LIST = [ 'artist', 'composer', 'type' ];
+const CC = [ 'I', 'R', 'D', 'V' ];
+const OF = [ 'F', 'S', 'T' ];
+const FF = { 'artist'   : [ 'song',   'S', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ],
+             'composer' : [ 'song',   'S', [ 'T', 'R', 'A' ], [ 'type', 'raga',   'artist'   ] ],
+             'raga'     : [ 'song',   'S', [ 'T', 'A', 'C' ], [ 'type', 'artist', 'composer' ] ],
+             'type'     : [ 'song',   'S', [ 'R', 'A', 'C' ], [ 'raga', 'artist', 'composer' ] ],
+             'song'     : [ 'artist', 'A', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ]
+           };
+const CARNATIC_ICON_DICT = { 'song'     : 'music-note-beamed',
+                             'artist'   : 'person-fill',
+                             'composer' : 'person-lines-fill',
+                             'raga'     : 'music-note-list',
+                             'type'     : 'tag'
+                           };
+const KEY_NAME_LIST = [ 'Melakartha', 'Thaat', 'God' ];
+const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b' };
+
 
 function sleep(seconds){
     var waitUntil = new Date().getTime() + seconds*1000;
@@ -153,7 +171,7 @@ function check_for_english_text(lang, category, h_id, h_text) {
     if (lang != 'English') {
         return false;
     }
-    if (category == 'artist' || category == 'composer' || category == 'type') {
+    if (ENGLISH_TYPE_LIST.includes(category)) {
         return true;
     }
     if (category != 'song') {
@@ -208,9 +226,7 @@ function info_transliteration(category, data_list) {
             if (lang != 'English' && name in map_dict) {
                 obj['V'] = map_dict[value];
             }
-        } else if (name == 'God') {
-            obj['V'] = get_transliterator_text(lang, value);
-        } else if (name == 'Melakartha' || name == 'Thaat') {
+        } else if (KEY_NAME_LIST.includes(name)) {
             obj['V'] = get_transliterator_text(lang, value);
         } else if (name == 'Arohana' || name == 'Avarohana') {
             obj['V'] = get_swara_text(lang, note_list, value)
@@ -321,7 +337,7 @@ function add_song(audio_file) {
     } else {
         play_list[play_list.length] = audio_file;
     }
-    sessionStorage["playlist"] = JSON.stringify(play_list);
+    sessionStorage['playlist'] = JSON.stringify(play_list);
     if (play_list.length == 1) {
         play_first();
     } else {
@@ -334,7 +350,7 @@ function delete_song(song_id) {
     if (play_list.length > 0) {
         song_id = parseInt(song_id);
         play_list.splice(song_id, 1);
-        sessionStorage["playlist"] = JSON.stringify(play_list);
+        sessionStorage['playlist'] = JSON.stringify(play_list);
         if (song_id == 0) {
             play_first();
         }
@@ -343,7 +359,7 @@ function delete_song(song_id) {
 
 function delete_row(row) {
     var row_id = row.parentNode.parentNode.rowIndex;
-    handle_playlist_command("delete", row_id - 1);
+    handle_playlist_command('delete', row_id - 1);
     document.getElementById('PLAYLIST_TABLE').deleteRow(row_id);
 }
 
@@ -372,13 +388,13 @@ function show_playlist() {
 }
 
 function handle_playlist_command(cmd, arg) {
-    if (cmd == "play") {
+    if (cmd == 'play') {
         var audio_file = arg;
         add_song(audio_file);
-    } else if (cmd == "delete") {
+    } else if (cmd == 'delete') {
         var song_id = arg;
         delete_song(song_id);
-    } else if (cmd == "show") {
+    } else if (cmd == 'show') {
         show_playlist();
     }
     return true;
@@ -388,8 +404,8 @@ function render_nav_template(category, data) {
     var lang = window.RENDER_LANGUAGE;
     var letter_list = data['alphabet']
     var l_list = [];
-    var no_transliterate = lang == 'English' && (category == 'artist' || category == 'composer' || category == 'type')
-    var id_data = window.ID_DATA;
+    var no_transliterate = lang == 'English' && ENGLISH_TYPE_LIST.includes(category);
+    var id_data = window.ID_DATA[category];
     for (var k = 0; k < letter_list.length; k++) {
         var l_item = letter_list[k];
         l_list.push(l_item['LL']);
@@ -397,9 +413,8 @@ function render_nav_template(category, data) {
         for (var i = 0; i < item_list.length; i++) {
             var obj = item_list[i];
             var h_id = obj['H'];
-            var n_id = h_id + 1;
-            var h_text = id_data[h_id];
-            var f_text = id_data[n_id];
+            var h_text = id_data[h_id][0];
+            var f_text = id_data[h_id][1];
             obj['H'] = h_text;
             if (lang != 'English' && f_text.includes('unknowncomposer')) {
                 f_text = f_text.replace('unknowncomposer', '?');
@@ -447,15 +462,16 @@ function render_card_template(template_name, id, data) {
 
 function get_folder_value(category, info, prefix, v) {
     var lang = window.RENDER_LANGUAGE;
-    var id_data = window.ID_DATA;
+    var id_data = window.ID_DATA[category];
     var h_name = prefix + 'D';
     var h_id = info[v];
-    var p_id = h_id + 1;
-    var h_text = id_data[h_id];
-    var f_text = id_data[p_id];
-    info[h_name] = h_text;
+    var h_text = id_data[h_id][0];
+    var f_text = id_data[h_id][1];
+    if (h_text != 'UnknownType') {
+        info[h_name] = h_text;
+    }
     var f_name = prefix + 'N';
-    if (lang != 'English' && (h_id == '1000' || h_id == '5000' || h_id == '7000')) {
+    if (lang != 'English' && h_id == 0) {
         info[f_name] = '?';
     } else if (check_for_english_text(lang, category, h_id, f_text)) {
         info[f_name] = h_text;
@@ -473,15 +489,6 @@ function get_match_count(f_category, f_value, context_list, c_len) {
     }
     return found;
 }
-
-const CC = [ 'I', 'R', 'D', 'V' ];
-const OF = [ 'F', 'S', 'T' ];
-const FF = { 'artist'   : [ 'song',   'S', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ],
-             'composer' : [ 'song',   'S', [ 'T', 'R', 'A' ], [ 'type', 'raga',   'artist'   ] ],
-             'raga'     : [ 'song',   'S', [ 'T', 'A', 'C' ], [ 'type', 'artist', 'composer' ] ],
-             'type'     : [ 'song',   'S', [ 'R', 'A', 'C' ], [ 'raga', 'artist', 'composer' ] ],
-             'song'     : [ 'artist', 'A', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ]
-           };
 
 function render_data_template(category, id, data, context_list) {
     var lang = window.RENDER_LANGUAGE;
@@ -625,7 +632,7 @@ function search_load() {
             var data_list = search_obj[category];
             data_list.forEach(function (data_item, data_index) {
                 var h_id = data_item.H;
-                var data_doc = { "id" : data_id, "href" : h_id, "title" : h_id + 1, "aka" : data_item.A, "category" : category, "pop" : data_item.P };
+                var data_doc = { 'id' : data_id, 'href' : h_id, 'title' : h_id, 'aka' : data_item.A, 'category' : category, 'pop' : data_item.P };
                 search_engine.add(data_doc);
                 data_id += 1;
             });
@@ -636,8 +643,6 @@ function search_load() {
 
     window.search_initialized = true;
 }
-
-const CARNATIC_ICON_DICT = { 'song' : 'music-note-beamed', 'artist' : 'person-fill', 'composer' : 'person-lines-fill', 'raga' : 'music-note-list', 'type' : 'tag' };
 
 function search_init() {
     window.carnatic_search_engine = new MiniSearch({
@@ -655,7 +660,6 @@ function get_search_results(search_word, search_options, item_list, id_list) {
     var results = search_engine.search(search_word, search_options);
     if (results.length > 0) {
         var max_score = results[0].score;
-        var id_data = window.ID_DATA;
         results.forEach(function (result_item, result_index) {
             if (!id_list.has(result_item.id)) {
                 var pop = result_item.pop;
@@ -663,10 +667,11 @@ function get_search_results(search_word, search_options, item_list, id_list) {
                     pop = ((400 * result_item.score) / max_score) + (0.6 * pop);
                 }
                 var category = result_item.category
+                var id_data = window.ID_DATA[category];
                 var c_name = category.charAt(0).toUpperCase() + category.slice(1);
                 var n_category = (lang == 'English') ? category.toUpperCase() : map_dict[c_name];
-                var title = id_data[result_item.title];
-                var href = id_data[result_item.href];
+                var href = id_data[result_item.href][0];
+                var title = id_data[result_item.title][1];
                 if (check_for_english_text(lang, category, result_item.href, href)) {
                     title = href;
                 } else {
@@ -730,9 +735,6 @@ function transliterate_text(word) {
     return new_word;
 }
 
-// const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b', 'k' : 'g', 't' : 'd' };
-const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b' };
-
 function get_tamil_phonetic_word(word) {
     var w_list = [];
     var new_word = word.toLowerCase();
@@ -744,7 +746,7 @@ function get_tamil_phonetic_word(word) {
 }
 
 function load_search_part(search_word, non_english) {
-    const s_search_word = search_word.replace(/\s/g, '');
+    var s_search_word = search_word.replace(/\s/g, '');
     var item_list = [];
     var id_list = new Set();
     var search_options = { prefix: true, combineWith: 'AND', fuzzy: term => term.length > 3 ? 0.1 : null };
@@ -847,7 +849,7 @@ function play_ended() {
     var swara = note_list[note_index];
     var note = NOTE_MAP[swara];
     var key_div = '#note' + note;
-    var key = $(key_div).css("background-color", window.note_key_color);
+    var key = $(key_div).css('background-color', window.note_key_color);
     window.note_play_index += 1;
     if (window.note_play_index < window.note_play_list.length) {
         play_note();
@@ -860,8 +862,8 @@ function play_note() {
     var swara = note_list[note_index];
     var note = NOTE_MAP[swara];
     var key_div = '#note' + note;
-    window.note_key_color = $(key_div).css("background-color");
-    var key = $(key_div).css("background-color", "cyan");
+    window.note_key_color = $(key_div).css('background-color');
+    var key = $(key_div).css('background-color', 'cyan');
     var note_audio = document.getElementById('NOTE_PLAY');
     var src = 'audio/' + note + '.mp3';
     note_audio.src = src;
@@ -1057,9 +1059,9 @@ function load_content() {
         });
         setTimeout(load_youtube_frame, 3000);
     });
-    $("#MENU_DATA li a").on("click", function() {
-        $("#MENU_DATA li").find(".active").removeClass("active");
-        $(this).parent().addClass("active");
+    $('#MENU_DATA li a').on('click', function() {
+        $('#MENU_DATA li').find('.active').removeClass('active');
+        $(this).parent().addClass('active');
     });
 
     load_id_data();

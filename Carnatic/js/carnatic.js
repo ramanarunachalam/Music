@@ -514,7 +514,7 @@ function render_data_template(category, id, data, context_list) {
     var st = ff[3];
     var video_list = data['videos']
     for (var k = 0; k < video_list.length; k++) {
-        var folder_list = video_list[k]['folder']
+        var folder_list = video_list[k]['folder'];
         for (var i = 0; i < folder_list.length; i++) {
             var folder = folder_list[i];
             var song_list = folder['songs'];
@@ -523,7 +523,7 @@ function render_data_template(category, id, data, context_list) {
                 song_ids = folder['S'];
             }
             folder['HT'] = f_category;
-            folder['HC'] = song_list.length
+            folder['HC'] = song_list.length;
             get_folder_value(f_category, folder, 'H', f_type);
             for (var j = 0; j < song_list.length; j++) {
                 var song = song_list[j];

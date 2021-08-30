@@ -11,7 +11,7 @@ let superscript_code_list = new Set(SUPERSCRIPT_CODES.map(i => String.fromCharCo
 
 function lists_to_map(l1, l2) {
     let d = new Map();
-    for(i=0;i<l1.length;i++){
+    for(let i = 0; i < l1.length; i++) {
         d.set(l1[i], l2[i]);
     }
     return d;
@@ -33,10 +33,10 @@ function init_lang_maps(map_data) {
     var lang_maps = new Map();
     var hk_tamil_list = hk_tamil_maps['hk_tamil'].split(/\s+/);
     for (var lang in hk_tamil_maps) {
-         if (MAP_KEYBOARD_DICT.hasOwnProperty(lang)) {
-            var lang_list = hk_tamil_maps[lang].split(/\s+/);
-            var l_map = lists_to_map(hk_tamil_list, lang_list);
-            lang_maps.set(lang, l_map);
+        if (MAP_KEYBOARD_DICT.hasOwnProperty(lang)) {
+           var lang_list = hk_tamil_maps[lang].split(/\s+/);
+           var l_map = lists_to_map(hk_tamil_list, lang_list);
+           lang_maps.set(lang, l_map);
         }
     }
 
@@ -63,9 +63,9 @@ function transliterate_map_freq_text(lang_map, maxlen, pattern, data) {
         let j = 1;
         let m = pattern.has(p) ? pattern.get(p) : 0;
         if (m > 1) {
-            nextstr = data.slice(current, current + maxlen)
+            let nextstr = data.slice(current, current + maxlen)
             for (let k = m; k > 0; k -= 1) {
-                s = nextstr.slice(0, k);
+                let s = nextstr.slice(0, k);
                 if (lang_map.has(s)) {
                     p = s;
                     j = k;

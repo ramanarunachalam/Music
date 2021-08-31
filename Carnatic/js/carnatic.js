@@ -177,7 +177,7 @@ function check_for_english_text(lang, category, h_id, h_text) {
     if (category != 'song') {
         return false;
     }
-    if (h_id < 200) {
+    if (h_id >== 20000) {
         return true;
     }
     if (h_text.includes(' - ')) {

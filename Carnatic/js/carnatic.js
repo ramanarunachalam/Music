@@ -177,7 +177,7 @@ function check_for_english_text(lang, category, h_id, h_text) {
     if (category != 'song') {
         return false;
     }
-    if (h_id >== 20000) {
+    if (h_id >= 20000) {
         return true;
     }
     if (h_text.includes(' - ')) {
@@ -239,6 +239,15 @@ function info_transliteration(category, data_list) {
                 if (m_list.length > 1 && lang in MAP_MONTH_DICT && m_list[1] in MAP_MONTH_DICT[lang]) {
                     obj['V'] = m_list[0] + ' ' + MAP_MONTH_DICT[lang][m_list[1]] + ' ' + m_list[2];
                 }
+            }
+        } else if (lang != 'English' && name == 'Gharana') {
+            var item_list = obj['P'];
+            if (value != undefined) {
+                var g_list = [];
+                for (var j = 0; j < item_list.length; j++) {
+                     g_list.push(get_transliterator_text(lang, item_list[j])); 
+                }
+                obj['V'] = g_list.join('</br>');
             }
         } else if (lang != 'English' && name in map_dict) {
             value = obj['P'];

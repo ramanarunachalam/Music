@@ -641,7 +641,8 @@ function search_load() {
             var data_list = search_obj[category];
             data_list.forEach(function (data_item, data_index) {
                 var h_id = data_item.H;
-                var data_doc = { 'id' : data_id, 'href' : h_id, 'title' : h_id, 'aka' : data_item.A, 'category' : category, 'pop' : data_item.P };
+                var aka_list = data_item.A.split(',');
+                var data_doc = { 'id' : data_id, 'href' : h_id, 'title' : h_id, 'aka' : aka_list, 'category' : category, 'pop' : data_item.P };
                 search_engine.add(data_doc);
                 data_id += 1;
             });
@@ -663,6 +664,7 @@ function search_init() {
 }
 
 function get_search_results(search_word, search_options, item_list, id_list) {
+    search_word = search_word.slice(0,8);
     var lang = window.RENDER_LANGUAGE;
     var map_dict = MAP_INFO_DICT[lang];
     var search_engine = window.carnatic_search_engine;

@@ -664,7 +664,15 @@ function search_init() {
 }
 
 function get_search_results(search_word, search_options, item_list, id_list) {
-    search_word = search_word.slice(0,8);
+    var word_list = search_word.split(' ');
+    var new_word_list = [];
+    for (var i = 0; i < word_list.length; i++) {
+        var word = word_list[i];
+        if (word != '') {
+            new_word_list.push(word.slice(0,8));
+        }
+        search_word = new_word_list.join(' ');
+    }
     var lang = window.RENDER_LANGUAGE;
     var map_dict = MAP_INFO_DICT[lang];
     var search_engine = window.carnatic_search_engine;

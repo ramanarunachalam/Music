@@ -90,7 +90,16 @@ function play_first() {
         return;
     }
     var parts = play_list[0].split(':');
-    window.yt_player.loadVideoById({'videoId': parts[0]});
+    var video_id = parts[0];
+    const time_str = '&t=';
+    if (video_id.includes(time_str)) {
+        var v_list = video_id.split(time_str);
+        video_id = v_list[0];
+        var start_time = parseInt(v_list[1].replace('s', ''));
+        window.yt_player.loadVideoById({ videoId: video_id, startSeconds: start_time});
+    } else {
+        window.yt_player.loadVideoById({ videoId: video_id });
+    }
 }
 
 function play_next() {

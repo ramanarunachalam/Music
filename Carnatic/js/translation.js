@@ -30,11 +30,12 @@ const MAP_ISO_DICT = {
 }
 
 const MAP_DOT_DICT = {
-    'hindi': '\\u094D',
-    'marathi': '\\u094D',
-    'bengali': '\\u09CD',
+    'hindi':    '\\u094D',
+    'marathi':  '\\u094D',
+    'bengali':  '\\u09CD',
     'gujarati': '\\u0ACD',
-    'punjabi': '\\u0A4D'
+    'punjabi':  '\\u0A4D',
+    'assamese': '\\u09CD'
 };
 
 const MAP_INFO_DICT = {

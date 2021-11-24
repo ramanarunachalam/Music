@@ -636,6 +636,17 @@ function load_context_search_data(context_list) {
     });
 }
 
+function normalize_search_text(search_text) {
+    search_text = search_text.toLowerCase();
+    search_text = search_text.replace(/(e)\1+/g, 'i');
+    search_text = search_text.replace(/(o)\1+/g, 'u');
+    search_text = search_text.replace(/(.)\1+/g, '$1');
+    search_text = search_text.replace(/([bcdfgjklpst])h/g, '$1')
+    search_text = search_text.replace(/([sd])v/g, '$1w')
+    search_text = search_text.replace(/([ao])u/g, 'ow')
+    return search_text;
+}
+
 function search_load() {
     if (window.search_initialized) {
         return;
@@ -650,7 +661,7 @@ function search_load() {
             var data_list = search_obj[category];
             data_list.forEach(function (data_item, data_index) {
                 var h_id = data_item.H;
-                var aka_list = data_item.A.split(',');
+                var aka_list = normalize_search_text(data_item.A).split(',');
                 var data_doc = { 'id' : data_id, 'href' : h_id, 'title' : h_id, 'aka' : aka_list, 'category' : category, 'pop' : data_item.P };
                 search_engine.add(data_doc);
                 data_id += 1;
@@ -672,12 +683,13 @@ function search_init() {
     search_load();
 }
 
-function get_search_results(search_word, search_options, item_list, id_list) {
+function get_search_results(search_word, search_options, item_list, id_list, base_pop) {
     var word_list = search_word.split(' ');
     var new_word_list = [];
     for (var i = 0; i < word_list.length; i++) {
         var word = word_list[i];
         if (word != '') {
+            word = normalize_search_text(word);
             new_word_list.push(word.slice(0,8));
         }
         search_word = new_word_list.join(' ');
@@ -686,30 +698,30 @@ function get_search_results(search_word, search_options, item_list, id_list) {
     var map_dict = MAP_INFO_DICT[lang];
     var search_engine = window.carnatic_search_engine;
     var results = search_engine.search(search_word, search_options);
-    if (results.length > 0) {
-        var max_score = results[0].score;
-        results.forEach(function (result_item, result_index) {
-            if (!id_list.has(result_item.id)) {
-                var pop = result_item.pop;
-                if (search_word.length > 2) {
-                    pop = ((400 * result_item.score) / max_score) + (0.6 * pop);
-                }
-                var category = result_item.category
-                var id_data = window.ID_DATA[category];
-                var c_name = category.charAt(0).toUpperCase() + category.slice(1);
-                var n_category = (lang == 'English') ? category.toUpperCase() : map_dict[c_name];
-                var href = id_data[result_item.href][0];
-                var title = id_data[result_item.title][1];
-                if (check_for_english_text(lang, category, result_item.href, href)) {
-                    title = href;
-                } else {
-                    title = get_transliterator_text(lang, title);
-                }
-                var item = { 'T' : category, 'C' : n_category, 'I' : CARNATIC_ICON_DICT[category], 'H' : href, 'N' : title, 'P' : pop };
-                item_list.push(item);
-                id_list.add(result_item.id);
-            }
-        });
+    if (results.length <= 0) return;
+    var max_score = results[0].score;
+    for (var i = 0; i < results.length; i++) {
+        var result_item = results[i];
+        if (id_list.has(result_item.id)) continue;
+        var pop = result_item.pop;
+        if (search_word.length > 2) {
+            pop = ((400 * result_item.score) / max_score) + (0.6 * pop);
+        }
+        pop = base_pop + pop;
+        var category = result_item.category
+        var id_data = window.ID_DATA[category];
+        var c_name = category.charAt(0).toUpperCase() + category.slice(1);
+        var n_category = (lang == 'English') ? category.toUpperCase() : map_dict[c_name];
+        var href = id_data[result_item.href][0];
+        var title = id_data[result_item.title][1];
+        if (check_for_english_text(lang, category, result_item.href, href)) {
+            title = href;
+        } else {
+            title = get_transliterator_text(lang, title);
+        }
+        var item = { 'T' : category, 'C' : n_category, 'I' : CARNATIC_ICON_DICT[category], 'H' : href, 'N' : title, 'P' : pop };
+        item_list.push(item);
+        id_list.add(result_item.id);
     }
 }
 
@@ -778,23 +790,23 @@ function load_search_part(search_word, non_english) {
     var item_list = [];
     var id_list = new Set();
     var search_options = { prefix: true, combineWith: 'AND', fuzzy: term => term.length > 3 ? 0.1 : null };
-    get_search_results(search_word, search_options, item_list, id_list);
+    get_search_results(search_word, search_options, item_list, id_list, 4000);
     if (search_word != s_search_word) {
-        get_search_results(s_search_word, search_options, item_list, id_list);
+        get_search_results(s_search_word, search_options, item_list, id_list, 1000);
     }
     var n_search_word = '';
     if (non_english) {
         n_search_word = get_tamil_phonetic_word(search_word);
-        get_search_results(n_search_word, search_options, item_list, id_list);
+        get_search_results(n_search_word, search_options, item_list, id_list, 5000);
     }
     if (search_word.length > 2) {
         var search_options = { prefix: true, combineWith: 'AND', fuzzy: term => term.length > 3 ? 0.3 : null };
-        get_search_results(search_word, search_options, item_list, id_list);
+        get_search_results(search_word, search_options, item_list, id_list, 0);
         if (non_english && n_search_word) {
-            get_search_results(n_search_word, search_options, item_list, id_list);
+            get_search_results(n_search_word, search_options, item_list, id_list, 0);
         }
         if (search_word != s_search_word) {
-            get_search_results(s_search_word, search_options, item_list, id_list);
+            get_search_results(s_search_word, search_options, item_list, id_list, 0);
         }
     }
     item_list.sort(function (a, b) { return b.P - a.P; });

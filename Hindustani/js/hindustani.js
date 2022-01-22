@@ -28,15 +28,19 @@ function capitalize_word(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+function get_bs_modal(id) {
+    return new bootstrap.Modal(document.getElementById(id));
+}
+
 function call_modal_dialog(title) {
     $('#DIALOG_TITLE').html(title);
-    $('#DIALOG_BOX').modal('show');
+    get_bs_modal('DIALOG_BOX').show();
 }
 
 function show_modal_dialog(title, body) {
     $('#DIALOG_BODY').html(body);
     call_modal_dialog(title);
-    setTimeout(function() { $('#DIALOG_BOX').modal('hide'); }, 3000);
+    setTimeout(function() { get_bs_modal('DIALOG_BOX').hide(); }, 3000);
 }
 
 function render_modal_dialog(title, template, data) {
@@ -148,10 +152,10 @@ function menu_transliteration(lang) {
     var menu_dict = { 'menus' : { 'languages' : lang_list, 'search' : other_dict, 'playlist' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
     render_card_template('#page-menu-template', '#MENU_DATA', menu_dict);
 
-    $('#SEARCH_INFO').tooltip();
-    $('#MIC_IMAGE').tooltip();
-    $('#KBD_IMAGE').tooltip();
-    $('.nav-link').tooltip();
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
     speech_to_text_init();
 }
 
@@ -1035,7 +1039,7 @@ function speech_start(event) {
 function load_keyboard(event) {
     var lang = window.RENDER_LANGUAGE;
     set_input_keyboard(lang.toLowerCase());
-    $('#LANG_KBD').modal();
+    get_bs_modal('LANG_KBD').show();
     return;
 }
 

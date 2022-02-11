@@ -52,6 +52,15 @@ function init_lang_maps(map_data) {
     lang_maps.set('hk_tamil_length', hk_length['hk_tamil']);
     lang_maps.set('hk_eng_length', hk_length['hk_eng']);
 
+    lang_maps.set('MAP_ISO_DICT', map_data['MAP_ISO_DICT']);
+    lang_maps.set('MAP_DOT_DICT', map_data['MAP_DOT_DICT']);
+    lang_maps.set('MAP_INFO_DICT', map_data['MAP_INFO_DICT']);
+    lang_maps.set('MAP_MONTH_DICT', map_data['MAP_MONTH_DICT']);
+    lang_maps.set('CARNATIC_KBD_LIST', map_data['CARNATIC_KBD_LIST']);
+    lang_maps.set('CARNATIC_NOTE_MAP', map_data['CARNATIC_NOTE_MAP']);
+    lang_maps.set('HINDUSTANI_KBD_LIST', map_data['HINDUSTANI_KBD_LIST']);
+    lang_maps.set('HINDUSTANI_KBD_LIST', map_data['HINDUSTANI_KBD_LIST']);
+
     window.LANG_MAPS = lang_maps;
 }
 
@@ -101,16 +110,20 @@ function set_tamil_regex_list() {
     window.HKT_REGEX_OBJ_LIST = set_regex(HKT_REGEX_LIST, '');
 }
 
+function get_map_data(key) {
+    var lang_map_data = window.LANG_MAPS;
+    return (lang_map_data != undefined) ? lang_map_data.get(key) : Object();
+}
+
 function transliterator_lang_init(lang) {
+    var map_dot_data = get_map_data('MAP_DOT_DICT');
     var out_lang = lang.toLowerCase();
-    window.DOT_REGEX_OBJ_LIST = set_regex(DOT_REGEX_LIST, MAP_DOT_DICT[out_lang]);
+    window.DOT_REGEX_OBJ_LIST = set_regex(DOT_REGEX_LIST, map_dot_data[out_lang]);
 }
 
 function get_transliterator_text(out_lang, data) {
     var lang_map_data = window.LANG_MAPS;
-    if (lang_map_data == undefined) {
-        return data;
-    }
+    if (lang_map_data == undefined) return data;
     var out_lang = out_lang.toLowerCase();
     let result = data;
     if (out_lang == 'tamil') {
@@ -127,7 +140,8 @@ function get_transliterator_text(out_lang, data) {
         var lang_freq = lang_map_data.get('hk_eng_freq');
         result = transliterate_map_freq_text(lang_map, lang_map_data.get('hk_eng_length'), lang_freq, result);
     }
-    if (MAP_DOT_DICT.hasOwnProperty(out_lang)) {
+    var map_dot_data = get_map_data('MAP_DOT_DICT');
+    if (map_dot_data.hasOwnProperty(out_lang)) {
         result = apply_regex(window.DOT_REGEX_OBJ_LIST, result);
     }
     return result;

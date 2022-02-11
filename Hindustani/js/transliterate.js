@@ -56,10 +56,8 @@ function init_lang_maps(map_data) {
     lang_maps.set('MAP_DOT_DICT', map_data['MAP_DOT_DICT']);
     lang_maps.set('MAP_INFO_DICT', map_data['MAP_INFO_DICT']);
     lang_maps.set('MAP_MONTH_DICT', map_data['MAP_MONTH_DICT']);
-    lang_maps.set('CARNATIC_KBD_LIST', map_data['CARNATIC_KBD_LIST']);
-    lang_maps.set('CARNATIC_NOTE_MAP', map_data['CARNATIC_NOTE_MAP']);
-    lang_maps.set('HINDUSTANI_KBD_LIST', map_data['HINDUSTANI_KBD_LIST']);
-    lang_maps.set('HINDUSTANI_KBD_LIST', map_data['HINDUSTANI_KBD_LIST']);
+    lang_maps.set('KEYBOARD_LIST', map_data['HINDUSTANI_KBD_LIST']);
+    lang_maps.set('NOTE_MAP', map_data['HINDUSTANI_NOTE_MAP']);
 
     window.LANG_MAPS = lang_maps;
 }

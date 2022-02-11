@@ -275,7 +275,7 @@ function info_transliteration(category, data_list) {
     }
     var item = data_list['keyboard']
     if (item != undefined) {
-        var kbd_list = get_map_data('HINDUSTANI_KBD_LIST');
+        var kbd_list = get_map_data('KEYBOARD_LIST');
         for (var i = 0; i < kbd_list.length; i++) {
             var obj = kbd_list[i];
             var swara_list = obj['V'];
@@ -900,7 +900,7 @@ function play_ended() {
     var note_list = window.note_play_list;
     var note_index = window.note_play_index;
     var swara = note_list[note_index];
-    var note_data = get_map_data('CARNATIC_NOTE_MAP');
+    var note_data = get_map_data('NOTE_MAP');
     var note = note_data[swara];
     var key_div = '#note' + note;
     var key = $(key_div).css('background-color', window.note_key_color);
@@ -914,7 +914,7 @@ function play_note() {
     var note_list = window.note_play_list;
     var note_index = window.note_play_index;
     var swara = note_list[note_index];
-    var note_data = get_map_data('CARNATIC_NOTE_MAP');
+    var note_data = get_map_data('NOTE_MAP');
     var note = note_data[swara];
     var key_div = '#note' + note;
     window.note_key_color = $(key_div).css('background-color');

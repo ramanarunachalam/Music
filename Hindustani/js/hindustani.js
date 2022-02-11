@@ -127,7 +127,8 @@ function on_storage_event(storageEvent) {
 
 function menu_transliteration(lang) {
     var item_list = CATEGORY_DICT['categories']
-    var map_dict = MAP_INFO_DICT[lang];
+    var map_info_data = get_map_data('MAP_INFO_DICT');
+    var map_dict = map_info_data[lang];
     for (var i = 0; i < item_list.length; i++) {
         var obj = item_list[i];
         var name = obj['C'];
@@ -201,12 +202,15 @@ function check_for_english_text(lang, category, h_id, h_text) {
 
 function info_transliteration(category, data_list) {
     var lang = window.RENDER_LANGUAGE;
-    var map_dict = MAP_INFO_DICT[lang];
-
+    var map_info_data = get_map_data('MAP_INFO_DICT');
+    var map_dict = map_info_data[lang];
+    var map_month_data = get_map_data('MAP_MONTH_DICT');
     var item = data_list['title']
     var h_text = item['H'];
     if (category == 'about') {
-        item['N'] = item['N'];
+        if (lang != 'English') {
+            item['N'] = map_dict[item['N']];
+        }
     } else if (check_for_english_text(lang, category, 200, h_text)) {
         item['N'] = h_text;
     } else {
@@ -249,8 +253,8 @@ function info_transliteration(category, data_list) {
                 if (value.includes(' ')) {
                     m_list = value.split(' ');
                 }
-                if (m_list.length > 1 && lang in MAP_MONTH_DICT && m_list[1] in MAP_MONTH_DICT[lang]) {
-                    obj['V'] = m_list[0] + ' ' + MAP_MONTH_DICT[lang][m_list[1]] + ' ' + m_list[2];
+                if (m_list.length > 1 && lang in map_month_data && m_list[1] in map_month_data[lang]) {
+                    obj['V'] = m_list[0] + ' ' + map_month_data[lang][m_list[1]] + ' ' + m_list[2];
                 }
             }
         } else if (lang != 'English' && name == 'Gharana') {
@@ -271,8 +275,9 @@ function info_transliteration(category, data_list) {
     }
     var item = data_list['keyboard']
     if (item != undefined) {
-        for (var i = 0; i < KEYBOARD_LIST.length; i++) {
-            var obj = KEYBOARD_LIST[i];
+        var kbd_list = get_map_data('HINDUSTANI_KBD_LIST');
+        for (var i = 0; i < kbd_list.length; i++) {
+            var obj = kbd_list[i];
             var swara_list = obj['V'];
             var new_swara_list = [];
             for (var j = 0; j < swara_list.length; j++) {
@@ -284,7 +289,7 @@ function info_transliteration(category, data_list) {
             }
             obj['N'] = '&nbsp;' + new_swara_list.join('<br>&nbsp;');
         }
-        data_list['keyboard'] = { 'keys' : KEYBOARD_LIST };
+        data_list['keyboard'] = { 'keys' : kbd_list };
     }
     var item_list = data_list['lyricstext']
     if (item_list == undefined) {
@@ -396,11 +401,12 @@ function show_playlist() {
         info_list.push(info_dict);
     }
     var lang = window.RENDER_LANGUAGE;
-    var map_dict = MAP_INFO_DICT[lang];
+    var map_info_data = get_map_data('MAP_INFO_DICT');
+    var map_dict = map_info_data[lang];
     var header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : 'Song', 'RN' : 'Raga' };
     var playlist = 'Playlist';
     if (lang != 'English') {
-        var map_dict = MAP_INFO_DICT[lang];
+        var map_dict = map_info_data[lang];
         playlist = map_dict[playlist];
         header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : map_dict['Song'], 'RN' : map_dict['Raga'] };
     }
@@ -524,7 +530,8 @@ function render_data_template(category, id, data, context_list) {
     var template_name = '#page-videos-template'
     var ul_template = $(template_name).html();
     if (lang != 'English') {
-        var map_dict = MAP_INFO_DICT[lang];
+        var map_info_data = get_map_data('MAP_INFO_DICT');
+        var map_dict = map_info_data[lang];
         ul_template = ul_template.replace('Videos', map_dict['Videos']);
         ul_template = ul_template.replace('Views', map_dict['Views']);
     }
@@ -699,7 +706,8 @@ function get_search_results(search_word, search_options, item_list, id_list, bas
         search_word = new_word_list.join(' ');
     }
     var lang = window.RENDER_LANGUAGE;
-    var map_dict = MAP_INFO_DICT[lang];
+    var map_info_data = get_map_data('MAP_INFO_DICT');
+    var map_dict = map_info_data[lang];
     var search_engine = window.carnatic_search_engine;
     var results = search_engine.search(search_word, search_options);
     if (results.length <= 0) return;
@@ -835,7 +843,8 @@ function handle_search_word(search_word) {
     }
     var result_header = 'Search Results';
     if (lang != 'English') {
-        var map_dict = MAP_INFO_DICT[lang];
+        var map_info_data = get_map_data('MAP_INFO_DICT');
+        var map_dict = map_info_data[lang];
         result_header = map_dict[result_header];
     }
     var item_data = { 'title' : { 'N': result_header, 'I': 'search' }, 'items' : new_item_list };
@@ -891,7 +900,8 @@ function play_ended() {
     var note_list = window.note_play_list;
     var note_index = window.note_play_index;
     var swara = note_list[note_index];
-    var note = NOTE_MAP[swara];
+    var note_data = get_map_data('CARNATIC_NOTE_MAP');
+    var note = note_data[swara];
     var key_div = '#note' + note;
     var key = $(key_div).css('background-color', window.note_key_color);
     window.note_play_index += 1;
@@ -904,7 +914,8 @@ function play_note() {
     var note_list = window.note_play_list;
     var note_index = window.note_play_index;
     var swara = note_list[note_index];
-    var note = NOTE_MAP[swara];
+    var note_data = get_map_data('CARNATIC_NOTE_MAP');
+    var note = note_data[swara];
     var key_div = '#note' + note;
     window.note_key_color = $(key_div).css('background-color');
     var key = $(key_div).css('background-color', 'cyan');
@@ -1027,9 +1038,10 @@ function speech_start(event) {
         window.speech_recognition.stop();
         return;
     }
+    var map_iso_data = get_map_data('MAP_ISO_DICT');
     var lang = window.RENDER_LANGUAGE;
     window.speech_final_transcript = '';
-    window.speech_recognition.lang = MAP_ISO_DICT[lang];
+    window.speech_recognition.lang = map_iso_data[lang];
     window.speech_recognition.start();
     window.speech_ignore_onend = false;
     window.speech_start_timestamp = event.timeStamp;

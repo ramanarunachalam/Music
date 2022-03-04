@@ -287,6 +287,7 @@ function on_key_click() {
        replace_keys(window.input_key_dict, window.script_vowel_size, r_key);
    }
    $('#SEARCH_WORD').val(text);
+   load_search_data();
 };
 
 function set_input_keyboard(lang) {

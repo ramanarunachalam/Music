@@ -219,6 +219,9 @@ function info_transliteration(category, data_list) {
         if (lang != 'English' && value.includes('unknowncomposer')) {
             value = value.replace('unknowncomposer', '?');
         }
+        if (lang != 'English' && value.includes('Unknownraga')) {
+            value = value.replace('Unknownraga', '?');
+        }
         item['N'] = get_transliterator_text(lang, value);
     }
     var item_list = data_list['stats']
@@ -270,6 +273,9 @@ function info_transliteration(category, data_list) {
         } else if (lang != 'English' && name in map_dict) {
             value = obj['P'];
             if (value != undefined) {
+                if (lang != 'English' && value.includes('Unknownraga')) {
+                    value = value.replace('Unknownraga', '?');
+                }
                 obj['V'] = get_transliterator_text(lang, value);
             }
         }

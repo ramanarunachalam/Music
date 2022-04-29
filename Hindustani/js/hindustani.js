@@ -456,7 +456,7 @@ function render_nav_template(category, data) {
         }
     }
     var ul_template = $('#nav-ul-template').html();
-    var template_html = Mustache.to_html(ul_template, data);
+    var template_html = Mustache.render(ul_template, data);
     $('#MENU').html(template_html);
     $('#slider').sliderNav({ 'items' : l_list });
 }
@@ -485,7 +485,7 @@ function load_nav_data(category) {
 
 function render_card_template(template_name, id, data) {
     var ul_template = $(template_name).html();
-    var template_html = Mustache.to_html(ul_template, data);
+    var template_html = Mustache.render(ul_template, data);
     $(id).html(template_html);
 }
 
@@ -607,7 +607,7 @@ function render_data_template(category, id, data, context_list) {
         }
     }
 
-    var template_html = Mustache.to_html(ul_template, data);
+    var template_html = Mustache.render(ul_template, data);
     $(id).html(template_html);
 }
 

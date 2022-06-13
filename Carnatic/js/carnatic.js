@@ -955,7 +955,8 @@ function get_youtube_video_info(id) {
                 info_list.push({ 'N' : key, 'C' : value });
             }
         }
-        var info_data = { 'videoinfo' : info_list };
+        var video_id = id.split('&')[0];
+        var info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id } };
         render_modal_dialog(id, '#modal-videoinfo-template', info_data)
     });
 }

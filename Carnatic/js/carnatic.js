@@ -956,7 +956,8 @@ function get_youtube_video_info(id) {
             }
         }
         var video_id = id.split('&')[0];
-        var info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id } };
+        var image = video_data['thumbnail_url'];
+        var info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
         render_modal_dialog(id, '#modal-videoinfo-template', info_data)
     });
 }

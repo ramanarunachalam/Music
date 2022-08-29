@@ -341,6 +341,13 @@ function set_language(obj) {
     }
 }
 
+function load_concert_data() {
+    var url = 'concert.json';
+    $.getJSON(url, function(concert_data) {
+        window.CONCERT_DATA = concert_data;
+    });
+}
+
 function load_lang_data() {
     var url = 'hk_lang_map.json';
     $.getJSON(url, function(map_data) {
@@ -349,6 +356,7 @@ function load_lang_data() {
         if (window.default_song != '') {
             load_content_data('song', window.default_song);
         }
+        // load_concert_data();
         search_init();
     });
 
@@ -525,24 +533,18 @@ function get_match_count(f_category, f_value, context_list, c_len) {
     return found;
 }
 
-function render_data_template(category, id, data, context_list) {
-    var lang = window.RENDER_LANGUAGE;
-    if (category == '') {
-        $('#PAGE_VIDEOS').html('');
-        $('#PAGE_LYRICS').html('');
-        $('#PAGE_REFS').html('');
-        return;
+function translate_song_id_to_data(category, sd, st, song_list) {
+    var HF = [ 'S', 'R', 'C' ];
+    var HCATEGORY = [ 'song', 'raga', 'composer' ];
+    for (var j = 0; j < song_list.length; j++) {
+        var song = song_list[j];
+        for (var m = 0; m < HF.length; m++) {
+            get_folder_value(HCATEGORY[m], song, HF[m], HF[m]);
+        }
     }
+}
 
-    var template_name = '#page-videos-template'
-    var ul_template = $(template_name).html();
-    if (lang != 'English') {
-        var map_info_data = get_map_data('MAP_INFO_DICT');
-        var map_dict = map_info_data[lang];
-        ul_template = ul_template.replace('Videos', map_dict['Videos']);
-        ul_template = ul_template.replace('Views', map_dict['Views']);
-    }
-    var new_folder_list = [];
+function translate_folder_id_to_data(category, id, data) {
     var ff = FF[category];
     var f_category = ff[0];
     var f_type = ff[1];
@@ -576,6 +578,27 @@ function render_data_template(category, id, data, context_list) {
             }
         }
     }
+}
+
+function render_data_template(category, id, data, context_list) {
+    var lang = window.RENDER_LANGUAGE;
+    if (category == '') {
+        $('#PAGE_VIDEOS').html('');
+        $('#PAGE_LYRICS').html('');
+        $('#PAGE_REFS').html('');
+        return;
+    }
+
+    var template_name = '#page-videos-template'
+    var ul_template = $(template_name).html();
+    if (lang != 'English') {
+        var map_info_data = get_map_data('MAP_INFO_DICT');
+        var map_dict = map_info_data[lang];
+        ul_template = ul_template.replace('Videos', map_dict['Videos']);
+        ul_template = ul_template.replace('Views', map_dict['Views']);
+    }
+
+    translate_folder_id_to_data(category, id, data);
 
     if (context_list != undefined) {
         var video_list = data['videos']
@@ -958,6 +981,17 @@ function get_youtube_video_info(id) {
         var video_id = id.split('&')[0];
         var image = video_data['thumbnail_url'];
         var info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
+        /*
+        var chapter_data = window.CONCERT_DATA[video_id];
+        if (chapter_data != undefined) {
+            var category = 'artist';
+            var ff = FF[category];
+            var sd = ff[2];
+            var st = ff[3];
+            translate_song_id_to_data(category, sd, st, chapter_data);
+            info_data['chapters'] = { 'songs' : window.CONCERT_DATA[video_id] };
+        }
+        */
         render_modal_dialog(id, '#modal-videoinfo-template', info_data)
     });
 }

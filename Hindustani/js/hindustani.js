@@ -32,19 +32,57 @@ function get_bs_modal(id) {
     return new bootstrap.Modal(document.getElementById(id));
 }
 
+function plain_get_html_text(id) {
+    return document.getElementById(id).innerHTML;
+}
+
+function plain_set_html_text(id, text) {
+    document.getElementById(id).innerHTML = text;
+}
+
+function plain_get_attr(id, key) {
+    var element = document.getElementById(id);
+    return element.getAttribute(key);
+}
+
+function plain_set_attr(id, key, value) {
+    var element = document.getElementById(id);
+    element.setAttribute(key, value);
+}
+
+function plain_get_background_color(id) {
+    var element = document.getElementById(id);
+    return element.style.backgroundColor;
+}
+
+function plain_set_background_color(id, value) {
+    var element = document.getElementById(id);
+    element.style.backgroundColor = value;
+}
+
+function plain_get_query_selector(phrase) {
+    return document.querySelectorAll(phrase);
+}
+
 function call_modal_dialog(title) {
-    $('#DIALOG_TITLE').html(title);
+    plain_set_html_text('DIALOG_TITLE', title);
     get_bs_modal('DIALOG_BOX').show();
 }
 
 function show_modal_dialog(title, body) {
-    $('#DIALOG_BODY').html(body);
+    plain_set_html_text('DIALOG_BODY', body);
     call_modal_dialog(title);
     setTimeout(function() { get_bs_modal('DIALOG_BOX').hide(); }, 3000);
 }
 
+function render_card_template(template_name, id, data) {
+    var ul_template = plain_get_html_text(template_name);
+    var template_html = Mustache.render(ul_template, data);
+    plain_set_html_text(id, template_html);
+}
+
 function render_modal_dialog(title, template, data) {
-    render_card_template(template, '#DIALOG_BODY', data);
+    render_card_template(template, 'DIALOG_BODY', data);
     call_modal_dialog(title);
 }
 
@@ -151,7 +189,7 @@ function menu_transliteration(lang) {
     var kbd_tooltip = 'Language Keyboard';
     var other_dict = { 'P' : playlist, 'S' : search, 'STP' : search_tooltip, 'MTP' : mic_tooltip, 'KTP' : kbd_tooltip };
     var menu_dict = { 'menus' : { 'languages' : lang_list, 'search' : other_dict, 'playlist' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
-    render_card_template('#page-menu-template', '#MENU_DATA', menu_dict);
+    render_card_template('page-menu-template', 'MENU_DATA', menu_dict);
     init_search_listener();
 
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -219,6 +257,9 @@ function info_transliteration(category, data_list) {
         if (lang != 'English' && value.includes('unknowncomposer')) {
             value = value.replace('unknowncomposer', '?');
         }
+        if (lang != 'English' && value.includes('Unknownraga')) {
+            value = value.replace('Unknownraga', '?');
+        }
         item['N'] = get_transliterator_text(lang, value);
     }
     var item_list = data_list['stats']
@@ -270,6 +311,9 @@ function info_transliteration(category, data_list) {
         } else if (lang != 'English' && name in map_dict) {
             value = obj['P'];
             if (value != undefined) {
+                if (lang != 'English' && value.includes('Unknownraga')) {
+                    value = value.replace('Unknownraga', '?');
+                }
                 obj['V'] = get_transliterator_text(lang, value);
             }
         }
@@ -337,7 +381,7 @@ function set_language(obj) {
 
 function load_lang_data() {
     var url = 'hk_lang_map.json';
-    $.getJSON(url, function(map_data) {
+    fetch(url).then(result => result.json()).then(map_data => {
         init_lang_maps(map_data);
         load_nav_data('raga');
         if (window.default_song != '') {
@@ -350,7 +394,7 @@ function load_lang_data() {
 
 function load_id_data() {
     var url = 'id.json';
-    $.getJSON(url, function(id_data) {
+    fetch(url).then(result => result.json()).then(id_data => {
         window.ID_DATA = id_data;
         load_lang_data()
     });
@@ -413,7 +457,7 @@ function show_playlist() {
     }
     var header_list = [ header_dict ];
     var list_data = { 'playlist' : { 'header' : header_list, 'videos' : info_list } };
-    render_modal_dialog(playlist, '#modal-playlist-template', list_data)
+    render_modal_dialog(playlist, 'modal-playlist-template', list_data)
 }
 
 function handle_playlist_command(cmd, arg) {
@@ -455,16 +499,25 @@ function render_nav_template(category, data) {
             }
         }
     }
-    var ul_template = $('#nav-ul-template').html();
+    var ul_template = plain_get_html_text('nav-ul-template')
     var template_html = Mustache.render(ul_template, data);
-    $('#MENU').html(template_html);
-    $('#slider').sliderNav({ 'items' : l_list });
+    plain_set_html_text('MENU', template_html);
+    if (window.NAV_SCROLL_SP != null) {
+        window.NAV_SCROLL_SP.refresh();
+    } else {
+        var scroll_element = document.getElementById('ALPHABET_DATA');
+        window.NAV_SCROLL_SPY = new bootstrap.ScrollSpy(scroll_element, { target: '#ALPHABET_LIST' });
+        const scrollspy = document.querySelector('[data-bs-spy="scroll"]')
+        scrollspy.addEventListener('activate.bs.scrollspy', (e) => {
+            var a_list = plain_get_query_selector('a');
+        })
+    }
 }
 
 function load_about_data(category, video_data) {
     info_transliteration(category, video_data);
-    render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
-    render_card_template('#page-about-template', '#PAGE_INFO', video_data);
+    render_card_template('page-title-template', 'PAGE_TITLE', video_data);
+    render_card_template('page-about-template', 'PAGE_INFO', video_data);
     render_data_template('', '', video_data);
 }
 
@@ -473,7 +526,7 @@ function load_nav_data(category) {
         window.NAV_CATEGORY = category;
     }
     var url = category + '.json';
-    $.getJSON(url, function(video_data) {
+    fetch(url).then(result => result.json()).then(video_data => {
         if (category == 'about') {
             load_about_data(category, video_data);
         } else {
@@ -481,12 +534,6 @@ function load_nav_data(category) {
         }
         add_history('nav', { 'category' : category });
     });
-}
-
-function render_card_template(template_name, id, data) {
-    var ul_template = $(template_name).html();
-    var template_html = Mustache.render(ul_template, data);
-    $(id).html(template_html);
 }
 
 function get_folder_value(category, info, prefix, v) {
@@ -519,24 +566,7 @@ function get_match_count(f_category, f_value, context_list, c_len) {
     return found;
 }
 
-function render_data_template(category, id, data, context_list) {
-    var lang = window.RENDER_LANGUAGE;
-    if (category == '') {
-        $('#PAGE_VIDEOS').html('');
-        $('#PAGE_LYRICS').html('');
-        $('#PAGE_REFS').html('');
-        return;
-    }
-
-    var template_name = '#page-videos-template'
-    var ul_template = $(template_name).html();
-    if (lang != 'English') {
-        var map_info_data = get_map_data('MAP_INFO_DICT');
-        var map_dict = map_info_data[lang];
-        ul_template = ul_template.replace('Videos', map_dict['Videos']);
-        ul_template = ul_template.replace('Views', map_dict['Views']);
-    }
-    var new_folder_list = [];
+function translate_folder_id_to_data(category, id, data) {
     var ff = FF[category];
     var f_category = ff[0];
     var f_type = ff[1];
@@ -570,6 +600,27 @@ function render_data_template(category, id, data, context_list) {
             }
         }
     }
+}
+
+function render_data_template(category, id, data, context_list) {
+    var lang = window.RENDER_LANGUAGE;
+    if (category == '') {
+        plain_set_html_text('PAGE_VIDEOS', '');
+        plain_set_html_text('PAGE_LYRICS', '');
+        plain_set_html_text('PAGE_REFS', '');
+        return;
+    }
+
+    var template_name = 'page-videos-template'
+    var ul_template = plain_get_html_text(template_name);
+    if (lang != 'English') {
+        var map_info_data = get_map_data('MAP_INFO_DICT');
+        var map_dict = map_info_data[lang];
+        ul_template = ul_template.replace('Videos', map_dict['Videos']);
+        ul_template = ul_template.replace('Views', map_dict['Views']);
+    }
+
+    translate_folder_id_to_data(category, id, data);
 
     if (context_list != undefined) {
         var video_list = data['videos']
@@ -608,17 +659,17 @@ function render_data_template(category, id, data, context_list) {
     }
 
     var template_html = Mustache.render(ul_template, data);
-    $(id).html(template_html);
+    plain_set_html_text(id, template_html);
 }
 
 function render_content_data(category, name, video_data, context_list) {
-    $('#PAGE_INFO').html('');
+    plain_set_html_text('PAGE_INFO', '');
     info_transliteration(category, video_data);
-    render_card_template('#page-title-template', '#PAGE_TITLE', video_data);
-    render_card_template('#page-info-template', '#PAGE_INFO', video_data);
-    render_data_template(category, '#PAGE_VIDEOS', video_data, context_list);
-    render_card_template('#page-lyrics-text-template', '#PAGE_LYRICS', video_data);
-    render_card_template('#page-lyrics-ref-template', '#PAGE_REFS', video_data);
+    render_card_template('page-title-template', 'PAGE_TITLE', video_data);
+    render_card_template('page-info-template', 'PAGE_INFO', video_data);
+    render_data_template(category, 'PAGE_VIDEOS', video_data, context_list);
+    render_card_template('page-lyrics-text-template', 'PAGE_LYRICS', video_data);
+    render_card_template('page-lyrics-ref-template', 'PAGE_REFS', video_data);
     window.scrollTo(0, 0);
 }
 
@@ -626,7 +677,7 @@ function load_content_data(category, name) {
     window.CONTENT_CATGEGORY = category;
     window.CONTENT_NAME = name;
     var url = `${category}/${name}.json`;
-    $.getJSON(url, function(video_data) {
+    fetch(url).then(result => result.json()).then(video_data => {
         render_content_data(category, name, video_data);
         add_history('content', { 'category' : category, 'name' : name });
     });
@@ -643,7 +694,7 @@ function load_context_search_data(context_list) {
     window.CONTENT_CATGEGORY = category;
     window.CONTENT_NAME = name;
     var url = `${category}/${name}.json`;
-    $.getJSON(url, function(video_data) {
+    fetch(url).then(result => result.json()).then(video_data => {
         render_content_data(category, name, video_data, new_context_list);
     });
 }
@@ -666,7 +717,7 @@ function search_load() {
 
     var url = 'search_index.json';
     var search_engine = window.carnatic_search_engine;
-    $.getJSON(url, function(search_index_obj) {
+    fetch(url).then(result => result.json()).then(search_index_obj => {
         var data_id = 0;
         var search_obj = search_index_obj['Search'];
         for (var category in search_obj) {
@@ -849,9 +900,9 @@ function handle_search_word(search_word) {
         result_header = map_dict[result_header];
     }
     var item_data = { 'title' : { 'N': result_header, 'I': 'search' }, 'items' : new_item_list };
-    render_card_template('#page-title-template', '#PAGE_TITLE', item_data);
+    render_card_template('page-title-template', 'PAGE_TITLE', item_data);
     if (context_list.length <= 1) {
-        render_card_template('#page-search-template', '#PAGE_INFO', item_data);
+        render_card_template('page-search-template', 'PAGE_INFO', item_data);
     } else {
         var row_list = [];
         for (var i = 0; i < context_list.length; i++) {
@@ -859,7 +910,7 @@ function handle_search_word(search_word) {
             row_list.push({ 'I' : i, 'col' : context_dict[w] });
         }
         var row_data = { 'items' : row_list };
-        render_card_template('#page-context-search-template', '#PAGE_INFO', row_data);
+        render_card_template('page-context-search-template', 'PAGE_INFO', row_data);
     }
     render_data_template('', '', item_data);
     window.scrollTo(0, 0);
@@ -884,12 +935,12 @@ function load_search_history(data) {
 }
 
 function handle_context_search() {
-    var select_list = $("select[id^=COL_]");
+    var select_list = plain_get_query_selector('select[id^=COL_]');
     var cols = select_list.length;
     var context_list = [];
     for (var i = 0; i < select_list.length; i++) {
-        var e = select_list[i];
-        var option = $('option:selected', e).attr('value');
+        var select_element = select_list[i];
+        var option = select_element.options[select_element.selectedIndex].value;
         if (option == '' || option == undefined) {
             continue;
         }
@@ -908,8 +959,8 @@ function play_ended() {
     var swara = note_list[note_index];
     var note_data = get_map_data('NOTE_MAP');
     var note = note_data[swara];
-    var key_div = '#note' + note;
-    var key = $(key_div).css('background-color', window.note_key_color);
+    var key_div = 'note' + note;
+    plain_set_background_color(key_div, window.note_key_color);
     window.note_play_index += 1;
     if (window.note_play_index < window.note_play_list.length) {
         play_note();
@@ -922,9 +973,9 @@ function play_note() {
     var swara = note_list[note_index];
     var note_data = get_map_data('NOTE_MAP');
     var note = note_data[swara];
-    var key_div = '#note' + note;
-    window.note_key_color = $(key_div).css('background-color');
-    var key = $(key_div).css('background-color', 'cyan');
+    var key_div = 'note' + note;
+    window.note_key_color = plain_get_background_color(key_div);
+    plain_set_background_color(key_div, 'cyan');
     var note_audio = document.getElementById('NOTE_PLAY');
     var src = 'audio/' + note + '.mp3';
     note_audio.src = src;
@@ -941,7 +992,7 @@ function play_notes(notes) {
 
 function get_youtube_video_info(id) {
     var url = `https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=${id}&format=json`
-    $.getJSON(url, function(video_data) {
+    fetch(url).then(result => result.json()).then(video_data => {
         var info_list = [];
         for (var key in video_data) {
             if (VIDEO_INFO_KEY_LIST.has(key)) {
@@ -952,7 +1003,7 @@ function get_youtube_video_info(id) {
         var video_id = id.split('&')[0];
         var image = video_data['thumbnail_url'];
         var info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
-        render_modal_dialog(id, '#modal-videoinfo-template', info_data)
+        render_modal_dialog(id, 'modal-videoinfo-template', info_data)
     });
 }
 
@@ -1029,7 +1080,7 @@ function speech_to_text_init() {
             }
             if (window.speech_final_transcript || interim_transcript) {
                 window.speech_recognition.stop();
-                $('#MIC_IMAGE').attr('src', 'icons/mic-mute.svg');
+                plain_set_attr('MIC_IMAGE', 'src', 'icons/mic-mute.svg');
                 document.getElementById('SEARCH_WORD').value = window.speech_final_transcript;
                 // console.log('Speech Final: ' + window.speech_final_transcript);
                 load_search_data();
@@ -1053,14 +1104,13 @@ function speech_start(event) {
     window.speech_recognition.start();
     window.speech_ignore_onend = false;
     window.speech_start_timestamp = event.timeStamp;
-    $('#MIC_IMAGE').attr('src', 'icons/mic.svg');
+    plain_set_attr('MIC_IMAGE', 'src', 'icons/mic.svg');
 }
 
 function load_keyboard(event) {
     var lang = window.RENDER_LANGUAGE;
     set_input_keyboard(lang.toLowerCase());
     get_bs_modal('LANG_KBD').show();
-    return;
 }
 
 function handle_history_context(data) {
@@ -1109,7 +1159,8 @@ function add_history(context, data) {
 }
 
 function load_youtube_frame() {
-    $('#FRAME_PLAYER').attr('src', $('#FRAME_PLAYER').attr('data-src'));
+    var value = plain_get_attr('FRAME_PLAYER', 'data-src');
+    plain_set_attr('FRAME_PLAYER', 'src', value);
     youtube_player_init();
 }
 
@@ -1117,16 +1168,16 @@ function load_content() {
     if (window.innerWidth < 992) {
         show_modal_dialog('Best Viewed in Landscape Mode', 'Use Landscape Mode');
     }
-    $(document).ready(function() {
-        $('#MENU_DATA li').bind('click', function() {
-            $(this).addClass('active').siblings().removeClass('active');
+    var a_list = plain_get_query_selector('#MENU_DATA li a');
+    for (var i = 0; i < a_list.length; i++) {
+        a_list[i].addEventListener('click', function() {
+            var active_list = plain_get_query_selector('#MENU_DATA li.active');
+            for (var j = 0; j < active_list.length; j++) {
+                active_list[j].classList.remove('active');
+            }
+            this.parentNode.classList.add('active');
         });
-        setTimeout(load_youtube_frame, 3000);
-    });
-    $('#MENU_DATA li a').on('click', function() {
-        $('#MENU_DATA li').find('.active').removeClass('active');
-        $(this).parent().addClass('active');
-    });
+    }
 
     load_id_data();
 }
@@ -1141,10 +1192,26 @@ function collection_init(collection, default_song) {
     window.history_data = undefined;
     window.carnatic_popstate = false;
 
+    window.NAV_SCROLL_SPY = null;
+
     sessionStorage.clear();
     window.addEventListener('storage', on_storage_event, false);
     window.addEventListener('popstate', handle_popstate);
     window.onload = load_content;
+
+    // Ready function
+    document.addEventListener('DOMContentLoaded', function() {
+        // console.log(`DOMContentLoaded: ${document.readyState}`);
+        if (document.readyState === "interactive" || document.readyState === "complete" ) {
+            var li_list = plain_get_query_selector('#MENU_DATA li');
+            for (var i = 0; i < li_list.length; i++) {
+                li_list[i].addEventListener('bind', function() {
+                    this.classList.add('active');
+                });
+            }
+            setTimeout(load_youtube_frame, 3000);
+        }
+    });
 
     init_input_keyboard();
     menu_transliteration(lang);

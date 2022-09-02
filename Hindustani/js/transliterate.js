@@ -234,14 +234,14 @@ function replace_keys(key_dict, vowel_size, key) {
     for (var i = 0; i < vowel_size; i++) {
         var c_key = combo_list[i];
         var c = (key == '' || c_key == 0) ? key_dict[i]['N'] : key + c_key;
-        var col_id = '#key_' + (i + 1);
-        $(col_id).html(c);
+        var col_id = 'key_' + (i + 1);
+        plain_set_html_text(col_id, c);
     }
 }
 
 function on_key_click() {
    var lang_dict = window.script_lang_dict;
-   var text = $('#SEARCH_WORD').val();
+   var text = document.getElementById('SEARCH_WORD').value;
    var element = event.srcElement;
    if (element.tagName == 'IMG') {
        event.stopPropagation();
@@ -286,7 +286,7 @@ function on_key_click() {
    if (r_key != undefined) {
        replace_keys(window.input_key_dict, window.script_vowel_size, r_key);
    }
-   $('#SEARCH_WORD').val(text);
+   document.getElementById('SEARCH_WORD').value = text;
    load_search_data();
 };
 
@@ -304,7 +304,7 @@ function set_input_keyboard(lang) {
         }
     } 
     window.input_key_dict = info_list;
-    render_card_template('#lang-key-template', '#GENKBD', key_dict);
+    render_card_template('lang-key-template', 'GENKBD', key_dict);
 }
 
 function init_input_keyboard(lang) {

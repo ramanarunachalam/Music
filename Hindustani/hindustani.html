@@ -105,7 +105,7 @@
           {{/playlist}}
             {{#categories}}
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{{N}}}</em>" href="javascript:load_nav_data('{{C}}');" >
+                <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{{N}}}</em>" onclick="javascript:load_nav_data('{{C}}', this);" >
                     <button class="button"><img class="ICON" src="icons/{{I}}.svg" ></button>
                 </a>
             </li>
@@ -128,8 +128,8 @@
             <ul class="OL_LIST">
               {{#items}}
               <li class="OL_ITEM">
-                <a href="javascript:load_content_data('{{T}}', '{{H}}');">
-                  <img class="ICON" src="icons/{{I}}.svg" /> {{N}}
+                <a onclick="load_content_data('{{T}}', '{{H}}', this);">
+                  <img class="ICON" src="icons/{{I}}.svg" loading="lazy" /> {{N}}
                 </a>
               </li>
               {{/items}}
@@ -142,14 +142,25 @@
 
     <script type="text/html" id="page-title-template">
         {{#title}}
-            <img class="ICON" src="icons/{{I}}.svg" />&nbsp; {{N}}
+            <img class="ICON" src="icons/{{I}}.svg" loading="lazy" />&nbsp; {{N}}
         {{/title}}
+    </script>
+
+    <script type="text/html" id="page-info-spinner">
+        {{#info}}
+        <center>
+            <button class="btn btn-secondary" type="button" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              &nbsp; {{T}}
+            </button>
+        </center>
+        {{/info}}
     </script>
 
     <script type="text/html" id="page-info-template">
       <div class="col-7">
         {{#poster}}
-            <img src="{{P}}" class="img-thumbnail POSTER" />
+            <img src="{{P}}" class="img-thumbnail POSTER" loading="lazy" />
         {{/poster}}
         <table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
             <tbody>
@@ -195,7 +206,7 @@
           {{#items}}
               <li class="list-group-item">
                   <a href="javascript:load_content_data('{{T}}', '{{H}}');">
-                      <img class="ICON" src="icons/{{I}}.svg" /> <i>{{C}}</i> : {{N}}
+                      <img class="ICON" src="icons/{{I}}.svg" loading="lazy" /> <i>{{C}}</i> : {{N}}
                   </a>
               </li>
           {{/items}}
@@ -226,7 +237,7 @@
         <div class="card">
             <div class="card-header ">
                 <h4 class="SONG_HEADER">
-                    <span><img class="ICON" src="icons/headphones.svg" />&nbsp; Videos:</span>
+                    <span><img class="ICON" src="icons/headphones.svg" loading="lazy" />&nbsp; Videos:</span>
                 </h4>
             </div>
             <div class="card-body">
@@ -234,7 +245,7 @@
                     <ol start="1">
                         <li>
                             <span>
-                                <img class="ICON" src="icons/folder.svg" />&nbsp;
+                                <img class="ICON" src="icons/folder.svg" loading="lazy" />&nbsp;
                                 <a href="javascript:load_content_data('{{HT}}', '{{HD}}');">{{HN}}</a> <font color="brown">({{HC}})</font>
                             </span>
                         </li>
@@ -243,7 +254,7 @@
                             <li>
                                 <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{I}}:{{PS}}:{{PR}}');">
                                     <span>
-                                         <img class="ICON" src="icons/play.svg" />&nbsp;
+                                         <img class="ICON" src="icons/play.svg" loading="lazy" />&nbsp;
                                     </span>
                                 </a>
                                 <a href="javascript:void(0);" onclick="get_youtube_video_info('{{I}}')">{{D}}</a> -
@@ -253,7 +264,7 @@
                                 {{V}} Views &nbsp;
                                 <a href="https://www.youtube.com/watch?v={{I}}" target="_blank">
                                     <span>
-                                         <img class="ICON" src="icons/youtube.svg" />
+                                         <img class="ICON" src="icons/youtube.svg" loading="lazy" />
                                     </span>
                                 </a>
                             </li>
@@ -272,7 +283,7 @@
             <div class="card-header ">
                 <h4 class="SONG_HEADER">
                     <span>
-                        <img class="ICON" src="icons/pencil.svg" />&nbsp; {{L}}:
+                        <img class="ICON" src="icons/pencil.svg" loading="lazy" />&nbsp; {{L}}:
                     </span>
                 </h4>
             </div>
@@ -298,7 +309,7 @@
             <div class="card-header ">
                 <h4 class="SONG_HEADER">
                     <span>
-                        <img class="ICON" src="icons/book.svg" />&nbsp; {{R}}:
+                        <img class="ICON" src="icons/book.svg" loading="lazy" />&nbsp; {{R}}:
                     </span>
                 </h4>
             </div>
@@ -307,7 +318,7 @@
                     {{#links}}
                     <a href="{{L}}" target="_blank" class="list-group-item">
                         <span>
-                            <img class="ICON" src="icons/link.svg" />&nbsp; {{N}}
+                            <img class="ICON" src="icons/link.svg" loading="lazy" />&nbsp; {{N}}
                         </span>
                     </a>
                     {{/links}}
@@ -327,7 +338,7 @@
             {{#videos}}
                 <tr>
                   <td>{{N}}</td><td>{{I}}</td><td>{{SN}}</td><td>{{RN}}</td>
-                  <td><a href="#" onclick="delete_row(this);"><img src="icons/x.svg" width="24" height="24"></a></td>
+                  <td><a href="#" onclick="delete_row(this);"><img src="icons/x.svg" loading="lazy" width="24" height="24" /></a></td>
                 </tr>
             {{/videos}}
             </table>
@@ -336,7 +347,7 @@
 
     <script type="text/html" id="modal-videoinfo-template">
         {{#videoimage}}
-            <img class="img-thumbnail POSTER" src="{{P}}">
+            <img class="img-thumbnail POSTER" src="{{P}}" loading="lazy" />
         {{/videoimage}}
         <table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
             <tbody>
@@ -345,6 +356,15 @@
             {{/videoinfo}}
             </tbody>
         </table>
+        {{#chapters}}
+        <table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
+            <tbody>
+            {{#songs}}
+                <tr><td>{{I}}</td><td><em>{{SN}}</em></td><td>{{RN}}</td><td>{{CN}}</td></tr>
+            {{/songs}}
+            </tbody>
+        </table>
+        {{/chapters}}
     </script>
 
     <script type="text/html" id="lang-key-template">

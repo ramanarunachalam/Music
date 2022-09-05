@@ -77,7 +77,7 @@ function show_modal_dialog(title, body) {
 
 function render_card_template(template_name, id, data) {
     var ul_template = plain_get_html_text(template_name);
-    var template_html = Mustache.render(ul_template, data);
+    var template_html = (data != undefined) ? Mustache.render(ul_template, data) : ul_template;
     plain_set_html_text(id, template_html);
 }
 
@@ -163,7 +163,7 @@ function on_storage_event(storageEvent) {
     play_first();
 }
 
-function menu_transliteration(lang) {
+function load_menu_data(lang) {
     var item_list = CATEGORY_DICT['categories']
     var map_info_data = get_map_data('MAP_INFO_DICT');
     var map_dict = map_info_data[lang];
@@ -191,6 +191,8 @@ function menu_transliteration(lang) {
     var menu_dict = { 'menus' : { 'languages' : lang_list, 'search' : other_dict, 'playlist' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
     render_card_template('page-menu-template', 'MENU_DATA', menu_dict);
     init_search_listener();
+
+    set_link_initial_active_state()
 
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -370,7 +372,7 @@ function set_language(obj) {
     var history_data = window.history_data;
     // console.log(`SET LANG: ${lang} ${got_lang} ${history_data}`);
     transliterator_lang_init(lang);
-    menu_transliteration(lang);
+    load_menu_data(lang);
     load_nav_data(window.NAV_CATEGORY);
     if (history_data == undefined) {
         load_content_data(window.CONTENT_CATGEGORY, window.CONTENT_NAME);
@@ -379,25 +381,14 @@ function set_language(obj) {
     }
 }
 
-function load_lang_data() {
-    var url = 'hk_lang_map.json';
-    fetch(url).then(result => result.json()).then(map_data => {
-        init_lang_maps(map_data);
-        load_nav_data('raga');
-        if (window.default_song != '') {
-            load_content_data('song', window.default_song);
-        }
-        search_init();
-    });
-
-}
-
-function load_id_data() {
-    var url = 'id.json';
-    fetch(url).then(result => result.json()).then(id_data => {
-        window.ID_DATA = id_data;
-        load_lang_data()
-    });
+function load_lang_data(url_data) {
+    init_lang_maps(url_data);
+    load_nav_data('raga');
+    if (window.default_song != '') {
+        load_content_data('song', window.default_song);
+    }
+    // fetch_url_data('CONCERT', 'concert.json');
+    search_init();
 }
 
 function add_song(audio_file) {
@@ -521,19 +512,45 @@ function load_about_data(category, video_data) {
     render_data_template('', '', video_data);
 }
 
-function load_nav_data(category) {
+function load_nav_fetch_data(category, url_data) {
+    if (category == 'about') {
+        load_about_data(category, url_data);
+    } else {
+        render_nav_template(category, url_data);
+    }
+    add_history('nav', { 'category' : category });
+}
+
+function set_link_initial_active_state() {
+    var a_list = plain_get_query_selector('#MENU_DATA li a');
+    var a_node = a_list[1].parentNode;
+    window.ACTIVE_MENU = a_node;
+    a_node.classList.add('active');
+}
+
+function clear_link_active_state(prev_element) {
+    if (prev_element != null) {
+        prev_element.classList.remove('active');
+    }
+    return null;
+}
+
+function set_link_active_state(element, prev_element) {
+    clear_link_active_state(prev_element);
+    element = element.parentNode;
+    element.classList.add('active');
+    return element;
+}
+
+function load_nav_data(category, element) {
     if (category != 'about') {
         window.NAV_CATEGORY = category;
     }
-    var url = category + '.json';
-    fetch(url).then(result => result.json()).then(video_data => {
-        if (category == 'about') {
-            load_about_data(category, video_data);
-        } else {
-            render_nav_template(category, video_data);
-        }
-        add_history('nav', { 'category' : category });
-    });
+    if (element != undefined && category != 'about') {
+        window.ACTIVE_MENU = set_link_active_state(element, window.ACTIVE_MENU);
+    }
+    var url = `${category}.json`;
+    fetch_url_data('NAV DATA', url, [ category ]);
 }
 
 function get_folder_value(category, info, prefix, v) {
@@ -564,6 +581,18 @@ function get_match_count(f_category, f_value, context_list, c_len) {
         }
     }
     return found;
+}
+
+function translate_song_id_to_data(category, sd, st, song_list) {
+    var HF = [ 'S', 'R', 'C' ];
+    var HCATEGORY = [ 'song', 'raga', 'composer' ];
+    for (var j = 0; j < song_list.length; j++) {
+        var song = song_list[j];
+        for (var m = 0; m < HF.length; m++) {
+            get_folder_value(HCATEGORY[m], song, HF[m], HF[m]);
+        }
+        song['I'] = j + 1;
+    }
 }
 
 function translate_folder_id_to_data(category, id, data) {
@@ -662,25 +691,38 @@ function render_data_template(category, id, data, context_list) {
     plain_set_html_text(id, template_html);
 }
 
-function render_content_data(category, name, video_data, context_list) {
-    plain_set_html_text('PAGE_INFO', '');
-    info_transliteration(category, video_data);
-    render_card_template('page-title-template', 'PAGE_TITLE', video_data);
-    render_card_template('page-info-template', 'PAGE_INFO', video_data);
-    render_data_template(category, 'PAGE_VIDEOS', video_data, context_list);
-    render_card_template('page-lyrics-text-template', 'PAGE_LYRICS', video_data);
-    render_card_template('page-lyrics-ref-template', 'PAGE_REFS', video_data);
+function empty_content_data(category, name) {
+    var lang = window.RENDER_LANGUAGE;
+    var map_info_data = get_map_data('MAP_INFO_DICT');
+    var map_dict = map_info_data[lang];
+    plain_set_html_text('PAGE_TITLE', '');
+    render_card_template('page-info-spinner', 'PAGE_INFO', { 'info' : { 'T' : map_dict['Fetch'] } });
+    var empty_data = {};
+    render_data_template('', '', empty_data);
     window.scrollTo(0, 0);
 }
 
-function load_content_data(category, name) {
+function render_content_data(category, name, video_data, context_list) {
+    info_transliteration(category, video_data);
+    render_card_template('page-title-template', 'PAGE_TITLE', video_data);
+    setTimeout(function() {
+        render_card_template('page-info-template', 'PAGE_INFO', video_data);
+        render_data_template(category, 'PAGE_VIDEOS', video_data, context_list);
+        render_card_template('page-lyrics-text-template', 'PAGE_LYRICS', video_data);
+        render_card_template('page-lyrics-ref-template', 'PAGE_REFS', video_data);
+        window.scrollTo(0, 0);
+    }, 0);
+}
+
+function load_content_data(category, name, element) {
     window.CONTENT_CATGEGORY = category;
     window.CONTENT_NAME = name;
+    empty_content_data(category, name);
+    if (element != undefined) {
+        window.ACTIVE_NAV = set_link_active_state(element, window.ACTIVE_NAV);
+    }
     var url = `${category}/${name}.json`;
-    fetch(url).then(result => result.json()).then(video_data => {
-        render_content_data(category, name, video_data);
-        add_history('content', { 'category' : category, 'name' : name });
-    });
+    fetch_url_data('CONTENT DATA', url, [ category, name ]);
 }
 
 function load_context_search_data(context_list) {
@@ -693,10 +735,9 @@ function load_context_search_data(context_list) {
     }
     window.CONTENT_CATGEGORY = category;
     window.CONTENT_NAME = name;
+    empty_content_data(category, name);
     var url = `${category}/${name}.json`;
-    fetch(url).then(result => result.json()).then(video_data => {
-        render_content_data(category, name, video_data, new_context_list);
-    });
+    fetch_url_data('CONTENT CONTEXT', url, [ category, name, new_context_list ]);
 }
 
 function normalize_search_text(search_text) {
@@ -710,30 +751,28 @@ function normalize_search_text(search_text) {
     return search_text;
 }
 
-function search_load() {
-    if (window.search_initialized) {
-        return;
-    }
-
-    var url = 'search_index.json';
+function search_load_fetch_data(search_index_obj) {
     var search_engine = window.carnatic_search_engine;
-    fetch(url).then(result => result.json()).then(search_index_obj => {
-        var data_id = 0;
-        var search_obj = search_index_obj['Search'];
-        for (var category in search_obj) {
-            var data_list = search_obj[category];
-            data_list.forEach(function (data_item, data_index) {
-                var h_id = data_item.H;
-                var aka_list = data_item.A.split(',');
-                var data_doc = { 'id' : data_id, 'href' : h_id, 'title' : h_id, 'aka' : aka_list, 'category' : category, 'pop' : data_item.P };
-                search_engine.add(data_doc);
-                data_id += 1;
-            });
-        }
-        window.CARNATIC_CHAR_MAP = search_index_obj['Charmap'];
-        transliterator_init();
-    });
+    var data_id = 0;
+    var search_obj = search_index_obj['Search'];
+    for (var category in search_obj) {
+        var data_list = search_obj[category];
+        data_list.forEach(function (data_item, data_index) {
+            var h_id = data_item.H;
+            var aka_list = data_item.A.split(',');
+            var data_doc = { 'id' : data_id, 'href' : h_id, 'title' : h_id, 'aka' : aka_list, 'category' : category, 'pop' : data_item.P };
+            search_engine.add(data_doc);
+            data_id += 1;
+        });
+    }
+    window.CARNATIC_CHAR_MAP = search_index_obj['Charmap'];
+    transliterator_init();
+}
 
+function search_load() {
+    if (window.search_initialized) return;
+    var search_engine = window.carnatic_search_engine;
+    fetch_url_data('SEARCH DATA', 'search_index.json');
     window.search_initialized = true;
 }
 
@@ -918,6 +957,7 @@ function handle_search_word(search_word) {
 }
 
 function load_search_data() {
+    window.ACTIVE_NAV = clear_link_active_state(window.ACTIVE_NAV);
     var search_word = document.getElementById('SEARCH_WORD').value;
     var search_word = decodeURI(search_word);
     handle_search_word(search_word);
@@ -990,20 +1030,67 @@ function play_notes(notes) {
     play_note();
 }
 
-function get_youtube_video_info(id) {
-    var url = `https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=${id}&format=json`
-    fetch(url).then(result => result.json()).then(video_data => {
-        var info_list = [];
-        for (var key in video_data) {
-            if (VIDEO_INFO_KEY_LIST.has(key)) {
-                var value = video_data[key];
+function render_youtube_video_info(id, video_data) {
+    var info_list = [];
+    var title = id;
+    for (var key in video_data) {
+        if (VIDEO_INFO_KEY_LIST.has(key)) {
+            var value = video_data[key];
+            if (key == 'title') {
+                title = value;
+            } else {
                 info_list.push({ 'N' : key, 'C' : value });
             }
         }
-        var video_id = id.split('&')[0];
-        var image = video_data['thumbnail_url'];
-        var info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
-        render_modal_dialog(id, 'modal-videoinfo-template', info_data)
+    }
+    var video_id = id.split('&')[0];
+    info_list.push({ 'N' : 'id', 'C' : video_id });
+    var image = video_data['thumbnail_url'];
+    var info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
+    /*
+    var chapter_data = window.CONCERT_DATA[video_id];
+    if (chapter_data != undefined) {
+        var category = 'artist';
+        var ff = FF[category];
+        var sd = ff[2];
+        var st = ff[3];
+        translate_song_id_to_data(category, sd, st, chapter_data);
+        info_data['chapters'] = { 'songs' : window.CONCERT_DATA[video_id] };
+    }
+    */
+    render_modal_dialog(title, 'modal-videoinfo-template', info_data);
+}
+
+function get_youtube_video_info(id) {
+    var url = `https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=${id}&format=json`
+    fetch_url_data('VIDEO INFO', url, [ id ]);
+}
+
+function fetch_url_data(name, url, args) {
+    fetch(url).then(result => result.json()).then(url_data => {
+        if (name == 'LANG MAP') {
+            load_lang_data(url_data);
+        } else if (name == 'ID DATA') {
+            window.ID_DATA = url_data;
+            fetch_url_data('LANG MAP', 'hk_lang_map.json');
+        } else if (name == 'NAV DATA') {
+            const category = args[0];
+            load_nav_fetch_data(category, url_data);
+        } else if (name == 'CONTENT DATA') {
+            const [ category, h_name ] = args;
+            render_content_data(category, h_name, url_data);
+            add_history('content', { 'category' : category, 'name' : h_name });
+        } else if (name == 'CONTENT CONTEXT') {
+            const [ category, h_name, new_context_list ] = args;
+            render_content_data(category, h_name, url_data, new_context_list);
+        } else if (name == 'SEARCH DATA') {
+            search_load_fetch_data(url_data);
+        } else if (name == 'VIDEO INFO') {
+            const id = args[0];
+            render_youtube_video_info(id, url_data);
+        } else if (name == 'CONCERT') {
+            window.CONCERT_DATA = url_data;
+        }
     });
 }
 
@@ -1168,18 +1255,7 @@ function load_content() {
     if (window.innerWidth < 992) {
         show_modal_dialog('Best Viewed in Landscape Mode', 'Use Landscape Mode');
     }
-    var a_list = plain_get_query_selector('#MENU_DATA li a');
-    for (var i = 0; i < a_list.length; i++) {
-        a_list[i].addEventListener('click', function() {
-            var active_list = plain_get_query_selector('#MENU_DATA li.active');
-            for (var j = 0; j < active_list.length; j++) {
-                active_list[j].classList.remove('active');
-            }
-            this.parentNode.classList.add('active');
-        });
-    }
-
-    load_id_data();
+    fetch_url_data('ID DATA', 'id.json');
 }
 
 function collection_init(collection, default_song) {
@@ -1193,28 +1269,22 @@ function collection_init(collection, default_song) {
     window.carnatic_popstate = false;
 
     window.NAV_SCROLL_SPY = null;
+    window.ACTIVE_MENU = null;
+    window.ACTIVE_NAV = null;
 
     sessionStorage.clear();
     window.addEventListener('storage', on_storage_event, false);
     window.addEventListener('popstate', handle_popstate);
     window.onload = load_content;
 
-    // Ready function
     document.addEventListener('DOMContentLoaded', function() {
-        // console.log(`DOMContentLoaded: ${document.readyState}`);
         if (document.readyState === "interactive" || document.readyState === "complete" ) {
-            var li_list = plain_get_query_selector('#MENU_DATA li');
-            for (var i = 0; i < li_list.length; i++) {
-                li_list[i].addEventListener('bind', function() {
-                    this.classList.add('active');
-                });
-            }
-            setTimeout(load_youtube_frame, 3000);
+            setTimeout(load_youtube_frame, 1000);
         }
     });
 
     init_input_keyboard();
-    menu_transliteration(lang);
+    load_menu_data(lang);
     load_nav_data('about');
 }
 

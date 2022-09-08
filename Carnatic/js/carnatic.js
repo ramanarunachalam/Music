@@ -20,12 +20,26 @@ const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b' };
 
 
 function sleep(seconds){
-    var waitUntil = new Date().getTime() + seconds*1000;
+    const waitUntil = new Date().getTime() + seconds*1000;
     while(new Date().getTime() < waitUntil) true;
 }
 
 function capitalize_word(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+async function fetch_url(url) {
+    let url_data = null;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            console.log('Fetch Error:', response.status);
+        }
+        url_data = await response.json();
+    } catch(error) {
+        console.log('Fetch Error:', error);
+    }
+    return url_data;
 }
 
 function get_bs_modal(id) {
@@ -41,22 +55,22 @@ function plain_set_html_text(id, text) {
 }
 
 function plain_get_attr(id, key) {
-    var element = document.getElementById(id);
+    const element = document.getElementById(id);
     return element.getAttribute(key);
 }
 
 function plain_set_attr(id, key, value) {
-    var element = document.getElementById(id);
+    const element = document.getElementById(id);
     element.setAttribute(key, value);
 }
 
 function plain_get_background_color(id) {
-    var element = document.getElementById(id);
+    const element = document.getElementById(id);
     return element.style.backgroundColor;
 }
 
 function plain_set_background_color(id, value) {
-    var element = document.getElementById(id);
+    let element = document.getElementById(id);
     element.style.backgroundColor = value;
 }
 
@@ -76,8 +90,8 @@ function show_modal_dialog(title, body) {
 }
 
 function render_card_template(template_name, id, data) {
-    var ul_template = plain_get_html_text(template_name);
-    var template_html = (data != undefined) ? Mustache.render(ul_template, data) : ul_template;
+    const ul_template = plain_get_html_text(template_name);
+    const template_html = (data != undefined) ? Mustache.render(ul_template, data) : ul_template;
     plain_set_html_text(id, template_html);
 }
 
@@ -101,7 +115,7 @@ function onPlayerReady(event) {
 
 last_player_status = 0;
 function onPlayerStateChange(event) {
-    var player_status = event.data;
+    const player_status = event.data;
     // playerStatus: -1 : unstarted, 0 - ended, 1 - playing, 2 - paused, 3 - buffering, 5 - video cued
     if (last_player_status == 3 && player_status == -1) {
         show_modal_dialog('Video is not playable', 'Click Play List to Delete Song');
@@ -114,45 +128,45 @@ function onPlayerStateChange(event) {
 }
 
 function youtube_player_init() {
-    var tag = document.createElement('script');
+    const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
-    var firstScriptTag = document.getElementsByTagName('script')[0];
+    const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
 
 function get_play_list() {
-    var new_play_list = sessionStorage['playlist'];
+    let new_play_list = sessionStorage['playlist'];
     new_play_list = (new_play_list == undefined) ? new Array() : JSON.parse(new_play_list);
     return new_play_list;
 }
 
 function play_first() {
-    var play_list = get_play_list();
+    const play_list = get_play_list();
     if (play_list.length <= 0) {
         return;
     }
-    var parts = play_list[0].split(':');
-    var video_id = parts[0];
+    const parts = play_list[0].split(':');
+    let video_id = parts[0];
     const time_str = '&t=';
     if (video_id.includes(time_str)) {
-        var v_list = video_id.split(time_str);
+        const v_list = video_id.split(time_str);
         video_id = v_list[0];
-        var start_time = parseInt(v_list[1].replace('s', ''));
-        window.yt_player.loadVideoById({ videoId: video_id, startSeconds: start_time});
+        const start_time = parseInt(v_list[1].replace('s', ''));
+        window.yt_player.loadVideoById({ videoId: video_id, startSeconds: start_time });
     } else {
         window.yt_player.loadVideoById({ videoId: video_id });
     }
 }
 
 function play_next() {
-    var play_list = get_play_list();
+    const play_list = get_play_list();
     play_list.shift();
     sessionStorage['playlist'] = JSON.stringify(play_list);
     play_first();
 }
 
 function on_storage_event(storageEvent) {
-    var play_list = get_play_list();
+    const play_list = get_play_list();
     if (play_list.length == 0) {
         return;
     }
@@ -164,38 +178,37 @@ function on_storage_event(storageEvent) {
 }
 
 function load_menu_data(lang) {
-    var item_list = CATEGORY_DICT['categories']
-    var map_info_data = get_map_data('MAP_INFO_DICT');
-    var map_dict = map_info_data[lang];
-    for (var i = 0; i < item_list.length; i++) {
-        var obj = item_list[i];
-        var name = obj['C'];
-        name = name.charAt(0).toUpperCase() + name.slice(1);
+    const item_list = CATEGORY_DICT['categories']
+    const map_info_data = get_map_data('MAP_INFO_DICT');
+    const map_dict = map_info_data[lang];
+    for (let i = 0; i < item_list.length; i++) {
+        const obj = item_list[i];
+        const name = capitalize_word(obj['C']);
         obj['N'] = (lang == 'English') ? name : map_dict[name];
     }
-    var playlist = 'Playlist';
-    var search = 'Search';
+    let playlist = 'Playlist';
+    let search = 'Search';
     if (lang != 'English') {
         playlist = map_dict[playlist];
         search = map_dict[search];
     }
-    let lang_list = [];
-    for (var l in MAP_LANG_DICT) {
-        var d = (l == window.GOT_LANGUAGE) ? { 'N' : l, 'O' : 'selected' } : { 'N' : l };
+    const lang_list = [];
+    for (let l in MAP_LANG_DICT) {
+        let d = (l == window.GOT_LANGUAGE) ? { 'N' : l, 'O' : 'selected' } : { 'N' : l };
         lang_list.push(d);
     }
-    var search_tooltip = 'Prefix Search <br/> e.g. radu daya <br/> Phonetic Search <br/> e.g. goula <br/> Language Search <br/> e.g. கல்யாணி <br/> Context Search <br/> e.g. mdr : kalyani : dikshitar';
-    var mic_tooltip = 'Only in Chrome';
-    var kbd_tooltip = 'Language Keyboard';
-    var other_dict = { 'P' : playlist, 'S' : search, 'STP' : search_tooltip, 'MTP' : mic_tooltip, 'KTP' : kbd_tooltip };
-    var menu_dict = { 'menus' : { 'languages' : lang_list, 'search' : other_dict, 'playlist' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
+    const search_tooltip = 'Prefix Search <br/> e.g. radu daya <br/> Phonetic Search <br/> e.g. goula <br/> Language Search <br/> e.g. கல்யாணி <br/> Context Search <br/> e.g. mdr : kalyani : dikshitar';
+    const mic_tooltip = 'Only in Chrome';
+    const kbd_tooltip = 'Language Keyboard';
+    const other_dict = { 'P' : playlist, 'S' : search, 'STP' : search_tooltip, 'MTP' : mic_tooltip, 'KTP' : kbd_tooltip };
+    const menu_dict = { 'menus' : { 'languages' : lang_list, 'search' : other_dict, 'playlist' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
     render_card_template('page-menu-template', 'MENU_DATA', menu_dict);
     init_search_listener();
 
     set_link_initial_active_state()
 
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new bootstrap.Tooltip(tooltipTriggerEl)
     });
     speech_to_text_init();
@@ -211,43 +224,33 @@ function get_swara_transliterate(lang, swara_str) {
 }
 
 function get_swara_text(lang, note_list, value_list) {
-    var swara_str = value_list[0];
-    var s_list = swara_str.split(' ');
-    for (var k = 0; k < s_list.length; k++) {
+    let swara_str = value_list[0];
+    const s_list = swara_str.split(' ');
+    for (let k = 0; k < s_list.length; k++) {
         note_list.add(s_list[k]);
     }
     swara_str = get_swara_transliterate(lang, swara_str);
-    var note_str = value_list[1];
-    var image_str = `<a href="javascript:play_notes('${note_str}');" ><img class="ICON" src="icons/soundwave.svg" ></a>`;
+    const note_str = value_list[1];
+    const image_str = `<a href="javascript:play_notes('${note_str}');" ><img class="ICON" src="icons/soundwave.svg" ></a>`;
     return swara_str + ' ' + image_str;
 }
 
 function check_for_english_text(lang, category, h_id, h_text) {
-    if (lang != 'English') {
-        return false;
-    }
-    if (ENGLISH_TYPE_LIST.includes(category)) {
-        return true;
-    }
-    if (category != 'song') {
-        return false;
-    }
-    if (h_id >= 20000) {
-        return true;
-    }
-    if (h_text.includes(' - ')) {
-        return true;
-    }
+    if (lang != 'English') return false;
+    if (ENGLISH_TYPE_LIST.includes(category)) return true;
+    if (category != 'song') return false;
+    if (h_id >= 20000) return true;
+    if (h_text.includes(' - ')) return true;
     return false;
 }
 
 function info_transliteration(category, data_list) {
-    var lang = window.RENDER_LANGUAGE;
-    var map_info_data = get_map_data('MAP_INFO_DICT');
-    var map_dict = map_info_data[lang];
-    var map_month_data = get_map_data('MAP_MONTH_DICT');
-    var item = data_list['title']
-    var h_text = item['H'];
+    const lang = window.RENDER_LANGUAGE;
+    const map_info_data = get_map_data('MAP_INFO_DICT');
+    const map_dict = map_info_data[lang];
+    const map_month_data = get_map_data('MAP_MONTH_DICT');
+    let item = data_list['title']
+    const h_text = item['H'];
     if (category == 'about') {
         if (lang != 'English') {
             item['N'] = map_dict[item['N']];
@@ -255,7 +258,7 @@ function info_transliteration(category, data_list) {
     } else if (check_for_english_text(lang, category, 200, h_text)) {
         item['N'] = h_text;
     } else {
-        var value = item['V'];
+        let value = item['V'];
         if (lang != 'English' && value.includes('unknowncomposer')) {
             value = value.replace('unknowncomposer', '?');
         }
@@ -264,25 +267,25 @@ function info_transliteration(category, data_list) {
         }
         item['N'] = get_transliterator_text(lang, value);
     }
-    var item_list = data_list['stats']
+    let item_list = data_list['stats']
     if (item_list == undefined) {
         item_list = [];
     }
-    for (var i = 0; i < item_list.length; i++) {
-        var obj = item_list[i];
-        var name = obj['H'];
+    for (let i = 0; i < item_list.length; i++) {
+        let obj = item_list[i];
+        let name = obj['H'];
         obj['N'] = (lang == 'English') ? name : map_dict[name];
     }
-    var note_list = new Set();
-    var item_list = data_list['info']
+    const note_list = new Set();
+    item_list = data_list['info']
     if (item_list == undefined) {
         item_list = [];
     }
-    for (var i = 0; i < item_list.length; i++) {
-        var obj = item_list[i];
-        var name = obj['H'];
+    for (let i = 0; i < item_list.length; i++) {
+        const obj = item_list[i];
+        const name = obj['H'];
         obj['N'] = (lang != 'English' && name in map_dict) ? map_dict[name] : name;
-        var value = obj['V'];
+        let value = obj['V'];
         if (name == 'Language') {
             if (lang != 'English' && name in map_dict) {
                 obj['V'] = map_dict[value];
@@ -293,7 +296,7 @@ function info_transliteration(category, data_list) {
             obj['V'] = get_swara_text(lang, note_list, value)
         } else if (name == 'Born' || name == 'Died') {
             if (value != undefined && typeof value === 'string') {
-                var m_list = [];
+                let m_list = [];
                 if (value.includes(' ')) {
                     m_list = value.split(' ');
                 }
@@ -302,10 +305,10 @@ function info_transliteration(category, data_list) {
                 }
             }
         } else if (lang != 'English' && name == 'Gharana') {
-            var item_list = obj['P'];
+            const item_list = obj['P'];
             if (value != undefined) {
-                var g_list = [];
-                for (var j = 0; j < item_list.length; j++) {
+                let g_list = [];
+                for (let j = 0; j < item_list.length; j++) {
                      g_list.push(get_transliterator_text(lang, item_list[j])); 
                 }
                 obj['V'] = g_list.join('</br>');
@@ -320,15 +323,15 @@ function info_transliteration(category, data_list) {
             }
         }
     }
-    var item = data_list['keyboard']
+    item = data_list['keyboard']
     if (item != undefined) {
-        var kbd_list = get_map_data('KEYBOARD_LIST');
-        for (var i = 0; i < kbd_list.length; i++) {
-            var obj = kbd_list[i];
-            var swara_list = obj['V'];
-            var new_swara_list = [];
-            for (var j = 0; j < swara_list.length; j++) {
-                var swara_str = swara_list[j];
+        let kbd_list = get_map_data('KEYBOARD_LIST');
+        for (let i = 0; i < kbd_list.length; i++) {
+            const obj = kbd_list[i];
+            const swara_list = obj['V'];
+            const new_swara_list = [];
+            for (let j = 0; j < swara_list.length; j++) {
+                let swara_str = swara_list[j];
                 if (note_list.has(swara_str)) {
                     swara_str = get_swara_transliterate(lang, swara_str);
                     new_swara_list.push(swara_str);
@@ -338,38 +341,38 @@ function info_transliteration(category, data_list) {
         }
         data_list['keyboard'] = { 'keys' : kbd_list };
     }
-    var item_list = data_list['lyricstext']
+    item_list = data_list['lyricstext']
     if (item_list == undefined) {
         item_list = [];
     }
-    var lyric_prefix = 'SAhityA';
-    var prefix = get_transliterator_text(lang, lyric_prefix);
-    for (var i = 0; i < item_list.length; i++) {
-        var obj = item_list[i];
-        var lyric_lang = obj['L'];
+    const lyric_prefix = 'SAhityA';
+    const prefix = get_transliterator_text(lang, lyric_prefix);
+    for (let i = 0; i < item_list.length; i++) {
+        const obj = item_list[i];
+        let lyric_lang = obj['L'];
         lyric_lang = (lang != 'English' && lyric_lang in map_dict) ? map_dict[lyric_lang] : lyric_lang;
         obj['L'] = prefix + ' - ' + lyric_lang;
     }
-    var references = 'References';
+    let references = 'References';
     if (lang != 'English') {
         references = map_dict[references];
     }
-    var item_list = data_list['lyricsref']
+    item_list = data_list['lyricsref']
     if (item_list == undefined) {
         item_list = [];
     }
-    for (var i = 0; i < item_list.length; i++) {
-        var obj = item_list[i];
+    for (let i = 0; i < item_list.length; i++) {
+        const obj = item_list[i];
         obj['R'] = references;
     }
 }
 
 function set_language(obj) {
-    var got_lang = obj.value;
+    const got_lang = obj.value;
     window.GOT_LANGUAGE = got_lang;
-    var lang = MAP_LANG_DICT[got_lang];
+    const lang = MAP_LANG_DICT[got_lang];
     window.RENDER_LANGUAGE = lang;
-    var history_data = window.history_data;
+    const history_data = window.history_data;
     // console.log(`SET LANG: ${lang} ${got_lang} ${history_data}`);
     transliterator_lang_init(lang);
     load_menu_data(lang);
@@ -387,12 +390,12 @@ function load_lang_data(url_data) {
     if (window.default_song != '') {
         load_content_data('song', window.default_song);
     }
-    // fetch_url_data('CONCERT', 'concert.json');
+    // fetch_url_data('CONCERT DATA', 'concert.json');
     search_init();
 }
 
-function add_song(audio_file) {
-    var play_list = get_play_list();
+function add_song(audio_file, script_mode) {
+    const play_list = get_play_list();
     if (play_list.length <= 0) {
         if (audio_file != '') {
             play_list[0] = audio_file;
@@ -403,13 +406,13 @@ function add_song(audio_file) {
     sessionStorage['playlist'] = JSON.stringify(play_list);
     if (play_list.length == 1) {
         play_first();
-    } else {
+    } else  if (!script_mode) {
         show_modal_dialog('Song added to Play List', 'Click Play List to Add/Delete Songs');
     }
 }
 
 function delete_song(song_id) {
-    var play_list = get_play_list();
+    const play_list = get_play_list();
     if (play_list.length > 0) {
         song_id = parseInt(song_id);
         play_list.splice(song_id, 1);
@@ -421,43 +424,138 @@ function delete_song(song_id) {
 }
 
 function delete_row(row) {
-    var row_id = row.parentNode.parentNode.rowIndex;
+    const row_id = row.parentNode.parentNode.rowIndex;
     handle_playlist_command('delete', row_id - 1);
     document.getElementById('PLAYLIST_TABLE').deleteRow(row_id);
 }
 
+function create_jukebox(obj) {
+    setTimeout(function() { create_jukebox_modal(obj); }, 0);
+}
+
+async function create_jukebox_modal(obj) {
+    const option = obj.value.toLowerCase();
+    const check_id = window.NAV_CATEGORY == window.CONTENT_CATGEGORY;
+    get_bs_modal('DIALOG_BOX').hide();
+    const JUKEBOX_TOTAL = 100;
+    const JUKEBOX_LENGTH = 10;
+    const song_id_list = [];
+    const play_list = [];
+    let category = 'song';
+    let loops = JUKEBOX_TOTAL;
+    if (FF[option] != undefined) {
+        category = option;
+        loops = 1;
+    }
+    const is_main_song = category == 'song';
+    let url = `${category}.json`;
+    let url_data = await fetch_url(url);
+    if (url_data == null) return;
+    const letter_list = url_data['alphabet'];
+    for (let i = 0; i < loops; i++) {
+        let t_id = 0;
+        let t_text = '';
+        if (loops <= 1) {
+            t_text = window.CONTENT_NAME;
+        } else {
+            const letter_index = Math.floor((Math.random() * letter_list.length));
+            const l_item = letter_list[letter_index];
+            const item_list = l_item['items']
+            const item_index = Math.floor((Math.random() * item_list.length));
+            const obj = item_list[item_index];
+            t_id = obj['H'];
+            t_text = window.ID_DATA[category][t_id][0];
+        }
+        url = `${category}/${t_text}.json`;
+        url_data = await fetch_url(url);
+        if (url_data == null) continue;
+        let folder_list = url_data['videos'][0]['folder'];
+        if (loops > 1) {
+            const folder_index = Math.floor((Math.random() * folder_list.length));
+            folder_list = [ folder_list[folder_index] ];
+        }
+        // console.log(`Jukebox: ${url} ${is_main_song} ${folder_list.length}`);
+        for (let j = 0; j < folder_list.length; j++) {
+            let folder = folder_list[j];
+            if (loops <= 1) {
+                const folder_index = Math.floor((Math.random() * folder_list.length));
+                folder = folder_list[folder_index];
+            }
+            const song_id = is_main_song ? t_id : folder['S'];
+            let video_list = folder['songs'];
+            if (loops <= 1) {
+                if (category == 'artist' || category == 'song') {
+                    video_list = [ video_list[0] ];
+                } else {
+                    const video_index = Math.floor((Math.random() * video_list.length));
+                    video_list = [ video_list[video_index] ];
+                }
+            } else {
+                const video_index = Math.floor((Math.random() * video_list.length));
+                video_list = [ video_list[video_index] ];
+            }
+            // console.log(`Jukebox folder: ${song_id} ${j} ${video_list.length}`);
+            for (let k = 0; k < video_list.length; k++) {
+                const video = video_list[k];
+                if (option == 'Views' && video['V'] < 100) continue;
+                const artist_id = is_main_song ? folder['A'] : video['A'];
+                // console.log(`Jukebox video: ${song_id} ${k} ${artist_id}`);
+                if (loops > 1 && category != 'artist' && (artist_id <= 0 || artist_id >= 50)) continue;
+                const raga_id = video['R'];
+                // console.log(`Jukebox video: ${song_id} ${k} ${artist_id} ${raga_id}`);
+                if (category != 'raga' && (raga_id <= 0 || raga_id > 250)) continue;
+                const composer_id = video['C'];
+                if (category != 'composer' && (composer_id <= 0 || composer_id > 100)) continue;
+                const video_id = video['I'];
+                // console.log(`Jukebox video: ${song_id} ${k} ${artist_id} ${raga_id} ${composer_id} ${video_id}`);
+                const args = `${video_id}:${song_id}:${raga_id}`;
+                play_list.push(args);
+                if (play_list.length >= JUKEBOX_LENGTH) break;
+            }
+            if (play_list.length >= JUKEBOX_LENGTH) break;
+        }
+        if (play_list.length >= JUKEBOX_LENGTH) break;
+    }
+    for (let i = 0; i < play_list.length; i++) {
+        add_song(play_list[i], true);
+    }
+    setTimeout(function() { show_playlist(); }, 0);
+}
+
 function show_playlist() {
-    var play_list = get_play_list();
-    var info_list = [];
-    for (var i = 0; i < play_list.length; i++) {
-        var parts = play_list[i].split(':');
+    const play_list = get_play_list();
+    const info_list = [];
+    for (let i = 0; i < play_list.length; i++) {
+        const parts = play_list[i].split(':');
         info_dict = { 'N' : i + 1, 'I' : parts[0], 'S' : parseInt(parts[1]), 'R' : parseInt(parts[2]) };
         get_folder_value('song', info_dict, 'S', 'S');
         get_folder_value('raga', info_dict, 'R', 'R');
         info_list.push(info_dict);
     }
-    var lang = window.RENDER_LANGUAGE;
-    var map_info_data = get_map_data('MAP_INFO_DICT');
-    var map_dict = map_info_data[lang];
-    var header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : 'Song', 'RN' : 'Raga' };
-    var playlist = 'Playlist';
+    const lang = window.RENDER_LANGUAGE;
+    const map_info_data = get_map_data('MAP_INFO_DICT');
+    const map_dict = map_info_data[lang];
+    let header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : 'Song', 'RN' : 'Raga' };
+    let title = 'Playlist';
     if (lang != 'English') {
-        var map_dict = map_info_data[lang];
-        playlist = map_dict[playlist];
+        const map_dict = map_info_data[lang];
+        title = map_dict[title];
         header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : map_dict['Song'], 'RN' : map_dict['Raga'] };
     }
-    var header_list = [ header_dict ];
-    var list_data = { 'playlist' : { 'header' : header_list, 'videos' : info_list } };
-    render_modal_dialog(playlist, 'modal-playlist-template', list_data)
+    const title_template = plain_get_html_text('modal-playlist-title-template');
+    const JUKEBOX_LIST = [ { 'N' : 'Popularity' } , { 'N' : 'Views' } , { 'N' : 'Artist' } , { 'N' : 'Composer' } , { 'N' : 'Raga' } , { 'N' : 'Song' }, { 'N' : 'Type' } ];
+    const template_html = Mustache.render(title_template, { 'jukebox' : JUKEBOX_LIST });
+    title = '<div class="row"><div class="col">' + title + '</div>' + template_html + ' </div>';
+    const header_list = [ header_dict ];
+    const list_data = { 'playlist' : { 'header' : header_list, 'videos' : info_list } };
+    render_modal_dialog(title, 'modal-playlist-template', list_data)
 }
 
 function handle_playlist_command(cmd, arg) {
     if (cmd == 'play') {
-        var audio_file = arg;
-        add_song(audio_file);
+        add_song(arg, false);
     } else if (cmd == 'delete') {
-        var song_id = arg;
-        delete_song(song_id);
+        delete_song(arg);
     } else if (cmd == 'show') {
         show_playlist();
     }
@@ -465,20 +563,18 @@ function handle_playlist_command(cmd, arg) {
 }
 
 function render_nav_template(category, data) {
-    var lang = window.RENDER_LANGUAGE;
-    var letter_list = data['alphabet']
-    var l_list = [];
-    var no_transliterate = lang == 'English' && ENGLISH_TYPE_LIST.includes(category);
-    var id_data = window.ID_DATA[category];
-    for (var k = 0; k < letter_list.length; k++) {
-        var l_item = letter_list[k];
-        l_list.push(l_item['LL']);
-        var item_list = l_item['items']
-        for (var i = 0; i < item_list.length; i++) {
-            var obj = item_list[i];
-            var h_id = obj['H'];
-            var h_text = id_data[h_id][0];
-            var f_text = id_data[h_id][1];
+    const lang = window.RENDER_LANGUAGE;
+    const letter_list = data['alphabet'];
+    const no_transliterate = lang == 'English' && ENGLISH_TYPE_LIST.includes(category);
+    const id_data = window.ID_DATA[category];
+    for (let k = 0; k < letter_list.length; k++) {
+        const l_item = letter_list[k];
+        const item_list = l_item['items']
+        for (let i = 0; i < item_list.length; i++) {
+            const obj = item_list[i];
+            const h_id = obj['H'];
+            const h_text = id_data[h_id][0];
+            let f_text = id_data[h_id][1];
             obj['H'] = h_text;
             if (lang != 'English' && f_text.includes('unknowncomposer')) {
                 f_text = f_text.replace('unknowncomposer', '?');
@@ -490,17 +586,17 @@ function render_nav_template(category, data) {
             }
         }
     }
-    var ul_template = plain_get_html_text('nav-ul-template')
-    var template_html = Mustache.render(ul_template, data);
+    const ul_template = plain_get_html_text('nav-ul-template')
+    const template_html = Mustache.render(ul_template, data);
     plain_set_html_text('MENU', template_html);
     if (window.NAV_SCROLL_SP != null) {
         window.NAV_SCROLL_SP.refresh();
     } else {
-        var scroll_element = document.getElementById('ALPHABET_DATA');
+        const scroll_element = document.getElementById('ALPHABET_DATA');
         window.NAV_SCROLL_SPY = new bootstrap.ScrollSpy(scroll_element, { target: '#ALPHABET_LIST' });
         const scrollspy = document.querySelector('[data-bs-spy="scroll"]')
         scrollspy.addEventListener('activate.bs.scrollspy', (e) => {
-            var a_list = plain_get_query_selector('a');
+            const a_list = plain_get_query_selector('a');
         })
     }
 }
@@ -522,8 +618,8 @@ function load_nav_fetch_data(category, url_data) {
 }
 
 function set_link_initial_active_state() {
-    var a_list = plain_get_query_selector('#MENU_DATA li a');
-    var a_node = a_list[1].parentNode;
+    const a_list = plain_get_query_selector('#MENU_DATA li a');
+    const a_node = a_list[1].parentNode;
     window.ACTIVE_MENU = a_node;
     a_node.classList.add('active');
 }
@@ -549,21 +645,21 @@ function load_nav_data(category, element) {
     if (element != undefined && category != 'about') {
         window.ACTIVE_MENU = set_link_active_state(element, window.ACTIVE_MENU);
     }
-    var url = `${category}.json`;
+    const url = `${category}.json`;
     fetch_url_data('NAV DATA', url, [ category ]);
 }
 
 function get_folder_value(category, info, prefix, v) {
-    var lang = window.RENDER_LANGUAGE;
-    var id_data = window.ID_DATA[category];
-    var h_name = prefix + 'D';
-    var h_id = info[v];
-    var h_text = id_data[h_id][0];
-    var f_text = id_data[h_id][1];
+    const lang = window.RENDER_LANGUAGE;
+    const id_data = window.ID_DATA[category];
+    const h_name = prefix + 'D';
+    const h_id = info[v];
+    const h_text = id_data[h_id][0];
+    const f_text = id_data[h_id][1];
     if (h_text != 'UnknownType') {
         info[h_name] = h_text;
     }
-    var f_name = prefix + 'N';
+    const f_name = prefix + 'N';
     if (lang != 'English' && h_id == 0) {
         info[f_name] = '?';
     } else if (check_for_english_text(lang, category, h_id, f_text)) {
@@ -574,8 +670,8 @@ function get_folder_value(category, info, prefix, v) {
 }
 
 function get_match_count(f_category, f_value, context_list, c_len) {
-    var found = 0;
-    for (var c = 1; c < c_len; c++) {
+    let found = 0;
+    for (let c = 1; c < c_len; c++) {
         if (context_list[c][0] == f_category && context_list[c][2] == f_value) {
             found += 1;
         }
@@ -584,11 +680,11 @@ function get_match_count(f_category, f_value, context_list, c_len) {
 }
 
 function translate_song_id_to_data(category, sd, st, song_list) {
-    var HF = [ 'S', 'R', 'C' ];
-    var HCATEGORY = [ 'song', 'raga', 'composer' ];
-    for (var j = 0; j < song_list.length; j++) {
-        var song = song_list[j];
-        for (var m = 0; m < HF.length; m++) {
+    const HF = [ 'S', 'R', 'C' ];
+    const HCATEGORY = [ 'song', 'raga', 'composer' ];
+    for (let j = 0; j < song_list.length; j++) {
+        const song = song_list[j];
+        for (let m = 0; m < HF.length; m++) {
             get_folder_value(HCATEGORY[m], song, HF[m], HF[m]);
         }
         song['I'] = j + 1;
@@ -596,28 +692,28 @@ function translate_song_id_to_data(category, sd, st, song_list) {
 }
 
 function translate_folder_id_to_data(category, id, data) {
-    var ff = FF[category];
-    var f_category = ff[0];
-    var f_type = ff[1];
-    var sd = ff[2];
-    var st = ff[3];
-    var video_list = data['videos']
-    for (var k = 0; k < video_list.length; k++) {
-        var folder_list = video_list[k]['folder'];
-        for (var i = 0; i < folder_list.length; i++) {
-            var folder = folder_list[i];
-            var song_list = folder['songs'];
-            var song_ids = '';
+    const ff = FF[category];
+    const f_category = ff[0];
+    const f_type = ff[1];
+    const sd = ff[2];
+    const st = ff[3];
+    const video_list = data['videos']
+    for (let k = 0; k < video_list.length; k++) {
+        const folder_list = video_list[k]['folder'];
+        for (let i = 0; i < folder_list.length; i++) {
+            const folder = folder_list[i];
+            const song_list = folder['songs'];
+            let song_ids = '';
             if (category != 'song') {
                 song_ids = folder['S'];
             }
             folder['HT'] = f_category;
             folder['HC'] = song_list.length;
             get_folder_value(f_category, folder, 'H', f_type);
-            for (var j = 0; j < song_list.length; j++) {
-                var song = song_list[j];
-                for (var m = 0; m < OF.length; m++) {
-                    var c = OF[m] + 'T';
+            for (let j = 0; j < song_list.length; j++) {
+                const song = song_list[j];
+                for (let m = 0; m < OF.length; m++) {
+                    const c = OF[m] + 'T';
                     song[c] = st[m];
                     get_folder_value(st[m], song, OF[m], sd[m]);
                 }
@@ -632,7 +728,7 @@ function translate_folder_id_to_data(category, id, data) {
 }
 
 function render_data_template(category, id, data, context_list) {
-    var lang = window.RENDER_LANGUAGE;
+    const lang = window.RENDER_LANGUAGE;
     if (category == '') {
         plain_set_html_text('PAGE_VIDEOS', '');
         plain_set_html_text('PAGE_LYRICS', '');
@@ -640,11 +736,11 @@ function render_data_template(category, id, data, context_list) {
         return;
     }
 
-    var template_name = 'page-videos-template'
-    var ul_template = plain_get_html_text(template_name);
+    const template_name = 'page-videos-template'
+    let ul_template = plain_get_html_text(template_name);
     if (lang != 'English') {
-        var map_info_data = get_map_data('MAP_INFO_DICT');
-        var map_dict = map_info_data[lang];
+        const map_info_data = get_map_data('MAP_INFO_DICT');
+        const map_dict = map_info_data[lang];
         ul_template = ul_template.replace('Videos', map_dict['Videos']);
         ul_template = ul_template.replace('Views', map_dict['Views']);
     }
@@ -652,26 +748,26 @@ function render_data_template(category, id, data, context_list) {
     translate_folder_id_to_data(category, id, data);
 
     if (context_list != undefined) {
-        var video_list = data['videos']
-        var c_len = context_list.length;
-        for (var k = 0; k < video_list.length; k++) {
-            var folder_list = video_list[k]['folder']
-            var new_folder_list = [];
-            for (var i = 0; i < folder_list.length; i++) {
-                var folder = folder_list[i];
-                var f_category = folder['HT'];
-                var f_value = folder['HN'];
-                var s_found = get_match_count(f_category, f_value, context_list, c_len);
-                var song_list = folder['songs'];
-                var new_song_list = [];
-                for (var j = 0; j < song_list.length; j++) {
-                    var song = song_list[j];
-                    var found = s_found;
-                    for (var m = 0; m < OF.length; m++) {
-                        var c = OF[m] + 'T';
-                        var f_category = song[c];
-                        var c = OF[m] + 'N';
-                        var f_value = song[c];
+        const video_list = data['videos']
+        const c_len = context_list.length;
+        for (let k = 0; k < video_list.length; k++) {
+            const folder_list = video_list[k]['folder']
+            const new_folder_list = [];
+            for (let i = 0; i < folder_list.length; i++) {
+                const folder = folder_list[i];
+                const f_category = folder['HT'];
+                const f_value = folder['HN'];
+                const s_found = get_match_count(f_category, f_value, context_list, c_len);
+                const song_list = folder['songs'];
+                const new_song_list = [];
+                for (let j = 0; j < song_list.length; j++) {
+                    const song = song_list[j];
+                    let found = s_found;
+                    for (let m = 0; m < OF.length; m++) {
+                        let c = OF[m] + 'T';
+                        let f_category = song[c];
+                        c = OF[m] + 'N';
+                        let f_value = song[c];
                         found += get_match_count(f_category, f_value, context_list, c_len);
                     }
                     if (found >= (c_len - 1)) {
@@ -687,17 +783,17 @@ function render_data_template(category, id, data, context_list) {
         }
     }
 
-    var template_html = Mustache.render(ul_template, data);
+    const template_html = Mustache.render(ul_template, data);
     plain_set_html_text(id, template_html);
 }
 
 function empty_content_data(category, name) {
-    var lang = window.RENDER_LANGUAGE;
-    var map_info_data = get_map_data('MAP_INFO_DICT');
-    var map_dict = map_info_data[lang];
+    const lang = window.RENDER_LANGUAGE;
+    const map_info_data = get_map_data('MAP_INFO_DICT');
+    const map_dict = map_info_data[lang];
     plain_set_html_text('PAGE_TITLE', '');
     render_card_template('page-info-spinner', 'PAGE_INFO', { 'info' : { 'T' : map_dict['Fetch'] } });
-    var empty_data = {};
+    const empty_data = {};
     render_data_template('', '', empty_data);
     window.scrollTo(0, 0);
 }
@@ -714,30 +810,24 @@ function render_content_data(category, name, video_data, context_list) {
     }, 0);
 }
 
-function load_content_data(category, name, element) {
-    window.CONTENT_CATGEGORY = category;
-    window.CONTENT_NAME = name;
-    empty_content_data(category, name);
+function load_content_data(category, name, element, new_context_list) {
     if (element != undefined) {
         window.ACTIVE_NAV = set_link_active_state(element, window.ACTIVE_NAV);
     }
-    var url = `${category}/${name}.json`;
-    fetch_url_data('CONTENT DATA', url, [ category, name ]);
-}
-
-function load_context_search_data(context_list) {
-    var option_list = context_list[0].split(':');
-    var category = option_list[0];
-    var name = option_list[1];
-    var new_context_list = [];
-    for (var i = 0; i < context_list.length; i++) {
-        new_context_list.push(context_list[i].split(':'));
-    }
     window.CONTENT_CATGEGORY = category;
     window.CONTENT_NAME = name;
     empty_content_data(category, name);
-    var url = `${category}/${name}.json`;
-    fetch_url_data('CONTENT CONTEXT', url, [ category, name, new_context_list ]);
+    const url = `${category}/${name}.json`;
+    fetch_url_data('CONTENT DATA', url, [ category, name, new_context_list ]);
+}
+
+function load_context_search_data(context_list) {
+    const [ category, name ] = context_list[0].split(':');
+    const new_context_list = [];
+    for (let i = 0; i < context_list.length; i++) {
+        new_context_list.push(context_list[i].split(':'));
+    }
+    load_content_data(category, name, undefined, new_context_list);
 }
 
 function normalize_search_text(search_text) {
@@ -752,15 +842,15 @@ function normalize_search_text(search_text) {
 }
 
 function search_load_fetch_data(search_index_obj) {
-    var search_engine = window.carnatic_search_engine;
-    var data_id = 0;
-    var search_obj = search_index_obj['Search'];
-    for (var category in search_obj) {
-        var data_list = search_obj[category];
+    const search_engine = window.carnatic_search_engine;
+    let data_id = 0;
+    const search_obj = search_index_obj['Search'];
+    for (let category in search_obj) {
+        const data_list = search_obj[category];
         data_list.forEach(function (data_item, data_index) {
-            var h_id = data_item.H;
-            var aka_list = data_item.A.split(',');
-            var data_doc = { 'id' : data_id, 'href' : h_id, 'title' : h_id, 'aka' : aka_list, 'category' : category, 'pop' : data_item.P };
+            const h_id = data_item.H;
+            const aka_list = data_item.A.split(',');
+            const data_doc = { 'id' : data_id, 'href' : h_id, 'title' : h_id, 'aka' : aka_list, 'category' : category, 'pop' : data_item.P };
             search_engine.add(data_doc);
             data_id += 1;
         });
@@ -771,7 +861,7 @@ function search_load_fetch_data(search_index_obj) {
 
 function search_load() {
     if (window.search_initialized) return;
-    var search_engine = window.carnatic_search_engine;
+    const search_engine = window.carnatic_search_engine;
     fetch_url_data('SEARCH DATA', 'search_index.json');
     window.search_initialized = true;
 }
@@ -786,53 +876,53 @@ function search_init() {
 }
 
 function get_search_results(search_word, search_options, item_list, id_list, base_pop) {
-    var word_list = search_word.split(' ');
-    var new_word_list = [];
-    for (var i = 0; i < word_list.length; i++) {
-        var word = word_list[i];
+    const word_list = search_word.split(' ');
+    const new_word_list = [];
+    for (let i = 0; i < word_list.length; i++) {
+        let word = word_list[i];
         if (word != '') {
             word = normalize_search_text(word);
             new_word_list.push(word.slice(0,8));
         }
         search_word = new_word_list.join(' ');
     }
-    var lang = window.RENDER_LANGUAGE;
-    var map_info_data = get_map_data('MAP_INFO_DICT');
-    var map_dict = map_info_data[lang];
-    var search_engine = window.carnatic_search_engine;
-    var results = search_engine.search(search_word, search_options);
+    const lang = window.RENDER_LANGUAGE;
+    const map_info_data = get_map_data('MAP_INFO_DICT');
+    const map_dict = map_info_data[lang];
+    const search_engine = window.carnatic_search_engine;
+    const results = search_engine.search(search_word, search_options);
     if (results.length <= 0) return;
-    var max_score = results[0].score;
-    for (var i = 0; i < results.length; i++) {
-        var result_item = results[i];
+    const max_score = results[0].score;
+    for (let i = 0; i < results.length; i++) {
+        const result_item = results[i];
         if (id_list.has(result_item.id)) continue;
-        var pop = result_item.pop;
+        let pop = result_item.pop;
         if (search_word.length > 2) {
             pop = ((400 * result_item.score) / max_score) + (0.6 * pop);
         }
         pop = base_pop + pop;
-        var category = result_item.category
-        var id_data = window.ID_DATA[category];
-        var c_name = category.charAt(0).toUpperCase() + category.slice(1);
-        var n_category = (lang == 'English') ? category.toUpperCase() : map_dict[c_name];
-        var href = id_data[result_item.href][0];
-        var title = id_data[result_item.title][1];
+        const category = result_item.category
+        const id_data = window.ID_DATA[category];
+        const c_name = capitalize_word(category);
+        const n_category = (lang == 'English') ? category.toUpperCase() : map_dict[c_name];
+        const href = id_data[result_item.href][0];
+        let title = id_data[result_item.title][1];
         if (check_for_english_text(lang, category, result_item.href, href)) {
             title = href;
         } else {
             title = get_transliterator_text(lang, title);
         }
-        var item = { 'T' : category, 'C' : n_category, 'I' : CARNATIC_ICON_DICT[category], 'H' : href, 'N' : title, 'P' : pop };
+        const item = { 'T' : category, 'C' : n_category, 'I' : CARNATIC_ICON_DICT[category], 'H' : href, 'N' : title, 'P' : pop };
         item_list.push(item);
         id_list.add(result_item.id);
     }
 }
 
 function transliterator_init() {
-    var char_map = window.CARNATIC_CHAR_MAP;
-    var key_list = [];
-    var max_len = 0;
-    for (var s in char_map) {
+    const char_map = window.CARNATIC_CHAR_MAP;
+    const key_list = [];
+    let max_len = 0;
+    for (let s in char_map) {
         key_list.push(s);
         max_len = Math.max(max_len, s.length);
     }
@@ -843,19 +933,19 @@ function transliterator_init() {
 }
 
 function transliterate_text(word) {
-    var char_map = window.CARNATIC_CHAR_MAP;
-    var tokenset = window.CHAR_MAP_KEY_LIST;
-    var maxlen = window.CHAR_MAP_MAX_LENGTH;
-    var current = 0;
-    var tokenlist = [];
+    const char_map = window.CARNATIC_CHAR_MAP;
+    const tokenset = window.CHAR_MAP_KEY_LIST;
+    const maxlen = window.CHAR_MAP_MAX_LENGTH;
+    let current = 0;
+    const tokenlist = [];
     word = word.toString();
     while (current < word.length) {
-        var nextstr = word.slice(current, current+maxlen);
-        var p = nextstr[0];
-        var j = 1;
-        var i = maxlen;
+        const nextstr = word.slice(current, current+maxlen);
+        let p = nextstr[0];
+        let j = 1;
+        let i = maxlen;
         while (i > 0) {
-            var s = nextstr.slice(0, i);
+            let s = nextstr.slice(0, i);
             if (tokenset.has(s)) {
                 p = s;
                 j = i;
@@ -869,7 +959,7 @@ function transliterate_text(word) {
         tokenlist.push(p);
         current += j;
     }
-    var new_word = tokenlist.join('');
+    let new_word = tokenlist.join('');
     if (word != new_word) {
         new_word = new_word.replace(/_/g, '');
         new_word = new_word.replace(/G/g, 'n');
@@ -879,31 +969,31 @@ function transliterate_text(word) {
 }
 
 function get_tamil_phonetic_word(word) {
-    var w_list = [];
-    var new_word = word.toLowerCase();
-    for (var i = 0; i < new_word.length; i++) {
-        var c = new_word[i];
+    const w_list = [];
+    const new_word = word.toLowerCase();
+    for (let i = 0; i < new_word.length; i++) {
+        const c = new_word[i];
         w_list.push((c in SEARCH_MAP_DICT) ? SEARCH_MAP_DICT[c] : c);
     }
     return w_list.join('');
 }
 
 function load_search_part(search_word, non_english) {
-    var s_search_word = search_word.replace(/\s/g, '');
-    var item_list = [];
-    var id_list = new Set();
-    var search_options = { prefix: true, combineWith: 'AND', fuzzy: term => term.length > 3 ? 0.1 : null };
+    const s_search_word = search_word.replace(/\s/g, '');
+    const item_list = [];
+    const id_list = new Set();
+    let search_options = { prefix: true, combineWith: 'AND', fuzzy: term => term.length > 3 ? 0.1 : null };
     get_search_results(search_word, search_options, item_list, id_list, 4000);
     if (search_word != s_search_word) {
         get_search_results(s_search_word, search_options, item_list, id_list, 1000);
     }
-    var n_search_word = '';
+    let n_search_word = '';
     if (non_english) {
         n_search_word = get_tamil_phonetic_word(search_word);
         get_search_results(n_search_word, search_options, item_list, id_list, 5000);
     }
     if (search_word.length > 2) {
-        var search_options = { prefix: true, combineWith: 'AND', fuzzy: term => term.length > 3 ? 0.3 : null };
+        let search_options = { prefix: true, combineWith: 'AND', fuzzy: term => term.length > 3 ? 0.3 : null };
         get_search_results(search_word, search_options, item_list, id_list, 0);
         if (non_english && n_search_word) {
             get_search_results(n_search_word, search_options, item_list, id_list, 0);
@@ -913,42 +1003,43 @@ function load_search_part(search_word, non_english) {
         }
     }
     item_list.sort(function (a, b) { return b.P - a.P; });
-    var new_item_list = item_list.slice(0, 25);
+    const new_item_list = item_list.slice(0, 25);
     return new_item_list;
 }
 
 function handle_search_word(search_word) {
-    var lang = window.RENDER_LANGUAGE;
-    var c = search_word.charCodeAt(0);
+    const lang = window.RENDER_LANGUAGE;
+    const c = search_word.charCodeAt(0);
     if (c > 127) {
         search_word = transliterate_text(search_word);
     }
-    var non_english = (0x0B80 <= c && c <= 0x0BFF) ? true : false;
+    const non_english = (0x0B80 <= c && c <= 0x0BFF) ? true : false;
 
-    var context_dict = {};
-    var context_list = search_word.split(':');
-    for (var i = 0; i < context_list.length; i++) {
-        var word = context_list[i];
-        var new_item_list = load_search_part(word, non_english);
+    const context_dict = {};
+    const context_list = search_word.split(':');
+    let new_item_list = [];
+    for (let i = 0; i < context_list.length; i++) {
+        const word = context_list[i];
+        new_item_list = load_search_part(word, non_english);
         context_dict[word] = new_item_list;
     }
-    var result_header = 'Search Results';
+    let result_header = 'Search Results';
     if (lang != 'English') {
-        var map_info_data = get_map_data('MAP_INFO_DICT');
-        var map_dict = map_info_data[lang];
+        const map_info_data = get_map_data('MAP_INFO_DICT');
+        const map_dict = map_info_data[lang];
         result_header = map_dict[result_header];
     }
-    var item_data = { 'title' : { 'N': result_header, 'I': 'search' }, 'items' : new_item_list };
+    const item_data = { 'title' : { 'N': result_header, 'I': 'search' }, 'items' : new_item_list };
     render_card_template('page-title-template', 'PAGE_TITLE', item_data);
     if (context_list.length <= 1) {
         render_card_template('page-search-template', 'PAGE_INFO', item_data);
     } else {
-        var row_list = [];
-        for (var i = 0; i < context_list.length; i++) {
-            var w = context_list[i];
+        const row_list = [];
+        for (let i = 0; i < context_list.length; i++) {
+            const w = context_list[i];
             row_list.push({ 'I' : i, 'col' : context_dict[w] });
         }
-        var row_data = { 'items' : row_list };
+        const row_data = { 'items' : row_list };
         render_card_template('page-context-search-template', 'PAGE_INFO', row_data);
     }
     render_data_template('', '', item_data);
@@ -958,33 +1049,33 @@ function handle_search_word(search_word) {
 
 function load_search_data() {
     window.ACTIVE_NAV = clear_link_active_state(window.ACTIVE_NAV);
-    var search_word = document.getElementById('SEARCH_WORD').value;
-    var search_word = decodeURI(search_word);
+    let search_word = document.getElementById('SEARCH_WORD').value;
+    search_word = decodeURI(search_word);
     handle_search_word(search_word);
 }
 
 function init_search_listener() {
-    var element = document.getElementById('SEARCH_WORD');
+    const element = document.getElementById('SEARCH_WORD');
     element.addEventListener('input', load_search_data);
 }
 
 function load_search_history(data) {
-    var search_word = data['search'];
+    const search_word = data['search'];
     document.getElementById('SEARCH_WORD').value = search_word;
     handle_search_word(search_word);
 }
 
 function handle_context_search() {
-    var select_list = plain_get_query_selector('select[id^=COL_]');
-    var cols = select_list.length;
-    var context_list = [];
-    for (var i = 0; i < select_list.length; i++) {
-        var select_element = select_list[i];
-        var option = select_element.options[select_element.selectedIndex].value;
+    const select_list = plain_get_query_selector('select[id^=COL_]');
+    const cols = select_list.length;
+    const context_list = [];
+    for (let i = 0; i < select_list.length; i++) {
+        const select_element = select_list[i];
+        const option = select_element.options[select_element.selectedIndex].value;
         if (option == '' || option == undefined) {
             continue;
         }
-        var new_option = option.replace(/\s/g, '');
+        const new_option = option.replace(/\s/g, '');
         if (new_option == '' || new_option == undefined) {
             continue;
         }
@@ -994,12 +1085,12 @@ function handle_context_search() {
 }
 
 function play_ended() {
-    var note_list = window.note_play_list;
-    var note_index = window.note_play_index;
-    var swara = note_list[note_index];
-    var note_data = get_map_data('NOTE_MAP');
-    var note = note_data[swara];
-    var key_div = 'note' + note;
+    const note_list = window.note_play_list;
+    const note_index = window.note_play_index;
+    const swara = note_list[note_index];
+    const note_data = get_map_data('NOTE_MAP');
+    const note = note_data[swara];
+    const key_div = 'note' + note;
     plain_set_background_color(key_div, window.note_key_color);
     window.note_play_index += 1;
     if (window.note_play_index < window.note_play_list.length) {
@@ -1008,16 +1099,16 @@ function play_ended() {
 };
 
 function play_note() {
-    var note_list = window.note_play_list;
-    var note_index = window.note_play_index;
-    var swara = note_list[note_index];
-    var note_data = get_map_data('NOTE_MAP');
-    var note = note_data[swara];
-    var key_div = 'note' + note;
+    const note_list = window.note_play_list;
+    const note_index = window.note_play_index;
+    const swara = note_list[note_index];
+    const note_data = get_map_data('NOTE_MAP');
+    const note = note_data[swara];
+    const key_div = 'note' + note;
     window.note_key_color = plain_get_background_color(key_div);
     plain_set_background_color(key_div, 'cyan');
-    var note_audio = document.getElementById('NOTE_PLAY');
-    var src = 'audio/' + note + '.mp3';
+    const note_audio = document.getElementById('NOTE_PLAY');
+    const src = 'audio/' + note + '.mp3';
     note_audio.src = src;
     note_audio.currentTime = 0;
     note_audio.onended = play_ended;
@@ -1031,11 +1122,11 @@ function play_notes(notes) {
 }
 
 function render_youtube_video_info(id, video_data) {
-    var info_list = [];
-    var title = id;
-    for (var key in video_data) {
+    const info_list = [];
+    let title = id;
+    for (let key in video_data) {
         if (VIDEO_INFO_KEY_LIST.has(key)) {
-            var value = video_data[key];
+            const value = video_data[key];
             if (key == 'title') {
                 title = value;
             } else {
@@ -1043,17 +1134,17 @@ function render_youtube_video_info(id, video_data) {
             }
         }
     }
-    var video_id = id.split('&')[0];
+    const video_id = id.split('&')[0];
     info_list.push({ 'N' : 'id', 'C' : video_id });
-    var image = video_data['thumbnail_url'];
-    var info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
+    const image = video_data['thumbnail_url'];
+    const info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
     /*
-    var chapter_data = window.CONCERT_DATA[video_id];
+    const chapter_data = window.CONCERT_DATA[video_id];
     if (chapter_data != undefined) {
-        var category = 'artist';
-        var ff = FF[category];
-        var sd = ff[2];
-        var st = ff[3];
+        const category = 'artist';
+        const ff = FF[category];
+        const sd = ff[2];
+        const st = ff[3];
         translate_song_id_to_data(category, sd, st, chapter_data);
         info_data['chapters'] = { 'songs' : window.CONCERT_DATA[video_id] };
     }
@@ -1062,36 +1153,35 @@ function render_youtube_video_info(id, video_data) {
 }
 
 function get_youtube_video_info(id) {
-    var url = `https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=${id}&format=json`
+    const url = `https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=${id}&format=json`
     fetch_url_data('VIDEO INFO', url, [ id ]);
 }
 
-function fetch_url_data(name, url, args) {
-    fetch(url).then(result => result.json()).then(url_data => {
-        if (name == 'LANG MAP') {
-            load_lang_data(url_data);
-        } else if (name == 'ID DATA') {
-            window.ID_DATA = url_data;
-            fetch_url_data('LANG MAP', 'hk_lang_map.json');
-        } else if (name == 'NAV DATA') {
-            const category = args[0];
-            load_nav_fetch_data(category, url_data);
-        } else if (name == 'CONTENT DATA') {
-            const [ category, h_name ] = args;
-            render_content_data(category, h_name, url_data);
+async function fetch_url_data(name, url, args) {
+    const url_data = await fetch_url(url);
+    if (url_data == null) return;
+    if (name == 'ID DATA') {
+        window.ID_DATA = url_data;
+        fetch_url_data('LANG DATA', 'hk_lang_map.json');
+    } else if (name == 'LANG DATA') {
+        load_lang_data(url_data);
+    } else if (name == 'NAV DATA') {
+        const category = args[0];
+        load_nav_fetch_data(category, url_data);
+    } else if (name == 'CONTENT DATA') {
+        const [ category, h_name, new_context_list ] = args;
+        render_content_data(category, h_name, url_data, new_context_list);
+        if (new_context_list == undefined) {
             add_history('content', { 'category' : category, 'name' : h_name });
-        } else if (name == 'CONTENT CONTEXT') {
-            const [ category, h_name, new_context_list ] = args;
-            render_content_data(category, h_name, url_data, new_context_list);
-        } else if (name == 'SEARCH DATA') {
-            search_load_fetch_data(url_data);
-        } else if (name == 'VIDEO INFO') {
-            const id = args[0];
-            render_youtube_video_info(id, url_data);
-        } else if (name == 'CONCERT') {
-            window.CONCERT_DATA = url_data;
         }
-    });
+    } else if (name == 'SEARCH DATA') {
+        search_load_fetch_data(url_data);
+    } else if (name == 'VIDEO INFO') {
+        const id = args[0];
+        render_youtube_video_info(id, url_data);
+    } else if (name == 'CONCERT DATA') {
+        window.CONCERT_DATA = url_data;
+    }
 }
 
 /*
@@ -1148,9 +1238,9 @@ function speech_to_text_init() {
         };
 
         window.speech_recognition.onresult = function(event) {
-            var interim_transcript = '';
+            let interim_transcript = '';
             /*
-            for (var i = event.resultIndex; i < event.results.length; ++i) {
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
                     window.speech_final_transcript += event.results[i][0].transcript;
                 } else {
@@ -1184,8 +1274,8 @@ function speech_start(event) {
         window.speech_recognition.stop();
         return;
     }
-    var map_iso_data = get_map_data('MAP_ISO_DICT');
-    var lang = window.RENDER_LANGUAGE;
+    const map_iso_data = get_map_data('MAP_ISO_DICT');
+    const lang = window.RENDER_LANGUAGE;
     window.speech_final_transcript = '';
     window.speech_recognition.lang = map_iso_data[lang];
     window.speech_recognition.start();
@@ -1195,13 +1285,13 @@ function speech_start(event) {
 }
 
 function load_keyboard(event) {
-    var lang = window.RENDER_LANGUAGE;
+    const lang = window.RENDER_LANGUAGE;
     set_input_keyboard(lang.toLowerCase());
     get_bs_modal('LANG_KBD').show();
 }
 
 function handle_history_context(data) {
-    var context = data['context'];
+    const context = data['context'];
     if (context == 'content') {
         load_content_data(data['category'], data['name']);
     } else if (context == 'nav') {
@@ -1212,19 +1302,19 @@ function handle_history_context(data) {
 }
 
 function handle_popstate(e) {
-    var data = e.state;
+    const data = e.state;
     if (data == null || data == undefined) {
         return;
     }
     // console.log('POP: ', e);
     window.carnatic_popstate = true;
     handle_history_context(data);
-    var lang = data['language'];
+    const lang = data['language'];
     // set_language({ 'value' : lang });
 }
 
 function add_history(context, data) {
-    var url = window.collection_name + '.html';
+    const url = window.collection_name + '.html';
     /*
     if (context == 'nav') {
         return;
@@ -1233,8 +1323,8 @@ function add_history(context, data) {
     data['language'] = window.GOT_LANGUAGE;
     if (!window.carnatic_popstate) {
         data['context'] = context;
-        var title = 'Carnatic: ' + capitalize_word(data['category']);
-        var name = data['name'];
+        let title = 'Carnatic: ' + capitalize_word(data['category']);
+        const name = data['name'];
         if (name != undefined) {
             title += ' ' + name;
         }
@@ -1246,7 +1336,7 @@ function add_history(context, data) {
 }
 
 function load_youtube_frame() {
-    var value = plain_get_attr('FRAME_PLAYER', 'data-src');
+    const value = plain_get_attr('FRAME_PLAYER', 'data-src');
     plain_set_attr('FRAME_PLAYER', 'src', value);
     youtube_player_init();
 }
@@ -1259,7 +1349,7 @@ function load_content() {
 }
 
 function collection_init(collection, default_song) {
-    var lang = 'English';
+    const lang = 'English';
     window.collection_name = collection;
     window.default_song = default_song;
 
@@ -1279,7 +1369,7 @@ function collection_init(collection, default_song) {
 
     document.addEventListener('DOMContentLoaded', function() {
         if (document.readyState === "interactive" || document.readyState === "complete" ) {
-            setTimeout(load_youtube_frame, 1000);
+            setTimeout(load_youtube_frame, 0);
         }
     });
 

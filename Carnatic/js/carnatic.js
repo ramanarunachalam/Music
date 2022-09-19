@@ -237,6 +237,7 @@ function get_swara_text(lang, note_list, value_list) {
 
 function check_for_english_text(lang, category, h_id, h_text) {
     if (lang != 'English') return false;
+    if (category == 'type' && h_text == 'Englishnote') return true;
     if (ENGLISH_TYPE_LIST.includes(category)) return true;
     if (category != 'song') return false;
     if (h_id >= 20000) return true;

@@ -118,7 +118,7 @@ function onPlayerStateChange(event) {
     const player_status = event.data;
     // playerStatus: -1 : unstarted, 0 - ended, 1 - playing, 2 - paused, 3 - buffering, 5 - video cued
     if (last_player_status == 3 && player_status == -1) {
-        show_modal_dialog('Video is not playable', 'Click Play List to Delete Song');
+        // show_modal_dialog('Video is not playable', 'Click Play List to Delete Song');
     }
     if (player_status == 0) {
         play_next();
@@ -142,20 +142,18 @@ function get_play_list() {
 
 function play_first() {
     const play_list = get_play_list();
-    if (play_list.length <= 0) {
-        return;
-    }
+    if (play_list.length <= 0) return;
     const parts = play_list[0].split(':');
-    let video_id = parts[0];
-    const time_str = '&t=';
-    if (video_id.includes(time_str)) {
-        const v_list = video_id.split(time_str);
-        video_id = v_list[0];
-        const start_time = parseInt(v_list[1].replace('s', ''));
-        window.yt_player.loadVideoById({ videoId: video_id, startSeconds: start_time });
-    } else {
-        window.yt_player.loadVideoById({ videoId: video_id });
+    const video_id = parts[0];
+    const v_list = video_id.split('&');
+    let time_option = { videoId: v_list[0] };
+    if (v_list.length >= 2) {
+        time_option['startSeconds'] = parseInt(v_list[1].replace('start=', ''));
     }
+    if (v_list.length >= 3) {
+        time_option['endSeconds'] = parseInt(v_list[2].replace('end=', ''));
+    }
+    window.yt_player.loadVideoById(time_option);
 }
 
 function play_next() {
@@ -167,9 +165,7 @@ function play_next() {
 
 function on_storage_event(storageEvent) {
     const play_list = get_play_list();
-    if (play_list.length == 0) {
-        return;
-    }
+    if (play_list.length == 0) return;
     if (play_list.length > 1) {
         show_modal_dialog('Song added to Play List', 'Click Play List to Add/Delete Songs');
         return;
@@ -200,8 +196,7 @@ function load_menu_data(lang) {
     const search_tooltip = 'Prefix Search <br/> e.g. radu daya <br/> Phonetic Search <br/> e.g. goula <br/> Language Search <br/> e.g. கல்யாணி <br/> Context Search <br/> e.g. mdr : kalyani : dikshitar';
     const mic_tooltip = 'Only in Chrome';
     const kbd_tooltip = 'Language Keyboard';
-    const other_dict = { 'P' : playlist, 'S' : search, 'STP' : search_tooltip, 'MTP' : mic_tooltip, 'KTP' : kbd_tooltip };
-    const menu_dict = { 'menus' : { 'languages' : lang_list, 'search' : other_dict, 'playlist' : other_dict, 'categories' : CATEGORY_DICT['categories'] } };
+    const menu_dict = { 'menus' : { 'languages' : lang_list, 'APP' : 'Android App', 'P' : playlist, 'S' : search, 'STP' : search_tooltip, 'MTP' : mic_tooltip, 'KTP' : kbd_tooltip, 'categories' : CATEGORY_DICT['categories'] } };
     render_card_template('page-menu-template', 'MENU_DATA', menu_dict);
     init_search_listener();
 
@@ -620,7 +615,7 @@ function load_nav_fetch_data(category, url_data) {
 
 function set_link_initial_active_state() {
     const a_list = plain_get_query_selector('#MENU_DATA li a');
-    const a_node = a_list[1].parentNode;
+    const a_node = a_list[2].parentNode;
     window.ACTIVE_MENU = a_node;
     a_node.classList.add('active');
 }
@@ -1268,9 +1263,7 @@ function speech_to_text_init() {
 }
 
 function speech_start(event) {
-    if (!('webkitSpeechRecognition' in window)) {
-        return;
-    }
+    if (!('webkitSpeechRecognition' in window)) return;
     if (window.speech_recognizing) {
         window.speech_recognition.stop();
         return;
@@ -1304,9 +1297,7 @@ function handle_history_context(data) {
 
 function handle_popstate(e) {
     const data = e.state;
-    if (data == null || data == undefined) {
-        return;
-    }
+    if (data == null || data == undefined) return;
     // console.log('POP: ', e);
     window.carnatic_popstate = true;
     handle_history_context(data);
@@ -1316,11 +1307,7 @@ function handle_popstate(e) {
 
 function add_history(context, data) {
     const url = window.collection_name + '.html';
-    /*
-    if (context == 'nav') {
-        return;
-    }
-    */
+    // if (context == 'nav') return;
     data['language'] = window.GOT_LANGUAGE;
     if (!window.carnatic_popstate) {
         data['context'] = context;

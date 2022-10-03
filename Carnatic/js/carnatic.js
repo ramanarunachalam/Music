@@ -447,6 +447,7 @@ async function create_jukebox_modal(obj) {
     let url = `${category}.json`;
     let url_data = await fetch_url(url);
     if (url_data == null) return;
+    const id_list = new Set();
     const letter_list = url_data['alphabet'];
     for (let i = 0; i < loops; i++) {
         let t_id = 0;
@@ -503,6 +504,8 @@ async function create_jukebox_modal(obj) {
                 const composer_id = video['C'];
                 if (category != 'composer' && (composer_id <= 0 || composer_id > 100)) continue;
                 const video_id = video['I'];
+                if (id_list.has(video_id)) continue;
+                id_list.add(video_id);
                 // console.log(`Jukebox video: ${song_id} ${k} ${artist_id} ${raga_id} ${composer_id} ${video_id}`);
                 const args = `${video_id}:${song_id}:${raga_id}`;
                 play_list.push(args);

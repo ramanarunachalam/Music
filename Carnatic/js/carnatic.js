@@ -1156,6 +1156,13 @@ function get_youtube_video_info(id) {
     fetch_url_data('VIDEO INFO', url, [ id ]);
 }
 
+function load_content() {
+    if (window.innerWidth < 992) {
+        show_modal_dialog('Best Viewed in Landscape Mode', 'Use Landscape Mode');
+    }
+    fetch_url_data('ID DATA', 'id.json');
+}
+
 async function fetch_url_data(name, url, args) {
     const url_data = await fetch_url(url);
     if (url_data == null) return;
@@ -1330,13 +1337,6 @@ function load_youtube_frame() {
     const value = plain_get_attr('FRAME_PLAYER', 'data-src');
     plain_set_attr('FRAME_PLAYER', 'src', value);
     youtube_player_init();
-}
-
-function load_content() {
-    if (window.innerWidth < 992) {
-        show_modal_dialog('Best Viewed in Landscape Mode', 'Use Landscape Mode');
-    }
-    fetch_url_data('ID DATA', 'id.json');
 }
 
 function collection_init(collection, default_song) {

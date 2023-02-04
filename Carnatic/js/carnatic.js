@@ -1078,12 +1078,6 @@ function load_init_data(id_data, hk_data) {
     }
     window.ID_DATA = id_data;
     init_lang_maps(hk_data);
-    /*
-    const url_list = [ fetch_url('raga.json'), fetch_url(`song/${window.default_song}.json`) ];
-    Promise.all(url_list).then((values) => {
-        const [ nav_data, content_data ] = values;
-    });
-    */
     load_nav_data('raga');
     if (window.default_song !== '') load_content_data('song', window.default_song);
     search_init();
@@ -1292,6 +1286,5 @@ function collection_init(collection, default_song) {
 
     init_input_keyboard();
     load_menu_data(lang);
-    // load_nav_data('about');
 }
 

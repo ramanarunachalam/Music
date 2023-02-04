@@ -91,7 +91,7 @@ function show_modal_dialog(title, body) {
 
 function render_card_template(template_name, id, data) {
     const ul_template = plain_get_html_text(template_name);
-    const template_html = (data != undefined) ? Mustache.render(ul_template, data) : ul_template;
+    const template_html = (data !== undefined) ? Mustache.render(ul_template, data) : ul_template;
     plain_set_html_text(id, template_html);
 }
 
@@ -117,12 +117,10 @@ last_player_status = 0;
 function onPlayerStateChange(event) {
     const player_status = event.data;
     // playerStatus: -1 : unstarted, 0 - ended, 1 - playing, 2 - paused, 3 - buffering, 5 - video cued
-    if (last_player_status == 3 && player_status == -1) {
+    if (last_player_status === 3 && player_status === -1) {
         // show_modal_dialog('Video is not playable', 'Click Play List to Delete Song');
     }
-    if (player_status == 0) {
-        play_next();
-    }
+    if (player_status === 0) play_next();
     // console.log(`Player Status ${player_status} last: ${last_player_status}`);
     last_player_status = player_status;
 }
@@ -136,7 +134,7 @@ function youtube_player_init() {
 
 function get_play_list() {
     let new_play_list = sessionStorage['playlist'];
-    new_play_list = (new_play_list == undefined) ? new Array() : JSON.parse(new_play_list);
+    new_play_list = (new_play_list === undefined) ? [] : JSON.parse(new_play_list);
     return new_play_list;
 }
 
@@ -165,7 +163,7 @@ function play_next() {
 
 function on_storage_event(storageEvent) {
     const play_list = get_play_list();
-    if (play_list.length == 0) return;
+    if (play_list.length === 0) return;
     if (play_list.length > 1) {
         show_modal_dialog('Song added to Play List', 'Click Play List to Add/Delete Songs');
         return;
@@ -177,20 +175,19 @@ function load_menu_data(lang) {
     const item_list = CATEGORY_DICT['categories']
     const map_info_data = get_map_data('MAP_INFO_DICT');
     const map_dict = map_info_data[lang];
-    for (let i = 0; i < item_list.length; i++) {
-        const obj = item_list[i];
+    for (const obj of item_list) {
         const name = capitalize_word(obj['C']);
-        obj['N'] = (lang == 'English') ? name : map_dict[name];
+        obj['N'] = (lang === 'English') ? name : map_dict[name];
     }
     let playlist = 'Playlist';
     let search = 'Search';
-    if (lang != 'English') {
+    if (lang !== 'English') {
         playlist = map_dict[playlist];
         search = map_dict[search];
     }
     const lang_list = [];
     for (let l in MAP_LANG_DICT) {
-        let d = (l == window.GOT_LANGUAGE) ? { 'N' : l, 'O' : 'selected' } : { 'N' : l };
+        let d = (l === window.GOT_LANGUAGE) ? { 'N' : l, 'O' : 'selected' } : { 'N' : l };
         lang_list.push(d);
     }
     const search_tooltip = 'Prefix Search <br/> e.g. radu daya <br/> Phonetic Search <br/> e.g. goula <br/> Language Search <br/> e.g. கல்யாணி <br/> Context Search <br/> e.g. mdr : kalyani : dikshitar';
@@ -210,7 +207,7 @@ function load_menu_data(lang) {
 }
 
 function get_swara_transliterate(lang, swara_str) {
-    if (lang != 'English') {
+    if (lang !== 'English') {
         swara_str = swara_str.replace(/da/g, 'dha');
     }
     swara_str = get_transliterator_text(lang, swara_str);
@@ -221,8 +218,8 @@ function get_swara_transliterate(lang, swara_str) {
 function get_swara_text(lang, note_list, value_list) {
     let swara_str = value_list[0];
     const s_list = swara_str.split(' ');
-    for (let k = 0; k < s_list.length; k++) {
-        note_list.add(s_list[k]);
+    for (const swara of s_list) {
+        note_list.add(swara);
     }
     swara_str = get_swara_transliterate(lang, swara_str);
     const note_str = value_list[1];
@@ -231,10 +228,10 @@ function get_swara_text(lang, note_list, value_list) {
 }
 
 function check_for_english_text(lang, category, h_id, h_text) {
-    if (lang != 'English') return false;
-    if (category == 'type' && h_text == 'Englishnote') return true;
+    if (lang !== 'English') return false;
+    if (category === 'type' && h_text === 'Englishnote') return true;
     if (ENGLISH_TYPE_LIST.includes(category)) return true;
-    if (category != 'song') return false;
+    if (category !== 'song') return false;
     if (h_id >= 20000) return true;
     if (h_text.includes(' - ')) return true;
     return false;
@@ -247,51 +244,45 @@ function info_transliteration(category, data_list) {
     const map_month_data = get_map_data('MAP_MONTH_DICT');
     let item = data_list['title']
     const h_text = item['H'];
-    if (category == 'about') {
-        if (lang != 'English') {
+    if (category === 'about') {
+        if (lang !== 'English') {
             item['N'] = map_dict[item['N']];
         }
     } else if (check_for_english_text(lang, category, 200, h_text)) {
         item['N'] = h_text;
     } else {
         let value = item['V'];
-        if (lang != 'English' && value.includes('unknowncomposer')) {
+        if (lang !== 'English' && value.includes('unknowncomposer')) {
             value = value.replace('unknowncomposer', '?');
         }
-        if (lang != 'English' && value.includes('Unknownraga')) {
+        if (lang !== 'English' && value.includes('Unknownraga')) {
             value = value.replace('Unknownraga', '?');
         }
         item['N'] = get_transliterator_text(lang, value);
     }
     let item_list = data_list['stats']
-    if (item_list == undefined) {
-        item_list = [];
-    }
-    for (let i = 0; i < item_list.length; i++) {
-        let obj = item_list[i];
+    if (item_list === undefined) item_list = [];
+    for (const obj of item_list) {
         let name = obj['H'];
-        obj['N'] = (lang == 'English') ? name : map_dict[name];
+        obj['N'] = (lang === 'English') ? name : map_dict[name];
     }
     const note_list = new Set();
     item_list = data_list['info']
-    if (item_list == undefined) {
-        item_list = [];
-    }
-    for (let i = 0; i < item_list.length; i++) {
-        const obj = item_list[i];
+    if (item_list === undefined) item_list = [];
+    for (const obj of item_list) {
         const name = obj['H'];
-        obj['N'] = (lang != 'English' && name in map_dict) ? map_dict[name] : name;
+        obj['N'] = (lang !== 'English' && name in map_dict) ? map_dict[name] : name;
         let value = obj['V'];
-        if (name == 'Language') {
-            if (lang != 'English' && name in map_dict) {
+        if (name === 'Language') {
+            if (lang !== 'English' && name in map_dict) {
                 obj['V'] = map_dict[value];
             }
         } else if (KEY_NAME_LIST.includes(name)) {
             obj['V'] = get_transliterator_text(lang, value);
-        } else if (name == 'Arohana' || name == 'Avarohana') {
+        } else if (name === 'Arohana' || name === 'Avarohana') {
             obj['V'] = get_swara_text(lang, note_list, value)
-        } else if (name == 'Born' || name == 'Died') {
-            if (value != undefined && typeof value === 'string') {
+        } else if (name === 'Born' || name === 'Died') {
+            if (value !== undefined && typeof value === 'string') {
                 let m_list = [];
                 if (value.includes(' ')) {
                     m_list = value.split(' ');
@@ -300,19 +291,19 @@ function info_transliteration(category, data_list) {
                     obj['V'] = m_list[0] + ' ' + map_month_data[lang][m_list[1]] + ' ' + m_list[2];
                 }
             }
-        } else if (lang != 'English' && name == 'Gharana') {
+        } else if (lang !== 'English' && name === 'Gharana') {
             const item_list = obj['P'];
-            if (value != undefined) {
+            if (value !== undefined) {
                 let g_list = [];
-                for (let j = 0; j < item_list.length; j++) {
-                     g_list.push(get_transliterator_text(lang, item_list[j])); 
+                for (const gobj of item_list) {
+                     g_list.push(get_transliterator_text(lang, gobj)); 
                 }
                 obj['V'] = g_list.join('</br>');
             }
-        } else if (lang != 'English' && name in map_dict) {
+        } else if (lang !== 'English' && name in map_dict) {
             value = obj['P'];
-            if (value != undefined) {
-                if (lang != 'English' && value.includes('Unknownraga')) {
+            if (value !== undefined) {
+                if (lang !== 'English' && value.includes('Unknownraga')) {
                     value = value.replace('Unknownraga', '?');
                 }
                 obj['V'] = get_transliterator_text(lang, value);
@@ -320,17 +311,15 @@ function info_transliteration(category, data_list) {
         }
     }
     item = data_list['keyboard']
-    if (item != undefined) {
+    if (item !== undefined) {
         let kbd_list = get_map_data('KEYBOARD_LIST');
-        for (let i = 0; i < kbd_list.length; i++) {
-            const obj = kbd_list[i];
+        for (const obj of kbd_list) {
             const swara_list = obj['V'];
             const new_swara_list = [];
-            for (let j = 0; j < swara_list.length; j++) {
-                let swara_str = swara_list[j];
+            for (const swara_str of swara_list) {
                 if (note_list.has(swara_str)) {
-                    swara_str = get_swara_transliterate(lang, swara_str);
-                    new_swara_list.push(swara_str);
+                    const new_swara_str = get_swara_transliterate(lang, swara_str);
+                    new_swara_list.push(new_swara_str);
                 }
             }
             obj['N'] = '&nbsp;' + new_swara_list.join('<br>&nbsp;');
@@ -338,27 +327,18 @@ function info_transliteration(category, data_list) {
         data_list['keyboard'] = { 'keys' : kbd_list };
     }
     item_list = data_list['lyricstext']
-    if (item_list == undefined) {
-        item_list = [];
-    }
+    if (item_list === undefined) item_list = [];
     const lyric_prefix = 'SAhityA';
     const prefix = get_transliterator_text(lang, lyric_prefix);
-    for (let i = 0; i < item_list.length; i++) {
-        const obj = item_list[i];
+    for (const obj of item_list) {
         let lyric_lang = obj['L'];
-        lyric_lang = (lang != 'English' && lyric_lang in map_dict) ? map_dict[lyric_lang] : lyric_lang;
+        lyric_lang = (lang !== 'English' && lyric_lang in map_dict) ? map_dict[lyric_lang] : lyric_lang;
         obj['L'] = prefix + ' - ' + lyric_lang;
     }
-    let references = 'References';
-    if (lang != 'English') {
-        references = map_dict[references];
-    }
+    const references = (lang !== 'English') ? map_dict['References'] : 'References';
     item_list = data_list['lyricsref']
-    if (item_list == undefined) {
-        item_list = [];
-    }
-    for (let i = 0; i < item_list.length; i++) {
-        const obj = item_list[i];
+    if (item_list === undefined) item_list = [];
+    for (const obj of item_list) {
         obj['R'] = references;
     }
 }
@@ -373,34 +353,22 @@ function set_language(obj) {
     transliterator_lang_init(lang);
     load_menu_data(lang);
     load_nav_data(window.NAV_CATEGORY);
-    if (history_data == undefined) {
+    if (history_data === undefined) {
         load_content_data(window.CONTENT_CATGEGORY, window.CONTENT_NAME);
     } else  {
         handle_history_context(history_data);
     }
 }
 
-function load_lang_data(url_data) {
-    init_lang_maps(url_data);
-    load_nav_data('raga');
-    if (window.default_song != '') {
-        load_content_data('song', window.default_song);
-    }
-    // fetch_url_data('CONCERT DATA', 'concert.json');
-    search_init();
-}
-
 function add_song(audio_file, script_mode) {
     const play_list = get_play_list();
     if (play_list.length <= 0) {
-        if (audio_file != '') {
-            play_list[0] = audio_file;
-        }
+        if (audio_file !== '') play_list[0] = audio_file;
     } else {
         play_list[play_list.length] = audio_file;
     }
     sessionStorage['playlist'] = JSON.stringify(play_list);
-    if (play_list.length == 1) {
+    if (play_list.length === 1) {
         play_first();
     } else  if (!script_mode) {
         show_modal_dialog('Song added to Play List', 'Click Play List to Add/Delete Songs');
@@ -413,9 +381,7 @@ function delete_song(song_id) {
         song_id = parseInt(song_id);
         play_list.splice(song_id, 1);
         sessionStorage['playlist'] = JSON.stringify(play_list);
-        if (song_id == 0) {
-            play_first();
-        }
+        if (song_id === 0) play_first();
     }
 }
 
@@ -431,7 +397,7 @@ function create_jukebox(obj) {
 
 async function create_jukebox_modal(obj) {
     const option = obj.value.toLowerCase();
-    const check_id = window.NAV_CATEGORY == window.CONTENT_CATGEGORY;
+    const check_id = window.NAV_CATEGORY === window.CONTENT_CATGEGORY;
     get_bs_modal('DIALOG_BOX').hide();
     const JUKEBOX_TOTAL = 100;
     const JUKEBOX_LENGTH = 10;
@@ -439,14 +405,14 @@ async function create_jukebox_modal(obj) {
     const play_list = [];
     let category = 'song';
     let loops = JUKEBOX_TOTAL;
-    if (FF[option] != undefined) {
+    if (FF[option] !== undefined) {
         category = option;
         loops = 1;
     }
-    const is_main_song = category == 'song';
+    const is_main_song = category === 'song';
     let url = `${category}.json`;
     let url_data = await fetch_url(url);
-    if (url_data == null) return;
+    if (url_data === null) return;
     const id_list = new Set();
     const letter_list = url_data['alphabet'];
     for (let i = 0; i < loops; i++) {
@@ -465,15 +431,14 @@ async function create_jukebox_modal(obj) {
         }
         url = `${category}/${t_text}.json`;
         url_data = await fetch_url(url);
-        if (url_data == null) continue;
+        if (url_data === null) continue;
         let folder_list = url_data['videos'][0]['folder'];
         if (loops > 1) {
             const folder_index = Math.floor((Math.random() * folder_list.length));
             folder_list = [ folder_list[folder_index] ];
         }
         // console.log(`Jukebox: ${url} ${is_main_song} ${folder_list.length}`);
-        for (let j = 0; j < folder_list.length; j++) {
-            let folder = folder_list[j];
+        for (const folder of folder_list) {
             if (loops <= 1) {
                 const folder_index = Math.floor((Math.random() * folder_list.length));
                 folder = folder_list[folder_index];
@@ -481,7 +446,7 @@ async function create_jukebox_modal(obj) {
             const song_id = is_main_song ? t_id : folder['S'];
             let video_list = folder['songs'];
             if (loops <= 1) {
-                if (category == 'artist' || category == 'song') {
+                if (category === 'artist' || category === 'song') {
                     video_list = [ video_list[0] ];
                 } else {
                     const video_index = Math.floor((Math.random() * video_list.length));
@@ -491,22 +456,21 @@ async function create_jukebox_modal(obj) {
                 const video_index = Math.floor((Math.random() * video_list.length));
                 video_list = [ video_list[video_index] ];
             }
-            // console.log(`Jukebox folder: ${song_id} ${j} ${video_list.length}`);
-            for (let k = 0; k < video_list.length; k++) {
-                const video = video_list[k];
-                if (option == 'Views' && video['V'] < 100) continue;
+            // console.log(`Jukebox folder: ${song_id} ${video_list.length}`);
+            for (const video of video_list) {
+                if (option === 'Views' && video['V'] < 100) continue;
                 const artist_id = is_main_song ? folder['A'] : video['A'];
                 // console.log(`Jukebox video: ${song_id} ${k} ${artist_id}`);
-                if (loops > 1 && category != 'artist' && (artist_id <= 0 || artist_id >= 50)) continue;
+                if (loops > 1 && category !== 'artist' && (artist_id <= 0 || artist_id >= 50)) continue;
                 const raga_id = video['R'];
                 // console.log(`Jukebox video: ${song_id} ${k} ${artist_id} ${raga_id}`);
-                if (category != 'raga' && (raga_id <= 0 || raga_id > 250)) continue;
+                if (category !== 'raga' && (raga_id <= 0 || raga_id > 250)) continue;
                 const composer_id = video['C'];
-                if (category != 'composer' && (composer_id <= 0 || composer_id > 100)) continue;
+                if (category !== 'composer' && (composer_id <= 0 || composer_id > 100)) continue;
                 const video_id = video['I'];
                 if (id_list.has(video_id)) continue;
                 id_list.add(video_id);
-                // console.log(`Jukebox video: ${song_id} ${k} ${artist_id} ${raga_id} ${composer_id} ${video_id}`);
+                // console.log(`Jukebox video: ${song_id} ${artist_id} ${raga_id} ${composer_id} ${video_id}`);
                 const args = `${video_id}:${song_id}:${raga_id}`;
                 play_list.push(args);
                 if (play_list.length >= JUKEBOX_LENGTH) break;
@@ -515,8 +479,8 @@ async function create_jukebox_modal(obj) {
         }
         if (play_list.length >= JUKEBOX_LENGTH) break;
     }
-    for (let i = 0; i < play_list.length; i++) {
-        add_song(play_list[i], true);
+    for (const obj of play_list) {
+        add_song(obj, true);
     }
     setTimeout(function() { show_playlist(); }, 0);
 }
@@ -524,8 +488,8 @@ async function create_jukebox_modal(obj) {
 function show_playlist() {
     const play_list = get_play_list();
     const info_list = [];
-    for (let i = 0; i < play_list.length; i++) {
-        const parts = play_list[i].split(':');
+    for (const [i, video] of play_list.entries()) {
+        const parts = video.split(':');
         info_dict = { 'N' : i + 1, 'I' : parts[0], 'S' : parseInt(parts[1]), 'R' : parseInt(parts[2]) };
         get_folder_value('song', info_dict, 'S', 'S');
         get_folder_value('raga', info_dict, 'R', 'R');
@@ -536,7 +500,7 @@ function show_playlist() {
     const map_dict = map_info_data[lang];
     let header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : 'Song', 'RN' : 'Raga' };
     let title = 'Playlist';
-    if (lang != 'English') {
+    if (lang !== 'English') {
         const map_dict = map_info_data[lang];
         title = map_dict[title];
         header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : map_dict['Song'], 'RN' : map_dict['Raga'] };
@@ -551,11 +515,11 @@ function show_playlist() {
 }
 
 function handle_playlist_command(cmd, arg) {
-    if (cmd == 'play') {
+    if (cmd === 'play') {
         add_song(arg, false);
-    } else if (cmd == 'delete') {
+    } else if (cmd === 'delete') {
         delete_song(arg);
-    } else if (cmd == 'show') {
+    } else if (cmd === 'show') {
         show_playlist();
     }
     return true;
@@ -564,18 +528,16 @@ function handle_playlist_command(cmd, arg) {
 function render_nav_template(category, data) {
     const lang = window.RENDER_LANGUAGE;
     const letter_list = data['alphabet'];
-    const no_transliterate = lang == 'English' && ENGLISH_TYPE_LIST.includes(category);
+    const no_transliterate = lang === 'English' && ENGLISH_TYPE_LIST.includes(category);
     const id_data = window.ID_DATA[category];
-    for (let k = 0; k < letter_list.length; k++) {
-        const l_item = letter_list[k];
+    for (const l_item of letter_list) {
         const item_list = l_item['items']
-        for (let i = 0; i < item_list.length; i++) {
-            const obj = item_list[i];
+        for (const obj of item_list) {
             const h_id = obj['H'];
             const h_text = id_data[h_id][0];
             let f_text = id_data[h_id][1];
             obj['H'] = h_text;
-            if (lang != 'English' && f_text.includes('unknowncomposer')) {
+            if (lang !== 'English' && f_text.includes('unknowncomposer')) {
                 f_text = f_text.replace('unknowncomposer', '?');
             }
             if (check_for_english_text(lang, category, h_id, f_text)) {
@@ -588,7 +550,7 @@ function render_nav_template(category, data) {
     const ul_template = plain_get_html_text('nav-ul-template')
     const template_html = Mustache.render(ul_template, data);
     plain_set_html_text('MENU', template_html);
-    if (window.NAV_SCROLL_SP != null) {
+    if (window.NAV_SCROLL_SP !== null && window.NAV_SCROLL_SP !== undefined) {
         window.NAV_SCROLL_SP.refresh();
     } else {
         const scroll_element = document.getElementById('ALPHABET_DATA');
@@ -608,7 +570,7 @@ function load_about_data(category, video_data) {
 }
 
 function load_nav_fetch_data(category, url_data) {
-    if (category == 'about') {
+    if (category === 'about') {
         load_about_data(category, url_data);
     } else {
         render_nav_template(category, url_data);
@@ -624,9 +586,7 @@ function set_link_initial_active_state() {
 }
 
 function clear_link_active_state(prev_element) {
-    if (prev_element != null) {
-        prev_element.classList.remove('active');
-    }
+    if (prev_element !== null) prev_element.classList.remove('active');
     return null;
 }
 
@@ -637,17 +597,6 @@ function set_link_active_state(element, prev_element) {
     return element;
 }
 
-function load_nav_data(category, element) {
-    if (category != 'about') {
-        window.NAV_CATEGORY = category;
-    }
-    if (element != undefined && category != 'about') {
-        window.ACTIVE_MENU = set_link_active_state(element, window.ACTIVE_MENU);
-    }
-    const url = `${category}.json`;
-    fetch_url_data('NAV DATA', url, [ category ]);
-}
-
 function get_folder_value(category, info, prefix, v) {
     const lang = window.RENDER_LANGUAGE;
     const id_data = window.ID_DATA[category];
@@ -655,11 +604,9 @@ function get_folder_value(category, info, prefix, v) {
     const h_id = info[v];
     const h_text = id_data[h_id][0];
     const f_text = id_data[h_id][1];
-    if (h_text != 'UnknownType') {
-        info[h_name] = h_text;
-    }
+    if (h_text !== 'UnknownType') info[h_name] = h_text;
     const f_name = prefix + 'N';
-    if (lang != 'English' && h_id == 0) {
+    if (lang !== 'English' && h_id === 0) {
         info[f_name] = '?';
     } else if (check_for_english_text(lang, category, h_id, f_text)) {
         info[f_name] = h_text;
@@ -671,9 +618,7 @@ function get_folder_value(category, info, prefix, v) {
 function get_match_count(f_category, f_value, context_list, c_len) {
     let found = 0;
     for (let c = 1; c < c_len; c++) {
-        if (context_list[c][0] == f_category && context_list[c][2] == f_value) {
-            found += 1;
-        }
+        if (context_list[c][0] === f_category && context_list[c][2] === f_value) found += 1;
     }
     return found;
 }
@@ -681,12 +626,11 @@ function get_match_count(f_category, f_value, context_list, c_len) {
 function translate_song_id_to_data(category, sd, st, song_list) {
     const HF = [ 'S', 'R', 'C' ];
     const HCATEGORY = [ 'song', 'raga', 'composer' ];
-    for (let j = 0; j < song_list.length; j++) {
-        const song = song_list[j];
-        for (let m = 0; m < HF.length; m++) {
-            get_folder_value(HCATEGORY[m], song, HF[m], HF[m]);
+    for (const [i, song] of song_list.entries()) {
+        for (const v of HF) {
+            get_folder_value(HCATEGORY[m], song, v, v);
         }
-        song['I'] = j + 1;
+        song['I'] = i + 1;
     }
 }
 
@@ -696,29 +640,20 @@ function translate_folder_id_to_data(category, id, data) {
     const f_type = ff[1];
     const sd = ff[2];
     const st = ff[3];
-    const video_list = data['videos']
-    for (let k = 0; k < video_list.length; k++) {
-        const folder_list = video_list[k]['folder'];
-        for (let i = 0; i < folder_list.length; i++) {
-            const folder = folder_list[i];
+    for (const video of data['videos']) {
+        for (const folder of video['folder']) {
             const song_list = folder['songs'];
-            let song_ids = '';
-            if (category != 'song') {
-                song_ids = folder['S'];
-            }
+            let song_ids = (category !== 'song') ? folder['S'] : '';
             folder['HT'] = f_category;
             folder['HC'] = song_list.length;
             get_folder_value(f_category, folder, 'H', f_type);
-            for (let j = 0; j < song_list.length; j++) {
-                const song = song_list[j];
+            for (const song of song_list) {
                 for (let m = 0; m < OF.length; m++) {
                     const c = OF[m] + 'T';
                     song[c] = st[m];
                     get_folder_value(st[m], song, OF[m], sd[m]);
                 }
-                if (category == 'song') {
-                    song_ids = song['S'];
-                }
+                if (category === 'song') song_ids = song['S'];
                 song['PS'] = song_ids;
                 song['PR'] = song['R'];
             }
@@ -728,7 +663,7 @@ function translate_folder_id_to_data(category, id, data) {
 
 function render_data_template(category, id, data, context_list) {
     const lang = window.RENDER_LANGUAGE;
-    if (category == '') {
+    if (category === '') {
         plain_set_html_text('PAGE_VIDEOS', '');
         plain_set_html_text('PAGE_LYRICS', '');
         plain_set_html_text('PAGE_REFS', '');
@@ -737,7 +672,7 @@ function render_data_template(category, id, data, context_list) {
 
     const template_name = 'page-videos-template'
     let ul_template = plain_get_html_text(template_name);
-    if (lang != 'English') {
+    if (lang !== 'English') {
         const map_info_data = get_map_data('MAP_INFO_DICT');
         const map_dict = map_info_data[lang];
         ul_template = ul_template.replace('Videos', map_dict['Videos']);
@@ -746,21 +681,17 @@ function render_data_template(category, id, data, context_list) {
 
     translate_folder_id_to_data(category, id, data);
 
-    if (context_list != undefined) {
-        const video_list = data['videos']
+    if (context_list !== undefined) {
         const c_len = context_list.length;
-        for (let k = 0; k < video_list.length; k++) {
-            const folder_list = video_list[k]['folder']
+        for (const video of data['videos']) {
             const new_folder_list = [];
-            for (let i = 0; i < folder_list.length; i++) {
-                const folder = folder_list[i];
+            for (const folder of video['folder']) {
                 const f_category = folder['HT'];
                 const f_value = folder['HN'];
                 const s_found = get_match_count(f_category, f_value, context_list, c_len);
                 const song_list = folder['songs'];
                 const new_song_list = [];
-                for (let j = 0; j < song_list.length; j++) {
-                    const song = song_list[j];
+                for (const song of song_list) {
                     let found = s_found;
                     for (let m = 0; m < OF.length; m++) {
                         let c = OF[m] + 'T';
@@ -769,16 +700,12 @@ function render_data_template(category, id, data, context_list) {
                         let f_value = song[c];
                         found += get_match_count(f_category, f_value, context_list, c_len);
                     }
-                    if (found >= (c_len - 1)) {
-                        new_song_list.push(song);
-                    }
+                    if (found >= (c_len - 1)) new_song_list.push(song);
                 }
                 folder['songs'] = new_song_list;
-                if (new_song_list.length > 0) {
-                    new_folder_list.push(folder);
-                }
+                if (new_song_list.length > 0) new_folder_list.push(folder);
             }
-            video_list[k]['folder'] = new_folder_list;
+            video['folder'] = new_folder_list;
         }
     }
 
@@ -809,22 +736,11 @@ function render_content_data(category, name, video_data, context_list) {
     }, 0);
 }
 
-function load_content_data(category, name, element, new_context_list) {
-    if (element != undefined) {
-        window.ACTIVE_NAV = set_link_active_state(element, window.ACTIVE_NAV);
-    }
-    window.CONTENT_CATGEGORY = category;
-    window.CONTENT_NAME = name;
-    empty_content_data(category, name);
-    const url = `${category}/${name}.json`;
-    fetch_url_data('CONTENT DATA', url, [ category, name, new_context_list ]);
-}
-
 function load_context_search_data(context_list) {
     const [ category, name ] = context_list[0].split(':');
     const new_context_list = [];
-    for (let i = 0; i < context_list.length; i++) {
-        new_context_list.push(context_list[i].split(':'));
+    for (const context of context_list) {
+        new_context_list.push(context.split(':'));
     }
     load_content_data(category, name, undefined, new_context_list);
 }
@@ -858,28 +774,21 @@ function search_load_fetch_data(search_index_obj) {
     transliterator_init();
 }
 
-function search_load() {
-    if (window.search_initialized) return;
-    const search_engine = window.carnatic_search_engine;
-    fetch_url_data('SEARCH DATA', 'search_index.json');
-    window.search_initialized = true;
-}
-
 function search_init() {
     window.carnatic_search_engine = new MiniSearch({
         fields: ['aka'], // fields to index for full-text search
         storeFields: ['title', 'href', 'category', 'pop'] // fields to return with search results
     });
     window.search_initialized = false;
-    search_load();
+    fetch_url_data('SEARCH DATA', 'search_index.json');
+    window.search_initialized = true;
 }
 
 function get_search_results(search_word, search_options, item_list, id_list, base_pop) {
     const word_list = search_word.split(' ');
     const new_word_list = [];
-    for (let i = 0; i < word_list.length; i++) {
-        let word = word_list[i];
-        if (word != '') {
+    for (let word of word_list) {
+        if (word !== '') {
             word = normalize_search_text(word);
             new_word_list.push(word.slice(0,8));
         }
@@ -888,12 +797,10 @@ function get_search_results(search_word, search_options, item_list, id_list, bas
     const lang = window.RENDER_LANGUAGE;
     const map_info_data = get_map_data('MAP_INFO_DICT');
     const map_dict = map_info_data[lang];
-    const search_engine = window.carnatic_search_engine;
-    const results = search_engine.search(search_word, search_options);
+    const results = window.carnatic_search_engine.search(search_word, search_options);
     if (results.length <= 0) return;
     const max_score = results[0].score;
-    for (let i = 0; i < results.length; i++) {
-        const result_item = results[i];
+    for (const result_item of results) {
         if (id_list.has(result_item.id)) continue;
         let pop = result_item.pop;
         if (search_word.length > 2) {
@@ -903,7 +810,7 @@ function get_search_results(search_word, search_options, item_list, id_list, bas
         const category = result_item.category
         const id_data = window.ID_DATA[category];
         const c_name = capitalize_word(category);
-        const n_category = (lang == 'English') ? category.toUpperCase() : map_dict[c_name];
+        const n_category = (lang === 'English') ? category.toUpperCase() : map_dict[c_name];
         const href = id_data[result_item.href][0];
         let title = id_data[result_item.title][1];
         if (check_for_english_text(lang, category, result_item.href, href)) {
@@ -959,7 +866,7 @@ function transliterate_text(word) {
         current += j;
     }
     let new_word = tokenlist.join('');
-    if (word != new_word) {
+    if (word !== new_word) {
         new_word = new_word.replace(/_/g, '');
         new_word = new_word.replace(/G/g, 'n');
         new_word = new_word.replace(/J/g, 'n');
@@ -970,8 +877,7 @@ function transliterate_text(word) {
 function get_tamil_phonetic_word(word) {
     const w_list = [];
     const new_word = word.toLowerCase();
-    for (let i = 0; i < new_word.length; i++) {
-        const c = new_word[i];
+    for (const c of new_word) {
         w_list.push((c in SEARCH_MAP_DICT) ? SEARCH_MAP_DICT[c] : c);
     }
     return w_list.join('');
@@ -983,7 +889,7 @@ function load_search_part(search_word, non_english) {
     const id_list = new Set();
     let search_options = { prefix: true, combineWith: 'AND', fuzzy: term => term.length > 3 ? 0.1 : null };
     get_search_results(search_word, search_options, item_list, id_list, 4000);
-    if (search_word != s_search_word) {
+    if (search_word !== s_search_word) {
         get_search_results(s_search_word, search_options, item_list, id_list, 1000);
     }
     let n_search_word = '';
@@ -997,7 +903,7 @@ function load_search_part(search_word, non_english) {
         if (non_english && n_search_word) {
             get_search_results(n_search_word, search_options, item_list, id_list, 0);
         }
-        if (search_word != s_search_word) {
+        if (search_word !== s_search_word) {
             get_search_results(s_search_word, search_options, item_list, id_list, 0);
         }
     }
@@ -1009,21 +915,17 @@ function load_search_part(search_word, non_english) {
 function handle_search_word(search_word) {
     const lang = window.RENDER_LANGUAGE;
     const c = search_word.charCodeAt(0);
-    if (c > 127) {
-        search_word = transliterate_text(search_word);
-    }
+    if (c > 127) search_word = transliterate_text(search_word);
     const non_english = (0x0B80 <= c && c <= 0x0BFF) ? true : false;
-
-    const context_dict = {};
     const context_list = search_word.split(':');
+    const context_dict = {};
     let new_item_list = [];
-    for (let i = 0; i < context_list.length; i++) {
-        const word = context_list[i];
+    for (const word of context_list) {
         new_item_list = load_search_part(word, non_english);
         context_dict[word] = new_item_list;
     }
     let result_header = 'Search Results';
-    if (lang != 'English') {
+    if (lang !== 'English') {
         const map_info_data = get_map_data('MAP_INFO_DICT');
         const map_dict = map_info_data[lang];
         result_header = map_dict[result_header];
@@ -1034,8 +936,7 @@ function handle_search_word(search_word) {
         render_card_template('page-search-template', 'PAGE_INFO', item_data);
     } else {
         const row_list = [];
-        for (let i = 0; i < context_list.length; i++) {
-            const w = context_list[i];
+        for (const [i, w] of context_list.entries()) {
             row_list.push({ 'I' : i, 'col' : context_dict[w] });
         }
         const row_data = { 'items' : row_list };
@@ -1068,16 +969,11 @@ function handle_context_search() {
     const select_list = plain_get_query_selector('select[id^=COL_]');
     const cols = select_list.length;
     const context_list = [];
-    for (let i = 0; i < select_list.length; i++) {
-        const select_element = select_list[i];
+    for (const select_element of select_list) {
         const option = select_element.options[select_element.selectedIndex].value;
-        if (option == '' || option == undefined) {
-            continue;
-        }
+        if (option === '' || option === undefined) continue;
         const new_option = option.replace(/\s/g, '');
-        if (new_option == '' || new_option == undefined) {
-            continue;
-        }
+        if (new_option === '' || new_option === undefined) continue;
         context_list.push(option);
     }
     load_context_search_data(context_list);
@@ -1126,7 +1022,7 @@ function render_youtube_video_info(id, video_data) {
     for (let key in video_data) {
         if (VIDEO_INFO_KEY_LIST.has(key)) {
             const value = video_data[key];
-            if (key == 'title') {
+            if (key === 'title') {
                 title = value;
             } else {
                 info_list.push({ 'N' : key, 'C' : value });
@@ -1139,7 +1035,7 @@ function render_youtube_video_info(id, video_data) {
     const info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
     /*
     const chapter_data = window.CONCERT_DATA[video_id];
-    if (chapter_data != undefined) {
+    if (chapter_data !== undefined) {
         const category = 'artist';
         const ff = FF[category];
         const sd = ff[2];
@@ -1156,38 +1052,65 @@ function get_youtube_video_info(id) {
     fetch_url_data('VIDEO INFO', url, [ id ]);
 }
 
-function load_content() {
+function load_nav_data(category, element) {
+    if (category !== 'about') window.NAV_CATEGORY = category;
+    if (element !== undefined && category !== 'about') {
+        window.ACTIVE_MENU = set_link_active_state(element, window.ACTIVE_MENU);
+    }
+    const url = `${category}.json`;
+    fetch_url_data('NAV DATA', url, [ category ]);
+}
+
+function load_content_data(category, name, element, new_context_list) {
+    if (element !== undefined) {
+        window.ACTIVE_NAV = set_link_active_state(element, window.ACTIVE_NAV);
+    }
+    window.CONTENT_CATGEGORY = category;
+    window.CONTENT_NAME = name;
+    empty_content_data(category, name);
+    const url = `${category}/${name}.json`;
+    fetch_url_data('CONTENT DATA', url, [ category, name, new_context_list ]);
+}
+
+function load_init_data(id_data, hk_data) {
     if (window.innerWidth < 992) {
         show_modal_dialog('Best Viewed in Landscape Mode', 'Use Landscape Mode');
     }
-    fetch_url_data('ID DATA', 'id.json');
+    window.ID_DATA = id_data;
+    init_lang_maps(hk_data);
+    /*
+    const url_list = [ fetch_url('raga.json'), fetch_url(`song/${window.default_song}.json`) ];
+    Promise.all(url_list).then((values) => {
+        const [ nav_data, content_data ] = values;
+    });
+    */
+    load_nav_data('raga');
+    if (window.default_song !== '') load_content_data('song', window.default_song);
+    search_init();
+    // fetch_url_data('CONCERT DATA', 'concert.json');
 }
 
 async function fetch_url_data(name, url, args) {
     const url_data = await fetch_url(url);
-    if (url_data == null) return;
-    if (name == 'ID DATA') {
-        window.ID_DATA = url_data;
-        fetch_url_data('LANG DATA', 'hk_lang_map.json');
-    } else if (name == 'LANG DATA') {
-        load_lang_data(url_data);
-    } else if (name == 'NAV DATA') {
+    if (url_data === null) return null;
+    if (name === 'NAV DATA') {
         const category = args[0];
         load_nav_fetch_data(category, url_data);
-    } else if (name == 'CONTENT DATA') {
+    } else if (name === 'CONTENT DATA') {
         const [ category, h_name, new_context_list ] = args;
         render_content_data(category, h_name, url_data, new_context_list);
-        if (new_context_list == undefined) {
+        if (new_context_list === undefined) {
             add_history('content', { 'category' : category, 'name' : h_name });
         }
-    } else if (name == 'SEARCH DATA') {
+    } else if (name === 'SEARCH DATA') {
         search_load_fetch_data(url_data);
-    } else if (name == 'VIDEO INFO') {
+    } else if (name === 'VIDEO INFO') {
         const id = args[0];
         render_youtube_video_info(id, url_data);
-    } else if (name == 'CONCERT DATA') {
+    } else if (name === 'CONCERT DATA') {
         window.CONCERT_DATA = url_data;
     }
+    return url_data;
 }
 
 /*
@@ -1213,15 +1136,15 @@ function speech_to_text_init() {
         };
 
         window.speech_recognition.onerror = function(event) {
-            if (event.error == 'no-speech') {
+            if (event.error === 'no-speech') {
                 console.log('Speech Error: No Speech');
                 window.speech_ignore_onend = true;
             }
-            if (event.error == 'audio-capture') {
+            if (event.error === 'audio-capture') {
                 console.log('Speech Error: Audio Capture');
               window.speech_ignore_onend = true;
             }
-            if (event.error == 'not-allowed') {
+            if (event.error === 'not-allowed') {
                 if (event.timeStamp - window.speech_start_timestamp < 100) {
                     console.log('Speech Error: Info Blocked');
                 } else {
@@ -1296,18 +1219,18 @@ function load_keyboard(event) {
 
 function handle_history_context(data) {
     const context = data['context'];
-    if (context == 'content') {
+    if (context === 'content') {
         load_content_data(data['category'], data['name']);
-    } else if (context == 'nav') {
+    } else if (context === 'nav') {
         load_nav_data(data['category']);
-    } else if (context == 'search') {
+    } else if (context === 'search') {
         load_search_history(data);
     }
 }
 
 function handle_popstate(e) {
     const data = e.state;
-    if (data == null || data == undefined) return;
+    if (data === null || data === undefined) return;
     // console.log('POP: ', e);
     window.carnatic_popstate = true;
     handle_history_context(data);
@@ -1317,15 +1240,13 @@ function handle_popstate(e) {
 
 function add_history(context, data) {
     const url = window.collection_name + '.html';
-    // if (context == 'nav') return;
+    // if (context === 'nav') return;
     data['language'] = window.GOT_LANGUAGE;
     if (!window.carnatic_popstate) {
         data['context'] = context;
         let title = 'Carnatic: ' + capitalize_word(data['category']);
         const name = data['name'];
-        if (name != undefined) {
-            title += ' ' + name;
-        }
+        if (name !== undefined) title += ' ' + name;
         // console.log('PUSH: ', data, window.carnatic_popstate);
         history.pushState(data, title, url);
     }
@@ -1356,12 +1277,17 @@ function collection_init(collection, default_song) {
     sessionStorage.clear();
     window.addEventListener('storage', on_storage_event, false);
     window.addEventListener('popstate', handle_popstate);
-    window.onload = load_content;
 
     document.addEventListener('DOMContentLoaded', function() {
         if (document.readyState === "interactive" || document.readyState === "complete" ) {
             setTimeout(load_youtube_frame, 0);
         }
+    });
+
+    const url_list = [ fetch_url_data('ID DATA', 'id.json'), fetch_url_data('LANG DATA', 'hk_lang_map.json') ];
+    Promise.all(url_list).then((values) => {
+        const [ id_data, hk_data ] = values;
+        load_init_data(id_data, hk_data);
     });
 
     init_input_keyboard();

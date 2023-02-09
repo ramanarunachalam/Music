@@ -296,7 +296,7 @@ function info_transliteration(category, data_list) {
             if (value !== undefined) {
                 let g_list = [];
                 for (const gobj of item_list) {
-                     g_list.push(get_transliterator_text(lang, gobj)); 
+                     g_list.push(get_transliterator_text(lang, gobj));
                 }
                 obj['V'] = g_list.join('</br>');
             }

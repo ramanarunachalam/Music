@@ -437,7 +437,7 @@ async function create_jukebox_modal(obj) {
             folder_list = [ folder_list[folder_index] ];
         }
         // console.log(`Jukebox: ${url} ${is_main_song} ${folder_list.length}`);
-        for (const folder of folder_list) {
+        for (let folder of folder_list) {
             if (loops <= 1) {
                 const folder_index = Math.floor((Math.random() * folder_list.length));
                 folder = folder_list[folder_index];

@@ -1,3 +1,5 @@
+const DEFAULT_VIDEO_ID    = "_tdYY6lUw9g"; 
+const DEFAULT_YOUTUBE_URL = `https://www.youtube.com/embed/${DEFAULT_VIDEO_ID}?enablejsapi=1`;
 
 const VIDEO_INFO_KEY_LIST = new Set([ 'title', 'author_name' ]);
 const ENGLISH_TYPE_LIST = [ 'artist', 'composer', 'type' ];
@@ -52,6 +54,16 @@ function plain_get_html_text(id) {
 
 function plain_set_html_text(id, text) {
     document.getElementById(id).innerHTML = text;
+}
+
+function plain_add_class(id, name) {
+    const element = document.getElementById(id);
+    element.classList.add(name);
+}
+
+function plain_remove_class(id, name) {
+    const element = document.getElementById(id);
+    element.classList.remove(name);
 }
 
 function plain_get_attr(id, key) {
@@ -193,7 +205,12 @@ function load_menu_data(lang) {
     const search_tooltip = 'Prefix Search <br/> e.g. malhar kamod <br/> Phonetic Search <br/> e.g. kanada <br/> Language Search <br/> e.g. यमन <br/> Context Search <br/> e.g. bhimsen : pag : malkauns';
     const mic_tooltip = 'Only in Chrome';
     const kbd_tooltip = 'Language Keyboard';
-    const menu_dict = { 'menus' : { 'languages' : lang_list, 'APP' : 'Android App', 'P' : playlist, 'S' : search, 'STP' : search_tooltip, 'MTP' : mic_tooltip, 'KTP' : kbd_tooltip, 'categories' : CATEGORY_DICT['categories'] } };
+    const menu_dict = { 'menus' : { 'LANGUAGE' : window.GOT_LANGUAGE, 'languages' : lang_list,
+                                    'S' : search, 'APP' : 'Android App', 'P' : playlist,
+                                    'B' : 'Brightness', 'BI' : 'brightness-low',
+                                    'STP' : search_tooltip, 'MTP' : mic_tooltip, 'KTP' : kbd_tooltip,
+                                    'categories' : CATEGORY_DICT['categories'] }
+                      };
     render_card_template('page-menu-template', 'MENU_DATA', menu_dict);
     init_search_listener();
 
@@ -223,7 +240,7 @@ function get_swara_text(lang, note_list, value_list) {
     }
     swara_str = get_swara_transliterate(lang, swara_str);
     const note_str = value_list[1];
-    const image_str = `<a href="javascript:play_notes('${note_str}');" ><img class="ICON" src="icons/soundwave.svg" ></a>`;
+    const image_str = `<a href="javascript:play_notes('${note_str}');" ><i class="bi bi-soundwave ICON_FONT"></i></a>`;
     return swara_str + ' ' + image_str;
 }
 
@@ -342,8 +359,7 @@ function info_transliteration(category, data_list) {
     }
 }
 
-function set_language(obj) {
-    const got_lang = obj.value;
+function set_language(got_lang, name_lang) {
     window.GOT_LANGUAGE = got_lang;
     const lang = MAP_LANG_DICT[got_lang];
     window.RENDER_LANGUAGE = lang;
@@ -357,6 +373,19 @@ function set_language(obj) {
     } else  {
         handle_history_context(history_data);
     }
+}
+
+function toggle_icon(id, old_class, new_class) {
+    plain_remove_class(id, old_class);
+    plain_add_class(id, new_class);
+}
+
+function toggle_brightness() {
+    window.COLOR_SCHEME = (window.COLOR_SCHEME === 'dark') ? 'light' : 'dark';
+    const elements = document.getElementsByTagName('html');
+    elements[0].setAttribute('data-bs-theme', window.COLOR_SCHEME);
+    if (window.COLOR_SCHEME === 'dark') toggle_icon('BRIGHTNESS', 'bi-brightness-low', 'bi-brightness-high-fill');
+    else toggle_icon('BRIGHTNESS', 'bi-brightness-high-fill', 'bi-brightness-low');
 }
 
 function add_song(audio_file, script_mode) {
@@ -1180,7 +1209,7 @@ function speech_to_text_init() {
             }
             if (window.speech_final_transcript || interim_transcript) {
                 window.speech_recognition.stop();
-                plain_set_attr('MIC_IMAGE', 'src', 'icons/mic-mute.svg');
+                toggle_icon('MIC_IMAGE', 'mic', 'mic-mute');
                 document.getElementById('SEARCH_WORD').value = window.speech_final_transcript;
                 // console.log('Speech Final: ' + window.speech_final_transcript);
                 load_search_data();
@@ -1202,7 +1231,7 @@ function speech_start(event) {
     window.speech_recognition.start();
     window.speech_ignore_onend = false;
     window.speech_start_timestamp = event.timeStamp;
-    plain_set_attr('MIC_IMAGE', 'src', 'icons/mic.svg');
+    toggle_icon('MIC_IMAGE', 'mic-mute', 'mic');
 }
 
 function load_keyboard(event) {
@@ -1259,6 +1288,7 @@ function collection_init(collection, default_song) {
     window.collection_name = collection;
     window.default_song = default_song;
 
+    window.COLOR_SCHEME = 'light';
     window.RENDER_LANGUAGE = lang;
     window.GOT_LANGUAGE = lang;
     window.history_data = undefined;

@@ -1,25 +1,26 @@
 <!DOCTYPE HTML>
 
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Hindustani Youtube Collection is a collection of 1,25,000+ youtube videos, comprising 860+ Ragas, 530+ artists, and 30+ types. The youtube videos are mined, and categorized based on Raga, Artist, Composer, Song, and Type. The site is viewable, searchable, and supports a keyboard for typing in English, Hindi, Marathi, Kannada, Bengali, Gujarati, Punjabi, Tamil, Telugu, Malayalam, Assamese, and Odia."/>
+<meta name="description" content="Hindustani Youtube Collection is a collection of 1,24,000+ youtube videos, comprising 860+ Ragas, 530+ artists, and 30+ types. The youtube videos are mined, and categorized based on Raga, Artist, Composer, Song, and Type. The site is viewable, searchable, and supports a keyboard for typing in English, Hindi, Marathi, Kannada, Bengali, Gujarati, Punjabi, Tamil, Telugu, Malayalam, Assamese, and Odia."/>
 <meta name="keywords" content="Hindustani Classical Music, North Indian Classical Music, English, Hindi, Marathi, Kannada, Bengali, Gujarati, Punjabi, Tamil, Telugu, Malayalam, Assamese, Odia"/>
 <meta name="author" content="Raman Arunachalam"/>
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-<link media="all" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" type="text/css"/>
+<link media="all" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" type="text/css"/>
+<link media="all" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" type="text/css"/>
 <link media="all" rel="stylesheet" href="css/hindustani.css" type="text/css"/>
 <title>Hindustani Youtube Collection</title>
 </head>
 <body>
-    <header class="navbar navbar-expand sticky-top navbar-light bg-light nav-fill w-100" id="MENU_DATA">
+    <header id="MENU_DATA" class="navbar navbar-expand sticky-top bg-body-tertiary nav-fill">
     </header>
     <div class="container-fluid">
       <div class="d-flex flex-row">
         <div class="sticky-top d-flex flex-column col-4" id="LIST">
           <div class="p-2" id="PLAYER">  
-              <iframe id="FRAME_PLAYER" name="FRAME_PLAYER" frameBorder="0" allowTransparency="true"; background="transparent"; data-src="https://www.youtube.com/embed/_tdYY6lUw9g?enablejsapi=1" style="visibility:hidden;" onload="this.style.visibility = 'visible';" allow="autoplay" loading="lazy" scrolling="no"; ></iframe>
+              <iframe id="FRAME_PLAYER" name="FRAME_PLAYER" frameBorder="0" allowTransparency="true"; background="transparent"; style="visibility:hidden;" onload="this.style.visibility = 'visible';" allow="autoplay" loading="lazy" scrolling="no"; ></iframe>
           </div>
           <div class="p-2" id="MENU">
           </div>
@@ -48,7 +49,19 @@
       </div>
     </div>
     
-    <div class="modal fade" id="DIALOG_BOX">
+    <div id="LANG_KBD" class="modal fade" tabindex="-1" aria-labelledby="KBD_MODEL_LABEL">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="KBD_MODEL_LABEL">Keyboard</h3>
+          </div>
+          <div id="GENKBD" class="modal-body">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="DIALOG_BOX" class="modal fade" tabindex="-1" aria-labelledby="DIALOG_TITLE">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
@@ -63,54 +76,52 @@
       </div>
     </div>
 
-    <div class="modal fade" id="LANG_KBD">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div id="GENKBD" class="modal-body">
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script type="text/html" id="page-menu-template">
       {{#menus}}
-        <ul class="navbar-nav col-6">
+        <ul class="navbar-nav col-4">
+          &nbsp; &nbsp;
           <li class="nav-item">
-            <select class="form-select" id="LANG_DATA" onchange="set_language(this)">
-              {{#languages}}
-              <option style="font-size: 12px" {{O}}>{{N}}</option>
-              {{/languages}}
-            </select>
-          </li>
-          <li class="nav-item">
-            <form allow="microphone;" method="GET" action="javascript:load_search_data();" class="navbar-form" role="search">
+            <form class="d-flex" allow="microphone;" method="GET" action="javascript:load_search_data();" role="search">
                 <div class="input-group">
-                    <button id="SEARCH_INFO" class="button" type="submit" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="{{STP}}" ><img class="ICON" src="icons/search.svg"></button>
-                    <input class="form-control" id="SEARCH_WORD" results=5 autosave=5 autofocus name="word" placeholder="{{S}}" type="text">
-                    <button class="button" onclick="speech_start(event)"><img id="MIC_IMAGE" class="ICON" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{MTP}}</em>" src="icons/mic-mute.svg"></button>
-                    <button class="button" onclick="load_keyboard(event)"><img id="KBD_IMAGE" class="ICON" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{KTP}}</em>" src="icons/keyboard.svg"></button>
+                    <button id="SEARCH_INFO" class="button" type="submit" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="{{STP}}"><i class="bi bi-search ICON_FONT"></i></button>
+                    <input class="form-control me-2" id="SEARCH_WORD" results=5 autosave=5 autofocus name="word" type="text" placeholder="{{S}}" aria-label="Search">
+                    <button class="button" onclick="speech_start(event)"><i id="MIC_IMAGE" class="bi bi-mic-mute ICON_FONT" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{MTP}}</em>"></i></button>
+                    <button class="button" onclick="load_keyboard(event)"><i class="bi bi-keyboard ICON_FONT" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{KTP}}</em>"></i></button>
                 </div>
             </form>
           </li>
         </ul>
-        <ul class="navbar-nav col-6">
+        <ul class="navbar-nav col-8">
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{APP}}</em>" href='https://play.google.com/store/apps/details?id=com.indic.carnatic' target="_blank" >
-                <button class="button"><img id='APP_ICON' class="ICON" src="icons/app.svg" ></button>
+                <span class="button"><i id="APP_ICON" class="bi bi-android2 NAV_ICON"></i></span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{P}}</em>" href='javascript:handle_playlist_command("show", "");'>
-                <button class="button"><img class="ICON" src="icons/card-list.svg" ></button>
+                <span class="button"><i class="bi bi-card-list NAV_ICON"></i></span>
             </a>
           </li>
-            {{#categories}}
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{{N}}}</em>" onclick="javascript:load_nav_data('{{C}}', this);" >
-                    <button class="button"><img class="ICON" src="icons/{{I}}.svg" ></button>
-                </a>
-            </li>
-            {{/categories}}
+          {{#categories}}
+          <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{{N}}}</em>" onclick="javascript:load_nav_data('{{C}}', this);" >
+                  <span class="button"><i class="bi bi-{{I}} NAV_ICON"></i></span>
+              </a>
+          </li>
+          {{/categories}}
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{B}}</em>" href='javascript:toggle_brightness();'>
+                <span class="button"><i id="BRIGHTNESS" class="bi bi-{{BI}} NAV_ICON"></i></span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false">{{LANGUAGE}}</a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                {{#languages}}
+                <li><a class="dropdown-item" href="javascript:set_language('{{N}}', '{{O}}');">{{N}}</a></li>
+                {{/languages}}
+              </ul>
+          </li>
         </ul>
       {{/menus}}
     </script>
@@ -128,9 +139,9 @@
             <div class="letter-heading text-center">{{LU}}</div>
             <ul class="OL_LIST">
               {{#items}}
-              <li class="OL_ITEM">
+              <li>
                 <a onclick="load_content_data('{{T}}', '{{H}}', this);">
-                  <img class="ICON" src="icons/{{I}}.svg" loading="lazy" /> {{N}}
+                  <i class="bi bi-{{I}} ICON_FONT"></i>&nbsp; {{N}}
                 </a>
               </li>
               {{/items}}
@@ -143,7 +154,7 @@
 
     <script type="text/html" id="page-title-template">
         {{#title}}
-            <img class="ICON" src="icons/{{I}}.svg" loading="lazy" />&nbsp; {{N}}
+            <i class="bi bi-{{I}} ICON_FONT"></i>&nbsp; {{N}}
         {{/title}}
     </script>
 
@@ -161,9 +172,11 @@
     <script type="text/html" id="page-info-template">
       <div class="col-7">
         {{#poster}}
-            <img src="{{P}}" class="img-thumbnail POSTER" loading="lazy" />
+            <center>
+              <img src="{{P}}" class="img-thumbnail POSTER" loading="lazy" />
+            </center>
         {{/poster}}
-        <table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
+        <table border="0" cellpadding="4" class="table table-bordered table-hover table-condensed" >
             <tbody>
                {{#info}}
                 <tr><td><em>{{N}}</em></td><td>{{{V}}}</td></tr>
@@ -180,7 +193,7 @@
         {{/keyboard}}
       </div>
       <div class="col-5">
-        <table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
+        <table border="0" cellpadding="4" class="table table-bordered table-hover table-condensed" >
             <tbody>
             {{#stats}}
                 <tr><td><em>{{N}}</em></td><td>{{C}}</td></tr>
@@ -192,7 +205,7 @@
 
     <script type="text/html" id="page-about-template">
       <div>
-        <table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
+        <table border="0" cellpadding="4" class="table table-bordered table-hover table-condensed" >
             <tbody>
             {{#stats}}
                 <tr><td><em>{{N}}</em></td><td>{{C}}</td></tr>
@@ -207,7 +220,7 @@
           {{#items}}
               <li class="list-group-item">
                   <a href="javascript:load_content_data('{{T}}', '{{H}}');">
-                      <img class="ICON" src="icons/{{I}}.svg" loading="lazy" /> <i>{{C}}</i> : {{N}}
+                      <i class="bi bi-{{I}} ICON_FONT"></i>&nbsp; {{C}}</i> : {{N}}
                   </a>
               </li>
           {{/items}}
@@ -215,7 +228,7 @@
     </script>
 
     <script type="text/html" id="page-context-search-template">
-        <table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
+        <table border="0" cellpadding="4" class="table table-bordered table-hover table-condensed" >
             <tbody>
                  <tr>
                      {{#items}}
@@ -238,7 +251,7 @@
         <div class="card">
             <div class="card-header ">
                 <h4 class="SONG_HEADER">
-                    <span><img class="ICON" src="icons/headphones.svg" loading="lazy" />&nbsp; Videos:</span>
+                    <i class="bi bi-headphones ICON_FONT"></i>&nbsp; Videos:
                 </h4>
             </div>
             <div class="card-body">
@@ -246,17 +259,15 @@
                     <ol start="1">
                         <li>
                             <span>
-                                <img class="ICON" src="icons/folder.svg" loading="lazy" />&nbsp;
-                                <a href="javascript:load_content_data('{{HT}}', '{{HD}}');">{{HN}}</a> <font color="brown">({{HC}})</font>
+                                <i class="bi bi-folder ICON_FONT"></i>
+                                <a href="javascript:load_content_data('{{HT}}', '{{HD}}');">{{HN}}</a> <font class="NUM_COLOR">({{HC}})</font>
                             </span>
                         </li>
                         <ul class="UL_LIST">
                             {{#songs}}
                             <li>
                                 <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{I}}:{{PS}}:{{PR}}');">
-                                    <span>
-                                         <img class="ICON" src="icons/play.svg" loading="lazy" />&nbsp;
-                                    </span>
+                                    <i class="bi bi-play ICON_FONT"></i>
                                 </a>
                                 <a href="javascript:void(0);" onclick="get_youtube_video_info('{{I}}')">{{D}}</a> -
                                 {{#FD}}<a href="javascript:load_content_data('{{FT}}', '{{FD}}');">{{FN}}</a> - {{/FD}}
@@ -264,9 +275,7 @@
                                 {{#TD}}<a href="javascript:load_content_data('{{TT}}', '{{TD}}');">{{TN}}</a> - {{/TD}}
                                 {{V}} Views &nbsp;
                                 <a href="https://www.youtube.com/watch?v={{I}}" target="_blank">
-                                    <span>
-                                         <img class="ICON" src="icons/youtube.svg" loading="lazy" />
-                                    </span>
+                                    <i class="bi bi-youtube ICON_FONT"></i>
                                 </a>
                             </li>
                             {{/songs}}
@@ -284,13 +293,13 @@
             <div class="card-header ">
                 <h4 class="SONG_HEADER">
                     <span>
-                        <img class="ICON" src="icons/pencil.svg" loading="lazy" />&nbsp; {{L}}:
+                        <i class="bi bi-pencil ICON_FONT"></i>&nbsp; {{L}}:
                     </span>
                 </h4>
             </div>
             <div class="card-body">
                 <div>
-                    <table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
+                    <table border="0" cellpadding="4" class="table table-bordered table-hover table-condensed" >
                         <tbody>
                              {{#text}}
                              <tr><td><em>{{M}}</em></td><td>{{{T}}}</td></tr>
@@ -309,18 +318,14 @@
         <div class="card">
             <div class="card-header ">
                 <h4 class="SONG_HEADER">
-                    <span>
-                        <img class="ICON" src="icons/book.svg" loading="lazy" />&nbsp; {{R}}:
-                    </span>
+                    <i class="bi bi-book ICON_FONT"></i> &nbsp; {{R}}
                 </h4>
             </div>
             <div class="card-body">
                 <div class="list-group">
                     {{#links}}
                     <a href="{{L}}" target="_blank" class="list-group-item">
-                        <span>
-                            <img class="ICON" src="icons/link.svg" loading="lazy" />&nbsp; {{N}}
-                        </span>
+                        <i class="bi bi-link ICON_FONT"></i> &nbsp; {{N}}
                     </a>
                     {{/links}}
                 </div>
@@ -332,7 +337,7 @@
 
     <script type="text/html" id="modal-playlist-title-template">
         <div class="col-auto">
-          <img class="ICON" src="icons/card-list.svg" >
+          <i class="bi bi-card-list ICON_FONT"></i>
         </div>
         <div class="col-auto">
           <select class="form-select" id="JUKEBOX_DATA" onchange="create_jukebox(this)">
@@ -346,14 +351,14 @@
 
     <script type="text/html" id="modal-playlist-template">
         {{#playlist}}
-            <table id="PLAYLIST_TABLE" class="table table-striped table-condensed">
+            <table id="PLAYLIST_TABLE" class="table table-hover table-condensed">
             {{#header}}
                 <tr><th>{{N}}</th><th>{{I}}</th><th>{{SN}}</th><th>{{RN}}</th><th></th></tr>
             {{/header}}
             {{#videos}}
                 <tr>
                   <td>{{N}}</td><td>{{I}}</td><td>{{SN}}</td><td>{{RN}}</td>
-                  <td><a href="#" onclick="delete_row(this);"><img src="icons/x.svg" loading="lazy" width="24" height="24" /></a></td>
+                  <td><a href="#" onclick="delete_row(this);"><i class="bi bi-x ICON_FONT"></i></a></td>
                 </tr>
             {{/videos}}
             </table>
@@ -364,7 +369,7 @@
         {{#videoimage}}
             <center><img class="img-thumbnail POSTER" src="{{P}}" loading="lazy" /></center>
         {{/videoimage}}
-        <table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
+        <table border="0" cellpadding="4" class="table table-bordered table-hover table-condensed" >
             <tbody>
             {{#videoinfo}}
                 <tr><td><em>{{N}}</em></td><td>{{C}}</td></tr>
@@ -372,7 +377,7 @@
             </tbody>
         </table>
         {{#chapters}}
-        <table border="0" cellpadding="4" class="table table-bordered table-striped table-condensed" >
+        <table border="0" cellpadding="4" class="table table-bordered table-hover table-condensed" >
             <tbody>
             {{#songs}}
                 <tr><td>{{I}}</td><td><em>{{SN}}</em></td><td>{{RN}}</td><td>{{CN}}</td></tr>
@@ -396,13 +401,14 @@
        </div>
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/minisearch@6.1.0/dist/umd/index.min.js"></script>
     <script src="js/translation.js"></script>
     <script src="js/transliterate.js"></script>
     <script src="js/hindustani.js"></script>
     <script type="text/javascript">
+        plain_set_attr('FRAME_PLAYER', 'data-src', DEFAULT_YOUTUBE_URL);
         collection_init('hindustani', '');
     </script>
 

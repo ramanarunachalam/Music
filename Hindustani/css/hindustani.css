@@ -1,6 +1,41 @@
+:root, [data-bs-theme=light] {
+    --indic-body-bg-color: lightgray;
+    --indic-alphabet-data: #FFF;
+    --indic-ul-list: #000;
+    --indic-ol-list: #000;
+    --indic-bg-ol: lightgray;
+    --indic-alphabet-li: lightgray;
+    --indic-alphabet-bg: silver;
+    --indic-kbd-key: #000;
+    --indic-kbd-bg: silver;
+    --indic-kbd-hover: lightgray;
+    --indic-num-color: brown;
+}
+
+[data-bs-theme=dark] {
+    --indic-body-bg-color: dimgray;
+    --indic-alphabet-data: #000;
+    --indic-ul-list: #FFF;
+    --indic-ol-list: #FFF;
+    --indic-bg-ol: dimgray;
+    --indic-alphabet-li: dimgray;
+    --indic-alphabet-bg: silver;
+    --indic-kbd-key: #FFF;
+    --indic-kbd-bg: dimgray;
+    --indic-kbd-hover: lightgray;
+    --indic-num-color: tan;
+}
 
 body {
-    background-color:  #F2F2F2;
+    background-color:  var(--indic-body-bg-color);
+}
+
+/* Bootstrap 5 tweak: do not underline links unless hovered over */
+a:not([class*="btn"]) {
+    text-decoration: none;
+}
+a:not([class*="btn"]):hover {
+    text-decoration: underline;
 }
 
 #LIST {
@@ -12,7 +47,7 @@ body {
     height: 100%;
 }
 
-#MENU_DATA ul li.active img {
+#MENU_DATA ul li.active i {
     background-color: silver;
 }
 
@@ -20,10 +55,26 @@ body {
     height: 90vh;
     position: relative;
     overflow-y: scroll;
+    background: var(--indic-alphabet-data);
+}
+
+#ALPHABET_DATA ul {
+    list-style: none;
 }
 
 #ALPHABET_DATA ul li.active {
     background-color: silver;
+}
+
+#ALPHABET_DATA ul li a {
+    padding: 5px 10px;
+    display: block;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+#ALPHABET_DATA ul li a:hover {
+    background: var(--indic-alphabet-bg);
+    border-color: var(--indic-alphabet-li);
 }
 
 #ALPHABET_LIST {
@@ -31,8 +82,13 @@ body {
 }
 
 #ALPHABET_LIST a {
-    padding: 3px 3px; line-height: 20px; text-align: center; font-weight: bold; display: block;
-    text-transform: uppercase; cursor: pointer;
+    padding: 3px 3px;
+    line-height: 20px;
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 #ALPHABET_LIST a.active {
@@ -40,25 +96,14 @@ body {
     background-color: silver;
 }
 
+#ALPHABET_LIST a:hover {
+    background: var(--indic-alphabet-bg);
+    border-color: var(--indic-alphabet-li);
+}
+
 .letter-heading {
     font-weight: bold;
     font-style: italic;
-}
-
-#ALPHABET_DATA {
-    background: #FFF;
-}
-
-#ALPHABET_DATA ul {
-    list-style: none;
-}
-
-#ALPHABET_DATA ul li a {
-    padding: 5px 10px; display: block; border-bottom: 1px solid #f3f3f3;
-}
-
-#ALPHABET_DATA ul li a:hover {
-    background: #f3faff; border-color: #d5ebf9;
 }
 
 #CONTENT {
@@ -66,27 +111,14 @@ body {
 }
 
 div#PLAYER {
-    background-color: silver;
     height: 120px;
+    background-color: silver;
 }
 
 iframe#FRAME_PLAYER {
     border: none;
     width: 100%;
     height: 85%;
-}
-
-h1 {
-    text-align:  center;
-    font-family: "Times New Roman", Times, serif;
-    font-size:  48px;
-    font-style:  oblique;
-    font-weight: bold;
-    text-shadow: 2px 2px 2px silver;
-}
-
-.navbar-brand {
-    text-shadow: 0px 2px 3px #555;
 }
 
 .card-header {
@@ -101,6 +133,18 @@ h1 {
 .ICON {
     width: 24px;
     height: 24px;
+}
+
+.NAV_ICON{
+    font-size: 2rem;
+}
+
+.ICON_FONT {
+    font-size: 1.5rem;
+}
+
+.NUM_COLOR {
+    color: var(--indic-num-color);
 }
 
 .INFOPOSTER {
@@ -124,68 +168,49 @@ ul.UL_LIST {
 }
 
 ul.UL_LIST li a {
-    color : #000;
     font-style: italic;
+    color : var(--indic-ul-list);
 }
 
 ul.OL_LIST {
     list-style: none;
     font-style: italic;
-    background-color: lightgrey;
-}
-
-ol.OL_LIST {
-    list-style: none;
-    background-color: silver;
+    background-color: var(--indic-bg-ol);
 }
 
 ul.OL_LIST li a {
-    color : #000;
-}
-
-/* Bootstrap 5 tweak: do not underline links unless hovered over */
-a:not([class*="btn"]) {
-    text-decoration: none;
-}
-a:not([class*="btn"]):hover {
-    text-decoration: underline;
+    color : var(--indic-ol-list) !important;
 }
 
 .piano {
-  display: flex;
+    display: flex;
 }
 
-
 .key {
-  height: calc(var(--width) * 4);
-  width: var(--width);
+    height: calc(var(--width) * 4);
+    width: var(--width);
 }
 
 .white {
-  --width: 50px;
-  background-color: white;
-  border: 1px solid #333;
+    --width: 50px;
+    border: 1px solid #333;
+    background-color: white;
 }
 
 .white.active {
-  background-color: #CCC;
+    background-color: #CCC;
 }
 
 .black {
-  --width: 30px;
-  background-color: black;
-  margin-left: calc(var(--width) / -2);
-  margin-right: calc(var(--width) / -2);
-  z-index: 2;
+    --width: 30px;
+    margin-left: calc(var(--width) / -2);
+    margin-right: calc(var(--width) / -2);
+    z-index: 2;
+    background-color: black;
 }
 
 .black.active {
-  background-color: #333;
-}
-
-:root {
-    --black-100: #d6d9dc;
-    --black-300: #9fa6ad;
+    background-color: #333;
 }
 
 table.langkbd {
@@ -197,23 +222,24 @@ td.keycol {
     border-radius: 5px;
     border: 5px solid white;
     cursor: pointer;
-    background-color: var(--black-100)
+    color: var(--indic-kbd-key) !important;
+    background-color: var(--indic-kbd-bg);
 }
 
 td.keycol:hover {
-    background-color:var(--black-300)
+    background-color:var(--indic-kbd-hover)
 }
 
 @keyframes app-shake {
-   0%, 90% { transform: translate3d(-4px, 0, 0); background: white; }
-  10%, 80% { transform: translate3d(4px, 0, 0); background: yellow; }
-  20%, 70% { transform: translate3d(-4px, 0, 0); background: lawngreen; }
-  30%, 60% { transform: translate3d(4px, 0, 0); background: orange; }
-  40%, 50% { transform: translate3d(-4px, 0, 0); background: cyan; }
+     0%, 90% { transform: translate3d(-4px, 0, 0); background: white; }
+    10%, 80% { transform: translate3d(4px, 0, 0); background: yellow; }
+    20%, 70% { transform: translate3d(-4px, 0, 0); background: lawngreen; }
+    30%, 60% { transform: translate3d(4px, 0, 0); background: orange; }
+    40%, 50% { transform: translate3d(-4px, 0, 0); background: cyan; }
 }
 
 #APP_ICON {
-  animation-name: app-shake;
-  animation-duration: 5s;
-  animation-iteration-count: 5;
+    animation-name: app-shake;
+    animation-duration: 5s;
+    animation-iteration-count: 5;
 }

@@ -184,7 +184,7 @@ function on_storage_event(storageEvent) {
 }
 
 function load_menu_data(lang) {
-    const item_list = CATEGORY_DICT['categories']
+    const item_list = CATEGORY_DICT['categories'];
     const map_info_data = get_map_data('MAP_INFO_DICT');
     const map_dict = map_info_data[lang];
     for (const obj of item_list) {

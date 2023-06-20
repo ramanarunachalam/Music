@@ -14,25 +14,24 @@
 <title>Carnatic Youtube Collection</title>
 </head>
 <body>
-    <header id="MENU_DATA" class="navbar navbar-expand sticky-top bg-body-tertiary nav-fill">
-    </header>
+    <header id="MENU_DATA" class="navbar navbar-expand sticky-top bg-body-tertiary nav-fill"></header>
     <div class="container-fluid">
       <div class="d-flex flex-row">
-        <div class="sticky-top d-flex flex-column col-4" id="LIST">
-          <div class="p-2" id="PLAYER">  
+        <div id="LIST" class="sticky-top d-flex flex-column col-4">
+          <div id="PLAYER" class="p-2">
             <iframe id="FRAME_PLAYER" name="FRAME_PLAYER" frameBorder="0" allowTransparency="true"; background="transparent"; style="visibility:hidden;" onload="this.style.visibility = 'visible';" allow="autoplay" loading="lazy" scrolling="no"; ></iframe>
           </div>
-          <div class="p-2" id="MENU"></div>
+          <div id="MENU" class="p-2"></div>
         </div>
-        <div class="col-8" id="CONTENT">
-          <div class="card" id="PAGE_HEADER">
+        <div id="CONTENT" class="col-8">
+          <div id="PAGE_HEADER" class="card">
             <div class="card-header ">
-              <h3 class="SONG_HEADER">
+              <h3 class="CONTENT_HEADER">
                 <span id="PAGE_TITLE"></span>
               </h3>
             </div>
             <div class="card-body">
-              <div class="row SONG_TABLE" id="PAGE_INFO"></div>
+              <div id="PAGE_INFO" class="row"></div>
             </div>
           </div>
           <hr />
@@ -48,6 +47,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h3 id="KBD_MODEL_LABEL">Keyboard</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div id="GENKBD" class="modal-body"></div>
         </div>
@@ -59,9 +59,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 id="DIALOG_TITLE" class="modal-title"></h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div id="DIALOG_BODY"class="modal-body"></div>
           <div class="modal-footer">
@@ -79,7 +77,7 @@
             <form class="d-flex" allow="microphone;" method="GET" action="javascript:load_search_data();" role="search">
               <div class="input-group">
                 <button id="SEARCH_INFO" class="btn" type="submit"><i class="bi bi-search ICON_FONT" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="{{STP}}"></i></button>
-                <input class="form-control me-2" id="SEARCH_WORD" results=5 autosave=5 autofocus name="word" type="text" placeholder="{{S}}" aria-label="Search">
+                <input id="SEARCH_WORD" class="form-control me-2" results=5 autosave=5 autofocus name="word" type="text" placeholder="{{S}}" aria-label="Search">
                 <button class="btn" onclick="speech_start(event)"><i id="MIC_IMAGE" class="bi bi-mic-mute ICON_FONT" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{MTP}}</em>"></i></button>
                 <button class="btn" onclick="load_keyboard(event)"><i class="bi bi-keyboard ICON_FONT" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{KTP}}</em>"></i></button>
               </div>
@@ -131,7 +129,7 @@
         <div id="ALPHABET_DATA" class="col" data-bs-spy="scroll" data-bs-target="#ALPHABET_LIST" data-bs-offset="0" tabindex="0">
          {{#alphabet}}
           <div id="LETTER_{{LL}}">
-            <div class="letter-heading text-center">{{LU}}</div>
+            <div class="ALPHABET_HEADER text-center">{{LU}}</div>
             <ul class="OL_LIST">
               {{#items}}
               <li>
@@ -167,33 +165,33 @@
     <script type="text/html" id="page-info-template">
       <div class="col-7">
         {{#poster}}
-            <center>
-              <img src="{{P}}" class="img-thumbnail POSTER" loading="lazy" />
-            </center>
+        <center>
+          <img src="{{P}}" class="img-thumbnail POSTER" loading="lazy" />
+        </center>
         {{/poster}}
         <table border="0" cellpadding="4" class="table table-bordered table-hover table-condensed" >
-            <tbody>
-               {{#info}}
-                <tr><td><em>{{N}}</em></td><td>{{{V}}}</td></tr>
-               {{/info}}
-            </tbody>
+          <tbody>
+           {{#info}}
+            <tr><td><em>{{N}}</em></td><td>{{{V}}}</td></tr>
+           {{/info}}
+          </tbody>
         </table>
         {{#keyboard}}
-            <div class="piano">
-               {{#keys}}
-                <div id="note{{I}}" class="key {{C}}"><p style="{{S}}">{{{N}}}</p></div>
-               {{/keys}}
-              <audio id="NOTE_PLAY"></audio>
-            </div>
+          <div class="PIANO">
+            {{#keys}}
+            <div id="note{{I}}" class="key {{C}}"><p style="{{S}}">{{{N}}}</p></div>
+            {{/keys}}
+            <audio id="NOTE_PLAY"></audio>
+          </div>
         {{/keyboard}}
       </div>
       <div class="col-5">
         <table border="0" cellpadding="4" class="table table-bordered table-hover table-condensed" >
-            <tbody>
+          <tbody>
             {{#stats}}
-                <tr><td><em>{{N}}</em></td><td>{{C}}</td></tr>
+            <tr><td><em>{{N}}</em></td><td>{{C}}</td></tr>
             {{/stats}}
-            </tbody>
+          </tbody>
         </table>
       </div>
     </script>
@@ -228,7 +226,7 @@
                  <tr>
                      {{#items}}
                      <td>
-                         <select class="form-select" id="COL_{{I}}">
+                         <select id="COL_{{I}}" class="form-select">
                              {{#col}}
                              <option style="font-size: 12px" value='{{T}}:{{H}}:{{N}}'>{{C}} : {{N}}</option>
                              {{/col}}
@@ -245,7 +243,7 @@
         {{#videos}}
         <div class="card">
             <div class="card-header ">
-                <h4 class="SONG_HEADER">
+                <h4 class="CONTENT_HEADER">
                     <i class="bi bi-headphones ICON_FONT"></i>&nbsp; Videos:
                 </h4>
             </div>
@@ -286,7 +284,7 @@
         {{#lyricstext}}
         <div class="card">
             <div class="card-header ">
-                <h4 class="SONG_HEADER">
+                <h4 class="CONTENT_HEADER">
                     <span>
                         <i class="bi bi-pencil ICON_FONT"></i>&nbsp; {{L}}:
                     </span>
@@ -312,7 +310,7 @@
         {{#lyricsref}}
         <div class="card">
             <div class="card-header ">
-                <h4 class="SONG_HEADER">
+                <h4 class="CONTENT_HEADER">
                     <i class="bi bi-book ICON_FONT"></i> &nbsp; {{R}}
                 </h4>
             </div>
@@ -335,7 +333,7 @@
           <i class="bi bi-card-list ICON_FONT"></i>
         </div>
         <div class="col-auto">
-          <select class="form-select" id="JUKEBOX_DATA" onchange="create_jukebox(this)">
+          <select id="JUKEBOX_DATA" class="form-select" onchange="create_jukebox(this)">
             <option hidden ><i>Playlist Filter</i></option>
             {{#jukebox}}
             <option style="font-size: 12px" {{N}}>{{N}}</option>

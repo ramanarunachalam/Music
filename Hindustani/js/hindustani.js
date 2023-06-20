@@ -184,7 +184,7 @@ function on_storage_event(storageEvent) {
 }
 
 function load_menu_data(lang) {
-    const item_list = CATEGORY_DICT['categories']
+    const item_list = CATEGORY_DICT['categories'];
     const map_info_data = get_map_data('MAP_INFO_DICT');
     const map_dict = map_info_data[lang];
     for (const obj of item_list) {
@@ -207,7 +207,7 @@ function load_menu_data(lang) {
     const kbd_tooltip = 'Language Keyboard';
     const menu_dict = { 'menus' : { 'LANGUAGE' : window.GOT_LANGUAGE, 'languages' : lang_list,
                                     'S' : search, 'APP' : 'Android App', 'P' : playlist,
-                                    'B' : 'Brightness', 'BI' : 'brightness-low',
+                                    'B' : 'Brightness', 'BI' : 'brightness-high-fill',
                                     'STP' : search_tooltip, 'MTP' : mic_tooltip, 'KTP' : kbd_tooltip,
                                     'categories' : CATEGORY_DICT['categories'] }
                       };
@@ -1288,7 +1288,8 @@ function collection_init(collection, default_song) {
     window.collection_name = collection;
     window.default_song = default_song;
 
-    window.COLOR_SCHEME = 'light';
+    const elements = document.getElementsByTagName('html');
+    window.COLOR_SCHEME = elements[0].getAttribute('data-bs-theme');
     window.RENDER_LANGUAGE = lang;
     window.GOT_LANGUAGE = lang;
     window.history_data = undefined;

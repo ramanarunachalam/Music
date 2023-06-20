@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 
-<html lang="en" data-bs-theme="light">
+<html lang="en" data-bs-theme="dark">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Hindustani Youtube Collection is a collection of 1,24,000+ youtube videos, comprising 860+ Ragas, 530+ artists, and 30+ types. The youtube videos are mined, and categorized based on Raga, Artist, Composer, Song, and Type. The site is viewable, searchable, and supports a keyboard for typing in English, Hindi, Marathi, Kannada, Bengali, Gujarati, Punjabi, Tamil, Telugu, Malayalam, Assamese, and Odia."/>
+<meta name="description" content="Hindustani Youtube Collection is a collection of 1,25,000+ youtube videos, comprising 860+ Ragas, 530+ artists, and 30+ types. The youtube videos are mined, and categorized based on Raga, Artist, Composer, Song, and Type. The site is viewable, searchable, and supports a keyboard for typing in English, Hindi, Marathi, Kannada, Bengali, Gujarati, Punjabi, Tamil, Telugu, Malayalam, Assamese, and Odia."/>
 <meta name="keywords" content="Hindustani Classical Music, North Indian Classical Music, English, Hindi, Marathi, Kannada, Bengali, Gujarati, Punjabi, Tamil, Telugu, Malayalam, Assamese, Odia"/>
 <meta name="author" content="Raman Arunachalam"/>
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
@@ -14,37 +14,30 @@
 <title>Hindustani Youtube Collection</title>
 </head>
 <body>
-    <header id="MENU_DATA" class="navbar navbar-expand sticky-top bg-body-tertiary nav-fill">
-    </header>
+    <header id="MENU_DATA" class="navbar navbar-expand sticky-top bg-body-tertiary nav-fill"></header>
     <div class="container-fluid">
       <div class="d-flex flex-row">
-        <div class="sticky-top d-flex flex-column col-4" id="LIST">
-          <div class="p-2" id="PLAYER">  
-              <iframe id="FRAME_PLAYER" name="FRAME_PLAYER" frameBorder="0" allowTransparency="true"; background="transparent"; style="visibility:hidden;" onload="this.style.visibility = 'visible';" allow="autoplay" loading="lazy" scrolling="no"; ></iframe>
+        <div id="LIST" class="sticky-top d-flex flex-column col-4">
+          <div id="PLAYER" class="p-2">
+            <iframe id="FRAME_PLAYER" name="FRAME_PLAYER" frameBorder="0" allowTransparency="true"; background="transparent"; style="visibility:hidden;" onload="this.style.visibility = 'visible';" allow="autoplay" loading="lazy" scrolling="no"; ></iframe>
           </div>
-          <div class="p-2" id="MENU">
-          </div>
+          <div id="MENU" class="p-2"></div>
         </div>
-        <div class="col-8" id="CONTENT">
-            <div class="card" id="PAGE_HEADER">
-                <div class="card-header ">
-                    <h3 class="SONG_HEADER">
-                        <span id="PAGE_TITLE">
-                        </span>
-                    </h3>
-                </div>
-                <div class="card-body">
-                    <div class="row SONG_TABLE" id="PAGE_INFO">
-                    </div>
-                </div>
+        <div id="CONTENT" class="col-8">
+          <div id="PAGE_HEADER" class="card">
+            <div class="card-header ">
+              <h3 class="CONTENT_HEADER">
+                <span id="PAGE_TITLE"></span>
+              </h3>
             </div>
-            <hr />
-            <div id="PAGE_VIDEOS">
+            <div class="card-body">
+              <div id="PAGE_INFO" class="row"></div>
             </div>
-            <div id="PAGE_LYRICS">
-            </div>
-            <div id="PAGE_REFS">
-            </div>
+          </div>
+          <hr />
+          <div id="PAGE_VIDEOS"></div>
+          <div id="PAGE_LYRICS"></div>
+          <div id="PAGE_REFS"></div>
         </div>
       </div>
     </div>
@@ -54,9 +47,9 @@
         <div class="modal-content">
           <div class="modal-header">
             <h3 id="KBD_MODEL_LABEL">Keyboard</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div id="GENKBD" class="modal-body">
-          </div>
+          <div id="GENKBD" class="modal-body"></div>
         </div>
       </div>
     </div>
@@ -66,7 +59,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 id="DIALOG_TITLE" class="modal-title"></h5>
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div id="DIALOG_BODY"class="modal-body"></div>
           <div class="modal-footer">
@@ -82,45 +75,45 @@
           &nbsp; &nbsp;
           <li class="nav-item">
             <form class="d-flex" allow="microphone;" method="GET" action="javascript:load_search_data();" role="search">
-                <div class="input-group">
-                    <button id="SEARCH_INFO" class="button" type="submit" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="{{STP}}"><i class="bi bi-search ICON_FONT"></i></button>
-                    <input class="form-control me-2" id="SEARCH_WORD" results=5 autosave=5 autofocus name="word" type="text" placeholder="{{S}}" aria-label="Search">
-                    <button class="button" onclick="speech_start(event)"><i id="MIC_IMAGE" class="bi bi-mic-mute ICON_FONT" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{MTP}}</em>"></i></button>
-                    <button class="button" onclick="load_keyboard(event)"><i class="bi bi-keyboard ICON_FONT" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{KTP}}</em>"></i></button>
-                </div>
+              <div class="input-group">
+                <button id="SEARCH_INFO" class="btn" type="submit"><i class="bi bi-search ICON_FONT" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="{{STP}}"></i></button>
+                <input id="SEARCH_WORD" class="form-control me-2" results=5 autosave=5 autofocus name="word" type="text" placeholder="{{S}}" aria-label="Search">
+                <button class="btn" onclick="speech_start(event)"><i id="MIC_IMAGE" class="bi bi-mic-mute ICON_FONT" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{MTP}}</em>"></i></button>
+                <button class="btn" onclick="load_keyboard(event)"><i class="bi bi-keyboard ICON_FONT" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{KTP}}</em>"></i></button>
+              </div>
             </form>
           </li>
         </ul>
         <ul class="navbar-nav col-8">
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{APP}}</em>" href='https://play.google.com/store/apps/details?id=com.indic.carnatic' target="_blank" >
-                <span class="button"><i id="APP_ICON" class="bi bi-android2 NAV_ICON"></i></span>
+              <i id="APP_ICON" class="bi bi-android2 ICON_FONT"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{P}}</em>" href='javascript:handle_playlist_command("show", "");'>
-                <span class="button"><i class="bi bi-card-list NAV_ICON"></i></span>
+              <i class="bi bi-card-list ICON_FONT"></i>
             </a>
           </li>
           {{#categories}}
           <li class="nav-item">
               <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{{N}}}</em>" onclick="javascript:load_nav_data('{{C}}', this);" >
-                  <span class="button"><i class="bi bi-{{I}} NAV_ICON"></i></span>
+                <i class="bi bi-{{I}} ICON_FONT"></i>
               </a>
           </li>
           {{/categories}}
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{B}}</em>" href='javascript:toggle_brightness();'>
-                <span class="button"><i id="BRIGHTNESS" class="bi bi-{{BI}} NAV_ICON"></i></span>
+              <i id="BRIGHTNESS" class="bi bi-{{BI}} ICON_FONT"></i>
             </a>
           </li>
           <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false">{{LANGUAGE}}</a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                {{#languages}}
-                <li><a class="dropdown-item" href="javascript:set_language('{{N}}', '{{O}}');">{{N}}</a></li>
-                {{/languages}}
-              </ul>
+            <a class="nav-link dropdown-toggle ICON_FONT" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false">{{LANGUAGE}}</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              {{#languages}}
+              <li><a class="dropdown-item" href="javascript:set_language('{{N}}', '{{O}}');">{{N}}</a></li>
+              {{/languages}}
+            </ul>
           </li>
         </ul>
       {{/menus}}
@@ -136,7 +129,7 @@
         <div id="ALPHABET_DATA" class="col" data-bs-spy="scroll" data-bs-target="#ALPHABET_LIST" data-bs-offset="0" tabindex="0">
          {{#alphabet}}
           <div id="LETTER_{{LL}}">
-            <div class="letter-heading text-center">{{LU}}</div>
+            <div class="ALPHABET_HEADER text-center">{{LU}}</div>
             <ul class="OL_LIST">
               {{#items}}
               <li>
@@ -233,7 +226,7 @@
                  <tr>
                      {{#items}}
                      <td>
-                         <select class="form-select" id="COL_{{I}}">
+                         <select id="COL_{{I}}" class="form-select">
                              {{#col}}
                              <option style="font-size: 12px" value='{{T}}:{{H}}:{{N}}'>{{C}} : {{N}}</option>
                              {{/col}}
@@ -250,7 +243,7 @@
         {{#videos}}
         <div class="card">
             <div class="card-header ">
-                <h4 class="SONG_HEADER">
+                <h4 class="CONTENT_HEADER">
                     <i class="bi bi-headphones ICON_FONT"></i>&nbsp; Videos:
                 </h4>
             </div>
@@ -291,7 +284,7 @@
         {{#lyricstext}}
         <div class="card">
             <div class="card-header ">
-                <h4 class="SONG_HEADER">
+                <h4 class="CONTENT_HEADER">
                     <span>
                         <i class="bi bi-pencil ICON_FONT"></i>&nbsp; {{L}}:
                     </span>
@@ -317,7 +310,7 @@
         {{#lyricsref}}
         <div class="card">
             <div class="card-header ">
-                <h4 class="SONG_HEADER">
+                <h4 class="CONTENT_HEADER">
                     <i class="bi bi-book ICON_FONT"></i> &nbsp; {{R}}
                 </h4>
             </div>
@@ -340,7 +333,7 @@
           <i class="bi bi-card-list ICON_FONT"></i>
         </div>
         <div class="col-auto">
-          <select class="form-select" id="JUKEBOX_DATA" onchange="create_jukebox(this)">
+          <select id="JUKEBOX_DATA" class="form-select" onchange="create_jukebox(this)">
             <option hidden ><i>Playlist Filter</i></option>
             {{#jukebox}}
             <option style="font-size: 12px" {{N}}>{{N}}</option>

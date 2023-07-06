@@ -420,12 +420,12 @@ function delete_row(row) {
     document.getElementById('PLAYLIST_TABLE').deleteRow(row_id);
 }
 
-function create_jukebox(obj) {
-    setTimeout(function() { create_jukebox_modal(obj); }, 0);
+function create_jukebox(value) {
+    setTimeout(function() { create_jukebox_modal(value); }, 0);
 }
 
-async function create_jukebox_modal(obj) {
-    const option = obj.value.toLowerCase();
+async function create_jukebox_modal(value) {
+    const option = value.toLowerCase();
     const check_id = window.NAV_CATEGORY === window.CONTENT_CATGEGORY;
     get_bs_modal('DIALOG_BOX').hide();
     const JUKEBOX_TOTAL = 100;
@@ -534,8 +534,11 @@ function show_playlist() {
         title = map_dict[title];
         header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : map_dict['Song'], 'RN' : map_dict['Raga'] };
     }
+    title = '';
     const title_template = plain_get_html_text('modal-playlist-title-template');
-    const JUKEBOX_LIST = [ { 'N' : 'Popularity' } , { 'N' : 'Views' } , { 'N' : 'Artist' } , { 'N' : 'Composer' } , { 'N' : 'Raga' } , { 'N' : 'Song' }, { 'N' : 'Type' } ];
+    const JUKEBOX_LIST = [ { 'N' : 'Popularity' }, { 'N' : 'Views' }, { 'N' : 'Artist' }, { 'N' : 'Composer' },
+                           { 'N' : 'Raga' }, { 'N' : 'Song' }, { 'N' : 'Type' }
+                         ];
     const template_html = Mustache.render(title_template, { 'jukebox' : JUKEBOX_LIST });
     title = '<div class="row"><div class="col">' + title + '</div>' + template_html + ' </div>';
     const header_list = [ header_dict ];

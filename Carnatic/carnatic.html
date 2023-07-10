@@ -47,7 +47,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h3 id="KBD_MODEL_LABEL" class="TEXT_COLOR">
-              <i class="bi bi-keyboard ICON_FONT TEXT_COLOR"></i> Keyboard
+              <i class="bi bi-keyboard ICON_STYLE"></i> Keyboard
             </h3>
             <button type="button" class="btn-close TEXT_COLOR" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -78,10 +78,10 @@
           <li class="nav-item">
             <form class="d-flex" allow="microphone;" method="GET" action="javascript:load_search_data();" role="search">
               <div class="input-group">
-                <button id="SEARCH_INFO" class="btn" type="submit"><i class="bi bi-search ICON_FONT TEXT_COLOR" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="{{STP}}"></i></button>
+                <button id="SEARCH_INFO" class="btn" type="submit"><i class="bi bi-search NAV_STYLE" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="{{STP}}"></i></button>
                 <input id="SEARCH_WORD" class="form-control me-2" results=5 autosave=5 autofocus autocomplete="off" name="word" type="text" placeholder="{{S}}" aria-label="Search">
-                <button class="btn" onclick="speech_start(event)"><i id="MIC_IMAGE" class="bi bi-mic-mute ICON_FONT TEXT_COLOR" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{MTP}}</em>"></i></button>
-                <button class="btn" onclick="load_keyboard(event)"><i class="bi bi-keyboard ICON_FONT TEXT_COLOR" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{KTP}}</em>"></i></button>
+                <button class="btn" onclick="speech_start(event)"><i id="MIC_IMAGE" class="bi bi-mic-mute NAV_STYLE" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{MTP}}</em>"></i></button>
+                <button class="btn" onclick="load_keyboard(event)"><i class="bi bi-keyboard NAV_STYLE" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{KTP}}</em>"></i></button>
               </div>
             </form>
           </li>
@@ -89,28 +89,28 @@
         <ul class="navbar-nav col-8">
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{APP}}</em>" href='https://play.google.com/store/apps/details?id=com.indic.carnatic' target="_blank" >
-              <i id="APP_ICON" class="bi bi-android2 ICON_FONT TEXT_COLOR"></i>
+              <i id="APP_ICON" class="bi bi-android2 NAV_STYLE"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{P}}</em>" href='javascript:handle_playlist_command("show", "");'>
-              <i class="bi bi-card-list ICON_FONT TEXT_COLOR"></i>
+              <i class="bi bi-card-list NAV_STYLE"></i>
             </a>
           </li>
           {{#categories}}
           <li class="nav-item">
               <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{{N}}}</em>" onclick="javascript:load_nav_data('{{C}}', this);" >
-                <i class="bi bi-{{I}} ICON_FONT TEXT_COLOR"></i>
+                <i class="bi bi-{{I}} NAV_STYLE"></i>
               </a>
           </li>
           {{/categories}}
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<em>{{B}}</em>" href='javascript:toggle_brightness();'>
-              <i id="BRIGHTNESS" class="bi bi-{{BI}} ICON_FONT TEXT_COLOR"></i>
+              <i id="BRIGHTNESS" class="bi bi-{{BI}} NAV_STYLE"></i>
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle ICON_FONT TEXT_COLOR" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false">{{LANGUAGE}}</a>
+            <a class="nav-link dropdown-toggle NAV_STYLE" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false">{{LANGUAGE}}</a>
             <ul class="dropdown-menu dropdown-menu-end">
               {{#languages}}
               <li><a class="dropdown-item TEXT_COLOR" href="javascript:set_language('{{N}}', '{{O}}');">{{N}}</a></li>
@@ -121,7 +121,7 @@
       {{/menus}}
     </script>
 
-    <script type="text/html" id="nav-ul-template">
+    <script type="text/html" id="nav-data-template">
       <div class="row g-0">
         <div id="ALPHABET_LIST" class="col-auto list-group list-group-flush d-flex">
          {{#alphabet}}
@@ -136,7 +136,13 @@
               {{#items}}
               <li>
                 <a class="TEXT_COLOR" onclick="load_content_data('{{T}}', '{{H}}', this);">
-                  <i class="bi bi-{{I}} ICON_FONT TEXT_COLOR"></i>&nbsp; {{N}}
+                 {{^P}}
+                 <i class="bi bi-{{I}} POSTER_STYLE"></i>
+                 {{/P}}
+                 {{#P}}
+                 <img class="POSTER_STYLE" src="{{P}}">
+                 {{/P}}
+                 &nbsp; {{N}}
                 </a>
               </li>
               {{/items}}
@@ -149,7 +155,7 @@
 
     <script type="text/html" id="page-title-template">
         {{#title}}
-          <i class="bi bi-{{I}} ICON_FONT TEXT_COLOR"></i>&nbsp; {{N}}
+          <i class="bi bi-{{I}} ICON_STYLE"></i>&nbsp; {{N}}
         {{/title}}
     </script>
 
@@ -210,12 +216,20 @@
       </div>
     </script>
 
+    <script type="text/html" id="page-note-template">
+        {{#note}}
+        <a href="javascript:play_notes('{{note}}');" >
+          &nbsp;&nbsp;<i class="bi bi-soundwave ICON_STYLE"></i>
+        </a>
+        {{/note}}
+    </script>
+
     <script type="text/html" id="page-search-template">
         <ul class="list-group">
           {{#items}}
           <li class="list-group-item">
-            <a href="javascript:load_content_data('{{T}}', '{{H}}');">
-              <i class="bi bi-{{I}} ICON_FONT TEXT_COLOR"></i>&nbsp; {{C}}</i> : {{N}}
+            <a class="TEXT_COLOR" href="javascript:load_content_data('{{T}}', '{{H}}');">
+              <i class="bi bi-{{I}} ICON_STYLE"></i>&nbsp; {{C}}</i> : {{N}}
             </a>
           </li>
           {{/items}}
@@ -246,7 +260,7 @@
         <div class="card">
           <div class="card-header">
             <h4 class="CONTENT_HEADER">
-              <i class="bi bi-headphones ICON_FONT TEXT_COLOR"></i>&nbsp; Videos:
+              <i class="bi bi-headphones ICON_STYLE"></i>&nbsp; {{VideoName}}:
             </h4>
           </div>
           <div class="card-body">
@@ -254,23 +268,24 @@
               <ol start="1">
                 <li>
                   <span>
-                    <i class="bi bi-folder ICON_FONT TEXT_COLOR"></i>
-                    <a href="javascript:load_content_data('{{HT}}', '{{HD}}');">{{HN}}</a> <font class="NUM_COLOR">({{HC}})</font>
+                    <i class="bi bi-folder ICON_STYLE"></i>
+                    <a class="TEXT_COLOR" href="javascript:load_content_data('{{HT}}', '{{HD}}');"><b>{{HN}}</b></a> <font class="NUM_COLOR">({{HC}})</font>
                   </span>
                   </li>
                   <ul class="UL_LIST">
                     {{#songs}}
                     <li>
+                      <img class="IMAGE_STYLE" src="https://i.ytimg.com/vi/{{Y}}.jpg">&nbsp;&nbsp;
                       <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{I}}:{{PS}}:{{PR}}');">
-                        <i class="bi bi-play ICON_FONT TEXT_COLOR"></i>
+                        <i class="bi bi-play ICON_STYLE"></i>
                       </a>
                       <a href="javascript:void(0);" onclick="get_youtube_video_info('{{I}}')">{{D}}</a> -
                       {{#FD}}<a href="javascript:load_content_data('{{FT}}', '{{FD}}');">{{FN}}</a> - {{/FD}}
                       {{#SD}}<a href="javascript:load_content_data('{{ST}}', '{{SD}}');">{{SN}}</a> - {{/SD}}
                       {{#TD}}<a href="javascript:load_content_data('{{TT}}', '{{TD}}');">{{TN}}</a> - {{/TD}}
-                      {{V}} Views &nbsp;
+                      {{V}} {{ViewName}} &nbsp;
                       <a href="https://www.youtube.com/watch?v={{I}}" target="_blank">
-                        <i class="bi bi-youtube ICON_FONT TEXT_COLOR"></i>
+                        <i class="bi bi-youtube ICON_STYLE"></i>
                       </a>
                     </li>
                     {{/songs}}
@@ -288,7 +303,7 @@
           <div class="card-header">
             <h4 class="CONTENT_HEADER">
               <span>
-                <i class="bi bi-pencil ICON_FONT TEXT_COLOR"></i>&nbsp; {{L}}:
+                <i class="bi bi-pencil ICON_STYLE"></i>&nbsp; {{L}}:
               </span>
             </h4>
           </div>
@@ -313,14 +328,14 @@
         <div class="card">
           <div class="card-header">
             <h4 class="CONTENT_HEADER">
-              <i class="bi bi-book ICON_FONT TEXT_COLOR"></i> &nbsp; {{R}}
+              <i class="bi bi-book ICON_STYLE"></i> &nbsp; {{R}}
             </h4>
           </div>
           <div class="card-body">
             <div class="list-group">
               {{#links}}
               <a class="list-group-item REF_COLOR" href="{{L}}" target="_blank">
-                <i class="bi bi-link ICON_FONT TEXT_COLOR"></i> &nbsp; {{N}}
+                <i class="bi bi-link ICON_STYLE"></i> &nbsp; {{N}}
               </a>
               {{/links}}
             </div>
@@ -332,11 +347,11 @@
 
     <script type="text/html" id="modal-playlist-title-template">
         <div class="col-auto">
-          <i class="bi bi-card-list ICON_FONT TEXT_COLOR"></i>
+          <i class="bi bi-card-list ICON_STYLE"></i>
         </div>
         <div class="col-auto">
           <div class="dropdown">
-            <a class="dropdown-toggle ICON_FONT TEXT_COLOR" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false">Playlist Filter</a>
+            <a class="dropdown-toggle ICON_STYLE" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false">Playlist Filter</a>
             <ul class="dropdown-menu dropdown-menu-end">
               {{#jukebox}}
               <li><a class="dropdown-item TEXT_COLOR" href="javascript:create_jukebox('{{N}}');">{{N}}</a></li>
@@ -355,7 +370,7 @@
           {{#videos}}
           <tr>
             <td>{{N}}</td><td>{{I}}</td><td>{{SN}}</td><td>{{RN}}</td>
-            <td><a href="#" onclick="delete_row(this);"><i class="bi bi-x ICON_FONT TEXT_COLOR"></i></a></td>
+            <td><a href="#" onclick="delete_row(this);"><i class="bi bi-x ICON_STYLE"></i></a></td>
           </tr>
           {{/videos}}
         </table>

@@ -1,7 +1,6 @@
 :root, [data-bs-theme=light] {
     --indic-body-bg: lightgray;
     --indic-player-bg: silver;
-    --indic-content-header: #222;
     --indic-card-header-bg: silver;
     --indic-card-body-bg: lightgray;
     --indic-td: black;
@@ -9,40 +8,45 @@
     --indic-ul-list: black;
     --indic-ol-list: black;
     --indic-ol-bg: lightgray;
-    --indic-alphabet-list-bg: silver;
+    --indic-alphabet-list-bg: gray;
+    --indic-alphabet-list-active-bg: lightgray;
+    --indic-alphabet-list-hover-bg: lightgray;
+    --indic-alphabet-header-bg: gray;
     --indic-alphabet-data-bg: white;
-    --indic-alphabet-data-li-hover-bg: silver;
-    --indic-alphabet-data-li-active-bg: silver;
+    --indic-alphabet-data-hover-bg: silver;
+    --indic-alphabet-data-active-bg: silver;
     --indic-alphabet-a: black;
     --indic-alphabet-border: lightgray;
     --indic-text-color: black;
     --indic-num-color: brown;
-    --indic-link-color: rgba(var(--bs-link-color-rgb));
+    --indic-link-color: darkgray;
     --indic-kbd-key: #000;
     --indic-kbd-bg: silver;
     --indic-kbd-hover-bg: lightgray;
 }
 
 [data-bs-theme=dark] {
-    --indic-body-bg: black;
+    --indic-body-bg: dimgray;
     --indic-player-bg: dimgray;
-    --indic-content-header: #222;
-    --indic-card-header-bg: dimgray;
-    --indic-card-body-bg: black;
+    --indic-card-header-bg: black;
+    --indic-card-body-bg: dimgray;
     --indic-td: white;
     --indic-td-bg: #606060;
     --indic-ul-list: white;
     --indic-ol-list: white;
-    --indic-ol-bg: black;
-    --indic-alphabet-list-bg: dimgray;
-    --indic-alphabet-data-bg: black;
-    --indic-alphabet-data-li-hover-bg: silver;
-    --indic-alphabet-data-li-active-bg: dimgray;
-    --indic-alphabet-a: black;
+    --indic-ol-bg: dimgray;
+    --indic-alphabet-list-bg: black;
+    --indic-alphabet-list-active-bg: dimgray;
+    --indic-alphabet-list-hover-bg: dimgray;
+    --indic-alphabet-header-bg: black;
+    --indic-alphabet-data-bg: dimgray;
+    --indic-alphabet-data-hover-bg: silver;
+    --indic-alphabet-data-active-bg: gray;
+    --indic-alphabet-a: dimgray;
     --indic-alphabet-border: dimgray;
     --indic-text-color: white;
     --indic-num-color: tan;
-    --indic-link-color: rgba(var(--bs-link-color-rgb));
+    --indic-link-color: darkgray;
     --indic-kbd-key: #FFF;
     --indic-kbd-bg: dimgray;
     --indic-kbd-hover-bg: lightgray;
@@ -84,6 +88,10 @@ iframe#FRAME_PLAYER {
     height: 100%;
 }
 
+#MENU_DATA ul li i {
+    color: var(--indic-text-color);
+}
+
 #MENU_DATA ul li.active i {
     color: var(--indic-link-color);
 }
@@ -105,12 +113,12 @@ iframe#FRAME_PLAYER {
 
 #ALPHABET_LIST a.active {
     color: var(--indic-alphabet-a);
-    background-color: var(--indic-alphabet-list-bg);
+    background: var(--indic-alphabet-list-hover-bg);
 }
 
 #ALPHABET_LIST a:hover {
     border-color: var(--indic-alphabet-border);
-    background: var(--indic-alphabet-list-bg);
+    background: var(--indic-alphabet-list-hover-bg);
 }
 
 #ALPHABET_DATA {
@@ -126,7 +134,7 @@ iframe#FRAME_PLAYER {
 
 #ALPHABET_DATA ul li.active {
     color: var(--indic-link-color);
-    background-color: var(--indic-alphabet-data-li-active-bg);
+    background-color: var(--indic-alphabet-data-active-bg);
 }
 
 #ALPHABET_DATA ul li a {
@@ -137,12 +145,13 @@ iframe#FRAME_PLAYER {
 
 #ALPHABET_DATA ul li a:hover {
     border-color: var(--indic-alphabet-border);
-    background: var(--indic-alphabet-data-li-hover-bg);
+    background: var(--indic-alphabet-data-hover-bg);
 }
 
 .ALPHABET_HEADER {
     font-weight: bold;
     font-style: italic;
+    background-color: var(--indic-alphabet-header-bg);
 }
 
 .card-header {
@@ -172,8 +181,25 @@ iframe#FRAME_PLAYER {
     font-size: 2rem;
 }
 
-.ICON_FONT {
+.NAV_STYLE {
     font-size: 1.5rem;
+}
+
+.POSTER_STYLE {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 2.0rem;
+    color: var(--indic-text-color) !important;
+}
+
+.IMAGE_STYLE {
+    width: 64px !important;
+    height: 48px !important;
+}
+
+.ICON_STYLE {
+    font-size: 1.5rem;
+    color: var(--indic-text-color) !important;
 }
 
 .TEXT_COLOR {
@@ -242,20 +268,6 @@ td.keycol {
 
 td.keycol:hover {
     background-color:var(--indic-kbd-hover-bg)
-}
-
-@keyframes app-shake {
-     0%, 90% { transform: translate3d(-4px, 0, 0); background: lightgray; }
-    10%, 80% { transform: translate3d(4px, 0, 0); background: dimgray; }
-    20%, 70% { transform: translate3d(-4px, 0, 0); background: gray; }
-    30%, 60% { transform: translate3d(4px, 0, 0); background: slategray; }
-    40%, 50% { transform: translate3d(-4px, 0, 0); background: darkgray; }
-}
-
-#APP_ICON {
-    animation-name: app-shake;
-    animation-duration: 5s;
-    animation-iteration-count: 5;
 }
 
 .PIANO {

@@ -17,8 +17,9 @@ const CARNATIC_ICON_DICT = { 'song'     : 'music-note-beamed',
                              'raga'     : 'music-note-list',
                              'type'     : 'tag'
                            };
-const KEY_NAME_LIST = [ 'Melakartha', 'Thaat', 'God' ];
+const KEY_NAME_LIST   = [ 'Melakartha', 'Thaat', 'God' ];
 const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b' };
+const IMAGE_MAP       = { 'm' : 'maxresdefault', 'h' : 'hqdefault', 's' : 'sddefault' };
 
 
 function sleep(seconds){
@@ -28,6 +29,10 @@ function sleep(seconds){
 
 function capitalize_word(s) {
     return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+function get_yt_image(image) {
+    return `https://i.ytimg.com/vi/${image}.jpg`;
 }
 
 async function fetch_url(url) {
@@ -240,8 +245,9 @@ function get_swara_text(lang, note_list, value_list) {
     }
     swara_str = get_swara_transliterate(lang, swara_str);
     const note_str = value_list[1];
-    const image_str = `<a href="javascript:play_notes('${note_str}');" ><i class="bi bi-soundwave ICON_FONT"></i></a>`;
-    return swara_str + ' ' + image_str;
+    const note_template = plain_get_html_text('page-note-template');
+    const note_html = Mustache.render(note_template, { 'note' : note_str });
+    return swara_str + ' ' + note_html;
 }
 
 function check_for_english_text(lang, category, h_id, h_text) {
@@ -419,12 +425,12 @@ function delete_row(row) {
     document.getElementById('PLAYLIST_TABLE').deleteRow(row_id);
 }
 
-function create_jukebox(obj) {
-    setTimeout(function() { create_jukebox_modal(obj); }, 0);
+function create_jukebox(value) {
+    setTimeout(function() { create_jukebox_modal(value); }, 0);
 }
 
-async function create_jukebox_modal(obj) {
-    const option = obj.value.toLowerCase();
+async function create_jukebox_modal(value) {
+    const option = value.toLowerCase();
     const check_id = window.NAV_CATEGORY === window.CONTENT_CATGEGORY;
     get_bs_modal('DIALOG_BOX').hide();
     const JUKEBOX_TOTAL = 100;
@@ -533,8 +539,11 @@ function show_playlist() {
         title = map_dict[title];
         header_dict = { 'N' : 'No.', 'I' : 'ID', 'SN' : map_dict['Song'], 'RN' : map_dict['Raga'] };
     }
+    title = '';
     const title_template = plain_get_html_text('modal-playlist-title-template');
-    const JUKEBOX_LIST = [ { 'N' : 'Popularity' } , { 'N' : 'Views' } , { 'N' : 'Artist' } , { 'N' : 'Composer' } , { 'N' : 'Raga' } , { 'N' : 'Song' }, { 'N' : 'Type' } ];
+    const JUKEBOX_LIST = [ { 'N' : 'Popularity' }, { 'N' : 'Views' }, { 'N' : 'Artist' }, { 'N' : 'Composer' },
+                           { 'N' : 'Raga' }, { 'N' : 'Song' }, { 'N' : 'Type' }
+                         ];
     const template_html = Mustache.render(title_template, { 'jukebox' : JUKEBOX_LIST });
     title = '<div class="row"><div class="col">' + title + '</div>' + template_html + ' </div>';
     const header_list = [ header_dict ];
@@ -558,6 +567,8 @@ function render_nav_template(category, data) {
     const letter_list = data['alphabet'];
     const no_transliterate = lang === 'English' && ENGLISH_TYPE_LIST.includes(category);
     const id_data = window.ID_DATA[category];
+    const poster_data = window.ABOUT_DATA[category];
+    const need_poster = category === 'artist' || category === 'composer';
     for (const l_item of letter_list) {
         const item_list = l_item['items']
         for (const obj of item_list) {
@@ -573,9 +584,15 @@ function render_nav_template(category, data) {
             } else {
                 obj['N'] = (no_transliterate) ? h_text : get_transliterator_text(lang, f_text);
             }
+            if (need_poster) {
+                const image_name = poster_data[h_id]
+                if (image_name !== undefined) {
+                    obj['J'] = `Images/${image_name}.jpg`;
+                }
+            }
         }
     }
-    const ul_template = plain_get_html_text('nav-ul-template')
+    const ul_template = plain_get_html_text('nav-data-template')
     const template_html = Mustache.render(ul_template, data);
     plain_set_html_text('MENU', template_html);
     if (window.NAV_SCROLL_SP !== null && window.NAV_SCROLL_SP !== undefined) {
@@ -684,6 +701,8 @@ function translate_folder_id_to_data(category, id, data) {
                 if (category === 'song') song_ids = song['S'];
                 song['PS'] = song_ids;
                 song['PR'] = song['R'];
+                const imageId = song['I'].split('&')[0];
+                song['Y'] = `${imageId}/${IMAGE_MAP[song['J']]}`;
             }
         }
     }
@@ -703,8 +722,11 @@ function render_data_template(category, id, data, context_list) {
     if (lang !== 'English') {
         const map_info_data = get_map_data('MAP_INFO_DICT');
         const map_dict = map_info_data[lang];
-        ul_template = ul_template.replace('Videos', map_dict['Videos']);
-        ul_template = ul_template.replace('Views', map_dict['Views']);
+        data['VideoName'] = map_dict['Videos'];
+        data['ViewName'] = map_dict['Views'];
+    } else {
+        data['VideoName'] = 'Videos';
+        data['ViewName'] = 'Views';
     }
 
     translate_folder_id_to_data(category, id, data);
@@ -846,7 +868,17 @@ function get_search_results(search_word, search_options, item_list, id_list, bas
         } else {
             title = get_transliterator_text(lang, title);
         }
-        const item = { 'T' : category, 'C' : n_category, 'I' : CARNATIC_ICON_DICT[category], 'H' : href, 'N' : title, 'P' : pop };
+        const item = { 'T' : category, 'C' : n_category, 'I' : CARNATIC_ICON_DICT[category],
+                       'H' : href, 'N' : title, 'P' : pop
+                     };
+        const need_poster = category === 'artist' || category === 'composer';
+        if (need_poster) {
+            const poster_data = window.ABOUT_DATA[category];
+            const image_name = poster_data[result_item.href]
+            if (image_name !== undefined) {
+                item['J'] = `Images/${image_name}.jpg`;
+            }
+        }
         item_list.push(item);
         id_list.add(result_item.id);
     }
@@ -1100,11 +1132,12 @@ function load_content_data(category, name, element, new_context_list) {
     fetch_url_data('CONTENT DATA', url, [ category, name, new_context_list ]);
 }
 
-function load_init_data(id_data, hk_data) {
+function load_init_data(id_data, about_data, hk_data) {
     if (window.innerWidth < 992) {
         show_modal_dialog('Best Viewed in Landscape Mode', 'Use Landscape Mode');
     }
     window.ID_DATA = id_data;
+    window.ABOUT_DATA = about_data;
     init_lang_maps(hk_data);
     load_nav_data('raga');
     if (window.default_song !== '') load_content_data('song', window.default_song);
@@ -1309,10 +1342,13 @@ function collection_init(collection, default_song) {
         }
     });
 
-    const url_list = [ fetch_url_data('ID DATA', 'id.json'), fetch_url_data('LANG DATA', 'hk_lang_map.json') ];
+    const url_list = [ fetch_url_data('ID DATA', 'id.json'),
+                       fetch_url_data('ABOUT DATA', 'about.json'),
+                       fetch_url_data('LANG DATA', 'hk_lang_map.json')
+                     ];
     Promise.all(url_list).then((values) => {
-        const [ id_data, hk_data ] = values;
-        load_init_data(id_data, hk_data);
+        const [ id_data, about_data, hk_data ] = values;
+        load_init_data(id_data, about_data, hk_data);
     });
 
     init_input_keyboard();

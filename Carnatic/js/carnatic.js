@@ -569,7 +569,7 @@ function render_nav_template(category, data) {
     const no_transliterate = lang === 'English' && ENGLISH_TYPE_LIST.includes(category);
     const id_data = window.ID_DATA[category];
     const poster_data = window.ABOUT_DATA[category];
-    const need_poster = category == 'artist' || category == 'composer';
+    const need_poster = category === 'artist' || category === 'composer';
     for (const l_item of letter_list) {
         const item_list = l_item['items']
         for (const obj of item_list) {
@@ -588,7 +588,7 @@ function render_nav_template(category, data) {
             if (need_poster) {
                 const image_name = poster_data[h_id]
                 if (image_name !== undefined) {
-                    obj['P'] = `Images/${image_name}.jpg`;
+                    obj['J'] = `Images/${image_name}.jpg`;
                 }
             }
         }
@@ -869,7 +869,17 @@ function get_search_results(search_word, search_options, item_list, id_list, bas
         } else {
             title = get_transliterator_text(lang, title);
         }
-        const item = { 'T' : category, 'C' : n_category, 'I' : CARNATIC_ICON_DICT[category], 'H' : href, 'N' : title, 'P' : pop };
+        const item = { 'T' : category, 'C' : n_category, 'I' : CARNATIC_ICON_DICT[category],
+                       'H' : href, 'N' : title, 'P' : pop
+                     };
+        const need_poster = category === 'artist' || category === 'composer';
+        if (need_poster) {
+            const poster_data = window.ABOUT_DATA[category];
+            const image_name = poster_data[result_item.href]
+            if (image_name !== undefined) {
+                item['J'] = `Images/${image_name}.jpg`;
+            }
+        }
         item_list.push(item);
         id_list.add(result_item.id);
     }

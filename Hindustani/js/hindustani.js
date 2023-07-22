@@ -1141,7 +1141,6 @@ function load_init_data(id_data, about_data, hk_data) {
     init_lang_maps(hk_data);
     load_nav_data('raga');
     if (window.default_song !== '') load_content_data('song', window.default_song);
-    load_nav_data('about');
     search_init();
     // fetch_url_data('CONCERT DATA', 'concert.json');
 }

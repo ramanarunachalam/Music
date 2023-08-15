@@ -19,8 +19,10 @@ const CARNATIC_ICON_DICT = { 'song'     : 'music-note-beamed',
                            };
 const KEY_NAME_LIST   = [ 'Melakartha', 'Thaat', 'God' ];
 const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b' };
-const IMAGE_MAP       = { 'm' : 'maxresdefault', 'h' : 'hqdefault', 's' : 'sddefault' };
-
+const IMAGE_MAP       = { 'm' : 'maxresdefault.jpg', 'h' : 'hqdefault.jpg', 's' : 'sddefault.jpg',
+                          'm2' : 'maxres2.jpg', 'h2' : 'hq2.jpg', 's2' : 'sd2.jpg',
+                          'sw' : 'sddefault.webp', 'sl' : 'sddefault_live.jpg'
+                        };
 
 function sleep(seconds){
     const waitUntil = new Date().getTime() + seconds*1000;
@@ -702,7 +704,8 @@ function translate_folder_id_to_data(category, id, data) {
                 song['PS'] = song_ids;
                 song['PR'] = song['R'];
                 const imageId = song['I'].split('&')[0];
-                song['Y'] = `${imageId}/${IMAGE_MAP[song['J']]}`;
+                const path = IMAGE_MAP[song['J']] ?? 'maxdefault.jpg';
+                song['Y'] = `${imageId}/${path}`;
             }
         }
     }

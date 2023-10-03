@@ -27,42 +27,6 @@ function lists_to_map(l1, l2) {
     return d;
 }
 
-function get_freq_map(hkt_freq) {
-    const freq_key_list = hkt_freq['key'];
-    const freq_value_list = hkt_freq['value'];
-    const freq_list = [];
-    for (let i = 0; i < freq_value_list.length; i += 1) {
-        freq_list.push(freq_value_list[i]);
-    }
-    const l_map = lists_to_map(freq_key_list, freq_list);
-    return l_map;
-}
-
-function init_lang_maps(map_data) {
-    const hk_tamil_maps = map_data['hk_tamil_maps'];
-    const lang_maps = new Map();
-    const hk_tamil_list = hk_tamil_maps['hk_tamil'].split(/\s+/);
-    for (let lang in hk_tamil_maps) {
-       const lang_list = hk_tamil_maps[lang].split(/\s+/);
-       const l_map = lists_to_map(hk_tamil_list, lang_list);
-       lang_maps.set(lang, l_map);
-    }
-
-    const hk_maps = map_data['hk_eng_maps'];
-    const e_map = lists_to_map(hk_maps['eng_input'], hk_maps['eng_output']);
-    lang_maps.set('hk_eng', e_map);
-
-    const hkt_freq = map_data['frequency']
-    lang_maps.set('hk_tamil_freq', get_freq_map(hkt_freq['hk_tamil']));
-    lang_maps.set('hk_eng_freq', get_freq_map(hkt_freq['hk_eng']));
-
-    const hk_length = map_data['length'];
-    lang_maps.set('hk_tamil_length', hk_length['hk_tamil']);
-    lang_maps.set('hk_eng_length', hk_length['hk_eng']);
-
-    window.LANG_MAPS = lang_maps;
-}
-
 function set_regex(value_list, prefix) {
     const regex_list = [];
     for (let i = 0; i < value_list.length; i += 1) {
@@ -84,25 +48,30 @@ function apply_regex(regex_list, txt) {
      Transliteration
 */
 
+function transliterator_lang_maps(lang) {
+    const map_data = window.LANG_DATA['map'];
+    const [ hkt_keys, lang_keys ] = map_data['from_hk'];
+    const lang_map = lists_to_map(hkt_keys.split(' '), lang_keys.split(' '));
+    const [ freq_keys, freq_values ] = map_data['from_freq'];
+    const key_list = freq_keys.split(',');
+    const value_list = [];
+    for (v of freq_values.split(',')) {
+        value_list.push(+v);
+    }
+    const f_map = lists_to_map(key_list, value_list);
+    const max_len = map_data['from_length'];
+    window.LANG_MAPS.set(lang, [ lang_map, max_len, f_map ]);
+}
+
 function transliterator_lang_init(lang) {
     const out_lang = lang.toLowerCase();
     if (out_lang === 'tamil')  window.HKT_REGEX_OBJ_LIST = set_regex(HKT_REGEX_LIST, '');
     else  window.HKT_REGEX_OBJ_LIST = set_regex(ENG_REGEX_LIST, '');
     window.DOT_REGEX_OBJ_LIST = set_regex(DOT_REGEX_LIST, MAP_DOT_DICT[out_lang]);
-
     const lang_map_data = window.LANG_MAPS;
-    if (lang_map_data === undefined) return;
-    if (out_lang != 'english') {
-        window.LANG_TRANS_LIST = [ lang_map_data.get(out_lang),
-                                   lang_map_data.get('hk_tamil_length'),
-                                   lang_map_data.get('hk_tamil_freq')
-                                 ]
-    } else {
-        window.LANG_TRANS_LIST = [ lang_map_data.get('hk_eng'),
-                                   lang_map_data.get('hk_eng_length'),
-                                   lang_map_data.get('hk_eng_freq')
-                                 ]
-    }
+    if (!(lang in window.LANG_MAPS)) transliterator_lang_maps(lang);
+    window.LANG_TRANS_LIST = window.LANG_MAPS.get(lang);
+    transliterate_search_init();
 }
 
 function get_transliterator_parser_text(data) {
@@ -140,14 +109,17 @@ function get_transliterator_text(out_lang, data) {
     return result;
 }
 
-function transliterate_search_init(char_map) {
-    const key_list = [];
+function transliterate_search_init() {
+    const map_data = window.LANG_DATA['map'];
+    const [ lang_keys, hkt_keys ] = map_data['to_hk'];
+    const lang_list = lang_keys.split(' ');
+    const hkt_list = hkt_keys.split(' ');
     let max_len = 0;
-    for (let s in char_map) {
-        key_list.push(s);
+    for (let s of lang_list) {
         max_len = Math.max(max_len, s.length);
     }
-    const token_set = new Set(key_list);
+    const char_map = lists_to_map(lang_list, hkt_list); 
+    const token_set = new Set(lang_list);
     window.INDIC_CHAR_MAP = [ char_map, token_set, max_len ];
 }
 
@@ -170,18 +142,21 @@ function transliterate_search_text(word) {
             }
             i -= 1;
         }
-        if (p in char_map) {
-            p = char_map[p];
+        if (char_map.has(p)) {
+            p = char_map.get(p);
         }
         tokenlist.push(p);
         current += j;
     }
     let new_word = tokenlist.join('');
+    new_word = new_word.replace('.', '');
+    new_word = new_word.replace('_', '');
     if (word !== new_word) {
         new_word = new_word.replace(/_/g, '');
         new_word = new_word.replace(/G/g, 'n');
         new_word = new_word.replace(/J/g, 'n');
     }
+    // console.log('transliterate_search_text:', new_word);
     return new_word;
 }
 

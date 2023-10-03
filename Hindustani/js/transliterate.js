@@ -71,6 +71,7 @@ function transliterator_lang_init(lang) {
     const lang_map_data = window.LANG_MAPS;
     if (!(lang in window.LANG_MAPS)) transliterator_lang_maps(lang);
     window.LANG_TRANS_LIST = window.LANG_MAPS.get(lang);
+    transliterate_search_init();
 }
 
 function get_transliterator_parser_text(data) {
@@ -155,7 +156,7 @@ function transliterate_search_text(word) {
         new_word = new_word.replace(/G/g, 'n');
         new_word = new_word.replace(/J/g, 'n');
     }
-    console.log('transliterate_search_text:', new_word);
+    // console.log('transliterate_search_text:', new_word);
     return new_word;
 }
 

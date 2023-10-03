@@ -27,6 +27,12 @@ const CATEGORY_DICT = { 'categories' : [ { 'C' : 'raga',     'I' : 'music-note-l
                                        ]
                       };
 
+const START_NAV_CATEGORY = 'raga';
+const [ C_PLURAL, C_SINGLE ]   = [ 'songs', 'song' ];
+const [ CC_PLURAL, CC_SINGLE ] = [ 'Songs', 'Song' ];
+
+const LINK_ACTIVE_BUTTON = 2;
+
 const KEY_NAME_LIST   = [ 'Melakartha', 'Thaat', 'God' ];
 const MENU_ICON_DICT = {};
 
@@ -40,9 +46,6 @@ const IMAGE_MAP       = { 'm'  : 'maxresdefault.jpg',
                           'sw' : 'sddefault.webp',
                           'sl' : 'sddefault_live.jpg'
                         };
-
-const [ C_PLURAL, C_SINGLE ]   = [ 'songs', 'song' ];
-const [ CC_PLURAL, CC_SINGLE ] = [ 'Songs', 'Song' ];
 
 PLAYLIST_PENDING_MSG  = [ `${CC_SINGLE} added to Play List`, `Click Play List to Add/Delete ${CC_PLURAL}` ];
 VIEW_IN_LANDSCAPE_MSG = [ 'Best Viewed in Landscape Mode', 'Use Landscape Mode' ];
@@ -373,7 +376,7 @@ function info_transliteration(category, data_list) {
     }
 }
 
-function set_language(got_lang, name_lang) {
+async function set_language(got_lang, name_lang) {
     window.GOT_LANGUAGE = got_lang;
     const lang_map_dict = window.LANG_DATA['map']['language'];
     const lang = lang_map_dict[got_lang];
@@ -381,7 +384,7 @@ function set_language(got_lang, name_lang) {
     const history_data = window.history_data;
     // console.log(`SET LANG: ${lang} ${got_lang} ${history_data}`);
     const l_lang = lang.toLowerCase();
-    fetch_url_data('LANG DATA', `${l_lang}_map.json`);
+    await fetch_url_data('LANG DATA', `${l_lang}_map.json`);
     load_menu_data(lang, window.NAV_CATEGORY);
     if (history_data === undefined) {
         load_content_data(window.CONTENT_CATGEGORY, window.CONTENT_NAME);
@@ -564,12 +567,16 @@ function handle_playlist_command(cmd, arg) {
     return true;
 }
 
+function check_need_poster(category) {
+     return category === 'artist' || category === 'composer';
+}
+
 function render_nav_template(category, data) {
     const lang = window.RENDER_LANGUAGE;
     const no_transliterate = lang === 'English' && ENGLISH_TYPE_LIST.includes(category);
     const id_data = window.ID_DATA[category];
     const poster_data = window.ABOUT_DATA[category];
-    const need_poster = category === 'artist' || category === 'composer';
+    const need_poster = check_need_poster(category);
     const icon = MENU_ICON_DICT[category];
     const letter_dict = data['letters'][lang.toLowerCase()];
     // console.log(lang, category, letter_dict);
@@ -627,7 +634,7 @@ function load_nav_fetch_data(category, url_data) {
 
 function set_link_initial_active_state() {
     const a_list = plain_get_query_selector('#MENU_DATA li a');
-    const a_node = a_list[2].parentNode;
+    const a_node = a_list[LINK_ACTIVE_BUTTON].parentNode;
     window.ACTIVE_MENU = a_node;
     a_node.classList.add('active');
 }
@@ -865,7 +872,7 @@ function get_search_results(search_word, search_options, item_list, id_list, bas
         const item = { 'T' : category, 'C' : n_category, 'I' : MENU_ICON_DICT[category],
                        'H' : href, 'N' : title, 'P' : pop
                      };
-        const need_poster = category === 'artist' || category === 'composer';
+        const need_poster = check_need_poster(category);
         if (need_poster) {
             const poster_data = window.ABOUT_DATA[category];
             const image_name = poster_data[result_item.href]
@@ -1081,7 +1088,7 @@ function load_init_data(data_set_list) {
     window.ABOUT_DATA = about_data;
     window.LANG_DATA = lang_data;
     window.LANG_MAPS = new Map();
-    load_menu_data(lang, 'raga');
+    load_menu_data(lang, START_NAV_CATEGORY);
     if (window.default_video !== '') load_content_data(C_SINGLE, window.default_video);
     search_init();
 }

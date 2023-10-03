@@ -4,10 +4,20 @@ const HKT_REGEX_LIST = [ [ 'M([cj])', 'J$1' ], [ 'M([kg])', 'G$1' ], [ 'M([TD])'
                          [ '[\\.]N', 'QQQQ' ], [ '\\bn', 'QQQQ' ], [ 'nd', 'QQQQd' ], [ 'nt', 'QQQQt' ],
                          [ 'n', '.n' ], [ 'QQQQ', 'n' ], [ 'qqqq', '.n' ]
                        ];
-
+const ENG_REGEX_LIST = [ [ '.N', 'n' ] ];
 const DOT_REGEX_LIST = [ [ ' ', ' ' ], [ ',', ',' ], [ '\\.', '.' ], [ '$', '' ] ];
 
+const SUPERSCRIPT_CODES = [ 0x00B2, 0x00B3, 0x2074 ];
 const superscript_code_list = new Set(SUPERSCRIPT_CODES.map(i => String.fromCharCode(i)));
+
+const MAP_DOT_DICT = {
+    'hindi':    '\\u094D',
+    'marathi':  '\\u094D',
+    'bengali':  '\\u09CD',
+    'gujarati': '\\u0ACD',
+    'punjabi':  '\\u0A4D',
+    'assamese': '\\u09CD'
+};
 
 function lists_to_map(l1, l2) {
     const d = new Map();
@@ -17,52 +27,54 @@ function lists_to_map(l1, l2) {
     return d;
 }
 
-function get_freq_map(hkt_freq) {
-    const freq_key_list = hkt_freq['key'];
-    const freq_value_list = hkt_freq['value'];
-    const freq_list = [];
-    for (let i = 0; i < freq_value_list.length; i += 1) {
-        freq_list.push(freq_value_list[i]);
+function set_regex(value_list, prefix) {
+    const regex_list = [];
+    for (let i = 0; i < value_list.length; i += 1) {
+        const value = value_list[i];
+        const obj = new RegExp(prefix + value[0], 'gm');
+        regex_list.push([ obj, value[1] ]);
     }
-    const l_map = lists_to_map(freq_key_list, freq_list);
-    return l_map;
+    return regex_list;
 }
 
-function init_lang_maps(map_data) {
-    const hk_tamil_maps = map_data['hk_tamil_maps'];
-    const lang_maps = new Map();
-    const hk_tamil_list = hk_tamil_maps['hk_tamil'].split(/\s+/);
-    for (let lang in hk_tamil_maps) {
-        if (MAP_KEYBOARD_DICT.hasOwnProperty(lang)) {
-           const lang_list = hk_tamil_maps[lang].split(/\s+/);
-           const l_map = lists_to_map(hk_tamil_list, lang_list);
-           lang_maps.set(lang, l_map);
-        }
+function apply_regex(regex_list, txt) {
+    for (let i = 0; i < regex_list.length; i += 1) {
+        txt = txt.replace(regex_list[i][0], regex_list[i][1]);
     }
-
-    const hk_maps = map_data['hk_eng_maps'];
-    const e_map = lists_to_map(hk_maps['eng_input'], hk_maps['eng_output']);
-    lang_maps.set('hk_eng', e_map);
-
-    const hkt_freq = map_data['frequency']
-    lang_maps.set('hk_tamil_freq', get_freq_map(hkt_freq['hk_tamil']));
-    lang_maps.set('hk_eng_freq', get_freq_map(hkt_freq['hk_eng']));
-
-    const hk_length = map_data['length'];
-    lang_maps.set('hk_tamil_length', hk_length['hk_tamil']);
-    lang_maps.set('hk_eng_length', hk_length['hk_eng']);
-
-    lang_maps.set('MAP_ISO_DICT', map_data['MAP_ISO_DICT']);
-    lang_maps.set('MAP_DOT_DICT', map_data['MAP_DOT_DICT']);
-    lang_maps.set('MAP_INFO_DICT', map_data['MAP_INFO_DICT']);
-    lang_maps.set('MAP_MONTH_DICT', map_data['MAP_MONTH_DICT']);
-    lang_maps.set('KEYBOARD_LIST', map_data['HINDUSTANI_KBD_LIST']);
-    lang_maps.set('NOTE_MAP', map_data['HINDUSTANI_NOTE_MAP']);
-
-    window.LANG_MAPS = lang_maps;
+    return txt;
 }
 
-function transliterate_map_freq_text(lang_map, maxlen, pattern, data) {
+/*
+     Transliteration
+*/
+
+function transliterator_lang_maps(lang) {
+    const map_data = window.LANG_DATA['map'];
+    const [ hkt_keys, lang_keys ] = map_data['from_hk'];
+    const lang_map = lists_to_map(hkt_keys.split(' '), lang_keys.split(' '));
+    const [ freq_keys, freq_values ] = map_data['from_freq'];
+    const key_list = freq_keys.split(',');
+    const value_list = [];
+    for (v of freq_values.split(',')) {
+        value_list.push(+v);
+    }
+    const f_map = lists_to_map(key_list, value_list);
+    const max_len = map_data['from_length'];
+    window.LANG_MAPS.set(lang, [ lang_map, max_len, f_map ]);
+}
+
+function transliterator_lang_init(lang) {
+    const out_lang = lang.toLowerCase();
+    if (out_lang === 'tamil')  window.HKT_REGEX_OBJ_LIST = set_regex(HKT_REGEX_LIST, '');
+    else  window.HKT_REGEX_OBJ_LIST = set_regex(ENG_REGEX_LIST, '');
+    window.DOT_REGEX_OBJ_LIST = set_regex(DOT_REGEX_LIST, MAP_DOT_DICT[out_lang]);
+    const lang_map_data = window.LANG_MAPS;
+    if (!(lang in window.LANG_MAPS)) transliterator_lang_maps(lang);
+    window.LANG_TRANS_LIST = window.LANG_MAPS.get(lang);
+}
+
+function get_transliterator_parser_text(data) {
+    const [ lang_map, maxlen, pattern ] = window.LANG_TRANS_LIST;
     const tokenlist = [];
     let current = 0;
     while (current < data.length) {
@@ -87,62 +99,64 @@ function transliterate_map_freq_text(lang_map, maxlen, pattern, data) {
     return tokenlist.join('');
 }
 
-function set_regex(value_list, prefix) {
-    const regex_list = [];
-    for (let i = 0; i < value_list.length; i += 1) {
-        const value = value_list[i];
-        const obj = new RegExp(prefix + value[0], 'gm');
-        regex_list.push([ obj, value[1] ]);
-    }
-    return regex_list;
-}
-
-function apply_regex(regex_list, txt) {
-    for (let i = 0; i < regex_list.length; i += 1) {
-        txt = txt.replace(regex_list[i][0], regex_list[i][1]);
-    }
-    return txt;
-}
-
-function set_tamil_regex_list() {
-    window.HKT_REGEX_OBJ_LIST = set_regex(HKT_REGEX_LIST, '');
-}
-
-function get_map_data(key) {
-    const lang_map_data = window.LANG_MAPS;
-    return (lang_map_data !== undefined) ? lang_map_data.get(key) : Object();
-}
-
-function transliterator_lang_init(lang) {
-    const map_dot_data = get_map_data('MAP_DOT_DICT');
-    const out_lang = lang.toLowerCase();
-    window.DOT_REGEX_OBJ_LIST = set_regex(DOT_REGEX_LIST, map_dot_data[out_lang]);
-}
-
 function get_transliterator_text(out_lang, data) {
-    const lang_map_data = window.LANG_MAPS;
-    if (lang_map_data === undefined) return data;
+    if (window.LANG_MAPS === undefined) return data;
     out_lang = out_lang.toLowerCase();
-    let result = data;
-    if (out_lang === 'tamil') {
-        result = apply_regex(window.HKT_REGEX_OBJ_LIST, result);
-    } else {
-        result = result.replace('.N', 'n');
-    }
-    if (out_lang !== 'english') {
-        const lang_map = lang_map_data.get(out_lang);
-        const lang_freq = lang_map_data.get('hk_tamil_freq');
-        result = transliterate_map_freq_text(lang_map, lang_map_data.get('hk_tamil_length'), lang_freq, result);
-    } else {
-        const lang_map = lang_map_data.get('hk_eng');
-        const lang_freq = lang_map_data.get('hk_eng_freq');
-        result = transliterate_map_freq_text(lang_map, lang_map_data.get('hk_eng_length'), lang_freq, result);
-    }
-    const map_dot_data = get_map_data('MAP_DOT_DICT');
-    if (map_dot_data.hasOwnProperty(out_lang)) {
-        result = apply_regex(window.DOT_REGEX_OBJ_LIST, result);
-    }
+    let result = apply_regex(window.HKT_REGEX_OBJ_LIST, data);
+    result = get_transliterator_parser_text(result);
+    if (MAP_DOT_DICT.hasOwnProperty(out_lang)) result = apply_regex(window.DOT_REGEX_OBJ_LIST, result);
     return result;
+}
+
+function transliterate_search_init() {
+    const map_data = window.LANG_DATA['map'];
+    const [ lang_keys, hkt_keys ] = map_data['to_hk'];
+    const lang_list = lang_keys.split(' ');
+    const hkt_list = hkt_keys.split(' ');
+    let max_len = 0;
+    for (let s of lang_list) {
+        max_len = Math.max(max_len, s.length);
+    }
+    const char_map = lists_to_map(lang_list, hkt_list); 
+    const token_set = new Set(lang_list);
+    window.INDIC_CHAR_MAP = [ char_map, token_set, max_len ];
+}
+
+function transliterate_search_text(word) {
+    const [ char_map, token_set, maxlen ] = window.INDIC_CHAR_MAP;
+    let current = 0;
+    const tokenlist = [];
+    word = word.toString();
+    while (current < word.length) {
+        const nextstr = word.slice(current, current+maxlen);
+        let p = nextstr[0];
+        let j = 1;
+        let i = maxlen;
+        while (i > 0) {
+            let s = nextstr.slice(0, i);
+            if (token_set.has(s)) {
+                p = s;
+                j = i;
+                break
+            }
+            i -= 1;
+        }
+        if (char_map.has(p)) {
+            p = char_map.get(p);
+        }
+        tokenlist.push(p);
+        current += j;
+    }
+    let new_word = tokenlist.join('');
+    new_word = new_word.replace('.', '');
+    new_word = new_word.replace('_', '');
+    if (word !== new_word) {
+        new_word = new_word.replace(/_/g, '');
+        new_word = new_word.replace(/G/g, 'n');
+        new_word = new_word.replace(/J/g, 'n');
+    }
+    console.log('transliterate_search_text:', new_word);
+    return new_word;
 }
 
 /*
@@ -290,28 +304,22 @@ function on_key_click() {
    load_search_data();
 };
 
-function set_input_keyboard(lang) {
-    const lang_dict = MAP_KEYBOARD_DICT[lang];
-    window.script_lang_dict = lang_dict;
-    window.script_combo_list = lang_dict['glyph'];
-    window.script_vowel_size = lang_dict['glyph'].length;
-    const [info_list, key_dict] = render_keys(lang_dict);
+function set_input_keyboard(kbd_dict) {
+    const base = kbd_dict['base'];
+    if (typeof base === 'string') kbd_dict['base'] = parseInt(base, 16);
+    window.script_lang_dict = kbd_dict;
+    window.script_combo_list = kbd_dict['glyph'];
+    window.script_vowel_size = kbd_dict['glyph'].length;
+    const [info_list, key_dict] = render_keys(kbd_dict);
     for (let i = 0; i < info_list.length; i++) {
         const info_dict = info_list[i];
         const key_name = info_dict['A'];
         if (key_name !== undefined) {
-            lang_dict[key_name] = 'key_' + info_dict['I'];
+            kbd_dict[key_name] = 'key_' + info_dict['I'];
         }
     } 
     window.input_key_dict = info_list;
     render_card_template('lang-key-template', 'GENKBD', key_dict);
 }
 
-function init_input_keyboard(lang) {
-    for (let lang in MAP_KEYBOARD_DICT) {
-        const info_dict = MAP_KEYBOARD_DICT[lang];
-        const base = parseInt(info_dict['base'], 16);
-        info_dict['base'] = base;
-    }
-}
 

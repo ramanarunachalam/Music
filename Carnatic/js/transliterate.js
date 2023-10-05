@@ -4,11 +4,8 @@ const HKT_REGEX_LIST = [ [ 'M([cj])', 'J$1' ], [ 'M([kg])', 'G$1' ], [ 'M([TD])'
                          [ '[\\.]N', 'QQQQ' ], [ '\\bn', 'QQQQ' ], [ 'nd', 'QQQQd' ], [ 'nt', 'QQQQt' ],
                          [ 'n', '.n' ], [ 'QQQQ', 'n' ], [ 'qqqq', '.n' ]
                        ];
-const ENG_REGEX_LIST = [ [ '.N', 'n' ] ];
+const ENG_REGEX_LIST = [ [ '[\\.]N', 'n' ] ];
 const DOT_REGEX_LIST = [ [ ' ', ' ' ], [ ',', ',' ], [ '\\.', '.' ], [ '$', '' ] ];
-
-const SUPERSCRIPT_CODES = [ 0x00B2, 0x00B3, 0x2074 ];
-const superscript_code_list = new Set(SUPERSCRIPT_CODES.map(i => String.fromCharCode(i)));
 
 const MAP_DOT_DICT = {
     'hindi':    '\\u094D',
@@ -18,6 +15,14 @@ const MAP_DOT_DICT = {
     'punjabi':  '\\u0A4D',
     'assamese': '\\u09CD'
 };
+
+const ENGLISH_REPLACE_LIST = [
+                               [ /\./g, '' ],
+                               [ /_/g, '' ],
+                               [ /G/g, 'n' ],
+                               [ /J/g, 'n' ]
+                             ];
+
 
 function lists_to_map(l1, l2) {
     const d = new Map();
@@ -48,19 +53,46 @@ function apply_regex(regex_list, txt) {
      Transliteration
 */
 
-function transliterator_lang_maps(lang) {
+function get_simple_parser_text(char_map_list, data) {
+    const [ char_map, token_list, max_len ] = char_map_list;
+    const char_list = [];
+    let current = 0;
+    while (current < data.length) {
+        let p = data[current];
+        let j = 1;
+        const m = token_list.has(p) ? token_list.get(p) : 0;
+        if (m > 1) {
+            let next_str = data.slice(current, current + max_len)
+            for (let k = m; k > 0; k -= 1) {
+                const s = next_str.slice(0, k);
+                if (char_map.has(s)) {
+                    p = s;
+                    j = k;
+                    break
+                }
+            }
+        }
+        p = char_map.has(p) ? char_map.get(p) : p
+        char_list.push(p);
+        current += j;
+    }
+    return char_list.join('');
+}
+
+function get_char_map_list(n_hk, n_freq, n_len) {
     const map_data = window.LANG_DATA['map'];
-    const [ hkt_keys, lang_keys ] = map_data['from_hk'];
-    const lang_map = lists_to_map(hkt_keys.split(' '), lang_keys.split(' '));
-    const [ freq_keys, freq_values ] = map_data['from_freq'];
+    const [ from_keys, to_keys ] = map_data[n_hk];
+    const char_map = lists_to_map(from_keys.split(' '), to_keys.split(' ')); 
+    const [ freq_keys, freq_values ] = map_data[n_freq];
     const key_list = freq_keys.split(',');
     const value_list = [];
-    for (v of freq_values.split(',')) {
+    for (const v of freq_values.split(',')) {
         value_list.push(+v);
     }
     const f_map = lists_to_map(key_list, value_list);
-    const max_len = map_data['from_length'];
-    window.LANG_MAPS.set(lang, [ lang_map, max_len, f_map ]);
+    const max_len = map_data[n_len];
+    const char_map_list = [ char_map, f_map, max_len ];
+    return char_map_list;
 }
 
 function transliterator_lang_init(lang) {
@@ -68,101 +100,41 @@ function transliterator_lang_init(lang) {
     if (out_lang === 'tamil')  window.HKT_REGEX_OBJ_LIST = set_regex(HKT_REGEX_LIST, '');
     else  window.HKT_REGEX_OBJ_LIST = set_regex(ENG_REGEX_LIST, '');
     window.DOT_REGEX_OBJ_LIST = set_regex(DOT_REGEX_LIST, MAP_DOT_DICT[out_lang]);
-    const lang_map_data = window.LANG_MAPS;
-    if (!(lang in window.LANG_MAPS)) transliterator_lang_maps(lang);
-    window.LANG_TRANS_LIST = window.LANG_MAPS.get(lang);
-    transliterate_search_init();
-}
 
-function get_transliterator_parser_text(data) {
-    const [ lang_map, maxlen, pattern ] = window.LANG_TRANS_LIST;
-    const tokenlist = [];
-    let current = 0;
-    while (current < data.length) {
-        let p = data[current];
-        let j = 1;
-        const m = pattern.has(p) ? pattern.get(p) : 0;
-        if (m > 1) {
-            let nextstr = data.slice(current, current + maxlen)
-            for (let k = m; k > 0; k -= 1) {
-                const s = nextstr.slice(0, k);
-                if (lang_map.has(s)) {
-                    p = s;
-                    j = k;
-                    break
-                }
-            }
-        }
-        p = lang_map.has(p) ? lang_map.get(p) : p
-        tokenlist.push(p);
-        current += j;
+    if (!(lang in window.TRANS_LANG_MAPS)) {
+        window.TRANS_LANG_MAPS[lang] = get_char_map_list('from_hk', 'from_freq', 'from_length');
     }
-    return tokenlist.join('');
+    window.TRANS_CHAR_MAP = window.TRANS_LANG_MAPS[lang];
+    window.SEARCH_CHAR_MAP = get_char_map_list('to_hk', 'to_freq', 'to_length');
 }
 
-function get_transliterator_text(out_lang, data) {
-    if (window.LANG_MAPS === undefined) return data;
+function transliterate_hk_to_lang(out_lang, text) {
+    if (text === undefined) return text;
+    if (window.TRANS_LANG_MAPS === undefined) return text;
     out_lang = out_lang.toLowerCase();
-    let result = apply_regex(window.HKT_REGEX_OBJ_LIST, data);
-    result = get_transliterator_parser_text(result);
-    if (MAP_DOT_DICT.hasOwnProperty(out_lang)) result = apply_regex(window.DOT_REGEX_OBJ_LIST, result);
-    return result;
+    text = apply_regex(window.HKT_REGEX_OBJ_LIST, text);
+    text = get_simple_parser_text(window.TRANS_CHAR_MAP, text);
+    if (out_lang in MAP_DOT_DICT) text = apply_regex(window.DOT_REGEX_OBJ_LIST, text);
+    return text;
 }
 
-function transliterate_search_init() {
-    const map_data = window.LANG_DATA['map'];
-    const [ lang_keys, hkt_keys ] = map_data['to_hk'];
-    const lang_list = lang_keys.split(' ');
-    const hkt_list = hkt_keys.split(' ');
-    let max_len = 0;
-    for (let s of lang_list) {
-        max_len = Math.max(max_len, s.length);
-    }
-    const char_map = lists_to_map(lang_list, hkt_list); 
-    const token_set = new Set(lang_list);
-    window.INDIC_CHAR_MAP = [ char_map, token_set, max_len ];
-}
-
-function transliterate_search_text(word) {
-    const [ char_map, token_set, maxlen ] = window.INDIC_CHAR_MAP;
-    let current = 0;
-    const tokenlist = [];
-    word = word.toString();
-    while (current < word.length) {
-        const nextstr = word.slice(current, current+maxlen);
-        let p = nextstr[0];
-        let j = 1;
-        let i = maxlen;
-        while (i > 0) {
-            let s = nextstr.slice(0, i);
-            if (token_set.has(s)) {
-                p = s;
-                j = i;
-                break
-            }
-            i -= 1;
-        }
-        if (char_map.has(p)) {
-            p = char_map.get(p);
-        }
-        tokenlist.push(p);
-        current += j;
-    }
-    let new_word = tokenlist.join('');
-    new_word = new_word.replace('.', '');
-    new_word = new_word.replace('_', '');
+function transliterate_lang_to_hk(word) {
+    let new_word = get_simple_parser_text(window.SEARCH_CHAR_MAP, word);
     if (word !== new_word) {
-        new_word = new_word.replace(/_/g, '');
-        new_word = new_word.replace(/G/g, 'n');
-        new_word = new_word.replace(/J/g, 'n');
+        for (const expr of ENGLISH_REPLACE_LIST) {
+            new_word = new_word.replace(expr[0], expr[1]);
+        }
     }
-    // console.log('transliterate_search_text:', new_word);
+    // console.log('transliterate_lang_to_hk:', word, new_word);
     return new_word;
 }
 
 /*
      Language Keyboards
 */
+
+const SUPERSCRIPT_CODES = [ 0x00B2, 0x00B3, 0x2074 ];
+const superscript_code_list = new Set(SUPERSCRIPT_CODES.map(i => String.fromCharCode(i)));
 
 const ROW_SIZE = 9;
 
@@ -323,4 +295,7 @@ function set_input_keyboard(kbd_dict) {
     render_card_template('lang-key-template', 'GENKBD', key_dict);
 }
 
+function transliterator_init() {
+    window.TRANS_LANG_MAPS = {};
+}
 

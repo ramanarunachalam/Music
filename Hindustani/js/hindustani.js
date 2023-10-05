@@ -8,7 +8,6 @@ const MIC_TOOLTIP = 'Only in Chrome';
 const KBD_TOOLTIP = 'Language Keyboard';
 
 const VIDEO_INFO_KEY_LIST = new Set([ 'title', 'author_name' ]);
-const ENGLISH_TYPE_LIST = [ 'artist', 'composer', 'type' ];
 const CC = [ 'I', 'R', 'D', 'V' ];
 const OF = [ 'F', 'S', 'T' ];
 const FF = { 'artist'   : [ 'song',   'S', [ 'T', 'R', 'C' ], [ 'type', 'raga',   'composer' ] ],
@@ -282,7 +281,7 @@ function get_swara_transliterate(lang, swara_str) {
     if (lang !== 'English') {
         swara_str = swara_str.replace(/da/g, 'dha');
     }
-    swara_str = get_transliterator_text(lang, swara_str);
+    swara_str = transliterate_hk_to_lang(lang, swara_str);
     swara_str = swara_str.replace(/([123])/g, '<sub>$1</sub>');
     return swara_str;
 }
@@ -324,7 +323,7 @@ function info_transliteration(category, data_list) {
         if (name === 'Language') {
             obj['V'] = get_map_text('info', value);
         } else if (KEY_NAME_LIST.includes(name)) {
-            obj['V'] = get_transliterator_text(lang, value);
+            obj['V'] = transliterate_hk_to_lang(lang, value);
         } else if (name === 'Arohana' || name === 'Avarohana') {
             obj['V'] = get_swara_text(lang, note_list, value)
         } else if (name === 'Born' || name === 'Died') {
@@ -335,13 +334,13 @@ function info_transliteration(category, data_list) {
             if (value !== undefined) {
                 let g_list = [];
                 for (const gobj of item_list) {
-                     g_list.push(get_transliterator_text(lang, gobj));
+                     g_list.push(transliterate_hk_to_lang(lang, gobj));
                 }
                 obj['V'] = g_list.join('</br>');
             }
         } else if (lang !== 'English') {
             value = obj['P'];
-            if (value !== undefined) obj['V'] = get_transliterator_text(lang, value);
+            if (value !== undefined) obj['V'] = transliterate_hk_to_lang(lang, value);
         }
     }
     item = data_list['keyboard']
@@ -363,7 +362,7 @@ function info_transliteration(category, data_list) {
     item_list = data_list['lyricstext']
     if (item_list === undefined) item_list = [];
     const lyric_prefix = 'SAhityA';
-    const prefix = get_transliterator_text(lang, lyric_prefix);
+    const prefix = transliterate_hk_to_lang(lang, lyric_prefix);
     for (const obj of item_list) {
         const lyric_lang = get_map_text('info', obj['L']);
         obj['L'] = prefix + ' - ' + lyric_lang;
@@ -573,7 +572,6 @@ function check_need_poster(category) {
 
 function render_nav_template(category, data) {
     const lang = window.RENDER_LANGUAGE;
-    const no_transliterate = lang === 'English' && ENGLISH_TYPE_LIST.includes(category);
     const id_data = window.ID_DATA[category];
     const poster_data = window.ABOUT_DATA[category];
     const need_poster = check_need_poster(category);
@@ -828,8 +826,6 @@ function search_load_fetch_data(search_index_obj) {
             data_id += 1;
         });
     }
-
-    transliterate_search_init();
 }
 
 function search_init() {
@@ -926,7 +922,7 @@ function load_search_part(search_word, non_english) {
 function handle_search_word(search_word) {
     const lang = window.RENDER_LANGUAGE;
     const c = search_word.charCodeAt(0);
-    if (c > 127) search_word = transliterate_search_text(search_word);
+    if (c > 127) search_word = transliterate_lang_to_hk(search_word);
     const non_english = (0x0B80 <= c && c <= 0x0BFF) ? true : false;
     const context_list = search_word.split(':');
     const context_dict = {};
@@ -1087,7 +1083,6 @@ function load_init_data(data_set_list) {
     window.ID_DATA = id_data;
     window.ABOUT_DATA = about_data;
     window.LANG_DATA = lang_data;
-    window.LANG_MAPS = new Map();
     load_menu_data(lang, START_NAV_CATEGORY);
     if (window.default_video !== '') load_content_data(C_SINGLE, window.default_video);
     search_init();
@@ -1294,6 +1289,8 @@ function collection_init(collection, default_video) {
             setTimeout(load_youtube_frame, 0);
         }
     });
+
+    transliterator_init();
 
     const l_lang = lang.toLowerCase();
     const url_list = [ fetch_url_data('ID DATA', 'id.json'),

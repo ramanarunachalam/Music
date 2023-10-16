@@ -32,7 +32,7 @@ const [ CC_PLURAL, CC_SINGLE ] = [ 'Songs', 'Song' ];
 
 const LINK_ACTIVE_BUTTON = 2;
 
-const KEY_NAME_LIST   = [ 'Melakartha', 'Thaat', 'God' ];
+const KEY_NAME_LIST   = [ 'Melakartha', 'Thaat', 'God', 'Tala name', 'Tala angas' ];
 const MENU_ICON_DICT = {};
 
 const SEARCH_MAP_DICT = { 'c' : 's', 'p' : 'b' };
@@ -277,22 +277,20 @@ function load_menu_data(lang, nav_category) {
     load_nav_data(nav_category);
 }
 
-function get_swara_transliterate(lang, swara_str) {
-    if (lang !== 'English') {
-        swara_str = swara_str.replace(/da/g, 'dha');
-    }
-    swara_str = transliterate_hk_to_lang(lang, swara_str);
-    swara_str = swara_str.replace(/([123])/g, '<sub>$1</sub>');
-    return swara_str;
+function get_swara_subscript(swara_str) {
+    return swara_str.replace(/([123])/g, '<sub>$1</sub>');
 }
 
 function get_swara_text(lang, note_list, value_list) {
+    const swara_map = window.LANG_DATA['map']['swara map'];
     let swara_str = value_list[0];
     const s_list = swara_str.split(' ');
-    for (const swara of s_list) {
-        note_list.add(swara);
+    const new_s_list = [];
+    for (const s of s_list) {
+        note_list.add(s);
+        new_s_list.push(swara_map.get(s))
     }
-    swara_str = get_swara_transliterate(lang, swara_str);
+    swara_str = get_swara_subscript(new_s_list.join(' '));
     const note_str = value_list[1];
     const note_template = plain_get_html_text('page-note-template');
     const note_html = Mustache.render(note_template, { 'note' : note_str });
@@ -323,7 +321,7 @@ function info_transliteration(category, data_list) {
         if (name === 'Language') {
             obj['V'] = get_map_text('info', value);
         } else if (KEY_NAME_LIST.includes(name)) {
-            obj['V'] = transliterate_hk_to_lang(lang, value);
+            obj['V'] = get_map_text(name.toLowerCase(), value);
         } else if (name === 'Arohana' || name === 'Avarohana') {
             obj['V'] = get_swara_text(lang, note_list, value)
         } else if (name === 'Born' || name === 'Died') {
@@ -340,7 +338,8 @@ function info_transliteration(category, data_list) {
             }
         } else if (lang !== 'English') {
             value = obj['P'];
-            if (value !== undefined) obj['V'] = transliterate_hk_to_lang(lang, value);
+            const h_id = obj['I'];
+            if (h_id !== undefined && h_id !== 0) obj['V'] = get_phonetic_text(name.toLowerCase(), h_id);
         }
     }
     item = data_list['keyboard']
@@ -348,10 +347,11 @@ function info_transliteration(category, data_list) {
         const kbd_list = window.LANG_DATA['map']['piano'];
         for (const obj of kbd_list) {
             const swara_list = obj['V'];
+            const t_swara_list = obj['T'];
             const new_swara_list = [];
-            for (const swara_str of swara_list) {
+            for (const [i, swara_str] of swara_list.entries()) {
                 if (note_list.has(swara_str)) {
-                    const new_swara_str = get_swara_transliterate(lang, swara_str);
+                    const new_swara_str = get_swara_subscript(t_swara_list[i]);
                     new_swara_list.push(new_swara_str);
                 }
             }
@@ -361,8 +361,8 @@ function info_transliteration(category, data_list) {
     }
     item_list = data_list['lyricstext']
     if (item_list === undefined) item_list = [];
-    const lyric_prefix = 'SAhityA';
-    const prefix = transliterate_hk_to_lang(lang, lyric_prefix);
+    const lyric_prefix = 'Sahitya';
+    const prefix = get_map_text('info', lyric_prefix);
     for (const obj of item_list) {
         const lyric_lang = get_map_text('info', obj['L']);
         obj['L'] = prefix + ' - ' + lyric_lang;

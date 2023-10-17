@@ -1,28 +1,10 @@
 
-const HKT_REGEX_LIST = [ [ 'M([cj])', 'J$1' ], [ 'M([kg])', 'G$1' ], [ 'M([TD])', 'N$1' ], [ 'M([tds])', 'n$1' ],
-                         [ '\\bjJ', 'J' ], [ 'jJ', 'JJ' ], [ 'Jj', 'Jc' ], [ 'TR', 'RR' ], [ '[\\.]n', 'qqqq' ],
-                         [ '[\\.]N', 'QQQQ' ], [ '\\bn', 'QQQQ' ], [ 'nd', 'QQQQd' ], [ 'nt', 'QQQQt' ],
-                         [ 'n', '.n' ], [ 'QQQQ', 'n' ], [ 'qqqq', '.n' ]
-                       ];
-const ENG_REGEX_LIST = [ [ '[\\.]N', 'n' ] ];
-const DOT_REGEX_LIST = [ [ ' ', ' ' ], [ ',', ',' ], [ '\\.', '.' ], [ '$', '' ] ];
-
-const MAP_DOT_DICT = {
-    'hindi':    '\\u094D',
-    'marathi':  '\\u094D',
-    'bengali':  '\\u09CD',
-    'gujarati': '\\u0ACD',
-    'punjabi':  '\\u0A4D',
-    'assamese': '\\u09CD'
-};
-
 const ENGLISH_REPLACE_LIST = [
-                               [ /\./g, '' ],
-                               [ /_/g, '' ],
-                               [ /G/g, 'n' ],
-                               [ /J/g, 'n' ]
+                               [ /\./g, ''  ],
+                               [ /_/g,  ''  ],
+                               [ /G/g,  'n' ],
+                               [ /J/g,  'n' ]
                              ];
-
 
 function lists_to_map(l1, l2) {
     const d = new Map();
@@ -30,23 +12,6 @@ function lists_to_map(l1, l2) {
         d.set(l1[i], l2[i]);
     }
     return d;
-}
-
-function set_regex(value_list, prefix) {
-    const regex_list = [];
-    for (let i = 0; i < value_list.length; i += 1) {
-        const value = value_list[i];
-        const obj = new RegExp(prefix + value[0], 'gm');
-        regex_list.push([ obj, value[1] ]);
-    }
-    return regex_list;
-}
-
-function apply_regex(regex_list, txt) {
-    for (let i = 0; i < regex_list.length; i += 1) {
-        txt = txt.replace(regex_list[i][0], regex_list[i][1]);
-    }
-    return txt;
 }
 
 /*
@@ -82,7 +47,7 @@ function get_simple_parser_text(char_map_list, data) {
 function get_char_map_list(n_hk, n_freq, n_len) {
     const map_data = window.LANG_DATA['map'];
     const [ from_keys, to_keys ] = map_data[n_hk];
-    const char_map = lists_to_map(from_keys.split(' '), to_keys.split(' ')); 
+    const char_map = lists_to_map(from_keys.split(' '), to_keys.split(' '));
     const [ freq_keys, freq_values ] = map_data[n_freq];
     const key_list = freq_keys.split(',');
     const value_list = [];
@@ -96,26 +61,11 @@ function get_char_map_list(n_hk, n_freq, n_len) {
 }
 
 function transliterator_lang_init(lang) {
-    const out_lang = lang.toLowerCase();
-    if (out_lang === 'tamil')  window.HKT_REGEX_OBJ_LIST = set_regex(HKT_REGEX_LIST, '');
-    else  window.HKT_REGEX_OBJ_LIST = set_regex(ENG_REGEX_LIST, '');
-    window.DOT_REGEX_OBJ_LIST = set_regex(DOT_REGEX_LIST, MAP_DOT_DICT[out_lang]);
-
-    if (!(lang in window.TRANS_LANG_MAPS)) {
-        window.TRANS_LANG_MAPS[lang] = get_char_map_list('from_hk', 'from_freq', 'from_length');
-    }
-    window.TRANS_CHAR_MAP = window.TRANS_LANG_MAPS[lang];
     window.SEARCH_CHAR_MAP = get_char_map_list('to_hk', 'to_freq', 'to_length');
-}
 
-function transliterate_hk_to_lang(out_lang, text) {
-    if (text === undefined) return text;
-    if (window.TRANS_LANG_MAPS === undefined) return text;
-    out_lang = out_lang.toLowerCase();
-    text = apply_regex(window.HKT_REGEX_OBJ_LIST, text);
-    text = get_simple_parser_text(window.TRANS_CHAR_MAP, text);
-    if (out_lang in MAP_DOT_DICT) text = apply_regex(window.DOT_REGEX_OBJ_LIST, text);
-    return text;
+    const map_data = window.LANG_DATA['map'];
+    const [ e_keys, l_keys ] = map_data['swara'];
+    map_data['swara map'] = lists_to_map(e_keys.split(' '), l_keys.split(' '));
 }
 
 function transliterate_lang_to_hk(word) {

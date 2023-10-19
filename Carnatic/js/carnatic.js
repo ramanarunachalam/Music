@@ -327,15 +327,6 @@ function info_transliteration(category, data_list) {
         } else if (name === 'Born' || name === 'Died') {
             const v = get_month_text(value);
             if (v !== '') obj['V'] = v;
-        } else if (lang !== 'English' && name === 'Gharana') {
-            const item_list = obj['P'];
-            if (value !== undefined) {
-                let g_list = [];
-                for (const gobj of item_list) {
-                     g_list.push(transliterate_hk_to_lang(lang, gobj));
-                }
-                obj['V'] = g_list.join('</br>');
-            }
         } else if (lang !== 'English') {
             value = obj['P'];
             const h_id = obj['I'];

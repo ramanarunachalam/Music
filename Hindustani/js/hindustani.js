@@ -669,24 +669,9 @@ function get_match_count(f_category, f_value, context_list, c_len) {
     return found;
 }
 
-function translate_song_id_to_data(category, sd, st, song_list) {
-    const HF = [ 'S', 'R', 'C' ];
-    const HCATEGORY = [ 'song', 'raga', 'composer' ];
-    for (const [i, song] of song_list.entries()) {
-        for (const v of HF) {
-            get_folder_value(HCATEGORY[m], song, v, v);
-        }
-        song['I'] = i + 1;
-    }
-}
-
 function translate_folder_id_to_data(category, id, data) {
     const lang = window.RENDER_LANGUAGE.toLowerCase();
-    const ff = FF[category];
-    const f_category = ff[0];
-    const f_type = ff[1];
-    const sd = ff[2];
-    const st = ff[3];
+    const [ f_category, f_type, sd, st ] = FF[category];
     const video_list = data[C_PLURAL];
     const folder_list = data['folders'];
     const folder_ids = data['languages'][lang];
@@ -704,6 +689,7 @@ function translate_folder_id_to_data(category, id, data) {
         for (const video_id of video_id_list) {
             const video = video_list[+video_id];
             for (let m = 0; m < OF.length; m++) {
+                if (video[sd[m]] === 0) continue;
                 const c = OF[m] + 'T';
                 video[c] = st[m];
                 get_folder_value(st[m], video, OF[m], sd[m]);
@@ -1035,17 +1021,6 @@ function render_youtube_video_info(id, video_data) {
     info_list.push({ 'N' : 'id', 'C' : video_id });
     const image = video_data['thumbnail_url'];
     const info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
-    /*
-    const chapter_data = window.CONCERT_DATA[video_id];
-    if (chapter_data !== undefined) {
-        const category = 'artist';
-        const ff = FF[category];
-        const sd = ff[2];
-        const st = ff[3];
-        translate_song_id_to_data(category, sd, st, chapter_data);
-        info_data['chapters'] = { 'songs' : window.CONCERT_DATA[video_id] };
-    }
-    */
     render_modal_dialog(title, 'modal-videoinfo-template', info_data);
 }
 

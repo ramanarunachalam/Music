@@ -232,13 +232,14 @@ function get_map_text(category, name) {
 
 function get_month_text(value) {
     if (typeof value !== 'string') return '';
-    if (!value.includes(' ')) return '';
     const m_list = value.split(' ');
-    if (m_list.length != 3) return '';
-    const [ d, m, y ] = m_list;
+    if (m_list.length < 2) return value;
+    let d, m, y;
+    if (m_list.length === 3) [ d, m, y ] = m_list;
+    if (m_list.length === 2) [ m, y ] = m_list;
     const month = get_map_text('month', m);
-    if (month === undefined) return '';
-    return `${d} ${month} ${y}`;
+    if (month === undefined) return value;
+    return (d === undefined) ? `${month} ${y}` : `${d} ${month} ${y}`;
 }
 
 function load_menu_data(lang, nav_category) {

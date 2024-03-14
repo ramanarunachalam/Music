@@ -26,7 +26,7 @@ const CATEGORY_DICT = { 'categories' : [ { 'C' : 'raga',     'I' : 'music-note-l
                                        ]
                       };
 
-const START_NAV_CATEGORY = 'raga';
+const START_NAV_CATEGORY       = 'raga';
 const [ C_PLURAL, C_SINGLE ]   = [ 'songs', 'song' ];
 const [ CC_PLURAL, CC_SINGLE ] = [ 'Songs', 'Song' ];
 
@@ -465,6 +465,7 @@ async function create_jukebox_modal(value) {
     const id_list = new Set();
     const letter_dict = url_data['letters'][lang.toLowerCase()];
     const letter_list = Object.keys(letter_dict);
+    // console.log(`Jukebox Loops: ${url} ${category} ${loops}`);
     const play_list = [];
     for (let i = 0; i < loops; i++) {
         let t_id = 0;
@@ -485,40 +486,38 @@ async function create_jukebox_modal(value) {
         const folder_list = url_data['folders'];
         let count = 0;
         const count_max = Math.min(JUKEBOX_LENGTH, folder_list.length);
-        // console.log(`Jukebox: ${url} ${category} ${folder_list.length} ${count_max}`);
+        // console.log(`Jukebox loop: ${url} ${category} ${folder_list.length} ${count_max}`);
         while (count < count_max) {
             const folder = get_random_item(folder_list);
             const [ s_category, s_id, video_ids ] = folder;
             const video_id_list = video_ids.split(',');
-            const video_id = +get_random_item(video_id_list);
-            const video = video_list[video_id];
-            // console.log(`Jukebox folder: ${video_id} ${video_list.length}`);
-            if (true) {
-                if (option === 'views' && video['V'] < 100) break;
-                const song_id = video['S'];
-                const artist_id = video['A'];
-                // console.log(`Jukebox video: ${song_id} ${k} ${artist_id}`);
-                if (loops > 1 && category !== 'artist' && (artist_id <= 0 || artist_id >= 50)) break;
-                const raga_id = video['R'];
-                // console.log(`Jukebox video: ${song_id} ${k} ${artist_id} ${raga_id}`);
-                if (category !== 'raga' && (raga_id <= 0 || raga_id > 250)) break;
-                const composer_id = video['C'];
-                // if (category !== 'composer' && (composer_id <= 0 || composer_id > 100)) break;
-                const video_id = video['I'];
-                if (id_list.has(video_id)) break;
-                id_list.add(video_id);
-                // console.log(`Jukebox video: ${song_id} ${artist_id} ${raga_id} ${composer_id} ${video_id}`);
-                const args = `${video_id}:${song_id}:${raga_id}`;
-                play_list.push(args);
-                if (play_list.length >= JUKEBOX_LENGTH) break;
-            }
-            if (play_list.length >= JUKEBOX_LENGTH) break;
+            const video_index = +get_random_item(video_id_list);
+            const video = video_list[video_index];
             count++;
+            // console.log(`Jukebox views: ${video_index} ${video_list.length}`);
+            if (option === 'views' && video['V'] < 100) continue;
+            const song_id = video['S'];
+            const artist_id = video['A'];
+            // console.log(`Jukebox artist: ${song_id} ${count} ${artist_id}`);
+            if (category !== 'artist' && (artist_id <= 0 || artist_id >= 50)) continue;
+            const raga_id = video['R'];
+            // console.log(`Jukebox raga: ${song_id} ${count} ${artist_id} ${raga_id}`);
+            if (category !== 'raga' && (raga_id <= 0 || raga_id > 250)) continue;
+            const composer_id = video['C'];
+            // if (category !== 'composer' && (composer_id <= 0 || composer_id > 100)) continue;
+            const video_id = video['I'].split('&')[0];
+            if (id_list.has(video_id)) continue;
+            id_list.add(video_id);
+            // console.log(`Jukebox video: ${song_id} ${artist_id} ${raga_id} ${composer_id} ${video_id}`);
+            const args = `${video_id}:${song_id}:${raga_id}`;
+            play_list.push(args);
+            if (play_list.length >= JUKEBOX_LENGTH) break;
             // console.log('Counting ...', t_id, t_name, play_list.length);
             if (loops > 1) break;
         }
+        // console.log('Looping ...', loops, count, play_list.length);
         if (play_list.length >= JUKEBOX_LENGTH) break;
-        // console.log('Looping ...');
+        if (loops <= 1) break;
     }
     // console.log('Playing ...', play_list.length);
     for (const obj of play_list) {
@@ -686,7 +685,6 @@ function translate_folder_id_to_data(category, id, data) {
         new_folder[f_type] = v_id;
         get_folder_value(f_category, new_folder, 'H', f_type);
         const new_video_list = [];
-        let p_video_ids = (category !== C_SINGLE) ? folder['S'] : '';
         for (const video_id of video_id_list) {
             const video = video_list[+video_id];
             for (let m = 0; m < OF.length; m++) {
@@ -695,8 +693,7 @@ function translate_folder_id_to_data(category, id, data) {
                 video[c] = st[m];
                 get_folder_value(st[m], video, OF[m], sd[m]);
             }
-            if (category === C_SINGLE) p_video_ids = video['S'];
-            video['PS'] = p_video_ids;
+            video['PS'] = video['S'];
             video['PR'] = video['R'];
             const imageId = video['I'].split('&')[0];
             const path = IMAGE_MAP[video['J']] ?? 'maxdefault.jpg';

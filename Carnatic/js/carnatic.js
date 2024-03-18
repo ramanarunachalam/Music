@@ -477,37 +477,38 @@ async function create_jukebox_modal(value) {
         const folder_list = url_data['folders'];
         let count = 0;
         const count_max = Math.min(JUKEBOX_LENGTH, folder_list.length);
-        // console.log(`Jukebox: ${url} ${category} ${folder_list.length} ${count_max}`);
+        // console.log(`Jukebox loop: ${url} ${category} ${folder_list.length} ${count_max}`);
         while (count < count_max) {
             const folder = get_random_item(folder_list);
             const [ s_category, s_id, video_ids ] = folder;
             const video_id_list = video_ids.split(',');
             const video_index = +get_random_item(video_id_list);
             const video = video_list[video_index];
-            // console.log(`Jukebox folder: ${video_index} ${video_list.length}`);
+            count++;
+            // console.log(`Jukebox views: ${video_index} ${video_list.length}`);
             if (option === 'views' && video['V'] < 100) continue;
             const song_id = video['S'];
             const artist_id = video['A'];
-            // console.log(`Jukebox video: ${song_id} ${k} ${artist_id}`);
+            // console.log(`Jukebox artist: ${song_id} ${count} ${artist_id}`);
             if (category !== 'artist' && (artist_id <= 0 || artist_id >= 50)) continue;
             const raga_id = video['R'];
-            // console.log(`Jukebox video: ${song_id} ${k} ${artist_id} ${raga_id}`);
+            // console.log(`Jukebox raga: ${song_id} ${count} ${artist_id} ${raga_id}`);
             if (category !== 'raga' && (raga_id <= 0 || raga_id > 250)) continue;
             const composer_id = video['C'];
             if (category !== 'composer' && (composer_id <= 0 || composer_id > 100)) continue;
-            const video_id = video['I'];
+            const video_id = video['I'].split('&')[0];
             if (id_list.has(video_id)) continue;
             id_list.add(video_id);
             // console.log(`Jukebox video: ${song_id} ${artist_id} ${raga_id} ${composer_id} ${video_id}`);
             const args = `${video_id}:${song_id}:${raga_id}`;
             play_list.push(args);
             if (play_list.length >= JUKEBOX_LENGTH) break;
-            count++;
             // console.log('Counting ...', t_id, t_name, play_list.length);
             if (loops > 1) break;
         }
+        // console.log('Looping ...', loops, count, play_list.length);
         if (play_list.length >= JUKEBOX_LENGTH) break;
-        // console.log('Looping ...', loops, count);
+        if (loops <= 1) break;
     }
     // console.log('Playing ...', play_list.length);
     for (const obj of play_list) {

@@ -277,7 +277,7 @@
               <ol start="1">
                 <li>
                   <span>
-                    <i class="bi bi-folder ICON_STYLE"></i>
+                    <i class="bi bi-folder align-middle ICON_STYLE"></i>
                     <a class="TEXT_COLOR" href="javascript:load_content_data('{{HT}}', '{{HD}}');"><b>{{HN}}</b></a> <font class="NUM_COLOR">({{HC}})</font>
                   </span>
                   </li>
@@ -286,15 +286,18 @@
                     <li>
                       <img class="IMAGE_STYLE" src="https://i.ytimg.com/vi/{{Y}}">&nbsp;&nbsp;
                       <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{I}}:{{PS}}:{{PR}}');">
-                        <i class="bi bi-play ICON_STYLE"></i>
+                        <i class="bi bi-play align-middle ICON_STYLE"></i>
                       </a>
-                      <a href="javascript:void(0);" onclick="get_youtube_video_info('{{I}}')">{{D}}</a> -
-                      {{#FD}}<a href="javascript:load_content_data('{{FT}}', '{{FD}}');">{{FN}}</a> - {{/FD}}
-                      {{#SD}}<a href="javascript:load_content_data('{{ST}}', '{{SD}}');">{{SN}}</a> - {{/SD}}
-                      {{#TD}}<a href="javascript:load_content_data('{{TT}}', '{{TD}}');">{{TN}}</a> - {{/TD}}
-                      {{V}} {{ViewName}} &nbsp;
+                      <a class="align-middle" href="javascript:void(0);" onclick="get_youtube_video_info('{{I}}')">{{D}}</a> -
+                      {{#FD}}<a class="align-middle" href="javascript:load_content_data('{{FT}}', '{{FD}}');">{{FN}}</a> - {{/FD}}
+                      {{#SD}}<a class="align-middle" href="javascript:load_content_data('{{ST}}', '{{SD}}');">{{SN}}</a> - {{/SD}}
+                      {{#TD}}<a class="align-middle" href="javascript:load_content_data('{{TT}}', '{{TD}}');">{{TN}}</a> - {{/TD}}
+                      <span class="align-middle">{{V}} {{ViewName}}</span> &nbsp;
+                      {{#K}}<a href="javascript:show_concert_info('{{HN}}', '{{I}}')">
+                        <i class="bi bi-list-ol align-middle ICON_STYLE"></i>
+                      {{/K}}</a> &nbsp; 
                       <a href="https://www.youtube.com/watch?v={{I}}" target="_blank">
-                        <i class="bi bi-youtube ICON_STYLE"></i>
+                        <i class="bi bi-youtube align-middle ICON_STYLE"></i>
                       </a>
                     </li>
                     {{/songs}}
@@ -384,6 +387,16 @@
           {{/videos}}
         </table>
         {{/playlist}}
+    </script>
+
+    <script type="text/html" id="modal-concert-template">
+        <ul class="UL_LIST">
+        {{#concert}}
+          <li>
+            {{IN}}. {{SN}} - {{RN}} - {{CN}}
+          </li>
+        {{/concert}}
+        </ul>
     </script>
 
     <script type="text/html" id="modal-videoinfo-template">

@@ -478,7 +478,7 @@ async function create_jukebox_modal(value) {
         let count = 0;
         const count_max = Math.min(JUKEBOX_LENGTH, folder_list.length);
         // console.log(`Jukebox loop: ${url} ${category} ${folder_list.length} ${count_max}`);
-        while (count < count_max) {
+        while (count < folder_list.length) {
             const folder = get_random_item(folder_list);
             const [ s_category, s_id, video_ids ] = folder;
             const video_id_list = video_ids.split(',');
@@ -555,6 +555,21 @@ function handle_playlist_command(cmd, arg) {
         show_playlist();
     }
     return true;
+}
+
+function show_concert_info(title, video_id) {
+    const video_list = window.CONCERT_DATA[video_id];
+    const new_video_list = [];
+    let i = 1;
+    for (const info_dict of video_list) {
+        get_folder_value('song', info_dict, 'S', 'S');
+        get_folder_value('raga', info_dict, 'R', 'R');
+        get_folder_value('composer', info_dict, 'C', 'C');
+        info_dict['IN'] = i;
+        new_video_list.push(info_dict);
+        i++;
+    }
+    render_modal_dialog(title, 'modal-concert-template', { 'concert' : new_video_list });
 }
 
 function check_need_poster(category) {
@@ -689,6 +704,7 @@ function translate_folder_id_to_data(category, id, data) {
             const imageId = video['I'].split('&')[0];
             const path = IMAGE_MAP[video['J']] ?? 'maxdefault.jpg';
             video['Y'] = `${imageId}/${path}`;
+            if (video['I'] in window.CONCERT_DATA) video['K'] = video['I'];
             new_video_list.push(video);
         }
         new_folder[C_PLURAL] = new_video_list;
@@ -1040,7 +1056,7 @@ function load_content_data(category, name, element, new_context_list) {
 
 function load_init_data(data_set_list) {
     const lang = window.RENDER_LANGUAGE;
-    const [ id_data, about_data, lang_data ] = data_set_list;
+    const [ id_data, about_data, lang_data, concert_data ] = data_set_list;
     if (window.innerWidth < 992) {
         show_modal_dialog(...VIEW_IN_LANDSCAPE_MSG)
     }
@@ -1259,7 +1275,8 @@ function collection_init(collection, default_video) {
     const l_lang = lang.toLowerCase();
     const url_list = [ fetch_url_data('ID DATA', 'id.json'),
                        fetch_url_data('ABOUT DATA', 'about.json'),
-                       fetch_url_data('LANG DATA', `${l_lang}_map.json`)
+                       fetch_url_data('LANG DATA', `${l_lang}_map.json`),
+                       fetch_url_data('CONCERT DATA', 'concert.json'),
                      ];
     Promise.all(url_list).then((data_set_list) => { load_init_data(data_set_list); });
 }

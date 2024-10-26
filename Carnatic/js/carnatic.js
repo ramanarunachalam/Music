@@ -563,8 +563,11 @@ function show_concert_info(title, video_id) {
     let i = 1;
     for (const info_dict of video_list) {
         get_folder_value('song', info_dict, 'S', 'S');
+        info_dict['SN'] = info_dict['SN'].split(' - ')[0];
         get_folder_value('raga', info_dict, 'R', 'R');
+        if (info_dict['RN'] === '?') info_dict['RN'] = '';
         get_folder_value('composer', info_dict, 'C', 'C');
+        if (info_dict['CN'] === '?') info_dict['CN'] = '';
         info_dict['IN'] = i;
         new_video_list.push(info_dict);
         i++;

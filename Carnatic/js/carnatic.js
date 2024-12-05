@@ -557,7 +557,8 @@ function handle_playlist_command(cmd, arg) {
     return true;
 }
 
-function show_concert_info(title, video_id) {
+function get_concert_info(video_id) {
+    if (!(video_id in window.CONCERT_DATA)) return [];
     const video_list = window.CONCERT_DATA[video_id];
     const new_video_list = [];
     let i = 1;
@@ -572,6 +573,11 @@ function show_concert_info(title, video_id) {
         new_video_list.push(info_dict);
         i++;
     }
+    return new_video_list;
+}
+
+function show_concert_info(title, video_id) {
+    const new_video_list = get_concert_info(video_id);
     render_modal_dialog(title, 'modal-concert-template', { 'concert' : new_video_list });
 }
 
@@ -1029,6 +1035,8 @@ function render_youtube_video_info(id, video_data) {
     info_list.push({ 'N' : 'id', 'C' : video_id });
     const image = video_data['thumbnail_url'];
     const info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
+    const new_video_list = get_concert_info(id);
+    if (new_video_list.length > 0) info_data['concert'] = new_video_list;
     render_modal_dialog(title, 'modal-videoinfo-template', info_data);
 }
 

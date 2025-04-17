@@ -713,7 +713,11 @@ function translate_folder_id_to_data(category, id, data) {
             const imageId = video['I'].split('&')[0];
             const path = IMAGE_MAP[video['J']] ?? 'maxdefault.jpg';
             video['Y'] = `${imageId}/${path}`;
-            if (video['I'] in window.CONCERT_DATA) video['K'] = video['I'];
+            if (video['I'] in window.CONCERT_DATA) { video['KC'] = video['I']; }
+            else if (video['V'] === '0') { video['KI'] = 'file-earmark-x'; }
+            else if (video['I'] !== imageId) { video['KI'] = 'file-earmark-text'; }
+            else { video['KI'] = 'file-earmark-play'; }
+            video['VZ'] = video['V'] !== '0';
             new_video_list.push(video);
         }
         new_folder[C_PLURAL] = new_video_list;

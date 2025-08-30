@@ -473,7 +473,7 @@ async function create_jukebox_modal(value) {
         url = `${category}/${t_name}.json`;
         url_data = await fetch_url(url);
         if (url_data === null) continue;
-        const video_list = url_data['songs'];
+        const video_list = url_data[C_PLURAL];
         const folder_list = url_data['folders'];
         let count = 0;
         const count_max = Math.min(JUKEBOX_LENGTH, folder_list.length);
@@ -557,27 +557,36 @@ function handle_playlist_command(cmd, arg) {
     return true;
 }
 
-function get_concert_info(video_id) {
-    if (!(video_id in window.CONCERT_DATA)) return [];
+function get_concert_info(video_id, title, real_title) {
+    if (!(video_id in window.CONCERT_DATA)) {
+        if (real_title === '') return [];
+        return [ { SN: real_title, RN : '', CN: '' } ];
+    }
     const video_list = window.CONCERT_DATA[video_id];
     const new_video_list = [];
     let i = 1;
     for (const info_dict of video_list) {
         get_folder_value('song', info_dict, 'S', 'S');
-        info_dict['SN'] = info_dict['SN'].split(' - ')[0];
-        get_folder_value('raga', info_dict, 'R', 'R');
-        if (info_dict['RN'] === '?') info_dict['RN'] = '';
-        get_folder_value('composer', info_dict, 'C', 'C');
-        if (info_dict['CN'] === '?') info_dict['CN'] = '';
-        info_dict['IN'] = i;
-        new_video_list.push(info_dict);
+        const song = info_dict['SN'];
+        if (title === '' || title === song) {
+            info_dict['SN'] = song.split(' - ')[0];
+            get_folder_value('raga', info_dict, 'R', 'R');
+            if (info_dict['RN'] === '?') info_dict['RN'] = '';
+            get_folder_value('composer', info_dict, 'C', 'C');
+            if (info_dict['CN'] === '?') info_dict['CN'] = '';
+            info_dict['IN'] = i;
+            new_video_list.push(info_dict);
+        }
         i++;
     }
     return new_video_list;
 }
 
 function show_concert_info(title, video_id) {
-    const new_video_list = get_concert_info(video_id);
+    if (video_id === undefined) return;
+    const new_video_id = video_id.split('&')[0];
+    const new_title = (video_id === new_video_id) ? '' : title;
+    const new_video_list = get_concert_info(new_video_id, new_title, title);
     render_modal_dialog(title, 'modal-concert-template', { 'concert' : new_video_list });
 }
 
@@ -713,7 +722,7 @@ function translate_folder_id_to_data(category, id, data) {
             const imageId = video['I'].split('&')[0];
             const path = IMAGE_MAP[video['J']] ?? 'maxdefault.jpg';
             video['Y'] = `${imageId}/${path}`;
-            if (video['I'] in window.CONCERT_DATA) { video['KC'] = video['I']; }
+            if (video['I'] in window.CONCERT_DATA) { video['KC'] = video['I']; video['KI'] = 'layers'; }
             else if (video['V'] === '0') { video['KI'] = 'file-earmark-x'; }
             else if (video['I'] !== imageId) { video['KI'] = 'file-earmark-text'; }
             else { video['KI'] = 'file-earmark-play'; }
@@ -1039,7 +1048,7 @@ function render_youtube_video_info(id, video_data) {
     info_list.push({ 'N' : 'id', 'C' : video_id });
     const image = video_data['thumbnail_url'];
     const info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
-    const new_video_list = get_concert_info(id);
+    const new_video_list = get_concert_info(id, '', '');
     if (new_video_list.length > 0) info_data['concert'] = new_video_list;
     render_modal_dialog(title, 'modal-videoinfo-template', info_data);
 }

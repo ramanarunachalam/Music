@@ -559,9 +559,11 @@ function handle_playlist_command(cmd, arg) {
 
 function get_concert_info(video_id, title, real_title) {
     if (!(video_id in window.CONCERT_DATA)) {
+        // console.log(`Not Concert ${video_id}, ${title}, ${real_title}`);
         if (real_title === '') return [];
         return [ { SN: real_title, RN : '', CN: '' } ];
     }
+    // console.log(`Concert ${video_id}, ${title}, ${real_title}`);
     const video_list = window.CONCERT_DATA[video_id];
     const new_video_list = [];
     let i = 1;
@@ -708,6 +710,8 @@ function translate_folder_id_to_data(category, id, data) {
         const new_folder = { HT: f_category, HC: video_id_list.length };
         new_folder[f_type] = v_id;
         get_folder_value(f_category, new_folder, 'H', f_type);
+        if (f_category === 'song') new_folder['HNC'] = new_folder['HN'];
+        else new_folder['HNC'] = get_phonetic_text(category, data['title']['T']);
         const new_video_list = [];
         for (const video_id of video_id_list) {
             const video = video_list[+video_id];
@@ -745,10 +749,7 @@ function render_data_template(category, id, data, context_list) {
         return;
     }
 
-    const template_name = 'page-videos-template'
-    let ul_template = plain_get_html_text(template_name);
     const new_data = translate_folder_id_to_data(category, id, data);
-
     new_data['VideoName'] = get_map_text('info', 'Videos');
     new_data['ViewName'] = get_map_text('info', 'Views');
 
@@ -780,6 +781,8 @@ function render_data_template(category, id, data, context_list) {
         }
     }
 
+    const template_name = 'page-videos-template'
+    let ul_template = plain_get_html_text(template_name);
     const template_html = Mustache.render(ul_template, new_data);
     plain_set_html_text(id, template_html);
 }

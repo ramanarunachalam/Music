@@ -781,7 +781,7 @@ function render_data_template(category, id, data, context_list) {
         }
     }
 
-    const template_name = 'page-videos-template'
+    const template_name = 'page-videos-template';
     let ul_template = plain_get_html_text(template_name);
     const template_html = Mustache.render(ul_template, new_data);
     plain_set_html_text(id, template_html);

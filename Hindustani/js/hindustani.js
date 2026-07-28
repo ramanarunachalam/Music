@@ -482,12 +482,12 @@ async function create_jukebox_modal(value) {
         url = `${category}/${t_name}.json`;
         url_data = await fetch_url(url);
         if (url_data === null) continue;
-        const video_list = url_data['songs'];
+        const video_list = url_data[C_PLURAL];
         const folder_list = url_data['folders'];
         let count = 0;
         const count_max = Math.min(JUKEBOX_LENGTH, folder_list.length);
         // console.log(`Jukebox loop: ${url} ${category} ${folder_list.length} ${count_max}`);
-        while (count < count_max) {
+        while (count < folder_list.length) {
             const folder = get_random_item(folder_list);
             const [ s_category, s_id, video_ids ] = folder;
             const video_id_list = video_ids.split(',');
@@ -564,6 +564,41 @@ function handle_playlist_command(cmd, arg) {
         show_playlist();
     }
     return true;
+}
+
+function get_concert_info(video_id, title, real_title) {
+    if (!(video_id in window.CONCERT_DATA)) {
+        // console.log(`Not Concert ${video_id}, ${title}, ${real_title}`);
+        if (real_title === '') return [];
+        return [ { SN: real_title, RN : '', CN: '' } ];
+    }
+    // console.log(`Concert ${video_id}, ${title}, ${real_title}`);
+    const video_list = window.CONCERT_DATA[video_id];
+    const new_video_list = [];
+    let i = 1;
+    for (const info_dict of video_list) {
+        get_folder_value('song', info_dict, 'S', 'S');
+        const song = info_dict['SN'];
+        if (title === '' || title === song) {
+            info_dict['SN'] = song.split(' - ')[0];
+            get_folder_value('raga', info_dict, 'R', 'R');
+            if (info_dict['RN'] === '?') info_dict['RN'] = '';
+            get_folder_value('composer', info_dict, 'C', 'C');
+            if (info_dict['CN'] === '?') info_dict['CN'] = '';
+            info_dict['IN'] = i;
+            new_video_list.push(info_dict);
+        }
+        i++;
+    }
+    return new_video_list;
+}
+
+function show_concert_info(title, video_id) {
+    if (video_id === undefined) return;
+    const new_video_id = video_id.split('&')[0];
+    const new_title = (video_id === new_video_id) ? '' : title;
+    const new_video_list = get_concert_info(new_video_id, new_title, title);
+    render_modal_dialog(title, 'modal-concert-template', { 'concert' : new_video_list });
 }
 
 function check_need_poster(category) {
@@ -684,6 +719,8 @@ function translate_folder_id_to_data(category, id, data) {
         const new_folder = { HT: f_category, HC: video_id_list.length };
         new_folder[f_type] = v_id;
         get_folder_value(f_category, new_folder, 'H', f_type);
+        if (f_category === 'song') new_folder['HNC'] = new_folder['HN'];
+        else new_folder['HNC'] = get_phonetic_text(category, data['title']['T']);
         const new_video_list = [];
         for (const video_id of video_id_list) {
             const video = video_list[+video_id];
@@ -698,6 +735,11 @@ function translate_folder_id_to_data(category, id, data) {
             const imageId = video['I'].split('&')[0];
             const path = IMAGE_MAP[video['J']] ?? 'maxdefault.jpg';
             video['Y'] = `${imageId}/${path}`;
+            if (video['I'] in window.CONCERT_DATA) { video['KC'] = video['I']; video['KI'] = 'layers'; }
+            else if (video['V'] === '0') { video['KI'] = 'file-earmark-x'; }
+            else if (video['I'] !== imageId) { video['KI'] = 'file-earmark-text'; }
+            else { video['KI'] = 'file-earmark-play'; }
+            video['VZ'] = video['V'] !== '0';
             new_video_list.push(video);
         }
         new_folder[C_PLURAL] = new_video_list;
@@ -716,10 +758,7 @@ function render_data_template(category, id, data, context_list) {
         return;
     }
 
-    const template_name = 'page-videos-template'
-    let ul_template = plain_get_html_text(template_name);
     const new_data = translate_folder_id_to_data(category, id, data);
-
     new_data['VideoName'] = get_map_text('info', 'Videos');
     new_data['ViewName'] = get_map_text('info', 'Views');
 
@@ -751,6 +790,8 @@ function render_data_template(category, id, data, context_list) {
         }
     }
 
+    const template_name = 'page-videos-template';
+    let ul_template = plain_get_html_text(template_name);
     const template_html = Mustache.render(ul_template, new_data);
     plain_set_html_text(id, template_html);
 }
@@ -1019,6 +1060,8 @@ function render_youtube_video_info(id, video_data) {
     info_list.push({ 'N' : 'id', 'C' : video_id });
     const image = video_data['thumbnail_url'];
     const info_data = { 'videoinfo' : info_list, 'videoimage' : { 'I' : video_id, 'P' : image } };
+    const new_video_list = get_concert_info(id, '', '');
+    if (new_video_list.length > 0) info_data['concert'] = new_video_list;
     render_modal_dialog(title, 'modal-videoinfo-template', info_data);
 }
 
@@ -1049,7 +1092,7 @@ function load_content_data(category, name, element, new_context_list) {
 
 function load_init_data(data_set_list) {
     const lang = window.RENDER_LANGUAGE;
-    const [ id_data, about_data, lang_data ] = data_set_list;
+    const [ id_data, about_data, lang_data, concert_data ] = data_set_list;
     if (window.innerWidth < 992) {
         show_modal_dialog(...VIEW_IN_LANDSCAPE_MSG)
     }
@@ -1268,7 +1311,8 @@ function collection_init(collection, default_video) {
     const l_lang = lang.toLowerCase();
     const url_list = [ fetch_url_data('ID DATA', 'id.json'),
                        fetch_url_data('ABOUT DATA', 'about.json'),
-                       fetch_url_data('LANG DATA', `${l_lang}_map.json`)
+                       fetch_url_data('LANG DATA', `${l_lang}_map.json`),
+                       fetch_url_data('CONCERT DATA', 'concert.json'),
                      ];
     Promise.all(url_list).then((data_set_list) => { load_init_data(data_set_list); });
 }

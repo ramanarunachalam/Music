@@ -282,7 +282,7 @@
               <ol start="1">
                 <li>
                   <span>
-                    <i class="bi bi-folder ICON_STYLE"></i>
+                    <i class="bi bi-folder align-middle ICON_STYLE"></i>
                     <a class="TEXT_COLOR" href="javascript:load_content_data('{{HT}}', '{{HD}}');"><b>{{HN}}</b></a> <font class="NUM_COLOR">({{HC}})</font>
                   </span>
                   </li>
@@ -290,16 +290,25 @@
                     {{#songs}}
                     <li>
                       <img class="IMAGE_STYLE" src="https://i.ytimg.com/vi/{{Y}}">&nbsp;&nbsp;
+                      {{#VZ}}
                       <a href="javascript:void(0);" onclick="handle_playlist_command('play', '{{I}}:{{PS}}:{{PR}}');">
-                        <i class="bi bi-play ICON_STYLE"></i>
+                        <i class="bi bi-play align-middle ICON_STYLE"></i>
                       </a>
-                      <a href="javascript:void(0);" onclick="get_youtube_video_info('{{I}}')">{{D}}</a> -
-                      {{#FD}}<a href="javascript:load_content_data('{{FT}}', '{{FD}}');">{{FN}}</a> - {{/FD}}
-                      {{#SD}}<a href="javascript:load_content_data('{{ST}}', '{{SD}}');">{{SN}}</a> - {{/SD}}
-                      {{#TD}}<a href="javascript:load_content_data('{{TT}}', '{{TD}}');">{{TN}}</a> - {{/TD}}
-                      {{V}} {{ViewName}} &nbsp;
+                      {{/VZ}}
+                      {{^VZ}}
+                        <i class="bi bi-exclamation align-middle ICON_STYLE"></i>
+                      {{/VZ}}
+                      <a class="align-middle" href="javascript:void(0);" onclick="get_youtube_video_info('{{I}}')">{{D}}</a> -
+                      {{#FD}}<a class="align-middle" href="javascript:load_content_data('{{FT}}', '{{FD}}');">{{FN}}</a> - {{/FD}}
+                      {{#SD}}<a class="align-middle" href="javascript:load_content_data('{{ST}}', '{{SD}}');">{{SN}}</a> - {{/SD}}
+                      {{#TD}}<a class="align-middle" href="javascript:load_content_data('{{TT}}', '{{TD}}');">{{TN}}</a> - {{/TD}}
+                      <span class="align-middle">{{V}} {{ViewName}}</span> &nbsp;
+                      <a href="javascript:show_concert_info('{{HNC}}', '{{I}}')">
+                        <i class="bi bi-{{KI}} align-middle ICON_STYLE"></i>
+                      </a>
+                      &nbsp; 
                       <a href="https://www.youtube.com/watch?v={{I}}" target="_blank">
-                        <i class="bi bi-youtube ICON_STYLE"></i>
+                        <i class="bi bi-youtube align-middle ICON_STYLE"></i>
                       </a>
                     </li>
                     {{/songs}}
@@ -391,6 +400,16 @@
         {{/playlist}}
     </script>
 
+    <script type="text/html" id="modal-concert-template">
+        <table id="CONCERT_TABLE" class="table table-hover table-condensed">
+        {{#concert}}
+          <tr>
+            <td>{{IN}}.</td><td>{{SN}}</td><td>{{RN}}</td><td>{{CN}}</td><td>{{D}}</td>
+          </tr>
+        {{/concert}}
+        </table>
+    </script>
+
     <script type="text/html" id="modal-videoinfo-template">
         {{#videoimage}}
           <center><img class="img-thumbnail POSTER" src="{{P}}" loading="lazy" /></center>
@@ -402,15 +421,16 @@
           {{/videoinfo}}
           </tbody>
         </table>
-        {{#chapters}}
-        <table border="0" cellpadding="4" class="table table-bordered table-hover table-condensed" >
-          <tbody>
-          {{#songs}}
-            <tr><td>{{I}}</td><td><em>{{SN}}</em></td><td>{{RN}}</td><td>{{CN}}</td></tr>
-          {{/songs}}
-          </tbody>
+        {{#concert.length}}
+        <h3>Concert</h3>
+        <table id="CONCERT_TABLE" class="table table-hover table-condensed">
+        {{#concert}}
+          <tr>
+            <td>{{IN}}.</td><td>{{SN}}</td><td>{{RN}}</td><td>{{CN}}</td><td>{{D}}</td>
+          </tr>
+        {{/concert}}
         </table>
-        {{/chapters}}
+        {{/concert.length}}
     </script>
 
     <script type="text/html" id="lang-key-template">
